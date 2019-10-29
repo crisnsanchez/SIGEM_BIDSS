@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIGEM_BIDSS", "SIGEM_BIDSS.csproj", "{127E532F-FB09-4339-8D29-97D707E09BE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{127E532F-FB09-4339-8D29-97D707E09BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{127E532F-FB09-4339-8D29-97D707E09BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{127E532F-FB09-4339-8D29-97D707E09BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{127E532F-FB09-4339-8D29-97D707E09BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8318B129-0553-4D3C-A053-27F159CEEF7E}
+	EndGlobalSection
+EndGlobal
