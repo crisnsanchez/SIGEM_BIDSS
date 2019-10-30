@@ -9,6 +9,21 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="css\" />
+    <Folder Include="js\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\css\demo\chart-area-demo.js" />
+    <None Include="wwwroot\css\demo\chart-bar-demo.js" />
+    <None Include="wwwroot\css\demo\chart-pie-demo.js" />
+    <None Include="wwwroot\css\demo\datatables-demo.js" />
   </ItemGroup>
 
 </Project>
