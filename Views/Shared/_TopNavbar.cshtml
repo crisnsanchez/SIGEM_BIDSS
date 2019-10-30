@@ -163,9 +163,25 @@
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                @using System.Security.Claims
+                @if (User.Identity.IsAuthenticated)
+                {
+                    var identity = User.Identity as ClaimsIdentity; // Azure AD V2 endpoint specific
+                    string preferred_username = identity.Claims.FirstOrDefault(c => c.Type == "preferred_username")?.Value;
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="navbar-text">Hello @preferred_username!</li>
+                        <li><a asp-area="AzureAD" asp-controller="Account" asp-action="SignOut">Sign out</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-area="AzureAD" asp-controller="Account" asp-action="SignIn">Sign in</a></li>
+                    </ul>
+                }
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
             </a>
+
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
