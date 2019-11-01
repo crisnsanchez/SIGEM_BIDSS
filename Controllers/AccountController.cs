@@ -59,7 +59,7 @@ namespace SIGEM_BIDSS.Controllers
         //}
 
 
-        [HttpGet("{scheme?}")]
+        [HttpGet]
         public IActionResult SignOut([FromRoute] string scheme)
         {
             scheme = scheme ?? AzureADDefaults.AuthenticationScheme;
