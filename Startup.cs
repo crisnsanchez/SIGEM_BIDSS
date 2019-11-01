@@ -38,11 +38,12 @@ namespace SIGEM_BIDSS
 
             services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
                 .AddAzureAD(options => Configuration.Bind("AzureAd", options));
-
+       
             services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
             {
                 options.Authority = options.Authority + "/v2.0/";
-
+                //options.SignedOutRedirectUri = "/";
+                //options.SignedOutCallbackPath = "/Login/Index/";
                 // Per the code below, this application signs in users in any Work and School
                 // accounts and any Microsoft Personal Accounts.
                 // If you want to direct Azure AD to restrict the users that can sign-in, change 
