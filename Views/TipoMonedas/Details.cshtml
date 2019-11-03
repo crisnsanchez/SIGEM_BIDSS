@@ -1,0 +1,55 @@
+﻿@model SIGEM_BIDSS.Models.TbTipoMoneda
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TbTipoMoneda</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TmoAbreviatura)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TmoAbreviatura)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TmoNombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TmoNombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TmoUsuarioCrea)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TmoUsuarioCrea)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TmoFechaCrea)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TmoFechaCrea)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TmoUsuarioModifica)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TmoUsuarioModifica)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TmoFechaModifica)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TmoFechaModifica)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TmoId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
