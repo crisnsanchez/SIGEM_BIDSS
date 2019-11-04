@@ -5,31 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Listado De Tipos De Monedas</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TmoAbreviatura)
+                Abreviatura
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TmoNombre)
+                Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TmoUsuarioCrea)
+                Usuario Crea
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TmoFechaCrea)
+                Fecha Crea
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TmoUsuarioModifica)
+                Usuario Modifica
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TmoFechaModifica)
+                Fecha Modifica
             </th>
             <th></th>
         </tr>

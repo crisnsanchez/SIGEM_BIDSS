@@ -5,31 +5,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Puestos De Trabajo</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PtoDescripcion)
+                Descripción
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PtoUsuarioCrea)
+                Usuario Crea
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PtoFechaCrea)
+                Fecha Crea
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PtoUsuarioModifica)
+                Usuario Modifica
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PtoFechaModifica)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Are)
+                Fecha Modifica
             </th>
             <th></th>
         </tr>
