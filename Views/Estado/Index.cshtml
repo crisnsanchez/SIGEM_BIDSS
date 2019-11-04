@@ -4,17 +4,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex  align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Listado de Estado</h6>
-
     </div>
-
     <!-- Card Body -->
     <div class="card-body">
+
         <div class="container-fluid">
             <div class="d-flex float-right position-relative">
                 <p class="float-right">
@@ -31,6 +28,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.EstDescripcion)
                             </th>
+
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -44,6 +42,7 @@
                                 <td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.EstDescripcion)
                                 </td>
+
                                 <td>
                                     <a class="btn btn-outline-primary btn-xs" asp-action="Edit" asp-route-id="@item.EstId">Editar</a>
                                     <a class="btn btn-outline-warning btn-xs" asp-action="Details" asp-route-id="@item.EstId">Detalle</a>
@@ -57,7 +56,3 @@
         </div>
     </div>
 </div>
-
-
-
-

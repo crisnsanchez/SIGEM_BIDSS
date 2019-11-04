@@ -8,18 +8,16 @@
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex  align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado De Tipo Monedas</h6>
-
-
-
+        <h6 class="m-0 font-weight-bold text-primary">Listado Tipo Moneda</h6>
 
     </div>
     <!-- Card Body -->
     <div class="card-body">
+
         <div class="container-fluid">
             <div class="d-flex float-right position-relative">
                 <p class="float-right">
-                    <a asp-action="Create" class="btn btn-primary">Agregar Moneda</a>
+                    <a asp-action="Create" class="btn btn-primary">Agregar Tipo Moneda</a>
                 </p>
             </div>
             <div class="table-responsive">
@@ -29,12 +27,14 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.TmoId)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TmoAbreviatura)
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model=> model.TmoAbreviatura)
                             </th>
+
                             <th>
                                 @Html.DisplayNameFor(model => model.TmoNombre)
                             </th>
+
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -48,9 +48,11 @@
                             <td style="text-align:center">
                                 @Html.DisplayFor(modelItem => item.TmoAbreviatura)
                             </td>
+
                             <td style="text-align:center">
                                 @Html.DisplayFor(modelItem => item.TmoNombre)
                             </td>
+
                             <td>
                                 <a class="btn btn-outline-primary btn-xs" asp-action="Edit" asp-route-id="@item.TmoId">Editar</a>
                                 <a class="btn btn-outline-warning btn-xs" asp-action="Details" asp-route-id="@item.TmoId">Detalle</a>
@@ -64,7 +66,3 @@
         </div>
     </div>
 </div>
-
-
-
-   

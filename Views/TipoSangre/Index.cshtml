@@ -4,10 +4,11 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex  align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Listado Tipos De Sangre</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Listado Tipo Sangre</h6>
 
     </div>
     <!-- Card Body -->
@@ -26,10 +27,11 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.TpsId)
                             </th>
-                            <th>
+                            <th style="text-align:center">
                                 @Html.DisplayNameFor(model => model.TpsNombre)
                             </th>
-                           
+
+                            
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -43,8 +45,7 @@
                                 <td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.TpsNombre)
                                 </td>
-
-                                <td>
+<td>
                                     <a class="btn btn-outline-primary btn-xs" asp-action="Edit" asp-route-id="@item.TpsId">Editar</a>
                                     <a class="btn btn-outline-warning btn-xs" asp-action="Details" asp-route-id="@item.TpsId">Detalle</a>
                                     @*<a class="btn btn-success btn-sm" asp-action="Delete" asp-route-id="@item.AreId">Delete</a>*@
