@@ -9,20 +9,16 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class TipoSolicitudsController : Controller
+    public class TipoSolicitudController : Controller
     {
-
         SIGEM_BIDSSModel db = new SIGEM_BIDSSModel();
-       
-
-     
-        // GET: TipoSolicituds
+        // GET: TipoSolicitud
         public IActionResult Index()
         {
-            return View(db.TbTipoSolicitud);
+            return View(db.TbTipoSolicitud.ToList());
         }
 
-        // GET: TipoSolicituds/Details/5
+        // GET: TipoSolicitud/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -40,13 +36,13 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbTipoSolicitud);
         }
 
-        // GET: TipoSolicituds/Create
+        // GET: TipoSolicitud/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TipoSolicituds/Create
+        // POST: TipoSolicitud/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -56,13 +52,13 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
             {
                 db.Add(tbTipoSolicitud);
-                db.SaveChanges();
+                db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(tbTipoSolicitud);
         }
 
-        // GET: TipoSolicituds/Edit/5
+        // GET: TipoSolicitud/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,7 +66,7 @@ namespace SIGEM_BIDSS.Controllers
                 return NotFound();
             }
 
-            var tbTipoSolicitud = db.TbTipoSolicitud.FindAsync(id);
+            var tbTipoSolicitud = db.TbTipoSolicitud.Find(id);
             if (tbTipoSolicitud == null)
             {
                 return NotFound();
@@ -78,7 +74,7 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbTipoSolicitud);
         }
 
-        // POST: TipoSolicituds/Edit/5
+        // POST: TipoSolicitud/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -95,7 +91,7 @@ namespace SIGEM_BIDSS.Controllers
                 try
                 {
                     db.Update(tbTipoSolicitud);
-                    db.SaveChanges();
+                    db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -113,7 +109,7 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbTipoSolicitud);
         }
 
-        // GET: TipoSolicituds/Delete/5
+        // GET: TipoSolicitud/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -131,14 +127,14 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbTipoSolicitud);
         }
 
-        // POST: TipoSolicituds/Delete/5
+        // POST: TipoSolicitud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             var tbTipoSolicitud = db.TbTipoSolicitud.Find(id);
             db.TbTipoSolicitud.Remove(tbTipoSolicitud);
-            db.SaveChanges();
+            db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
