@@ -53,8 +53,7 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(tbArea);
-                db.SaveChanges();
+                db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbArea_Insert @p0, @p1, @p2", parameters: new[] { tbArea.AreDescripcion, "1","2019/02/02" });
                 return RedirectToAction(nameof(Index));
             }
             return View(tbArea);
