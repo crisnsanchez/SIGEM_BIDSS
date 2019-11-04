@@ -11,6 +11,7 @@ namespace SIGEM_BIDSS.Models
             TbPuesto = new HashSet<TbPuesto>();
         }
 
+        [Display(Name = "ID")]
         public int AreId { get; set; }
 
         [Required(ErrorMessage = "Campo {0} requerido")]
