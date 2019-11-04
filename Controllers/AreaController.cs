@@ -55,7 +55,8 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbArea_Insert @p0, @p1, @p2", parameters: new object[] { tbArea.AreDescripcion, tbArea.AreUsuarioCrea });
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbArea_Insert @p0, @p1", parameters: new object[] { tbArea.AreDescripcion, tbArea.AreUsuarioCrea });
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (Exception Ex)
                 {
