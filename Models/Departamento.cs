@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SIGEM_BIDSS.Models
 {
@@ -11,6 +12,7 @@ namespace SIGEM_BIDSS.Models
         }
 
         public string DepId { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string DepDescripcion { get; set; }
         public int DepUsuarioCrea { get; set; }
         public DateTime DepFechaCrea { get; set; }

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.TbDepartamento>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepDescripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepUsuarioCrea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepFechaCrea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepUsuarioModifica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepFechaModifica)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepDescripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepUsuarioCrea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepFechaCrea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepUsuarioModifica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepFechaModifica)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DepId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DepId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DepId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,55 @@
+﻿@model SIGEM_BIDSS.Models.TbMunicipio
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TbMunicipio</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MunNombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MunNombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MunUsuarioCrea)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MunUsuarioCrea)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MunFechaCrea)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MunFechaCrea)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MunUsuarioModifica)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MunUsuarioModifica)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MunFechaModifica)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MunFechaModifica)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Dep)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dep.DepId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MunId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

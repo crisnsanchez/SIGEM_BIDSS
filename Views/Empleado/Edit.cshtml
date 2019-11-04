@@ -1,0 +1,122 @@
+﻿@model SIGEM_BIDSS.Models.TbEmpleado
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>TbEmpleado</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EmpId" />
+            <div class="form-group">
+                <label asp-for="EmpNombres" class="control-label"></label>
+                <input asp-for="EmpNombres" class="form-control" />
+                <span asp-validation-for="EmpNombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpApellidos" class="control-label"></label>
+                <input asp-for="EmpApellidos" class="form-control" />
+                <span asp-validation-for="EmpApellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpSexo" class="control-label"></label>
+                <input asp-for="EmpSexo" class="form-control" />
+                <span asp-validation-for="EmpSexo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpFechaNacimiento" class="control-label"></label>
+                <input asp-for="EmpFechaNacimiento" class="form-control" />
+                <span asp-validation-for="EmpFechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpIdentificacion" class="control-label"></label>
+                <input asp-for="EmpIdentificacion" class="form-control" />
+                <span asp-validation-for="EmpIdentificacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpTelefono" class="control-label"></label>
+                <input asp-for="EmpTelefono" class="form-control" />
+                <span asp-validation-for="EmpTelefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpCorreoElectronico" class="control-label"></label>
+                <input asp-for="EmpCorreoElectronico" class="form-control" />
+                <span asp-validation-for="EmpCorreoElectronico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TpsId" class="control-label"></label>
+                <select asp-for="TpsId" class="form-control" asp-items="ViewBag.TpsId"></select>
+                <span asp-validation-for="TpsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PtoId" class="control-label"></label>
+                <select asp-for="PtoId" class="form-control" asp-items="ViewBag.PtoId"></select>
+                <span asp-validation-for="PtoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpFechaIngreso" class="control-label"></label>
+                <input asp-for="EmpFechaIngreso" class="form-control" />
+                <span asp-validation-for="EmpFechaIngreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpDireccion" class="control-label"></label>
+                <input asp-for="EmpDireccion" class="form-control" />
+                <span asp-validation-for="EmpDireccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpRazonInactivacion" class="control-label"></label>
+                <input asp-for="EmpRazonInactivacion" class="form-control" />
+                <span asp-validation-for="EmpRazonInactivacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpEstado" class="control-label"></label>
+                <input asp-for="EmpEstado" class="form-control" />
+                <span asp-validation-for="EmpEstado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpPathImage" class="control-label"></label>
+                <input asp-for="EmpPathImage" class="form-control" />
+                <span asp-validation-for="EmpPathImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MunId" class="control-label"></label>
+                <select asp-for="MunId" class="form-control" asp-items="ViewBag.MunId"></select>
+                <span asp-validation-for="MunId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpUsuarioCrea" class="control-label"></label>
+                <input asp-for="EmpUsuarioCrea" class="form-control" />
+                <span asp-validation-for="EmpUsuarioCrea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpFechaCrea" class="control-label"></label>
+                <input asp-for="EmpFechaCrea" class="form-control" />
+                <span asp-validation-for="EmpFechaCrea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpUsuarioModifica" class="control-label"></label>
+                <input asp-for="EmpUsuarioModifica" class="form-control" />
+                <span asp-validation-for="EmpUsuarioModifica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmpFechaModifica" class="control-label"></label>
+                <input asp-for="EmpFechaModifica" class="form-control" />
+                <span asp-validation-for="EmpFechaModifica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SIGEM_BIDSS.Models
 {
-    public partial class TbEstado
+    public partial class Estado
     {
         public int EstId { get; set; }
         public string EstDescripcion { get; set; }

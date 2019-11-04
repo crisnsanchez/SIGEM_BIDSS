@@ -1,0 +1,144 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.TbEmpleado>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpNombres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpApellidos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpSexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpFechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpIdentificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpTelefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpCorreoElectronico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpFechaIngreso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpDireccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpRazonInactivacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpEstado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpPathImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpUsuarioCrea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpFechaCrea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpUsuarioModifica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpFechaModifica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mun)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tps)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpNombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpApellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpSexo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpFechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpIdentificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpTelefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpCorreoElectronico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpFechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpDireccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpRazonInactivacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpEstado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpPathImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpUsuarioCrea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpFechaCrea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpUsuarioModifica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpFechaModifica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mun.MunId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pto.PtoDescripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tps.TpsNombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EmpId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EmpId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EmpId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

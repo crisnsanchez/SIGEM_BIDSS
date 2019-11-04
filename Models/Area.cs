@@ -7,7 +7,7 @@ namespace SIGEM_BIDSS.Models
     {
         public TbArea()
         {
-            TbPuesto = new HashSet<TbPuesto>();
+            TbPuesto = new HashSet<Puesto>();
         }
 
         public int AreId { get; set; }
@@ -17,6 +17,6 @@ namespace SIGEM_BIDSS.Models
         public int? AreUsuarioModifica { get; set; }
         public DateTime? AreFechaModifica { get; set; }
 
-        public virtual ICollection<TbPuesto> TbPuesto { get; set; }
+        public virtual ICollection<Puesto> TbPuesto { get; set; }
     }
 }

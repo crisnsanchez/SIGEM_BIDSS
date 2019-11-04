@@ -1,0 +1,51 @@
+﻿@model SIGEM_BIDSS.Models.TipoSolicitud
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>TbTipoSolicitud</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TipsolDescripcion" class="control-label"></label>
+                <input asp-for="TipsolDescripcion" class="form-control" />
+                <span asp-validation-for="TipsolDescripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipsolUsuarioCrea" class="control-label"></label>
+                <input asp-for="TipsolUsuarioCrea" class="form-control" />
+                <span asp-validation-for="TipsolUsuarioCrea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipsolFechaCrea" class="control-label"></label>
+                <input asp-for="TipsolFechaCrea" class="form-control" />
+                <span asp-validation-for="TipsolFechaCrea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipsolUsuarioModifica" class="control-label"></label>
+                <input asp-for="TipsolUsuarioModifica" class="form-control" />
+                <span asp-validation-for="TipsolUsuarioModifica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipsolFechaModifica" class="control-label"></label>
+                <input asp-for="TipsolFechaModifica" class="form-control" />
+                <span asp-validation-for="TipsolFechaModifica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

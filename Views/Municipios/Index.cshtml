@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.TbMunicipio>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MunNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MunUsuarioCrea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MunFechaCrea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MunUsuarioModifica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MunFechaModifica)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dep)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MunNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MunUsuarioCrea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MunFechaCrea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MunUsuarioModifica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MunFechaModifica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dep.DepId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MunId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MunId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MunId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
