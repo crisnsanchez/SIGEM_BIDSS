@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h2>Editar Area</h2>
 
-<h4>TbArea</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,38 +15,26 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AreId" />
             <div class="form-group">
+                <label asp-for="AreId" class="control-label"></label>
+                <input asp-for="AreId" class="form-control" readonly />
+                <span asp-validation-for="AreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="AreDescripcion" class="control-label"></label>
                 <input asp-for="AreDescripcion" class="form-control" />
                 <span asp-validation-for="AreDescripcion" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="AreUsuarioCrea" class="control-label"></label>
-                <input asp-for="AreUsuarioCrea" class="form-control" />
-                <span asp-validation-for="AreUsuarioCrea" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AreFechaCrea" class="control-label"></label>
-                <input asp-for="AreFechaCrea" class="form-control" />
-                <span asp-validation-for="AreFechaCrea" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AreUsuarioModifica" class="control-label"></label>
-                <input asp-for="AreUsuarioModifica" class="form-control" />
-                <span asp-validation-for="AreUsuarioModifica" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AreFechaModifica" class="control-label"></label>
-                <input asp-for="AreFechaModifica" class="form-control" />
-                <span asp-validation-for="AreFechaModifica" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-danger">Regresar al Listado</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+ 
 </div>
 
