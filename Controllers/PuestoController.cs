@@ -29,7 +29,7 @@ namespace SIGEM_BIDSS.Controllers
 
             var tbPuesto = db.TbPuesto
                 .Include(t => t.Are)
-                .FirstOrDefaultAsync(m => m.PtoId == id);
+                .FirstOrDefault(m => m.PtoId == id);
             if (tbPuesto == null)
             {
                 return NotFound();
@@ -125,7 +125,7 @@ namespace SIGEM_BIDSS.Controllers
 
             var tbPuesto = db.TbPuesto
                 .Include(t => t.Are)
-                .FirstOrDefaultAsync(m => m.PtoId == id);
+                .FirstOrDefault(m => m.PtoId == id);
             if (tbPuesto == null)
             {
                 return NotFound();

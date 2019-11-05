@@ -27,7 +27,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbTipoSolicitud = db.TbTipoSolicitud
-                .FirstOrDefaultAsync(m => m.TipsolId == id);
+                .FirstOrDefault(m => m.TipsolId == id);
             if (tbTipoSolicitud == null)
             {
                 return NotFound();
@@ -118,7 +118,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbTipoSolicitud = db.TbTipoSolicitud
-                .FirstOrDefaultAsync(m => m.TipsolId == id);
+                .FirstOrDefault(m => m.TipsolId == id);
             if (tbTipoSolicitud == null)
             {
                 return NotFound();

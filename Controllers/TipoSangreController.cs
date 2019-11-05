@@ -28,7 +28,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbTipoSangre = db.TbTipoSangre
-                .FirstOrDefaultAsync(m => m.TpsId == id);
+                .FirstOrDefault(m => m.TpsId == id);
             if (tbTipoSangre == null)
             {
                 return NotFound();
@@ -119,7 +119,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbTipoSangre = db.TbTipoSangre
-                .FirstOrDefaultAsync(m => m.TpsId == id);
+                .FirstOrDefault(m => m.TpsId == id);
             if (tbTipoSangre == null)
             {
                 return NotFound();

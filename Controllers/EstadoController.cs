@@ -28,7 +28,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbEstado = db.TbEstado
-                .FirstOrDefaultAsync(m => m.EstId == id);
+                .FirstOrDefault(m => m.EstId == id);
             if (tbEstado == null)
             {
                 return NotFound();
@@ -119,7 +119,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbEstado = db.TbEstado
-                .FirstOrDefaultAsync(m => m.EstId == id);
+                .FirstOrDefault(m => m.EstId == id);
             if (tbEstado == null)
             {
                 return NotFound();

@@ -5,21 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Detalle</h1>
+<h2>Detalle Tipo Solicitud </h2>
+<hr />
+<dl class="dl-horizontal">
+
+    <dt class="col-sm-10">
+        ID Solicitud
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.TipsolId)
+    </dd>
+
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.TipsolDescripcion)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.TipsolDescripcion)
+    </dd>
+
+</dl>
 
 <div>
-    <h4>Tipo Solicitud</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipsolDescripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipsolDescripcion)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.TipsolId" class="btn btn-primary">Editar</a> 
-    <a asp-action="Index" class="btn btn-danger">Regresar a Lista</a>
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.TipsolId">Editar</a>
+    <a asp-action="Index" class="btn btn-danger">Regresar al Listado</a>
 </div>

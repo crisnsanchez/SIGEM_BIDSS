@@ -21,7 +21,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<TbEstado> TbEstado { get; set; }
         public virtual DbSet<TbMunicipio> TbMunicipio { get; set; }
         public virtual DbSet<TbPuesto> TbPuesto { get; set; }
-        public virtual DbSet<TipoMoneda> TbTipoMoneda { get; set; }
+        public virtual DbSet<TbTipoMoneda> TbTipoMoneda { get; set; }
         public virtual DbSet<TbTipoSangre> TbTipoSangre { get; set; }
         public virtual DbSet<TbTipoSolicitud> TbTipoSolicitud { get; set; }
 
@@ -316,7 +316,7 @@ namespace SIGEM_BIDSS.Models
                     .HasConstraintName("FK_are_Id");
             });
 
-            modelBuilder.Entity<TipoMoneda>(entity =>
+            modelBuilder.Entity<TbTipoMoneda>(entity =>
             {
                 entity.HasKey(e => e.TmoId)
                     .HasName("PK__tbTipoMo__8AEAA3A3D1C9BBB4");

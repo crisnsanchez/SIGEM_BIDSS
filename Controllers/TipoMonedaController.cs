@@ -27,7 +27,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbTipoMoneda = db.TbTipoMoneda
-                .FirstOrDefaultAsync(m => m.TmoId == id);
+                .FirstOrDefault(m => m.TmoId == id);
             if (tbTipoMoneda == null)
             {
                 return NotFound();
@@ -47,7 +47,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TipoMoneda tbTipoMoneda)
+        public IActionResult Create([Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TbTipoMoneda tbTipoMoneda)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(short id, [Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TipoMoneda tbTipoMoneda)
+        public IActionResult Edit(short id, [Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TbTipoMoneda tbTipoMoneda)
         {
             if (id != tbTipoMoneda.TmoId)
             {
@@ -118,7 +118,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbTipoMoneda = db.TbTipoMoneda
-                .FirstOrDefaultAsync(m => m.TmoId == id);
+                .FirstOrDefault(m => m.TmoId == id);
             if (tbTipoMoneda == null)
             {
                 return NotFound();

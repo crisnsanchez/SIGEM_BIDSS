@@ -9,7 +9,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Al precionar Salir, la Sesion se cerrara !.</div>
+            <div class="modal-body">Al presionar "Salir" la sesión se cerrará.</div>
             <div class="modal-footer">
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -176,7 +176,7 @@
                 string preferred_username = identity.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
             
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Hola Bienvenido @preferred_username!
+                Hola Bienvenido @preferred_username
             </a>
                  
             

@@ -28,7 +28,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbDepartamento = db.TbDepartamento
-                .FirstOrDefaultAsync(m => m.DepId == id);
+                .FirstOrDefault(m => m.DepId == id);
             if (tbDepartamento == null)
             {
                 return NotFound();
@@ -119,7 +119,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbDepartamento = db.TbDepartamento
-                .FirstOrDefaultAsync(m => m.DepId == id);
+                .FirstOrDefault(m => m.DepId == id);
             if (tbDepartamento == null)
             {
                 return NotFound();
