@@ -33,9 +33,12 @@ namespace SIGEM_BIDSS.Models
         public string EmpSexo { get; set; }
 
         [Display(Name = "Fecha de Nacimiento")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string EmpFechaNacimiento { get; set; }
 
         [Display(Name = "Número de Identidad")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+    
         public string EmpIdentificacion { get; set; }
 
         [Display(Name = "Telefóno")]
@@ -44,16 +47,19 @@ namespace SIGEM_BIDSS.Models
         public string EmpTelefono { get; set; }
 
         [Display(Name = "Correo Electrónico")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+
         public string EmpCorreoElectronico { get; set; }
 
         [Display(Name = "Tipo de Sangre")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int TpsId { get; set; }
 
         [Display(Name = "Puesto")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "No se permiten mas de 50 Caracteres.")]
         public int PtoId { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Fecha Ingreso")]
         public string EmpFechaIngreso { get; set; }
 
@@ -65,25 +71,32 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Razón de Inactivación")]
         public string EmpRazonInactivacion { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Estado")]
         public string EmpEstado { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Imagen")]
         public string EmpPathImage { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Código Municipio")]
         public string MunId { get; set; }
 
-        //[Display(Name = "Código Departamento")]
-        //public int EmpUsuarioCrea { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Creado por ")]
+        public int EmpUsuarioCrea { get; set; }
 
-        //[Display(Name = "Código Departamento")]
-        //public DateTime EmpFechaCrea { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Creado el")]
+        public DateTime EmpFechaCrea { get; set; }
 
-        //[Display(Name = "Código Departamento")]
-        //public int? EmpUsuarioModifica { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Modificado por")]
+        public int? EmpUsuarioModifica { get; set; }
 
-        //[Display(Name = "Código Departamento")]
-        //public DateTime? EmpFechaModifica { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Modificado el")]
+        public DateTime? EmpFechaModifica { get; set; }
     }
 }

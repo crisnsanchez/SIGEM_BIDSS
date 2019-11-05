@@ -1,45 +1,58 @@
-﻿@model SIGEM_BIDSS.Models.TbTipoMoneda
+﻿@model SIGEM_BIDSS.Models.TbMunicipio
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="card shadow mb-4">
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex  align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Detalle Tipo Moneda</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Detalle De Municipio</h6>
         <div class="float-right">
+           
         </div>
     </div>
+    <!-- Card Body -->
     <div class="card-body">
 
         <div class="container-fluid">
             <div class="col-md-4">
+
                 <dl class="dl-horizontal">
 
-                    <dt class="col-sm-10">
-                        Abreviatura Moneda
+                    <dt class="col-sm-6">
+                         Departamento
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TmoAbreviatura)
+                        @Html.DisplayFor(model => model.DepId)
                     </dd>
 
-                    <dt class="col-sm-10">
-                        @Html.DisplayNameFor(model => model.TmoNombre)
+                    <dt class="col-sm-4">
+                        Codigo Municipio
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TmoNombre)
+                        @Html.DisplayFor(model => model.MunId)
+                    </dd>
+
+                    <dt class="col-lg-10">
+                        @Html.DisplayNameFor(model => model.MunNombre)
+                    </dt>
+                    <dd class="col-lg-10">
+                        @Html.DisplayFor(model => model.MunNombre)
                     </dd>
 
                 </dl>
 
                 <div>
-                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.TmoId">Editar</a>
+                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.MunId">Editar</a>
                     <a asp-action="Index" class="btn btn-danger">Regresar al Listado</a>
                 </div>
             </div>
         </div>
+
+
     </div>
-    </div>
+</div>
+
+

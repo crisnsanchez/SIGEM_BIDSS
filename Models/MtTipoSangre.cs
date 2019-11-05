@@ -18,6 +18,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "ID")]
         public int TpsId { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Nombre")]
         public string TpsNombre { get; set; }
     }

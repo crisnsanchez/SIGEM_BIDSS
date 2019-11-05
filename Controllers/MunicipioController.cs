@@ -11,31 +11,29 @@ namespace SIGEM_BIDSS.Controllers
 {
     public class MunicipioController : Controller
     {
-        private readonly SIGEM_BIDSSModel _context;
+        SIGEM_BIDSSModel db = new SIGEM_BIDSSModel();
 
-        public MunicipioController(SIGEM_BIDSSModel context)
-        {
-            _context = context;
-        }
 
         // GET: Municipios
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
-            var sIGEM_BIDSSModel = _context.TbMunicipio.Include(t => t.Dep);
-            return View(await sIGEM_BIDSSModel.ToListAsync());
+           
+            var sIGEM_BIDSSModel = db.TbMunicipio.Include(t => t.Dep);
+            ViewData["DepId"] = new SelectList(db.TbDepartamento, "DepId", "DepDescripcion");
+            return View(sIGEM_BIDSSModel);
         }
 
         // GET: Municipios/Details/5
-        public async Task<IActionResult> Details(string id)
+        public  IActionResult Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbMunicipio = await _context.TbMunicipio
+            var tbMunicipio =  db.TbMunicipio
                 .Include(t => t.Dep)
-                .FirstOrDefaultAsync(m => m.MunId == id);
+                .FirstOrDefault(m => m.MunId == id);
             if (tbMunicipio == null)
             {
                 return NotFound();
@@ -47,7 +45,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Municipios/Create
         public IActionResult Create()
         {
-            ViewData["DepId"] = new SelectList(_context.TbDepartamento, "DepId", "DepId");
+            ViewData["DepId"] = new SelectList(db.TbDepartamento, "DepId", "DepDescripcion");
             return View();
         }
 
@@ -56,32 +54,52 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MunId,DepId,MunNombre,MunUsuarioCrea,MunFechaCrea,MunUsuarioModifica,MunFechaModifica")] TbMunicipio tbMunicipio)
+        public  IActionResult Create([Bind("MunId,DepId,MunNombre,MunUsuarioCrea,MunFechaCrea,MunUsuarioModifica,MunFechaModifica")] TbMunicipio tbMunicipio)
         {
+            
+
             if (ModelState.IsValid)
             {
-                _context.Add(tbMunicipio);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbMunicipio_Insert @p0, @p1, @p2, @p3",
+                        parameters: new object[] { tbMunicipio.MunId,
+                                                   tbMunicipio.DepId,
+                                                   tbMunicipio.MunNombre,
+                                                     1});
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception Ex)
+                {
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbMunicipio);
+                }
+
             }
-            ViewData["DepId"] = new SelectList(_context.TbDepartamento, "DepId", "DepId", tbMunicipio.DepId);
-            return View(tbMunicipio);
+            else
+            {
+                ViewData["DepId"] = new SelectList(db.TbDepartamento, "DepId", "DepId", tbMunicipio.DepId);
+
+                return View(tbMunicipio);
+            }
         }
 
         // GET: Municipios/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public  IActionResult Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbMunicipio = await _context.TbMunicipio.FindAsync(id);
+            var tbMunicipio =  db.TbMunicipio.Find(id);
             if (tbMunicipio == null)
             {
                 return NotFound();
             }
-            ViewData["DepId"] = new SelectList(_context.TbDepartamento, "DepId", "DepId", tbMunicipio.DepId);
+            ViewData["DepId"] = new SelectList(db.TbDepartamento, "DepId", "DepDescripcion", tbMunicipio.DepId);
             return View(tbMunicipio);
         }
 
@@ -90,48 +108,47 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MunId,DepId,MunNombre,MunUsuarioCrea,MunFechaCrea,MunUsuarioModifica,MunFechaModifica")] TbMunicipio tbMunicipio)
+        public  IActionResult Edit(string id, [Bind("MunId,DepId,MunNombre,MunUsuarioCrea,MunFechaCrea,MunUsuarioModifica,MunFechaModifica")] TbMunicipio tbMunicipio)
         {
-            if (id != tbMunicipio.MunId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(tbMunicipio);
-                    await _context.SaveChangesAsync();
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbMunicipio_Update @p0, @p1, @p2, @p3",
+                        parameters: new object[] { tbMunicipio.MunId,
+                                                   tbMunicipio.DepId,
+                                                   tbMunicipio.MunNombre,
+                                                   1});
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception Ex)
                 {
-                    if (!TbMunicipioExists(tbMunicipio.MunId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbMunicipio);
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            ViewData["DepId"] = new SelectList(_context.TbDepartamento, "DepId", "DepId", tbMunicipio.DepId);
-            return View(tbMunicipio);
+            else
+            {
+                ViewData["DepId"] = new SelectList(db.TbDepartamento, "DepId", "DepId", tbMunicipio.DepId);
+
+                return View(tbMunicipio);
+            }
         }
 
         // GET: Municipios/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public  IActionResult Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbMunicipio = await _context.TbMunicipio
+            var tbMunicipio =  db.TbMunicipio
                 .Include(t => t.Dep)
-                .FirstOrDefaultAsync(m => m.MunId == id);
+                .FirstOrDefault(m => m.MunId == id);
             if (tbMunicipio == null)
             {
                 return NotFound();
@@ -143,17 +160,17 @@ namespace SIGEM_BIDSS.Controllers
         // POST: Municipios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public  IActionResult DeleteConfirmed(string id)
         {
-            var tbMunicipio = await _context.TbMunicipio.FindAsync(id);
-            _context.TbMunicipio.Remove(tbMunicipio);
-            await _context.SaveChangesAsync();
+            var tbMunicipio =  db.TbMunicipio.Find(id);
+            db.TbMunicipio.Remove(tbMunicipio);
+             db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TbMunicipioExists(string id)
         {
-            return _context.TbMunicipio.Any(e => e.MunId == id);
+            return db.TbMunicipio.Any(e => e.MunId == id);
         }
     }
 }

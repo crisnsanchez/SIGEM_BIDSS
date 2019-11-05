@@ -47,15 +47,28 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TbTipoMoneda tbTipoMoneda)
+        public IActionResult Create([Bind("TmoAbreviatura,TmoNombre,TmoUsuarioCrea")] TbTipoMoneda tbTipoMoneda)
         {
             if (ModelState.IsValid)
             {
-                db.Add(tbTipoMoneda);
-                db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbTipoMoneda_Insert @p0, @p1, @p2", parameters: new object[] { tbTipoMoneda.TmoAbreviatura, tbTipoMoneda.TmoNombre, '1' });
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception Ex)
+                {
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbTipoMoneda);
+                }
+
             }
-            return View(tbTipoMoneda);
+            else
+            {
+                return View(tbTipoMoneda);
+            }
         }
 
         // GET: TipoMonedas/Edit/5
@@ -79,7 +92,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(short id, [Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TbTipoMoneda tbTipoMoneda)
+        public IActionResult Edit(short id, [Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioModifica")] TbTipoMoneda tbTipoMoneda)
         {
             if (id != tbTipoMoneda.TmoId)
             {
@@ -90,23 +103,22 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    db.Update(tbTipoMoneda);
-                    db.SaveChangesAsync();
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbTipoMoneda_Update @p0, @p1, @p2, @p3", parameters: new object[] { tbTipoMoneda.TmoId, tbTipoMoneda.TmoAbreviatura, tbTipoMoneda.TmoNombre, "1" });
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception Ex)
                 {
-                    if (!tbTipoMonedaExists(tbTipoMoneda.TmoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbTipoMoneda);
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(tbTipoMoneda);
+            else
+            {
+                return View(tbTipoMoneda);
+            }
         }
 
         // GET: TipoMonedas/Delete/5

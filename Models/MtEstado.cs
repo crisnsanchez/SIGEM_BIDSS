@@ -16,7 +16,7 @@ namespace SIGEM_BIDSS.Models
     public class TbEstadometadata
     {
         [Display(Name = "ID")]
-        
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int EstId { get; set; }
 
         [Display(Name = "Descripción")]

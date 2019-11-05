@@ -18,6 +18,7 @@ namespace SIGEM_BIDSS.Models
     public class TbDepartamentoMetadata
     {
         [Display(Name = "Código Departamento")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string DepId { get; set; }
 
         [Display(Name = "Departamento")]

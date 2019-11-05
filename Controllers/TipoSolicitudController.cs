@@ -47,15 +47,28 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("TipsolId,TipsolDescripcion,TipsolUsuarioCrea,TipsolFechaCrea,TipsolUsuarioModifica,TipsolFechaModifica")] TbTipoSolicitud tbTipoSolicitud)
+        public IActionResult Create([Bind("TipsolDescripcion,TipsolUsuarioCrea")] TbTipoSolicitud tbTipoSolicitud)
         {
             if (ModelState.IsValid)
             {
-                db.Add(tbTipoSolicitud);
-                db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbTipoSolicitud_Insert @p0, @p1", parameters: new object[] { tbTipoSolicitud.TipsolDescripcion, '1' });
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception Ex)
+                {
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbTipoSolicitud);
+                }
+
             }
-            return View(tbTipoSolicitud);
+            else
+            {
+                return View(tbTipoSolicitud);
+            }
         }
 
         // GET: TipoSolicitud/Edit/5
@@ -79,7 +92,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("TipsolId,TipsolDescripcion,TipsolUsuarioCrea,TipsolFechaCrea,TipsolUsuarioModifica,TipsolFechaModifica")] TbTipoSolicitud tbTipoSolicitud)
+        public IActionResult Edit(int id, [Bind("TipsolId,TipsolDescripcion,TipsolUsuarioModifica")] TbTipoSolicitud tbTipoSolicitud)
         {
             if (id != tbTipoSolicitud.TipsolId)
             {
@@ -90,23 +103,22 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    db.Update(tbTipoSolicitud);
-                    db.SaveChangesAsync();
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbTipoSolicitud_Update @p0, @p1, @p2", parameters: new object[] { tbTipoSolicitud.TipsolId, tbTipoSolicitud.TipsolDescripcion, "1" });
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception Ex)
                 {
-                    if (!TbTipoSolicitudExists(tbTipoSolicitud.TipsolId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbTipoSolicitud);
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(tbTipoSolicitud);
+            else
+            {
+                return View(tbTipoSolicitud);
+            }
         }
 
         // GET: TipoSolicitud/Delete/5

@@ -17,12 +17,17 @@ namespace SIGEM_BIDSS.Models
     public class TbMunicipiometada
     {
         [Display(Name = "Código Municipio")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string MunId { get; set; }
 
-        [Display(Name = "Código Departamento")]
+        [Display(Name = "Departamento")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string DepId { get; set; }
 
+
+
         [Display(Name = "Municipio")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string MunNombre { get; set; }
 
         //public int MunUsuarioCrea { get; set; }

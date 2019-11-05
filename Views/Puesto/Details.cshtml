@@ -5,30 +5,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalle Puesto</h2>
+<div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex  align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalle De Municipio</h6>
+        <div class="float-right">
 
-<div>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PtoId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PtoId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PtoDescripcion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PtoDescripcion)
-        </dd>
+        <div class="container-fluid">
+            <div class="col-md-4">
 
-    </dl>
+                <dl class="dl-horizontal">
+
+                    <dt class="col-sm-6">
+                       ID
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.PtoId)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        Area
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Are.AreDescripcion)
+                    </dd>
+
+                    <dt class="col-lg-10">
+                        @Html.DisplayNameFor(model => model.PtoDescripcion)
+                    </dt>
+                    <dd class="col-lg-10">
+                        @Html.DisplayFor(model => model.PtoDescripcion)
+                    </dd>
+
+                </dl>
+
+                <div>
+                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.PtoId">Editar</a>
+                    <a asp-action="Index" class="btn btn-danger">Regresar al Listado</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 </div>
-
-<div>
-    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.PtoId">Editar</a>
-    <a asp-action="Index" class="btn btn-danger">Regresar al Listado</a>
-</div>
-

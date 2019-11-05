@@ -16,6 +16,7 @@ namespace SIGEM_BIDSS.Models
     public class AreaMetaData
     {
         [Display(Name = "ID")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int AreId { get; set; }
 
         [Display(Name = "Área")]

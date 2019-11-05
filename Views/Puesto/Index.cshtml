@@ -1,4 +1,8 @@
-﻿@model IEnumerable<SIGEM_BIDSS.Models.TbPuesto>
+﻿
+
+
+@model IEnumerable<SIGEM_BIDSS.Models.TbPuesto>
+
 
 @{
     ViewData["Title"] = "Index";
@@ -26,6 +30,10 @@
                                 @Html.DisplayNameFor(model => model.PtoId)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.AreId)
+                            </th>
+                          
+                            <th>
                                 @Html.DisplayNameFor(model => model.PtoDescripcion)
                             </th>
 
@@ -35,20 +43,23 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.PtoId)
-                                </td>
-                                <td style="text-align:center">
-                                    @Html.DisplayFor(modelItem => item.PtoDescripcion)
-                                </td>
+                        <tr>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.PtoId)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.Are.AreDescripcion)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.PtoDescripcion)
+                            </td>
 
-                                <td>
-                                    <a class="btn btn-outline-primary btn-xs" asp-action="Edit" asp-route-id="@item.PtoId">Editar</a>
-                                    <a class="btn btn-outline-warning btn-xs" asp-action="Details" asp-route-id="@item.PtoId">Detalle</a>
-                                    @*<a class="btn btn-success btn-sm" asp-action="Delete" asp-route-id="@item.AreId">Delete</a>*@
-                                </td>
-                            </tr>
+                            <td>
+                                <a class="btn btn-outline-primary btn-xs" asp-action="Edit" asp-route-id="@item.PtoId">Editar</a>
+                                <a class="btn btn-outline-warning btn-xs" asp-action="Details" asp-route-id="@item.PtoId">Detalle</a>
+                                @*<a class="btn btn-success btn-sm" asp-action="Delete" asp-route-id="@item.AreId">Delete</a>*@
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

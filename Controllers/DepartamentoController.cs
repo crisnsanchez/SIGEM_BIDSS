@@ -52,11 +52,27 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(tbDepartamento);
-                db.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbDepartamento_Insert @p0, @p1, @p2",
+                        parameters: new object[] { tbDepartamento.DepId,
+                                                   tbDepartamento.DepDescripcion,
+                                                   tbDepartamento.DepUsuarioCrea});
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception Ex)
+                {
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbDepartamento);
+                }
+
             }
-            return View(tbDepartamento);
+            else
+            {
+                return View(tbDepartamento);
+            }
         }
 
         // GET: Departamento/Edit/5
@@ -86,28 +102,29 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Update(tbDepartamento);
-                    db.SaveChanges();
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbDepartamento_Update @p0, @p1, @p2",
+                        parameters: new object[] { tbDepartamento.DepId,
+                                                   tbDepartamento.DepDescripcion,
+                                                   tbDepartamento.DepUsuarioModifica});
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception Ex)
                 {
-                    if (!TbDepartamentoExists(tbDepartamento.DepId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbDepartamento);
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(tbDepartamento);
+            else
+            {
+                return View(tbDepartamento);
+            }
         }
 
         // GET: Departamento/Delete/5

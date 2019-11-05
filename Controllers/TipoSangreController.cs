@@ -48,15 +48,28 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("TpsId,TpsNombre,TpsUsuarioCrea,TpsFechaCrea,TpsUsuarioModifica,TpsFechaModifica")] TbTipoSangre tbTipoSangre)
+        public IActionResult Create([Bind("TpsNombre,TpsUsuarioCrea")] TbTipoSangre tbTipoSangre)
         {
             if (ModelState.IsValid)
             {
-                db.Add(tbTipoSangre);
-                db.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbTipoSangre_Insert @p0, @p1", parameters: new object[] { tbTipoSangre.TpsNombre, '1' });
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception Ex)
+                {
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbTipoSangre);
+                }
+
             }
-            return View(tbTipoSangre);
+            else
+            {
+                return View(tbTipoSangre);
+            }
         }
 
         // GET: TipoSangre/Edit/5
@@ -80,7 +93,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("TpsId,TpsNombre,TpsUsuarioCrea,TpsFechaCrea,TpsUsuarioModifica,TpsFechaModifica")] TbTipoSangre tbTipoSangre)
+        public IActionResult Edit(int id, [Bind("TpsId,TpsNombre,TpsUsuarioModifica")] TbTipoSangre tbTipoSangre)
         {
             if (id != tbTipoSangre.TpsId)
             {
@@ -91,23 +104,22 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    db.Update(tbTipoSangre);
-                    db.SaveChanges();
+                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbTipoSangre_Update @p0, @p1, @p2", parameters: new object[] { tbTipoSangre.TpsId, tbTipoSangre.TpsNombre, "1" });
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception Ex)
                 {
-                    if (!TbTipoSangreExists(tbTipoSangre.TpsId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
+                    var Message = Ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbTipoSangre);
                 }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(tbTipoSangre);
+            else
+            {
+                return View(tbTipoSangre);
+            }
         }
 
         // GET: TipoSangre/Delete/5

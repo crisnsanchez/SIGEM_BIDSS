@@ -5,41 +5,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Crear</h1>
-
-<h4>Tipo Moneda</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="TmoId" class="control-label"></label>
-                <input asp-for="TmoId" class="form-control" />
-                <span asp-validation-for="TmoId" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="TmoAbreviatura" class="control-label"></label>
-                <input asp-for="TmoAbreviatura" class="form-control" />
-                <span asp-validation-for="TmoAbreviatura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TmoNombre" class="control-label"></label>
-                <input asp-for="TmoNombre" class="form-control" />
-                <span asp-validation-for="TmoNombre" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-danger">Cancelar</a>
-            </div>
-        </form>
+<div class="card shadow">
+    <div class="card-header py-3 d-flex  align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Registrar Moneda</h6>
+        <div class="float-right">
+            <a class="btn btn-primary" asp-action="Index">Regresar Al Listado</a>
+        </div>
     </div>
-</div>
+    <div class="card-body">
+        <div class="container-fluid">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TmoAbreviatura" class="control-label"></label>
+                        <input asp-for="TmoAbreviatura" class="form-control" />
+                        <span asp-validation-for="TmoAbreviatura" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TmoNombre" class="control-label"></label>
+                        <input asp-for="TmoNombre" class="form-control" />
+                        <span asp-validation-for="TmoNombre" class="text-danger"></span>
+                    </div>
 
-<div>
-</div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        <div>
+        </div>
+    </div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

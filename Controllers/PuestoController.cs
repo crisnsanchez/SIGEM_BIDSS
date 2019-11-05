@@ -15,6 +15,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Puesto
         public IActionResult Index()
         {
+            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion");
             var sIGEM_BIDSSModel = db.TbPuesto.Include(t => t.Are);
             return View(sIGEM_BIDSSModel.ToList());
         }
@@ -50,18 +51,37 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("PtoId,AreId,PtoDescripcion,PtoUsuarioCrea,PtoFechaCrea,PtoUsuarioModifica,PtoFechaModifica")] TbPuesto tbPuesto)
+        public IActionResult Create([Bind("AreId,PtoDescripcion,PtoUsuarioCrea")] TbPuesto tbPuesto)
         {
             if (ModelState.IsValid)
             {
-                db.Add(tbPuesto);
-                db.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
-            return View(tbPuesto);
-        }
+                try
+                {
+                    var _Insert = db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbPuesto_Insert @p0,@p1,@p2", parameters: new object[] { tbPuesto.AreId, tbPuesto.PtoDescripcion, "1" });
+                    if (_Insert == 0)
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbPuesto);
+                    }
+                    else
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var Message = ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbPuesto);
 
+                }
+            }
+            else
+            {
+                ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
+                return View(tbPuesto);
+            }
+        }
         // GET: Puesto/Edit/5
         public IActionResult Edit(int? id)
         {
@@ -71,11 +91,11 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             var tbPuesto = db.TbPuesto.Find(id);
+            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
             if (tbPuesto == null)
             {
                 return NotFound();
             }
-            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
             return View(tbPuesto);
         }
 
@@ -88,6 +108,7 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (id != tbPuesto.PtoId)
             {
+                ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
                 return NotFound();
             }
 
@@ -95,28 +116,39 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    db.Update(tbPuesto);
-                    db.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TbPuestoExists(tbPuesto.PtoId))
+                    
+                    var _Insert = db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbPuesto_Update @p0, @p1, @p2,@p3",
+                        parameters: new object[] { tbPuesto.PtoId, tbPuesto.AreId, tbPuesto.PtoDescripcion, 1 });
+                    if (_Insert == 0)
                     {
-                        return NotFound();
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbPuesto);
                     }
                     else
                     {
-                        throw;
+                        
+                        return RedirectToAction(nameof(Index));
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                 
+
+                    var Message = ex.Message;
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbPuesto);
+                }
+
             }
-            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
-            return View(tbPuesto);
+            else
+            {
+                ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
+                return View(tbPuesto);
+            }
         }
 
-        // GET: Puesto/Delete/5
-        public IActionResult Delete(int? id)
+            // GET: Puesto/Delete/5
+            public IActionResult Delete(int? id)
         {
             if (id == null)
             {

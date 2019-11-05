@@ -18,9 +18,11 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "ID")]
         public short TmoId { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Abreviatura")]
         public string TmoAbreviatura { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Nombre")]
         public string TmoNombre { get; set; }
 

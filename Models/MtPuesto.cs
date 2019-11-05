@@ -19,10 +19,12 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "ID")]
         public int PtoId { get; set; }
 
-        [Display(Name = "ID Puesto")]
+        [Display(Name = "Area")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo {0} es requerido")]
         public int AreId { get; set; }
 
         [Display(Name = "Descripcion")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Campo {0} es requerido")]
         public string PtoDescripcion { get; set; }
     }
 }
