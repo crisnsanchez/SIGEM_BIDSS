@@ -5,30 +5,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalle Area</h2>
-    <hr />
+<div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex  align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Detalle Area</h6>
+        <div class="float-right">
+            <a class="btn btn-primary" asp-action="Index">Regresar Al Listado</a>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+
+        <div class="container-fluid">
+            <div class="col-md-4">
+
                 <dl class="dl-horizontal">
 
                     <dt class="col-sm-4">
-                    Id Area             
+                        Id Area
                     </dt>
                     <dd class="col-sm-10">
                         @Html.DisplayFor(model => model.AreId)
                     </dd>
 
-                    <dt class="col-sm-2">
+                    <dt class="col-lg-10">
                         @Html.DisplayNameFor(model => model.AreDescripcion)
                     </dt>
-                    <dd class="col-sm-10">
+                    <dd class="col-lg-10">
                         @Html.DisplayFor(model => model.AreDescripcion)
                     </dd>
 
                 </dl>
-          
-            <div>
-                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.AreId">Editar</a> 
-                <a asp-action="Index" class="btn btn-danger">Regresar al Listado</a>
-            </div>
-        
 
-         
+                <div>
+                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.AreId">Editar</a>
+                    <a asp-action="Index" class="btn btn-danger">Regresar al Listado</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
