@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SIGEM_BIDSS.Models
 {
     [ModelMetadataType(typeof(TipoMonedametada))]
-    public partial class TipoMoneda
+    public partial class TbTipoMoneda
     {
 
 

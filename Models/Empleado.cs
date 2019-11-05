@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SIGEM_BIDSS.Models
 {
     public partial class TbEmpleado
     {
+        [NotMapped]
+        public string DepId { get; set; }
         public short EmpId { get; set; }
         public string EmpNombres { get; set; }
         public string EmpApellidos { get; set; }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +48,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Empleado/Create
         public IActionResult Create()
         {
-            ViewData["MunId"] = new SelectList(db.TbMunicipio, "MunId", "MunId");
+            ViewData["DepId"] = new SelectList(db.TbDepartamento, "DepId", "DepDescripcion");
             ViewData["PtoId"] = new SelectList(db.TbPuesto, "PtoId", "PtoDescripcion");
             ViewData["TpsId"] = new SelectList(db.TbTipoSangre, "TpsId", "TpsNombre");
             return View();
@@ -57,7 +59,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("EmpId,EmpNombres,EmpApellidos,EmpSexo,EmpFechaNacimiento,EmpIdentificacion,EmpTelefono,EmpCorreoElectronico,TpsId,PtoId,EmpFechaIngreso,EmpDireccion,EmpRazonInactivacion,EmpEstado,EmpPathImage,MunId,EmpUsuarioCrea,EmpFechaCrea,EmpUsuarioModifica,EmpFechaModifica")] TbEmpleado tbEmpleado)
+        public IActionResult Create([Bind("EmpId,EmpNombres,EmpApellidos,EmpSexo,EmpFechaNacimiento,EmpIdentificacion,EmpTelefono,EmpCorreoElectronico,TpsId,PtoId,EmpFechaIngreso,EmpDireccion,EmpRazonInactivacion,EmpEstado,EmpPathImage,MunId,EmpUsuarioCrea,EmpFechaCrea,EmpUsuarioModifica,EmpFechaModifica,DepId")] TbEmpleado tbEmpleado)
         {
 
 
@@ -87,7 +89,15 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 catch (Exception Ex)
                 {
-                    ViewData["MunId"] = new SelectList(db.TbMunicipio, "MunId", "MunId", tbEmpleado.MunId);
+                    if (tbEmpleado.MunId == null)
+                    {
+                        ViewData["MunId"] = null;
+                    }
+                    else
+                    {
+                        ViewData["MunId"] = new SelectList(db.TbMunicipio, "MunId", "MunNombre", tbEmpleado.MunId);
+                    }
+                    ViewData["DepId"] = new SelectList(db.TbDepartamento, "DepId", "DepDescripcion", tbEmpleado.DepId);
                     ViewData["PtoId"] = new SelectList(db.TbPuesto, "PtoId", "PtoDescripcion", tbEmpleado.PtoId);
                     ViewData["TpsId"] = new SelectList(db.TbTipoSangre, "TpsId", "TpsNombre", tbEmpleado.TpsId);
 
@@ -100,7 +110,15 @@ namespace SIGEM_BIDSS.Controllers
             }
             else
             {
-                ViewData["MunId"] = new SelectList(db.TbMunicipio, "MunId", "MunId", tbEmpleado.MunId);
+                if (tbEmpleado.MunId == null)
+                {
+                    ViewData["MunId"] = null;
+                }
+                else
+                {
+                    ViewData["MunId"] = new SelectList(db.TbMunicipio, "MunId", "MunNombre", tbEmpleado.MunId);
+                }
+                ViewData["DepId"] = new SelectList(db.TbDepartamento, "DepId", "DepDescripcion", tbEmpleado.DepId);
                 ViewData["PtoId"] = new SelectList(db.TbPuesto, "PtoId", "PtoDescripcion", tbEmpleado.PtoId);
                 ViewData["TpsId"] = new SelectList(db.TbTipoSangre, "TpsId", "TpsNombre", tbEmpleado.TpsId);
 
@@ -224,5 +242,21 @@ namespace SIGEM_BIDSS.Controllers
         {
             return db.TbEmpleado.Any(e => e.EmpId == id);
         }
+
+
+
+        [HttpPost]
+        public JsonResult GetValue(string DepId)
+        {
+            var _result = db.TbMunicipio
+            .Where(x => x.DepId == DepId)
+            .Select(y => new TbMunicipio() {  MunId= y.MunId ,MunNombre = y.MunNombre })
+            .ToList();
+
+            var _resultTwo = db.TbMunicipio.Where(x => x.DepId == DepId).ToArray();
+
+            return new JsonResult(_result);
+        }
+
     }
 }

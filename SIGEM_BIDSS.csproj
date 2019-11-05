@@ -28,11 +28,21 @@
 
 
   <ItemGroup>
+    <None Include="Views\Area\Create.cshtml" />
+    <None Include="Views\Area\Delete.cshtml" />
+    <None Include="Views\Area\Details.cshtml" />
+    <None Include="Views\Area\Edit.cshtml" />
+    <None Include="Views\Area\Index.cshtml" />
     <None Include="Views\Departamento\Create.cshtml" />
     <None Include="Views\Departamento\Delete.cshtml" />
     <None Include="Views\Departamento\Details.cshtml" />
     <None Include="Views\Departamento\Edit.cshtml" />
     <None Include="Views\Departamento\Index.cshtml" />
+    <None Include="Views\Empleado\Create.cshtml" />
+    <None Include="Views\Empleado\Delete.cshtml" />
+    <None Include="Views\Empleado\Details.cshtml" />
+    <None Include="Views\Empleado\Edit.cshtml" />
+    <None Include="Views\Empleado\Index.cshtml" />
     <None Include="Views\Estado\Create.cshtml" />
     <None Include="Views\Estado\Delete.cshtml" />
     <None Include="Views\Estado\Details.cshtml" />
@@ -43,6 +53,14 @@
     <None Include="Views\Puesto\Details.cshtml" />
     <None Include="Views\Puesto\Edit.cshtml" />
     <None Include="Views\Puesto\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Footer.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_Navigation.cshtml" />
+    <None Include="Views\Shared\_TopNavbar.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\TipoSangre\Create.cshtml" />
     <None Include="Views\TipoSangre\Delete.cshtml" />
     <None Include="Views\TipoSangre\Details.cshtml" />

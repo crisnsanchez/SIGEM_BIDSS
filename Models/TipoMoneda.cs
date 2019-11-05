@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SIGEM_BIDSS.Models
 {
-    public partial class TipoMoneda
+    public partial class TbTipoMoneda
     {
         public short TmoId { get; set; }
         public string TmoAbreviatura { get; set; }

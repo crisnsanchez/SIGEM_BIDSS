@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SIGEM_BIDSS.Models
 {
-    [ModelMetadataType(typeof(AreaSalidaMetaData))]
+    [ModelMetadataType(typeof(AreaMetaData))]
     public partial class TbArea
     {
         
     }
 
-    public class AreaSalidaMetaData
+    public class AreaMetaData
     {
         [Display(Name = "ID")]
         public int AreId { get; set; }
