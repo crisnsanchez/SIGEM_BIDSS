@@ -27,6 +27,31 @@
 
 
   <ItemGroup>
+    <None Include="Views\Departamento\Create.cshtml" />
+    <None Include="Views\Departamento\Delete.cshtml" />
+    <None Include="Views\Departamento\Details.cshtml" />
+    <None Include="Views\Departamento\Edit.cshtml" />
+    <None Include="Views\Departamento\Index.cshtml" />
+    <None Include="Views\Estado\Create.cshtml" />
+    <None Include="Views\Estado\Delete.cshtml" />
+    <None Include="Views\Estado\Details.cshtml" />
+    <None Include="Views\Estado\Edit.cshtml" />
+    <None Include="Views\Estado\Index.cshtml" />
+    <None Include="Views\Puesto\Create.cshtml" />
+    <None Include="Views\Puesto\Delete.cshtml" />
+    <None Include="Views\Puesto\Details.cshtml" />
+    <None Include="Views\Puesto\Edit.cshtml" />
+    <None Include="Views\Puesto\Index.cshtml" />
+    <None Include="Views\TipoSangre\Create.cshtml" />
+    <None Include="Views\TipoSangre\Delete.cshtml" />
+    <None Include="Views\TipoSangre\Details.cshtml" />
+    <None Include="Views\TipoSangre\Edit.cshtml" />
+    <None Include="Views\TipoSangre\Index.cshtml" />
+    <None Include="Views\TipoSolicitud\Create.cshtml" />
+    <None Include="Views\TipoSolicitud\Delete.cshtml" />
+    <None Include="Views\TipoSolicitud\Details.cshtml" />
+    <None Include="Views\TipoSolicitud\Edit.cshtml" />
+    <None Include="Views\TipoSolicitud\Index.cshtml" />
     <None Include="wwwroot\css\demo\chart-area-demo.js" />
     <None Include="wwwroot\css\demo\chart-bar-demo.js" />
     <None Include="wwwroot\css\demo\chart-pie-demo.js" />

@@ -11,28 +11,23 @@ namespace SIGEM_BIDSS.Controllers
 {
     public class TipoSangreController : Controller
     {
-        private readonly SIGEM_BIDSSModel _context;
-
-        public TipoSangreController(SIGEM_BIDSSModel context)
-        {
-            _context = context;
-        }
+        SIGEM_BIDSSModel db = new SIGEM_BIDSSModel();
 
         // GET: TipoSangre
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.TbTipoSangre.ToListAsync());
+            return View(db.TbTipoSangre.ToList());
         }
 
         // GET: TipoSangre/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbTipoSangre = await _context.TbTipoSangre
+            var tbTipoSangre = db.TbTipoSangre
                 .FirstOrDefaultAsync(m => m.TpsId == id);
             if (tbTipoSangre == null)
             {
@@ -53,26 +48,26 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TpsId,TpsNombre,TpsUsuarioCrea,TpsFechaCrea,TpsUsuarioModifica,TpsFechaModifica")] TbTipoSangre tbTipoSangre)
+        public IActionResult Create([Bind("TpsId,TpsNombre,TpsUsuarioCrea,TpsFechaCrea,TpsUsuarioModifica,TpsFechaModifica")] TbTipoSangre tbTipoSangre)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbTipoSangre);
-                await _context.SaveChangesAsync();
+                db.Add(tbTipoSangre);
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(tbTipoSangre);
         }
 
         // GET: TipoSangre/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbTipoSangre = await _context.TbTipoSangre.FindAsync(id);
+            var tbTipoSangre = db.TbTipoSangre.Find(id);
             if (tbTipoSangre == null)
             {
                 return NotFound();
@@ -85,7 +80,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TpsId,TpsNombre,TpsUsuarioCrea,TpsFechaCrea,TpsUsuarioModifica,TpsFechaModifica")] TbTipoSangre tbTipoSangre)
+        public IActionResult Edit(int id, [Bind("TpsId,TpsNombre,TpsUsuarioCrea,TpsFechaCrea,TpsUsuarioModifica,TpsFechaModifica")] TbTipoSangre tbTipoSangre)
         {
             if (id != tbTipoSangre.TpsId)
             {
@@ -96,8 +91,8 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    _context.Update(tbTipoSangre);
-                    await _context.SaveChangesAsync();
+                    db.Update(tbTipoSangre);
+                    db.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,14 +111,14 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         // GET: TipoSangre/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbTipoSangre = await _context.TbTipoSangre
+            var tbTipoSangre = db.TbTipoSangre
                 .FirstOrDefaultAsync(m => m.TpsId == id);
             if (tbTipoSangre == null)
             {
@@ -136,17 +131,17 @@ namespace SIGEM_BIDSS.Controllers
         // POST: TipoSangre/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var tbTipoSangre = await _context.TbTipoSangre.FindAsync(id);
-            _context.TbTipoSangre.Remove(tbTipoSangre);
-            await _context.SaveChangesAsync();
+            var tbTipoSangre = db.TbTipoSangre.Find(id);
+            db.TbTipoSangre.Remove(tbTipoSangre);
+            db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TbTipoSangreExists(int id)
         {
-            return _context.TbTipoSangre.Any(e => e.TpsId == id);
+            return db.TbTipoSangre.Any(e => e.TpsId == id);
         }
     }
 }

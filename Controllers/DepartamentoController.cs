@@ -13,24 +13,22 @@ namespace SIGEM_BIDSS.Controllers
     {
         SIGEM_BIDSSModel db = new SIGEM_BIDSSModel();
 
-        
-
         // GET: Departamento
-        public  IActionResult Index()
+        public IActionResult Index()
         {
-            return View(db.TbDepartamento);
+            return View(db.TbDepartamento.ToList());
         }
 
         // GET: Departamento/Details/5
-        public  IActionResult Details(string id)
+        public IActionResult Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbDepartamento =  db.TbDepartamento
-                .FirstOrDefault(m => m.DepId == id);
+            var tbDepartamento = db.TbDepartamento
+                .FirstOrDefaultAsync(m => m.DepId == id);
             if (tbDepartamento == null)
             {
                 return NotFound();
@@ -50,45 +48,26 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Create([Bind("DepId,DepDescripcion,DepUsuarioCrea,DepFechaCrea,DepUsuarioModifica,DepFechaModifica")] TbDepartamento tbDepartamento)
+        public IActionResult Create([Bind("DepId,DepDescripcion,DepUsuarioCrea,DepFechaCrea,DepUsuarioModifica,DepFechaModifica")] TbDepartamento tbDepartamento)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbDepartamento_Insert @p0, @p1, @p2" +
-                        "", parameters: new object[] { tbDepartamento.DepId,
-                                                       tbDepartamento.DepDescripcion,
-                                                       tbDepartamento.DepUsuarioCrea
-                        });
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception Ex)
-                {
-                   
-                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
-                    var Message = Ex.Message;
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbDepartamento);
-                }
-
+                db.Add(tbDepartamento);
+                db.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                
-                return View(tbDepartamento);
-            }
+            return View(tbDepartamento);
         }
 
         // GET: Departamento/Edit/5
-        public  IActionResult Edit(string id)
+        public IActionResult Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbDepartamento =  db.TbDepartamento.Find(id);
+            var tbDepartamento = db.TbDepartamento.Find(id);
             if (tbDepartamento == null)
             {
                 return NotFound();
@@ -101,7 +80,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Edit(string id, [Bind("DepId,DepDescripcion,DepUsuarioCrea,DepFechaCrea,DepUsuarioModifica,DepFechaModifica")] TbDepartamento tbDepartamento)
+        public IActionResult Edit(string id, [Bind("DepId,DepDescripcion,DepUsuarioCrea,DepFechaCrea,DepUsuarioModifica,DepFechaModifica")] TbDepartamento tbDepartamento)
         {
             if (id != tbDepartamento.DepId)
             {
@@ -112,40 +91,35 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbDepartamento_Update @p0, @p1, @p2" +
-                        "", parameters: new object[] { tbDepartamento.DepId,
-                                                       tbDepartamento.DepDescripcion,
-                                                       tbDepartamento.DepUsuarioCrea
-                        });
-                    return RedirectToAction(nameof(Index));
+                    db.Update(tbDepartamento);
+                    db.SaveChanges();
                 }
-                catch (Exception Ex)
+                catch (DbUpdateConcurrencyException)
                 {
-
-                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
-                    var Message = Ex.Message;
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbDepartamento);
+                    if (!TbDepartamentoExists(tbDepartamento.DepId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-
+                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-
-                return View(tbDepartamento);
-            }
+            return View(tbDepartamento);
         }
 
         // GET: Departamento/Delete/5
-        public  IActionResult Delete(string id)
+        public IActionResult Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbDepartamento =  db.TbDepartamento
-                .FirstOrDefault(m => m.DepId == id);
+            var tbDepartamento = db.TbDepartamento
+                .FirstOrDefaultAsync(m => m.DepId == id);
             if (tbDepartamento == null)
             {
                 return NotFound();
@@ -157,11 +131,11 @@ namespace SIGEM_BIDSS.Controllers
         // POST: Departamento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public  IActionResult DeleteConfirmed(string id)
+        public IActionResult DeleteConfirmed(string id)
         {
-            var tbDepartamento =  db.TbDepartamento.Find(id);
+            var tbDepartamento = db.TbDepartamento.Find(id);
             db.TbDepartamento.Remove(tbDepartamento);
-             db.SaveChanges();
+            db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

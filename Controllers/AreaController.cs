@@ -53,27 +53,13 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbArea_Insert @p0, @p1", parameters: new object[] { tbArea.AreDescripcion, tbArea.AreUsuarioCrea });
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception Ex)
-                {
-                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
-                    var Message = Ex.Message;
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbArea);
-                }
-
+                db.Add(tbArea);
+                db.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                return View(tbArea);
-            }
+            return View(tbArea);
         }
 
-      
         // GET: Area/Edit/5
         public IActionResult Edit(int? id)
         {

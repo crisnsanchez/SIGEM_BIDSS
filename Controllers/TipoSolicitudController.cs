@@ -11,28 +11,22 @@ namespace SIGEM_BIDSS.Controllers
 {
     public class TipoSolicitudController : Controller
     {
-        private readonly SIGEM_BIDSSModel _context;
-
-        public TipoSolicitudController(SIGEM_BIDSSModel context)
-        {
-            _context = context;
-        }
-
+        SIGEM_BIDSSModel db = new SIGEM_BIDSSModel();
         // GET: TipoSolicitud
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.TbTipoSolicitud.ToListAsync());
+            return View(db.TbTipoSolicitud.ToList());
         }
 
         // GET: TipoSolicitud/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbTipoSolicitud = await _context.TbTipoSolicitud
+            var tbTipoSolicitud = db.TbTipoSolicitud
                 .FirstOrDefaultAsync(m => m.TipsolId == id);
             if (tbTipoSolicitud == null)
             {
@@ -53,26 +47,26 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TipsolId,TipsolDescripcion,TipsolUsuarioCrea,TipsolFechaCrea,TipsolUsuarioModifica,TipsolFechaModifica")] TipoSolicitud tbTipoSolicitud)
+        public IActionResult Create([Bind("TipsolId,TipsolDescripcion,TipsolUsuarioCrea,TipsolFechaCrea,TipsolUsuarioModifica,TipsolFechaModifica")] TbTipoSolicitud tbTipoSolicitud)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tbTipoSolicitud);
-                await _context.SaveChangesAsync();
+                db.Add(tbTipoSolicitud);
+                db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(tbTipoSolicitud);
         }
 
         // GET: TipoSolicitud/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbTipoSolicitud = await _context.TbTipoSolicitud.FindAsync(id);
+            var tbTipoSolicitud = db.TbTipoSolicitud.Find(id);
             if (tbTipoSolicitud == null)
             {
                 return NotFound();
@@ -85,7 +79,7 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TipsolId,TipsolDescripcion,TipsolUsuarioCrea,TipsolFechaCrea,TipsolUsuarioModifica,TipsolFechaModifica")] TipoSolicitud tbTipoSolicitud)
+        public IActionResult Edit(int id, [Bind("TipsolId,TipsolDescripcion,TipsolUsuarioCrea,TipsolFechaCrea,TipsolUsuarioModifica,TipsolFechaModifica")] TbTipoSolicitud tbTipoSolicitud)
         {
             if (id != tbTipoSolicitud.TipsolId)
             {
@@ -96,8 +90,8 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    _context.Update(tbTipoSolicitud);
-                    await _context.SaveChangesAsync();
+                    db.Update(tbTipoSolicitud);
+                    db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,14 +110,14 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         // GET: TipoSolicitud/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tbTipoSolicitud = await _context.TbTipoSolicitud
+            var tbTipoSolicitud = db.TbTipoSolicitud
                 .FirstOrDefaultAsync(m => m.TipsolId == id);
             if (tbTipoSolicitud == null)
             {
@@ -136,17 +130,17 @@ namespace SIGEM_BIDSS.Controllers
         // POST: TipoSolicitud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var tbTipoSolicitud = await _context.TbTipoSolicitud.FindAsync(id);
-            _context.TbTipoSolicitud.Remove(tbTipoSolicitud);
-            await _context.SaveChangesAsync();
+            var tbTipoSolicitud = db.TbTipoSolicitud.Find(id);
+            db.TbTipoSolicitud.Remove(tbTipoSolicitud);
+            db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TbTipoSolicitudExists(int id)
         {
-            return _context.TbTipoSolicitud.Any(e => e.TipsolId == id);
+            return db.TbTipoSolicitud.Any(e => e.TipsolId == id);
         }
     }
 }

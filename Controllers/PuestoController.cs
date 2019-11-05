@@ -11,43 +11,37 @@ namespace SIGEM_BIDSS.Controllers
 {
     public class PuestoController : Controller
     {
-        private readonly SIGEM_BIDSSModel _context;
-
-        public PuestoController(SIGEM_BIDSSModel context)
-        {
-            _context = context;
-        }
-
+        SIGEM_BIDSSModel db = new SIGEM_BIDSSModel();
         // GET: Puesto
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var sIGEM_BIDSSModel = _context.TbPuesto.Include(p => p.Are);
-            return View(await sIGEM_BIDSSModel.ToListAsync());
+            var sIGEM_BIDSSModel = db.TbPuesto.Include(t => t.Are);
+            return View(sIGEM_BIDSSModel.ToList());
         }
 
         // GET: Puesto/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var puesto = await _context.TbPuesto
-                .Include(p => p.Are)
+            var tbPuesto = db.TbPuesto
+                .Include(t => t.Are)
                 .FirstOrDefaultAsync(m => m.PtoId == id);
-            if (puesto == null)
+            if (tbPuesto == null)
             {
                 return NotFound();
             }
 
-            return View(puesto);
+            return View(tbPuesto);
         }
 
         // GET: Puesto/Create
         public IActionResult Create()
         {
-            ViewData["AreId"] = new SelectList(_context.TbArea, "AreId", "AreDescripcion");
+            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion");
             return View();
         }
 
@@ -56,33 +50,33 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PtoId,AreId,PtoDescripcion,PtoUsuarioCrea,PtoFechaCrea,PtoUsuarioModifica,PtoFechaModifica")] Puesto puesto)
+        public IActionResult Create([Bind("PtoId,AreId,PtoDescripcion,PtoUsuarioCrea,PtoFechaCrea,PtoUsuarioModifica,PtoFechaModifica")] TbPuesto tbPuesto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(puesto);
-                await _context.SaveChangesAsync();
+                db.Add(tbPuesto);
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreId"] = new SelectList(_context.TbArea, "AreId", "AreDescripcion", puesto.AreId);
-            return View(puesto);
+            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
+            return View(tbPuesto);
         }
 
         // GET: Puesto/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var puesto = await _context.TbPuesto.FindAsync(id);
-            if (puesto == null)
+            var tbPuesto = db.TbPuesto.Find(id);
+            if (tbPuesto == null)
             {
                 return NotFound();
             }
-            ViewData["AreId"] = new SelectList(_context.TbArea, "AreId", "AreDescripcion", puesto.AreId);
-            return View(puesto);
+            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
+            return View(tbPuesto);
         }
 
         // POST: Puesto/Edit/5
@@ -90,9 +84,9 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PtoId,AreId,PtoDescripcion,PtoUsuarioCrea,PtoFechaCrea,PtoUsuarioModifica,PtoFechaModifica")] Puesto puesto)
+        public IActionResult Edit(int id, [Bind("PtoId,AreId,PtoDescripcion,PtoUsuarioCrea,PtoFechaCrea,PtoUsuarioModifica,PtoFechaModifica")] TbPuesto tbPuesto)
         {
-            if (id != puesto.PtoId)
+            if (id != tbPuesto.PtoId)
             {
                 return NotFound();
             }
@@ -101,12 +95,12 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    _context.Update(puesto);
-                    await _context.SaveChangesAsync();
+                    db.Update(tbPuesto);
+                    db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PuestoExists(puesto.PtoId))
+                    if (!TbPuestoExists(tbPuesto.PtoId))
                     {
                         return NotFound();
                     }
@@ -117,43 +111,43 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AreId"] = new SelectList(_context.TbArea, "AreId", "AreDescripcion", puesto.AreId);
-            return View(puesto);
+            ViewData["AreId"] = new SelectList(db.TbArea, "AreId", "AreDescripcion", tbPuesto.AreId);
+            return View(tbPuesto);
         }
 
         // GET: Puesto/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var puesto = await _context.TbPuesto
-                .Include(p => p.Are)
+            var tbPuesto = db.TbPuesto
+                .Include(t => t.Are)
                 .FirstOrDefaultAsync(m => m.PtoId == id);
-            if (puesto == null)
+            if (tbPuesto == null)
             {
                 return NotFound();
             }
 
-            return View(puesto);
+            return View(tbPuesto);
         }
 
         // POST: Puesto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var puesto = await _context.TbPuesto.FindAsync(id);
-            _context.TbPuesto.Remove(puesto);
-            await _context.SaveChangesAsync();
+            var tbPuesto = db.TbPuesto.Find(id);
+            db.TbPuesto.Remove(tbPuesto);
+            db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PuestoExists(int id)
+        private bool TbPuestoExists(int id)
         {
-            return _context.TbPuesto.Any(e => e.PtoId == id);
+            return db.TbPuesto.Any(e => e.PtoId == id);
         }
     }
 }

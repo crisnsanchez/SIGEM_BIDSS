@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace SIGEM_BIDSS.Models
 {
-    public partial class Puesto
+    public partial class TbPuesto
     {
-        public Puesto()
+        public TbPuesto()
         {
             TbEmpleado = new HashSet<TbEmpleado>();
         }

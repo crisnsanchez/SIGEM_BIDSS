@@ -11,83 +11,77 @@ namespace SIGEM_BIDSS.Controllers
 {
     public class TipoMonedaController : Controller
     {
-        private readonly SIGEM_BIDSSModel _context;
-
-        public TipoMonedaController(SIGEM_BIDSSModel context)
+        SIGEM_BIDSSModel db = new SIGEM_BIDSSModel();
+        // GET: TipoMonedas
+        public IActionResult Index()
         {
-            _context = context;
+            return View(db.TbTipoMoneda.ToList());
         }
 
-        // GET: TipoMoneda
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.TbTipoMoneda.ToListAsync());
-        }
-
-        // GET: TipoMoneda/Details/5
-        public async Task<IActionResult> Details(short? id)
+        // GET: TipoMonedas/Details/5
+        public IActionResult Details(short? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tipoMoneda = await _context.TbTipoMoneda
+            var tbTipoMoneda = db.TbTipoMoneda
                 .FirstOrDefaultAsync(m => m.TmoId == id);
-            if (tipoMoneda == null)
+            if (tbTipoMoneda == null)
             {
                 return NotFound();
             }
 
-            return View(tipoMoneda);
+            return View(tbTipoMoneda);
         }
 
-        // GET: TipoMoneda/Create
+        // GET: TipoMonedas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TipoMoneda/Create
+        // POST: TipoMonedas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TipoMoneda tipoMoneda)
+        public IActionResult Create([Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TipoMoneda tbTipoMoneda)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tipoMoneda);
-                await _context.SaveChangesAsync();
+                db.Add(tbTipoMoneda);
+                db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tipoMoneda);
+            return View(tbTipoMoneda);
         }
 
-        // GET: TipoMoneda/Edit/5
-        public async Task<IActionResult> Edit(short? id)
+        // GET: TipoMonedas/Edit/5
+        public IActionResult Edit(short? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tipoMoneda = await _context.TbTipoMoneda.FindAsync(id);
-            if (tipoMoneda == null)
+            var tbTipoMoneda = db.TbTipoMoneda.Find(id);
+            if (tbTipoMoneda == null)
             {
                 return NotFound();
             }
-            return View(tipoMoneda);
+            return View(tbTipoMoneda);
         }
 
-        // POST: TipoMoneda/Edit/5
+        // POST: TipoMonedas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(short id, [Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TipoMoneda tipoMoneda)
+        public IActionResult Edit(short id, [Bind("TmoId,TmoAbreviatura,TmoNombre,TmoUsuarioCrea,TmoFechaCrea,TmoUsuarioModifica,TmoFechaModifica")] TipoMoneda tbTipoMoneda)
         {
-            if (id != tipoMoneda.TmoId)
+            if (id != tbTipoMoneda.TmoId)
             {
                 return NotFound();
             }
@@ -96,12 +90,12 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    _context.Update(tipoMoneda);
-                    await _context.SaveChangesAsync();
+                    db.Update(tbTipoMoneda);
+                    db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TipoMonedaExists(tipoMoneda.TmoId))
+                    if (!tbTipoMonedaExists(tbTipoMoneda.TmoId))
                     {
                         return NotFound();
                     }
@@ -112,41 +106,41 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tipoMoneda);
+            return View(tbTipoMoneda);
         }
 
-        // GET: TipoMoneda/Delete/5
-        public async Task<IActionResult> Delete(short? id)
+        // GET: TipoMonedas/Delete/5
+        public IActionResult Delete(short? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tipoMoneda = await _context.TbTipoMoneda
+            var tbTipoMoneda = db.TbTipoMoneda
                 .FirstOrDefaultAsync(m => m.TmoId == id);
-            if (tipoMoneda == null)
+            if (tbTipoMoneda == null)
             {
                 return NotFound();
             }
 
-            return View(tipoMoneda);
+            return View(tbTipoMoneda);
         }
 
-        // POST: TipoMoneda/Delete/5
+        // POST: TipoMonedas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(short id)
+        public IActionResult DeleteConfirmed(short id)
         {
-            var tipoMoneda = await _context.TbTipoMoneda.FindAsync(id);
-            _context.TbTipoMoneda.Remove(tipoMoneda);
-            await _context.SaveChangesAsync();
+            var tbTipoMoneda = db.TbTipoMoneda.Find(id);
+            db.TbTipoMoneda.Remove(tbTipoMoneda);
+            db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TipoMonedaExists(short id)
+        private bool tbTipoMonedaExists(short id)
         {
-            return _context.TbTipoMoneda.Any(e => e.TmoId == id);
+            return db.TbTipoMoneda.Any(e => e.TmoId == id);
         }
     }
 }

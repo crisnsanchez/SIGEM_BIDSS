@@ -5,45 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>TbArea</h4>
+<h2>Detalle Area</h2>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreDescripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AreDescripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreUsuarioCrea)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AreUsuarioCrea)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreFechaCrea)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AreFechaCrea)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreUsuarioModifica)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AreUsuarioModifica)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AreFechaModifica)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AreFechaModifica)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.AreId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+                <dl class="dl-horizontal">
+
+                    <dt class="col-sm-4">
+                    Id Area             
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.AreId)
+                    </dd>
+
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.AreDescripcion)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.AreDescripcion)
+                    </dd>
+
+                </dl>
+          
+            <div>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.AreId">Editar</a> 
+                <a asp-action="Index" class="btn btn-danger">Regresar al Listado</a>
+            </div>
+        
+
+         

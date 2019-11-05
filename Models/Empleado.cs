@@ -27,7 +27,7 @@ namespace SIGEM_BIDSS.Models
         public DateTime? EmpFechaModifica { get; set; }
 
         public virtual TbMunicipio Mun { get; set; }
-        public virtual Puesto Pto { get; set; }
+        public virtual TbPuesto Pto { get; set; }
         public virtual TbTipoSangre Tps { get; set; }
     }
 }

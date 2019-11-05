@@ -18,12 +18,12 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<TbArea> TbArea { get; set; }
         public virtual DbSet<TbDepartamento> TbDepartamento { get; set; }
         public virtual DbSet<TbEmpleado> TbEmpleado { get; set; }
-        public virtual DbSet<Estado> TbEstado { get; set; }
+        public virtual DbSet<TbEstado> TbEstado { get; set; }
         public virtual DbSet<TbMunicipio> TbMunicipio { get; set; }
-        public virtual DbSet<Puesto> TbPuesto { get; set; }
+        public virtual DbSet<TbPuesto> TbPuesto { get; set; }
         public virtual DbSet<TipoMoneda> TbTipoMoneda { get; set; }
         public virtual DbSet<TbTipoSangre> TbTipoSangre { get; set; }
-        public virtual DbSet<TipoSolicitud> TbTipoSolicitud { get; set; }
+        public virtual DbSet<TbTipoSolicitud> TbTipoSolicitud { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -207,7 +207,7 @@ namespace SIGEM_BIDSS.Models
                     .HasConstraintName("FK_tps_Id");
             });
 
-            modelBuilder.Entity<Estado>(entity =>
+            modelBuilder.Entity<TbEstado>(entity =>
             {
                 entity.HasKey(e => e.EstId)
                     .HasName("PK__tbEstado__40ADECB0E46D2B4B");
@@ -279,7 +279,7 @@ namespace SIGEM_BIDSS.Models
                     .HasConstraintName("FK_dep_Id");
             });
 
-            modelBuilder.Entity<Puesto>(entity =>
+            modelBuilder.Entity<TbPuesto>(entity =>
             {
                 entity.HasKey(e => e.PtoId)
                     .HasName("PK__tbPuesto__6856AD9DF71DB5B8");
@@ -379,7 +379,7 @@ namespace SIGEM_BIDSS.Models
                 entity.Property(e => e.TpsUsuarioModifica).HasColumnName("tps_UsuarioModifica");
             });
 
-            modelBuilder.Entity<TipoSolicitud>(entity =>
+            modelBuilder.Entity<TbTipoSolicitud>(entity =>
             {
                 entity.HasKey(e => e.TipsolId)
                     .HasName("PK__tbTipoSo__1A57EB0701D0435A");

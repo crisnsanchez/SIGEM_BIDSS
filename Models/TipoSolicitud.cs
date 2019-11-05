@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SIGEM_BIDSS.Models
 {
-    public partial class TipoSolicitud
+    public partial class TbTipoSolicitud
     {
         public int TipsolId { get; set; }
         public string TipsolDescripcion { get; set; }

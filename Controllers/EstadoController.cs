@@ -10,34 +10,31 @@ using SIGEM_BIDSS.Models;
 namespace SIGEM_BIDSS.Controllers
 {
     public class EstadoController : Controller
-
-    { 
+    {
         SIGEM_BIDSSModel db = new SIGEM_BIDSSModel();
-   
-        
 
         // GET: Estado
-        public  IActionResult Index()
+        public IActionResult Index()
         {
-            return View( db.TbEstado.ToList());
+            return View(db.TbEstado.ToList());
         }
 
         // GET: Estado/Details/5
-        public  IActionResult Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var estado =  db.TbEstado
-                .FirstOrDefault(m => m.EstId == id);
-            if (estado == null)
+            var tbEstado = db.TbEstado
+                .FirstOrDefaultAsync(m => m.EstId == id);
+            if (tbEstado == null)
             {
                 return NotFound();
             }
 
-            return View(estado);
+            return View(tbEstado);
         }
 
         // GET: Estado/Create
@@ -51,44 +48,31 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Create([Bind("EstId,EstDescripcion,EstUsuarioCrea,EstFechaCrea,EstUsuarioModifica,EstFechaModifica")] Estado estado)
+        public IActionResult Create([Bind("EstId,EstDescripcion,EstUsuarioCrea,EstFechaCrea,EstUsuarioModifica,EstFechaModifica")] TbEstado tbEstado)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.Database.ExecuteSqlCommand("Gral.UDP_Gral_tbEstado_Insert @p0, @p1", parameters: new object[] { estado.EstDescripcion, estado.EstUsuarioCrea });
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception Ex)
-                {
-                    //Function.InsertBitacoraErrores("Empleado/Create", Ex.Message.ToString(), "Create");
-                    var Message = Ex.Message;
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(estado);
-                }
-
+                db.Add(tbEstado);
+                db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                return View(estado);
-            }
+            return View(tbEstado);
         }
 
         // GET: Estado/Edit/5
-        public  IActionResult Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var estado =  db.TbEstado.Find(id);
-            if (estado == null)
+            var tbEstado = db.TbEstado.Find(id);
+            if (tbEstado == null)
             {
                 return NotFound();
             }
-            return View(estado);
+            return View(tbEstado);
         }
 
         // POST: Estado/Edit/5
@@ -96,9 +80,9 @@ namespace SIGEM_BIDSS.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Edit(int id, [Bind("EstId,EstDescripcion,EstUsuarioCrea,EstFechaCrea,EstUsuarioModifica,EstFechaModifica")] Estado estado)
+        public IActionResult Edit(int id, [Bind("EstId,EstDescripcion,EstUsuarioCrea,EstFechaCrea,EstUsuarioModifica,EstFechaModifica")] TbEstado tbEstado)
         {
-            if (id != estado.EstId)
+            if (id != tbEstado.EstId)
             {
                 return NotFound();
             }
@@ -107,12 +91,12 @@ namespace SIGEM_BIDSS.Controllers
             {
                 try
                 {
-                    db.Update(estado);
-                     db.SaveChanges();
+                    db.Update(tbEstado);
+                    db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EstadoExists(estado.EstId))
+                    if (!TbEstadoExists(tbEstado.EstId))
                     {
                         return NotFound();
                     }
@@ -123,39 +107,39 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(estado);
+            return View(tbEstado);
         }
 
         // GET: Estado/Delete/5
-        public  IActionResult Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var estado =  db.TbEstado
-                .FirstOrDefault(m => m.EstId == id);
-            if (estado == null)
+            var tbEstado = db.TbEstado
+                .FirstOrDefaultAsync(m => m.EstId == id);
+            if (tbEstado == null)
             {
                 return NotFound();
             }
 
-            return View(estado);
+            return View(tbEstado);
         }
 
         // POST: Estado/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public  IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var estado =  db.TbEstado.Find(id);
-            db.TbEstado.Remove(estado);
-             db.SaveChanges();
+            var tbEstado = db.TbEstado.Find(id);
+            db.TbEstado.Remove(tbEstado);
+            db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EstadoExists(int id)
+        private bool TbEstadoExists(int id)
         {
             return db.TbEstado.Any(e => e.EstId == id);
         }
