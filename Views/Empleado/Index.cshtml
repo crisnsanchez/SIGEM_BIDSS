@@ -28,49 +28,18 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.EmpApellidos)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmpSexo)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmpFechaNacimiento)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmpIdentificacion)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmpTelefono)
-                            </th>
+                            
                             <th>
                                 @Html.DisplayNameFor(model => model.EmpCorreoElectronico)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmpFechaIngreso)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmpDireccion)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmpRazonInactivacion)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmpEstado)
-                            </th>
+                           
                             <th>
                                 @Html.DisplayNameFor(model => model.EmpPathImage)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.EmpUsuarioCrea)
-                            </th>
-                          
-                            <th>
-                                @Html.DisplayNameFor(model => model.Mun)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.Pto)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Tps)
-                            </th>
+                         
                             <th></th>
                         </tr>
                     </thead>
@@ -84,46 +53,19 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.EmpApellidos)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpSexo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpFechaNacimiento)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpIdentificacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpTelefono)
-                            </td>
+                           
                             <td>
                                 @Html.DisplayFor(modelItem => item.EmpCorreoElectronico)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpFechaIngreso)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpDireccion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpRazonInactivacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpEstado)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.EmpPathImage)
-                            </td>
+                          
                          
                             <td>
-                                @Html.DisplayFor(modelItem => item.Mun.MunId)
+                                @Html.DisplayFor(modelItem => item.EmpPathImage)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Pto.PtoDescripcion)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Tps.TpsNombre)
-                            </td>
+                           
                             <td>
                                 <a class="btn btn-outline-primary btn-xs" asp-action="Edit" asp-route-id="@item.EmpId">Editar</a>
                                 <a class="btn btn-outline-warning btn-xs" asp-action="Details" asp-route-id="@item.EmpId">Detalle</a>

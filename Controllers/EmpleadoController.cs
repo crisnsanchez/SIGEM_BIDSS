@@ -61,8 +61,6 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("EmpId,EmpNombres,EmpApellidos,EmpSexo,EmpFechaNacimiento,EmpIdentificacion,EmpTelefono,EmpCorreoElectronico,TpsId,PtoId,EmpFechaIngreso,EmpDireccion,EmpRazonInactivacion,EmpEstado,EmpPathImage,MunId,EmpUsuarioCrea,EmpFechaCrea,EmpUsuarioModifica,EmpFechaModifica,DepId")] TbEmpleado tbEmpleado)
         {
-
-
             if (ModelState.IsValid)
             {
                 try
@@ -106,7 +104,6 @@ namespace SIGEM_BIDSS.Controllers
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View(tbEmpleado);
                 }
-
             }
             else
             {

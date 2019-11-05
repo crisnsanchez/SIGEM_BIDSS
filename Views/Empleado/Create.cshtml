@@ -38,9 +38,16 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
-                                <label asp-for="EmpPathImage" class="control-label"></label>
-                                <img id="EmpPathImage" src="~/img/Profile_Pictures/user_Image.png" width="200" height="200" class="rounded mx-auto d-block" alt="...">
-                                <span asp-validation-for="EmpPathImage" class="text-danger"></span>
+                                <img id="EmpPathImage" src="~/img/588920b9405ce-bpfull.png" width="200" height="200" class="rounded mb-xl-auto d-block" alt="...">
+                                <dl class="">
+                                    <dt>
+                                        <label asp-for="EmpPathImage"></label>
+                                    </dt>
+                                    <dd>
+                                        <input asp-for="EmpPathImage" type="file">
+                                        <span asp-validation-for="EmpPathImage"></span>
+                                    </dd>
+                                </dl>
                             </div>
                             <div class="form-group col-md-5">
                                 <label asp-for="EmpDireccion" class="control-label"></label>

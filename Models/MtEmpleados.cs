@@ -75,7 +75,6 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Estado")]
         public string EmpEstado { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Imagen")]
         public string EmpPathImage { get; set; }
 
@@ -83,19 +82,15 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Código Municipio")]
         public string MunId { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Creado por ")]
         public int EmpUsuarioCrea { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Creado el")]
         public DateTime EmpFechaCrea { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Modificado por")]
         public int? EmpUsuarioModifica { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Modificado el")]
         public DateTime? EmpFechaModifica { get; set; }
     }
