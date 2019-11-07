@@ -1,0 +1,55 @@
+﻿@model SIGEM_BIDSS.Models.tbMunicipio
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.mun_codigo, new { @class = "control-label col-md-2 , required" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.mun_codigo, new { htmlAttributes = new { } })
+                            <div id="ValidationCodigoCreate">
+                                @Html.ValidationMessageFor(model => model.mun_codigo)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.mun_nombre, new { @class = "control-label col-md-2 , required" })
+                            <div class="col-md-3">
+                                @Html.EditorFor(model => model.mun_nombre)
+                                <div id="ValidationNombreCreate">
+                                    @Html.ValidationMessageFor(model => model.mun_nombre)
+                                </div>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <button class="btn btn-primary btn-sm" type="button" id="AgregarMunicipios">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table id="tblMunicipios" class="table table-striped table-responsive table-bordered table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Código Municipio</th>
+                                <th>Municipio</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>

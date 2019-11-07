@@ -166,6 +166,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +179,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Departamentos.cs" />
+    <Compile Include="Models\FunctionGenerals.cs" />
+    <Compile Include="Models\Municipios.cs" />
     <Compile Include="Models\SIGEM_BIDSSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1094,6 +1098,7 @@
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
       <LastGenOutput>SIGEM_BIDSSModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\app\Departamento.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\template\build\js\.jscsrc" />
@@ -1304,6 +1309,12 @@
     <Content Include="Views\Menu\Catalogo.cshtml" />
     <Content Include="Views\Menu\Empleados.cshtml" />
     <Content Include="Views\Menu\Solicitud.cshtml" />
+    <Content Include="Views\Departamento\Create.cshtml" />
+    <Content Include="Views\Departamento\Delete.cshtml" />
+    <Content Include="Views\Departamento\Details.cshtml" />
+    <Content Include="Views\Departamento\Edit.cshtml" />
+    <Content Include="Views\Departamento\Index.cshtml" />
+    <Content Include="Views\Departamento\_CrearMunicipio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
