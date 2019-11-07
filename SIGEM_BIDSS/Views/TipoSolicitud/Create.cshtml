@@ -1,4 +1,4 @@
-﻿@model SIGEM_BIDSS.Models.tbTipoSangre
+﻿@model SIGEM_BIDSS.Models.tbTipoSolicitud
 
 @{
     ViewBag.Title = "Create";
@@ -12,17 +12,16 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>tbTipoSangre</h4>
+        <h4>tbTipoSolicitud</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.tps_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.tipsol_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.tps_nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tps_nombre, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.tipsol_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tipsol_Descripcion, "", new { @class = "text-danger" })
             </div>
         </div>
-
 
 
         <div class="form-group">

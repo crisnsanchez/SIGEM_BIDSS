@@ -10,51 +10,51 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class TipoSangreController : Controller
+    public class TipoSolicitudController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 
-        // GET: TipoSangre
+        // GET: TipoSolicitud
         public ActionResult Index()
         {
-            return View(db.tbTipoSangre.ToList());
+            return View(db.tbTipoSolicitud.ToList());
         }
 
-        // GET: TipoSangre/Details/5
+        // GET: TipoSolicitud/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoSangre tbTipoSangre = db.tbTipoSangre.Find(id);
-            if (tbTipoSangre == null)
+            tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
+            if (tbTipoSolicitud == null)
             {
                 return HttpNotFound();
             }
-            return View(tbTipoSangre);
+            return View(tbTipoSolicitud);
         }
 
-        // GET: TipoSangre/Create
+        // GET: TipoSolicitud/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TipoSangre/Create
+        // POST: TipoSolicitud/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tps_Id,tps_nombre,tps_UsuarioCrea,tps_FechaCrea,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
+        public ActionResult Create([Bind(Include = "tipsol_Id,tipsol_Descripcion,tipsol_UsuarioCrea,tipsol_FechaCrea,tipsol_UsuarioModifica,tipsol_FechaModifica")] tbTipoSolicitud tbTipoSolicitud)
         {
             if (ModelState.IsValid)
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_nombre, 1);
-                    foreach (UDP_Gral_tbTipoSangre_Insert_Result TipoSangre in List)
+                    List = db.UDP_Gral_tbTipoSolicitud_Insert(tbTipoSolicitud.tipsol_Descripcion, 1);
+                    foreach (UDP_Gral_tbTipoSolicitud_Insert_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
@@ -68,91 +68,91 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 catch (Exception Ex)
                 {
-                   
+
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View();
                 }
 
+            return View(tbTipoSolicitud);
 
 
-            return View(tbTipoSangre);
         }
-
-        // GET: TipoSangre/Edit/5
+        // GET: TipoSolicitud/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoSangre tbTipoSangre = db.tbTipoSangre.Find(id);
-            if (tbTipoSangre == null)
+            tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
+            if (tbTipoSolicitud == null)
             {
                 return HttpNotFound();
             }
-            return View(tbTipoSangre);
+            return View(tbTipoSolicitud);
         }
 
-        // POST: TipoSangre/Edit/5
+        // POST: TipoSolicitud/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tps_Id,tps_nombre,tps_UsuarioCrea,tps_FechaCrea,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
+        public ActionResult Edit([Bind(Include = "tipsol_Id,tipsol_Descripcion,tipsol_UsuarioCrea,tipsol_FechaCrea,tipsol_UsuarioModifica,tipsol_FechaModifica")] tbTipoSolicitud tbTipoSolicitud)
         {
-            try
-            {
-                IEnumerable<Object> List = null;
-                string Msj = "";
-                List = db.UDP_Gral_tbTipoSangre_Update(1,tbTipoSangre.tps_nombre, 1);
-                foreach (UDP_Gral_tbTipoSangre_Update_Result TipoSangre in List)
-                    Msj = TipoSangre.MensajeError;
-                if (Msj.StartsWith("-1"))
+            if (ModelState.IsValid)
+                try
                 {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbTipoSolicitud_Update(tbTipoSolicitud.tipsol_Id, tbTipoSolicitud.tipsol_Descripcion, 1);
+                    foreach (UDP_Gral_tbTipoSolicitud_Update_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View();
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (Exception Ex)
-            {
 
-                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                return View();
-            }
-
-            return View(tbTipoSangre);
-
+            return View(tbTipoSolicitud);
 
 
         }
+      
+        
 
-
-        // GET: TipoSangre/Delete/5
+        // GET: TipoSolicitud/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoSangre tbTipoSangre = db.tbTipoSangre.Find(id);
-            if (tbTipoSangre == null)
+            tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
+            if (tbTipoSolicitud == null)
             {
                 return HttpNotFound();
             }
-            return View(tbTipoSangre);
+            return View(tbTipoSolicitud);
         }
 
-        // POST: TipoSangre/Delete/5
+        // POST: TipoSolicitud/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbTipoSangre tbTipoSangre = db.tbTipoSangre.Find(id);
-            db.tbTipoSangre.Remove(tbTipoSangre);
+            tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
+            db.tbTipoSolicitud.Remove(tbTipoSolicitud);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -45,6 +45,155 @@
       <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
     </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SIGEM_BIDSSModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SIGEM_BIDSSModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="spSelect" ReturnType="Collection(SIGEM_BIDSSModel.spSelect_Result)" />
+    <FunctionImport Name="UDP_Gral_tbArea_Insert" ReturnType="Collection(String)">
+      <Parameter Name="are_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="are_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbArea_Update" ReturnType="Collection(String)">
+      <Parameter Name="are_Id" Mode="In" Type="Int32" />
+      <Parameter Name="are_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="are_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbDepartamento_Insert" ReturnType="Collection(String)">
+      <Parameter Name="dep_Codigo" Mode="In" Type="String" />
+      <Parameter Name="dep_Nombre" Mode="In" Type="String" />
+      <Parameter Name="dep_UsuarioCrea" Mode="In" Type="Int32" />
+      <Parameter Name="dep_FechaCrea" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbDepartamento_Update" ReturnType="Collection(String)">
+      <Parameter Name="dep_Codigo" Mode="In" Type="String" />
+      <Parameter Name="dep_Nombre" Mode="In" Type="String" />
+      <Parameter Name="dep_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbEmpleado_Insert" ReturnType="Collection(String)">
+      <Parameter Name="emp_Nombres" Mode="In" Type="String" />
+      <Parameter Name="emp_Apellidos" Mode="In" Type="String" />
+      <Parameter Name="emp_Sexo" Mode="In" Type="String" />
+      <Parameter Name="emp_FechaNacimiento" Mode="In" Type="String" />
+      <Parameter Name="emp_Identificacion" Mode="In" Type="String" />
+      <Parameter Name="emp_Telefono" Mode="In" Type="String" />
+      <Parameter Name="emp_CorreoElectronico" Mode="In" Type="String" />
+      <Parameter Name="tps_Id" Mode="In" Type="Int32" />
+      <Parameter Name="pto_Id" Mode="In" Type="Int32" />
+      <Parameter Name="emp_FechaIngreso" Mode="In" Type="String" />
+      <Parameter Name="emp_Direccion" Mode="In" Type="String" />
+      <Parameter Name="emp_Estado" Mode="In" Type="String" />
+      <Parameter Name="emp_PathImage" Mode="In" Type="String" />
+      <Parameter Name="mun_Id" Mode="In" Type="String" />
+      <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbEmpleado_Update" ReturnType="Collection(String)">
+      <Parameter Name="emp_Id" Mode="In" Type="Int16" />
+      <Parameter Name="emp_Nombres" Mode="In" Type="String" />
+      <Parameter Name="emp_Apellidos" Mode="In" Type="String" />
+      <Parameter Name="emp_Sexo" Mode="In" Type="String" />
+      <Parameter Name="emp_FechaNacimiento" Mode="In" Type="String" />
+      <Parameter Name="emp_Identificacion" Mode="In" Type="String" />
+      <Parameter Name="emp_Telefono" Mode="In" Type="String" />
+      <Parameter Name="emp_CorreoElectronico" Mode="In" Type="String" />
+      <Parameter Name="tps_Id" Mode="In" Type="Int32" />
+      <Parameter Name="pto_Id" Mode="In" Type="Int32" />
+      <Parameter Name="emp_FechaIngreso" Mode="In" Type="String" />
+      <Parameter Name="emp_Direccion" Mode="In" Type="String" />
+      <Parameter Name="emp_RazonInactivacion" Mode="In" Type="String" />
+      <Parameter Name="emp_Estado" Mode="In" Type="String" />
+      <Parameter Name="emp_PathImage" Mode="In" Type="String" />
+      <Parameter Name="mun_Id" Mode="In" Type="String" />
+      <Parameter Name="emp_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbEstado_Insert" ReturnType="Collection(String)">
+      <Parameter Name="est_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="est_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbEstado_Update" ReturnType="Collection(String)">
+      <Parameter Name="est_Id" Mode="In" Type="Int32" />
+      <Parameter Name="est_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="est_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbMunicipio_Insert" ReturnType="Collection(String)">
+      <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+      <Parameter Name="dep_Codigo" Mode="In" Type="String" />
+      <Parameter Name="mun_Nombre" Mode="In" Type="String" />
+      <Parameter Name="mun_UsuarioCrea" Mode="In" Type="Int32" />
+      <Parameter Name="mun_FechaCrea" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbMunicipio_Update" ReturnType="Collection(String)">
+      <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+      <Parameter Name="dep_Codigo" Mode="In" Type="String" />
+      <Parameter Name="mun_Nombre" Mode="In" Type="String" />
+      <Parameter Name="mun_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbPuesto_Insert" ReturnType="Collection(String)">
+      <Parameter Name="are_Id" Mode="In" Type="Int32" />
+      <Parameter Name="pto_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="pto_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbPuesto_Update" ReturnType="Collection(String)">
+      <Parameter Name="pto_Id" Mode="In" Type="Int32" />
+      <Parameter Name="are_Id" Mode="In" Type="Int32" />
+      <Parameter Name="pto_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="pto_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoMoneda_Insert" ReturnType="Collection(String)">
+      <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+      <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+      <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoMoneda_Update" ReturnType="Collection(String)">
+      <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
+      <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+      <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+      <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoSangre_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Insert_Result)">
+      <Parameter Name="tps_Nombre" Mode="In" Type="String" />
+      <Parameter Name="tps_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoSangre_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Update_Result)">
+      <Parameter Name="tps_Id" Mode="In" Type="Int32" />
+      <Parameter Name="tps_Nombre" Mode="In" Type="String" />
+      <Parameter Name="tps_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoSolicitud_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSolicitud_Insert_Result)">
+      <Parameter Name="tipsol_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="tipsol_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoSolicitud_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSolicitud_Update_Result)">
+      <Parameter Name="tipsol_Id" Mode="In" Type="Int32" />
+      <Parameter Name="tipsol_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="tipsol_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="tbArea">
     <Key>
@@ -234,4 +383,35 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spSelect_Result">
+    <Property Type="Int32" Name="tps_Id" Nullable="false" />
+    <Property Type="String" Name="tps_nombre" Nullable="false" MaxLength="3" />
+    <Property Type="Int32" Name="tps_UsuarioCrea" Nullable="false" />
+    <Property Type="DateTime" Name="tps_FechaCrea" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="tps_UsuarioModifica" Nullable="true" />
+    <Property Type="DateTime" Name="tps_FechaModifica" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbTipoSangre_Insert_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbTipoSangre_Update_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbTipoSolicitud_Insert_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbTipoSolicitud_Update_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
 </Schema>

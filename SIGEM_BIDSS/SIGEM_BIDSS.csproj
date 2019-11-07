@@ -173,6 +173,7 @@
     <Compile Include="Controllers\PuestoController.cs" />
     <Compile Include="Controllers\TipoMonedaController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
+    <Compile Include="Controllers\TipoSolicitudController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +191,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spSelect_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbArea.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
@@ -219,6 +229,18 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoSolicitud.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoSangre_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoSangre_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoSolicitud_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoSolicitud_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1248,6 +1270,11 @@
     <Content Include="Views\TipoSangre\Details.cshtml" />
     <Content Include="Views\TipoSangre\Edit.cshtml" />
     <Content Include="Views\TipoSangre\Index.cshtml" />
+    <Content Include="Views\TipoSolicitud\Create.cshtml" />
+    <Content Include="Views\TipoSolicitud\Delete.cshtml" />
+    <Content Include="Views\TipoSolicitud\Details.cshtml" />
+    <Content Include="Views\TipoSolicitud\Edit.cshtml" />
+    <Content Include="Views\TipoSolicitud\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
