@@ -146,7 +146,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spSelect_Result>("spSelect");
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbArea_Insert(string are_Descripcion, Nullable<int> are_UsuarioCrea)
+        public virtual ObjectResult<UDP_Gral_tbArea_Insert_Result> UDP_Gral_tbArea_Insert(string are_Descripcion, Nullable<int> are_UsuarioCrea)
         {
             var are_DescripcionParameter = are_Descripcion != null ?
                 new ObjectParameter("are_Descripcion", are_Descripcion) :
@@ -156,10 +156,10 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("are_UsuarioCrea", are_UsuarioCrea) :
                 new ObjectParameter("are_UsuarioCrea", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbArea_Insert", are_DescripcionParameter, are_UsuarioCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbArea_Insert_Result>("UDP_Gral_tbArea_Insert", are_DescripcionParameter, are_UsuarioCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbArea_Update(Nullable<int> are_Id, string are_Descripcion, Nullable<int> are_UsuarioModifica)
+        public virtual ObjectResult<UDP_Gral_tbArea_Update_Result> UDP_Gral_tbArea_Update(Nullable<int> are_Id, string are_Descripcion, Nullable<int> are_UsuarioModifica)
         {
             var are_IdParameter = are_Id.HasValue ?
                 new ObjectParameter("are_Id", are_Id) :
@@ -173,7 +173,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("are_UsuarioModifica", are_UsuarioModifica) :
                 new ObjectParameter("are_UsuarioModifica", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbArea_Update", are_IdParameter, are_DescripcionParameter, are_UsuarioModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbArea_Update_Result>("UDP_Gral_tbArea_Update", are_IdParameter, are_DescripcionParameter, are_UsuarioModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Gral_tbDepartamento_Insert(string dep_Codigo, string dep_Nombre, Nullable<int> dep_UsuarioCrea, Nullable<System.DateTime> dep_FechaCrea)
@@ -352,7 +352,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbEmpleado_Update", emp_IdParameter, emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoElectronicoParameter, tps_IdParameter, pto_IdParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_RazonInactivacionParameter, emp_EstadoParameter, emp_PathImageParameter, mun_IdParameter, emp_UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbEstado_Insert(string est_Descripcion, Nullable<int> est_UsuarioCrea)
+        public virtual ObjectResult<UDP_Gral_tbEstado_Insert_Result> UDP_Gral_tbEstado_Insert(string est_Descripcion, Nullable<int> est_UsuarioCrea)
         {
             var est_DescripcionParameter = est_Descripcion != null ?
                 new ObjectParameter("est_Descripcion", est_Descripcion) :
@@ -362,10 +362,10 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("est_UsuarioCrea", est_UsuarioCrea) :
                 new ObjectParameter("est_UsuarioCrea", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbEstado_Insert", est_DescripcionParameter, est_UsuarioCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEstado_Insert_Result>("UDP_Gral_tbEstado_Insert", est_DescripcionParameter, est_UsuarioCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbEstado_Update(Nullable<int> est_Id, string est_Descripcion, Nullable<int> est_UsuarioModifica)
+        public virtual ObjectResult<UDP_Gral_tbEstado_Update_Result> UDP_Gral_tbEstado_Update(Nullable<int> est_Id, string est_Descripcion, Nullable<int> est_UsuarioModifica)
         {
             var est_IdParameter = est_Id.HasValue ?
                 new ObjectParameter("est_Id", est_Id) :
@@ -379,7 +379,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("est_UsuarioModifica", est_UsuarioModifica) :
                 new ObjectParameter("est_UsuarioModifica", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbEstado_Update", est_IdParameter, est_DescripcionParameter, est_UsuarioModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEstado_Update_Result>("UDP_Gral_tbEstado_Update", est_IdParameter, est_DescripcionParameter, est_UsuarioModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Gral_tbMunicipio_Insert(string mun_Codigo, string dep_Codigo, string mun_Nombre, Nullable<int> mun_UsuarioCrea, Nullable<System.DateTime> mun_FechaCrea)
@@ -428,7 +428,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbMunicipio_Update", mun_CodigoParameter, dep_CodigoParameter, mun_NombreParameter, mun_UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbPuesto_Insert(Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioCrea)
+        public virtual ObjectResult<UDP_Gral_tbPuesto_Insert_Result> UDP_Gral_tbPuesto_Insert(Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioCrea)
         {
             var are_IdParameter = are_Id.HasValue ?
                 new ObjectParameter("are_Id", are_Id) :
@@ -442,10 +442,10 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pto_UsuarioCrea", pto_UsuarioCrea) :
                 new ObjectParameter("pto_UsuarioCrea", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbPuesto_Insert", are_IdParameter, pto_DescripcionParameter, pto_UsuarioCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Insert_Result>("UDP_Gral_tbPuesto_Insert", are_IdParameter, pto_DescripcionParameter, pto_UsuarioCreaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbPuesto_Update(Nullable<int> pto_Id, Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioModifica)
+        public virtual ObjectResult<UDP_Gral_tbPuesto_Update_Result> UDP_Gral_tbPuesto_Update(Nullable<int> pto_Id, Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioModifica)
         {
             var pto_IdParameter = pto_Id.HasValue ?
                 new ObjectParameter("pto_Id", pto_Id) :
@@ -463,7 +463,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pto_UsuarioModifica", pto_UsuarioModifica) :
                 new ObjectParameter("pto_UsuarioModifica", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
         }
     
         public virtual ObjectResult<string> UDP_Gral_tbTipoMoneda_Insert(string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioCrea)

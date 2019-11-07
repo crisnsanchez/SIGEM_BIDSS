@@ -49,14 +49,35 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "est_Id,est_Descripcion,est_UsuarioCrea,est_FechaCrea,est_UsuarioModifica,est_FechaModifica")] tbEstado tbEstado)
         {
             if (ModelState.IsValid)
-            {
-                db.tbEstado.Add(tbEstado);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbEstado_Insert(tbEstado.est_Descripcion, 1);
+                    foreach (UDP_Gral_tbEstado_Insert_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
+
 
             return View(tbEstado);
         }
+
 
         // GET: Estado/Edit/5
         public ActionResult Edit(int? id)
@@ -81,13 +102,35 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "est_Id,est_Descripcion,est_UsuarioCrea,est_FechaCrea,est_UsuarioModifica,est_FechaModifica")] tbEstado tbEstado)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(tbEstado).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbEstado_Update(tbEstado.est_Id, tbEstado.est_Descripcion, 1);
+                    foreach (UDP_Gral_tbEstado_Update_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
+
+
             return View(tbEstado);
         }
+
 
         // GET: Estado/Delete/5
         public ActionResult Delete(int? id)

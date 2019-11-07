@@ -16,7 +16,9 @@ namespace SIGEM_BIDSS.Controllers
 
         // GET: Puesto
         public ActionResult Index()
+
         {
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             return View(db.tbPuesto.ToList());
         }
 
@@ -32,12 +34,14 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             return View(tbPuesto);
         }
 
         // GET: Puesto/Create
         public ActionResult Create()
         {
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             return View();
         }
 
@@ -49,14 +53,35 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "pto_Id,are_Id,pto_Descripcion,pto_UsuarioCrea,pto_FechaCrea,pto_UsuarioModifica,pto_FechaModifica")] tbPuesto tbPuesto)
         {
             if (ModelState.IsValid)
-            {
-                db.tbPuesto.Add(tbPuesto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbPuesto_Insert(tbPuesto.are_Id, tbPuesto.pto_Descripcion,1);
+                    foreach (UDP_Gral_tbPuesto_Insert_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
 
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
+
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             return View(tbPuesto);
         }
+
 
         // GET: Puesto/Edit/5
         public ActionResult Edit(int? id)
@@ -70,6 +95,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             return View(tbPuesto);
         }
 
@@ -81,11 +107,32 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "pto_Id,are_Id,pto_Descripcion,pto_UsuarioCrea,pto_FechaCrea,pto_UsuarioModifica,pto_FechaModifica")] tbPuesto tbPuesto)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(tbPuesto).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbPuesto_Update(tbPuesto.pto_Id,tbPuesto.are_Id, tbPuesto.pto_Descripcion, 1);
+                    foreach (UDP_Gral_tbPuesto_Update_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
+
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             return View(tbPuesto);
         }
 
