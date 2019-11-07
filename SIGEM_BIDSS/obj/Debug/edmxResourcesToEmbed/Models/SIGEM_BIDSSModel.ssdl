@@ -1,5 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SIGEM_BIDSSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbArea">
+    <Key>
+      <PropertyRef Name="are_Id" />
+    </Key>
+    <Property Name="are_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="are_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="are_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="are_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="are_UsuarioModifica" Type="int" />
+    <Property Name="are_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbDepartamento">
+    <Key>
+      <PropertyRef Name="dep_Codigo" />
+    </Key>
+    <Property Name="dep_Codigo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="dep_Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="dep_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="dep_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="dep_UsuarioModifica" Type="int" />
+    <Property Name="dep_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbEmpleado">
+    <Key>
+      <PropertyRef Name="emp_Id" />
+    </Key>
+    <Property Name="emp_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp_Nombres" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="emp_Apellidos" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="emp_Sexo" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="emp_FechaNacimiento" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_Identificacion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="emp_Telefono" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="emp_CorreoElectronico" Type="nvarchar" MaxLength="50" />
+    <Property Name="tps_Id" Type="int" Nullable="false" />
+    <Property Name="pto_Id" Type="int" Nullable="false" />
+    <Property Name="emp_FechaIngreso" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_Direccion" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="emp_RazonInactivacion" Type="nvarchar" MaxLength="500" />
+    <Property Name="emp_Estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_PathImage" Type="varchar(max)" />
+    <Property Name="mun_Id" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="emp_UsuarioCrea" Type="int" />
+    <Property Name="emp_FechaCrea" Type="datetime" />
+    <Property Name="emp_UsuarioModifica" Type="int" />
+    <Property Name="emp_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbEstado">
+    <Key>
+      <PropertyRef Name="est_Id" />
+    </Key>
+    <Property Name="est_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="est_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="est_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="est_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="est_UsuarioModifica" Type="int" />
+    <Property Name="est_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbMunicipio">
+    <Key>
+      <PropertyRef Name="mun_codigo" />
+    </Key>
+    <Property Name="mun_codigo" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="dep_codigo" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="mun_nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="mun_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="mun_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="mun_UsuarioModifica" Type="int" />
+    <Property Name="mun_FechaModifica" Type="datetime" />
+  </EntityType>
   <EntityType Name="tbPuesto">
     <Key>
       <PropertyRef Name="pto_Id" />
@@ -12,7 +82,146 @@
     <Property Name="pto_UsuarioModifica" Type="int" />
     <Property Name="pto_FechaModifica" Type="datetime" />
   </EntityType>
+  <EntityType Name="tbSolicitud">
+    <Key>
+      <PropertyRef Name="sol_Id" />
+    </Key>
+    <Property Name="sol_Id" Type="int" Nullable="false" />
+    <Property Name="sol_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_Id" Type="int" Nullable="false" />
+    <Property Name="tpsol_Id" Type="int" Nullable="false" />
+    <Property Name="sol_FechaSolicitud" Type="datetime" Nullable="false" />
+    <Property Name="sol_FechaRegreso" Type="datetime" Nullable="false" />
+    <Property Name="sol_CantidadDias" Type="int" />
+    <Property Name="sol_UsuarioCrea" Type="int" />
+    <Property Name="sol_FechaCrea" Type="datetime" />
+    <Property Name="sol_UsuarioModifica" Type="int" />
+    <Property Name="sol_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbTipoMoneda">
+    <Key>
+      <PropertyRef Name="tmo_Id" />
+    </Key>
+    <Property Name="tmo_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tmo_Abreviatura" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="tmo_Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="tmo_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="tmo_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="tmo_UsuarioModifica" Type="int" />
+    <Property Name="tmo_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbTipoSangre">
+    <Key>
+      <PropertyRef Name="tps_Id" />
+    </Key>
+    <Property Name="tps_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tps_nombre" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="tps_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="tps_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="tps_UsuarioModifica" Type="int" />
+    <Property Name="tps_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbTipoSolicitud">
+    <Key>
+      <PropertyRef Name="tipsol_Id" />
+    </Key>
+    <Property Name="tipsol_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipsol_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipsol_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="tipsol_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="tipsol_UsuarioModifica" Type="int" />
+    <Property Name="tipsol_FechaModifica" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_are_Id">
+    <End Role="tbArea" Type="Self.tbArea" Multiplicity="1" />
+    <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbArea">
+        <PropertyRef Name="are_Id" />
+      </Principal>
+      <Dependent Role="tbPuesto">
+        <PropertyRef Name="are_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dep_Id">
+    <End Role="tbDepartamento" Type="Self.tbDepartamento" Multiplicity="1" />
+    <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbDepartamento">
+        <PropertyRef Name="dep_Codigo" />
+      </Principal>
+      <Dependent Role="tbMunicipio">
+        <PropertyRef Name="dep_codigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id">
+    <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+    <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbMunicipio">
+        <PropertyRef Name="mun_codigo" />
+      </Principal>
+      <Dependent Role="tbEmpleado">
+        <PropertyRef Name="mun_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pto_Id">
+    <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="1" />
+    <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbPuesto">
+        <PropertyRef Name="pto_Id" />
+      </Principal>
+      <Dependent Role="tbEmpleado">
+        <PropertyRef Name="pto_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tps_Id">
+    <End Role="tbTipoSangre" Type="Self.tbTipoSangre" Multiplicity="1" />
+    <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoSangre">
+        <PropertyRef Name="tps_Id" />
+      </Principal>
+      <Dependent Role="tbEmpleado">
+        <PropertyRef Name="tps_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="SIGEM_BIDSSModelStoreContainer">
+    <EntitySet Name="tbArea" EntityType="Self.tbArea" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbDepartamento" EntityType="Self.tbDepartamento" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbEmpleado" EntityType="Self.tbEmpleado" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbEstado" EntityType="Self.tbEstado" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbMunicipio" EntityType="Self.tbMunicipio" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbPuesto" EntityType="Self.tbPuesto" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbSolicitud" EntityType="Self.tbSolicitud" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbTipoMoneda" EntityType="Self.tbTipoMoneda" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbTipoSangre" EntityType="Self.tbTipoSangre" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbTipoSolicitud" EntityType="Self.tbTipoSolicitud" Schema="Gral" store:Type="Tables" />
+    <AssociationSet Name="FK_are_Id" Association="Self.FK_are_Id">
+      <End Role="tbArea" EntitySet="tbArea" />
+      <End Role="tbPuesto" EntitySet="tbPuesto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dep_Id" Association="Self.FK_dep_Id">
+      <End Role="tbDepartamento" EntitySet="tbDepartamento" />
+      <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" Association="Self.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id">
+      <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+      <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pto_Id" Association="Self.FK_pto_Id">
+      <End Role="tbPuesto" EntitySet="tbPuesto" />
+      <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tps_Id" Association="Self.FK_tps_Id">
+      <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
+      <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

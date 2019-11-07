@@ -26,5 +26,14 @@ namespace SIGEM_BIDSS.Models
         }
     
         public virtual DbSet<tbPuesto> tbPuesto { get; set; }
+        public virtual DbSet<tbArea> tbArea { get; set; }
+        public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
+        public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
+        public virtual DbSet<tbEstado> tbEstado { get; set; }
+        public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
+        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
+        public virtual DbSet<tbTipoMoneda> tbTipoMoneda { get; set; }
+        public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
+        public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
     }
 }

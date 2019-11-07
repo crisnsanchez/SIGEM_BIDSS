@@ -12,24 +12,22 @@ namespace SIGEM_BIDSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbPuesto
+    public partial class tbArea
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbPuesto()
+        public tbArea()
         {
-            this.tbEmpleado = new HashSet<tbEmpleado>();
+            this.tbPuesto = new HashSet<tbPuesto>();
         }
     
-        public int pto_Id { get; set; }
         public int are_Id { get; set; }
-        public string pto_Descripcion { get; set; }
-        public int pto_UsuarioCrea { get; set; }
-        public System.DateTime pto_FechaCrea { get; set; }
-        public Nullable<int> pto_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> pto_FechaModifica { get; set; }
+        public string are_Descripcion { get; set; }
+        public int are_UsuarioCrea { get; set; }
+        public System.DateTime are_FechaCrea { get; set; }
+        public Nullable<int> are_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> are_FechaModifica { get; set; }
     
-        public virtual tbArea tbArea { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
+        public virtual ICollection<tbPuesto> tbPuesto { get; set; }
     }
 }

@@ -1,0 +1,142 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbEmpleado>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_Apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_Sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_FechaNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_Identificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_CorreoElectronico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_FechaIngreso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_Direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_RazonInactivacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_PathImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emp_FechaModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbMunicipio.dep_codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbPuesto.pto_Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbTipoSangre.tps_nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_Apellidos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_Sexo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_FechaNacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_Identificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_CorreoElectronico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_FechaIngreso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_Direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_RazonInactivacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_PathImage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emp_FechaModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbMunicipio.dep_codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbPuesto.pto_Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbTipoSangre.tps_nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.emp_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.emp_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.emp_Id })
+        </td>
+    </tr>
+}
+
+</table>
