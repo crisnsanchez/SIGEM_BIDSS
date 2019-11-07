@@ -170,6 +170,7 @@
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PuestoController.cs" />
     <Compile Include="Controllers\TipoMonedaController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\tbTipoSolicitud.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoMoneda.cs" />
     <Compile Include="Models\UDP_Gral_tbArea_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -247,6 +249,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbPuesto_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoMoneda_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoMoneda_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoSangre_Insert_Result.cs">
@@ -1293,6 +1301,9 @@
     <Content Include="Views\TipoSolicitud\Details.cshtml" />
     <Content Include="Views\TipoSolicitud\Edit.cshtml" />
     <Content Include="Views\TipoSolicitud\Index.cshtml" />
+    <Content Include="Views\Menu\Catalogo.cshtml" />
+    <Content Include="Views\Menu\Empleados.cshtml" />
+    <Content Include="Views\Menu\Solicitud.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
