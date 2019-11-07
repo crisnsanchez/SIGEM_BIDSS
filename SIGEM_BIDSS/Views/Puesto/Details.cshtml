@@ -1,0 +1,67 @@
+﻿@model SIGEM_BIDSS.Models.tbPuesto
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbPuesto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.are_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.are_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pto_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pto_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pto_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pto_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pto_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pto_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pto_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pto_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pto_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pto_FechaModifica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.pto_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

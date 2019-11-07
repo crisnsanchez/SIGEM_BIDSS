@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SIGEM_BIDSSModelStoreContainer" CdmEntityContainer="SIGEM_BIDSSEntities">
+    <EntitySetMapping Name="tbPuesto">
+      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbPuesto">
+        <MappingFragment StoreEntitySet="tbPuesto">
+          <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
+          <ScalarProperty Name="are_Id" ColumnName="are_Id" />
+          <ScalarProperty Name="pto_Descripcion" ColumnName="pto_Descripcion" />
+          <ScalarProperty Name="pto_UsuarioCrea" ColumnName="pto_UsuarioCrea" />
+          <ScalarProperty Name="pto_FechaCrea" ColumnName="pto_FechaCrea" />
+          <ScalarProperty Name="pto_UsuarioModifica" ColumnName="pto_UsuarioModifica" />
+          <ScalarProperty Name="pto_FechaModifica" ColumnName="pto_FechaModifica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
