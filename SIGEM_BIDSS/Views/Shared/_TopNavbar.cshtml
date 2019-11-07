@@ -108,7 +108,7 @@
             @if (!Request.IsAuthenticated)
             {
                 <!-- If the user is not authenticated, display the sign-in button -->
-            <a class="nav-link" href="@Url.Action("SignIn", "Home")">
+            <a class="nav-link" href="@Url.Action("SignIn", "Login")">
                 <i class="fa fa-sign-in mr-2"></i>
                 Iniciar Sesion
             </a>
@@ -121,7 +121,7 @@
                     <i class="fa fa-angle-down"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="Home/SignOut" class="dropdown-item">
+                    <a href="Login/SignOut" class="dropdown-item">
                         <i class="fa fa-sign-out"></i>
                         Cerrar Sesion
                     </a>

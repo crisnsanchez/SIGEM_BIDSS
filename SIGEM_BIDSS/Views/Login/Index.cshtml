@@ -1,0 +1,119 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<!-- Font Awesome -->
+<link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- icheck bootstrap -->
+<script src="~/Content/template/plugins/iCheck/icheck.min.js"></script>
+<!-- Theme style -->
+<link href="~/Content/template/dist/css/adminlte.min.css" rel="stylesheet" />
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="../../index2.html"><b>Admin</b>LTE</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form action="../../index3.html" method="post">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <div class="social-auth-links text-center mb-3">
+                    <p>- OR -</p>
+                    <a class="btn btn-block" href="@Url.Action("SignIn", "Login")" style="text-decoration: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="2 2 3460 522" class="SignInButton">
+                        <style type="text/css">
+                            .fil0:hover {
+                                fill: #4B4B4B;
+                            }
+
+                            .fnt0 {
+                                font-size: 260px;
+                                font-family: 'Segoe UI Semibold', 'Segoe UI';
+                                text-decoration: none;
+                            }
+</style>
+                        <rect class="fil0" x="6" y="2" width="3460" height="517" fill="black" />
+
+                        <rect x="150" y="129" width="122" height="122" fill="#F35325" />
+
+                        <rect x="284" y="129" width="122" height="122" fill="#81BC06" />
+
+                        <rect x="150" y="263" width="122" height="122" fill="#05A6F0" />
+
+                        <rect x="284" y="263" width="122" height="122" fill="#FFBA08" />
+
+                        <text x="470" y="357" fill="white" class="fnt0">Iniciar sesion con Office</text>
+                         </svg>
+                    </a>
+                </div>
+                <!-- /.social-auth-links -->
+
+                <p class="mb-1">
+                    <a href="forgot-password.html">I forgot my password</a>
+                </p>
+                <p class="mb-0">
+                    <a href="register.html" class="text-center">Register a new membership</a>
+                </p>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/Content/template/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <link href="~/Content/template/dist/css/adminlte.min.css" rel="stylesheet" />
+
+
+</body>
+</html>
