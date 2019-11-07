@@ -10,25 +10,15 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-striped table-responsive table-bordered table-hover" style="width:100%" id="dataTable">
+<table class="table table-striped table-responsive " style="width:100%" id="dataTable">
     <thead>
         <tr>
+
             <th>
                 @Html.DisplayNameFor(model => model.tps_nombre)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tps_UsuarioCrea)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tps_FechaCrea)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tps_UsuarioModifica)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tps_FechaModifica)
-            </th>
-            <th></th>
+     
+            <th>ACCIONES</th>
         </tr>
     </thead>
     <tbody>
@@ -38,18 +28,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.tps_nombre)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tps_UsuarioCrea)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tps_FechaCrea)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tps_UsuarioModifica)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tps_FechaModifica)
-                </td>
+           
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.tps_Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.tps_Id }) |

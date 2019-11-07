@@ -11,48 +11,31 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tipsol_Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipsol_UsuarioCrea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipsol_FechaCrea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipsol_UsuarioModifica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipsol_FechaModifica)
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tipsol_Descripcion)
+            </th>
+   
+   
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipsol_Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipsol_UsuarioCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipsol_FechaCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipsol_UsuarioModifica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipsol_FechaModifica)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.tipsol_Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.tipsol_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.tipsol_Id })
-        </td>
-    </tr>
-}
-
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipsol_Descripcion)
+                </td>
+              
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.tipsol_Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.tipsol_Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.tipsol_Id })
+                </td>
+            </tr>
+        }
+        </tbody>
 </table>

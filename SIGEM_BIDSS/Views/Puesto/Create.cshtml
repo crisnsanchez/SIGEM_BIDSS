@@ -17,7 +17,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.are_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
        @Html.DropDownListFor(model => model.are_Id, (SelectList)ViewBag.Area, new { @class = "form-control" })
                                   
                 @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.pto_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.pto_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.pto_Descripcion, "", new { @class = "text-danger" })
             </div>
