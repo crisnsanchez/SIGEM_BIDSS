@@ -49,32 +49,16 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "tmo_Id,tmo_Abreviatura,tmo_Nombre,tmo_UsuarioCrea,tmo_FechaCrea,tmo_UsuarioModifica,tmo_FechaModifica")] tbTipoMoneda tbTipoMoneda)
         {
             if (ModelState.IsValid)
-                try
-                {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbTipoMoneda_Insert(tbTipoMoneda.tmo_Abreviatura, tbTipoMoneda.tmo_Nombre, tbTipoMoneda.tmo_UsuarioCrea=1);
-                    foreach (UDP_Gral_tbTipoMoneda_Insert_Result TipoMoneda in List)
-                        Msj = TipoMoneda.MensajeError;
-                    if (Msj.StartsWith("-1"))
-                    {
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View();
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch (Exception Ex)
-                {
+            {
+                db.tbTipoMoneda.Add(tbTipoMoneda);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
             return View(tbTipoMoneda);
         }
-        
+
+        // GET: TipoMoneda/Edit/5
         public ActionResult Edit(short? id)
         {
             if (id == null)
@@ -98,32 +82,12 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbTipoMoneda_Update(tbTipoMoneda.tmo_Id, tbTipoMoneda.tmo_Abreviatura, tbTipoMoneda.tmo_Nombre,tbTipoMoneda.tmo_UsuarioModifica = 1);
-                    foreach (UDP_Gral_tbTipoMoneda_Update_Result TipoSangre in List)
-                        Msj = TipoSangre.MensajeError;
-                    if (Msj.StartsWith("-1"))
-                    {
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View();
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch (Exception Ex)
-                {
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
+                db.Entry(tbTipoMoneda).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(tbTipoMoneda);
-        
-    }
+        }
 
         // GET: TipoMoneda/Delete/5
         public ActionResult Delete(short? id)

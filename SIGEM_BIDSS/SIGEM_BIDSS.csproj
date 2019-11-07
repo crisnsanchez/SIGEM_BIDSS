@@ -231,7 +231,6 @@
     <Compile Include="Models\tbTipoSolicitud.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TipoMoneda.cs" />
     <Compile Include="Models\UDP_Gral_tbArea_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -248,12 +247,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbPuesto_Update_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_tbTipoMoneda_Insert_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_tbTipoMoneda_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoSangre_Insert_Result.cs">

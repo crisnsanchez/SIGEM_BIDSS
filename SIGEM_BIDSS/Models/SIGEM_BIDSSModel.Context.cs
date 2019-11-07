@@ -466,7 +466,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoMoneda_Insert_Result> UDP_Gral_tbTipoMoneda_Insert(string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioCrea)
+        public virtual ObjectResult<string> UDP_Gral_tbTipoMoneda_Insert(string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioCrea)
         {
             var tmo_AbreviaturaParameter = tmo_Abreviatura != null ?
                 new ObjectParameter("tmo_Abreviatura", tmo_Abreviatura) :
@@ -480,10 +480,10 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tmo_UsuarioCrea", tmo_UsuarioCrea) :
                 new ObjectParameter("tmo_UsuarioCrea", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoMoneda_Insert_Result>("UDP_Gral_tbTipoMoneda_Insert", tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbTipoMoneda_Insert", tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoMoneda_Update_Result> UDP_Gral_tbTipoMoneda_Update(Nullable<short> tmo_Id, string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioModifica)
+        public virtual ObjectResult<string> UDP_Gral_tbTipoMoneda_Update(Nullable<short> tmo_Id, string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioModifica)
         {
             var tmo_IdParameter = tmo_Id.HasValue ?
                 new ObjectParameter("tmo_Id", tmo_Id) :
@@ -501,7 +501,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tmo_UsuarioModifica", tmo_UsuarioModifica) :
                 new ObjectParameter("tmo_UsuarioModifica", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoMoneda_Update_Result>("UDP_Gral_tbTipoMoneda_Update", tmo_IdParameter, tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbTipoMoneda_Update", tmo_IdParameter, tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Nombre, Nullable<int> tps_UsuarioCrea)

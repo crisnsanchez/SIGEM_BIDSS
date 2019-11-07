@@ -548,12 +548,12 @@
             <Parameter Name="pto_Descripcion" Mode="In" Type="String" />
             <Parameter Name="pto_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoMoneda_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoMoneda_Insert_Result)">
+          <FunctionImport Name="UDP_Gral_tbTipoMoneda_Insert" ReturnType="Collection(String)">
             <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
             <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
             <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoMoneda_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoMoneda_Update_Result)">
+          <FunctionImport Name="UDP_Gral_tbTipoMoneda_Update" ReturnType="Collection(String)">
             <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
             <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
             <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
@@ -815,12 +815,6 @@
         <ComplexType Name="UDP_Gral_tbPuesto_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <ComplexType Name="UDP_Gral_tbTipoMoneda_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbTipoMoneda_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1053,20 +1047,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoMoneda_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoMoneda_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSangre_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSangre_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Insert_Result">
