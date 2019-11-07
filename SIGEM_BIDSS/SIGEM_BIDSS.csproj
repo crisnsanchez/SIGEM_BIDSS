@@ -165,10 +165,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
+    <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PuestoController.cs" />
+    <Compile Include="Controllers\TipoMonedaController.cs" />
+    <Compile Include="Controllers\TipoSangreController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1224,6 +1228,26 @@
     <Content Include="Views\Empleado\Details.cshtml" />
     <Content Include="Views\Empleado\Edit.cshtml" />
     <Content Include="Views\Empleado\Index.cshtml" />
+    <Content Include="Views\Area\Create.cshtml" />
+    <Content Include="Views\Area\Delete.cshtml" />
+    <Content Include="Views\Area\Details.cshtml" />
+    <Content Include="Views\Area\Edit.cshtml" />
+    <Content Include="Views\Area\Index.cshtml" />
+    <Content Include="Views\Estado\Create.cshtml" />
+    <Content Include="Views\Estado\Delete.cshtml" />
+    <Content Include="Views\Estado\Details.cshtml" />
+    <Content Include="Views\Estado\Edit.cshtml" />
+    <Content Include="Views\Estado\Index.cshtml" />
+    <Content Include="Views\TipoMoneda\Create.cshtml" />
+    <Content Include="Views\TipoMoneda\Delete.cshtml" />
+    <Content Include="Views\TipoMoneda\Details.cshtml" />
+    <Content Include="Views\TipoMoneda\Edit.cshtml" />
+    <Content Include="Views\TipoMoneda\Index.cshtml" />
+    <Content Include="Views\TipoSangre\Create.cshtml" />
+    <Content Include="Views\TipoSangre\Delete.cshtml" />
+    <Content Include="Views\TipoSangre\Details.cshtml" />
+    <Content Include="Views\TipoSangre\Edit.cshtml" />
+    <Content Include="Views\TipoSangre\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

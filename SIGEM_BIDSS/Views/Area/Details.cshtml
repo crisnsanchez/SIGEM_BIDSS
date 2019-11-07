@@ -1,0 +1,59 @@
+﻿@model SIGEM_BIDSS.Models.tbArea
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbArea</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.are_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.are_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.are_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.are_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.are_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.are_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.are_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.are_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.are_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.are_FechaModifica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.are_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

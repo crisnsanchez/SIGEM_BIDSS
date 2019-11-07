@@ -1,0 +1,67 @@
+﻿@model SIGEM_BIDSS.Models.tbTipoMoneda
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbTipoMoneda</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tmo_Abreviatura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tmo_Abreviatura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tmo_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tmo_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tmo_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tmo_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tmo_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tmo_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tmo_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tmo_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tmo_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tmo_FechaModifica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.tmo_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

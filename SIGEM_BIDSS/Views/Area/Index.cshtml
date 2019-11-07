@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbArea>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.are_Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.are_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.are_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.are_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.are_FechaModifica)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.are_Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.are_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.are_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.are_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.are_FechaModifica)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.are_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.are_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.are_Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbTipoSangre>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tps_nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tps_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tps_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tps_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tps_FechaModifica)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tps_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tps_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tps_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tps_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tps_FechaModifica)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.tps_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.tps_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.tps_Id })
+        </td>
+    </tr>
+}
+
+</table>

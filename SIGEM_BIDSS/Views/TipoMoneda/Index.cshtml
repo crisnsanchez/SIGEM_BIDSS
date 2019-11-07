@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbTipoMoneda>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tmo_Abreviatura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tmo_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tmo_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tmo_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tmo_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tmo_FechaModifica)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tmo_Abreviatura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tmo_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tmo_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tmo_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tmo_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tmo_FechaModifica)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.tmo_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.tmo_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.tmo_Id })
+        </td>
+    </tr>
+}
+
+</table>
