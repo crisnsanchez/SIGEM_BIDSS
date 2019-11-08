@@ -4,56 +4,48 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>tbDepartamento</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.dep_Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dep_Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dep_UsuarioCrea)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dep_UsuarioCrea)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dep_FechaCrea)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dep_FechaCrea)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dep_UsuarioModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dep_UsuarioModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dep_FechaModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dep_FechaModifica)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="col-sm-4">
+        <h2>Departamento</h2>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.dep_Codigo }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Detalles Departamento</h5>
+            </div>
+            <div class="ibox-content">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.dep_Codigo)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.dep_Codigo)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.dep_Nombre)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.dep_Nombre)
+                    </dd>
+                </dl>
+                <div class="col-md-12">
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.dep_Codigo }, new { @class = "btn btn-primary" })
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.Partial("_DetailsMunicipio", Model.tbMunicipio)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/app/Departamento.js"></script>
