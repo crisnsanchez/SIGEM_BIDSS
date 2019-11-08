@@ -38,32 +38,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbEmpleado">
-      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbEmpleado">
-        <MappingFragment StoreEntitySet="tbEmpleado">
-          <ScalarProperty Name="emp_FechaModifica" ColumnName="emp_FechaModifica" />
-          <ScalarProperty Name="emp_UsuarioModifica" ColumnName="emp_UsuarioModifica" />
-          <ScalarProperty Name="emp_FechaCrea" ColumnName="emp_FechaCrea" />
-          <ScalarProperty Name="emp_UsuarioCrea" ColumnName="emp_UsuarioCrea" />
-          <ScalarProperty Name="mun_Id" ColumnName="mun_Id" />
-          <ScalarProperty Name="emp_PathImage" ColumnName="emp_PathImage" />
-          <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
-          <ScalarProperty Name="emp_RazonInactivacion" ColumnName="emp_RazonInactivacion" />
-          <ScalarProperty Name="emp_Direccion" ColumnName="emp_Direccion" />
-          <ScalarProperty Name="emp_FechaIngreso" ColumnName="emp_FechaIngreso" />
-          <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
-          <ScalarProperty Name="tps_Id" ColumnName="tps_Id" />
-          <ScalarProperty Name="emp_CorreoElectronico" ColumnName="emp_CorreoElectronico" />
-          <ScalarProperty Name="emp_Telefono" ColumnName="emp_Telefono" />
-          <ScalarProperty Name="emp_Identificacion" ColumnName="emp_Identificacion" />
-          <ScalarProperty Name="emp_FechaNacimiento" ColumnName="emp_FechaNacimiento" />
-          <ScalarProperty Name="emp_Sexo" ColumnName="emp_Sexo" />
-          <ScalarProperty Name="emp_Apellidos" ColumnName="emp_Apellidos" />
-          <ScalarProperty Name="emp_Nombres" ColumnName="emp_Nombres" />
-          <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbEstado">
       <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbEstado">
         <MappingFragment StoreEntitySet="tbEstado">
@@ -195,7 +169,13 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbDepartamento_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbDepartamento_Insert" />
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbDepartamento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbDepartamento_Update" />
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tbEmpleado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEmpleado_Insert" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbEmpleado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEmpleado_Insert">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbEmpleado_Insert_Result">
+          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbEmpleado_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEmpleado_Update" />
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbEstado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEstado_Insert">
       <ResultMapping>
@@ -269,5 +249,31 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="tbEmpleado">
+      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbEmpleado">
+        <MappingFragment StoreEntitySet="tbEmpleado">
+          <ScalarProperty Name="emp_FechaModifica" ColumnName="emp_FechaModifica" />
+          <ScalarProperty Name="emp_UsuarioModifica" ColumnName="emp_UsuarioModifica" />
+          <ScalarProperty Name="emp_FechaCrea" ColumnName="emp_FechaCrea" />
+          <ScalarProperty Name="emp_UsuarioCrea" ColumnName="emp_UsuarioCrea" />
+          <ScalarProperty Name="mun_Id" ColumnName="mun_Id" />
+          <ScalarProperty Name="emp_PathImage" ColumnName="emp_PathImage" />
+          <ScalarProperty Name="est_Id" ColumnName="est_Id" />
+          <ScalarProperty Name="emp_RazonInactivacion" ColumnName="emp_RazonInactivacion" />
+          <ScalarProperty Name="emp_Direccion" ColumnName="emp_Direccion" />
+          <ScalarProperty Name="emp_FechaIngreso" ColumnName="emp_FechaIngreso" />
+          <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
+          <ScalarProperty Name="tps_Id" ColumnName="tps_Id" />
+          <ScalarProperty Name="emp_CorreoElectronico" ColumnName="emp_CorreoElectronico" />
+          <ScalarProperty Name="emp_Telefono" ColumnName="emp_Telefono" />
+          <ScalarProperty Name="emp_Identificacion" ColumnName="emp_Identificacion" />
+          <ScalarProperty Name="emp_FechaNacimiento" ColumnName="emp_FechaNacimiento" />
+          <ScalarProperty Name="emp_Sexo" ColumnName="emp_Sexo" />
+          <ScalarProperty Name="emp_Apellidos" ColumnName="emp_Apellidos" />
+          <ScalarProperty Name="emp_Nombres" ColumnName="emp_Nombres" />
+          <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

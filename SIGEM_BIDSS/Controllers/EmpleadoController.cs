@@ -53,16 +53,50 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono,emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,emp_Estado,emp_PathImage,mun_Id,emp_UsuarioCrea,emp_FechaCrea,emp_UsuarioModifica,emp_FechaModifica")] tbEmpleado tbEmpleado)
         {
             if (ModelState.IsValid)
-            {
-                db.tbEmpleado.Add(tbEmpleado);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbEmpleado_Insert(tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id, 1);
+                    foreach (UDP_Gral_tbEmpleado_Insert_Result Empleado in List)
+                        Msj = Empleado.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbEmpleado.mun_Id);
+                        ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
+                        ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                        return View(tbEmpleado);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
 
-            ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbEmpleado.mun_Id);
-            ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-            ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
-            return View(tbEmpleado);
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbEmpleado.mun_Id);
+                    ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
+                    ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                    return View(tbEmpleado);
+                }
+            else
+            {
+                ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbEmpleado.mun_Id);
+                ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
+                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                return View(tbEmpleado);
+            }
+            //if (ModelState.IsValid)
+            //{
+            //    db.tbEmpleado.Add(tbEmpleado);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+       
         }
 
         // GET: Empleado/Edit/5

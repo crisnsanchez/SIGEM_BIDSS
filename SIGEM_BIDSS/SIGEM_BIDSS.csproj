@@ -182,6 +182,7 @@
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\Departamentos.cs" />
     <Compile Include="Models\Empleado.cs" />
+    <Compile Include="Models\Empleados.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\FunctionGenerals.cs" />
     <Compile Include="Models\Municipios.cs" />
@@ -246,6 +247,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbArea_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbEmpleado_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbEstado_Insert_Result.cs">
@@ -1104,6 +1108,7 @@
       <LastGenOutput>SIGEM_BIDSSModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\Departamento.js" />
+    <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\template\build\js\.jscsrc" />

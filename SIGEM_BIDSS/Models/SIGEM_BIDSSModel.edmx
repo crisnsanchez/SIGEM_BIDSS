@@ -44,7 +44,7 @@
           <Property Name="emp_FechaIngreso" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="emp_Direccion" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="emp_RazonInactivacion" Type="nvarchar" MaxLength="500" />
-          <Property Name="emp_Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="est_Id" Type="int" Nullable="false" />
           <Property Name="emp_PathImage" Type="varchar(max)" />
           <Property Name="mun_Id" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="emp_UsuarioCrea" Type="int" />
@@ -185,6 +185,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tbEmpleado_tbEstado_est_Id">
+          <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
+          <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleado">
+              <PropertyRef Name="est_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tps_Id">
           <End Role="tbTipoSangre" Type="Self.tbTipoSangre" Multiplicity="1" />
           <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -261,7 +273,6 @@
           <Parameter Name="pto_Id" Type="int" Mode="In" />
           <Parameter Name="emp_FechaIngreso" Type="varchar" Mode="In" />
           <Parameter Name="emp_Direccion" Type="nvarchar" Mode="In" />
-          <Parameter Name="emp_Estado" Type="varchar" Mode="In" />
           <Parameter Name="emp_PathImage" Type="varchar(max)" Mode="In" />
           <Parameter Name="mun_Id" Type="char" Mode="In" />
           <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
@@ -374,6 +385,10 @@
             <End Role="tbPuesto" EntitySet="tbPuesto" />
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
           </AssociationSet>
+          <AssociationSet Name="FK_tbEmpleado_tbEstado_est_Id" Association="Self.FK_tbEmpleado_tbEstado_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+          </AssociationSet>
           <AssociationSet Name="FK_tps_Id" Association="Self.FK_tps_Id">
             <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
@@ -401,7 +416,6 @@
           <EntitySet Name="tbPuesto" EntityType="Self.tbPuesto" />
           <EntitySet Name="tbArea" EntityType="SIGEM_BIDSSModel.tbArea" />
           <EntitySet Name="tbDepartamento" EntityType="SIGEM_BIDSSModel.tbDepartamento" />
-          <EntitySet Name="tbEmpleado" EntityType="SIGEM_BIDSSModel.tbEmpleado" />
           <EntitySet Name="tbEstado" EntityType="SIGEM_BIDSSModel.tbEstado" />
           <EntitySet Name="tbMunicipio" EntityType="SIGEM_BIDSSModel.tbMunicipio" />
           <EntitySet Name="tbSolicitud" EntityType="SIGEM_BIDSSModel.tbSolicitud" />
@@ -415,18 +429,6 @@
           <AssociationSet Name="FK_dep_Id" Association="SIGEM_BIDSSModel.FK_dep_Id">
             <End Role="tbDepartamento" EntitySet="tbDepartamento" />
             <End Role="tbMunicipio" EntitySet="tbMunicipio" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id">
-            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_pto_Id" Association="SIGEM_BIDSSModel.FK_pto_Id">
-            <End Role="tbPuesto" EntitySet="tbPuesto" />
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tps_Id" Association="SIGEM_BIDSSModel.FK_tps_Id">
-            <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -479,7 +481,7 @@
             <Parameter Name="dep_Nombre" Mode="In" Type="String" />
             <Parameter Name="dep_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbEmpleado_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Gral_tbEmpleado_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbEmpleado_Insert_Result)">
             <Parameter Name="emp_Nombres" Mode="In" Type="String" />
             <Parameter Name="emp_Apellidos" Mode="In" Type="String" />
             <Parameter Name="emp_Sexo" Mode="In" Type="String" />
@@ -491,7 +493,6 @@
             <Parameter Name="pto_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_FechaIngreso" Mode="In" Type="String" />
             <Parameter Name="emp_Direccion" Mode="In" Type="String" />
-            <Parameter Name="emp_Estado" Mode="In" Type="String" />
             <Parameter Name="emp_PathImage" Mode="In" Type="String" />
             <Parameter Name="mun_Id" Mode="In" Type="String" />
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
@@ -577,6 +578,23 @@
             <Parameter Name="tipsol_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tipsol_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tbEmpleado" EntityType="SIGEM_BIDSSModel.tbEmpleado" />
+          <AssociationSet Name="FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pto_Id" Association="SIGEM_BIDSSModel.FK_pto_Id">
+            <End Role="tbPuesto" EntitySet="tbPuesto" />
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEmpleado_tbEstado_est_Id" Association="SIGEM_BIDSSModel.FK_tbEmpleado_tbEstado_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tps_Id" Association="SIGEM_BIDSSModel.FK_tps_Id">
+            <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbArea">
           <Key>
@@ -602,34 +620,6 @@
           <Property Name="dep_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_dep_Id" FromRole="tbDepartamento" ToRole="tbMunicipio" />
         </EntityType>
-        <EntityType Name="tbEmpleado">
-          <Key>
-            <PropertyRef Name="emp_Id" />
-          </Key>
-          <Property Name="emp_Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="emp_Nombres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="emp_FechaNacimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Identificacion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Telefono" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="emp_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="tps_Id" Type="Int32" Nullable="false" />
-          <Property Name="pto_Id" Type="Int32" Nullable="false" />
-          <Property Name="emp_FechaIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="emp_Direccion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="emp_RazonInactivacion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="emp_PathImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="mun_Id" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="emp_UsuarioCrea" Type="Int32" />
-          <Property Name="emp_FechaCrea" Type="DateTime" Precision="3" />
-          <Property Name="emp_UsuarioModifica" Type="Int32" />
-          <Property Name="emp_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbMunicipio" />
-          <NavigationProperty Name="tbPuesto" Relationship="SIGEM_BIDSSModel.FK_pto_Id" FromRole="tbEmpleado" ToRole="tbPuesto" />
-          <NavigationProperty Name="tbTipoSangre" Relationship="SIGEM_BIDSSModel.FK_tps_Id" FromRole="tbEmpleado" ToRole="tbTipoSangre" />
-        </EntityType>
         <EntityType Name="tbEstado">
           <Key>
             <PropertyRef Name="est_Id" />
@@ -640,6 +630,7 @@
           <Property Name="est_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="est_UsuarioModifica" Type="Int32" />
           <Property Name="est_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_tbEmpleado_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbEmpleado" />
         </EntityType>
         <EntityType Name="tbMunicipio">
           <Key>
@@ -730,42 +721,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id">
-          <End Type="SIGEM_BIDSSModel.tbMunicipio" Role="tbMunicipio" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbMunicipio">
-              <PropertyRef Name="mun_codigo" />
-            </Principal>
-            <Dependent Role="tbEmpleado">
-              <PropertyRef Name="mun_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_pto_Id">
-          <End Type="SIGEM_BIDSSModel.tbPuesto" Role="tbPuesto" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbPuesto">
-              <PropertyRef Name="pto_Id" />
-            </Principal>
-            <Dependent Role="tbEmpleado">
-              <PropertyRef Name="pto_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tps_Id">
-          <End Type="SIGEM_BIDSSModel.tbTipoSangre" Role="tbTipoSangre" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoSangre">
-              <PropertyRef Name="tps_Id" />
-            </Principal>
-            <Dependent Role="tbEmpleado">
-              <PropertyRef Name="tps_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -821,6 +776,86 @@
         <ComplexType Name="UDP_Gral_tbTipoMoneda_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="tbEmpleado">
+          <Key>
+            <PropertyRef Name="emp_Id" />
+          </Key>
+          <Property Name="emp_Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_Nombres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="emp_FechaNacimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Identificacion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Telefono" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="emp_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tps_Id" Type="Int32" Nullable="false" />
+          <Property Name="pto_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_FechaIngreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emp_Direccion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="emp_RazonInactivacion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="est_Id" Type="Int32" Nullable="false" />
+          <Property Name="emp_PathImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="mun_Id" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="emp_UsuarioCrea" Type="Int32" />
+          <Property Name="emp_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="emp_UsuarioModifica" Type="Int32" />
+          <Property Name="emp_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbMunicipio" />
+          <NavigationProperty Name="tbPuesto" Relationship="SIGEM_BIDSSModel.FK_pto_Id" FromRole="tbEmpleado" ToRole="tbPuesto" />
+          <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_tbEmpleado_tbEstado_est_Id" FromRole="tbEmpleado" ToRole="tbEstado" />
+          <NavigationProperty Name="tbTipoSangre" Relationship="SIGEM_BIDSSModel.FK_tps_Id" FromRole="tbEmpleado" ToRole="tbTipoSangre" />
+        </EntityType>
+        <Association Name="FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id">
+          <End Type="SIGEM_BIDSSModel.tbMunicipio" Role="tbMunicipio" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_codigo" />
+            </Principal>
+            <Dependent Role="tbEmpleado">
+              <PropertyRef Name="mun_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pto_Id">
+          <End Type="SIGEM_BIDSSModel.tbPuesto" Role="tbPuesto" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPuesto">
+              <PropertyRef Name="pto_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleado">
+              <PropertyRef Name="pto_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEmpleado_tbEstado_est_Id">
+          <End Type="SIGEM_BIDSSModel.tbEstado" Role="tbEstado" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleado">
+              <PropertyRef Name="est_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tps_Id">
+          <End Type="SIGEM_BIDSSModel.tbTipoSangre" Role="tbTipoSangre" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoSangre">
+              <PropertyRef Name="tps_Id" />
+            </Principal>
+            <Dependent Role="tbEmpleado">
+              <PropertyRef Name="tps_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_Gral_tbEmpleado_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -861,32 +896,6 @@
                 <ScalarProperty Name="dep_UsuarioCrea" ColumnName="dep_UsuarioCrea" />
                 <ScalarProperty Name="dep_Nombre" ColumnName="dep_Nombre" />
                 <ScalarProperty Name="dep_Codigo" ColumnName="dep_Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbEmpleado">
-            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbEmpleado">
-              <MappingFragment StoreEntitySet="tbEmpleado">
-                <ScalarProperty Name="emp_FechaModifica" ColumnName="emp_FechaModifica" />
-                <ScalarProperty Name="emp_UsuarioModifica" ColumnName="emp_UsuarioModifica" />
-                <ScalarProperty Name="emp_FechaCrea" ColumnName="emp_FechaCrea" />
-                <ScalarProperty Name="emp_UsuarioCrea" ColumnName="emp_UsuarioCrea" />
-                <ScalarProperty Name="mun_Id" ColumnName="mun_Id" />
-                <ScalarProperty Name="emp_PathImage" ColumnName="emp_PathImage" />
-                <ScalarProperty Name="emp_Estado" ColumnName="emp_Estado" />
-                <ScalarProperty Name="emp_RazonInactivacion" ColumnName="emp_RazonInactivacion" />
-                <ScalarProperty Name="emp_Direccion" ColumnName="emp_Direccion" />
-                <ScalarProperty Name="emp_FechaIngreso" ColumnName="emp_FechaIngreso" />
-                <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
-                <ScalarProperty Name="tps_Id" ColumnName="tps_Id" />
-                <ScalarProperty Name="emp_CorreoElectronico" ColumnName="emp_CorreoElectronico" />
-                <ScalarProperty Name="emp_Telefono" ColumnName="emp_Telefono" />
-                <ScalarProperty Name="emp_Identificacion" ColumnName="emp_Identificacion" />
-                <ScalarProperty Name="emp_FechaNacimiento" ColumnName="emp_FechaNacimiento" />
-                <ScalarProperty Name="emp_Sexo" ColumnName="emp_Sexo" />
-                <ScalarProperty Name="emp_Apellidos" ColumnName="emp_Apellidos" />
-                <ScalarProperty Name="emp_Nombres" ColumnName="emp_Nombres" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1021,7 +1030,13 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbDepartamento_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbDepartamento_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbDepartamento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbDepartamento_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbEmpleado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEmpleado_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbEmpleado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEmpleado_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbEmpleado_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbEmpleado_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEmpleado_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbEstado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEstado_Insert" >
             <ResultMapping>
@@ -1095,6 +1110,32 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbEmpleado">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbEmpleado">
+              <MappingFragment StoreEntitySet="tbEmpleado">
+                <ScalarProperty Name="emp_FechaModifica" ColumnName="emp_FechaModifica" />
+                <ScalarProperty Name="emp_UsuarioModifica" ColumnName="emp_UsuarioModifica" />
+                <ScalarProperty Name="emp_FechaCrea" ColumnName="emp_FechaCrea" />
+                <ScalarProperty Name="emp_UsuarioCrea" ColumnName="emp_UsuarioCrea" />
+                <ScalarProperty Name="mun_Id" ColumnName="mun_Id" />
+                <ScalarProperty Name="emp_PathImage" ColumnName="emp_PathImage" />
+                <ScalarProperty Name="est_Id" ColumnName="est_Id" />
+                <ScalarProperty Name="emp_RazonInactivacion" ColumnName="emp_RazonInactivacion" />
+                <ScalarProperty Name="emp_Direccion" ColumnName="emp_Direccion" />
+                <ScalarProperty Name="emp_FechaIngreso" ColumnName="emp_FechaIngreso" />
+                <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
+                <ScalarProperty Name="tps_Id" ColumnName="tps_Id" />
+                <ScalarProperty Name="emp_CorreoElectronico" ColumnName="emp_CorreoElectronico" />
+                <ScalarProperty Name="emp_Telefono" ColumnName="emp_Telefono" />
+                <ScalarProperty Name="emp_Identificacion" ColumnName="emp_Identificacion" />
+                <ScalarProperty Name="emp_FechaNacimiento" ColumnName="emp_FechaNacimiento" />
+                <ScalarProperty Name="emp_Sexo" ColumnName="emp_Sexo" />
+                <ScalarProperty Name="emp_Apellidos" ColumnName="emp_Apellidos" />
+                <ScalarProperty Name="emp_Nombres" ColumnName="emp_Nombres" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
