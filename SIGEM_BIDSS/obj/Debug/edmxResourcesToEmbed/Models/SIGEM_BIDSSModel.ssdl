@@ -276,7 +276,7 @@
     <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbEmpleado_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-    <Parameter Name="emp_Id" Type="smallint" Mode="In" />
+    <Parameter Name="emp_Id" Type="int" Mode="In" />
     <Parameter Name="emp_Nombres" Type="nvarchar" Mode="In" />
     <Parameter Name="emp_Apellidos" Type="nvarchar" Mode="In" />
     <Parameter Name="emp_Sexo" Type="char" Mode="In" />
@@ -284,15 +284,15 @@
     <Parameter Name="emp_Identificacion" Type="nvarchar(max)" Mode="In" />
     <Parameter Name="emp_Telefono" Type="nvarchar" Mode="In" />
     <Parameter Name="emp_CorreoElectronico" Type="nvarchar" Mode="In" />
+    <Parameter Name="emp_RazonInactivacion" Type="nvarchar" Mode="In" />
+    <Parameter Name="est_Id" Type="int" Mode="In" />
     <Parameter Name="tps_Id" Type="int" Mode="In" />
     <Parameter Name="pto_Id" Type="int" Mode="In" />
     <Parameter Name="emp_FechaIngreso" Type="varchar" Mode="In" />
     <Parameter Name="emp_Direccion" Type="nvarchar" Mode="In" />
-    <Parameter Name="emp_RazonInactivacion" Type="nvarchar" Mode="In" />
-    <Parameter Name="emp_Estado" Type="varchar" Mode="In" />
     <Parameter Name="emp_PathImage" Type="varchar(max)" Mode="In" />
     <Parameter Name="mun_Id" Type="char" Mode="In" />
-    <Parameter Name="emp_UsuarioModifica" Type="int" Mode="In" />
+    <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbEstado_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="est_Descripcion" Type="nvarchar" Mode="In" />

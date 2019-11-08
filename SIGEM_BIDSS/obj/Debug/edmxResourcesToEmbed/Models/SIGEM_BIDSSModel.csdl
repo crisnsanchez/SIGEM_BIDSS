@@ -88,25 +88,6 @@
       <Parameter Name="mun_Id" Mode="In" Type="String" />
       <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="UDP_Gral_tbEmpleado_Update" ReturnType="Collection(String)">
-      <Parameter Name="emp_Id" Mode="In" Type="Int16" />
-      <Parameter Name="emp_Nombres" Mode="In" Type="String" />
-      <Parameter Name="emp_Apellidos" Mode="In" Type="String" />
-      <Parameter Name="emp_Sexo" Mode="In" Type="String" />
-      <Parameter Name="emp_FechaNacimiento" Mode="In" Type="String" />
-      <Parameter Name="emp_Identificacion" Mode="In" Type="String" />
-      <Parameter Name="emp_Telefono" Mode="In" Type="String" />
-      <Parameter Name="emp_CorreoElectronico" Mode="In" Type="String" />
-      <Parameter Name="tps_Id" Mode="In" Type="Int32" />
-      <Parameter Name="pto_Id" Mode="In" Type="Int32" />
-      <Parameter Name="emp_FechaIngreso" Mode="In" Type="String" />
-      <Parameter Name="emp_Direccion" Mode="In" Type="String" />
-      <Parameter Name="emp_RazonInactivacion" Mode="In" Type="String" />
-      <Parameter Name="emp_Estado" Mode="In" Type="String" />
-      <Parameter Name="emp_PathImage" Mode="In" Type="String" />
-      <Parameter Name="mun_Id" Mode="In" Type="String" />
-      <Parameter Name="emp_UsuarioModifica" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="UDP_Gral_tbEstado_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbEstado_Insert_Result)">
       <Parameter Name="est_Descripcion" Mode="In" Type="String" />
       <Parameter Name="est_UsuarioCrea" Mode="In" Type="Int32" />
@@ -202,6 +183,25 @@
       <Parameter Name="dep_Codigo" Mode="In" Type="String" />
       <Parameter Name="mun_Nombre" Mode="In" Type="String" />
       <Parameter Name="mun_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbEmpleado_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbEmpleado_Update_Result)">
+      <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+      <Parameter Name="emp_Nombres" Mode="In" Type="String" />
+      <Parameter Name="emp_Apellidos" Mode="In" Type="String" />
+      <Parameter Name="emp_Sexo" Mode="In" Type="String" />
+      <Parameter Name="emp_FechaNacimiento" Mode="In" Type="String" />
+      <Parameter Name="emp_Identificacion" Mode="In" Type="String" />
+      <Parameter Name="emp_Telefono" Mode="In" Type="String" />
+      <Parameter Name="emp_CorreoElectronico" Mode="In" Type="String" />
+      <Parameter Name="emp_RazonInactivacion" Mode="In" Type="String" />
+      <Parameter Name="est_Id" Mode="In" Type="Int32" />
+      <Parameter Name="tps_Id" Mode="In" Type="Int32" />
+      <Parameter Name="pto_Id" Mode="In" Type="Int32" />
+      <Parameter Name="emp_FechaIngreso" Mode="In" Type="String" />
+      <Parameter Name="emp_Direccion" Mode="In" Type="String" />
+      <Parameter Name="emp_PathImage" Mode="In" Type="String" />
+      <Parameter Name="mun_Id" Mode="In" Type="String" />
+      <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="tbArea">
@@ -483,6 +483,9 @@
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
   <ComplexType Name="UDP_Gral_tbMunicipio_Update_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbEmpleado_Update_Result">
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
 </Schema>

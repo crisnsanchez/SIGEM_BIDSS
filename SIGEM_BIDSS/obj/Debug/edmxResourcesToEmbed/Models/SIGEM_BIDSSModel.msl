@@ -174,7 +174,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tbEmpleado_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEmpleado_Update" />
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbEstado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEstado_Insert">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbEstado_Insert_Result">
@@ -309,6 +308,13 @@
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbMunicipio_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMunicipio_Update">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Update_Result">
+          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbEmpleado_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEmpleado_Update">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbEmpleado_Update_Result">
           <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
         </ComplexTypeMapping>
       </ResultMapping>
