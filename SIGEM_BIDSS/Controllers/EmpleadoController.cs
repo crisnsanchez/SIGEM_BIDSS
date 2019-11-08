@@ -13,6 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class EmpleadoController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
+        private GeneralFunctions GFC = new GeneralFunctions();
 
         // GET: Empleado
         public ActionResult Index()
@@ -42,6 +43,8 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo");
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");
+            ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description");
+
             return View();
         }
 

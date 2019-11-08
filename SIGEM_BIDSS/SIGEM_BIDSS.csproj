@@ -185,6 +185,7 @@
     <Compile Include="Models\Empleados.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\FunctionGenerals.cs" />
+    <Compile Include="Models\GeneralFunctions.cs" />
     <Compile Include="Models\Municipios.cs" />
     <Compile Include="Models\Puesto.cs" />
     <Compile Include="Models\SIGEM_BIDSSModel.Context.cs">
@@ -286,6 +287,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\descarga.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\template\build\js\AdminLTE.js" />
     <Content Include="Content\template\build\js\ControlSidebar.js" />
