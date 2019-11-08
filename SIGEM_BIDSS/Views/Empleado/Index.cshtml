@@ -39,11 +39,9 @@
         <th>
             @Html.DisplayNameFor(model => model.emp_Direccion)
         </th>
+     
         <th>
-            @Html.DisplayNameFor(model => model.emp_RazonInactivacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.emp_Estado)
+            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.emp_PathImage)
@@ -101,11 +99,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.emp_Direccion)
         </td>
+    
         <td>
-            @Html.DisplayFor(modelItem => item.emp_RazonInactivacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.emp_Estado)
+            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.emp_PathImage)
@@ -134,7 +130,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.emp_Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.emp_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.emp_Id })
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.emp_Id })*@
         </td>
     </tr>
 }

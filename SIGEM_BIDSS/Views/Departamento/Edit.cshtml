@@ -1,70 +1,226 @@
 ﻿@model SIGEM_BIDSS.Models.tbDepartamento
-
+@using SIGEM_BIDSS.Models
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .validation-error {
+        color: red;
+        font-size: small;
+    }
 
-<h2>Edit</h2>
+    .validation-summary-errors {
+        color: red;
+        font-size: small;
+    }
 
-@using (Html.BeginForm())
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+</style>
+
+
+
+@{
+    tbMunicipio Municipio = new tbMunicipio();
+}
+<style type="text/css">
+    #dep_Nombre, #mun_NombreEdit, #mun_NombreEdit_ {
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="form-horizontal">
+    <div class="col-sm-4">
+        <h2>Departamento</h2>
+    </div>
+</div>
+
+@using (Html.BeginForm("Edit", "Departamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>tbDepartamento</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.dep_Codigo)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.dep_Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dep_Nombre, "", new { @class = "text-danger" })
-            </div>
+
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Editar Departamento</h5>
         </div>
+        <div class="ibox-content">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.dep_UsuarioCrea, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dep_UsuarioCrea, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dep_UsuarioCrea, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.dep_Codigo)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.dep_FechaCrea, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dep_FechaCrea, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dep_FechaCrea, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.dep_Codigo)
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.dep_UsuarioModifica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dep_UsuarioModifica, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dep_UsuarioModifica, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label , required" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.dep_Nombre, new { @class = "form-control" })
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.dep_Nombre)</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-white" })
+                    </div>
+                </div>
+                <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.dep_FechaModifica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dep_FechaModifica, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dep_FechaModifica, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @Html.Partial("_IndexMunicipio", Model.tbMunicipio)
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+}
+<!-- CREAR REGISTRO MODAL-->
+<div class="modal fade" id="modalregistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Registrar Municipio</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-horizontal">
+                        <div id="ValidationCreate_">
+                        </div>
+                        @Html.HiddenFor(model => model.dep_Codigo)
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label col-md-2" })*@
+                            <input type="hidden" value="@Model.dep_Nombre" />
+                            <label class="control-label col-md-2">Código Departamento</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label" })
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.dep_Nombre, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => Municipio.mun_codigo, new { @class = "control-label , required" })
+                            <div class="col-md-2">
+                                <input type="text" id="mun_CodigoEdit" name="mun_Codigo" class="form-control" required; />
+                                <div id="ValidacionMunCodigoEdit">
+                                    @Html.ValidationMessageFor(model => Municipio.mun_codigo)
+                                </div>
+                            </div>
+                            @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label , required" })
+                            <div class="col-md-4">
+                                <input type="text" id="mun_NombreEdit" name="mun_Nombre" class="form-control" required; minLength="4" />
+                                <div id="ValidacionMunNombreEdit">
+                                    @Html.ValidationMessageFor(model => Municipio.mun_nombre)
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <button class="btn btn-primary btn-sm" type="button" id="AgregarMunicipiosEdit">Agregar</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <br /><br />
+                            </div>
+                            <table id="tblMunicipiosEdit" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Código Municipio</th>
+                                        <th>Municipio</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" aria-label="Close" type="button" id="btnNuevoEdit">Guardar</button>
+                <input type="button" class="btn btn-white" data-dismiss="modal" style="width:110px;" id="btnCerrar" value="Cancelar" />
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Edit Municipio Modal-->
+<div class="modal fade" id="EditMunicipioModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        <div class="form-horizontal">
+                            <label id="MsjError">
+                            </label>
+                            <div class="form-group">
+                                @Html.LabelFor(m => Municipio.mun_codigo, new { @class = "control-label" })
+                                <div class="col-sm-10">
+                                    <input type="text" id="mun_CodigoEdit_" name="mun_Codigo" class="form-control" readonly; minLength="4" />
+                                    @Html.ValidationMessageFor(m => Municipio.mun_codigo)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
+
+                                <div class="col-sm-10">
+                                    <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; />
+                                    @Html.ValidationMessageFor(m => Municipio.mun_nombre)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-primary" type="button" id="BtnsubmitMunicipio" tabindex="10"> Guardar </button>
+                                    <button type="button" class="btn btn-white" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>Auditoría</h5>
+    </div>
+    <div class="ibox-content">
+        <table class="table">
+            <tr>
+                <th>Acción</th>
+                <th>Usuario</th>
+                <th> Fecha</th>
+            </tr>
+            <tr>
+                <td>Creado por  </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Modificado por</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/app/Departamento.js"></script>
+<script src="~/Scripts/app/CrearActualizarEliminar.js"></script>
