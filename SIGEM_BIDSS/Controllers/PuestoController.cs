@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SIGEM_BIDSS.Models;
+using System.Transactions;
 
 namespace SIGEM_BIDSS.Controllers
 {
@@ -53,7 +54,9 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "pto_Id,are_Id,pto_Descripcion,pto_UsuarioCrea,pto_FechaCrea,pto_UsuarioModifica,pto_FechaModifica")] tbPuesto tbPuesto)
         {
             if (ModelState.IsValid)
-                try
+                using (TransactionScope _Tran = new TransactionScope())
+                {
+                    try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
@@ -77,6 +80,7 @@ namespace SIGEM_BIDSS.Controllers
                     return View();
                 }
 
+                }
 
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             return View(tbPuesto);

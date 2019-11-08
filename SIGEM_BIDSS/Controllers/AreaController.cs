@@ -46,15 +46,34 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "are_Id,are_Descripcion,are_UsuarioCrea,are_FechaCrea,are_UsuarioModifica,are_FechaModifica")] tbArea tbArea)
+        public ActionResult Create([Bind(Include = "are_Id,are_Descripcion,are_UsuarioCrea")] tbArea tbArea)
         {
             if (ModelState.IsValid)
             {
-                db.tbArea.Add(tbArea);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<object> _List = null;
+                    string MsjError = "";
+                    _List = db.UDP_Gral_tbArea_Insert(tbArea.are_Descripcion,1);
+                    foreach (UDP_Gral_tbArea_Insert_Result _Area in _List)
+                        MsjError = _Area.MensajeError;
+                    if (MsjError.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbArea);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbArea);
+                }
 
+            }
             return View(tbArea);
         }
 
@@ -82,9 +101,28 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tbArea).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    IEnumerable<object> _List = null;
+                    string MsjError = "";
+                    _List = db.UDP_Gral_tbArea_Update(tbArea.are_Id,tbArea.are_Descripcion, 1);
+                    foreach (UDP_Gral_tbArea_Update_Result _Area in _List)
+                        MsjError = _Area.MensajeError;
+                    if (MsjError.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbArea);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbArea);
+                }
             }
             return View(tbArea);
         }

@@ -108,14 +108,14 @@
             @if (!Request.IsAuthenticated)
             {
                 <!-- If the user is not authenticated, display the sign-in button -->
-            <a class="nav-link" href="@Url.Action("SignIn", "Login")">
+            <a class="navbar-text" href="@Url.Action("SignIn", "Login")">
                 <i class="fa fa-sign-in mr-2"></i>
                 Iniciar Sesion
             </a>
             }
             else
             {
-                <a class="nav-link" data-toggle="dropdown" href="#">
+                <a class="nav nav-text" data-toggle="dropdown" href="#">
                     Hello @System.Security.Claims.ClaimsPrincipal.Current.FindFirst("name").Value
                     <span class="badge"> </span>
                     <i class="fa fa-angle-down"></i>
