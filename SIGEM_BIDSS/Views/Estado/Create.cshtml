@@ -30,36 +30,44 @@
 
 
 
-<h2>Create</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>tbEstado</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.est_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.est_Descripcion, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()" } })
-                @Html.ValidationMessageFor(model => model.est_Descripcion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-upload mr-1"></i>
+            Insertar Estado
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
     </div>
-}
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        <div class="form-horizontal">
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+             
+                <div class="form-group">
+                    @Html.LabelFor(model => model.est_Descripcion, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.est_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "3", autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()" } })
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.est_Descripcion, "", new { @class = "text-danger" })</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+    }
 </div>
 <script>
     ///validar solo letras
