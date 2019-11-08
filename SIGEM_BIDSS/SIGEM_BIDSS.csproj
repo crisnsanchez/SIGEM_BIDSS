@@ -183,10 +183,15 @@
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\Departamentos.cs" />
     <Compile Include="Models\Empleado.cs" />
+    <Compile Include="Models\Empleados.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\FunctionGenerals.cs" />
+    <Compile Include="Models\GeneralFunctions.cs" />
     <Compile Include="Models\Municipios.cs" />
     <Compile Include="Models\Puesto.cs" />
+    <Compile Include="Models\SDP_tbMunicipio_Select_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SIGEM_BIDSSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -249,10 +254,25 @@
     <Compile Include="Models\UDP_Gral_tbArea_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Gral_tbDepartamento_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbDepartamento_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbEmpleado_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Gral_tbEstado_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbEstado_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbMunicipio_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbMunicipio_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbPuesto_Insert_Result.cs">
@@ -283,6 +303,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\descarga.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\template\build\js\AdminLTE.js" />
     <Content Include="Content\template\build\js\ControlSidebar.js" />
@@ -1105,6 +1126,7 @@
       <LastGenOutput>SIGEM_BIDSSModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\app\Departamento.js" />
+    <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\template\build\js\.jscsrc" />
@@ -1321,6 +1343,8 @@
     <Content Include="Views\Departamento\Edit.cshtml" />
     <Content Include="Views\Departamento\Index.cshtml" />
     <Content Include="Views\Departamento\_CrearMunicipio.cshtml" />
+    <Content Include="Views\Departamento\_DetailsMunicipio.cshtml" />
+    <Content Include="Views\Departamento\_IndexMunicipio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

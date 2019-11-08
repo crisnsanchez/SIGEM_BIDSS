@@ -12,6 +12,11 @@ namespace SIGEM_BIDSS.Models
     {
         [NotMapped]
         public List<tbEmpleado> EmpleadoList { get; set; }
+        [NotMapped]
+        public string ge_Id { get; set; }
+        [NotMapped]
+        public string ge_Description { get; set; }
+
     }
 
     public class EmpleadoMetaData
@@ -32,9 +37,9 @@ namespace SIGEM_BIDSS.Models
         public string emp_Telefono { get; set; }
         [Display(Name = "Correo Electronico")]
         public string emp_CorreoElectronico { get; set; }
-        [Display(Name = "ID")]
+        [Display(Name = "Tipo Sangre")]
         public int tps_Id { get; set; }
-        [Display(Name = "ID")]
+        [Display(Name = "Puesto")]
         public int pto_Id { get; set; }
         [Display(Name = "Fecha de Ingreso")]
         public string emp_FechaIngreso { get; set; }
@@ -43,7 +48,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Razon Inactivo")]
         public string emp_RazonInactivacion { get; set; }
         [Display(Name = "Estado")]
-        public string emp_Estado { get; set; }
+        public string est_Id { get; set; }
         [Display(Name = "Imagen")]
         public string emp_PathImage { get; set; }
         [Display(Name = "Municipio")]

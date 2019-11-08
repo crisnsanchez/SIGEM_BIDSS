@@ -27,7 +27,7 @@ namespace SIGEM_BIDSS.Models
         public string emp_FechaIngreso { get; set; }
         public string emp_Direccion { get; set; }
         public string emp_RazonInactivacion { get; set; }
-        public string emp_Estado { get; set; }
+        public int est_Id { get; set; }
         public string emp_PathImage { get; set; }
         public string mun_Id { get; set; }
         public Nullable<int> emp_UsuarioCrea { get; set; }
@@ -37,6 +37,7 @@ namespace SIGEM_BIDSS.Models
     
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
+        public virtual tbEstado tbEstado { get; set; }
         public virtual tbTipoSangre tbTipoSangre { get; set; }
     }
 }
