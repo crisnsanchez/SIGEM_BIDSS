@@ -39,7 +39,7 @@
     <Property Name="emp_FechaIngreso" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="emp_Direccion" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="emp_RazonInactivacion" Type="nvarchar" MaxLength="500" />
-    <Property Name="est_Id" Type="int" Nullable="false" />
+    <Property Name="emp_Estado" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="emp_PathImage" Type="varchar(max)" />
     <Property Name="mun_Id" Type="char" MaxLength="4" Nullable="false" />
     <Property Name="emp_UsuarioCrea" Type="int" />
@@ -180,18 +180,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tbEmpleado_tbEstado_est_Id">
-    <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
-    <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbEstado">
-        <PropertyRef Name="est_Id" />
-      </Principal>
-      <Dependent Role="tbEmpleado">
-        <PropertyRef Name="est_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_tps_Id">
     <End Role="tbTipoSangre" Type="Self.tbTipoSangre" Multiplicity="1" />
     <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -236,9 +224,6 @@
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="SDP_tbMunicipio_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-    <Parameter Name="mun_Codigo" Type="char" Mode="In" />
-  </Function>
   <Function Name="UDP_Gral_tbArea_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="are_Descripcion" Type="nvarchar" Mode="In" />
     <Parameter Name="are_UsuarioCrea" Type="int" Mode="In" />
@@ -271,6 +256,7 @@
     <Parameter Name="pto_Id" Type="int" Mode="In" />
     <Parameter Name="emp_FechaIngreso" Type="varchar" Mode="In" />
     <Parameter Name="emp_Direccion" Type="nvarchar" Mode="In" />
+    <Parameter Name="emp_Estado" Type="varchar" Mode="In" />
     <Parameter Name="emp_PathImage" Type="varchar(max)" Mode="In" />
     <Parameter Name="mun_Id" Type="char" Mode="In" />
     <Parameter Name="emp_UsuarioCrea" Type="int" Mode="In" />
@@ -302,9 +288,6 @@
     <Parameter Name="est_Id" Type="int" Mode="In" />
     <Parameter Name="est_Descripcion" Type="nvarchar" Mode="In" />
     <Parameter Name="est_UsuarioModifica" Type="int" Mode="In" />
-  </Function>
-  <Function Name="UDP_Gral_tbMunicipio_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-    <Parameter Name="mun_Codigo" Type="char" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbMunicipio_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="mun_Codigo" Type="char" Mode="In" />
@@ -384,10 +367,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_pto_Id" Association="Self.FK_pto_Id">
       <End Role="tbPuesto" EntitySet="tbPuesto" />
-      <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbEmpleado_tbEstado_est_Id" Association="Self.FK_tbEmpleado_tbEstado_est_Id">
-      <End Role="tbEstado" EntitySet="tbEstado" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
     </AssociationSet>
     <AssociationSet Name="FK_tps_Id" Association="Self.FK_tps_Id">

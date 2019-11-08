@@ -7,15 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SIGEM_BIDSS.Models;
-using System.Transactions;
 
 namespace SIGEM_BIDSS.Controllers
 {
     public class DepartamentoController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-
-        FunctionGenerals function = new FunctionGenerals();
 
         // GET: Departamento
         public ActionResult Index()
@@ -51,82 +48,28 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "dep_Codigo,dep_Nombre,dep_UsuarioCrea,dep_FechaCrea,dep_UsuarioModifica,dep_FechaModifica")] tbDepartamento tbDepartamento)
         {
-            IEnumerable<object> list = null;
-            IEnumerable<object> lista = null;
-            string MensajeError = "";
-            string MsjError = "";
-            var listMunicipios = (List<tbMunicipio>)Session["tbMunicipio"];
-
-            if (db.tbDepartamento.Any(a => a.dep_Nombre == tbDepartamento.dep_Nombre))
-            {
-                ModelState.AddModelError("", "Ya existe un Departamento con ese Nombre, agregue otro.");
-            }
             if (ModelState.IsValid)
             {
-                using (TransactionScope _Tran = new TransactionScope())
-                {
-                    try
-                    {
-                        list = db.UDP_Gral_tbDepartamento_Insert(tbDepartamento.dep_Codigo, tbDepartamento.dep_Nombre, 1, function.DatetimeNow());
-                        foreach (UDP_Gral_tbDepartamento_Insert_Result departamento in list)
-                            MsjError = departamento.MensajeError;
-                        if (MsjError.StartsWith("-1"))
-                        {
-                           
-                            ModelState.AddModelError("", "Ya existe un Departamento con ese Código, agregue otro.");
-                            return View(tbDepartamento);
-                        }
-                        else
-                        {
-                            if (listMunicipios != null)
-                            {
-                                if (listMunicipios.Count > 0)
-                                {
-                                    foreach (tbMunicipio mun in listMunicipios)
-                                    {
-                                        lista = db.UDP_Gral_tbMunicipio_Insert(mun.mun_codigo, tbDepartamento.dep_Codigo, mun.mun_nombre,  1,function.DatetimeNow());
-                                        foreach (UDP_Gral_tbMunicipio_Insert_Result municipios in lista)
-                                            MensajeError = municipios.MensajeError;
-                                        if (MensajeError.StartsWith("-1"))
-                                        {
-                                           
-                                            ModelState.AddModelError("", "No se pudo insertar el registro detalle, favor contacte al administrador.");
-                                            return View(tbDepartamento);
-                                        }
-                                    }
-                                }
-                            }
-                            _Tran.Complete();
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View(tbDepartamento);
-                    }
-                }
+                db.tbDepartamento.Add(tbDepartamento);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(tbDepartamento);
         }
 
         // GET: Departamento/Edit/5
         public ActionResult Edit(string id)
         {
-            Session["tbMunicipio"] = null;
-            try
-            {
-                ViewBag.smserror = TempData["smserror"].ToString();
-            }
-            catch { }
-
             if (id == null)
             {
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbDepartamento tbDepartamento = db.tbDepartamento.Find(id);
-            
+            if (tbDepartamento == null)
+            {
+                return HttpNotFound();
+            }
             return View(tbDepartamento);
         }
 
@@ -139,204 +82,46 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-                IEnumerable<object> list = null;
-                string MsjError = "";
-                {
-                    try
-                    {
-                        list = db.UDP_Gral_tbDepartamento_Update(tbDepartamento.dep_Codigo, tbDepartamento.dep_Nombre,1);
-                        foreach (UDP_Gral_tbDepartamento_Update_Result dep in list)
-                            MsjError = dep.MensajeError;
-                        if (MsjError.StartsWith("-1"))
-                        {
-                            
-                            ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
-                            return View(tbDepartamento);
-                        }
-                        else
-                        {
-                            return RedirectToAction("Edit/" + tbDepartamento.dep_Codigo);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        
-                        ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
-                        return View(tbDepartamento);
-                    }
-                }
+                db.Entry(tbDepartamento).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(tbDepartamento);
         }
 
-        [HttpPost]
-        public JsonResult AnadirMunicipio(tbMunicipio Municipio)
+        // GET: Departamento/Delete/5
+        public ActionResult Delete(string id)
         {
-            List<tbMunicipio> sessionMunicipio = new List<tbMunicipio>();
-            var list = (List<tbMunicipio>)Session["tbMunicipio"];
-            if (list == null)
+            if (id == null)
             {
-                sessionMunicipio.Add(Municipio);
-                Session["tbMunicipio"] = sessionMunicipio;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            tbDepartamento tbDepartamento = db.tbDepartamento.Find(id);
+            if (tbDepartamento == null)
             {
-                list.Add(Municipio);
-                Session["tbMunicipio"] = list;
+                return HttpNotFound();
             }
-            return Json("Exito", JsonRequestBehavior.AllowGet);
+            return View(tbDepartamento);
         }
 
-
-        [HttpPost]
-        public JsonResult RemoveMunicipios(tbMunicipio Municipios)
+        // POST: Departamento/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
         {
-            var list = (List<tbMunicipio>)Session["tbMunicipio"];
-
-            if (list != null)
-            {
-                var itemToRemove = list.Single(r => r.mun_UsuarioCrea == Municipios.mun_UsuarioCrea);
-                list.Remove(itemToRemove);
-                Session["tbMunicipio"] = list;
-            }
-            return Json("Exito", JsonRequestBehavior.AllowGet);
+            tbDepartamento tbDepartamento = db.tbDepartamento.Find(id);
+            db.tbDepartamento.Remove(tbDepartamento);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
-
-        [HttpPost]
-        public JsonResult ActualizarMunicipio(tbMunicipio Municipio)
+        protected override void Dispose(bool disposing)
         {
-            string MsjError = "";
-            string depCodigo = Municipio.mun_codigo.Substring(0, 2);
-            try
+            if (disposing)
             {
-                IEnumerable<object> list = null;
-                tbMunicipio munl = db.tbMunicipio.Find(Municipio.mun_codigo);
-                list = db.UDP_Gral_tbMunicipio_Update(Municipio.mun_codigo,
-                    depCodigo,
-                    Municipio.mun_nombre,
-                    1
-                    );
-                foreach (UDP_Gral_tbMunicipio_Update_Result mun in list)
-                    MsjError = (mun.MensajeError);
+                db.Dispose();
             }
-            catch (Exception Ex)
-            {
-                Ex.Message.ToString();
-                ModelState.AddModelError("", "No se Actualizo el registro");
-            }
-            return Json(MsjError, JsonRequestBehavior.AllowGet);
+            base.Dispose(disposing);
         }
-
-        [HttpPost]
-        public JsonResult GuardarMun(tbMunicipio GuardarMunicipios)
-        {
-            {
-                string MsjError = "";
-                try
-                {
-                    IEnumerable<object> list = null;
-                    list = db.UDP_Gral_tbMunicipio_Insert(GuardarMunicipios.mun_codigo, GuardarMunicipios.dep_codigo, GuardarMunicipios.mun_nombre, 1, function.DatetimeNow());
-                    foreach (UDP_Gral_tbMunicipio_Insert_Result mun in list)
-                        MsjError = (mun.MensajeError);
-
-                    if (MsjError.Substring(0, 1) == "-1")
-                    {
-                        ModelState.AddModelError("", "No se Guardo el Registro");
-                    }
-                    else
-                    {
-                        return Json("Index");
-                    }
-                }
-                catch (Exception Ex)
-                {
-                    Ex.Message.ToString();
-                    ModelState.AddModelError("", "No se Guardo el registro");
-                }
-                return Json("Index");
-            }
-        }
-
-
-        [HttpPost]
-        public JsonResult GuardarMunicipioModal([Bind(Include = "dep_Codigo,dep_Nombre,dep_UsuarioCrea,dep_FechaCrea,dep_UsuarioModifica,dep_FechaModifica")] tbMunicipio tbMunicipio)
-        {
-            string Msj = "";
-            try
-            {
-                IEnumerable<object> list = null;
-                list = db.UDP_Gral_tbMunicipio_Insert(tbMunicipio.mun_codigo, tbMunicipio.dep_codigo, tbMunicipio.mun_nombre, 1, function.DatetimeNow());
-
-                foreach (UDP_Gral_tbMunicipio_Insert_Result Municipio in list)
-                    Msj = Municipio.MensajeError;
-
-                if (Msj.Substring(0, 2) == "-1")
-                {
-                    ModelState.AddModelError("", "No se Actualizo el registro");
-
-
-                }
-                else
-                {
-                    return Json(Msj);
-                }
-            }
-            catch (Exception Ex)
-            {
-                Ex.Message.ToString();
-                ModelState.AddModelError("", "No se Actualizo el registro");
-            }
-            return Json("Index");
-        }
-
-
-        
-
-        [HttpPost]
-        public JsonResult GuardarMuninicipio(string depCodigo)
-        {
-            string MsjError = "";
-            var listMunicipios = (List<tbMunicipio>)Session["tbMunicipio"];
-            IEnumerable<object> list = null;
-            try
-            {
-                if (listMunicipios.Count > 0 && listMunicipios != null)
-                {
-                    foreach (tbMunicipio mun in listMunicipios)
-                    {
-                        list = db.UDP_Gral_tbMunicipio_Insert(mun.mun_codigo, depCodigo, mun.mun_nombre, 1, function.DatetimeNow());
-                        foreach (UDP_Gral_tbMunicipio_Insert_Result municipios in list)
-                        {
-                            MsjError = municipios.MensajeError;
-                        }
-                    }
-                }
-            }
-            catch (Exception Ex)
-            {
-                MsjError = "-1";
-                Ex.Message.ToString();
-                ModelState.AddModelError("", "No se Guardo el registro");
-            }
-            return Json(MsjError, JsonRequestBehavior.AllowGet);
-        }
-        [HttpPost]
-        public JsonResult getMunicipio(string munCodigo)
-        {
-            IEnumerable<object> list = null;
-            try
-            {
-                list = db.SDP_tbMunicipio_Select(munCodigo).ToList();
-            }
-            catch (Exception Ex)
-            {
-                Ex.Message.ToString();
-            }
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-
-
     }
-
 }
