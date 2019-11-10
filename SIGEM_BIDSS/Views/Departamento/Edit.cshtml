@@ -22,67 +22,96 @@
     }
 </style>
 
-
-
 @{
     tbMunicipio Municipio = new tbMunicipio();
 }
-<style type="text/css">
-    #dep_Nombre, #mun_NombreEdit, #mun_NombreEdit_ {
-        text-transform: uppercase;
-    }
-</style>
 
-<div class="form-horizontal">
-    <div class="col-sm-4">
-        <h2>Departamento</h2>
-    </div>
+<div class="card-header d-flex p-0 ui-sortable-handle">
+    <h3 class="card-title p-3">
+        <i class="fa fa-upload mr-1"></i>
+        Editar Departamento
+    </h3>
+    <ul class="nav nav-pills ml-auto p-2">
+        <li class="nav-item">
+            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+        </li>
+    </ul>
 </div>
-
 @using (Html.BeginForm("Edit", "Departamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
-
 {
+    @Html.AntiForgeryToken()
 
 
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5>Editar Departamento</h5>
-        </div>
-        <div class="ibox-content">
+    <div class="form-horizontal">
 
-            @Html.AntiForgeryToken()
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true)
-                @Html.HiddenFor(model => model.dep_Codigo)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.dep_Codigo)
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label" })
-                    <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
-                        @Html.ValidationMessageFor(model => model.dep_Codigo)
-                    </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.dep_Codigo)
+            </div>
 
-                    @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label , required" })
-                    <div class="col-md-3">
-                        @Html.EditorFor(model => model.dep_Nombre, new { @class = "form-control" })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.dep_Nombre)</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-white" })
-                    </div>
-                </div>
-                <div class="form-horizontal">
-
-                    @Html.Partial("_IndexMunicipio", Model.tbMunicipio)
-
-                </div>
-
+            @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label , required" })
+            <div class="col-sm-4">
+                @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()" } })
+                <p style="color:red">@Html.ValidationMessageFor(model => model.dep_Nombre)</p>
             </div>
         </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-white" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.Partial("_IndexMunicipio", Model.tbMunicipio)
+
+        </div>
+
     </div>
+
+    <script>
+        ///validar solo letras
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = "-+'/áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = "8-37-39-46";
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                return false;
+            }
+        }
+
+        ///validar not copy paste///
+        window.onload =
+            function () {
+                var myInput1 = document.getElementById('dep_Nombre');
+                myInput1.onpaste = function (e) {
+                    e.preventDefault();
+                    //alert("esta acción está prohibida");
+                }
+
+                myInput1.oncopy = function (e) {
+                    e.preventDefault();
+                    //alert("esta acción está prohibida");
+                }
+            }
+    </script>
 
 }
 <!-- CREAR REGISTRO MODAL-->
@@ -223,4 +252,3 @@
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/app/Departamento.js"></script>
-<script src="~/Scripts/app/CrearActualizarEliminar.js"></script>

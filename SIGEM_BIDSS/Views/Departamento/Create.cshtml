@@ -4,62 +4,122 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .validation-error {
+        color: red;
+        font-size: small;
+    }
 
-<h2>Crear</h2>
+    .validation-summary-errors {
+        color: red;
+        font-size: small;
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+
+    #tps_nombre {
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-upload mr-1"></i>
+            Insertar Departamento
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Departamento</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.dep_Codigo, htmlAttributes: new { @class = "control-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dep_Codigo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dep_Codigo, "", new { @class = "text-danger" })
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.dep_Codigo, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-6">
+                    @Html.EditorFor(model => model.dep_Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.dep_Codigo, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.dep_Nombre, htmlAttributes: new { @class = "control-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dep_Nombre, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.dep_Nombre, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-6">
+                    @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "3", autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()" } })
+                    <p style="color:red">@Html.ValidationMessageFor(model => model.dep_Nombre, "", new { @class = "text-danger" })</p>
+                </div>
             </div>
-        </div>
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Agregar Municipios</h5>
-            </div>
-            <div class="ibox-content">
-                <div class="form-horizontal">
 
-                    @Html.Partial("_CrearMunicipio", new SIGEM_BIDSS.Models.tbMunicipio())
 
-                    <div class="form-group">
-                        <div class="col-md">
-                            <input type="submit" value="Guardar" class="btn btn-primary" />
-                            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-white", onclick = "return ConfirmationDialog()" })
-
-                        </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Agregar Municipios</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        @Html.Partial("_CrearMunicipio", new SIGEM_BIDSS.Models.tbMunicipio())
                     </div>
                 </div>
             </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                </div>
             </div>
+
         </div>
+        
     </div>
-}
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/app/Departamento.js"></script>
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    }
+    <script src="~/Scripts/app/Departamento.js"></script>
+    <script>
+        ///validar solo letras
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = "-+'/áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = "8-37-39-46";
+
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                return false;
+            }
+        }
+
+        ///validar not copy paste///
+        window.onload =
+            function () {
+                var myInput1 = document.getElementById('dep_Nombre');
+                myInput1.onpaste = function (e) {
+                    e.preventDefault();
+                    //alert("esta acción está prohibida");
+                }
+
+                myInput1.oncopy = function (e) {
+                    e.preventDefault();
+                    //alert("esta acción está prohibida");
+                }
+            }
+    </script>
+
 </div>

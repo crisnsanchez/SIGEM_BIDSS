@@ -155,7 +155,7 @@ namespace SIGEM_BIDSS.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Edit/" + tbDepartamento.dep_Codigo);
+                            return RedirectToAction("Index");
                         }
                     }
                     catch (Exception)
@@ -186,6 +186,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             return Json("Exito", JsonRequestBehavior.AllowGet);
         }
+
 
 
         [HttpPost]
@@ -290,9 +291,6 @@ namespace SIGEM_BIDSS.Controllers
             return Json("Index");
         }
 
-
-        
-
         [HttpPost]
         public JsonResult GuardarMuninicipio(string depCodigo)
         {
@@ -321,6 +319,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             return Json(MsjError, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult getMunicipio(string munCodigo)
         {
@@ -335,7 +334,6 @@ namespace SIGEM_BIDSS.Controllers
             }
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-
 
     }
 

@@ -5,38 +5,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-list mr-1"></i>
+            Listado Departamento
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink(" Nuevo", "Create", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.dep_Codigo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.dep_Nombre)
+                    </th>
 
-<p>
-    @Html.ActionLink("Crear", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.dep_Codigo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dep_Nombre)
-        </th>
-        
-        <th></th>
-    </tr>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dep_Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dep_Nombre)
+                    </td>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.dep_Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dep_Nombre)
-            </td>
-            
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.dep_Codigo }) |
-                @Html.ActionLink("Details", "Details", new { id = item.dep_Codigo }) |
-            </td>
-        </tr>
-    }
-</table>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.dep_Codigo }, new { @class = "btn btn-primary btn-sm" })
+                        @Html.ActionLink("Details", "Details", new { id = item.dep_Codigo }, new { @class = "btn btn-default btn-sm" })
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
