@@ -7,6 +7,10 @@
 
 
 
+<link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+
+
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -24,10 +28,10 @@
             <thead>
                 <tr>
                     <th>
-                       ID
+                        ID
                     </th>
                     <th>
-                  Nombre
+                        Nombre
                     </th>
 
                     <th>ACCIONES</th>
@@ -36,21 +40,57 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tps_Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tps_nombre)
-                    </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tps_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tps_nombre)
+                        </td>
 
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.tps_Id }, new { @class = "btn btn-primary btn-sm" })
-                        @Html.ActionLink("Detalles", "Details", new { id = item.tps_Id }, new { @class = "btn btn-default btn-sm" })
-                    </td>
-                </tr>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.tps_Id }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.tps_Id }, new { @class = "btn btn-default btn-sm" })
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+@section Scripts {
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dataTable').DataTable(
+                {
+                    "searching": true,
+                    "lengthChange": true,
+                    "oLanguage": {
+                        "oPaginate": {
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior",
+                        },
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sEmptyTable": "No hay registros",
+                        "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+                        "sSearch": "Buscar",
+                        "sInfo": "Mostrando _START_ a _END_ Entradas",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    }
+                });
+        });
+
+    </script>
+
+}

@@ -9,58 +9,54 @@
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
-<div class="card">
-    <div class="card-header border-0">
-        <h3 class="card-title">Listado de Estados</h3>
-        <div class="card-tools">
-            @Html.ActionLink("Registrar Estado", "Create", null, htmlAttributes: new { @class = "btn btn-primary float-right" })
-        </div>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-list mr-1"></i>
+            Listado Estado
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink(" Nuevo", "Create", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
     </div>
-    <!-- /.card-header -->
     <div class="card-body">
-        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table class="table table-striped table-bordered table-condensed" id="tbAreaDT">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.est_Id)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.est_Descripcion)
-                                </th>
+        <table class="table table-bordered table-hover" id="dataTable">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
 
-                                <th>ACCIONES</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.est_Id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.est_Descripcion)
-                                    </td>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.est_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.est_Descripcion)
+                        </td>
 
-                                    <td>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.est_Id }, htmlAttributes: new { @class = "btn btn-sm btn-outline-primary" }) |
-                                        @Html.ActionLink("Detalles", "Details", new { id = item.est_Id }, htmlAttributes: new { @class = "btn btn-sm btn-outline-secondary" }) 
-                                      
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.est_Id }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.est_Id }, new { @class = "btn btn-default btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    <!-- /.card-body -->
 </div>
-<!-- /.card -->
 
 
 @section Scripts {
@@ -73,29 +69,34 @@
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#tbAreaDT').DataTable(
-                {
-                    "searching": true,
-                    "lengthChange": true,
-                    "oLanguage": {
-                        "oPaginate": {
-                            "sNext": "Siguiente",
-                            "sPrevious": "Anterior",
-                        },
-                        "sProcessing": "Procesando...",
-                        "sLengthMenu": "Mostrar _MENU_ registros",
-                        "sZeroRecords": "No se encontraron resultados",
-                        "sEmptyTable": "Ningún dato disponible en esta tabla",
-                        "sEmptyTable": "No hay registros",
-                        "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-                        "sSearch": "Buscar",
-                        "sInfo": "Mostrando _START_ a _END_ Entradas",
-                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    }
-                });
-        });
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#dataTable').DataTable(
+                    {
+                        "searching": true,
+                        "lengthChange": true,
+                        "oLanguage": {
+                            "oPaginate": {
+                                "sNext": "Siguiente",
+                                "sPrevious": "Anterior",
+                            },
+                            "sProcessing": "Procesando...",
+                            "sLengthMenu": "Mostrar _MENU_ registros",
+                            "sZeroRecords": "No se encontraron resultados",
+                            "sEmptyTable": "Ningún dato disponible en esta tabla",
+                            "sEmptyTable": "No hay registros",
+                            "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+                            "sSearch": "Buscar",
+                            "sInfo": "Mostrando _START_ a _END_ Entradas",
+                            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        }
+                    });
+            });
+
     </script>
+
+
 
 }

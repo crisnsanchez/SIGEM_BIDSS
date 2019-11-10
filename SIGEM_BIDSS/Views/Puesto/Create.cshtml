@@ -68,7 +68,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.pto_Descripcion, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.pto_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "3", autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()" } })
+                        @Html.EditorFor(model => model.pto_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "100", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                         <p style="color:red">@Html.ValidationMessageFor(model => model.pto_Descripcion, "", new { @class = "text-danger" })</p>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-10">
-                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
@@ -87,10 +87,11 @@
 </div>
 <script>
     ///validar solo letras
+    ///validar solo letras
     function soloLetras(e) {
         key = e.keyCode || e.which;
         tecla = String.fromCharCode(key).toLowerCase();
-        letras = "'/áéíóúabcdefghijklmnñopqrstuvwxyz";
+        letras = "$# '/áéíóúabcdefghijklmnñopqrstuvwxyz";
         especiales = "8-37-39-46";
 
         tecla_especial = false
@@ -105,19 +106,21 @@
             return false;
         }
     }
+    function noespaciosincio(e) {
+        var valor = e.value.replace(/^ */, '');
+        e.value = valor;
+    }
 
-    ///validar not copy paste///
-    window.onload =
-        function () {
-            var myInput1 = document.getElementById('pto_Descripcion');
-            myInput1.onpaste = function (e) {
-                e.preventDefault();
-                //alert("esta acción está prohibida");
-            }
 
-            myInput1.oncopy = function (e) {
-                e.preventDefault();
-                //alert("esta acción está prohibida");
-            }
-        }
+
+    document.getElementById("Save").onclick = function () {
+        var txtObj = document.getElementById("des");
+        txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
+        txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
+
+
+
+
+    };
+
 </script>

@@ -54,8 +54,8 @@ namespace SIGEM_BIDSS.Controllers
                     IEnumerable<Object> List = null;
                     string Msj = "";
                     List = db.UDP_Gral_tbTipoSolicitud_Insert(tbTipoSolicitud.tipsol_Descripcion, 1);
-                    foreach (UDP_Gral_tbTipoSolicitud_Insert_Result TipoSangre in List)
-                        Msj = TipoSangre.MensajeError;
+                    foreach (UDP_Gral_tbTipoSolicitud_Insert_Result Tiposolicitud in List)
+                        Msj = Tiposolicitud.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
@@ -74,6 +74,10 @@ namespace SIGEM_BIDSS.Controllers
                 }
 
             return View(tbTipoSolicitud);
+
+
+
+
 
 
         }
