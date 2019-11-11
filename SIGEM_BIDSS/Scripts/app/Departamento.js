@@ -1,6 +1,6 @@
 ﻿var contador = 0;
 var contadorEdit = 0;
-$('#AgregarMunicipios').click(function () {
+$('#AgregarMunicipio').click(function () {
     var MunCodigo = $('#mun_codigo').val();
     var MunNombre = $('#mun_nombre').val();
 
@@ -40,7 +40,7 @@ $('#AgregarMunicipios').click(function () {
         copiar += "<td id = 'MunNombre'>" + $('#mun_nombre').val() + "</td>";
         copiar += "<td>" + '<button id="removeMunicipios" class="btn btn-danger btn-xs eliminar" type="button">Quitar</button>' + "</td>";
         copiar += "</tr>";
-        $('#tblMunicipios').append(copiar);
+        $('#tblMunicipio').append(copiar);
 
 
         var tbMunicipio = GetMunicipio();
@@ -71,7 +71,7 @@ function GetMunicipio() {
     return Municipio;
 }
 
-$(document).on("click", "#tblMunicipios tbody tr td button#removeMunicipios", function () {
+$(document).on("click", "#tblMunicipio tbody tr td button#removeMunicipios", function () {
     $(this).closest('tr').remove();
     idItem = $(this).closest('tr').data('id');
     var Municipios = {

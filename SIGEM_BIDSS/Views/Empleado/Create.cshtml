@@ -54,8 +54,6 @@
                                 <p id="Apellidos" style="color:red">@Html.ValidationMessageFor(model => model.emp_Apellidos, "", new { @class = "text-danger" })</p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="row">
                                 <div class="col-lg-5">
                                     @Html.LabelFor(model => model.emp_Sexo, htmlAttributes: new { @class = "control-label col-md-4" })
                                     <div class="col-md-10">
@@ -70,15 +68,9 @@
                                         @Html.ValidationMessageFor(model => model.emp_FechaNacimiento, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-5">
-                        <div class="form-group">
-
+                        <div class="col-lg-6">
                             @Html.LabelFor(model => model.emp_Identificacion, htmlAttributes: new { @class = "control-label col-md-8" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.emp_Identificacion, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
@@ -86,7 +78,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="col-lg-6">
                             @Html.LabelFor(model => model.emp_Telefono, htmlAttributes: new { @class = "control-label col-md-8" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.emp_Telefono, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)", } })
@@ -94,23 +86,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="col-lg-6">
                             @Html.LabelFor(model => model.pto_Id, htmlAttributes: new { @class = "control-label col-md-8" })
                             <div class="col-md-10">
                                 @Html.DropDownList("pto_Id", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.pto_Id, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-
-
-                    @*<div class="form-group">
-                            <div class="row">
-
-
-                            </div>
-                        </div>*@
-
                     <div class="col-lg-5">
                         <div class="form-group">
                             @Html.LabelFor(model => model.emp_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-8" })
@@ -136,25 +118,16 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-5">
+                        
+                    <div class="col-lg-6">
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.emp_FechaIngreso, htmlAttributes: new { @class = "control-label col-md-8" })
-                            <div class="col-md-10">
+                            <div class="col-md-4">
                                 @Html.EditorFor(model => model.emp_FechaIngreso, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.emp_FechaIngreso, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-
-
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-7">
 
                         <label class="control-label col-md-4">Departamento<span style="color:red"> *</span></label>
                         <div class="col-md-4">
@@ -163,15 +136,12 @@
                         </div>
                         @Html.LabelFor(model => model.mun_Id, "Municipio", new { @class = "control-label col-md-5" })
                         <div class="col-md-4">
-                            @Html.DropDownList("mun_Id", null,"Seleccione Municipios", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("mun_Id", null, "Seleccione Municipios", htmlAttributes: new { @class = "form-control" })
 
                             @*@Html.DropDownList("mun_Id", null, "Seleccione Municipio", new { @class = "form-control",@name="mun_Id" })*@
                             <p id="Municipio" style="color:red">@Html.ValidationMessageFor(model => model.mun_Id)</p>
                         </div>
                     </div>
-
-                </div>
-
 
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-10">
