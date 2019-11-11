@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+
 
 <div>
-    <h4>tbEmpleado</h4>
+    <h4>Detalles Del Empleado</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -96,7 +96,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.est_Id)
+            @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
         </dd>
 
         <dt>
@@ -139,13 +139,31 @@
             @Html.DisplayFor(model => model.emp_FechaModifica)
         </dd>
 
+
+
         <dt>
             @Html.DisplayNameFor(model => model.tbMunicipio.dep_codigo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.tbMunicipio.dep_codigo)
+            @Html.DisplayFor(model => model.tbMunicipio.tbDepartamento.dep_Nombre)
         </dd>
+
+
+
+
+
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbMunicipio.mun_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbMunicipio.mun_nombre)
+        </dd>
+
 
         <dt>
             @Html.DisplayNameFor(model => model.tbPuesto.pto_Descripcion)

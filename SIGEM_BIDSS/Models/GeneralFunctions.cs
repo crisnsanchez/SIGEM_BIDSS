@@ -22,6 +22,7 @@ namespace SIGEM_BIDSS.Models
             return dt;
         }
 
-
+        public const int empleadoinactivo = 2;
+        public const int empleadoactivo = 1;
     }
 }
