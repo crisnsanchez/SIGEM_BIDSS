@@ -1,13 +1,12 @@
 ﻿@model SIGEM_BIDSS.Models.tbMunicipio
 
-
 <div class="form-horizontal">
     <div class="card-body">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.mun_codigo, htmlAttributes: new { @class = "control-label col-sm-2 , required" })
             <div class="col-sm-6">
-                <input type="number"  id="mun_Codigo" name="mun_Codigo" placeholder="" class="form-control" min="1" maxlength="4" autocomplete="off" />
+                <input type="number" id="mun_Codigo" name="mun_Codigo" placeholder="" class="form-control" min="1" maxlength="4" autocomplete="off" />
                 <div id="ValidationCodigoCreate">
                     @Html.ValidationMessageFor(model => model.mun_codigo)
                 </div>
@@ -28,7 +27,7 @@
             <div class="col-sm-6">
                 <button class="btn btn-primary" type="button" id="AgregarMunicipios">Añadir</button>
             </div>
-            
+
         </div>
 
 
@@ -46,7 +45,5 @@
     </div>
 
 </div>
-
-
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/app/Departamento.js"></script>

@@ -16,5 +16,12 @@ namespace SIGEM_BIDSS.Models
             return Hola;
         }
 
+        public DateTime DatetimeNow()
+        {
+            DateTime dt = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(-6)).DateTime;
+            return dt;
+        }
+
+
     }
 }

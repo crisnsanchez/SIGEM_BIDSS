@@ -168,7 +168,7 @@
       <Parameter Name="dep_Nombre" Mode="In" Type="String" />
       <Parameter Name="dep_UsuarioModifica" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="UDP_Gral_tbMunicipio_Delete" ReturnType="Collection(String)">
+    <FunctionImport Name="UDP_Gral_tbMunicipio_Delete" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Delete_Result)">
       <Parameter Name="mun_Codigo" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="UDP_Gral_tbMunicipio_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Insert_Result)">
@@ -486,6 +486,9 @@
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
   <ComplexType Name="UDP_Gral_tbEmpleado_Update_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbMunicipio_Delete_Result">
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
 </Schema>

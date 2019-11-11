@@ -185,7 +185,6 @@
     <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\Empleados.cs" />
     <Compile Include="Models\Estado.cs" />
-    <Compile Include="Models\FunctionGenerals.cs" />
     <Compile Include="Models\GeneralFunctions.cs" />
     <Compile Include="Models\Municipios.cs" />
     <Compile Include="Models\Puesto.cs" />
@@ -271,6 +270,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbEstado_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbMunicipio_Delete_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbMunicipio_Insert_Result.cs">
@@ -1349,6 +1351,7 @@
     <Content Include="Views\Departamento\_CrearMunicipio.cshtml" />
     <Content Include="Views\Departamento\_DetailsMunicipio.cshtml" />
     <Content Include="Views\Departamento\_IndexMunicipio.cshtml" />
+    <Content Include="Views\Departamento\_CrearMunicipioModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

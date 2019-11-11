@@ -3,39 +3,40 @@
 
 @using SIGEM_BIDSS.Models;
 
-    <div class="ibox-title">
-        <h5>Listado de Municipios</h5>
-        <div class="ibox-tools">
 
-        </div>
+<div class="ibox-title">
+    <h5>Listado de Municipios</h5>
+    <div class="ibox-tools">
+
     </div>
-    <div class="row">
-        <table class="table" id="DataTable">
-            <thead>
+</div>
+<div class="row">
+    <table class="table table-bordered table-hover" id="DataTable">
+        <thead>
+            <tr>
+                <th class="col-lg-4">
+                    @Html.DisplayNameFor(model => model.mun_codigo)
+                </th>
+                <th class="col-lg-4">
+                    @Html.DisplayNameFor(model => model.mun_nombre)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th class="col-lg-4">
-                        @Html.DisplayNameFor(model => model.mun_codigo)
-                    </th>
-                    <th class="col-lg-4">
-                        @Html.DisplayNameFor(model => model.mun_nombre)
-                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mun_codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mun_nombre)
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.mun_codigo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.mun_nombre)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+</div>
 
 <div class="ibox float-e-margins">
     <div class="ibox-title">

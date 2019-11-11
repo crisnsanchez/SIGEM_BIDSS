@@ -15,7 +15,7 @@ namespace SIGEM_BIDSS.Controllers
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 
-        FunctionGenerals function = new FunctionGenerals();
+        GeneralFunctions function = new GeneralFunctions();
 
         // GET: Departamento
         public ActionResult Index()
@@ -41,6 +41,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Departamento/Create
         public ActionResult Create()
         {
+            Session["tbMunicipio"] = null;
             return View();
         }
 
@@ -169,6 +170,15 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbDepartamento);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
         [HttpPost]
         public JsonResult AnadirMunicipio(tbMunicipio Municipio)
         {
@@ -259,7 +269,6 @@ namespace SIGEM_BIDSS.Controllers
             }
         }
 
-
         [HttpPost]
         public JsonResult GuardarMunicipioModal([Bind(Include = "dep_Codigo,dep_Nombre,dep_UsuarioCrea,dep_FechaCrea,dep_UsuarioModifica,dep_FechaModifica")] tbMunicipio tbMunicipio)
         {
@@ -318,6 +327,38 @@ namespace SIGEM_BIDSS.Controllers
                 ModelState.AddModelError("", "No se Guardo el registro");
             }
             return Json(MsjError, JsonRequestBehavior.AllowGet);
+        }
+
+   
+      public ActionResult EliminarMunicipio(string id, string dep_Codigo)
+        {
+            //Validar Inicio de Sesión
+            GeneralFunctions Function = new GeneralFunctions();
+                    try
+                    {
+                        tbMunicipio obj = db.tbMunicipio.Find(id);
+                        IEnumerable<object> list = null;
+                        var MsjError = ""; list = db.UDP_Gral_tbMunicipio_Delete(id);
+                        foreach (UDP_Gral_tbMunicipio_Delete_Result mun in list)
+                            MsjError = mun.MensajeError;
+                        if (MsjError.StartsWith("-1The DELETE statement conflicted with the REFERENCE constraint"))
+                        {
+                            TempData["smserror"] = "No se puede eliminar el registro porque posee dependencias, favor contacte al administrador.";
+                            ViewBag.smserror = TempData["smserror"];
+                            ModelState.AddModelError("", "No se puede borrar el registro");
+                            return RedirectToAction("Edit/" + dep_Codigo);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Edit/" + dep_Codigo);
+                        }
+                    }
+                    catch (Exception Ex)
+                    {
+                        Ex.Message.ToString();
+                        ModelState.AddModelError("", "No se Actualizo el registro");
+                        return RedirectToAction("Edit/" + dep_Codigo);
+                    }
         }
 
         [HttpPost]

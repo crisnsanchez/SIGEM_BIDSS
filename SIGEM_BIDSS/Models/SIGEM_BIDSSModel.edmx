@@ -968,7 +968,7 @@
             <Parameter Name="dep_Nombre" Mode="In" Type="String" />
             <Parameter Name="dep_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbMunicipio_Delete" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Gral_tbMunicipio_Delete" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Delete_Result)">
           <Parameter Name="mun_Codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbMunicipio_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Insert_Result)">
@@ -1288,6 +1288,9 @@
         <ComplexType Name="UDP_Gral_tbEmpleado_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Gral_tbMunicipio_Delete_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1590,7 +1593,13 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbMunicipio_Delete" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMunicipio_Delete" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbMunicipio_Delete" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMunicipio_Delete" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Delete_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbMunicipio_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMunicipio_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Insert_Result">
