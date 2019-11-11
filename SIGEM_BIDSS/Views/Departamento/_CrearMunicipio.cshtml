@@ -6,7 +6,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.mun_codigo, htmlAttributes: new { @class = "control-label col-sm-2 , required" })
             <div class="col-sm-6">
-                <input type="number" id="mun_Codigo" name="mun_Codigo" placeholder="" class="form-control" min="1" maxlength="4" autocomplete="off" />
+                <input type="number" id="mun_codigo" name="mun_codigo" placeholder="" class="form-control" min="1" maxlength="4" autocomplete="off" />
                 <div id="ValidationCodigoCreate">
                     @Html.ValidationMessageFor(model => model.mun_codigo)
                 </div>
@@ -16,7 +16,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.mun_nombre, htmlAttributes: new { @class = "control-label col-sm-2 , required" })
             <div class="col-sm-6">
-                <input type="text" onkeypress="return soloLetras(event)" id="mun_Nombre" name="mun_Nombre" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
+                <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
                 <p style="color:red" id="NombreError">@Html.ValidationMessageFor(model => model.mun_nombre)</p>
                 <div id="ValidationCodigoCreate">
                     <p style="color:red"></p>
@@ -25,13 +25,12 @@
         </div>
         <div class="form-group">
             <div class="col-sm-6">
-                <button class="btn btn-primary" type="button" id="AgregarMunicipios">Añadir</button>
+                <button class="btn btn-primary" type="button" id="AgregarMunicipio">Añadir</button>
             </div>
 
         </div>
 
-
-        <table id="tblMunicipios" class="table" style="width:100%">
+        <table id="tblMunicipio" class="table" style="width:100%">
             <thead>
                 <tr>
                     <th>Código Municipio</th>
@@ -46,4 +45,3 @@
 
 </div>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/app/Departamento.js"></script>
