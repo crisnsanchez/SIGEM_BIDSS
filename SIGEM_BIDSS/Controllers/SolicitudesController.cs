@@ -9,7 +9,7 @@ namespace SIGEM_BIDSS.Controllers
     public class SolicitudesController : Controller
     {
         // GET: Solicitudes
-        public ActionResult Index()
+        public ActionResult SolicitudAnticipoViatico()
         {
             return View();
         }

@@ -861,3 +861,4 @@ C:\Users\JonathanHerrera\OneDrive - BI-DSS\Documentos\GitHub\SIGEM_BIDSS\SIGEM_B
 C:\Users\JonathanHerrera\OneDrive - BI-DSS\Documentos\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CopyComplete
 C:\Users\JonathanHerrera\OneDrive - BI-DSS\Documentos\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.dll
 C:\Users\JonathanHerrera\OneDrive - BI-DSS\Documentos\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb
+C:\Users\JonathanHerrera\OneDrive - BI-DSS\Documentos\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.cache

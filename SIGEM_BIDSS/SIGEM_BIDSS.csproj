@@ -206,6 +206,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Solicitudes.cs" />
     <Compile Include="Models\spSelect_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
