@@ -11,6 +11,7 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
+    [Authorize]
     public class EmpleadoController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();

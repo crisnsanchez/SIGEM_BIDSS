@@ -57,7 +57,7 @@ namespace SIGEM_BIDSS
                 // To allow users from only a list of specific organizations, set ValidateIssuer to true and use ValidIssuers parameter 
                 TokenValidationParameters = new TokenValidationParameters()
                 {
-                    ValidateIssuer = false
+                    ValidateIssuer = true
                 },
                 // OpenIdConnectAuthenticationNotifications configures OWIN to send notification of failed authentications to OnAuthenticationFailed method
                 Notifications = new OpenIdConnectAuthenticationNotifications

@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.OpenIdConnect;
 
 namespace SIGEM_BIDSS.Controllers
 {
+    [Authorize]
     public class LoginController : Controller
     {
         // GET: Login
