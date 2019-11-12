@@ -12,25 +12,22 @@ namespace SIGEM_BIDSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbEstado
+    public partial class tbTipoViatico
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbEstado()
+        public tbTipoViatico()
         {
-            this.tbEmpleado = new HashSet<tbEmpleado>();
-            this.tbEmpleado1 = new HashSet<tbEmpleado>();
+            this.tbSolicitud = new HashSet<tbSolicitud>();
         }
     
-        public int est_Id { get; set; }
-        public string est_Descripcion { get; set; }
-        public int est_UsuarioCrea { get; set; }
-        public System.DateTime est_FechaCrea { get; set; }
-        public Nullable<int> est_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> est_FechaModifica { get; set; }
+        public int tpv_Id { get; set; }
+        public string tpv_Descripcion { get; set; }
+        public int tpv_UsuarioCrea { get; set; }
+        public System.DateTime tpv_FechaCrea { get; set; }
+        public Nullable<int> tpv_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> tpv_FechaModifica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleado> tbEmpleado1 { get; set; }
+        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

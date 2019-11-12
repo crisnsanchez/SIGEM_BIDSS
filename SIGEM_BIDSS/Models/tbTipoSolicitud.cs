@@ -14,11 +14,20 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbTipoSolicitud
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbTipoSolicitud()
+        {
+            this.tbSolicitud = new HashSet<tbSolicitud>();
+        }
+    
         public int tipsol_Id { get; set; }
         public string tipsol_Descripcion { get; set; }
         public int tipsol_UsuarioCrea { get; set; }
         public System.DateTime tipsol_FechaCrea { get; set; }
         public Nullable<int> tipsol_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tipsol_FechaModifica { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

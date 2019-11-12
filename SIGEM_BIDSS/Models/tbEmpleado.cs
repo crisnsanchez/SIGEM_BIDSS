@@ -14,6 +14,12 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbEmpleado
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbEmpleado()
+        {
+            this.tbSolicitud = new HashSet<tbSolicitud>();
+        }
+    
         public short emp_Id { get; set; }
         public string emp_Nombres { get; set; }
         public string emp_Apellidos { get; set; }
@@ -35,9 +41,12 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> emp_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
+        public virtual tbEstado tbEstado { get; set; }
+        public virtual tbEstado tbEstado1 { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
-        public virtual tbEstado tbEstado { get; set; }
         public virtual tbTipoSangre tbTipoSangre { get; set; }
     }
 }

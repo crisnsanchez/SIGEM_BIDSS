@@ -27,16 +27,17 @@ namespace SIGEM_BIDSS.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tbPuesto> tbPuesto { get; set; }
         public virtual DbSet<tbArea> tbArea { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
+        public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbEstado> tbEstado { get; set; }
         public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
+        public virtual DbSet<tbPuesto> tbPuesto { get; set; }
         public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
         public virtual DbSet<tbTipoMoneda> tbTipoMoneda { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
-        public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
+        public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
