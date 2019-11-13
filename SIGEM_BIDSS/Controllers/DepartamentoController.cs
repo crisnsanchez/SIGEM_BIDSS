@@ -11,7 +11,6 @@ using System.Transactions;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    [Authorize]
     public class DepartamentoController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
