@@ -8,6 +8,8 @@
         <title>SIGEM | BI DSS</title>
         @Styles.Render("~/Content/font-awesome")
         @Styles.Render("~/Content/adminlte")
+        <link href="~/Content/template/dist/css/styles.css" rel="stylesheet" />
+
         <link rel="stylesheet" href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="~/Content/template/dist/css/adminlte.min.css">
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -22,8 +24,8 @@
                 <div class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
-                          
-                      
+                            @*<img src="~/Content/img/logo.png" width="950" height="400" alt="" />*@
+
                         </div>
                     </div>
                 </div>
@@ -31,6 +33,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
+                               @*<img src="~/Content/img/logo.png" width="950" height="400" alt="" />*@
                                 @RenderBody()
                             </div>
                         </div>

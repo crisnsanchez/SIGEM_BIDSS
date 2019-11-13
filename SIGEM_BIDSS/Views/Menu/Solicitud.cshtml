@@ -3,16 +3,107 @@
     ViewBag.Title = "Solicitud";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+
+
+
+<style>
+    .azul {
+        color: #0d71bf;
+    }
+
+    .rojo {
+        color: #d51917;
+    }
+
+    .amarillo {
+        color: #febe01;
+    }
+</style>
+
+
+
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info">
+                <div class="small-box bg-primary">
                     <div class="inner">
 
-                        <h2>Solicitud Anticipo Viatico</h2>
+                        <h4> Solicitud Anticipo Viatico</h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("SolicitudAnticipoViatico","Solicitudes")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6  ">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h4>Liquidación Anticipo de Viáticos</h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="@Url.Action("Index","Area")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+
+                        <h4> Aprovisionamiento de Licencias-CSP </h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("Index","Estado")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-6">
+                <div class="color"
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+
+                        <h4>Solicitud Anticipo de Salario</h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("Index","Estado")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            </div>
+        </div>
+        </div><!-- /.container-fluid -->
+</section>
+
+
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6 ">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+
+                        <h4> Permiso Laboral </h4>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -23,20 +114,72 @@
 
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info">
+                <div class="small-box bg-warning">
                     <div class="inner">
-
-                        <h1> Solicitud</h1>
+                        <h4>Requisición de Compra</h4>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="@Url.Action("Index","TipoSolicitud")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h4> Reembolso de Gastos </h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="@Url.Action("Index","Area")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h4>Acción Personal </h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="@Url.Action("Index","TipoSolicitud")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
 
-            <!-- /.row (main row) -->
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+
+
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+
+                        <h4>Checklist Capaciones </h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("SolicitudAnticipoViatico","Solicitudes")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+
 
         </div>
     </div><!-- /.container-fluid -->

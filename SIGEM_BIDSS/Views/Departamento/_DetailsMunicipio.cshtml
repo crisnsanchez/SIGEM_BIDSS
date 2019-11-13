@@ -4,61 +4,71 @@
 @using SIGEM_BIDSS.Models;
 
 
-<div class="ibox-title">
-    <h5>Listado de Municipios</h5>
-    <div class="ibox-tools">
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-info  mr-1"></i>
+            Detalle Municipio
+        </h3>
 
     </div>
-</div>
-<div class="row">
-    <table class="table table-bordered table-hover" id="DataTable">
-        <thead>
-            <tr>
-                <th class="col-lg-4">
-                    @Html.DisplayNameFor(model => model.mun_codigo)
-                </th>
-                <th class="col-lg-4">
-                    @Html.DisplayNameFor(model => model.mun_nombre)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="row">
+        <table class="table table-bordered table-hover" id="DataTable">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.mun_codigo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.mun_nombre)
-                    </td>
+                    <th class="col-lg-4">
+                        @Html.DisplayNameFor(model => model.mun_codigo)
+                    </th>
+                    <th class="col-lg-4">
+                        @Html.DisplayNameFor(model => model.mun_nombre)
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.mun_codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.mun_nombre)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<div class="ibox float-e-margins">
-    <div class="ibox-title">
-        <h5>Auditoría</h5>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-user  mr-1"></i>
+            Auditoria
+        </h3>
+
     </div>
-    <div class="ibox-content">
-        <table class="table">
-            <tr>
-                <th>Acción</th>
-                <th>Usuario</th>
-                <th> Fecha</th>
-            </tr>
-            <tr>
-                <td>Creado por  </td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Modificado por</td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+    <div class="ibox float-e-margins">
+      
+        <div class="ibox-content">
+            <table class="table">
+                <tr>
+                    <th>Acción</th>
+                    <th>Usuario</th>
+                    <th> Fecha</th>
+                </tr>
+                <tr>
+                    <td>Creado por  </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Modificado por</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>

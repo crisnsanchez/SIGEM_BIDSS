@@ -3,6 +3,13 @@
  * --------------
  */
 
+.colores{
+    color: #0d71bf;
+
+
+
+}
+
 .card {
   @extend .mb-3;
   @include box-shadow($card-shadow);

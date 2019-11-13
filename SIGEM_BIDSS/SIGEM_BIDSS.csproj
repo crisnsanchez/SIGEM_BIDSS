@@ -178,6 +178,7 @@
     <Compile Include="Controllers\TipoMonedaController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
     <Compile Include="Controllers\TipoSolicitudController.cs" />
+    <Compile Include="Controllers\TipoViaticoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -326,6 +327,7 @@
     <Content Include="Content\template\build\npm\Publish.js" />
     <Content Include="Content\template\dist\css\adminlte.css" />
     <Content Include="Content\template\dist\css\adminlte.min.css" />
+    <Content Include="Content\template\dist\css\styles.css" />
     <Content Include="Content\template\dist\img\AdminLTELogo.png" />
     <Content Include="Content\template\dist\img\avatar.png" />
     <Content Include="Content\template\dist\img\avatar04.png" />
@@ -1357,6 +1359,12 @@
     <Content Include="Views\Departamento\_IndexMunicipio.cshtml" />
     <Content Include="Views\Departamento\_CrearMunicipioModal.cshtml" />
     <Content Include="Views\Solicitudes\SolicitudAnticipoViatico.cshtml" />
+    <Content Include="Views\TipoViatico\Create.cshtml" />
+    <Content Include="Views\TipoViatico\Delete.cshtml" />
+    <Content Include="Views\TipoViatico\Details.cshtml" />
+    <Content Include="Views\TipoViatico\Edit.cshtml" />
+    <Content Include="Views\TipoViatico\Index.cshtml" />
+    <Content Include="Views\Empleado\_Modales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
