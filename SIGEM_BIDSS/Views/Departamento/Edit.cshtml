@@ -95,45 +95,41 @@
                         <div id="ValidationCreate">
                         </div>
                         @Html.HiddenFor(model => model.dep_Codigo)
-                        <form class="needs-validation" novalidate>
-                            <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <input type="hidden" value="@Model.dep_Nombre" />
-                                    <label for="validationTooltip02">Código Departamento</label>
-          
-                                        @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
-
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label" })
-                                    
-                                        @Html.TextBoxFor(model => model.dep_Nombre, new { @class = "form-control", @readonly = "readonly" })
-                                   
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    @Html.LabelFor(model => Municipio.mun_codigo, new { @class = "control-label , required" })
-                                    <input type="text" id="mun_CodigoEdit" name="mun_Codigo" class="form-control" required; />
-                                    <div id="ValidacionMunCodigoEdit">
-                                        @Html.ValidationMessageFor(model => Municipio.mun_codigo)
-                                    </div>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label , required" })
-
-                                    <input type="text" id="mun_NombreEdit" name="mun_Nombre" class="form-control" required; minLength="4" />
-                                    <div id="ValidacionMunNombreEdit">
-                                        @Html.ValidationMessageFor(model => Municipio.mun_nombre)
-                                    </div>
-
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label col-md-2" })*@
+                            <input type="hidden" value="@Model.dep_Nombre" />
+                            <label class="control-label col-md-2">Código Departamento</label>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.dep_Nombre, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => Municipio.mun_codigo, new { @class = "control-label col-md-2 , required" })
+                            <div class="col-md-2">
+                                <input type="text" id="mun_CodigoEdit" name="mun_Codigo" class="form-control" required; />
+                                <div id="ValidacionMunCodigoEdit">
+                                    @Html.ValidationMessageFor(model => Municipio.mun_codigo)
                                 </div>
                             </div>
-                            <div class="col-md">
+                            @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label col-md-2 , required" })
+                            <div class="col-md-4">
+                                <input type="text" id="mun_NombreEdit" name="mun_Nombre" class="form-control" required; minLength="4" />
+                                <div id="ValidacionMunNombreEdit">
+                                    @Html.ValidationMessageFor(model => Municipio.mun_nombre)
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center">
                                 <button class="btn btn-primary btn-sm" type="button" id="AgregarMunicipiosEdit">Agregar</button>
                             </div>
-                            <br />
-                        </form>
-
+                        </div>
                         <div class="form-group">
+                            <div>
+                                <br /><br />
+                            </div>
                             <table id="tblMunicipiosEdit" class="table">
                                 <thead>
                                     <tr>
@@ -160,6 +156,10 @@
 <div class="modal fade" id="EditMunicipioModal">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle">Editar Municipio</h4>
+            </div>
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">

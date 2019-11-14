@@ -1,5 +1,6 @@
 ﻿var contador = 0;
-$('#AgregarMunicipio').click(function () {
+var contadorEdit = 0;
+$('#AgregarMunicipios').click(function () {
     var MunCodigo = $('#mun_codigo').val();
     var MunNombre = $('#mun_nombre').val();
 
@@ -39,7 +40,7 @@ $('#AgregarMunicipio').click(function () {
         copiar += "<td id = 'MunNombre'>" + $('#mun_nombre').val() + "</td>";
         copiar += "<td>" + '<button id="removeMunicipios" class="btn btn-danger btn-xs eliminar" type="button">Quitar</button>' + "</td>";
         copiar += "</tr>";
-        $('#tblMunicipio').append(copiar);
+        $('#tblMunicipios').append(copiar);
 
 
         var tbMunicipio = GetMunicipio();
@@ -70,9 +71,7 @@ function GetMunicipio() {
     return Municipio;
 }
 
-
-
-$(document).on("click", "#tblMunicipio tbody tr td button#removeMunicipios", function () {
+$(document).on("click", "#tblMunicipios tbody tr td button#removeMunicipios", function () {
     $(this).closest('tr').remove();
     idItem = $(this).closest('tr').data('id');
     var Municipios = {
@@ -85,6 +84,68 @@ $(document).on("click", "#tblMunicipio tbody tr td button#removeMunicipios", fun
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ Municipios: Municipios }),
     });
+});
+
+/////////////////////////MODAL
+$('#AgregarMunicipiosEdit').click(function () {
+    var MunCodigo = $('#mun_CodigoEdit').val();
+    var MunNombre = $('#mun_NombreEdit').val();
+
+
+    if (MunCodigo == '') {
+        $('#ValidationCreate').text('');
+        $('#CodigoError').text('');
+        $('#NombreError').text('');
+        $('#ValidacionMunCodigoEdit').after('<ul id="CodigoError" class="validation-summary-errors text-danger">Campo Requerido</ul>');
+    }
+    else if (MunCodigo.length < 4) {
+        $('#ValidationCreate').text('');
+        $('#CodigoError').text('');
+        $('#NombreError').text('');
+        $('#ValidacionMunCodigoEdit').after('<ul id="CodigoError" class="validation-summary-errors text-danger">No se Aceptan menos de 4 números.</ul>');
+    }
+    else if (MunNombre == '') {
+        $('#ValidationCreate').text('');
+        $('#CodigoError').text('');
+        $('#NombreError').text('');
+        $('#ValidacionMunNombreEdit').after('<ul id="NombreError" class="validation-summary-errors text-danger">Campo Requerido</ul>');
+    }
+    else if (MunNombre.substring(0, 1) == " ") {
+        $('#ValidationCreate').text('');
+        $('#CodigoError').text('');
+        $('#NombreError').text('');
+        $('#ValidacionMunNombreEdit').after('<ul id="NombreError" class="validation-summary-errors text-danger">No se Aceptan Espacios en blanco.</ul>');
+    }
+    else {
+        contadorEdit = contadorEdit + 1;
+        copiar = "<tr data-id=" + contadorEdit + ">";
+        copiar += "<td id = 'MunCodigo'>" + $('#mun_CodigoEdit').val() + "</td>";
+        copiar += "<td id = 'MunNombre'>" + $('#mun_NombreEdit').val() + "</td>";
+        copiar += "<td>" + '<button id="removeMunicipiosEdit" class="btn btn-danger btn-xs eliminar" type="button">Quitar</button>' + "</td>";
+        copiar += "</tr>";
+        $('#tblMunicipiosEdit').append(copiar);
+
+        var Municipio = {
+            mun_Codigo: $('#mun_CodigoEdit').val(),
+            mun_Nombre: $('#mun_NombreEdit').val(),
+            mun_UsuarioCrea: contadorEdit,
+        };
+        $.ajax({
+            url: "/Departamento/AnadirMunicipio",
+            method: "POST",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ Municipio: Municipio }),
+        })
+            .done(function (data) {
+                $('#ValidationCreate').text('');
+                $('#mun_CodigoEdit').val('');
+                $('#mun_NombreEdit').val('');
+                $('#CodigoError').text('');
+                $('#NombreError').text('');
+            });
+    }
+
 });
 
 ////////////////////////////////////
@@ -409,4 +470,3 @@ $(document).on("click", "#tblMunicipiosEdit tbody tr td button#removeMunicipiosE
         data: JSON.stringify({ Municipios: Municipios }),
     });
 });
-
