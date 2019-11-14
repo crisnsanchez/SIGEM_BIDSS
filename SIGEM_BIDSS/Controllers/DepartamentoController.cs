@@ -206,7 +206,7 @@ namespace SIGEM_BIDSS.Controllers
 
             if (list != null)
             {
-                var itemToRemove = list.Single(r => r.mun_codigo == Municipios.mun_codigo);
+                var itemToRemove = list.Single(r => r.mun_UsuarioCrea == Municipios.mun_UsuarioCrea);
                 list.Remove(itemToRemove);
                 Session["tbMunicipio"] = list;
             }
