@@ -578,5 +578,18 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEmpleado_Update_Result>("UDP_Gral_tbEmpleado_Update", emp_IdParameter, emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoElectronicoParameter, emp_RazonInactivacionParameter, est_IdParameter, tps_IdParameter, pto_IdParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_PathImageParameter, mun_IdParameter, emp_UsuarioCreaParameter);
         }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoViatico_Insert_Result> UDP_Gral_tbTipoViatico_Insert(string tpv_Descripcion, Nullable<int> tpv_UsuarioCrea)
+        {
+            var tpv_DescripcionParameter = tpv_Descripcion != null ?
+                new ObjectParameter("tpv_Descripcion", tpv_Descripcion) :
+                new ObjectParameter("tpv_Descripcion", typeof(string));
+    
+            var tpv_UsuarioCreaParameter = tpv_UsuarioCrea.HasValue ?
+                new ObjectParameter("tpv_UsuarioCrea", tpv_UsuarioCrea) :
+                new ObjectParameter("tpv_UsuarioCrea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoViatico_Insert_Result>("UDP_Gral_tbTipoViatico_Insert", tpv_DescripcionParameter, tpv_UsuarioCreaParameter);
+        }
     }
 }
