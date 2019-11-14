@@ -28,209 +28,211 @@
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
-
-<div class="card-header d-flex p-0 ui-sortable-handle">
-    <h3 class="card-title p-3">
-        <i class="fa fa-upload mr-1"></i>
-        Editar Departamento
-    </h3>
-    <ul class="nav nav-pills ml-auto p-2">
-        <li class="nav-item">
-            @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
-        </li>
-    </ul>
-</div>
-@using (Html.BeginForm("Edit", "Departamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-refresh  mr-1"></i>
+            Editar Departamento
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    @using (Html.BeginForm("Edit", "Departamento", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <div class="card-body">
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.dep_Codigo)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.dep_Codigo)
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        @Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label" })
-            <div class="col-sm-4">
-                @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(model => model.dep_Codigo)
+                        @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.dep_Codigo)
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label , required" })
+
+                        @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()" } })
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.dep_Nombre)</p>
+                    </div>
+                </div>
+            </form>
+
+            <div class="form-group">
+                @Html.Partial("_CrearMunicipioModal", Model.tbMunicipio)
             </div>
-
-            @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label , required" })
-            <div class="col-sm-4">
-                @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()" } })
-                <p style="color:red">@Html.ValidationMessageFor(model => model.dep_Nombre)</p>
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-12 text-center">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-white" })
-            </div>
-        </div>
-
-        <div class="form-group">
-
-            @Html.Partial("_CrearMunicipioModal", Model.tbMunicipio)
-
-        </div>
-
+       
     </div>
-}
-<!-- CREAR REGISTRO MODAL-->
-<div class="modal fade" id="modalregistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Registrar Municipio</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal">
+        
+    }
+    <!-- CREAR REGISTRO MODAL-->
+    <div class="modal fade" id="modalregistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Registrar Municipio</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
                     <div class="form-horizontal">
-                        <div id="ValidationCreate">
-                        </div>
-                        @Html.HiddenFor(model => model.dep_Codigo)
-                        <form class="needs-validation" novalidate>
-                            <div class="form-row">
-                                <div class="col-md-4 mb-3">
-                                    <input type="hidden" value="@Model.dep_Nombre" />
-                                    <label for="validationTooltip02">Código Departamento</label>
+                        <div class="form-horizontal">
+                            <div id="ValidationCreate">
+                            </div>
+                            @Html.HiddenFor(model => model.dep_Codigo)
+                            <form class="needs-validation" novalidate>
+                                <div class="form-row">
+                                    <div class="col-md-4 mb-3">
+                                        <input type="hidden" value="@Model.dep_Nombre" />
+                                        <label for="validationTooltip02">Código Departamento</label>
+                                        @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label" })
 
-                                    @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.TextBoxFor(model => model.dep_Nombre, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-5">
+                                            @Html.LabelFor(model => Municipio.mun_codigo, new { @class = "control-label , required" })
+                                            <input type="text" id="mun_codigo" name="mun_codigo" placeholder="" onkeypress="return soloNumeros(event)" class="form-control" min="1" maxlength="2" autocomplete="off" />
+                                            <div id="ValidationMunCodigoCreate">
+                                                @Html.ValidationMessageFor(model => Municipio.mun_codigo)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label , required" })
+                                            <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
+                                            <div id="ValidationMunNombreCreate">
+                                                @Html.ValidationMessageFor(model => Municipio.mun_nombre)
+                                            </div>
 
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label" })
-
-                                    @Html.TextBoxFor(model => model.dep_Nombre, new { @class = "form-control", @readonly = "readonly" })
-
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    @Html.LabelFor(model => Municipio.mun_codigo, new { @class = "control-label , required" })
-                                    <input type="text" id="mun_codigo" name="mun_codigo" placeholder="" onkeypress="return soloNumeros(event)" class="form-control" min="1" maxlength="2" autocomplete="off" />
-                                    <div id="ValidationMunCodigoCreate">
-                                        @Html.ValidationMessageFor(model => Municipio.mun_codigo)
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label , required" })
-                                    <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
-                                    <div id="ValidationMunNombreCreate">
-                                        @Html.ValidationMessageFor(model => Municipio.mun_nombre)
-                                    </div>
-
+                                <br />
+                                <div class="col-md">
+                                    <button class="btn btn-primary btn-sm" type="button" id="AgregarMunicipio">Agregar</button>
                                 </div>
-                            </div>
-                            <div class="col-md">
-                                <button class="btn btn-primary btn-sm" type="button" id="AgregarMunicipio">Agregar</button>
-                            </div>
-                            <br />
-                        </form>
+                                <br />
+                            </form>
 
-                        <div class="form-group">
-                            <table id="tblMunicipio" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Código Municipio</th>
-                                        <th>Municipio</th>
-                                        <th>Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
+                            <div class="form-group">
+                                <table id="tblMunicipio" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Código Municipio</th>
+                                            <th>Municipio</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" aria-label="Close" type="button" id="btnNuevoEdit">Guardar</button>
-                <input type="button" class="btn btn-white" data-dismiss="modal" style="width:110px;" id="btnCerrar" value="Cancelar" />
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit Municipio Modal-->
-<div class="modal fade" id="EditMunicipioModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form id="form">
-                    <fieldset id="SubmitForm">
-                        <div class="form-horizontal">
-                            <label id="MsjError">
-                            </label>
-                            <div class="form-group">
-                                @Html.LabelFor(m => Municipio.mun_codigo, new { @class = "control-label col-sm-2", @readonly = "readonly" })
-                                <div class="col-sm-10">
-                                    <input type="text" id="mun_CodigoEdit_" name="mun_Codigo" class="form-control" readonly; minLength="4" />
-                                    @Html.ValidationMessageFor(m => Municipio.mun_codigo)
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label col-sm-2 , required" })
-
-                                <div class="col-sm-10">
-                                    <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; />
-                                    @Html.ValidationMessageFor(m => Municipio.mun_nombre)
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12 text-center">
-                                    <button class="btn btn-primary" type="button" id="BtnsubmitMunicipio" tabindex="10"> Guardar </button>
-                                    <button type="button" class="btn btn-white" data-dismiss="modal" aria-label="Close">Cancelar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" aria-label="Close" type="button" id="btnNuevoEdit">Guardar</button>
+                    <input type="button" class="btn btn-white" data-dismiss="modal" style="width:110px;" id="btnCerrar" value="Cancelar" />
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Edit Municipio Modal-->
+    <div class="modal fade" id="EditMunicipioModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="form">
+                        <fieldset id="SubmitForm">
+                            <div class="form-horizontal">
+                                <label id="MsjError">
+                                </label>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => Municipio.mun_codigo, new { @class = "control-label", @readonly = "readonly" })
+                                    <div class="col-sm-8">
+                                        <input type="text" id="mun_CodigoEdit_" name="mun_Codigo" class="form-control" readonly; minLength="4" />
+                                        @Html.ValidationMessageFor(m => Municipio.mun_codigo)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
+
+                                    <div class="col-sm-8">
+                                        <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; />
+                                        @Html.ValidationMessageFor(m => Municipio.mun_nombre)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 col-md-10">
+                                        <button class="btn btn-primary" type="button" id="BtnsubmitMunicipio" tabindex="10"> Guardar </button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        <!-- Bootstrap 4 -->
+        <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- DataTables -->
+        <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+        <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+        <script src="~/Scripts/app/Departamento.js"></script>
+
+        @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#dataTable').DataTable(
+                    {
+                        "searching": true,
+                        "lengthChange": true,
+                        "oLanguage": {
+                            "oPaginate": {
+                                "sNext": "Siguiente",
+                                "sPrevious": "Anterior",
+                            },
+                            "sProcessing": "Procesando...",
+                            "sLengthMenu": "Mostrar _MENU_ registros",
+                            "sZeroRecords": "No se encontraron resultados",
+                            "sEmptyTable": "Ningún dato disponible en esta tabla",
+                            "sEmptyTable": "No hay registros",
+                            "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+                            "sSearch": "Buscar",
+                            "sInfo": "Mostrando _START_ a _END_ Entradas",
+                            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        }
+                    });
+            });
+
+        </script>
+
+    }
+
+
+
 </div>
-@section Scripts {
-    <!-- Bootstrap 4 -->
-    <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables -->
-    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
-    <script src="~/Scripts/app/Departamento.js"></script>
-
-    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#dataTable').DataTable(
-                {
-                    "searching": true,
-                    "lengthChange": true,
-                    "oLanguage": {
-                        "oPaginate": {
-                            "sNext": "Siguiente",
-                            "sPrevious": "Anterior",
-                        },
-                        "sProcessing": "Procesando...",
-                        "sLengthMenu": "Mostrar _MENU_ registros",
-                        "sZeroRecords": "No se encontraron resultados",
-                        "sEmptyTable": "Ningún dato disponible en esta tabla",
-                        "sEmptyTable": "No hay registros",
-                        "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-                        "sSearch": "Buscar",
-                        "sInfo": "Mostrando _START_ a _END_ Entradas",
-                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    }
-                });
-        });
-
-    </script>
-
-}
-
-
-
