@@ -100,41 +100,40 @@
                                 <div class="col-md-4 mb-3">
                                     <input type="hidden" value="@Model.dep_Nombre" />
                                     <label for="validationTooltip02">Código Departamento</label>
-          
-                                        @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+
+                                    @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
 
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label" })
-                                    
-                                        @Html.TextBoxFor(model => model.dep_Nombre, new { @class = "form-control", @readonly = "readonly" })
-                                   
+
+                                    @Html.TextBoxFor(model => model.dep_Nombre, new { @class = "form-control", @readonly = "readonly" })
+
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     @Html.LabelFor(model => Municipio.mun_codigo, new { @class = "control-label , required" })
-                                    <input type="text" id="mun_CodigoEdit" name="mun_Codigo" class="form-control" required; />
-                                    <div id="ValidacionMunCodigoEdit">
+                                    <input type="text" id="mun_codigo" name="mun_codigo" placeholder="" onkeypress="return soloNumeros(event)" class="form-control" min="1" maxlength="2" autocomplete="off" />
+                                    <div id="ValidationMunCodigoCreate">
                                         @Html.ValidationMessageFor(model => Municipio.mun_codigo)
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label , required" })
-
-                                    <input type="text" id="mun_NombreEdit" name="mun_Nombre" class="form-control" required; minLength="4" />
-                                    <div id="ValidacionMunNombreEdit">
+                                    <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
+                                    <div id="ValidationMunNombreCreate">
                                         @Html.ValidationMessageFor(model => Municipio.mun_nombre)
                                     </div>
 
                                 </div>
                             </div>
                             <div class="col-md">
-                                <button class="btn btn-primary btn-sm" type="button" id="AgregarMunicipiosEdit">Agregar</button>
+                                <button class="btn btn-primary btn-sm" type="button" id="AgregarMunicipio">Agregar</button>
                             </div>
                             <br />
                         </form>
 
                         <div class="form-group">
-                            <table id="tblMunicipiosEdit" class="table">
+                            <table id="tblMunicipio" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Código Municipio</th>
@@ -202,8 +201,8 @@
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+    <script src="~/Scripts/app/Departamento.js"></script>
 
-   <script src="~/Scripts/app/Municipio.js"></script>
     @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
     <script type="text/javascript">
         $(document).ready(function () {
