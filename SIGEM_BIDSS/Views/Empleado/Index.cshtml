@@ -42,9 +42,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.emp_Identificacion)
                     </th>
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.emp_FechaIngreso)
-                    </th>
+                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
                     </th>
@@ -54,13 +54,13 @@
                         @Html.DisplayNameFor(model => model.emp_Telefono)
                     </th>
 
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.emp_CorreoElectronico)
-                    </th>
+                    </th>*@
 
 
 
-                    <th></th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,22 +76,22 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.emp_Identificacion)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.emp_FechaIngreso)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.emp_Telefono)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.emp_CorreoElectronico)
-                        </td>
+                        </td>*@
 
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.emp_Id }, new { @class = "btn btn-primary btn-sm " })
-                            @Html.ActionLink("Detalles", "Details", new { id = item.emp_Id }, new { @class = "btn btn-default btn-sm" })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.emp_Id }, new { @class = "btn btn-primary btn-xs " })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.emp_Id }, new { @class = "btn btn-default btn-xs" })
 
                             @if (item.est_Id == GeneralFunctions.empleadoactivo)
                             {
@@ -100,7 +100,7 @@
                             }
                             else if(item.est_Id == GeneralFunctions.empleadoinactivo)
                             {
-                                @Html.ActionLink("Activar", "Activate", new { id = item.emp_Id }, new { @class = "btn btn-success btn-sm" })
+                                @Html.ActionLink("Activar", "Activate", new { id = item.emp_Id }, new { @class = "btn btn-success btn-xs" })
                             }
                         </td>
                     </tr>
