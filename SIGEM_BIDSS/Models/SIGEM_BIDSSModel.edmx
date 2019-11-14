@@ -285,6 +285,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SDP_tbMunicipio_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="mun_Codigo" Type="char" Mode="In" />
@@ -555,11 +586,6 @@
           </Key>
           <Property Name="sol_Id" Type="int" Nullable="false" />
           <Property Name="sol_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="sol_FechaGasto" Type="datetime" />
-          <Property Name="sol_FechaViaje" Type="datetime" />
-          <Property Name="sol_Proveedor" Type="nvarchar" MaxLength="100" />
-          <Property Name="tps_Id" Type="int" />
-          <Property Name="sol_Monto" Type="nchar" MaxLength="10" />
           <Property Name="emp_Id" Type="smallint" Nullable="false" />
           <Property Name="tipsol_Id" Type="int" Nullable="false" />
           <Property Name="pto_Id" Type="int" />
@@ -876,10 +902,6 @@
           <Parameter Name="tipsol_Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="tipsol_UsuarioModifica" Type="int" Mode="In" />
         </Function>
-        <Function Name="UDP_Gral_tbTipoViatico_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-          <Parameter Name="tpv_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="tpv_UsuarioCrea" Type="int" Mode="In" />
-        </Function>
         <EntityContainer Name="SIGEM_BIDSSModelStoreContainer">
           <EntitySet Name="tbArea" EntityType="Self.tbArea" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbDepartamento" EntityType="Self.tbDepartamento" Schema="Gral" store:Type="Tables" />
@@ -1151,10 +1173,6 @@
             <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
             <End Role="tbSolicitud" EntitySet="tbSolicitud" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Gral_tbTipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Insert_Result)">
-            <Parameter Name="tpv_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="tpv_UsuarioCrea" Mode="In" Type="Int32" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1362,11 +1380,6 @@
           <NavigationProperty Name="tbPuesto" Relationship="SIGEM_BIDSSModel.FK_pto_Id_Puesto" FromRole="tbSolicitud" ToRole="tbPuesto" />
           <NavigationProperty Name="tbTipoSolicitud" Relationship="SIGEM_BIDSSModel.FK_tipsol_Id_TipoSolicitud" FromRole="tbSolicitud" ToRole="tbTipoSolicitud" />
           <NavigationProperty Name="tbTipoViatico" Relationship="SIGEM_BIDSSModel.FK_tpv_Id" FromRole="tbSolicitud" ToRole="tbTipoViatico" />
-          <Property Name="sol_FechaGasto" Type="DateTime" Precision="3" />
-          <Property Name="sol_FechaViaje" Type="DateTime" Precision="3" />
-          <Property Name="sol_Proveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="tps_Id" Type="Int32" />
-          <Property Name="sol_Monto" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="tbTipoMoneda">
           <Key>
@@ -1548,9 +1561,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_Gral_tbTipoViatico_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1806,11 +1816,6 @@
           <EntitySetMapping Name="tbSolicitud">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
               <MappingFragment StoreEntitySet="tbSolicitud">
-                <ScalarProperty Name="sol_Monto" ColumnName="sol_Monto" />
-                <ScalarProperty Name="tps_Id" ColumnName="tps_Id" />
-                <ScalarProperty Name="sol_Proveedor" ColumnName="sol_Proveedor" />
-                <ScalarProperty Name="sol_FechaViaje" ColumnName="sol_FechaViaje" />
-                <ScalarProperty Name="sol_FechaGasto" ColumnName="sol_FechaGasto" />
                 <ScalarProperty Name="sol_FechaModifica" ColumnName="sol_FechaModifica" />
                 <ScalarProperty Name="sol_UsuarioModifica" ColumnName="sol_UsuarioModifica" />
                 <ScalarProperty Name="sol_FechaCrea" ColumnName="sol_FechaCrea" />
@@ -1879,13 +1884,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

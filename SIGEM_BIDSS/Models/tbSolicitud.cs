@@ -30,11 +30,6 @@ namespace SIGEM_BIDSS.Models
         public Nullable<System.DateTime> sol_FechaCrea { get; set; }
         public Nullable<int> sol_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> sol_FechaModifica { get; set; }
-        public Nullable<System.DateTime> sol_FechaGasto { get; set; }
-        public Nullable<System.DateTime> sol_FechaViaje { get; set; }
-        public string sol_Proveedor { get; set; }
-        public Nullable<int> tps_Id { get; set; }
-        public string sol_Monto { get; set; }
     
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
