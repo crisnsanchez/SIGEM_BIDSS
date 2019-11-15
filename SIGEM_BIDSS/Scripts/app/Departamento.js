@@ -263,6 +263,7 @@ function AgregarMunicipiosDT() {
 
         $('#dep_Codigo').prop('disabled', true);
         $('#dep_Nombre').prop('disabled', true);
+        $('#Valida').prop('disabled', false);
 
         var tbMunicipio = GetMunicipio();
 
@@ -340,6 +341,8 @@ $(document).on("click", "#tblMunicipio tbody tr td button#removeMunicipios", fun
 
             $('#dep_Codigo').prop('disabled', false);
             $('#dep_Nombre').prop('disabled', false);
+            $('#Valida').prop('disabled', true);
+         
 
         }
         console.log(data)
