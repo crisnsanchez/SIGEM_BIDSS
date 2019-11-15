@@ -85,7 +85,7 @@ function readURL(input) {
         reader.onload = function (e) {
             $('#imgpreview').attr('src', e.target.result);
         }
-
+        $("#lblCargarFoto").text(input);
         reader.readAsDataURL(input.files[0]);
     }
 }
