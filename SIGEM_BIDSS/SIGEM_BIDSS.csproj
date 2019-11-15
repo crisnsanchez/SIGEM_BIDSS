@@ -176,6 +176,7 @@
     <Compile Include="Controllers\PuestoController.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
     <Compile Include="Controllers\TipoMonedaController.cs" />
+    <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
     <Compile Include="Controllers\TipoSolicitudController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
@@ -211,12 +212,6 @@
     <Compile Include="Models\spSelect_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbArea.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -239,6 +234,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoMoneda.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoMovimiento.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoSalario.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoSangre.cs">
@@ -308,6 +309,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoSolicitud_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoViatico_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_TipoMovimiento_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1131,8 +1138,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\SIGEM_BIDSSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SIGEM_BIDSSModel.Context.cs</LastGenOutput>
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
+      <LastGenOutput>SIGEM_BIDSSModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\SIGEM_BIDSSModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1277,6 +1284,8 @@
     <Content Include="Content\template\plugins\popper\umd\popper-utils.min.js.map" />
     <Content Include="Content\template\plugins\popper\umd\popper.js.map" />
     <Content Include="Content\template\plugins\popper\umd\popper.min.js.map" />
+    <Content Include="Content\template\plugins\bs-custom-file-input\bs-custom-file-input.js.map" />
+    <Content Include="Content\template\plugins\bs-custom-file-input\bs-custom-file-input.min.js.map" />
     <EntityDeploy Include="Models\SIGEM_BIDSSModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SIGEM_BIDSSModel.Designer.cs</LastGenOutput>
@@ -1284,8 +1293,6 @@
     <Content Include="Models\SIGEM_BIDSSModel.edmx.diagram">
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\template\plugins\bs-custom-file-input\bs-custom-file-input.js.map" />
-    <Content Include="Content\template\plugins\bs-custom-file-input\bs-custom-file-input.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1369,6 +1376,11 @@
     <Content Include="Views\TipoViatico\Edit.cshtml" />
     <Content Include="Views\TipoViatico\Index.cshtml" />
     <Content Include="Views\Empleado\_Modales.cshtml" />
+    <Content Include="Views\TipoMovimiento\Create.cshtml" />
+    <Content Include="Views\TipoMovimiento\Delete.cshtml" />
+    <Content Include="Views\TipoMovimiento\Details.cshtml" />
+    <Content Include="Views\TipoMovimiento\Edit.cshtml" />
+    <Content Include="Views\TipoMovimiento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

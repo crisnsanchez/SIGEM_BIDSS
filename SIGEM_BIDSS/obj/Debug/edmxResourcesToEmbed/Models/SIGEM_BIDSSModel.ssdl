@@ -90,14 +90,27 @@
     <Property Name="sol_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="emp_Id" Type="smallint" Nullable="false" />
     <Property Name="tipsol_Id" Type="int" Nullable="false" />
-    <Property Name="pto_Id" Type="int" />
+    <Property Name="pto_Id" Type="int" Nullable="false" />
     <Property Name="sol_JefeInmediato" Type="nvarchar" MaxLength="100" />
     <Property Name="sol_CorreoJefeInmediato" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_PropositoVisita" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_LugarDestino" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_TrasladoHacia" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_Hospedaje" Type="nvarchar" MaxLength="50" />
+    <Property Name="tpsal_id" Type="int" Nullable="false" />
+    <Property Name="sol_MontoSolicitud" Type="float" />
+    <Property Name="tmo_id" Type="smallint" Nullable="false" />
+    <Property Name="are_Id" Type="int" Nullable="false" />
+    <Property Name="tipmo_id" Type="int" Nullable="false" />
+    <Property Name="tpv_Id" Type="int" Nullable="false" />
+    <Property Name="sol_Justificacion" Type="nvarchar" MaxLength="50" />
     <Property Name="sol_Cliente" Type="nvarchar" MaxLength="100" />
     <Property Name="sol_FechaSolicitud" Type="datetime" Nullable="false" />
     <Property Name="sol_FechaRegreso" Type="datetime" Nullable="false" />
+    <Property Name="sol_FechaMonto" Type="datetime" Nullable="false" />
+    <Property Name="sol_CargoA" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_NoFactura" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_CantidadDias" Type="int" />
-    <Property Name="tpv_Id" Type="int" Nullable="false" />
     <Property Name="sol_UsuarioCrea" Type="int" />
     <Property Name="sol_FechaCrea" Type="datetime" />
     <Property Name="sol_UsuarioModifica" Type="int" />
@@ -114,6 +127,28 @@
     <Property Name="tmo_FechaCrea" Type="datetime" Nullable="false" />
     <Property Name="tmo_UsuarioModifica" Type="int" />
     <Property Name="tmo_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbTipoMovimiento">
+    <Key>
+      <PropertyRef Name="tipmo_id" />
+    </Key>
+    <Property Name="tipmo_id" Type="int" Nullable="false" />
+    <Property Name="tipmo_Movimiento" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="tipmo_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="tipmo_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="tipmo_UsuarioModifica" Type="int" />
+    <Property Name="tipmo_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbTipoSalario">
+    <Key>
+      <PropertyRef Name="tpsal_id" />
+    </Key>
+    <Property Name="tpsal_id" Type="int" Nullable="false" />
+    <Property Name="tpsal_Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="tpsal_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="tpsal_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="tpsal_UsuarioModifica" Type="int" />
+    <Property Name="tpsal_FechaModifica" Type="datetime" />
   </EntityType>
   <EntityType Name="tbTipoSangre">
     <Key>
@@ -142,7 +177,7 @@
       <PropertyRef Name="tpv_Id" />
     </Key>
     <Property Name="tpv_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="tpv_Descripcion" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="tpv_Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="tpv_UsuarioCrea" Type="int" Nullable="false" />
     <Property Name="tpv_FechaCrea" Type="datetime" Nullable="false" />
     <Property Name="tpv_UsuarioModifica" Type="int" />
@@ -196,18 +231,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_est_Id_Estado">
-    <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
-    <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbEstado">
-        <PropertyRef Name="est_Id" />
-      </Principal>
-      <Dependent Role="tbEmpleado">
-        <PropertyRef Name="est_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id">
     <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
     <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -233,7 +256,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_pto_Id_Puesto">
-    <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="0..1" />
+    <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="1" />
     <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="tbPuesto">
@@ -241,6 +264,18 @@
       </Principal>
       <Dependent Role="tbSolicitud">
         <PropertyRef Name="pto_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tipmo_Id_TipoMovimiento">
+    <End Role="tbTipoMovimiento" Type="Self.tbTipoMovimiento" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoMovimiento">
+        <PropertyRef Name="tipmo_id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tipmo_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -256,6 +291,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tmo_Id_TipoMonedad">
+    <End Role="tbTipoMoneda" Type="Self.tbTipoMoneda" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoMoneda">
+        <PropertyRef Name="tmo_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tmo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tps_Id">
     <End Role="tbTipoSangre" Type="Self.tbTipoSangre" Multiplicity="1" />
     <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -265,6 +312,18 @@
       </Principal>
       <Dependent Role="tbEmpleado">
         <PropertyRef Name="tps_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tpsal_Id_TipoSalario">
+    <End Role="tbTipoSalario" Type="Self.tbTipoSalario" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoSalario">
+        <PropertyRef Name="tpsal_id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tpsal_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -280,37 +339,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="spSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SDP_tbMunicipio_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="mun_Codigo" Type="char" Mode="In" />
@@ -435,6 +463,14 @@
     <Parameter Name="tipsol_Descripcion" Type="varchar" Mode="In" />
     <Parameter Name="tipsol_UsuarioModifica" Type="int" Mode="In" />
   </Function>
+  <Function Name="UDP_Gral_tbTipoViatico_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tpv_Descripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="tpv_UsuarioCrea" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_TipoMovimiento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tipmo_Movimiento" Type="nvarchar" Mode="In" />
+    <Parameter Name="tipmo_UsuarioCrea" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="SIGEM_BIDSSModelStoreContainer">
     <EntitySet Name="tbArea" EntityType="Self.tbArea" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbDepartamento" EntityType="Self.tbDepartamento" Schema="Gral" store:Type="Tables" />
@@ -444,6 +480,8 @@
     <EntitySet Name="tbPuesto" EntityType="Self.tbPuesto" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbSolicitud" EntityType="Self.tbSolicitud" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoMoneda" EntityType="Self.tbTipoMoneda" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbTipoMovimiento" EntityType="Self.tbTipoMovimiento" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbTipoSalario" EntityType="Self.tbTipoSalario" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoSangre" EntityType="Self.tbTipoSangre" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoSolicitud" EntityType="Self.tbTipoSolicitud" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoViatico" EntityType="Self.tbTipoViatico" Schema="Gral" store:Type="Tables" />
@@ -463,10 +501,6 @@
       <End Role="tbEstado" EntitySet="tbEstado" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
     </AssociationSet>
-    <AssociationSet Name="FK_est_Id_Estado" Association="Self.FK_est_Id_Estado">
-      <End Role="tbEstado" EntitySet="tbEstado" />
-      <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-    </AssociationSet>
     <AssociationSet Name="FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" Association="Self.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id">
       <End Role="tbMunicipio" EntitySet="tbMunicipio" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
@@ -479,13 +513,25 @@
       <End Role="tbPuesto" EntitySet="tbPuesto" />
       <End Role="tbSolicitud" EntitySet="tbSolicitud" />
     </AssociationSet>
+    <AssociationSet Name="FK_tipmo_Id_TipoMovimiento" Association="Self.FK_tipmo_Id_TipoMovimiento">
+      <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
     <AssociationSet Name="FK_tipsol_Id_TipoSolicitud" Association="Self.FK_tipsol_Id_TipoSolicitud">
       <End Role="tbTipoSolicitud" EntitySet="tbTipoSolicitud" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tmo_Id_TipoMonedad" Association="Self.FK_tmo_Id_TipoMonedad">
+      <End Role="tbTipoMoneda" EntitySet="tbTipoMoneda" />
       <End Role="tbSolicitud" EntitySet="tbSolicitud" />
     </AssociationSet>
     <AssociationSet Name="FK_tps_Id" Association="Self.FK_tps_Id">
       <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tpsal_Id_TipoSalario" Association="Self.FK_tpsal_Id_TipoSalario">
+      <End Role="tbTipoSalario" EntitySet="tbTipoSalario" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
     </AssociationSet>
     <AssociationSet Name="FK_tpv_Id" Association="Self.FK_tpv_Id">
       <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
