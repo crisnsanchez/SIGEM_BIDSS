@@ -178,6 +178,7 @@
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\TipoMonedaController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
+    <Compile Include="Controllers\TipoSalarioController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
     <Compile Include="Controllers\TipoSolicitudController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
@@ -299,6 +300,15 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoMoneda_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoMovimiento_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoSalario_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoSalario_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoSangre_Insert_Result.cs">
@@ -1387,6 +1397,11 @@
     <Content Include="Views\TipoMovimiento\Edit.cshtml" />
     <Content Include="Views\TipoMovimiento\Index.cshtml" />
     <Content Include="Views\Solicitud\AccionPersonal.cshtml" />
+    <Content Include="Views\TipoSalario\Create.cshtml" />
+    <Content Include="Views\TipoSalario\Delete.cshtml" />
+    <Content Include="Views\TipoSalario\Details.cshtml" />
+    <Content Include="Views\TipoSalario\Edit.cshtml" />
+    <Content Include="Views\TipoSalario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

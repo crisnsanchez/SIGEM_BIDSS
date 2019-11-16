@@ -1,8 +1,10 @@
-﻿@model SIGEM_BIDSS.Models.tbTipoMovimiento
+﻿@model SIGEM_BIDSS.Models.tbTipoSalario
 
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Edit";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
@@ -32,7 +34,7 @@
     @Html.AntiForgeryToken()
     <div class="card">
         <div class="card-header ">
-            <h3 class="card-title">Editar Tipo Movimiento</h3>
+            <h3 class="card-title">Editar Tipo Salario</h3>
             <div class="card-tools">
                 @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-primary float-right" })
             </div>
@@ -44,18 +46,18 @@
                     <div class="col-sm-6">
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.tipmo_id)
+                            @Html.HiddenFor(model => model.tpsal_id)
                             <div class="form-group">
-                                @Html.LabelFor(model => model.tipmo_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.tpsal_id, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.tipmo_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.tipmo_id, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.tpsal_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.tpsal_id, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.tipmo_Movimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.tpsal_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
-                                        @Html.EditorFor(model => model.tipmo_Movimiento, new { htmlAttributes = new { @class = "form-control", maxlength = "100", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                                        @Html.ValidationMessageFor(model => model.tipmo_Movimiento, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.tpsal_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "100", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                                        @Html.ValidationMessageFor(model => model.tpsal_Descripcion, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="form-group">

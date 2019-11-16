@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,52 +10,52 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class TipoMovimientoController : Controller
+    public class TipoSalarioController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 
-        // GET: TipoMovimiento
+        // GET: TipoSalario
         public ActionResult Index()
         {
-            return View(db.tbTipoMovimiento.ToList());
+            return View(db.tbTipoSalario.ToList());
         }
 
-        // GET: TipoMovimiento/Details/5
+        // GET: TipoSalario/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
-            if (tbTipoMovimiento == null)
+            tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
+            if (tbTipoSalario == null)
             {
                 return HttpNotFound();
             }
-            return View(tbTipoMovimiento);
+            return View(tbTipoSalario);
         }
 
-        // GET: TipoMovimiento/Create
+        // GET: TipoSalario/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TipoMovimiento/Create
+        // POST: TipoSalario/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tipmo_id,tipmo_Movimiento,tipmo_UsuarioCrea,tipmo_FechaCrea,tipmo_UsuarioModifica,tipmo_FechaModifica")] tbTipoMovimiento tbTipoMovimiento)
+        public ActionResult Create([Bind(Include = "tpsal_id,tpsal_Descripcion,tpsal_UsuarioCrea,tpsal_FechaCrea,tpsal_UsuarioModifica,tpsal_FechaModifica")] tbTipoSalario tbTipoSalario)
         {
             if (ModelState.IsValid)
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_TipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, 1);
-                    foreach (UDP_Gral_TipoMovimiento_Insert_Result tbMovimiento in List)
-                        Msj = tbMovimiento.MensajeError;
+                    List = db.UDP_Gral_tbTipoSalario_Insert(tbTipoSalario.tpsal_Descripcion, 1);
+                    foreach (UDP_Gral_tbTipoSalario_Insert_Result Salario in List)
+                        Msj = Salario.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
@@ -73,85 +73,86 @@ namespace SIGEM_BIDSS.Controllers
                     return View();
                 }
 
-            return View(tbTipoMovimiento);
 
 
-
+            return View(tbTipoSalario);
         }
 
-        // GET: TipoMovimiento/Edit/5
+        // GET: TipoSalario/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
-            if (tbTipoMovimiento == null)
+            tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
+            if (tbTipoSalario == null)
             {
                 return HttpNotFound();
             }
-            return View(tbTipoMovimiento);
+            return View(tbTipoSalario);
         }
 
-        // POST: TipoMovimiento/Edit/5
+        // POST: TipoSalario/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tipmo_id,tipmo_Movimiento,tipmo_UsuarioCrea,tipmo_FechaCrea,tipmo_UsuarioModifica,tipmo_FechaModifica")] tbTipoMovimiento tbTipoMovimiento)
+        public ActionResult Edit([Bind(Include = "tpsal_id,tpsal_Descripcion,tpsal_UsuarioCrea,tpsal_FechaCrea,tpsal_UsuarioModifica,tpsal_FechaModifica")] tbTipoSalario tbTipoSalario)
         {
-            if (ModelState.IsValid)
-                try
+            try
+            {
+                IEnumerable<Object> List = null;
+                string Msj = "";
+                List = db.UDP_Gral_tbTipoSalario_Update(tbTipoSalario.tpsal_id,tbTipoSalario.tpsal_Descripcion ,1);
+                foreach (UDP_Gral_tbTipoSalario_Update_Result TipoSangre in List)
+                    Msj = TipoSangre.MensajeError;
+                if (Msj.StartsWith("-1"))
                 {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, 1);
-                    foreach (UDP_Gral_tbTipoMovimiento_Update_Result Movimiento in List)
-                        Msj = Movimiento.MensajeError;
-                    if (Msj.StartsWith("-1"))
-                    {
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View();
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch (Exception Ex)
-                {
-
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View();
                 }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception Ex)
+            {
 
-            return View(tbTipoMovimiento);
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
+
+            return View(tbTipoSalario);
+
 
 
         }
-        // GET: TipoMovimiento/Delete/5
+
+
+        // GET: TipoSalario/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
-            if (tbTipoMovimiento == null)
+            tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
+            if (tbTipoSalario == null)
             {
                 return HttpNotFound();
             }
-            return View(tbTipoMovimiento);
+            return View(tbTipoSalario);
         }
 
-        // POST: TipoMovimiento/Delete/5
+        // POST: TipoSalario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
-            db.tbTipoMovimiento.Remove(tbTipoMovimiento);
+            tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
+            db.tbTipoSalario.Remove(tbTipoSalario);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

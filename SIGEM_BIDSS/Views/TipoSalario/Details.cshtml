@@ -1,15 +1,16 @@
-﻿@model SIGEM_BIDSS.Models.tbTipoMovimiento
+﻿@model SIGEM_BIDSS.Models.tbTipoSalario
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-info  mr-1"></i>
-            Detalle Tipo Movimiento
+            Detalle Tipo Salario
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -21,18 +22,18 @@
         <div class="card-body">
             <dl class="dl-horizontal">
                 <dt>
-                    Id Tipo Movimiento
+                    Id Tipo Salario
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.tipmo_id)
+                    @Html.DisplayFor(model => model.tpsal_id)
                 </dd>
                 <dt>
                     Descripcion
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.tipmo_Movimiento)
+                    @Html.DisplayFor(model => model.tpsal_Descripcion)
                 </dd>
 
             </dl>
@@ -41,7 +42,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-4 col-md-10">
-            @Html.ActionLink("Editar", "Edit", new { id = Model.tipmo_id }, new { @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Editar", "Edit", new { id = Model.tpsal_id }, new { @class = "btn btn-primary btn-sm" })
 
         </div>
     </div>

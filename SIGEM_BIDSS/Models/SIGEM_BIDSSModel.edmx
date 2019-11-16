@@ -1129,16 +1129,16 @@
             <Parameter Name="tipmo_Movimiento" Mode="In" Type="String" />
             <Parameter Name="tipmo_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoMovimiento_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Gral_tbTipoMovimiento_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoMovimiento_Update_Result)">
             <Parameter Name="tipmo_id" Mode="In" Type="Int32" />
             <Parameter Name="tipmo_Movimiento" Mode="In" Type="String" />
             <Parameter Name="tipmo_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoSalario_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Gral_tbTipoSalario_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Insert_Result)">
             <Parameter Name="tpsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tpsal_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoSalario_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Gral_tbTipoSalario_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Update_Result)">
             <Parameter Name="tpsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="tpsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tpsal_UsuarioModifica" Mode="In" Type="Int32" />
@@ -1230,6 +1230,15 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbTipoViatico_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbTipoMovimiento_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbTipoSalario_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbTipoSalario_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
       </Schema>
@@ -1606,9 +1615,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMovimiento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMovimiento_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMovimiento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMovimiento_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoMovimiento_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result">
