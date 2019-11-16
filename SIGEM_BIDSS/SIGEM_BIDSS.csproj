@@ -209,7 +209,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Solicitudes.cs" />
+    <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Models\spSelect_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -253,6 +253,7 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoMoneda.cs" />
+    <Compile Include="Models\TipoMoviento.cs" />
     <Compile Include="Models\TipoSangre.cs" />
     <Compile Include="Models\TipoSolicitud.cs" />
     <Compile Include="Models\UDP_Gral_tbArea_Insert_Result.cs">
@@ -1382,11 +1383,7 @@
     <Content Include="Views\TipoMovimiento\Details.cshtml" />
     <Content Include="Views\TipoMovimiento\Edit.cshtml" />
     <Content Include="Views\TipoMovimiento\Index.cshtml" />
-    <Content Include="Views\Solicitud\Create.cshtml" />
-    <Content Include="Views\Solicitud\Delete.cshtml" />
-    <Content Include="Views\Solicitud\Details.cshtml" />
-    <Content Include="Views\Solicitud\Edit.cshtml" />
-    <Content Include="Views\Solicitud\Index.cshtml" />
+    <Content Include="Views\Solicitud\AccionPersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
