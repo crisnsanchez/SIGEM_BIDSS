@@ -19,6 +19,8 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "ID")]
         public int are_Id { get; set; }
         [Display(Name = "Aréa")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [MinLength(5, ErrorMessage = "Minimo {1} caracteres")]
         public string are_Descripcion { get; set; }
         [Display(Name = "Usuario Crea")]
         public int are_UsuarioCrea { get; set; }

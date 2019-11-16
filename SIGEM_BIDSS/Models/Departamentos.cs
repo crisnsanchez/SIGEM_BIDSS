@@ -15,10 +15,12 @@ namespace SIGEM_BIDSS.Models
 
 
         [Display(Name = "Código Departamento")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string dep_Codigo { get; set; }
 
        
         [Display(Name = "Nombre")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string dep_Nombre { get; set; }
 
 

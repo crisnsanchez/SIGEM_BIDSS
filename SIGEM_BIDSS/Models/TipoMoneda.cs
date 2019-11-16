@@ -22,6 +22,7 @@ namespace SIGEM_BIDSS.Models
         public short tmo_Id { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Abreviatura")]
+        [MinLength(3, ErrorMessage = "Minimo {1} caracteres")]
         public string tmo_Abreviatura { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Moneda")]

@@ -68,10 +68,11 @@
 
     <script>
         ///validar solo letras
+        ///validar solo letras
         function soloLetras(e) {
             key = e.keyCode || e.which;
             tecla = String.fromCharCode(key).toLowerCase();
-            letras = "-+'/áéíóúabcdefghijklmnñopqrstuvwxyz";
+            letras = "$# '/áéíóúabcdefghijklmnñopqrstuvwxyz";
             especiales = "8-37-39-46";
 
             tecla_especial = false
@@ -86,20 +87,21 @@
                 return false;
             }
         }
+        function noespaciosincio(e) {
+            var valor = e.value.replace(/^ */, '');
+            e.value = valor;
+        }
 
-        ///validar not copy paste///
-        window.onload =
-            function () {
-                var myInput1 = document.getElementById('tpsal_Descripcion');
-                myInput1.onpaste = function (e) {
-                    e.preventDefault();
-                    //alert("esta acción está prohibida");
-                }
 
-                myInput1.oncopy = function (e) {
-                    e.preventDefault();
-                    //alert("esta acción está prohibida");
-                }
-            }
+
+        document.getElementById("Save").onclick = function () {
+            var txtObj = document.getElementById("des");
+            txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
+            txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
+
+
+
+
+        };
     </script>
 </div>

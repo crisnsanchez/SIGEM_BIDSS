@@ -13,9 +13,11 @@ namespace SIGEM_BIDSS.Models
     public class MunicipiosMetaData
     {
         [Display(Name = "Código Municipio")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string mun_codigo { get; set; }
 
         [Display(Name = "Código Departamento")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string dep_codigo { get; set; }
 
         [Display(Name = "Nombre")]

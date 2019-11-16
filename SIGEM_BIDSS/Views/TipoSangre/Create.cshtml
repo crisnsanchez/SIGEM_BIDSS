@@ -65,7 +65,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
                         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                     </div>
                 </div>
@@ -74,10 +74,12 @@
 
         <script>
             ///validar solo letras
+            ///validar solo letras
+            ///validar solo letras
             function soloLetras(e) {
                 key = e.keyCode || e.which;
                 tecla = String.fromCharCode(key).toLowerCase();
-                letras = "-+'/áéíóúabcdefghijklmnñopqrstuvwxyz";
+                letras = "$# '/áéíóúabcdefghijklmnñopqrstuvwxyz";
                 especiales = "8-37-39-46";
 
                 tecla_especial = false
@@ -92,20 +94,21 @@
                     return false;
                 }
             }
+            function noespaciosincio(e) {
+                var valor = e.value.replace(/^ */, '');
+                e.value = valor;
+            }
 
-            ///validar not copy paste///
-            window.onload =
-                function () {
-                    var myInput1 = document.getElementById('TpsNombre');
-                    myInput1.onpaste = function (e) {
-                        e.preventDefault();
-                        //alert("esta acción está prohibida");
-                    }
 
-                    myInput1.oncopy = function (e) {
-                        e.preventDefault();
-                        //alert("esta acción está prohibida");
-                    }
-                }
+
+            document.getElementById("Save").onclick = function () {
+                var txtObj = document.getElementById("des");
+                txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
+                txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
+
+
+
+
+            };
         </script>
 </div>
