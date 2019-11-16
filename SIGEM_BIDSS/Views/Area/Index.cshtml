@@ -8,7 +8,6 @@
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
-
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -24,7 +23,16 @@
     <div class="card-body">
         <table class="table table-bordered table-hover" id="dataTable">
             <thead>
-           
+                <tr>
+                    <th>
+                        Id Area
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
+
+                    <th>ACCIONES</th>
+                </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
@@ -49,6 +57,7 @@
     </div>
 </div>
 
+
 @section Scripts {
 
     <!-- Bootstrap 4 -->
@@ -59,7 +68,8 @@
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
 
-     
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#dataTable').DataTable(
@@ -85,5 +95,7 @@
         });
 
     </script>
+
+
 
 }

@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace SIGEM_BIDSS.Models
 {
     [MetadataType(typeof(TipoSangreMetaData))]
+    public partial class tbTipoSangre
+    {
+        [NotMapped]
+        public List<tbTipoSangre> AreaList { get; set; }
+
+    }
     public class TipoSangreMetaData
     {
 
-        [Display(Name = "ID")]
+        [Display(Name = "Id Tipo Sangre")]
         public int tps_Id { get; set; }
 
-        [Display(Name = "Nombre")]
+        [Display(Name = "Descripcion")]
+        [MinLength(2, ErrorMessage = "Minimo {1} caracteres")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MinLength(5, ErrorMessage = "Minimo {1} caracteres")]
+        
         public string tps_nombre { get; set; }
 
         [Display(Name = "Usuario Crea")]
@@ -34,8 +42,5 @@ namespace SIGEM_BIDSS.Models
         public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
     }
 
-    public partial class tbTipoSangre
-    {
-        
-    }
+  
 }
