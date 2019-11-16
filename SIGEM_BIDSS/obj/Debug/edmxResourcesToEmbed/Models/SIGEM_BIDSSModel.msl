@@ -369,5 +369,15 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMovimiento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMovimiento_Update" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Insert" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Update" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Update">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result">
+          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -503,5 +503,69 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_TipoMovimiento_Insert_Result>("UDP_Gral_TipoMovimiento_Insert", tipmo_MovimientoParameter, tipmo_UsuarioCreaParameter);
         }
+    
+        public virtual ObjectResult<string> UDP_Gral_tbTipoMovimiento_Update(Nullable<int> tipmo_id, string tipmo_Movimiento, Nullable<int> tipmo_UsuarioModifica)
+        {
+            var tipmo_idParameter = tipmo_id.HasValue ?
+                new ObjectParameter("tipmo_id", tipmo_id) :
+                new ObjectParameter("tipmo_id", typeof(int));
+    
+            var tipmo_MovimientoParameter = tipmo_Movimiento != null ?
+                new ObjectParameter("tipmo_Movimiento", tipmo_Movimiento) :
+                new ObjectParameter("tipmo_Movimiento", typeof(string));
+    
+            var tipmo_UsuarioModificaParameter = tipmo_UsuarioModifica.HasValue ?
+                new ObjectParameter("tipmo_UsuarioModifica", tipmo_UsuarioModifica) :
+                new ObjectParameter("tipmo_UsuarioModifica", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbTipoMovimiento_Update", tipmo_idParameter, tipmo_MovimientoParameter, tipmo_UsuarioModificaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Gral_tbTipoSalario_Insert(string tpsal_Descripcion, Nullable<int> tpsal_UsuarioCrea)
+        {
+            var tpsal_DescripcionParameter = tpsal_Descripcion != null ?
+                new ObjectParameter("tpsal_Descripcion", tpsal_Descripcion) :
+                new ObjectParameter("tpsal_Descripcion", typeof(string));
+    
+            var tpsal_UsuarioCreaParameter = tpsal_UsuarioCrea.HasValue ?
+                new ObjectParameter("tpsal_UsuarioCrea", tpsal_UsuarioCrea) :
+                new ObjectParameter("tpsal_UsuarioCrea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbTipoSalario_Insert", tpsal_DescripcionParameter, tpsal_UsuarioCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Gral_tbTipoSalario_Update(Nullable<int> tpsal_Id, string tpsal_Descripcion, Nullable<int> tpsal_UsuarioModifica)
+        {
+            var tpsal_IdParameter = tpsal_Id.HasValue ?
+                new ObjectParameter("tpsal_Id", tpsal_Id) :
+                new ObjectParameter("tpsal_Id", typeof(int));
+    
+            var tpsal_DescripcionParameter = tpsal_Descripcion != null ?
+                new ObjectParameter("tpsal_Descripcion", tpsal_Descripcion) :
+                new ObjectParameter("tpsal_Descripcion", typeof(string));
+    
+            var tpsal_UsuarioModificaParameter = tpsal_UsuarioModifica.HasValue ?
+                new ObjectParameter("tpsal_UsuarioModifica", tpsal_UsuarioModifica) :
+                new ObjectParameter("tpsal_UsuarioModifica", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbTipoSalario_Update", tpsal_IdParameter, tpsal_DescripcionParameter, tpsal_UsuarioModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoViatico_Update_Result> UDP_Gral_tbTipoViatico_Update(Nullable<int> tpv_Id, string tpv_Descripcion, Nullable<int> tpv_UsuarioModifica)
+        {
+            var tpv_IdParameter = tpv_Id.HasValue ?
+                new ObjectParameter("tpv_Id", tpv_Id) :
+                new ObjectParameter("tpv_Id", typeof(int));
+    
+            var tpv_DescripcionParameter = tpv_Descripcion != null ?
+                new ObjectParameter("tpv_Descripcion", tpv_Descripcion) :
+                new ObjectParameter("tpv_Descripcion", typeof(string));
+    
+            var tpv_UsuarioModificaParameter = tpv_UsuarioModifica.HasValue ?
+                new ObjectParameter("tpv_UsuarioModifica", tpv_UsuarioModifica) :
+                new ObjectParameter("tpv_UsuarioModifica", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoViatico_Update_Result>("UDP_Gral_tbTipoViatico_Update", tpv_IdParameter, tpv_DescripcionParameter, tpv_UsuarioModificaParameter);
+        }
     }
 }

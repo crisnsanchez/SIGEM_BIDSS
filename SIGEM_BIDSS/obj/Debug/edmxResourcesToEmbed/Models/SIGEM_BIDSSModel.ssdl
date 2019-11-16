@@ -86,7 +86,7 @@
     <Key>
       <PropertyRef Name="sol_Id" />
     </Key>
-    <Property Name="sol_Id" Type="int" Nullable="false" />
+    <Property Name="sol_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="sol_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="emp_Id" Type="smallint" Nullable="false" />
     <Property Name="tipsol_Id" Type="int" Nullable="false" />
@@ -106,10 +106,10 @@
     <Property Name="sol_Justificacion" Type="nvarchar" MaxLength="50" />
     <Property Name="sol_Cliente" Type="nvarchar" MaxLength="100" />
     <Property Name="sol_FechaSolicitud" Type="datetime" Nullable="false" />
-    <Property Name="sol_FechaRegreso" Type="datetime" Nullable="false" />
-    <Property Name="sol_FechaMonto" Type="datetime" Nullable="false" />
-    <Property Name="sol_CargoA" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="sol_NoFactura" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_FechaRegreso" Type="datetime" />
+    <Property Name="sol_FechaMonto" Type="datetime" />
+    <Property Name="sol_CargoA" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_NoFactura" Type="nvarchar" MaxLength="50" />
     <Property Name="sol_CantidadDias" Type="int" />
     <Property Name="sol_UsuarioCrea" Type="int" />
     <Property Name="sol_FechaCrea" Type="datetime" />
@@ -132,7 +132,7 @@
     <Key>
       <PropertyRef Name="tipmo_id" />
     </Key>
-    <Property Name="tipmo_id" Type="int" Nullable="false" />
+    <Property Name="tipmo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tipmo_Movimiento" Type="varchar" MaxLength="25" Nullable="false" />
     <Property Name="tipmo_UsuarioCrea" Type="int" Nullable="false" />
     <Property Name="tipmo_FechaCrea" Type="datetime" Nullable="false" />
@@ -143,7 +143,7 @@
     <Key>
       <PropertyRef Name="tpsal_id" />
     </Key>
-    <Property Name="tpsal_id" Type="int" Nullable="false" />
+    <Property Name="tpsal_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tpsal_Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="tpsal_UsuarioCrea" Type="int" Nullable="false" />
     <Property Name="tpsal_FechaCrea" Type="datetime" Nullable="false" />
@@ -445,6 +445,20 @@
     <Parameter Name="tmo_Nombre" Type="nvarchar" Mode="In" />
     <Parameter Name="tmo_UsuarioModifica" Type="int" Mode="In" />
   </Function>
+  <Function Name="UDP_Gral_tbTipoMovimiento_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tipmo_id" Type="int" Mode="In" />
+    <Parameter Name="tipmo_Movimiento" Type="varchar" Mode="In" />
+    <Parameter Name="tipmo_UsuarioModifica" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbTipoSalario_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tpsal_Descripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="tpsal_UsuarioCrea" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbTipoSalario_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tpsal_Id" Type="int" Mode="In" />
+    <Parameter Name="tpsal_Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="tpsal_UsuarioModifica" Type="int" Mode="In" />
+  </Function>
   <Function Name="UDP_Gral_tbTipoSangre_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="tps_Nombre" Type="nvarchar" Mode="In" />
     <Parameter Name="tps_UsuarioCrea" Type="int" Mode="In" />
@@ -466,6 +480,11 @@
   <Function Name="UDP_Gral_tbTipoViatico_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="tpv_Descripcion" Type="nvarchar" Mode="In" />
     <Parameter Name="tpv_UsuarioCrea" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbTipoViatico_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tpv_Id" Type="int" Mode="In" />
+    <Parameter Name="tpv_Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="tpv_UsuarioModifica" Type="int" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_TipoMovimiento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="tipmo_Movimiento" Type="nvarchar" Mode="In" />

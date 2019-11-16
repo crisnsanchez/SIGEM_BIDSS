@@ -119,10 +119,10 @@
     <Property Name="sol_Justificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="sol_Cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="sol_FechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="sol_FechaRegreso" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="sol_FechaMonto" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="sol_CargoA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="sol_NoFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sol_FechaRegreso" Type="DateTime" Precision="3" />
+    <Property Name="sol_FechaMonto" Type="DateTime" Precision="3" />
+    <Property Name="sol_CargoA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sol_NoFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="sol_CantidadDias" Type="Int32" />
     <Property Name="sol_UsuarioCrea" Type="Int32" />
     <Property Name="sol_FechaCrea" Type="DateTime" Precision="3" />
@@ -563,6 +563,25 @@
       <Parameter Name="tipmo_Movimiento" Mode="In" Type="String" />
       <Parameter Name="tipmo_UsuarioCrea" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoMovimiento_Update" ReturnType="Collection(String)">
+      <Parameter Name="tipmo_id" Mode="In" Type="Int32" />
+      <Parameter Name="tipmo_Movimiento" Mode="In" Type="String" />
+      <Parameter Name="tipmo_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoSalario_Insert" ReturnType="Collection(String)">
+      <Parameter Name="tpsal_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="tpsal_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoSalario_Update" ReturnType="Collection(String)">
+      <Parameter Name="tpsal_Id" Mode="In" Type="Int32" />
+      <Parameter Name="tpsal_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="tpsal_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result)">
+      <Parameter Name="tpv_Id" Mode="In" Type="Int32" />
+      <Parameter Name="tpv_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="tpv_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="spSelect_Result">
     <Property Type="Int32" Name="tps_Id" Nullable="false" />
@@ -642,6 +661,9 @@
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
   <ComplexType Name="UDP_Gral_TipoMovimiento_Insert_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbTipoViatico_Update_Result">
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
 </Schema>

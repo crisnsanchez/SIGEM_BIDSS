@@ -34,8 +34,8 @@ namespace SIGEM_BIDSS.Models
         public string sol_Justificacion { get; set; }
         public string sol_Cliente { get; set; }
         public System.DateTime sol_FechaSolicitud { get; set; }
-        public System.DateTime sol_FechaRegreso { get; set; }
-        public System.DateTime sol_FechaMonto { get; set; }
+        public Nullable<System.DateTime> sol_FechaRegreso { get; set; }
+        public Nullable<System.DateTime> sol_FechaMonto { get; set; }
         public string sol_CargoA { get; set; }
         public string sol_NoFactura { get; set; }
         public Nullable<int> sol_CantidadDias { get; set; }
