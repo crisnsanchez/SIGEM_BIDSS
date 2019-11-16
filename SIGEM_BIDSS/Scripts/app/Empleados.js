@@ -1,7 +1,7 @@
 ﻿
 
 /////DATE PICKER
-$("#emp_FechaNacimiento,#emp_FechaIngreso").datepicker({
+$("#emp_FechaNacimiento,#emp_FechaIngreso,#emp_FechaIngreso").datepicker({
     dateFormat: 'mm/dd/yy',
     monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
     dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
