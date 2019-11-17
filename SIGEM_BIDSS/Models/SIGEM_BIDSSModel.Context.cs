@@ -33,13 +33,13 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbEstado> tbEstado { get; set; }
         public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
         public virtual DbSet<tbPuesto> tbPuesto { get; set; }
-        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
         public virtual DbSet<tbTipoMoneda> tbTipoMoneda { get; set; }
         public virtual DbSet<tbTipoMovimiento> tbTipoMovimiento { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
+        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
     
         public virtual ObjectResult<spSelect_Result> spSelect()
         {

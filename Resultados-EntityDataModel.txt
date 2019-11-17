@@ -1,0 +1,9 @@
+﻿Archivo de modelo generado: SIGEM_BIDSSModel.edmx.
+La carga de los metadatos desde la base de datos tardó 00:00:02.3611195.
+La generación del modelo tardó 00:00:09.7997671.
+Archivo de modelo generado: SIGEM_BIDSSModel.edmx.
+La carga de los metadatos desde la base de datos tardó 00:00:01.8362660.
+La generación del modelo tardó 00:00:17.1639821.
+Archivo de modelo generado: SIGEM_BIDSSModel.edmx.
+La carga de los metadatos desde la base de datos tardó 00:00:02.3090367.
+La generación del modelo tardó 00:00:14.2308225.

@@ -15,30 +15,51 @@ namespace SIGEM_BIDSS.Models
     public partial class tbSolicitud
     {
         public int sol_Id { get; set; }
-        public string sol_Descripcion { get; set; }
         public short emp_Id { get; set; }
         public int tipsol_Id { get; set; }
         public int pto_Id { get; set; }
-        public string sol_JefeInmediato { get; set; }
-        public string sol_CorreoJefeInmediato { get; set; }
-        public string sol_PropositoVisita { get; set; }
-        public string sol_LugarDestino { get; set; }
-        public string sol_TrasladoHacia { get; set; }
-        public string sol_Hospedaje { get; set; }
         public int tpsal_id { get; set; }
-        public Nullable<double> sol_MontoSolicitud { get; set; }
         public short tmo_id { get; set; }
         public int are_Id { get; set; }
         public int tipmo_id { get; set; }
         public int tpv_Id { get; set; }
-        public string sol_Justificacion { get; set; }
-        public string sol_Cliente { get; set; }
-        public System.DateTime sol_FechaSolicitud { get; set; }
-        public Nullable<System.DateTime> sol_FechaRegreso { get; set; }
-        public Nullable<System.DateTime> sol_FechaMonto { get; set; }
-        public string sol_CargoA { get; set; }
-        public string sol_NoFactura { get; set; }
-        public Nullable<int> sol_CantidadDias { get; set; }
+        public string sol_GralDescripcion { get; set; }
+        public string sol_GralJefeInmediato { get; set; }
+        public string sol_GralCorreoJefeInmediato { get; set; }
+        public string sol_GralComentario { get; set; }
+        public string sol_GralJustificacion { get; set; }
+        public System.DateTime sol_GralFechaSolicitud { get; set; }
+        public Nullable<System.DateTime> sol_AnviFechaViaje { get; set; }
+        public string sol_Anvi_Cliente { get; set; }
+        public string sol_Anvi_LugarDestino { get; set; }
+        public string sol_Acper_Anterior { get; set; }
+        public string sol_Anvi_PropositoVisita { get; set; }
+        public Nullable<int> sol_Anvi_DiasVisita { get; set; }
+        public string sol_AnviHospedaje { get; set; }
+        public string sol_AnviTrasladoHacia { get; set; }
+        public Nullable<double> sol_AnsolMonto { get; set; }
+        public Nullable<System.DateTime> sol_perFechaRegreso { get; set; }
+        public Nullable<bool> sol_perMedioDia { get; set; }
+        public Nullable<int> sol_perCantidadDias { get; set; }
+        public Nullable<double> sol_ReemMonto { get; set; }
+        public Nullable<System.DateTime> sol_ReemFechaMonto { get; set; }
+        public string sol_ReemProveedor { get; set; }
+        public string sol_ReemCargoA { get; set; }
+        public Nullable<System.DateTime> sol_ReemFechaGastos { get; set; }
+        public string sol_ReemNoFactura { get; set; }
+        public string sol_AprRtn { get; set; }
+        public string sol_AprNombreEmpresa { get; set; }
+        public string sol_AprCiudad { get; set; }
+        public string sol_AprDireccion { get; set; }
+        public string sol_ApreTelefono { get; set; }
+        public string sol_ApreContactoAdm { get; set; }
+        public string sol_ApreCorreoAdm { get; set; }
+        public string sol_ApreNombreTecn { get; set; }
+        public string sol_ApreTelefonoTecn { get; set; }
+        public string sol_ApreCorreoTecn { get; set; }
+        public string sol_ApreCargoTecn { get; set; }
+        public string sol_ApreLink { get; set; }
+        public string sol_Acper_Nuevo { get; set; }
         public Nullable<int> sol_UsuarioCrea { get; set; }
         public Nullable<System.DateTime> sol_FechaCrea { get; set; }
         public Nullable<int> sol_UsuarioModifica { get; set; }

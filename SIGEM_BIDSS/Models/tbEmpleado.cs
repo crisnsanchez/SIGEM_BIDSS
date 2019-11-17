@@ -41,11 +41,11 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> emp_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
         public virtual tbEstado tbEstado { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
         public virtual tbTipoSangre tbTipoSangre { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

@@ -87,30 +87,51 @@
       <PropertyRef Name="sol_Id" />
     </Key>
     <Property Name="sol_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="sol_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="emp_Id" Type="smallint" Nullable="false" />
     <Property Name="tipsol_Id" Type="int" Nullable="false" />
     <Property Name="pto_Id" Type="int" Nullable="false" />
-    <Property Name="sol_JefeInmediato" Type="nvarchar" MaxLength="100" />
-    <Property Name="sol_CorreoJefeInmediato" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_PropositoVisita" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_LugarDestino" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_TrasladoHacia" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_Hospedaje" Type="nvarchar" MaxLength="50" />
     <Property Name="tpsal_id" Type="int" Nullable="false" />
-    <Property Name="sol_MontoSolicitud" Type="float" />
     <Property Name="tmo_id" Type="smallint" Nullable="false" />
     <Property Name="are_Id" Type="int" Nullable="false" />
     <Property Name="tipmo_id" Type="int" Nullable="false" />
     <Property Name="tpv_Id" Type="int" Nullable="false" />
-    <Property Name="sol_Justificacion" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_Cliente" Type="nvarchar" MaxLength="100" />
-    <Property Name="sol_FechaSolicitud" Type="datetime" Nullable="false" />
-    <Property Name="sol_FechaRegreso" Type="datetime" />
-    <Property Name="sol_FechaMonto" Type="datetime" />
-    <Property Name="sol_CargoA" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_NoFactura" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_CantidadDias" Type="int" />
+    <Property Name="sol_GralDescripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_GralJefeInmediato" Type="nvarchar" MaxLength="100" />
+    <Property Name="sol_GralCorreoJefeInmediato" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_GralComentario" Type="nchar" MaxLength="50" />
+    <Property Name="sol_GralJustificacion" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_GralFechaSolicitud" Type="datetime" Nullable="false" />
+    <Property Name="sol_AnviFechaViaje" Type="datetime" />
+    <Property Name="sol_Anvi_Cliente" Type="nvarchar" MaxLength="100" />
+    <Property Name="sol_Anvi_LugarDestino" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_Acper_Anterior" Type="nchar" MaxLength="50" />
+    <Property Name="sol_Anvi_PropositoVisita" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_Anvi_DiasVisita" Type="int" />
+    <Property Name="sol_AnviHospedaje" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_AnviTrasladoHacia" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_AnsolMonto" Type="float" />
+    <Property Name="sol_perFechaRegreso" Type="datetime" />
+    <Property Name="sol_perMedioDia" Type="bit" />
+    <Property Name="sol_perCantidadDias" Type="int" />
+    <Property Name="sol_ReemMonto" Type="float" />
+    <Property Name="sol_ReemFechaMonto" Type="datetime" />
+    <Property Name="sol_ReemProveedor" Type="nchar" MaxLength="10" />
+    <Property Name="sol_ReemCargoA" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ReemFechaGastos" Type="datetime" />
+    <Property Name="sol_ReemNoFactura" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_AprRtn" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_AprNombreEmpresa" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_AprCiudad" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_AprDireccion" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ApreTelefono" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ApreContactoAdm" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ApreCorreoAdm" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ApreNombreTecn" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ApreTelefonoTecn" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ApreCorreoTecn" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ApreCargoTecn" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" />
+    <Property Name="sol_Acper_Nuevo" Type="nchar" MaxLength="50" />
     <Property Name="sol_UsuarioCrea" Type="int" />
     <Property Name="sol_FechaCrea" Type="datetime" />
     <Property Name="sol_UsuarioModifica" Type="int" />
@@ -144,7 +165,7 @@
       <PropertyRef Name="tpsal_id" />
     </Key>
     <Property Name="tpsal_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="tpsal_Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="tpsal_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="tpsal_UsuarioCrea" Type="int" Nullable="false" />
     <Property Name="tpsal_FechaCrea" Type="datetime" Nullable="false" />
     <Property Name="tpsal_UsuarioModifica" Type="int" />

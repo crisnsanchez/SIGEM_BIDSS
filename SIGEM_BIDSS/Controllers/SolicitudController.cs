@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace SIGEM_BIDSS.Controllers
 {
+    [Authorize]
     public class SolicitudController : Controller
     {
         // GET: Solicitud
