@@ -7,6 +7,8 @@ namespace SIGEM_BIDSS.Models
 {
     public class GeneralFunctions
     {
+
+        private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         public List<tbEmpleado> Sexo()
         {
             List<tbEmpleado> Hola = new List<tbEmpleado>();
@@ -21,8 +23,44 @@ namespace SIGEM_BIDSS.Models
             DateTime dt = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(-6)).DateTime;
             return dt;
         }
+        public int sol_UsuarioCrea()
+        {
+            int _user = 1;
+            return _user;
+        }
+        //public int tipsol_Id(int _TipoSolicitud)
+        //{
+        //    int tipsol = db.tbTipoSolicitud.Find(_TipoSolicitud).tipsol_Id;
+        //    return tipsol;
+        //}
+        //public object TipodeSolicitud()
+        //{
+        //    object obtipsol = new { AccionPersonal = TipodeSolicitudSearch("Accion Personal"),
+        //                            AnticipodeViaticos = TipodeSolicitudSearch("Anticipo de Viaticos")
+        //    };
+        //    return obtipsol;
+        //}
+
+        //public int TipodeSolicitudSearch(string _strtiposolSearch)
+        //{
+        //    if (_strtiposolSearch == null || _strtiposolSearch == "") { return 0;}
+        //    int tipsol = (from _dbtts in db.tbTipoSolicitud where (_dbtts.tipsol_Descripcion == _strtiposolSearch) select (_dbtts.tipsol_Id)).FirstOrDefault();
+        //    return tipsol;
+        //}
+
+
+        //public const string AccionPersonal = "Accion Personal";
+
+        public const int AccionPersonal = 1;
+
+        public const int AnticipodeViaticos = 2;
+    
+
+
 
         public const int empleadoinactivo = 2;
         public const int empleadoactivo = 1;
     }
+
+
 }

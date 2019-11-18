@@ -29,23 +29,23 @@ namespace SIGEM_BIDSS.Models
         public string sol_GralComentario { get; set; }
         public string sol_GralJustificacion { get; set; }
         public System.DateTime sol_GralFechaSolicitud { get; set; }
-        public Nullable<System.DateTime> sol_AnviFechaViaje { get; set; }
+        public System.DateTime sol_AnviFechaViaje { get; set; }
         public string sol_Anvi_Cliente { get; set; }
         public string sol_Anvi_LugarDestino { get; set; }
         public string sol_Acper_Anterior { get; set; }
         public string sol_Anvi_PropositoVisita { get; set; }
-        public Nullable<int> sol_Anvi_DiasVisita { get; set; }
+        public int sol_Anvi_DiasVisita { get; set; }
         public string sol_AnviHospedaje { get; set; }
         public string sol_AnviTrasladoHacia { get; set; }
-        public Nullable<double> sol_AnsolMonto { get; set; }
-        public Nullable<System.DateTime> sol_perFechaRegreso { get; set; }
-        public Nullable<bool> sol_perMedioDia { get; set; }
-        public Nullable<int> sol_perCantidadDias { get; set; }
-        public Nullable<double> sol_ReemMonto { get; set; }
-        public Nullable<System.DateTime> sol_ReemFechaMonto { get; set; }
+        public double sol_AnsolMonto { get; set; }
+        public System.DateTime sol_perFechaRegreso { get; set; }
+        public bool sol_perMedioDia { get; set; }
+        public int sol_perCantidadDias { get; set; }
+        public double sol_ReemMonto { get; set; }
+        public System.DateTime sol_ReemFechaMonto { get; set; }
         public string sol_ReemProveedor { get; set; }
         public string sol_ReemCargoA { get; set; }
-        public Nullable<System.DateTime> sol_ReemFechaGastos { get; set; }
+        public System.DateTime sol_ReemFechaGastos { get; set; }
         public string sol_ReemNoFactura { get; set; }
         public string sol_AprRtn { get; set; }
         public string sol_AprNombreEmpresa { get; set; }
@@ -60,17 +60,9 @@ namespace SIGEM_BIDSS.Models
         public string sol_ApreCargoTecn { get; set; }
         public string sol_ApreLink { get; set; }
         public string sol_Acper_Nuevo { get; set; }
-        public Nullable<int> sol_UsuarioCrea { get; set; }
-        public Nullable<System.DateTime> sol_FechaCrea { get; set; }
-        public Nullable<int> sol_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> sol_FechaModifica { get; set; }
-    
-        public virtual tbEmpleado tbEmpleado { get; set; }
-        public virtual tbPuesto tbPuesto { get; set; }
-        public virtual tbTipoMovimiento tbTipoMovimiento { get; set; }
-        public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
-        public virtual tbTipoMoneda tbTipoMoneda { get; set; }
-        public virtual tbTipoSalario tbTipoSalario { get; set; }
-        public virtual tbTipoViatico tbTipoViatico { get; set; }
+        public int sol_UsuarioCrea { get; set; }
+        public System.DateTime sol_FechaCrea { get; set; }
+        public int sol_UsuarioModifica { get; set; }
+        public System.DateTime sol_FechaModifica { get; set; }
     }
 }

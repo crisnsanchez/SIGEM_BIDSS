@@ -98,44 +98,44 @@
     <Property Name="sol_GralDescripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_GralJefeInmediato" Type="nvarchar" MaxLength="100" />
     <Property Name="sol_GralCorreoJefeInmediato" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_GralComentario" Type="nchar" MaxLength="50" />
+    <Property Name="sol_GralComentario" Type="nvarchar" MaxLength="50" />
     <Property Name="sol_GralJustificacion" Type="nvarchar" MaxLength="50" />
     <Property Name="sol_GralFechaSolicitud" Type="datetime" Nullable="false" />
-    <Property Name="sol_AnviFechaViaje" Type="datetime" />
-    <Property Name="sol_Anvi_Cliente" Type="nvarchar" MaxLength="100" />
-    <Property Name="sol_Anvi_LugarDestino" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_Acper_Anterior" Type="nchar" MaxLength="50" />
-    <Property Name="sol_Anvi_PropositoVisita" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_Anvi_DiasVisita" Type="int" />
-    <Property Name="sol_AnviHospedaje" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_AnviTrasladoHacia" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_AnsolMonto" Type="float" />
-    <Property Name="sol_perFechaRegreso" Type="datetime" />
-    <Property Name="sol_perMedioDia" Type="bit" />
-    <Property Name="sol_perCantidadDias" Type="int" />
-    <Property Name="sol_ReemMonto" Type="float" />
-    <Property Name="sol_ReemFechaMonto" Type="datetime" />
-    <Property Name="sol_ReemProveedor" Type="nchar" MaxLength="10" />
-    <Property Name="sol_ReemCargoA" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ReemFechaGastos" Type="datetime" />
-    <Property Name="sol_ReemNoFactura" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_AprRtn" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_AprNombreEmpresa" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_AprCiudad" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_AprDireccion" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ApreTelefono" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ApreContactoAdm" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ApreCorreoAdm" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ApreNombreTecn" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ApreTelefonoTecn" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ApreCorreoTecn" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ApreCargoTecn" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" />
-    <Property Name="sol_Acper_Nuevo" Type="nchar" MaxLength="50" />
-    <Property Name="sol_UsuarioCrea" Type="int" />
-    <Property Name="sol_FechaCrea" Type="datetime" />
-    <Property Name="sol_UsuarioModifica" Type="int" />
-    <Property Name="sol_FechaModifica" Type="datetime" />
+    <Property Name="sol_AnviFechaViaje" Type="datetime" Nullable="false" />
+    <Property Name="sol_Anvi_Cliente" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="sol_Anvi_LugarDestino" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_Acper_Anterior" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_Anvi_PropositoVisita" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_Anvi_DiasVisita" Type="int" Nullable="false" />
+    <Property Name="sol_AnviHospedaje" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_AnviTrasladoHacia" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_AnsolMonto" Type="float" Nullable="false" />
+    <Property Name="sol_perFechaRegreso" Type="datetime" Nullable="false" />
+    <Property Name="sol_perMedioDia" Type="bit" Nullable="false" />
+    <Property Name="sol_perCantidadDias" Type="int" Nullable="false" />
+    <Property Name="sol_ReemMonto" Type="float" Nullable="false" />
+    <Property Name="sol_ReemFechaMonto" Type="datetime" Nullable="false" />
+    <Property Name="sol_ReemProveedor" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="sol_ReemCargoA" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ReemFechaGastos" Type="datetime" Nullable="false" />
+    <Property Name="sol_ReemNoFactura" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_AprRtn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_AprNombreEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_AprCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_AprDireccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ApreTelefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ApreContactoAdm" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ApreCorreoAdm" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ApreNombreTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ApreTelefonoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ApreCorreoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ApreCargoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_Acper_Nuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="sol_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="sol_UsuarioModifica" Type="int" Nullable="false" />
+    <Property Name="sol_FechaModifica" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="tbTipoMoneda">
     <Key>
@@ -228,18 +228,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_emp_Id_Empleado">
-    <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbEmpleado">
-        <PropertyRef Name="emp_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="emp_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_est_Id">
     <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
     <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -276,54 +264,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_pto_Id_Puesto">
-    <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbPuesto">
-        <PropertyRef Name="pto_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="pto_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tipmo_Id_TipoMovimiento">
-    <End Role="tbTipoMovimiento" Type="Self.tbTipoMovimiento" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoMovimiento">
-        <PropertyRef Name="tipmo_id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tipmo_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tipsol_Id_TipoSolicitud">
-    <End Role="tbTipoSolicitud" Type="Self.tbTipoSolicitud" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoSolicitud">
-        <PropertyRef Name="tipsol_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tipsol_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tmo_Id_TipoMonedad">
-    <End Role="tbTipoMoneda" Type="Self.tbTipoMoneda" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoMoneda">
-        <PropertyRef Name="tmo_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tmo_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_tps_Id">
     <End Role="tbTipoSangre" Type="Self.tbTipoSangre" Multiplicity="1" />
     <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -336,33 +276,31 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tpsal_Id_TipoSalario">
-    <End Role="tbTipoSalario" Type="Self.tbTipoSalario" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoSalario">
-        <PropertyRef Name="tpsal_id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tpsal_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tpv_Id">
-    <End Role="tbTipoViatico" Type="Self.tbTipoViatico" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoViatico">
-        <PropertyRef Name="tpv_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tpv_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Function Name="spSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SDP_tbMunicipio_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_CrearAccionPersonal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="emp_Id" Type="int" Mode="In" />
+    <Parameter Name="tipsol_Id" Type="int" Mode="In" />
+    <Parameter Name="pto_Id" Type="int" Mode="In" />
+    <Parameter Name="tpsal_id" Type="int" Mode="In" />
+    <Parameter Name="tmo_id" Type="int" Mode="In" />
+    <Parameter Name="are_Id" Type="int" Mode="In" />
+    <Parameter Name="tipmo_id" Type="int" Mode="In" />
+    <Parameter Name="tpv_Id" Type="int" Mode="In" />
+    <Parameter Name="sol_GralDescripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralJefeInmediato" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralCorreoJefeInmediato" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralComentario" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralJustificacion" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralFechaSolicitud" Type="datetime" Mode="In" />
+    <Parameter Name="sol_Acper_Anterior" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_Acper_Nuevo" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_UsuarioCrea" Type="int" Mode="In" />
+    <Parameter Name="sol_FechaCrea" Type="datetime" Mode="In" />
+    <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />
+    <Parameter Name="sol_FechaModifica" Type="datetime" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbArea_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="are_Descripcion" Type="nvarchar" Mode="In" />
@@ -533,10 +471,6 @@
       <End Role="tbDepartamento" EntitySet="tbDepartamento" />
       <End Role="tbMunicipio" EntitySet="tbMunicipio" />
     </AssociationSet>
-    <AssociationSet Name="FK_emp_Id_Empleado" Association="Self.FK_emp_Id_Empleado">
-      <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
     <AssociationSet Name="FK_est_Id" Association="Self.FK_est_Id">
       <End Role="tbEstado" EntitySet="tbEstado" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
@@ -549,33 +483,9 @@
       <End Role="tbPuesto" EntitySet="tbPuesto" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
     </AssociationSet>
-    <AssociationSet Name="FK_pto_Id_Puesto" Association="Self.FK_pto_Id_Puesto">
-      <End Role="tbPuesto" EntitySet="tbPuesto" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tipmo_Id_TipoMovimiento" Association="Self.FK_tipmo_Id_TipoMovimiento">
-      <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tipsol_Id_TipoSolicitud" Association="Self.FK_tipsol_Id_TipoSolicitud">
-      <End Role="tbTipoSolicitud" EntitySet="tbTipoSolicitud" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tmo_Id_TipoMonedad" Association="Self.FK_tmo_Id_TipoMonedad">
-      <End Role="tbTipoMoneda" EntitySet="tbTipoMoneda" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
     <AssociationSet Name="FK_tps_Id" Association="Self.FK_tps_Id">
       <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tpsal_Id_TipoSalario" Association="Self.FK_tpsal_Id_TipoSalario">
-      <End Role="tbTipoSalario" EntitySet="tbTipoSalario" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tpv_Id" Association="Self.FK_tpv_Id">
-      <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

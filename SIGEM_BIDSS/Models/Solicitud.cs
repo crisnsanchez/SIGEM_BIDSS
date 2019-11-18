@@ -14,8 +14,6 @@ namespace SIGEM_BIDSS.Models
         public int sol_Id { get; set; }
 
 
-        [Display(Name = "Descripción Solicitud")]
-        public string sol_Descripcion { get; set; }
 
         [Display(Name = "ID Empleado")]
         public short emp_Id { get; set; }
@@ -61,6 +59,9 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "ID Tipo Viático")]
         public int tpv_Id { get; set; }
+
+        [Display(Name = "Descripción Solicitud")]
+        public string sol_GralDescripcion { get; set; }
 
         [Display(Name = "Justificaión Solicitud")]
         public string sol_Justificacion { get; set; }

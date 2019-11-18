@@ -103,44 +103,44 @@
           <Property Name="sol_GralDescripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_GralJefeInmediato" Type="nvarchar" MaxLength="100" />
           <Property Name="sol_GralCorreoJefeInmediato" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_GralComentario" Type="nchar" MaxLength="50" />
+          <Property Name="sol_GralComentario" Type="nvarchar" MaxLength="50" />
           <Property Name="sol_GralJustificacion" Type="nvarchar" MaxLength="50" />
           <Property Name="sol_GralFechaSolicitud" Type="datetime" Nullable="false" />
-          <Property Name="sol_AnviFechaViaje" Type="datetime" />
-          <Property Name="sol_Anvi_Cliente" Type="nvarchar" MaxLength="100" />
-          <Property Name="sol_Anvi_LugarDestino" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_Acper_Anterior" Type="nchar" MaxLength="50" />
-          <Property Name="sol_Anvi_PropositoVisita" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_Anvi_DiasVisita" Type="int" />
-          <Property Name="sol_AnviHospedaje" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_AnviTrasladoHacia" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_AnsolMonto" Type="float" />
-          <Property Name="sol_perFechaRegreso" Type="datetime" />
-          <Property Name="sol_perMedioDia" Type="bit" />
-          <Property Name="sol_perCantidadDias" Type="int" />
-          <Property Name="sol_ReemMonto" Type="float" />
-          <Property Name="sol_ReemFechaMonto" Type="datetime" />
-          <Property Name="sol_ReemProveedor" Type="nchar" MaxLength="10" />
-          <Property Name="sol_ReemCargoA" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ReemFechaGastos" Type="datetime" />
-          <Property Name="sol_ReemNoFactura" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_AprRtn" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_AprNombreEmpresa" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_AprCiudad" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_AprDireccion" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ApreTelefono" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ApreContactoAdm" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ApreCorreoAdm" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ApreNombreTecn" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ApreTelefonoTecn" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ApreCorreoTecn" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ApreCargoTecn" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" />
-          <Property Name="sol_Acper_Nuevo" Type="nchar" MaxLength="50" />
-          <Property Name="sol_UsuarioCrea" Type="int" />
-          <Property Name="sol_FechaCrea" Type="datetime" />
-          <Property Name="sol_UsuarioModifica" Type="int" />
-          <Property Name="sol_FechaModifica" Type="datetime" />
+          <Property Name="sol_AnviFechaViaje" Type="datetime" Nullable="false" />
+          <Property Name="sol_Anvi_Cliente" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="sol_Anvi_LugarDestino" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_Acper_Anterior" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_Anvi_PropositoVisita" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_Anvi_DiasVisita" Type="int" Nullable="false" />
+          <Property Name="sol_AnviHospedaje" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_AnviTrasladoHacia" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_AnsolMonto" Type="float" Nullable="false" />
+          <Property Name="sol_perFechaRegreso" Type="datetime" Nullable="false" />
+          <Property Name="sol_perMedioDia" Type="bit" Nullable="false" />
+          <Property Name="sol_perCantidadDias" Type="int" Nullable="false" />
+          <Property Name="sol_ReemMonto" Type="float" Nullable="false" />
+          <Property Name="sol_ReemFechaMonto" Type="datetime" Nullable="false" />
+          <Property Name="sol_ReemProveedor" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="sol_ReemCargoA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ReemFechaGastos" Type="datetime" Nullable="false" />
+          <Property Name="sol_ReemNoFactura" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_AprRtn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_AprNombreEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_AprCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_AprDireccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ApreTelefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ApreContactoAdm" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ApreCorreoAdm" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ApreNombreTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ApreTelefonoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ApreCorreoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ApreCargoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_Acper_Nuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="sol_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="sol_UsuarioModifica" Type="int" Nullable="false" />
+          <Property Name="sol_FechaModifica" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tbTipoMoneda">
           <Key>
@@ -233,18 +233,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_emp_Id_Empleado">
-          <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
-          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleado">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_est_Id">
           <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
           <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -281,54 +269,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_pto_Id_Puesto">
-          <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="1" />
-          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbPuesto">
-              <PropertyRef Name="pto_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="pto_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tipmo_Id_TipoMovimiento">
-          <End Role="tbTipoMovimiento" Type="Self.tbTipoMovimiento" Multiplicity="1" />
-          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoMovimiento">
-              <PropertyRef Name="tipmo_id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tipmo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tipsol_Id_TipoSolicitud">
-          <End Role="tbTipoSolicitud" Type="Self.tbTipoSolicitud" Multiplicity="1" />
-          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoSolicitud">
-              <PropertyRef Name="tipsol_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tipsol_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tmo_Id_TipoMonedad">
-          <End Role="tbTipoMoneda" Type="Self.tbTipoMoneda" Multiplicity="1" />
-          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoMoneda">
-              <PropertyRef Name="tmo_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tmo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tps_Id">
           <End Role="tbTipoSangre" Type="Self.tbTipoSangre" Multiplicity="1" />
           <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -341,33 +281,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tpsal_Id_TipoSalario">
-          <End Role="tbTipoSalario" Type="Self.tbTipoSalario" Multiplicity="1" />
-          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoSalario">
-              <PropertyRef Name="tpsal_id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tpsal_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tpv_Id">
-          <End Role="tbTipoViatico" Type="Self.tbTipoViatico" Multiplicity="1" />
-          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoViatico">
-              <PropertyRef Name="tpv_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tpv_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="spSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SDP_tbMunicipio_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+        </Function>
+        <Function Name="UDP_Gral_CrearAccionPersonal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="tipsol_Id" Type="int" Mode="In" />
+          <Parameter Name="pto_Id" Type="int" Mode="In" />
+          <Parameter Name="tpsal_id" Type="int" Mode="In" />
+          <Parameter Name="tmo_id" Type="int" Mode="In" />
+          <Parameter Name="are_Id" Type="int" Mode="In" />
+          <Parameter Name="tipmo_id" Type="int" Mode="In" />
+          <Parameter Name="tpv_Id" Type="int" Mode="In" />
+          <Parameter Name="sol_GralDescripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralJefeInmediato" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralCorreoJefeInmediato" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralComentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralJustificacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralFechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="sol_Acper_Anterior" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_Acper_Nuevo" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="sol_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="sol_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Gral_tbArea_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="are_Descripcion" Type="nvarchar" Mode="In" />
@@ -538,10 +476,6 @@
             <End Role="tbDepartamento" EntitySet="tbDepartamento" />
             <End Role="tbMunicipio" EntitySet="tbMunicipio" />
           </AssociationSet>
-          <AssociationSet Name="FK_emp_Id_Empleado" Association="Self.FK_emp_Id_Empleado">
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
           <AssociationSet Name="FK_est_Id" Association="Self.FK_est_Id">
             <End Role="tbEstado" EntitySet="tbEstado" />
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
@@ -554,33 +488,9 @@
             <End Role="tbPuesto" EntitySet="tbPuesto" />
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
           </AssociationSet>
-          <AssociationSet Name="FK_pto_Id_Puesto" Association="Self.FK_pto_Id_Puesto">
-            <End Role="tbPuesto" EntitySet="tbPuesto" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tipmo_Id_TipoMovimiento" Association="Self.FK_tipmo_Id_TipoMovimiento">
-            <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tipsol_Id_TipoSolicitud" Association="Self.FK_tipsol_Id_TipoSolicitud">
-            <End Role="tbTipoSolicitud" EntitySet="tbTipoSolicitud" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tmo_Id_TipoMonedad" Association="Self.FK_tmo_Id_TipoMonedad">
-            <End Role="tbTipoMoneda" EntitySet="tbTipoMoneda" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
           <AssociationSet Name="FK_tps_Id" Association="Self.FK_tps_Id">
             <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tpsal_Id_TipoSalario" Association="Self.FK_tpsal_Id_TipoSalario">
-            <End Role="tbTipoSalario" EntitySet="tbTipoSalario" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tpv_Id" Association="Self.FK_tpv_Id">
-            <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -639,7 +549,6 @@
           <NavigationProperty Name="tbMunicipio" Relationship="Self.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbMunicipio" />
           <NavigationProperty Name="tbPuesto" Relationship="Self.FK_pto_Id" FromRole="tbEmpleado" ToRole="tbPuesto" />
           <NavigationProperty Name="tbTipoSangre" Relationship="Self.FK_tps_Id" FromRole="tbEmpleado" ToRole="tbTipoSangre" />
-          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_emp_Id_Empleado" FromRole="tbEmpleado" ToRole="tbSolicitud" />
         </EntityType>
         <EntityType Name="tbEstado">
           <Key>
@@ -680,7 +589,6 @@
           <Property Name="pto_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbArea" Relationship="Self.FK_are_Id" FromRole="tbPuesto" ToRole="tbArea" />
           <NavigationProperty Name="tbEmpleado" Relationship="Self.FK_pto_Id" FromRole="tbPuesto" ToRole="tbEmpleado" />
-          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_pto_Id_Puesto" FromRole="tbPuesto" ToRole="tbSolicitud" />
         </EntityType>
         <EntityType Name="tbTipoMoneda">
           <Key>
@@ -693,7 +601,6 @@
           <Property Name="tmo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tmo_UsuarioModifica" Type="Int32" />
           <Property Name="tmo_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_tmo_Id_TipoMonedad" FromRole="tbTipoMoneda" ToRole="tbSolicitud" />
         </EntityType>
         <EntityType Name="tbTipoMovimiento">
           <Key>
@@ -705,7 +612,6 @@
           <Property Name="tipmo_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tipmo_UsuarioModifica" Type="Int32" />
           <Property Name="tipmo_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_tipmo_Id_TipoMovimiento" FromRole="tbTipoMovimiento" ToRole="tbSolicitud" />
         </EntityType>
         <EntityType Name="tbTipoSalario">
           <Key>
@@ -717,7 +623,6 @@
           <Property Name="tpsal_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tpsal_UsuarioModifica" Type="Int32" />
           <Property Name="tpsal_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_tpsal_Id_TipoSalario" FromRole="tbTipoSalario" ToRole="tbSolicitud" />
         </EntityType>
         <EntityType Name="tbTipoSangre">
           <Key>
@@ -741,7 +646,6 @@
           <Property Name="tipsol_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tipsol_UsuarioModifica" Type="Int32" />
           <Property Name="tipsol_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_tipsol_Id_TipoSolicitud" FromRole="tbTipoSolicitud" ToRole="tbSolicitud" />
         </EntityType>
         <EntityType Name="tbTipoViatico">
           <Key>
@@ -753,7 +657,6 @@
           <Property Name="tpv_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tpv_UsuarioModifica" Type="Int32" />
           <Property Name="tpv_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_tpv_Id" FromRole="tbTipoViatico" ToRole="tbSolicitud" />
         </EntityType>
         <Association Name="FK_are_Id">
           <End Role="tbArea" Type="Self.tbArea" Multiplicity="1" />
@@ -1015,36 +918,30 @@
             <Parameter Name="tpv_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tpv_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Gral_CrearAccionPersonal" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_CrearAccionPersonal_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tipsol_Id" Mode="In" Type="Int32" />
+            <Parameter Name="pto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tpsal_id" Mode="In" Type="Int32" />
+            <Parameter Name="tmo_id" Mode="In" Type="Int32" />
+            <Parameter Name="are_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tipmo_id" Mode="In" Type="Int32" />
+            <Parameter Name="tpv_Id" Mode="In" Type="Int32" />
+            <Parameter Name="sol_GralDescripcion" Mode="In" Type="String" />
+            <Parameter Name="sol_GralJefeInmediato" Mode="In" Type="String" />
+            <Parameter Name="sol_GralCorreoJefeInmediato" Mode="In" Type="String" />
+            <Parameter Name="sol_GralComentario" Mode="In" Type="String" />
+            <Parameter Name="sol_GralJustificacion" Mode="In" Type="String" />
+            <Parameter Name="sol_GralFechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_Acper_Anterior" Mode="In" Type="String" />
+            <Parameter Name="sol_Acper_Nuevo" Mode="In" Type="String" />
+            <Parameter Name="sol_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="sol_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="sol_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <EntitySet Name="tbSolicitud" EntityType="SIGEM_BIDSSModel.tbSolicitud" />
-          <AssociationSet Name="FK_emp_Id_Empleado" Association="SIGEM_BIDSSModel.FK_emp_Id_Empleado">
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_pto_Id_Puesto" Association="SIGEM_BIDSSModel.FK_pto_Id_Puesto">
-            <End Role="tbPuesto" EntitySet="tbPuesto" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tipmo_Id_TipoMovimiento" Association="SIGEM_BIDSSModel.FK_tipmo_Id_TipoMovimiento">
-            <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tipsol_Id_TipoSolicitud" Association="SIGEM_BIDSSModel.FK_tipsol_Id_TipoSolicitud">
-            <End Role="tbTipoSolicitud" EntitySet="tbTipoSolicitud" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tmo_Id_TipoMonedad" Association="SIGEM_BIDSSModel.FK_tmo_Id_TipoMonedad">
-            <End Role="tbTipoMoneda" EntitySet="tbTipoMoneda" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tpsal_Id_TipoSalario" Association="SIGEM_BIDSSModel.FK_tpsal_Id_TipoSalario">
-            <End Role="tbTipoSalario" EntitySet="tbTipoSalario" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tpv_Id" Association="SIGEM_BIDSSModel.FK_tpv_Id">
-            <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
-            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="spSelect_Result">
           <Property Type="Int32" Name="tps_Id" Nullable="false" />
           <Property Type="String" Name="tps_nombre" Nullable="false" MaxLength="3" />
@@ -1137,6 +1034,9 @@
         <ComplexType Name="UDP_Gral_tbTipoSalario_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Gral_CrearAccionPersonal_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         <EntityType Name="tbSolicitud">
           <Key>
             <PropertyRef Name="sol_Id" />
@@ -1153,137 +1053,46 @@
           <Property Name="sol_GralDescripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sol_GralJefeInmediato" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="sol_GralCorreoJefeInmediato" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_GralComentario" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="sol_GralComentario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sol_GralJustificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sol_GralFechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="sol_AnviFechaViaje" Type="DateTime" Precision="3" />
-          <Property Name="sol_Anvi_Cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="sol_Anvi_LugarDestino" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_Acper_Anterior" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="sol_Anvi_PropositoVisita" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_Anvi_DiasVisita" Type="Int32" />
-          <Property Name="sol_AnviHospedaje" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_AnviTrasladoHacia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_AnsolMonto" Type="Double" />
-          <Property Name="sol_perFechaRegreso" Type="DateTime" Precision="3" />
-          <Property Name="sol_perMedioDia" Type="Boolean" />
-          <Property Name="sol_perCantidadDias" Type="Int32" />
-          <Property Name="sol_ReemMonto" Type="Double" />
-          <Property Name="sol_ReemFechaMonto" Type="DateTime" Precision="3" />
-          <Property Name="sol_ReemProveedor" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="sol_ReemCargoA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ReemFechaGastos" Type="DateTime" Precision="3" />
-          <Property Name="sol_ReemNoFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_AprRtn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_AprNombreEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_AprCiudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_AprDireccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ApreTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ApreContactoAdm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ApreCorreoAdm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ApreNombreTecn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ApreTelefonoTecn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ApreCorreoTecn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ApreCargoTecn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_ApreLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sol_Acper_Nuevo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="sol_UsuarioCrea" Type="Int32" />
-          <Property Name="sol_FechaCrea" Type="DateTime" Precision="3" />
-          <Property Name="sol_UsuarioModifica" Type="Int32" />
-          <Property Name="sol_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_emp_Id_Empleado" FromRole="tbSolicitud" ToRole="tbEmpleado" />
-          <NavigationProperty Name="tbPuesto" Relationship="SIGEM_BIDSSModel.FK_pto_Id_Puesto" FromRole="tbSolicitud" ToRole="tbPuesto" />
-          <NavigationProperty Name="tbTipoMovimiento" Relationship="SIGEM_BIDSSModel.FK_tipmo_Id_TipoMovimiento" FromRole="tbSolicitud" ToRole="tbTipoMovimiento" />
-          <NavigationProperty Name="tbTipoSolicitud" Relationship="SIGEM_BIDSSModel.FK_tipsol_Id_TipoSolicitud" FromRole="tbSolicitud" ToRole="tbTipoSolicitud" />
-          <NavigationProperty Name="tbTipoMoneda" Relationship="SIGEM_BIDSSModel.FK_tmo_Id_TipoMonedad" FromRole="tbSolicitud" ToRole="tbTipoMoneda" />
-          <NavigationProperty Name="tbTipoSalario" Relationship="SIGEM_BIDSSModel.FK_tpsal_Id_TipoSalario" FromRole="tbSolicitud" ToRole="tbTipoSalario" />
-          <NavigationProperty Name="tbTipoViatico" Relationship="SIGEM_BIDSSModel.FK_tpv_Id" FromRole="tbSolicitud" ToRole="tbTipoViatico" />
+          <Property Name="sol_AnviFechaViaje" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_Anvi_Cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sol_Anvi_LugarDestino" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_Acper_Anterior" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_Anvi_PropositoVisita" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_Anvi_DiasVisita" Type="Int32" Nullable="false" />
+          <Property Name="sol_AnviHospedaje" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_AnviTrasladoHacia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_AnsolMonto" Type="Double" Nullable="false" />
+          <Property Name="sol_perFechaRegreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_perMedioDia" Type="Boolean" Nullable="false" />
+          <Property Name="sol_perCantidadDias" Type="Int32" Nullable="false" />
+          <Property Name="sol_ReemMonto" Type="Double" Nullable="false" />
+          <Property Name="sol_ReemFechaMonto" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_ReemProveedor" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="sol_ReemCargoA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ReemFechaGastos" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_ReemNoFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_AprRtn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_AprNombreEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_AprCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_AprDireccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ApreTelefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ApreContactoAdm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ApreCorreoAdm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ApreNombreTecn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ApreTelefonoTecn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ApreCorreoTecn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ApreCargoTecn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_ApreLink" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_Acper_Nuevo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sol_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="sol_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_UsuarioModifica" Type="Int32" Nullable="false" />
+          <Property Name="sol_FechaModifica" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <Association Name="FK_emp_Id_Empleado">
-          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleado">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_pto_Id_Puesto">
-          <End Type="SIGEM_BIDSSModel.tbPuesto" Role="tbPuesto" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbPuesto">
-              <PropertyRef Name="pto_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="pto_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tipmo_Id_TipoMovimiento">
-          <End Type="SIGEM_BIDSSModel.tbTipoMovimiento" Role="tbTipoMovimiento" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoMovimiento">
-              <PropertyRef Name="tipmo_id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tipmo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tipsol_Id_TipoSolicitud">
-          <End Type="SIGEM_BIDSSModel.tbTipoSolicitud" Role="tbTipoSolicitud" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoSolicitud">
-              <PropertyRef Name="tipsol_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tipsol_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tmo_Id_TipoMonedad">
-          <End Type="SIGEM_BIDSSModel.tbTipoMoneda" Role="tbTipoMoneda" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoMoneda">
-              <PropertyRef Name="tmo_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tmo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tpsal_Id_TipoSalario">
-          <End Type="SIGEM_BIDSSModel.tbTipoSalario" Role="tbTipoSalario" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoSalario">
-              <PropertyRef Name="tpsal_id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tpsal_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tpv_Id">
-          <End Type="SIGEM_BIDSSModel.tbTipoViatico" Role="tbTipoViatico" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoViatico">
-              <PropertyRef Name="tpv_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitud">
-              <PropertyRef Name="tpv_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1646,6 +1455,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_CrearAccionPersonal" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_CrearAccionPersonal" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_CrearAccionPersonal_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

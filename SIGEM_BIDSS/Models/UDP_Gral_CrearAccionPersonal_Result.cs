@@ -10,16 +10,9 @@
 namespace SIGEM_BIDSS.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tbTipoMoneda
+    public partial class UDP_Gral_CrearAccionPersonal_Result
     {
-        public short tmo_Id { get; set; }
-        public string tmo_Abreviatura { get; set; }
-        public string tmo_Nombre { get; set; }
-        public int tmo_UsuarioCrea { get; set; }
-        public System.DateTime tmo_FechaCrea { get; set; }
-        public Nullable<int> tmo_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> tmo_FechaModifica { get; set; }
+        public string MensajeError { get; set; }
     }
 }

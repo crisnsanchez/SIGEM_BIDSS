@@ -18,7 +18,6 @@ namespace SIGEM_BIDSS.Models
         public tbPuesto()
         {
             this.tbEmpleado = new HashSet<tbEmpleado>();
-            this.tbSolicitud = new HashSet<tbSolicitud>();
         }
     
         public int pto_Id { get; set; }
@@ -32,7 +31,5 @@ namespace SIGEM_BIDSS.Models
         public virtual tbArea tbArea { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

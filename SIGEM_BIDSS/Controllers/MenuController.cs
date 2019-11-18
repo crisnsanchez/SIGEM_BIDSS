@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SIGEM_BIDSS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace SIGEM_BIDSS.Controllers
     [Authorize]
     public class MenuController : Controller
     {
+        private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         // GET: Menu
         public ActionResult Index()
         {
@@ -24,7 +26,8 @@ namespace SIGEM_BIDSS.Controllers
         }
         public ActionResult Solicitud()
         {
-            return View();
+            var tiposol = (from _dbt in db.tbTipoSolicitud select(_dbt.tipsol_Descripcion) );
+            return View(tiposol);
         }
     }
 }
