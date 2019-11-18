@@ -103,7 +103,20 @@
                             case GeneralFunctions.AnticipodeViatico:
                                 @Html.Partial("_AnticipoViatico", new tbSolicitud());
                                 break;
-                         
+                            case GeneralFunctions.ChecklistCapacitaciones:
+                                @Html.Partial("_CheckListCapacitaciones", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.RembolsoGastos:
+                                @Html.Partial("_RembolsoGastos", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.LiquidacionAnticipoViaticos:
+                                @Html.Partial("_LiquidacionAnticipoViaticos", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.AnticipoSalario:
+                                @Html.Partial("_AnticipoSalario", new tbSolicitud());
+                                break;
+
+
                             default:
                                 @Html.Label("Opcion3");
                                 break;

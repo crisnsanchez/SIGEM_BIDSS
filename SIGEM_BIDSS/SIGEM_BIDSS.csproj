@@ -1412,6 +1412,8 @@
     <Content Include="Views\Solicitud\_AnticipoViatico.cshtml" />
     <Content Include="Views\Solicitud\_CheckListCapacitaciones.cshtml" />
     <Content Include="Views\Solicitud\_RembolsoGastos.cshtml" />
+    <Content Include="Views\Solicitud\_LiquidacionAnticipoViaticos.cshtml" />
+    <Content Include="Views\Solicitud\_AnticipoSalario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

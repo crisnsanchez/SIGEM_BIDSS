@@ -37,6 +37,15 @@ namespace SIGEM_BIDSS.Controllers
         {
             return PartialView(meter_id);
         }
+        public ActionResult _LiquidacionAnticipoViaticos(int meter_id)
+        {
+            return PartialView(meter_id);
+        }
+        public ActionResult _AnticipoSalario(int meter_id)
+        {
+            return PartialView(meter_id);
+        }
+
 
 
         public ActionResult Create(tbSolicitud SolicitudS, string _tipsol_Id)

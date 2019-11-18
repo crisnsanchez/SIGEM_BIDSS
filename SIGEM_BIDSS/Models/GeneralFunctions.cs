@@ -41,7 +41,10 @@ namespace SIGEM_BIDSS.Models
                 AnticipodeViatico = TipodeSolicitudSearch("Anticipo de Viaticos"),
                 PermisoLaboral = TipodeSolicitudSearch("Permiso Laboral"),
                 ChecklistCapacitaciones = TipodeSolicitudSearch("Checklist Capacitaciones"),
-                RembolsoGastos = TipodeSolicitudSearch("Rembolso de Gastos")
+                RembolsoGastos = TipodeSolicitudSearch("Rembolso de Gastos"),
+                  LiquidacionAnticipoViaticos= TipodeSolicitudSearch("Liquidacion Anticipo de viaticos "),
+
+                  AnticipoSalario = TipodeSolicitudSearch("Anticipo Salario")
             };
             return obtipsol;
         }
@@ -62,7 +65,8 @@ namespace SIGEM_BIDSS.Models
         public const int PermisoLaboral = 3;
         public const int ChecklistCapacitaciones = 4;
         public const int RembolsoGastos = 5;
-
+        public const int LiquidacionAnticipoViaticos = 6;
+        public const int AnticipoSalario = 7;
 
         public const int empleadoinactivo = 2;
         public const int empleadoactivo = 1;
