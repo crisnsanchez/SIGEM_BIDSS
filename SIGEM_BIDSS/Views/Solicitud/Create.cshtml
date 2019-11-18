@@ -97,9 +97,13 @@
                             case GeneralFunctions.AccionPersonal:
                                 @Html.Partial("_AccionPersonal", new tbSolicitud());
                                 break;
-                            case GeneralFunctions.AnticipodeViaticos:
-                                @Html.Label("Opcion2");
+                            case GeneralFunctions.PermisoLaboral:
+                                @Html.Partial("_PermisoLaboral", new tbSolicitud());
                                 break;
+                            case GeneralFunctions.AnticipodeViatico:
+                                @Html.Partial("_AnticipoViatico", new tbSolicitud());
+                                break;
+                         
                             default:
                                 @Html.Label("Opcion3");
                                 break;

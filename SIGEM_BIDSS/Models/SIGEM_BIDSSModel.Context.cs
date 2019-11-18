@@ -33,13 +33,13 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbEstado> tbEstado { get; set; }
         public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
         public virtual DbSet<tbPuesto> tbPuesto { get; set; }
+        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
         public virtual DbSet<tbTipoMoneda> tbTipoMoneda { get; set; }
         public virtual DbSet<tbTipoMovimiento> tbTipoMovimiento { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
-        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
     
         public virtual ObjectResult<spSelect_Result> spSelect()
         {
@@ -651,6 +651,161 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("sol_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_CrearAccionPersonal_Result>("UDP_Gral_CrearAccionPersonal", emp_IdParameter, tipsol_IdParameter, pto_IdParameter, tpsal_idParameter, tmo_idParameter, are_IdParameter, tipmo_idParameter, tpv_IdParameter, sol_GralDescripcionParameter, sol_GralJefeInmediatoParameter, sol_GralCorreoJefeInmediatoParameter, sol_GralComentarioParameter, sol_GralJustificacionParameter, sol_GralFechaSolicitudParameter, sol_Acper_AnteriorParameter, sol_Acper_NuevoParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter, sol_UsuarioModificaParameter, sol_FechaModificaParameter);
+        }
+    
+        public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
+        {
+            var tipsol_idParameter = tipsol_id.HasValue ?
+                new ObjectParameter("tipsol_id", tipsol_id) :
+                new ObjectParameter("tipsol_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SDP_tbAnticipoSalario_Select", tipsol_idParameter);
+        }
+    
+        public virtual int UDP_Gral_ReembolsoGastos(string sol_Descripcion, Nullable<int> emp_Id, Nullable<int> tipsol_id, Nullable<int> pto_id, Nullable<int> tpsal_id, Nullable<double> sol_MontoSolicitud, Nullable<int> tmo_id, Nullable<int> tipmo_id, Nullable<int> tpv_id, string sol_Justificacion, Nullable<System.DateTime> sol_FechaSolicitud, Nullable<System.DateTime> sol_FechaMonto, string sol_NoFactura, Nullable<int> sol_UsuarioCrea, Nullable<System.DateTime> sol_FechaCrea)
+        {
+            var sol_DescripcionParameter = sol_Descripcion != null ?
+                new ObjectParameter("sol_Descripcion", sol_Descripcion) :
+                new ObjectParameter("sol_Descripcion", typeof(string));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var tipsol_idParameter = tipsol_id.HasValue ?
+                new ObjectParameter("tipsol_id", tipsol_id) :
+                new ObjectParameter("tipsol_id", typeof(int));
+    
+            var pto_idParameter = pto_id.HasValue ?
+                new ObjectParameter("pto_id", pto_id) :
+                new ObjectParameter("pto_id", typeof(int));
+    
+            var tpsal_idParameter = tpsal_id.HasValue ?
+                new ObjectParameter("tpsal_id", tpsal_id) :
+                new ObjectParameter("tpsal_id", typeof(int));
+    
+            var sol_MontoSolicitudParameter = sol_MontoSolicitud.HasValue ?
+                new ObjectParameter("sol_MontoSolicitud", sol_MontoSolicitud) :
+                new ObjectParameter("sol_MontoSolicitud", typeof(double));
+    
+            var tmo_idParameter = tmo_id.HasValue ?
+                new ObjectParameter("tmo_id", tmo_id) :
+                new ObjectParameter("tmo_id", typeof(int));
+    
+            var tipmo_idParameter = tipmo_id.HasValue ?
+                new ObjectParameter("tipmo_id", tipmo_id) :
+                new ObjectParameter("tipmo_id", typeof(int));
+    
+            var tpv_idParameter = tpv_id.HasValue ?
+                new ObjectParameter("tpv_id", tpv_id) :
+                new ObjectParameter("tpv_id", typeof(int));
+    
+            var sol_JustificacionParameter = sol_Justificacion != null ?
+                new ObjectParameter("sol_Justificacion", sol_Justificacion) :
+                new ObjectParameter("sol_Justificacion", typeof(string));
+    
+            var sol_FechaSolicitudParameter = sol_FechaSolicitud.HasValue ?
+                new ObjectParameter("sol_FechaSolicitud", sol_FechaSolicitud) :
+                new ObjectParameter("sol_FechaSolicitud", typeof(System.DateTime));
+    
+            var sol_FechaMontoParameter = sol_FechaMonto.HasValue ?
+                new ObjectParameter("sol_FechaMonto", sol_FechaMonto) :
+                new ObjectParameter("sol_FechaMonto", typeof(System.DateTime));
+    
+            var sol_NoFacturaParameter = sol_NoFactura != null ?
+                new ObjectParameter("sol_NoFactura", sol_NoFactura) :
+                new ObjectParameter("sol_NoFactura", typeof(string));
+    
+            var sol_UsuarioCreaParameter = sol_UsuarioCrea.HasValue ?
+                new ObjectParameter("sol_UsuarioCrea", sol_UsuarioCrea) :
+                new ObjectParameter("sol_UsuarioCrea", typeof(int));
+    
+            var sol_FechaCreaParameter = sol_FechaCrea.HasValue ?
+                new ObjectParameter("sol_FechaCrea", sol_FechaCrea) :
+                new ObjectParameter("sol_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Gral_ReembolsoGastos", sol_DescripcionParameter, emp_IdParameter, tipsol_idParameter, pto_idParameter, tpsal_idParameter, sol_MontoSolicitudParameter, tmo_idParameter, tipmo_idParameter, tpv_idParameter, sol_JustificacionParameter, sol_FechaSolicitudParameter, sol_FechaMontoParameter, sol_NoFacturaParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Gral_tbAnticipoSalario(Nullable<short> emp_Id, Nullable<int> tipsol_Id, Nullable<int> pto_Id, Nullable<int> tpsal_id, Nullable<short> tmo_id, Nullable<int> are_Id, Nullable<int> tipmo_id, Nullable<int> tpv_Id, string sol_GralDescripcion, string sol_GralJefeInmediato, string sol_GralCorreoJefeInmediato, string sol_GralComentario, string sol_GralJustificacion, Nullable<System.DateTime> sol_GralFechaSolicitud, Nullable<double> sol_AnsolMonto, Nullable<int> sol_UsuarioCrea, Nullable<System.DateTime> sol_FechaCrea, Nullable<int> sol_UsuarioModifica, Nullable<System.DateTime> sol_FechaModifica)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(short));
+    
+            var tipsol_IdParameter = tipsol_Id.HasValue ?
+                new ObjectParameter("tipsol_Id", tipsol_Id) :
+                new ObjectParameter("tipsol_Id", typeof(int));
+    
+            var pto_IdParameter = pto_Id.HasValue ?
+                new ObjectParameter("pto_Id", pto_Id) :
+                new ObjectParameter("pto_Id", typeof(int));
+    
+            var tpsal_idParameter = tpsal_id.HasValue ?
+                new ObjectParameter("tpsal_id", tpsal_id) :
+                new ObjectParameter("tpsal_id", typeof(int));
+    
+            var tmo_idParameter = tmo_id.HasValue ?
+                new ObjectParameter("tmo_id", tmo_id) :
+                new ObjectParameter("tmo_id", typeof(short));
+    
+            var are_IdParameter = are_Id.HasValue ?
+                new ObjectParameter("are_Id", are_Id) :
+                new ObjectParameter("are_Id", typeof(int));
+    
+            var tipmo_idParameter = tipmo_id.HasValue ?
+                new ObjectParameter("tipmo_id", tipmo_id) :
+                new ObjectParameter("tipmo_id", typeof(int));
+    
+            var tpv_IdParameter = tpv_Id.HasValue ?
+                new ObjectParameter("tpv_Id", tpv_Id) :
+                new ObjectParameter("tpv_Id", typeof(int));
+    
+            var sol_GralDescripcionParameter = sol_GralDescripcion != null ?
+                new ObjectParameter("sol_GralDescripcion", sol_GralDescripcion) :
+                new ObjectParameter("sol_GralDescripcion", typeof(string));
+    
+            var sol_GralJefeInmediatoParameter = sol_GralJefeInmediato != null ?
+                new ObjectParameter("sol_GralJefeInmediato", sol_GralJefeInmediato) :
+                new ObjectParameter("sol_GralJefeInmediato", typeof(string));
+    
+            var sol_GralCorreoJefeInmediatoParameter = sol_GralCorreoJefeInmediato != null ?
+                new ObjectParameter("sol_GralCorreoJefeInmediato", sol_GralCorreoJefeInmediato) :
+                new ObjectParameter("sol_GralCorreoJefeInmediato", typeof(string));
+    
+            var sol_GralComentarioParameter = sol_GralComentario != null ?
+                new ObjectParameter("sol_GralComentario", sol_GralComentario) :
+                new ObjectParameter("sol_GralComentario", typeof(string));
+    
+            var sol_GralJustificacionParameter = sol_GralJustificacion != null ?
+                new ObjectParameter("sol_GralJustificacion", sol_GralJustificacion) :
+                new ObjectParameter("sol_GralJustificacion", typeof(string));
+    
+            var sol_GralFechaSolicitudParameter = sol_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("sol_GralFechaSolicitud", sol_GralFechaSolicitud) :
+                new ObjectParameter("sol_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var sol_AnsolMontoParameter = sol_AnsolMonto.HasValue ?
+                new ObjectParameter("sol_AnsolMonto", sol_AnsolMonto) :
+                new ObjectParameter("sol_AnsolMonto", typeof(double));
+    
+            var sol_UsuarioCreaParameter = sol_UsuarioCrea.HasValue ?
+                new ObjectParameter("sol_UsuarioCrea", sol_UsuarioCrea) :
+                new ObjectParameter("sol_UsuarioCrea", typeof(int));
+    
+            var sol_FechaCreaParameter = sol_FechaCrea.HasValue ?
+                new ObjectParameter("sol_FechaCrea", sol_FechaCrea) :
+                new ObjectParameter("sol_FechaCrea", typeof(System.DateTime));
+    
+            var sol_UsuarioModificaParameter = sol_UsuarioModifica.HasValue ?
+                new ObjectParameter("sol_UsuarioModifica", sol_UsuarioModifica) :
+                new ObjectParameter("sol_UsuarioModifica", typeof(int));
+    
+            var sol_FechaModificaParameter = sol_FechaModifica.HasValue ?
+                new ObjectParameter("sol_FechaModifica", sol_FechaModifica) :
+                new ObjectParameter("sol_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbAnticipoSalario", emp_IdParameter, tipsol_IdParameter, pto_IdParameter, tpsal_idParameter, tmo_idParameter, are_IdParameter, tipmo_idParameter, tpv_IdParameter, sol_GralDescripcionParameter, sol_GralJefeInmediatoParameter, sol_GralCorreoJefeInmediatoParameter, sol_GralComentarioParameter, sol_GralJustificacionParameter, sol_GralFechaSolicitudParameter, sol_AnsolMontoParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter, sol_UsuarioModificaParameter, sol_FechaModificaParameter);
         }
     }
 }

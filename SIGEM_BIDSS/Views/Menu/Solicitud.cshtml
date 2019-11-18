@@ -38,7 +38,10 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="@Url.Action("SolicitudAnticipoViatico","Solicitudes")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    @{
+
+                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.AnticipodeViatico})" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    }
                 </div>
             </div>
 
@@ -108,7 +111,10 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="@Url.Action("SolicitudAnticipoViatico","Solicitudes")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    @{
+
+                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.PermisoLaboral})" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    }
                 </div>
             </div>
 
@@ -134,7 +140,10 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="@Url.Action("Index","Area")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    @{
+
+                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.RembolsoGastos })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    }
                 </div>
             </div>
 
@@ -177,7 +186,7 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="@Url.Action("SolicitudAnticipoViatico","Solicitudes", new { _tipsol_Id = GeneralFunctions.AnticipodeViaticos })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.ChecklistCapacitaciones})" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 

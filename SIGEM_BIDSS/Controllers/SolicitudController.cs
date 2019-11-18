@@ -18,6 +18,26 @@ namespace SIGEM_BIDSS.Controllers
         {
             return View();
         }
+        public ActionResult _PermisoLaboral(int meter_id)
+        {
+            return PartialView(meter_id);
+        }
+
+        public ActionResult _CheckListCapacitaciones(int meter_id)
+        {
+               return PartialView(meter_id);
+        }
+
+        public ActionResult _AnticipoViatico(int meter_id)
+        {
+            return PartialView(meter_id);
+        }
+
+        public ActionResult _RembolsoGastos(int meter_id)
+        {
+            return PartialView(meter_id);
+        }
+
 
         public ActionResult Create(tbSolicitud SolicitudS, string _tipsol_Id)
         {
@@ -77,6 +97,7 @@ namespace SIGEM_BIDSS.Controllers
                 ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
                 return RedirectToAction("Edit", "Factura");
             }
+        
         }
     }
 }
