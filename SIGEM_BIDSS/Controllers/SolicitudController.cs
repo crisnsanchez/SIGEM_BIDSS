@@ -19,10 +19,10 @@ namespace SIGEM_BIDSS.Controllers
             return View();
         }
 
-        public ActionResult Create(tbSolicitud SolicitudS, string _tipsol_Id)
+        public ActionResult Create(tbSolicitud SolicitudS, int _tipsol_Id)
         {
 
-            SolicitudS.tipsol_Id = _functions.TipodeSolicitudSearch(_tipsol_Id);
+            SolicitudS.tipsol_Id = _tipsol_Id;
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.tipsol_Id = new SelectList(db.tbTipoSolicitud, "tipsol_Id", "tipsol_Descripcion");
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
