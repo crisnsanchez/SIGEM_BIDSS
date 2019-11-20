@@ -1,6 +1,8 @@
 ﻿@model SIGEM_BIDSS.Models.tbSolicitud
 @using SIGEM_BIDSS.Models
 
+
+@*@Html.HiddenFor(model => model.sol_GralCorreoJefeInmediato, new { Value = "----" })*@
 @Html.HiddenFor(model => model.tmo_id, new { Value = "1" })
 @Html.HiddenFor(model => model.sol_AnsolMonto, new { Value = "1" })
 @Html.HiddenFor(model => model.pto_Id, new { Value = "1" })
@@ -29,6 +31,17 @@
 @Html.HiddenFor(model => model.sol_ReemProveedor, new { Value = "----" })
 @Html.HiddenFor(model => model.sol_ReemCargoA, new { Value = "----" })
 @Html.HiddenFor(model => model.sol_AprDireccion, new { Value = "----" })
+
+
+@*sol_GralFechaSolicitud*@
+
+
+
+@Html.HiddenFor(model => model.sol_AnviFechaViaje, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.sol_perFechaRegreso, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.sol_ReemFechaGastos, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.sol_ReemFechaMonto, new { Value = "1900/01/01" })
+
 
 
 
@@ -60,9 +73,6 @@
     <div class="form-group">
         @Html.LabelFor(model => model.sol_Acper_Anterior, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-
-
-
             @Html.EditorFor(model => model.sol_Acper_Anterior, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_Acper_Anterior, "", new { @class = "text-danger" })
         </div>

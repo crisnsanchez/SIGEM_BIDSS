@@ -362,16 +362,10 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_CrearAccionPersonal" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_CrearAccionPersonal">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_CrearAccionPersonal_Result">
-          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <EntitySetMapping Name="tbSolicitud">
       <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
         <MappingFragment StoreEntitySet="tbSolicitud">
+          <ScalarProperty Name="sol_ReemMontoTotal" ColumnName="sol_ReemMontoTotal" />
           <ScalarProperty Name="sol_FechaModifica" ColumnName="sol_FechaModifica" />
           <ScalarProperty Name="sol_UsuarioModifica" ColumnName="sol_UsuarioModifica" />
           <ScalarProperty Name="sol_FechaCrea" ColumnName="sol_FechaCrea" />
@@ -425,5 +419,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_CrearAccionPersonal" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_CrearAccionPersonal">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_CrearAccionPersonal_Result">
+          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tSolicitudInsertar" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tSolicitudInsertar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result">
+          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

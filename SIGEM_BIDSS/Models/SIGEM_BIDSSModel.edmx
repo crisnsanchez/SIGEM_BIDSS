@@ -124,6 +124,7 @@
           <Property Name="sol_ReemCargoA" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_ReemFechaGastos" Type="datetime" Nullable="false" />
           <Property Name="sol_ReemNoFactura" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sol_ReemMontoTotal" Type="float" Nullable="false" />
           <Property Name="sol_AprRtn" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_AprNombreEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_AprCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -453,6 +454,58 @@
         <Function Name="UDP_Gral_TipoMovimiento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="tipmo_Movimiento" Type="nvarchar" Mode="In" />
           <Parameter Name="tipmo_UsuarioCrea" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_Gral_tSolicitudInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="emp_Id" Type="smallint" Mode="In" />
+          <Parameter Name="tipsol_Id" Type="int" Mode="In" />
+          <Parameter Name="pto_Id" Type="int" Mode="In" />
+          <Parameter Name="tpsal_id" Type="int" Mode="In" />
+          <Parameter Name="tmo_id" Type="smallint" Mode="In" />
+          <Parameter Name="are_Id" Type="int" Mode="In" />
+          <Parameter Name="tipmo_id" Type="int" Mode="In" />
+          <Parameter Name="tpv_Id" Type="int" Mode="In" />
+          <Parameter Name="sol_GralDescripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralJefeInmediato" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralCorreoJefeInmediato" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralComentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralJustificacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_GralFechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="sol_AnviFechaViaje" Type="datetime" Mode="In" />
+          <Parameter Name="sol_Anvi_Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_Anvi_LugarDestino" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_Acper_Anterior" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_Anvi_PropositoVisita" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_Anvi_DiasVisita" Type="int" Mode="In" />
+          <Parameter Name="sol_AnviHospedaje" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_AnviTrasladoHacia" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_AnsolMonto" Type="float" Mode="In" />
+          <Parameter Name="sol_perFechaRegreso" Type="datetime" Mode="In" />
+          <Parameter Name="sol_perMedioDia" Type="bit" Mode="In" />
+          <Parameter Name="sol_perCantidadDias" Type="int" Mode="In" />
+          <Parameter Name="sol_ReemMonto" Type="float" Mode="In" />
+          <Parameter Name="sol_ReemFechaMonto" Type="datetime" Mode="In" />
+          <Parameter Name="sol_ReemProveedor" Type="nchar" Mode="In" />
+          <Parameter Name="sol_ReemCargoA" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ReemFechaGastos" Type="datetime" Mode="In" />
+          <Parameter Name="sol_ReemNoFactura" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ReemMontoTotal" Type="float" Mode="In" />
+          <Parameter Name="sol_AprRtn" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_AprNombreEmpresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_AprCiudad" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_AprDireccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ApreTelefono" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ApreContactoAdm" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ApreCorreoAdm" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ApreNombreTecn" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ApreTelefonoTecn" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ApreCorreoTecn" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ApreCargoTecn" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_ApreLink" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_Acper_Nuevo" Type="nvarchar" Mode="In" />
+          <Parameter Name="sol_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="sol_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="sol_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="SIGEM_BIDSSModelStoreContainer">
           <EntitySet Name="tbArea" EntityType="Self.tbArea" Schema="Gral" store:Type="Tables" />
@@ -918,6 +971,7 @@
             <Parameter Name="tpv_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tpv_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tbSolicitud" EntityType="SIGEM_BIDSSModel.tbSolicitud" />
           <FunctionImport Name="UDP_Gral_CrearAccionPersonal" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_CrearAccionPersonal_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="tipsol_Id" Mode="In" Type="Int32" />
@@ -940,7 +994,58 @@
             <Parameter Name="sol_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="sol_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="tbSolicitud" EntityType="SIGEM_BIDSSModel.tbSolicitud" />
+          <FunctionImport Name="UDP_Gral_tSolicitudInsertar" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int16" />
+            <Parameter Name="tipsol_Id" Mode="In" Type="Int32" />
+            <Parameter Name="pto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tpsal_id" Mode="In" Type="Int32" />
+            <Parameter Name="tmo_id" Mode="In" Type="Int16" />
+            <Parameter Name="are_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tipmo_id" Mode="In" Type="Int32" />
+            <Parameter Name="tpv_Id" Mode="In" Type="Int32" />
+            <Parameter Name="sol_GralDescripcion" Mode="In" Type="String" />
+            <Parameter Name="sol_GralJefeInmediato" Mode="In" Type="String" />
+            <Parameter Name="sol_GralCorreoJefeInmediato" Mode="In" Type="String" />
+            <Parameter Name="sol_GralComentario" Mode="In" Type="String" />
+            <Parameter Name="sol_GralJustificacion" Mode="In" Type="String" />
+            <Parameter Name="sol_GralFechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_AnviFechaViaje" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_Anvi_Cliente" Mode="In" Type="String" />
+            <Parameter Name="sol_Anvi_LugarDestino" Mode="In" Type="String" />
+            <Parameter Name="sol_Acper_Anterior" Mode="In" Type="String" />
+            <Parameter Name="sol_Anvi_PropositoVisita" Mode="In" Type="String" />
+            <Parameter Name="sol_Anvi_DiasVisita" Mode="In" Type="Int32" />
+            <Parameter Name="sol_AnviHospedaje" Mode="In" Type="String" />
+            <Parameter Name="sol_AnviTrasladoHacia" Mode="In" Type="String" />
+            <Parameter Name="sol_AnsolMonto" Mode="In" Type="Double" />
+            <Parameter Name="sol_perFechaRegreso" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_perMedioDia" Mode="In" Type="Boolean" />
+            <Parameter Name="sol_perCantidadDias" Mode="In" Type="Int32" />
+            <Parameter Name="sol_ReemMonto" Mode="In" Type="Double" />
+            <Parameter Name="sol_ReemFechaMonto" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_ReemProveedor" Mode="In" Type="String" />
+            <Parameter Name="sol_ReemCargoA" Mode="In" Type="String" />
+            <Parameter Name="sol_ReemFechaGastos" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_ReemNoFactura" Mode="In" Type="String" />
+            <Parameter Name="sol_ReemMontoTotal" Mode="In" Type="Double" />
+            <Parameter Name="sol_AprRtn" Mode="In" Type="String" />
+            <Parameter Name="sol_AprNombreEmpresa" Mode="In" Type="String" />
+            <Parameter Name="sol_AprCiudad" Mode="In" Type="String" />
+            <Parameter Name="sol_AprDireccion" Mode="In" Type="String" />
+            <Parameter Name="sol_ApreTelefono" Mode="In" Type="String" />
+            <Parameter Name="sol_ApreContactoAdm" Mode="In" Type="String" />
+            <Parameter Name="sol_ApreCorreoAdm" Mode="In" Type="String" />
+            <Parameter Name="sol_ApreNombreTecn" Mode="In" Type="String" />
+            <Parameter Name="sol_ApreTelefonoTecn" Mode="In" Type="String" />
+            <Parameter Name="sol_ApreCorreoTecn" Mode="In" Type="String" />
+            <Parameter Name="sol_ApreCargoTecn" Mode="In" Type="String" />
+            <Parameter Name="sol_ApreLink" Mode="In" Type="String" />
+            <Parameter Name="sol_Acper_Nuevo" Mode="In" Type="String" />
+            <Parameter Name="sol_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="sol_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="sol_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="spSelect_Result">
           <Property Type="Int32" Name="tps_Id" Nullable="false" />
@@ -1034,9 +1139,6 @@
         <ComplexType Name="UDP_Gral_tbTipoSalario_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <ComplexType Name="UDP_Gral_CrearAccionPersonal_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <EntityType Name="tbSolicitud">
           <Key>
             <PropertyRef Name="sol_Id" />
@@ -1091,7 +1193,14 @@
           <Property Name="sol_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="sol_UsuarioModifica" Type="Int32" Nullable="false" />
           <Property Name="sol_FechaModifica" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_ReemMontoTotal" Type="Double" Nullable="false" />
         </EntityType>
+        <ComplexType Name="UDP_Gral_CrearAccionPersonal_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tSolicitudInsertar_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1459,16 +1568,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_CrearAccionPersonal" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_CrearAccionPersonal" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_CrearAccionPersonal_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="tbSolicitud">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
               <MappingFragment StoreEntitySet="tbSolicitud">
+                <ScalarProperty Name="sol_ReemMontoTotal" ColumnName="sol_ReemMontoTotal" />
                 <ScalarProperty Name="sol_FechaModifica" ColumnName="sol_FechaModifica" />
                 <ScalarProperty Name="sol_UsuarioModifica" ColumnName="sol_UsuarioModifica" />
                 <ScalarProperty Name="sol_FechaCrea" ColumnName="sol_FechaCrea" />
@@ -1522,6 +1625,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_CrearAccionPersonal" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_CrearAccionPersonal" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_CrearAccionPersonal_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tSolicitudInsertar" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tSolicitudInsertar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

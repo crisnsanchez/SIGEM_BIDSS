@@ -64,5 +64,6 @@ namespace SIGEM_BIDSS.Models
         public System.DateTime sol_FechaCrea { get; set; }
         public int sol_UsuarioModifica { get; set; }
         public System.DateTime sol_FechaModifica { get; set; }
+        public double sol_ReemMontoTotal { get; set; }
     }
 }
