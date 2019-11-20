@@ -19,9 +19,8 @@ namespace SIGEM_BIDSS.Models
     {
         [Display(Name = "ID")]
         public int tipsol_Id { get; set; }
-        [Display(Name = "Tipo Solicitud")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [StringLength(100, ErrorMessage = "Máximo {1} caracteres")]
+        [Display(Name = "Tipo Solicitud")]
         [MinLength(3, ErrorMessage = "Minimo {1} caracteres")]
         public string tipsol_Descripcion { get; set; }
         [Display(Name = "Usuario Crea")]

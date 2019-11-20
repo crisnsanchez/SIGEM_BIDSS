@@ -65,5 +65,13 @@ namespace SIGEM_BIDSS.Models
         public int sol_UsuarioModifica { get; set; }
         public System.DateTime sol_FechaModifica { get; set; }
         public double sol_ReemMontoTotal { get; set; }
+    
+        public virtual tbArea tbArea { get; set; }
+        public virtual tbEmpleado tbEmpleado { get; set; }
+        public virtual tbTipoMovimiento tbTipoMovimiento { get; set; }
+        public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
+        public virtual tbTipoMoneda tbTipoMoneda { get; set; }
+        public virtual tbTipoSalario tbTipoSalario { get; set; }
+        public virtual tbTipoViatico tbTipoViatico { get; set; }
     }
 }

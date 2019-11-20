@@ -254,6 +254,7 @@
     <Compile Include="Models\TipoMoneda.cs" />
     <Compile Include="Models\TipoMoviento.cs" />
     <Compile Include="Models\TipoSangre.cs" />
+    <Compile Include="Models\TipoSalario.cs" />
     <Compile Include="Models\TipoSolicitud.cs" />
     <Compile Include="Models\UDP_Gral_CrearAccionPersonal_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>

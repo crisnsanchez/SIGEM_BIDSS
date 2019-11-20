@@ -24,6 +24,13 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_pto_Id" ManuallyRouted="false" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_tps_Id" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitud" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_are_Id_Area" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_emp_Id_tbEmpleado" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tipmo_id_tbTipoMovimiento" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tipsol_Id_tbTipoSolicitud" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tmo_Id_Moneda" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tpsal_Id_TipoSalario" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tpv_Id" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
