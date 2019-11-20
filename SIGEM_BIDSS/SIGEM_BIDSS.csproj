@@ -166,13 +166,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
-    <Compile Include="Controllers\PuestoController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\TipoMonedaController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
@@ -255,6 +255,7 @@
     <Compile Include="Models\TipoMoviento.cs" />
     <Compile Include="Models\TipoSangre.cs" />
     <Compile Include="Models\TipoSalario.cs" />
+    <Compile Include="Models\TipoViatico.cs" />
     <Compile Include="Models\TipoSolicitud.cs" />
     <Compile Include="Models\UDP_Gral_CrearAccionPersonal_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
@@ -1343,11 +1344,6 @@
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Puesto\Create.cshtml" />
-    <Content Include="Views\Puesto\Delete.cshtml" />
-    <Content Include="Views\Puesto\Details.cshtml" />
-    <Content Include="Views\Puesto\Edit.cshtml" />
-    <Content Include="Views\Puesto\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Empleado\Create.cshtml" />
     <Content Include="Views\Empleado\Delete.cshtml" />
@@ -1410,6 +1406,11 @@
     <Content Include="Views\TipoSalario\Index.cshtml" />
     <Content Include="Views\Solicitud\Create.cshtml" />
     <Content Include="Views\Solicitud\_AccionPersonal.cshtml" />
+    <Content Include="Views\Cargos\Create.cshtml" />
+    <Content Include="Views\Cargos\Delete.cshtml" />
+    <Content Include="Views\Cargos\Details.cshtml" />
+    <Content Include="Views\Cargos\Edit.cshtml" />
+    <Content Include="Views\Cargos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

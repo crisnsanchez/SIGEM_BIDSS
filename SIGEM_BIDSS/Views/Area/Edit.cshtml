@@ -32,92 +32,90 @@
     }
 </style>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="card">
-        <div class="card-header ">
-            <h3 class="card-title">Editar Area</h3>
-            <div class="card-tools">
-                @Html.ActionLink("Regresar", "Index", null, htmlAttributes: new { @class = "btn btn-primary float-right" })
-            </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-horizontal">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.are_Id)
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.are_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.are_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.are_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "100", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                                        @Html.ValidationMessageFor(model => model.are_Descripcion, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
-                                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-refresh  mr-1"></i>
+            Editar Area
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.are_Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.are_Id, "Id Area", htmlAttributes: new { @class = "control-label col-sm-4" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })</p>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    @Html.LabelFor(model => model.are_Descripcion, "Descripcion", htmlAttributes: new { @class = "control-label col-sm-4" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.are_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.are_Descripcion, "", new { @class = "text-danger" })</p>
+                    </div>
+                </div>
             </div>
 
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-primary" id="Save" />
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
         </div>
+    }
+</div>
 
-    </div>
+    <script>
+        ///validar solo letras
+        ///validar solo letras
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = "$# '/áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = "8-37-39-46";
 
-}
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
 
-
-<script>
-    ///validar solo letras
-    ///validar solo letras
-    function soloLetras(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = "$# '/áéíóúabcdefghijklmnñopqrstuvwxyz";
-        especiales = "8-37-39-46";
-
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
+            if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                return false;
             }
         }
-
-        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-            return false;
+        function noespaciosincio(e) {
+            var valor = e.value.replace(/^ */, '');
+            e.value = valor;
         }
-    }
-    function noespaciosincio(e) {
-        var valor = e.value.replace(/^ */, '');
-        e.value = valor;
-    }
 
 
 
-    document.getElementById("Save").onclick = function () {
-        var txtObj = document.getElementById("des");
-        txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
-        txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
+        document.getElementById("Save").onclick = function () {
+            var txtObj = document.getElementById("des");
+            txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
+            txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 
 
 
 
-    };
-</script>
+        };
+    </script>

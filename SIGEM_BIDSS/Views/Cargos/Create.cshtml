@@ -1,9 +1,11 @@
 ﻿@model SIGEM_BIDSS.Models.tbPuesto
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 
 
 <style>
@@ -33,11 +35,12 @@
 
 
 
+
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
-            <i class="fa fa-refresh mr-1"></i>
-           Editar Puesto
+            <i class="fa fa-upload mr-1"></i>
+            Insertar Cargo
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -51,17 +54,10 @@
 
         <div class="form-horizontal">
             <div class="card-body">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.pto_Id, htmlAttributes: new { @class = "control-label col-sm-2" })
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.pto_Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.pto_Id, "", new { @class = "text-danger" })</p>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.are_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-3">
+                    <div class="col-sm-4">
                         @Html.DropDownListFor(model => model.are_Id, (SelectList)ViewBag.Area, new { @class = "form-control" })
 
                         @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
@@ -90,6 +86,8 @@
     }
 </div>
 <script>
+    ///validar solo letras
+    ///validar solo letras
     function soloLetras(e) {
         key = e.keyCode || e.which;
         tecla = String.fromCharCode(key).toLowerCase();
@@ -124,4 +122,5 @@
 
 
     };
+
 </script>

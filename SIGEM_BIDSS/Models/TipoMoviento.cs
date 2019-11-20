@@ -35,7 +35,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> tipmo_FechaModifica { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+     
         public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }
