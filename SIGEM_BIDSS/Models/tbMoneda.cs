@@ -12,8 +12,14 @@ namespace SIGEM_BIDSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTipoMoneda
+    public partial class tbMoneda
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbMoneda()
+        {
+            this.tbSolicitud = new HashSet<tbSolicitud>();
+        }
+    
         public short tmo_Id { get; set; }
         public string tmo_Abreviatura { get; set; }
         public string tmo_Nombre { get; set; }
@@ -21,5 +27,8 @@ namespace SIGEM_BIDSS.Models
         public System.DateTime tmo_FechaCrea { get; set; }
         public Nullable<int> tmo_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tmo_FechaModifica { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

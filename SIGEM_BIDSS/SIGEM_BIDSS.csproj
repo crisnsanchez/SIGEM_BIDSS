@@ -175,8 +175,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
-    <Compile Include="Controllers\TipoMonedaController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSalarioController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
@@ -226,6 +226,9 @@
     <Compile Include="Models\tbEstado.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbMoneda.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbMunicipio.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -239,6 +242,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoMovimiento.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoPermiso.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoSalario.cs">
@@ -2926,6 +2932,7 @@
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
       <LastGenOutput>SIGEM_BIDSSModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\SIGEM_BIDSSModel.edmx.sql" />
     <Content Include="Models\SIGEM_BIDSSModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
@@ -3011,11 +3018,6 @@
     <Content Include="Views\Estado\Details.cshtml" />
     <Content Include="Views\Estado\Edit.cshtml" />
     <Content Include="Views\Estado\Index.cshtml" />
-    <Content Include="Views\TipoMoneda\Create.cshtml" />
-    <Content Include="Views\TipoMoneda\Delete.cshtml" />
-    <Content Include="Views\TipoMoneda\Details.cshtml" />
-    <Content Include="Views\TipoMoneda\Edit.cshtml" />
-    <Content Include="Views\TipoMoneda\Index.cshtml" />
     <Content Include="Views\TipoSangre\Create.cshtml" />
     <Content Include="Views\TipoSangre\Delete.cshtml" />
     <Content Include="Views\TipoSangre\Details.cshtml" />
@@ -3066,6 +3068,11 @@
     <Content Include="Views\Solicitud\_AnticipoSalario.cshtml" />
     <Content Include="Views\Solicitud\_RembolsoGastos.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Moneda\Create.cshtml" />
+    <Content Include="Views\Moneda\Delete.cshtml" />
+    <Content Include="Views\Moneda\Details.cshtml" />
+    <Content Include="Views\Moneda\Edit.cshtml" />
+    <Content Include="Views\Moneda\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

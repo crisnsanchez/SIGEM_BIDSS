@@ -12,14 +12,13 @@ namespace SIGEM_BIDSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTipoMoneda
+    public partial class tbTipoPermiso
     {
-        public short tmo_Id { get; set; }
-        public string tmo_Abreviatura { get; set; }
-        public string tmo_Nombre { get; set; }
-        public int tmo_UsuarioCrea { get; set; }
-        public System.DateTime tmo_FechaCrea { get; set; }
-        public Nullable<int> tmo_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> tmo_FechaModifica { get; set; }
+        public int tperm_Id { get; set; }
+        public string tperm_Descripcion { get; set; }
+        public int tperm_UsuarioCrea { get; set; }
+        public System.DateTime tperm_FechaCrea { get; set; }
+        public Nullable<int> tperm_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> tperm_FechaModifica { get; set; }
     }
 }

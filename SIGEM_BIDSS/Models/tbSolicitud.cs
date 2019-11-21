@@ -19,7 +19,7 @@ namespace SIGEM_BIDSS.Models
         public int tipsol_Id { get; set; }
         public int pto_Id { get; set; }
         public int tpsal_id { get; set; }
-        public short tmo_id { get; set; }
+        public short tmo_Id { get; set; }
         public int are_Id { get; set; }
         public int tipmo_id { get; set; }
         public int tpv_Id { get; set; }
@@ -47,6 +47,7 @@ namespace SIGEM_BIDSS.Models
         public string sol_ReemCargoA { get; set; }
         public System.DateTime sol_ReemFechaGastos { get; set; }
         public string sol_ReemNoFactura { get; set; }
+        public double sol_ReemMontoTotal { get; set; }
         public string sol_AprRtn { get; set; }
         public string sol_AprNombreEmpresa { get; set; }
         public string sol_AprCiudad { get; set; }
@@ -60,18 +61,19 @@ namespace SIGEM_BIDSS.Models
         public string sol_ApreCargoTecn { get; set; }
         public string sol_ApreLink { get; set; }
         public string sol_Acper_Nuevo { get; set; }
+        public Nullable<double> sol_RequeCantidad { get; set; }
         public int sol_UsuarioCrea { get; set; }
         public System.DateTime sol_FechaCrea { get; set; }
         public int sol_UsuarioModifica { get; set; }
         public System.DateTime sol_FechaModifica { get; set; }
-        public double sol_ReemMontoTotal { get; set; }
     
         public virtual tbArea tbArea { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }
+        public virtual tbMoneda tbMoneda { get; set; }
+        public virtual tbPuesto tbPuesto { get; set; }
         public virtual tbTipoMovimiento tbTipoMovimiento { get; set; }
-        public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
-        public virtual tbTipoMoneda tbTipoMoneda { get; set; }
         public virtual tbTipoSalario tbTipoSalario { get; set; }
+        public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
         public virtual tbTipoViatico tbTipoViatico { get; set; }
     }
 }

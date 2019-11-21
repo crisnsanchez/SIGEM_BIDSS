@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="60707c0b490a456f9643d50b4e4a1cb7" Name="Diagram1" ZoomLevel="22">
+      <Diagram DiagramId="60707c0b490a456f9643d50b4e4a1cb7" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbArea" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbDepartamento" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbEmpleado" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
@@ -23,14 +23,17 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" ManuallyRouted="false" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_pto_Id" ManuallyRouted="false" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_tps_Id" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitud" Width="1.5" PointX="7.375" PointY="0.75" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_are_Id_Area" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_emp_Id_tbEmpleado" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tipmo_id_tbTipoMovimiento" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tipsol_Id_tbTipoSolicitud" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tmo_Id_Moneda" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tpsal_Id_TipoSalario" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tpv_Id" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbMoneda" Width="1.5" PointX="5.625" PointY="27.125" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitud" Width="1.5" PointX="7.875" PointY="7.125" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoPermiso" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbArea_are_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbEmpleado_emp_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbMoneda_tmo_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbPuesto_pto_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

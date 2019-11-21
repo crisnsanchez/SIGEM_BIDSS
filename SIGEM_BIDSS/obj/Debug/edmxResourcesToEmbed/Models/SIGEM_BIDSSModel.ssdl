@@ -58,6 +58,18 @@
     <Property Name="est_UsuarioModifica" Type="int" />
     <Property Name="est_FechaModifica" Type="datetime" />
   </EntityType>
+  <EntityType Name="tbMoneda">
+    <Key>
+      <PropertyRef Name="tmo_Id" />
+    </Key>
+    <Property Name="tmo_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tmo_Abreviatura" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="tmo_Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="tmo_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="tmo_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="tmo_UsuarioModifica" Type="int" />
+    <Property Name="tmo_FechaModifica" Type="datetime" />
+  </EntityType>
   <EntityType Name="tbMunicipio">
     <Key>
       <PropertyRef Name="mun_codigo" />
@@ -91,7 +103,7 @@
     <Property Name="tipsol_Id" Type="int" Nullable="false" />
     <Property Name="pto_Id" Type="int" Nullable="false" />
     <Property Name="tpsal_id" Type="int" Nullable="false" />
-    <Property Name="tmo_id" Type="smallint" Nullable="false" />
+    <Property Name="tmo_Id" Type="smallint" Nullable="false" />
     <Property Name="are_Id" Type="int" Nullable="false" />
     <Property Name="tipmo_id" Type="int" Nullable="false" />
     <Property Name="tpv_Id" Type="int" Nullable="false" />
@@ -133,22 +145,11 @@
     <Property Name="sol_ApreCargoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_Acper_Nuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sol_RequeCantidad" Type="float" />
     <Property Name="sol_UsuarioCrea" Type="int" Nullable="false" />
     <Property Name="sol_FechaCrea" Type="datetime" Nullable="false" />
     <Property Name="sol_UsuarioModifica" Type="int" Nullable="false" />
     <Property Name="sol_FechaModifica" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="tbTipoMoneda">
-    <Key>
-      <PropertyRef Name="tmo_Id" />
-    </Key>
-    <Property Name="tmo_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="tmo_Abreviatura" Type="varchar" MaxLength="4" Nullable="false" />
-    <Property Name="tmo_Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="tmo_UsuarioCrea" Type="int" Nullable="false" />
-    <Property Name="tmo_FechaCrea" Type="datetime" Nullable="false" />
-    <Property Name="tmo_UsuarioModifica" Type="int" />
-    <Property Name="tmo_FechaModifica" Type="datetime" />
   </EntityType>
   <EntityType Name="tbTipoMovimiento">
     <Key>
@@ -160,6 +161,17 @@
     <Property Name="tipmo_FechaCrea" Type="datetime" Nullable="false" />
     <Property Name="tipmo_UsuarioModifica" Type="int" />
     <Property Name="tipmo_FechaModifica" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tbTipoPermiso">
+    <Key>
+      <PropertyRef Name="tperm_Id" />
+    </Key>
+    <Property Name="tperm_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tperm_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tperm_UsuarioCrea" Type="int" Nullable="false" />
+    <Property Name="tperm_FechaCrea" Type="datetime" Nullable="false" />
+    <Property Name="tperm_UsuarioModifica" Type="int" />
+    <Property Name="tperm_FechaModifica" Type="datetime" />
   </EntityType>
   <EntityType Name="tbTipoSalario">
     <Key>
@@ -217,18 +229,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_are_Id_Area">
-    <End Role="tbArea" Type="Self.tbArea" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbArea">
-        <PropertyRef Name="are_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="are_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_dep_Id">
     <End Role="tbDepartamento" Type="Self.tbDepartamento" Multiplicity="1" />
     <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="*" />
@@ -238,18 +238,6 @@
       </Principal>
       <Dependent Role="tbMunicipio">
         <PropertyRef Name="dep_codigo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_emp_Id_tbEmpleado">
-    <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbEmpleado">
-        <PropertyRef Name="emp_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="emp_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -277,6 +265,102 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbArea_are_Id">
+    <End Role="tbArea" Type="Self.tbArea" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbArea">
+        <PropertyRef Name="are_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="are_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbEmpleado_emp_Id">
+    <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbEmpleado">
+        <PropertyRef Name="emp_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="emp_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbMoneda_tmo_Id">
+    <End Role="tbMoneda" Type="Self.tbMoneda" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbMoneda">
+        <PropertyRef Name="tmo_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tmo_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbPuesto_pto_Id">
+    <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbPuesto">
+        <PropertyRef Name="pto_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="pto_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id">
+    <End Role="tbTipoMovimiento" Type="Self.tbTipoMovimiento" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoMovimiento">
+        <PropertyRef Name="tipmo_id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tipmo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id">
+    <End Role="tbTipoSalario" Type="Self.tbTipoSalario" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoSalario">
+        <PropertyRef Name="tpsal_id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tpsal_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id">
+    <End Role="tbTipoSolicitud" Type="Self.tbTipoSolicitud" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoSolicitud">
+        <PropertyRef Name="tipsol_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tipsol_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id">
+    <End Role="tbTipoViatico" Type="Self.tbTipoViatico" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoViatico">
+        <PropertyRef Name="tpv_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tpv_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_pto_Id">
     <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="1" />
     <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -289,42 +373,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tipmo_id_tbTipoMovimiento">
-    <End Role="tbTipoMovimiento" Type="Self.tbTipoMovimiento" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoMovimiento">
-        <PropertyRef Name="tipmo_id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tipmo_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tipsol_Id_tbTipoSolicitud">
-    <End Role="tbTipoSolicitud" Type="Self.tbTipoSolicitud" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoSolicitud">
-        <PropertyRef Name="tipsol_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tipsol_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tmo_Id_Moneda">
-    <End Role="tbTipoMoneda" Type="Self.tbTipoMoneda" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoMoneda">
-        <PropertyRef Name="tmo_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tmo_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_tps_Id">
     <End Role="tbTipoSangre" Type="Self.tbTipoSangre" Multiplicity="1" />
     <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -334,30 +382,6 @@
       </Principal>
       <Dependent Role="tbEmpleado">
         <PropertyRef Name="tps_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tpsal_Id_TipoSalario">
-    <End Role="tbTipoSalario" Type="Self.tbTipoSalario" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoSalario">
-        <PropertyRef Name="tpsal_id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tpsal_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tpv_Id">
-    <End Role="tbTipoViatico" Type="Self.tbTipoViatico" Multiplicity="1" />
-    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbTipoViatico">
-        <PropertyRef Name="tpv_Id" />
-      </Principal>
-      <Dependent Role="tbSolicitud">
-        <PropertyRef Name="tpv_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -539,7 +563,7 @@
     <Parameter Name="tipsol_Id" Type="int" Mode="In" />
     <Parameter Name="pto_Id" Type="int" Mode="In" />
     <Parameter Name="tpsal_id" Type="int" Mode="In" />
-    <Parameter Name="tmo_id" Type="smallint" Mode="In" />
+    <Parameter Name="tmo_Id" Type="smallint" Mode="In" />
     <Parameter Name="are_Id" Type="int" Mode="In" />
     <Parameter Name="tipmo_id" Type="int" Mode="In" />
     <Parameter Name="tpv_Id" Type="int" Mode="In" />
@@ -591,11 +615,12 @@
     <EntitySet Name="tbDepartamento" EntityType="Self.tbDepartamento" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbEmpleado" EntityType="Self.tbEmpleado" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbEstado" EntityType="Self.tbEstado" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbMoneda" EntityType="Self.tbMoneda" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbMunicipio" EntityType="Self.tbMunicipio" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbPuesto" EntityType="Self.tbPuesto" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbSolicitud" EntityType="Self.tbSolicitud" Schema="Gral" store:Type="Tables" />
-    <EntitySet Name="tbTipoMoneda" EntityType="Self.tbTipoMoneda" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoMovimiento" EntityType="Self.tbTipoMovimiento" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbTipoPermiso" EntityType="Self.tbTipoPermiso" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoSalario" EntityType="Self.tbTipoSalario" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoSangre" EntityType="Self.tbTipoSangre" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoSolicitud" EntityType="Self.tbTipoSolicitud" Schema="Gral" store:Type="Tables" />
@@ -604,17 +629,9 @@
       <End Role="tbArea" EntitySet="tbArea" />
       <End Role="tbPuesto" EntitySet="tbPuesto" />
     </AssociationSet>
-    <AssociationSet Name="FK_are_Id_Area" Association="Self.FK_are_Id_Area">
-      <End Role="tbArea" EntitySet="tbArea" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
     <AssociationSet Name="FK_dep_Id" Association="Self.FK_dep_Id">
       <End Role="tbDepartamento" EntitySet="tbDepartamento" />
       <End Role="tbMunicipio" EntitySet="tbMunicipio" />
-    </AssociationSet>
-    <AssociationSet Name="FK_emp_Id_tbEmpleado" Association="Self.FK_emp_Id_tbEmpleado">
-      <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
     </AssociationSet>
     <AssociationSet Name="FK_est_Id" Association="Self.FK_est_Id">
       <End Role="tbEstado" EntitySet="tbEstado" />
@@ -624,33 +641,45 @@
       <End Role="tbMunicipio" EntitySet="tbMunicipio" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
     </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbArea_are_Id" Association="Self.FK_Gral_tbSolicitud_tbArea_are_Id">
+      <End Role="tbArea" EntitySet="tbArea" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbEmpleado_emp_Id" Association="Self.FK_Gral_tbSolicitud_tbEmpleado_emp_Id">
+      <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbMoneda_tmo_Id" Association="Self.FK_Gral_tbSolicitud_tbMoneda_tmo_Id">
+      <End Role="tbMoneda" EntitySet="tbMoneda" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbPuesto_pto_Id" Association="Self.FK_Gral_tbSolicitud_tbPuesto_pto_Id">
+      <End Role="tbPuesto" EntitySet="tbPuesto" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id">
+      <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id">
+      <End Role="tbTipoSalario" EntitySet="tbTipoSalario" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id">
+      <End Role="tbTipoSolicitud" EntitySet="tbTipoSolicitud" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id">
+      <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
     <AssociationSet Name="FK_pto_Id" Association="Self.FK_pto_Id">
       <End Role="tbPuesto" EntitySet="tbPuesto" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
     </AssociationSet>
-    <AssociationSet Name="FK_tipmo_id_tbTipoMovimiento" Association="Self.FK_tipmo_id_tbTipoMovimiento">
-      <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tipsol_Id_tbTipoSolicitud" Association="Self.FK_tipsol_Id_tbTipoSolicitud">
-      <End Role="tbTipoSolicitud" EntitySet="tbTipoSolicitud" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tmo_Id_Moneda" Association="Self.FK_tmo_Id_Moneda">
-      <End Role="tbTipoMoneda" EntitySet="tbTipoMoneda" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
     <AssociationSet Name="FK_tps_Id" Association="Self.FK_tps_Id">
       <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
       <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tpsal_Id_TipoSalario" Association="Self.FK_tpsal_Id_TipoSalario">
-      <End Role="tbTipoSalario" EntitySet="tbTipoSalario" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tpv_Id" Association="Self.FK_tpv_Id">
-      <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
-      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
