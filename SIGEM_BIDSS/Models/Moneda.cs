@@ -7,15 +7,15 @@ using System.Web;
 
 namespace SIGEM_BIDSS.Models
 {
-    [MetadataType(typeof(TipoMonedaMetaData))]
+    [MetadataType(typeof(MonedaMetaData))]
     public partial class tbTipoMoneda
     {
 
         [NotMapped]
-        public List<tbTipoMoneda> TipoMonedaList { get; set; }
+        public List<tbMoneda> TipoMonedaList { get; set; }
 
     }
-    public class TipoMonedaMetaData
+    public class MonedaMetaData
     {
 
         [Display(Name = "ID")]
