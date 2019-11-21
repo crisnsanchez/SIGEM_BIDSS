@@ -385,7 +385,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="spSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SDP_tbAnticipoSalario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tipsol_id" Type="int" Mode="In" />
+  </Function>
   <Function Name="SDP_tbMunicipio_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="mun_Codigo" Type="char" Mode="In" />
   </Function>
@@ -406,6 +408,54 @@
     <Parameter Name="sol_GralFechaSolicitud" Type="datetime" Mode="In" />
     <Parameter Name="sol_Acper_Anterior" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_Acper_Nuevo" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_UsuarioCrea" Type="int" Mode="In" />
+    <Parameter Name="sol_FechaCrea" Type="datetime" Mode="In" />
+    <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />
+    <Parameter Name="sol_FechaModifica" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_ReembolsoGastos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="emp_Id" Type="smallint" Mode="In" />
+    <Parameter Name="tipsol_Id" Type="int" Mode="In" />
+    <Parameter Name="pto_Id" Type="int" Mode="In" />
+    <Parameter Name="tpsal_id" Type="int" Mode="In" />
+    <Parameter Name="tmo_id" Type="smallint" Mode="In" />
+    <Parameter Name="are_Id" Type="int" Mode="In" />
+    <Parameter Name="tipmo_id" Type="int" Mode="In" />
+    <Parameter Name="tpv_Id" Type="int" Mode="In" />
+    <Parameter Name="sol_GralDescripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralJefeInmediato" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralCorreoJefeInmediato" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralComentario" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralJustificacion" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralFechaSolicitud" Type="datetime" Mode="In" />
+    <Parameter Name="sol_ReemMonto" Type="float" Mode="In" />
+    <Parameter Name="sol_ReemFechaMonto" Type="datetime" Mode="In" />
+    <Parameter Name="sol_ReemProveedor" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_ReemCargoA" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_ReemFechaGastos" Type="datetime" Mode="In" />
+    <Parameter Name="sol_ReemNoFactura" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_ReemMontoTotal" Type="float" Mode="In" />
+    <Parameter Name="sol_UsuarioCrea" Type="int" Mode="In" />
+    <Parameter Name="sol_FechaCrea" Type="datetime" Mode="In" />
+    <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />
+    <Parameter Name="sol_FechaModifica" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbAnticipoSalario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="emp_Id" Type="smallint" Mode="In" />
+    <Parameter Name="tipsol_Id" Type="int" Mode="In" />
+    <Parameter Name="pto_Id" Type="int" Mode="In" />
+    <Parameter Name="tpsal_id" Type="int" Mode="In" />
+    <Parameter Name="tmo_id" Type="smallint" Mode="In" />
+    <Parameter Name="are_Id" Type="int" Mode="In" />
+    <Parameter Name="tipmo_id" Type="int" Mode="In" />
+    <Parameter Name="tpv_Id" Type="int" Mode="In" />
+    <Parameter Name="sol_GralDescripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralJefeInmediato" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralCorreoJefeInmediato" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralComentario" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralJustificacion" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_GralFechaSolicitud" Type="datetime" Mode="In" />
+    <Parameter Name="sol_AnsolMonto" Type="float" Mode="In" />
     <Parameter Name="sol_UsuarioCrea" Type="int" Mode="In" />
     <Parameter Name="sol_FechaCrea" Type="datetime" Mode="In" />
     <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />

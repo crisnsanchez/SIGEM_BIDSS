@@ -27,7 +27,7 @@ namespace SIGEM_BIDSS.Controllers
     ViewBag.tipsol_Id = new SelectList(db.tbTipoSolicitud, "tipsol_Id", "tipsol_Descripcion");
     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
     ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
-    ViewBag.tmo_id = new SelectList(db.tbTipoMoneda, "tmo_id", "tmo_Abreviatura");
+    ViewBag.tmo_id = new SelectList(db.tbMoneda, "tmo_id", "tmo_Abreviatura");
     ViewBag.tipmo_id = new SelectList(db.tbTipoMovimiento, "tipmo_id", "tipmo_Movimiento");
     ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
 
@@ -52,7 +52,7 @@ namespace SIGEM_BIDSS.Controllers
     ViewBag.tipsol_Id = new SelectList(db.tbTipoSolicitud, "tipsol_Id", "tipsol_Descripcion");
     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
     ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
-    ViewBag.tmo_id = new SelectList(db.tbTipoMoneda, "tmo_id", "tmo_Abreviatura");
+    ViewBag.tmo_id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
     ViewBag.tipmo_id = new SelectList(db.tbTipoMovimiento, "tipmo_id", "tipmo_Movimiento");
     ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
     if (ModelState.IsValid)

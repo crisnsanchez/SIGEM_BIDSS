@@ -63,6 +63,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbMoneda">
+      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbMoneda">
+        <MappingFragment StoreEntitySet="tbMoneda">
+          <ScalarProperty Name="tmo_Id" ColumnName="tmo_Id" />
+          <ScalarProperty Name="tmo_Abreviatura" ColumnName="tmo_Abreviatura" />
+          <ScalarProperty Name="tmo_Nombre" ColumnName="tmo_Nombre" />
+          <ScalarProperty Name="tmo_UsuarioCrea" ColumnName="tmo_UsuarioCrea" />
+          <ScalarProperty Name="tmo_FechaCrea" ColumnName="tmo_FechaCrea" />
+          <ScalarProperty Name="tmo_UsuarioModifica" ColumnName="tmo_UsuarioModifica" />
+          <ScalarProperty Name="tmo_FechaModifica" ColumnName="tmo_FechaModifica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tbMunicipio">
       <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbMunicipio">
         <MappingFragment StoreEntitySet="tbMunicipio">
@@ -89,6 +102,64 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbSolicitud">
+      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
+        <MappingFragment StoreEntitySet="tbSolicitud">
+          <ScalarProperty Name="sol_Id" ColumnName="sol_Id" />
+          <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+          <ScalarProperty Name="tipsol_Id" ColumnName="tipsol_Id" />
+          <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
+          <ScalarProperty Name="tpsal_id" ColumnName="tpsal_id" />
+          <ScalarProperty Name="tmo_Id" ColumnName="tmo_Id" />
+          <ScalarProperty Name="are_Id" ColumnName="are_Id" />
+          <ScalarProperty Name="tipmo_id" ColumnName="tipmo_id" />
+          <ScalarProperty Name="tpv_Id" ColumnName="tpv_Id" />
+          <ScalarProperty Name="sol_GralDescripcion" ColumnName="sol_GralDescripcion" />
+          <ScalarProperty Name="sol_GralJefeInmediato" ColumnName="sol_GralJefeInmediato" />
+          <ScalarProperty Name="sol_GralCorreoJefeInmediato" ColumnName="sol_GralCorreoJefeInmediato" />
+          <ScalarProperty Name="sol_GralComentario" ColumnName="sol_GralComentario" />
+          <ScalarProperty Name="sol_GralJustificacion" ColumnName="sol_GralJustificacion" />
+          <ScalarProperty Name="sol_GralFechaSolicitud" ColumnName="sol_GralFechaSolicitud" />
+          <ScalarProperty Name="sol_AnviFechaViaje" ColumnName="sol_AnviFechaViaje" />
+          <ScalarProperty Name="sol_Anvi_Cliente" ColumnName="sol_Anvi_Cliente" />
+          <ScalarProperty Name="sol_Anvi_LugarDestino" ColumnName="sol_Anvi_LugarDestino" />
+          <ScalarProperty Name="sol_Acper_Anterior" ColumnName="sol_Acper_Anterior" />
+          <ScalarProperty Name="sol_Anvi_PropositoVisita" ColumnName="sol_Anvi_PropositoVisita" />
+          <ScalarProperty Name="sol_Anvi_DiasVisita" ColumnName="sol_Anvi_DiasVisita" />
+          <ScalarProperty Name="sol_AnviHospedaje" ColumnName="sol_AnviHospedaje" />
+          <ScalarProperty Name="sol_AnviTrasladoHacia" ColumnName="sol_AnviTrasladoHacia" />
+          <ScalarProperty Name="sol_AnsolMonto" ColumnName="sol_AnsolMonto" />
+          <ScalarProperty Name="sol_perFechaRegreso" ColumnName="sol_perFechaRegreso" />
+          <ScalarProperty Name="sol_perMedioDia" ColumnName="sol_perMedioDia" />
+          <ScalarProperty Name="sol_perCantidadDias" ColumnName="sol_perCantidadDias" />
+          <ScalarProperty Name="sol_ReemMonto" ColumnName="sol_ReemMonto" />
+          <ScalarProperty Name="sol_ReemFechaMonto" ColumnName="sol_ReemFechaMonto" />
+          <ScalarProperty Name="sol_ReemProveedor" ColumnName="sol_ReemProveedor" />
+          <ScalarProperty Name="sol_ReemCargoA" ColumnName="sol_ReemCargoA" />
+          <ScalarProperty Name="sol_ReemFechaGastos" ColumnName="sol_ReemFechaGastos" />
+          <ScalarProperty Name="sol_ReemNoFactura" ColumnName="sol_ReemNoFactura" />
+          <ScalarProperty Name="sol_ReemMontoTotal" ColumnName="sol_ReemMontoTotal" />
+          <ScalarProperty Name="sol_AprRtn" ColumnName="sol_AprRtn" />
+          <ScalarProperty Name="sol_AprNombreEmpresa" ColumnName="sol_AprNombreEmpresa" />
+          <ScalarProperty Name="sol_AprCiudad" ColumnName="sol_AprCiudad" />
+          <ScalarProperty Name="sol_AprDireccion" ColumnName="sol_AprDireccion" />
+          <ScalarProperty Name="sol_ApreTelefono" ColumnName="sol_ApreTelefono" />
+          <ScalarProperty Name="sol_ApreContactoAdm" ColumnName="sol_ApreContactoAdm" />
+          <ScalarProperty Name="sol_ApreCorreoAdm" ColumnName="sol_ApreCorreoAdm" />
+          <ScalarProperty Name="sol_ApreNombreTecn" ColumnName="sol_ApreNombreTecn" />
+          <ScalarProperty Name="sol_ApreTelefonoTecn" ColumnName="sol_ApreTelefonoTecn" />
+          <ScalarProperty Name="sol_ApreCorreoTecn" ColumnName="sol_ApreCorreoTecn" />
+          <ScalarProperty Name="sol_ApreCargoTecn" ColumnName="sol_ApreCargoTecn" />
+          <ScalarProperty Name="sol_ApreLink" ColumnName="sol_ApreLink" />
+          <ScalarProperty Name="sol_Acper_Nuevo" ColumnName="sol_Acper_Nuevo" />
+          <ScalarProperty Name="sol_RequeCantidad" ColumnName="sol_RequeCantidad" />
+          <ScalarProperty Name="sol_UsuarioCrea" ColumnName="sol_UsuarioCrea" />
+          <ScalarProperty Name="sol_FechaCrea" ColumnName="sol_FechaCrea" />
+          <ScalarProperty Name="sol_UsuarioModifica" ColumnName="sol_UsuarioModifica" />
+          <ScalarProperty Name="sol_FechaModifica" ColumnName="sol_FechaModifica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tbTipoMovimiento">
       <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbTipoMovimiento">
         <MappingFragment StoreEntitySet="tbTipoMovimiento">
@@ -98,6 +169,18 @@
           <ScalarProperty Name="tipmo_FechaCrea" ColumnName="tipmo_FechaCrea" />
           <ScalarProperty Name="tipmo_UsuarioModifica" ColumnName="tipmo_UsuarioModifica" />
           <ScalarProperty Name="tipmo_FechaModifica" ColumnName="tipmo_FechaModifica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbTipoPermiso">
+      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbTipoPermiso">
+        <MappingFragment StoreEntitySet="tbTipoPermiso">
+          <ScalarProperty Name="tperm_Id" ColumnName="tperm_Id" />
+          <ScalarProperty Name="tperm_Descripcion" ColumnName="tperm_Descripcion" />
+          <ScalarProperty Name="tperm_UsuarioCrea" ColumnName="tperm_UsuarioCrea" />
+          <ScalarProperty Name="tperm_FechaCrea" ColumnName="tperm_FechaCrea" />
+          <ScalarProperty Name="tperm_UsuarioModifica" ColumnName="tperm_UsuarioModifica" />
+          <ScalarProperty Name="tperm_FechaModifica" ColumnName="tperm_FechaModifica" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -149,18 +232,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="spSelect" FunctionName="SIGEM_BIDSSModel.Store.spSelect">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.spSelect_Result">
-          <ScalarProperty Name="tps_Id" ColumnName="tps_Id" />
-          <ScalarProperty Name="tps_nombre" ColumnName="tps_nombre" />
-          <ScalarProperty Name="tps_UsuarioCrea" ColumnName="tps_UsuarioCrea" />
-          <ScalarProperty Name="tps_FechaCrea" ColumnName="tps_FechaCrea" />
-          <ScalarProperty Name="tps_UsuarioModifica" ColumnName="tps_UsuarioModifica" />
-          <ScalarProperty Name="tps_FechaModifica" ColumnName="tps_FechaModifica" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SDP_tbAnticipoSalario_Select" FunctionName="SIGEM_BIDSSModel.Store.SDP_tbAnticipoSalario_Select" />
     <FunctionImportMapping FunctionImportName="SDP_tbMunicipio_Select" FunctionName="SIGEM_BIDSSModel.Store.SDP_tbMunicipio_Select">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.SDP_tbMunicipio_Select_Result">
@@ -174,6 +246,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_CrearAccionPersonal" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_CrearAccionPersonal" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_ReembolsoGastos" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_ReembolsoGastos" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbAnticipoSalario" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbAnticipoSalario" />
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Insert">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result">
@@ -265,16 +340,25 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Insert">
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Insert" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Update" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMovimiento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMovimiento_Update">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoMoneda_Insert_Result">
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoMovimiento_Update_Result">
           <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Update">
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Insert">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoMoneda_Update_Result">
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Insert_Result">
+          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Update">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Update_Result">
           <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
         </ComplexTypeMapping>
       </ResultMapping>
@@ -314,34 +398,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_TipoMovimiento_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_TipoMovimiento_Insert">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_TipoMovimiento_Insert_Result">
-          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMovimiento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMovimiento_Update">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoMovimiento_Update_Result">
-          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Insert">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Insert_Result">
-          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Update">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Update_Result">
-          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Update">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result">
@@ -349,9 +405,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_CrearAccionPersonal" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_CrearAccionPersonal">
+    <FunctionImportMapping FunctionImportName="UDP_Gral_TipoMovimiento_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_TipoMovimiento_Insert">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_CrearAccionPersonal_Result">
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_TipoMovimiento_Insert_Result">
           <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
         </ComplexTypeMapping>
       </ResultMapping>
@@ -363,88 +419,5 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="tbMoneda">
-      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbMoneda">
-        <MappingFragment StoreEntitySet="tbMoneda">
-          <ScalarProperty Name="tmo_FechaModifica" ColumnName="tmo_FechaModifica" />
-          <ScalarProperty Name="tmo_UsuarioModifica" ColumnName="tmo_UsuarioModifica" />
-          <ScalarProperty Name="tmo_FechaCrea" ColumnName="tmo_FechaCrea" />
-          <ScalarProperty Name="tmo_UsuarioCrea" ColumnName="tmo_UsuarioCrea" />
-          <ScalarProperty Name="tmo_Nombre" ColumnName="tmo_Nombre" />
-          <ScalarProperty Name="tmo_Abreviatura" ColumnName="tmo_Abreviatura" />
-          <ScalarProperty Name="tmo_Id" ColumnName="tmo_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tbSolicitud">
-      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
-        <MappingFragment StoreEntitySet="tbSolicitud">
-          <ScalarProperty Name="sol_FechaModifica" ColumnName="sol_FechaModifica" />
-          <ScalarProperty Name="sol_UsuarioModifica" ColumnName="sol_UsuarioModifica" />
-          <ScalarProperty Name="sol_FechaCrea" ColumnName="sol_FechaCrea" />
-          <ScalarProperty Name="sol_UsuarioCrea" ColumnName="sol_UsuarioCrea" />
-          <ScalarProperty Name="sol_RequeCantidad" ColumnName="sol_RequeCantidad" />
-          <ScalarProperty Name="sol_Acper_Nuevo" ColumnName="sol_Acper_Nuevo" />
-          <ScalarProperty Name="sol_ApreLink" ColumnName="sol_ApreLink" />
-          <ScalarProperty Name="sol_ApreCargoTecn" ColumnName="sol_ApreCargoTecn" />
-          <ScalarProperty Name="sol_ApreCorreoTecn" ColumnName="sol_ApreCorreoTecn" />
-          <ScalarProperty Name="sol_ApreTelefonoTecn" ColumnName="sol_ApreTelefonoTecn" />
-          <ScalarProperty Name="sol_ApreNombreTecn" ColumnName="sol_ApreNombreTecn" />
-          <ScalarProperty Name="sol_ApreCorreoAdm" ColumnName="sol_ApreCorreoAdm" />
-          <ScalarProperty Name="sol_ApreContactoAdm" ColumnName="sol_ApreContactoAdm" />
-          <ScalarProperty Name="sol_ApreTelefono" ColumnName="sol_ApreTelefono" />
-          <ScalarProperty Name="sol_AprDireccion" ColumnName="sol_AprDireccion" />
-          <ScalarProperty Name="sol_AprCiudad" ColumnName="sol_AprCiudad" />
-          <ScalarProperty Name="sol_AprNombreEmpresa" ColumnName="sol_AprNombreEmpresa" />
-          <ScalarProperty Name="sol_AprRtn" ColumnName="sol_AprRtn" />
-          <ScalarProperty Name="sol_ReemMontoTotal" ColumnName="sol_ReemMontoTotal" />
-          <ScalarProperty Name="sol_ReemNoFactura" ColumnName="sol_ReemNoFactura" />
-          <ScalarProperty Name="sol_ReemFechaGastos" ColumnName="sol_ReemFechaGastos" />
-          <ScalarProperty Name="sol_ReemCargoA" ColumnName="sol_ReemCargoA" />
-          <ScalarProperty Name="sol_ReemProveedor" ColumnName="sol_ReemProveedor" />
-          <ScalarProperty Name="sol_ReemFechaMonto" ColumnName="sol_ReemFechaMonto" />
-          <ScalarProperty Name="sol_ReemMonto" ColumnName="sol_ReemMonto" />
-          <ScalarProperty Name="sol_perCantidadDias" ColumnName="sol_perCantidadDias" />
-          <ScalarProperty Name="sol_perMedioDia" ColumnName="sol_perMedioDia" />
-          <ScalarProperty Name="sol_perFechaRegreso" ColumnName="sol_perFechaRegreso" />
-          <ScalarProperty Name="sol_AnsolMonto" ColumnName="sol_AnsolMonto" />
-          <ScalarProperty Name="sol_AnviTrasladoHacia" ColumnName="sol_AnviTrasladoHacia" />
-          <ScalarProperty Name="sol_AnviHospedaje" ColumnName="sol_AnviHospedaje" />
-          <ScalarProperty Name="sol_Anvi_DiasVisita" ColumnName="sol_Anvi_DiasVisita" />
-          <ScalarProperty Name="sol_Anvi_PropositoVisita" ColumnName="sol_Anvi_PropositoVisita" />
-          <ScalarProperty Name="sol_Acper_Anterior" ColumnName="sol_Acper_Anterior" />
-          <ScalarProperty Name="sol_Anvi_LugarDestino" ColumnName="sol_Anvi_LugarDestino" />
-          <ScalarProperty Name="sol_Anvi_Cliente" ColumnName="sol_Anvi_Cliente" />
-          <ScalarProperty Name="sol_AnviFechaViaje" ColumnName="sol_AnviFechaViaje" />
-          <ScalarProperty Name="sol_GralFechaSolicitud" ColumnName="sol_GralFechaSolicitud" />
-          <ScalarProperty Name="sol_GralJustificacion" ColumnName="sol_GralJustificacion" />
-          <ScalarProperty Name="sol_GralComentario" ColumnName="sol_GralComentario" />
-          <ScalarProperty Name="sol_GralCorreoJefeInmediato" ColumnName="sol_GralCorreoJefeInmediato" />
-          <ScalarProperty Name="sol_GralJefeInmediato" ColumnName="sol_GralJefeInmediato" />
-          <ScalarProperty Name="sol_GralDescripcion" ColumnName="sol_GralDescripcion" />
-          <ScalarProperty Name="tpv_Id" ColumnName="tpv_Id" />
-          <ScalarProperty Name="tipmo_id" ColumnName="tipmo_id" />
-          <ScalarProperty Name="are_Id" ColumnName="are_Id" />
-          <ScalarProperty Name="tmo_Id" ColumnName="tmo_Id" />
-          <ScalarProperty Name="tpsal_id" ColumnName="tpsal_id" />
-          <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
-          <ScalarProperty Name="tipsol_Id" ColumnName="tipsol_Id" />
-          <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-          <ScalarProperty Name="sol_Id" ColumnName="sol_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tbTipoPermiso">
-      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbTipoPermiso">
-        <MappingFragment StoreEntitySet="tbTipoPermiso">
-          <ScalarProperty Name="tperm_FechaModifica" ColumnName="tperm_FechaModifica" />
-          <ScalarProperty Name="tperm_UsuarioModifica" ColumnName="tperm_UsuarioModifica" />
-          <ScalarProperty Name="tperm_FechaCrea" ColumnName="tperm_FechaCrea" />
-          <ScalarProperty Name="tperm_UsuarioCrea" ColumnName="tperm_UsuarioCrea" />
-          <ScalarProperty Name="tperm_Descripcion" ColumnName="tperm_Descripcion" />
-          <ScalarProperty Name="tperm_Id" ColumnName="tperm_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

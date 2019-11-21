@@ -1,0 +1,24 @@
+﻿1>------ Operación Compilar iniciada: proyecto: SIGEM_BIDSS, configuración: Debug Any CPU ------
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoViaticoController.cs(70,34,70,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoViaticoController.cs(123,34,123,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\AreaController.cs(71,34,71,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoSolicitudController.cs(70,34,70,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\AreaController.cs(122,34,122,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoSolicitudController.cs(125,34,125,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoSangreController.cs(70,34,70,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoSangreController.cs(128,13,128,19): warning CS0162: Se detectó código inaccesible
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoSangreController.cs(121,30,121,32): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\CargosController.cs(74,34,74,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoSalarioController.cs(70,34,70,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\CargosController.cs(129,34,129,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoSalarioController.cs(128,13,128,19): warning CS0162: Se detectó código inaccesible
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoSalarioController.cs(121,30,121,32): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoMovimientoController.cs(70,34,70,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\TipoMovimientoController.cs(123,34,123,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\EstadoController.cs(70,34,70,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\EstadoController.cs(123,34,123,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\EmpleadoController.cs(177,34,177,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\SolicitudController.cs(90,24,90,26): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Controllers\EmpleadoController.cs(289,34,289,36): warning CS0168: La variable 'Ex' se ha declarado pero nunca se usa
+1>  SIGEM_BIDSS -> C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.dll
+========== Compilar: 1 correctos, 0 incorrectos, 0 actualizados, 0 omitidos ==========

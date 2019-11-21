@@ -211,9 +211,6 @@
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Solicitud.cs" />
-    <Compile Include="Models\spSelect_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbArea.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -236,9 +233,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbSolicitud.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbTipoMoneda.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbTipoMovimiento.cs">
@@ -265,9 +259,6 @@
     <Compile Include="Models\TipoSalario.cs" />
     <Compile Include="Models\TipoViatico.cs" />
     <Compile Include="Models\TipoSolicitud.cs" />
-    <Compile Include="Models\UDP_Gral_CrearAccionPersonal_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Gral_tbArea_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -305,12 +296,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbPuesto_Update_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_tbTipoMoneda_Insert_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_tbTipoMoneda_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoMovimiento_Update_Result.cs">
@@ -2932,7 +2917,6 @@
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
       <LastGenOutput>SIGEM_BIDSSModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\SIGEM_BIDSSModel.edmx.sql" />
     <Content Include="Models\SIGEM_BIDSSModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
@@ -2943,13 +2927,6 @@
     <Content Include="Scripts\app\Municipio.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\SIGEM_BIDSSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SIGEM_BIDSSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\SIGEM_BIDSSModel.edmx.diagram">
-      <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\template\plugins\.npmignore" />
     <Content Include="Content\template\plugins\daterangepicker\bower.json" />
     <Content Include="Content\template\plugins\daterangepicker\example\browserify\README.md" />
@@ -2974,6 +2951,13 @@
     <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <EntityDeploy Include="Models\SIGEM_BIDSSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SIGEM_BIDSSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SIGEM_BIDSSModel.edmx.diagram">
+      <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
