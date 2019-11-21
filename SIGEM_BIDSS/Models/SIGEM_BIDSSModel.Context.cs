@@ -656,44 +656,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
         }
     
-        public virtual int UDP_Gral_tbTipoMoneda_Insert(string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioCrea)
-        {
-            var tmo_AbreviaturaParameter = tmo_Abreviatura != null ?
-                new ObjectParameter("tmo_Abreviatura", tmo_Abreviatura) :
-                new ObjectParameter("tmo_Abreviatura", typeof(string));
-    
-            var tmo_NombreParameter = tmo_Nombre != null ?
-                new ObjectParameter("tmo_Nombre", tmo_Nombre) :
-                new ObjectParameter("tmo_Nombre", typeof(string));
-    
-            var tmo_UsuarioCreaParameter = tmo_UsuarioCrea.HasValue ?
-                new ObjectParameter("tmo_UsuarioCrea", tmo_UsuarioCrea) :
-                new ObjectParameter("tmo_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Gral_tbTipoMoneda_Insert", tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioCreaParameter);
-        }
-    
-        public virtual int UDP_Gral_tbTipoMoneda_Update(Nullable<short> tmo_Id, string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioModifica)
-        {
-            var tmo_IdParameter = tmo_Id.HasValue ?
-                new ObjectParameter("tmo_Id", tmo_Id) :
-                new ObjectParameter("tmo_Id", typeof(short));
-    
-            var tmo_AbreviaturaParameter = tmo_Abreviatura != null ?
-                new ObjectParameter("tmo_Abreviatura", tmo_Abreviatura) :
-                new ObjectParameter("tmo_Abreviatura", typeof(string));
-    
-            var tmo_NombreParameter = tmo_Nombre != null ?
-                new ObjectParameter("tmo_Nombre", tmo_Nombre) :
-                new ObjectParameter("tmo_Nombre", typeof(string));
-    
-            var tmo_UsuarioModificaParameter = tmo_UsuarioModifica.HasValue ?
-                new ObjectParameter("tmo_UsuarioModifica", tmo_UsuarioModifica) :
-                new ObjectParameter("tmo_UsuarioModifica", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Gral_tbTipoMoneda_Update", tmo_IdParameter, tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioModificaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Gral_tbTipoMovimiento_Update_Result> UDP_Gral_tbTipoMovimiento_Update(Nullable<int> tipmo_id, string tipmo_Movimiento, Nullable<int> tipmo_UsuarioModifica)
         {
             var tipmo_idParameter = tipmo_id.HasValue ?
@@ -1047,6 +1009,74 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("sol_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tSolicitudInsertar_Result>("UDP_Gral_tSolicitudInsertar", emp_IdParameter, tipsol_IdParameter, pto_IdParameter, tpsal_idParameter, tmo_IdParameter, are_IdParameter, tipmo_idParameter, tpv_IdParameter, sol_GralDescripcionParameter, sol_GralJefeInmediatoParameter, sol_GralCorreoJefeInmediatoParameter, sol_GralComentarioParameter, sol_GralJustificacionParameter, sol_GralFechaSolicitudParameter, sol_AnviFechaViajeParameter, sol_Anvi_ClienteParameter, sol_Anvi_LugarDestinoParameter, sol_Acper_AnteriorParameter, sol_Anvi_PropositoVisitaParameter, sol_Anvi_DiasVisitaParameter, sol_AnviHospedajeParameter, sol_AnviTrasladoHaciaParameter, sol_AnsolMontoParameter, sol_perFechaRegresoParameter, sol_perMedioDiaParameter, sol_perCantidadDiasParameter, sol_ReemMontoParameter, sol_ReemFechaMontoParameter, sol_ReemProveedorParameter, sol_ReemCargoAParameter, sol_ReemFechaGastosParameter, sol_ReemNoFacturaParameter, sol_ReemMontoTotalParameter, sol_AprRtnParameter, sol_AprNombreEmpresaParameter, sol_AprCiudadParameter, sol_AprDireccionParameter, sol_ApreTelefonoParameter, sol_ApreContactoAdmParameter, sol_ApreCorreoAdmParameter, sol_ApreNombreTecnParameter, sol_ApreTelefonoTecnParameter, sol_ApreCorreoTecnParameter, sol_ApreCargoTecnParameter, sol_ApreLinkParameter, sol_Acper_NuevoParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter, sol_UsuarioModificaParameter, sol_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbMoneda_Insert_Result> UDP_Gral_tbMoneda_Insert(string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioCrea)
+        {
+            var tmo_AbreviaturaParameter = tmo_Abreviatura != null ?
+                new ObjectParameter("tmo_Abreviatura", tmo_Abreviatura) :
+                new ObjectParameter("tmo_Abreviatura", typeof(string));
+    
+            var tmo_NombreParameter = tmo_Nombre != null ?
+                new ObjectParameter("tmo_Nombre", tmo_Nombre) :
+                new ObjectParameter("tmo_Nombre", typeof(string));
+    
+            var tmo_UsuarioCreaParameter = tmo_UsuarioCrea.HasValue ?
+                new ObjectParameter("tmo_UsuarioCrea", tmo_UsuarioCrea) :
+                new ObjectParameter("tmo_UsuarioCrea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMoneda_Insert_Result>("UDP_Gral_tbMoneda_Insert", tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbMoneda_Update_Result> UDP_Gral_tbMoneda_Update(Nullable<short> tmo_Id, string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioModifica)
+        {
+            var tmo_IdParameter = tmo_Id.HasValue ?
+                new ObjectParameter("tmo_Id", tmo_Id) :
+                new ObjectParameter("tmo_Id", typeof(short));
+    
+            var tmo_AbreviaturaParameter = tmo_Abreviatura != null ?
+                new ObjectParameter("tmo_Abreviatura", tmo_Abreviatura) :
+                new ObjectParameter("tmo_Abreviatura", typeof(string));
+    
+            var tmo_NombreParameter = tmo_Nombre != null ?
+                new ObjectParameter("tmo_Nombre", tmo_Nombre) :
+                new ObjectParameter("tmo_Nombre", typeof(string));
+    
+            var tmo_UsuarioModificaParameter = tmo_UsuarioModifica.HasValue ?
+                new ObjectParameter("tmo_UsuarioModifica", tmo_UsuarioModifica) :
+                new ObjectParameter("tmo_UsuarioModifica", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMoneda_Update_Result>("UDP_Gral_tbMoneda_Update", tmo_IdParameter, tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoPermiso_Insert_Result> UDP_Gral_tbTipoPermiso_Insert(string tperm_Descripcion, Nullable<int> tperm_UsuarioCrea)
+        {
+            var tperm_DescripcionParameter = tperm_Descripcion != null ?
+                new ObjectParameter("tperm_Descripcion", tperm_Descripcion) :
+                new ObjectParameter("tperm_Descripcion", typeof(string));
+    
+            var tperm_UsuarioCreaParameter = tperm_UsuarioCrea.HasValue ?
+                new ObjectParameter("tperm_UsuarioCrea", tperm_UsuarioCrea) :
+                new ObjectParameter("tperm_UsuarioCrea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoPermiso_Insert_Result>("UDP_Gral_tbTipoPermiso_Insert", tperm_DescripcionParameter, tperm_UsuarioCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoPermiso_Update_Result> UDP_Gral_tbTipoPermiso_Update(Nullable<int> tperm_Id, string tperm__Descripcion, Nullable<int> tperm__UsuarioModifica)
+        {
+            var tperm_IdParameter = tperm_Id.HasValue ?
+                new ObjectParameter("tperm_Id", tperm_Id) :
+                new ObjectParameter("tperm_Id", typeof(int));
+    
+            var tperm__DescripcionParameter = tperm__Descripcion != null ?
+                new ObjectParameter("tperm__Descripcion", tperm__Descripcion) :
+                new ObjectParameter("tperm__Descripcion", typeof(string));
+    
+            var tperm__UsuarioModificaParameter = tperm__UsuarioModifica.HasValue ?
+                new ObjectParameter("tperm__UsuarioModifica", tperm__UsuarioModifica) :
+                new ObjectParameter("tperm__UsuarioModifica", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoPermiso_Update_Result>("UDP_Gral_tbTipoPermiso_Update", tperm_IdParameter, tperm__DescripcionParameter, tperm__UsuarioModificaParameter);
         }
     }
 }

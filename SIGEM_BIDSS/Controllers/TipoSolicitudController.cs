@@ -114,7 +114,6 @@ namespace SIGEM_BIDSS.Controllers
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
                     else

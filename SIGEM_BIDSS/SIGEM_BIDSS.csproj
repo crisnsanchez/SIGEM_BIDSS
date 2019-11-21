@@ -177,6 +177,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
+    <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSalarioController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
@@ -283,6 +284,12 @@
     <Compile Include="Models\UDP_Gral_tbEstado_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Gral_tbMoneda_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbMoneda_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Gral_tbMunicipio_Delete_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -299,6 +306,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoMovimiento_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoPermiso_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoPermiso_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoSalario_Insert_Result.cs">
@@ -3057,6 +3070,11 @@
     <Content Include="Views\Moneda\Details.cshtml" />
     <Content Include="Views\Moneda\Edit.cshtml" />
     <Content Include="Views\Moneda\Index.cshtml" />
+    <Content Include="Views\TipoPermiso\Create.cshtml" />
+    <Content Include="Views\TipoPermiso\Delete.cshtml" />
+    <Content Include="Views\TipoPermiso\Details.cshtml" />
+    <Content Include="Views\TipoPermiso\Edit.cshtml" />
+    <Content Include="Views\TipoPermiso\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

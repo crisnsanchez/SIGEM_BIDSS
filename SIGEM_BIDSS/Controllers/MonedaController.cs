@@ -49,14 +49,35 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "tmo_Id,tmo_Abreviatura,tmo_Nombre,tmo_UsuarioCrea,tmo_FechaCrea,tmo_UsuarioModifica,tmo_FechaModifica")] tbMoneda tbMoneda)
         {
             if (ModelState.IsValid)
-            {
-                db.tbMoneda.Add(tbMoneda);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbMoneda_Insert(tbMoneda.tmo_Abreviatura ,tbMoneda.tmo_Nombre, 1);
+                    foreach (UDP_Gral_tbMoneda_Insert_Result Moneda in List)
+                        Msj = Moneda.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
 
             return View(tbMoneda);
+
+
         }
+
 
         // GET: Moneda/Edit/5
         public ActionResult Edit(short? id)
@@ -81,12 +102,33 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "tmo_Id,tmo_Abreviatura,tmo_Nombre,tmo_UsuarioCrea,tmo_FechaCrea,tmo_UsuarioModifica,tmo_FechaModifica")] tbMoneda tbMoneda)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(tbMoneda).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbMoneda_Update(tbMoneda.tmo_Id, tbMoneda.tmo_Abreviatura,tbMoneda.tmo_Nombre, 1);
+                    foreach (UDP_Gral_tbMoneda_Update_Result Moneda in List)
+                        Msj = Moneda.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
             return View(tbMoneda);
+
+
         }
 
         // GET: Moneda/Delete/5

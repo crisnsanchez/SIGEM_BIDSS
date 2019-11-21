@@ -525,6 +525,17 @@
     <Parameter Name="est_Descripcion" Type="nvarchar" Mode="In" />
     <Parameter Name="est_UsuarioModifica" Type="int" Mode="In" />
   </Function>
+  <Function Name="UDP_Gral_tbMoneda_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tmo_Abreviatura" Type="varchar" Mode="In" />
+    <Parameter Name="tmo_Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="tmo_UsuarioCrea" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbMoneda_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tmo_Id" Type="smallint" Mode="In" />
+    <Parameter Name="tmo_Abreviatura" Type="nvarchar" Mode="In" />
+    <Parameter Name="tmo_Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="tmo_UsuarioModifica" Type="int" Mode="In" />
+  </Function>
   <Function Name="UDP_Gral_tbMunicipio_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="mun_Codigo" Type="char" Mode="In" />
   </Function>
@@ -567,6 +578,15 @@
     <Parameter Name="tipmo_id" Type="int" Mode="In" />
     <Parameter Name="tipmo_Movimiento" Type="varchar" Mode="In" />
     <Parameter Name="tipmo_UsuarioModifica" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbTipoPermiso_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tperm_Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="tperm_UsuarioCrea" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbTipoPermiso_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="tperm_Id" Type="int" Mode="In" />
+    <Parameter Name="tperm__Descripcion" Type="nvarchar" Mode="In" />
+    <Parameter Name="tperm__UsuarioModifica" Type="int" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbTipoSalario_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="tpsal_Descripcion" Type="nvarchar" Mode="In" />

@@ -10,7 +10,6 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    [Authorize]
     public class TipoSalarioController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
@@ -50,31 +49,11 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "tpsal_id,tpsal_Descripcion,tpsal_UsuarioCrea,tpsal_FechaCrea,tpsal_UsuarioModifica,tpsal_FechaModifica")] tbTipoSalario tbTipoSalario)
         {
             if (ModelState.IsValid)
-                try
-                {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbTipoSalario_Insert(tbTipoSalario.tpsal_Descripcion, 1);
-                    foreach (UDP_Gral_tbTipoSalario_Insert_Result Salario in List)
-                        Msj = Salario.MensajeError;
-                    if (Msj.StartsWith("-1"))
-                    {
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View();
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
-
-
+            {
+                db.tbTipoSalario.Add(tbTipoSalario);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
             return View(tbTipoSalario);
         }
@@ -101,36 +80,14 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tpsal_id,tpsal_Descripcion,tpsal_UsuarioCrea,tpsal_FechaCrea,tpsal_UsuarioModifica,tpsal_FechaModifica")] tbTipoSalario tbTipoSalario)
         {
-            try
+            if (ModelState.IsValid)
             {
-                IEnumerable<Object> List = null;
-                string Msj = "";
-                List = db.UDP_Gral_tbTipoSalario_Update(tbTipoSalario.tpsal_id,tbTipoSalario.tpsal_Descripcion ,1);
-                foreach (UDP_Gral_tbTipoSalario_Update_Result TipoSangre in List)
-                    Msj = TipoSangre.MensajeError;
-                if (Msj.StartsWith("-1"))
-                {
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+                db.Entry(tbTipoSalario).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch (Exception Ex)
-            {
-
-                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                return View();
-            }
-
             return View(tbTipoSalario);
-
-
-
         }
-
 
         // GET: TipoSalario/Delete/5
         public ActionResult Delete(int? id)

@@ -10,58 +10,56 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    [Authorize]
-    public class AreaController : Controller
+    public class tbTipoPermisoController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 
-        // GET: Area
+        // GET: tbTipoPermiso
         public ActionResult Index()
         {
-            return View(db.tbArea.ToList());
+            return View(db.tbTipoPermiso.ToList());
         }
 
-        // GET: Area/Details/5
+        // GET: tbTipoPermiso/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbArea tbArea = db.tbArea.Find(id);
-            if (tbArea == null)
+            tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
+            if (tbTipoPermiso == null)
             {
                 return HttpNotFound();
             }
-            return View(tbArea);
+            return View(tbTipoPermiso);
         }
 
-        // GET: Area/Create
+        // GET: tbTipoPermiso/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Area/Create
+        // POST: tbTipoPermiso/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "are_Id,are_Descripcion,are_UsuarioCrea")] tbArea tbArea)
+        public ActionResult Create([Bind(Include = "tperm_Id,tperm_Descripcion,tperm_UsuarioCrea,tperm_FechaCrea,tperm_UsuarioModifica,tperm_FechaModifica")] tbTipoPermiso tbTipoPermiso)
         {
             if (ModelState.IsValid)
-            {
                 try
                 {
-                    IEnumerable<object> _List = null;
-                    string MsjError = "";
-                    _List = db.UDP_Gral_tbArea_Insert(tbArea.are_Descripcion,1);
-                    foreach (UDP_Gral_tbArea_Insert_Result _Area in _List)
-                        MsjError = _Area.MensajeError;
-                    if (MsjError.StartsWith("-1"))
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbTipoPermiso_Insert(tbTipoPermiso.tperm_Descripcion, 1);
+                    foreach (UDP_Gral_tbTipoPermiso_Insert_Result Permiso in List)
+                        Msj = Permiso.MensajeError;
+                    if (Msj.StartsWith("-1"))
                     {
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View(tbArea);
+
+                        return View();
                     }
                     else
                     {
@@ -70,85 +68,91 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 catch (Exception Ex)
                 {
+
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbArea);
+                    return View();
                 }
 
-            }
-            return View(tbArea);
+            return View(tbTipoPermiso);
+
+
         }
 
-        // GET: Area/Edit/5
+
+        // GET: tbTipoPermiso/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbArea tbArea = db.tbArea.Find(id);
-            if (tbArea == null)
+            tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
+            if (tbTipoPermiso == null)
             {
                 return HttpNotFound();
             }
-            return View(tbArea);
+            return View(tbTipoPermiso);
         }
 
-        // POST: Area/Edit/5
+        // POST: tbTipoPermiso/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "are_Id,are_Descripcion,are_UsuarioCrea,are_FechaCrea,are_UsuarioModifica,are_FechaModifica")] tbArea tbArea)
+        public ActionResult Edit([Bind(Include = "tperm_Id,tperm_Descripcion,tperm_UsuarioCrea,tperm_FechaCrea,tperm_UsuarioModifica,tperm_FechaModifica")] tbTipoPermiso tbTipoPermiso)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
+                IEnumerable<Object> List = null;
+                string Msj = "";
+                List = db.UDP_Gral_tbTipoPermiso_Update(tbTipoPermiso.tperm_Id,tbTipoPermiso.tperm_Descripcion, 1);
+                foreach (UDP_Gral_tbTipoPermiso_Update_Result Moneda in List)
+                    Msj = Moneda.MensajeError;
+                if (Msj.StartsWith("-1"))
                 {
-                    IEnumerable<object> _List = null;
-                    string MsjError = "";
-                    _List = db.UDP_Gral_tbArea_Update(tbArea.are_Id,tbArea.are_Descripcion, 1);
-                    foreach (UDP_Gral_tbArea_Update_Result _Area in _List)
-                        MsjError = _Area.MensajeError;
-                    if (MsjError.StartsWith("-1"))
-                    {
-                        return View(tbArea);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
+
+                    return View();
                 }
-                catch (Exception Ex)
+                else
                 {
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbArea);
+                    return RedirectToAction("Index");
                 }
             }
-            return View(tbArea);
+            catch (Exception Ex)
+            {
+
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
+
+            return View(tbTipoPermiso);
+
+
         }
 
-        // GET: Area/Delete/5
+
+        // GET: tbTipoPermiso/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbArea tbArea = db.tbArea.Find(id);
-            if (tbArea == null)
+            tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
+            if (tbTipoPermiso == null)
             {
                 return HttpNotFound();
             }
-            return View(tbArea);
+            return View(tbTipoPermiso);
         }
 
-        // POST: Area/Delete/5
+        // POST: tbTipoPermiso/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbArea tbArea = db.tbArea.Find(id);
-            db.tbArea.Remove(tbArea);
+            tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
+            db.tbTipoPermiso.Remove(tbTipoPermiso);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

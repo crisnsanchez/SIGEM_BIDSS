@@ -651,17 +651,6 @@
       <Parameter Name="pto_Descripcion" Mode="In" Type="String" />
       <Parameter Name="pto_UsuarioModifica" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="UDP_Gral_tbTipoMoneda_Insert">
-      <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
-      <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
-      <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="UDP_Gral_tbTipoMoneda_Update">
-      <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
-      <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
-      <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
-      <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="UDP_Gral_tbTipoMovimiento_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoMovimiento_Update_Result)">
       <Parameter Name="tipmo_id" Mode="In" Type="Int32" />
       <Parameter Name="tipmo_Movimiento" Mode="In" Type="String" />
@@ -759,6 +748,26 @@
       <Parameter Name="sol_UsuarioModifica" Mode="In" Type="Int32" />
       <Parameter Name="sol_FechaModifica" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbMoneda_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result)">
+      <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+      <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+      <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbMoneda_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Update_Result)">
+      <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
+      <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+      <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+      <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoPermiso_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result)">
+      <Parameter Name="tperm_Descripcion" Mode="In" Type="String" />
+      <Parameter Name="tperm_UsuarioCrea" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbTipoPermiso_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Update_Result)">
+      <Parameter Name="tperm_Id" Mode="In" Type="Int32" />
+      <Parameter Name="tperm__Descripcion" Mode="In" Type="String" />
+      <Parameter Name="tperm__UsuarioModifica" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="SDP_tbMunicipio_Select_Result">
     <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -839,6 +848,18 @@
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
   <ComplexType Name="UDP_Gral_tSolicitudInsertar_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbTipoPermiso_Update_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbTipoPermiso_Insert_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbMoneda_Insert_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbMoneda_Update_Result">
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
 </Schema>
