@@ -39,8 +39,25 @@ namespace SIGEM_BIDSS.Controllers
         [HttpPost]
         public JsonResult InactivarEmpleado(tbEmpleado tbEmpleado)
         {
-            tbEmpleado empleado = db.tbEmpleado.Find(tbEmpleado.emp_Id);
-            var list = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, empleado.emp_Nombres,empleado.emp_Apellidos,empleado.emp_Sexo,empleado.emp_FechaNacimiento,empleado.emp_Identificacion,empleado.emp_Telefono,empleado.emp_CorreoElectronico, tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoinactivo, empleado.tps_Id,empleado.pto_Id,empleado.emp_FechaIngreso,empleado.emp_Direccion,empleado.emp_PathImage,empleado.mun_Id,empleado.emp_UsuarioCrea).ToList();
+
+            IEnumerable<Object>  list = null;
+            try {
+
+
+
+                tbEmpleado empleado = db.tbEmpleado.Find(tbEmpleado.emp_Id);
+                 list = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, empleado.emp_Nombres, empleado.emp_Apellidos, empleado.emp_Sexo, empleado.emp_FechaNacimiento, empleado.emp_Identificacion, empleado.emp_Telefono, empleado.emp_CorreoElectronico, tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoinactivo, empleado.tps_Id, empleado.pto_Id, empleado.emp_FechaIngreso, empleado.emp_Direccion, empleado.emp_PathImage, empleado.mun_Id, empleado.emp_UsuarioCrea).ToList();
+
+
+            }
+            catch 
+                (Exception Ex)
+            {
+
+
+               
+            }
+
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
@@ -109,6 +126,9 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono,emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,emp_Estado,emp_PathImage,mun_Id,emp_UsuarioCrea,emp_FechaCrea,emp_UsuarioModifica,emp_FechaModifica")] tbEmpleado tbEmpleado ,  HttpPostedFileBase FotoPath)
         {
+
+             tbEmpleado.emp_PathImage = "----";
+
             if (FotoPath == null)
             {
                 TempData["smserror"] = "Imagen requerida.";
@@ -222,7 +242,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
             ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
-               ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre",db.tbMunicipio.Find(tbEmpleado.mun_Id).dep_codigo);
             return View(tbEmpleado);
         }
 

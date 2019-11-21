@@ -95,7 +95,7 @@
 
                             @if (item.est_Id == GeneralFunctions.empleadoactivo)
                             {
-                                <input type="button" id="RazonInactivacion" class="btn btn-danger" data-toggle="modal" data-target="#ModalRazonInactivacion" value="Inactivar" />
+                                <input type="button" id="RazonInactivacion" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalRazonInactivacion" value="Inactivar" />
                                 <input type="hidden" id="_emp_Id" value="@item.emp_Id" />
                             }
                             else if(item.est_Id == GeneralFunctions.empleadoinactivo)
