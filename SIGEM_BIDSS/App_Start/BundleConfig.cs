@@ -14,6 +14,9 @@ namespace SIGEM_BIDSS
             bundles.Add(new StyleBundle("~/Content/adminlte").Include(
                      "~/Content/template/dist/css/adminlte.min.css"));
 
+            bundles.Add(new ScriptBundle("~/Content/all").Include(
+                       "~/Content/template/plugins/fontawesome-free/css/all.min.css"));
+
             bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
                         "~/Content/template/plugins/jquery/jquery.min.js"));
 
@@ -22,6 +25,8 @@ namespace SIGEM_BIDSS
 
             bundles.Add(new ScriptBundle("~/Scripts/adminlte").Include(
                         "~/Content/template/dist/js/adminlte.min.js"));
+
+
 
         }
     }

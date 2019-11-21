@@ -23,6 +23,11 @@ namespace SIGEM_BIDSS.Controllers
 
             return View();
         }
+        public ActionResult Error()
+        {
+            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
     }
 }
