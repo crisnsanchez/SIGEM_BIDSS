@@ -57,9 +57,9 @@
 
 
 
-            <div class="col-lg-3 col-6">
+            @*<div class="col-lg-3 col-6">*@
                 <!-- small box -->
-                <div class="small-box bg-danger">
+                @*<div class="small-box bg-danger">
                     <div class="inner">
 
                         <h4> Aprovisionamiento de Licencias-CSP </h4>
@@ -69,7 +69,7 @@
                     </div>
                     <a href="@Url.Action("Index","Estado")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-            </div>
+            </div>*@
 
 
             <div class="col-lg-3 col-6">
@@ -121,7 +121,10 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="@Url.Action("Index","TipoSolicitud")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    @{
+
+                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.AccionPersonal })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    }
                 </div>
             </div>
 
@@ -134,7 +137,7 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="@Url.Action("Index","Area")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="@Url.Action("Index","RembolsoGastos")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 

@@ -38,7 +38,8 @@ namespace SIGEM_BIDSS.Models
             object obtipsol = new
             {
                 AccionPersonal = TipodeSolicitudSearch("Accion Personal"),
-                AnticipodeViaticos = TipodeSolicitudSearch("Anticipo de Viaticos")
+                AnticipodeViaticos = TipodeSolicitudSearch("Anticipo de Viaticos"),
+                RequisicionCompra = TipodeSolicitudSearch("Requisicion de Compra")
             };
             return obtipsol;
         }
@@ -56,7 +57,9 @@ namespace SIGEM_BIDSS.Models
         public const int AccionPersonal = 1;
 
         public const int AnticipodeViaticos = 2;
-    
+
+        public const int RequisicionCompra = 3;
+
 
 
 

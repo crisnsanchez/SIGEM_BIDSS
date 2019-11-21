@@ -1398,7 +1398,6 @@
     <Content Include="Views\TipoMovimiento\Details.cshtml" />
     <Content Include="Views\TipoMovimiento\Edit.cshtml" />
     <Content Include="Views\TipoMovimiento\Index.cshtml" />
-    <Content Include="Views\Solicitud\AccionPersonal.cshtml" />
     <Content Include="Views\TipoSalario\Create.cshtml" />
     <Content Include="Views\TipoSalario\Delete.cshtml" />
     <Content Include="Views\TipoSalario\Details.cshtml" />
@@ -1411,6 +1410,10 @@
     <Content Include="Views\Cargos\Details.cshtml" />
     <Content Include="Views\Cargos\Edit.cshtml" />
     <Content Include="Views\Cargos\Index.cshtml" />
+    <Content Include="Views\Solicitud\_RequisicionCompra.cshtml" />
+    <Content Include="Views\Solicitud\_AnticipoViatico.cshtml" />
+    <Content Include="Views\Solicitud\_AnticipoSalario.cshtml" />
+    <Content Include="Views\Solicitud\_RembolsoGastos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

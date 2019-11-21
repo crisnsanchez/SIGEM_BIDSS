@@ -20,10 +20,9 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Id Tipo Sangre")]
         public int tps_Id { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Descripcion")]
         [MinLength(2, ErrorMessage = "Minimo {1} caracteres")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        
         public string tps_nombre { get; set; }
 
         [Display(Name = "Usuario Crea")]
@@ -38,7 +37,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> tps_FechaModifica { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+      
         public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
     }
 
