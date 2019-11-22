@@ -261,8 +261,8 @@ function AgregarMunicipiosDT() {
     }
     else {
 
-        $('#dep_Codigo').prop('disabled', true);
-        $('#dep_Nombre').prop('disabled', true);
+        //$('#dep_Codigo').prop('disabled', true);
+        //$('#dep_Nombre').prop('disabled', true);
         $('#Valida').prop('disabled', false);
 
         var tbMunicipio = GetMunicipio();
@@ -417,12 +417,6 @@ $("#BtnsubmitMunicipio").click(function () {
         }
     });
 })
-
-
-
-
-
-
 
 
 
