@@ -13,7 +13,7 @@
 
     </div>
     <div class="card-body">
-        <table class="table table-bordered table-hover" id="dataTable">
+        <table class="table table-bordered table-hover"  id="dataTables">
             <thead>
                 <tr>
                     <th>
@@ -41,59 +41,36 @@
     </div>
 </div>
 
-<div class="card card-primary card-outline">
-    <div class="card-header d-flex p-0 ui-sortable-handle">
-        <h3 class="card-title p-3">
-            <i class="fa fa-user  mr-1"></i>
-            Auditoria
-        </h3>
 
-    </div>
-    <div class="ibox float-e-margins">
-      
-        <div class="ibox-content">
-            <table class="table">
-                <tr>
-                    <th>Acción</th>
-                    <th>Usuario</th>
-                    <th> Fecha</th>
-                </tr>
-                <tr>
-                    <td>Creado por  </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Modificado por</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
+
+@*<div class="card card-primary card-outline">
+        <div class="card-header d-flex p-0 ui-sortable-handle">
+            <h3 class="card-title p-3">
+                <i class="fa fa-user  mr-1"></i>
+                Auditoria
+            </h3>
+
         </div>
-    </div>
-</div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#dataTable').DataTable(
-            {
-                "searching": true,
-                "lengthChange": true,
-                "oLanguage": {
-                    "oPaginate": {
-                        "sNext": "Siguiente",
-                        "sPrevious": "Anterior",
-                    },
-                    "sProcessing": "Procesando...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "No se encontraron resultados",
-                    "sEmptyTable": "Ningún dato disponible en esta tabla",
-                    "sEmptyTable": "No hay registros",
-                    "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-                    "sSearch": "Buscar",
-                    "sInfo": "Mostrando _START_ a _END_ Entradas",
-                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                }
-            });
-    });
+        <div class="ibox float-e-margins">
 
-</script>
+            <div class="ibox-content">
+                <table class="table">
+                    <tr>
+                        <th>Acción</th>
+                        <th>Usuario</th>
+                        <th> Fecha</th>
+                    </tr>
+                    <tr>
+                        <td>Creado por  </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Modificado por</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>*@

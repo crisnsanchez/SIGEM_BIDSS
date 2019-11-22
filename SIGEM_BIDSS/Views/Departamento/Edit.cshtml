@@ -98,31 +98,33 @@
                             @Html.HiddenFor(model => model.dep_Codigo)
                             <form class="needs-validation" novalidate>
                                 <div class="form-row">
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col">
                                         <input type="hidden" value="@Model.dep_Nombre" />
                                         <label for="validationTooltip02">Código Departamento</label>
                                         @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-7">
                                         @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label" })
 
                                         @Html.TextBoxFor(model => model.dep_Nombre, new { @class = "form-control", @readonly = "readonly" })
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-5">
-                                            @Html.LabelFor(model => Municipio.mun_codigo, new { @class = "control-label , required" })
-                                            <input type="text" id="mun_codigo" name="mun_codigo" placeholder="" onkeypress="return soloNumeros(event)" class="form-control" min="1" maxlength="2" autocomplete="off" />
-                                            <div id="ValidationMunCodigoCreate">
-                                                @Html.ValidationMessageFor(model => Municipio.mun_codigo)
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label , required" })
-                                            <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
-                                            <div id="ValidationMunNombreCreate">
-                                                @Html.ValidationMessageFor(model => Municipio.mun_nombre)
-                                            </div>
 
+                                </div>
+                                <br />
+                                <div class="form-row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => Municipio.mun_codigo, new { @class = "control-label , required" })
+                                        <input type="text" id="mun_codigo" name="mun_codigo" placeholder="" onkeypress="return soloNumeros(event)" class="form-control" min="1" maxlength="2" autocomplete="off" />
+                                        <div id="ValidationMunCodigoCreate">
+                                            @Html.ValidationMessageFor(model => Municipio.mun_codigo)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-7">
+                                        @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label , required" })
+                                        <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
+                                        <div id="ValidationMunNombreCreate">
+                                            @Html.ValidationMessageFor(model => Municipio.mun_nombre)
                                         </div>
                                     </div>
                                 </div>
@@ -166,26 +168,29 @@
                             <div class="form-horizontal">
                                 <label id="MsjError">
                                 </label>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => Municipio.mun_codigo, new { @class = "control-label", @readonly = "readonly" })
-                                    <div class="col-sm-8">
-                                        <input type="text" id="mun_CodigoEdit_" name="mun_Codigo" class="form-control" readonly="readonly"; minLength="4" onkeypress="return soloNumeros(event)"  />
-                                        @Html.ValidationMessageFor(m => Municipio.mun_codigo)
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
 
-                                    <div class="col-sm-8">
-                                        <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly;  style = "text-transform:uppercase;" maxlength="150" />
+                                <div class="form-row">
+                                    <div class="col-auto">
+                                        @Html.LabelFor(m => Municipio.mun_codigo, new { @class = "control-label", @readonly = "readonly" })
+
+                                        <input type="text" id="mun_CodigoEdit_" name="mun_Codigo" class="form-control" readonly="readonly" ; minLength="4" onkeypress="return soloNumeros(event)" />
+                                        @Html.ValidationMessageFor(m => Municipio.mun_codigo)
+
+                                    </div>
+                                    <div class="col-auto">
+                                        @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
+                                        <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; style="text-transform:uppercase;" maxlength="150" autocomplete="off"/>
                                         @Html.ValidationMessageFor(m => Municipio.mun_nombre)
                                     </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-4 col-md-10">
-                                        <button class="btn btn-primary" type="button" id="BtnsubmitMunicipio" tabindex="10"> Guardar </button>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
-                                    </div>
+
+                            </div>
+                            <br />
+                            <div class="center">
+                                <div class="col-md-offset-4 col-md-10">
+                                    <button class="btn btn-primary" type="button" id="BtnsubmitMunicipio" tabindex="10"> Guardar </button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
                                 </div>
                             </div>
                         </fieldset>

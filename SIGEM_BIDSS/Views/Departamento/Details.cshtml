@@ -4,6 +4,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -54,4 +55,42 @@
 </div>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/app/Departamento.js"></script>
+@section Scripts {
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Content/template/dist/js/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables -->
+    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dataTables').DataTable(
+                {
+                    "searching": true,
+                    "lengthChange": true,
+                    "oLanguage": {
+                        "oPaginate": {
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior",
+                        },
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sEmptyTable": "No hay registros",
+                        "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+                        "sSearch": "Buscar",
+                        "sInfo": "Mostrando _START_ a _END_ Entradas",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    }
+                });
+        });
+
+    </script>
+
+}
 
