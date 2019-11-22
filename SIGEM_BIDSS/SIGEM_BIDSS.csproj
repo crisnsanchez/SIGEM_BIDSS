@@ -3071,12 +3071,13 @@
     <Content Include="Views\Moneda\Details.cshtml" />
     <Content Include="Views\Moneda\Edit.cshtml" />
     <Content Include="Views\Moneda\Index.cshtml" />
-    <Content Include="Views\TipoPermiso\Create.cshtml" />
-    <Content Include="Views\TipoPermiso\Delete.cshtml" />
-    <Content Include="Views\TipoPermiso\Details.cshtml" />
-    <Content Include="Views\TipoPermiso\Edit.cshtml" />
-    <Content Include="Views\TipoPermiso\Index.cshtml" />
+    <Content Include="Views\tbTipoPermiso\Create.cshtml" />
+    <Content Include="Views\tbTipoPermiso\Delete.cshtml" />
+    <Content Include="Views\tbTipoPermiso\Details.cshtml" />
+    <Content Include="Views\tbTipoPermiso\Edit.cshtml" />
+    <Content Include="Views\tbTipoPermiso\Index.cshtml" />
     <Content Include="Views\Solicitud\_PermisoLaboral.cshtml" />
+    <Content Include="Views\Solicitud\LiquidacionAnticipoSalario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -56,10 +56,13 @@ namespace SIGEM_BIDSS.Models
 
         public const int AccionPersonal = 1;
 
-        public const int AnticipodeViaticos = 2;
+        public const int SolicitudPermisoLaboral = 2;
 
-        public const int RequisicionCompra = 3;
-
+        public const int SolicitudAnticipoViaticos = 3;
+        public const int SolicitudAnticipoSalario = 4;
+        public const int LiquidacionAnticipoSalario = 5;
+        public const int RequisicionCompra = 6;
+        public const int RembolsoGastos = 7;
 
 
 

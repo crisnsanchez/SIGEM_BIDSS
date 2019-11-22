@@ -89,22 +89,34 @@
                     @{
                         //int _value = _funtion.TipodeSolicitudSearch(GeneralFunctions.AccionPersonal);
                         @*if (Model.tipsol_Id == _value)
-                                        {
-                                @Html.Partial("_AccionPersonal", new tbSolicitud());
-                            }*@
+                        {
+                @Html.Partial("_AccionPersonal", new tbSolicitud());
+            }*@
 
                         switch (Model.tipsol_Id)
                         {
                             case GeneralFunctions.AccionPersonal:
                                 @Html.Partial("_AccionPersonal", new tbSolicitud());
                                 break;
-                              case GeneralFunctions.RequisicionCompra:
-                                @Html.Partial("_AccionPersonal", new tbSolicitud());
+                            case GeneralFunctions.SolicitudPermisoLaboral:
+                                @Html.Partial("_PermisoLaboral", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.SolicitudAnticipoViaticos:
+                                @Html.Partial("_AnticipoViatico", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.SolicitudAnticipoSalario:
+                                @Html.Partial("_AnticipoSalario", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.LiquidacionAnticipoSalario:
+                                @Html.Partial("_LiquidacionAnticipoSalario", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.RequisicionCompra:
+                                @Html.Partial("_RequisicionCompra", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.RembolsoGastos:
+                                @Html.Partial("_RembolsoGastos", new tbSolicitud());
                                 break;
 
-                            case GeneralFunctions.AnticipodeViaticos:
-                                @Html.Label("Opcion2");
-                                break;
                             default:
                                 @Html.Label("Opcion3");
                                 break;
