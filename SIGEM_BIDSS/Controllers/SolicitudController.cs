@@ -44,7 +44,8 @@ namespace SIGEM_BIDSS.Controllers
     [HttpPost]
     [ValidateAntiForgeryToken]
  
-    public ActionResult Create([Bind(Include = "emp_Id,tipsol_Id, pto_Id, tpsal_id, tmo_Id, are_Id, tipmo_id, tpv_Id, sol_GralDescripcion, sol_GralJefeInmediato, sol_GralCorreoJefeInmediato, sol_GralComentario, sol_GralJustificacion, sol_GralFechaSolicitud, sol_AnviFechaViaje, sol_Anvi_Cliente, sol_Anvi_LugarDestino, sol_Acper_Anterior, sol_Anvi_PropositoVisita, sol_Anvi_DiasVisita, sol_AnviHospedaje, sol_AnviTrasladoHacia, sol_AnsolMonto, sol_perFechaRegreso, sol_perMedioDia, sol_perCantidadDias, sol_ReemMonto, sol_ReemFechaMonto, sol_ReemProveedor, sol_ReemCargoA, sol_ReemFechaGastos, sol_ReemNoFactura, sol_ReemMontoTotal, sol_AprRtn, sol_AprNombreEmpresa, sol_AprCiudad, sol_AprDireccion, sol_ApreTelefono, sol_ApreContactoAdm, sol_ApreCorreoAdm, sol_ApreNombreTecn, sol_ApreTelefonoTecn, sol_ApreCorreoTecn, sol_ApreCargoTecn, sol_ApreLink, sol_Acper_Nuevo, sol_UsuarioCrea, sol_FechaCrea, sol_UsuarioModifica, sol_FechaModifica")] tbSolicitud tbSolicitud)
+    public ActionResult Create([Bind(Include = "emp_Id,tipsol_Id, pto_Id, tpsal_id, tmo_Id, are_Id, tipmo_id, tpv_Id, sol_GralDescripcion, sol_GralJefeInmediato, sol_GralCorreoJefeInmediato, sol_GralComentario, sol_GralJustificacion, sol_GralFechaSolicitud, sol_AnviFechaViaje, sol_Anvi_Cliente, sol_Anvi_LugarDestino, sol_Acper_Anterior, sol_Anvi_PropositoVisita, sol_Anvi_DiasVisita, sol_AnviHospedaje, sol_AnviTrasladoHacia, sol_AnsolMonto, sol_perFechaRegreso, sol_perMedioDia, sol_perCantidadDias, sol_ReemMonto, sol_ReemFechaMonto, sol_ReemProveedor, sol_ReemCargoA, sol_ReemFechaGastos, sol_ReemNoFactura, sol_ReemMontoTotal, sol_AprRtn, sol_AprNombreEmpresa, sol_AprCiudad, sol_AprDireccion, sol_ApreTelefono, sol_ApreContactoAdm, sol_ApreCorreoAdm, sol_ApreNombreTecn, sol_ApreTelefonoTecn, sol_ApreCorreoTecn, sol_ApreCargoTecn, sol_ApreLink, sol_Acper_Nuevo, sol_UsuarioCrea, sol_FechaCrea, sol_UsuarioModifica, sol_FechaModifica," +
+        "tperm_Id,sol_PerFechaRegreso,sol_PerMedioDia,sol_PerFechaInicio,sol_PerCantidadDias")] tbSolicitud tbSolicitud)
     {
  
 
@@ -63,11 +64,11 @@ namespace SIGEM_BIDSS.Controllers
         IEnumerable<object> list = null;
         var _date = Convert.ToDateTime(tbSolicitud.sol_GralFechaSolicitud);
         list = db.UDP_Gral_tSolicitudInsertar(tbSolicitud.emp_Id, tbSolicitud.tipsol_Id, tbSolicitud.pto_Id, tbSolicitud.tpsal_id, tbSolicitud.tmo_Id, 
-            tbSolicitud.are_Id, tbSolicitud.tipmo_id, tbSolicitud.tpv_Id, tbSolicitud.sol_GralDescripcion, tbSolicitud.sol_GralJefeInmediato, 
+            tbSolicitud.are_Id, tbSolicitud.tipmo_id, tbSolicitud.tpv_Id,tbSolicitud.tperm_Id, tbSolicitud.sol_GralDescripcion, tbSolicitud.sol_GralJefeInmediato, 
             tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralComentario, tbSolicitud.sol_GralJustificacion, _date,
             _date, tbSolicitud.sol_Anvi_Cliente, tbSolicitud.sol_Anvi_LugarDestino, tbSolicitud.sol_Acper_Anterior, 
             tbSolicitud.sol_Anvi_PropositoVisita, tbSolicitud.sol_Anvi_DiasVisita, tbSolicitud.sol_AnviHospedaje, tbSolicitud.sol_AnviTrasladoHacia, 
-            tbSolicitud.sol_AnsolMonto, _date, tbSolicitud.sol_perMedioDia, tbSolicitud.sol_perCantidadDias, tbSolicitud.sol_ReemMonto,
+            tbSolicitud.sol_AnsolMonto,tbSolicitud.sol_PerFechaRegreso,tbSolicitud.sol_PerMedioDia,tbSolicitud.sol_PerFechaInicio,tbSolicitud.sol_PerCantidadDias,tbSolicitud.sol_ReemMonto,
             _date, tbSolicitud.sol_ReemProveedor, tbSolicitud.sol_ReemCargoA, _date,
             tbSolicitud.sol_ReemNoFactura, tbSolicitud.sol_ReemMontoTotal, tbSolicitud.sol_AprRtn, tbSolicitud.sol_AprNombreEmpresa, tbSolicitud.sol_AprCiudad,
             tbSolicitud.sol_AprDireccion, tbSolicitud.sol_ApreTelefono, tbSolicitud.sol_ApreContactoAdm, tbSolicitud.sol_ApreCorreoAdm, 

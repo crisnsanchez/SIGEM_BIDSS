@@ -33,6 +33,7 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" ManuallyRouted="false" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id" ManuallyRouted="false" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

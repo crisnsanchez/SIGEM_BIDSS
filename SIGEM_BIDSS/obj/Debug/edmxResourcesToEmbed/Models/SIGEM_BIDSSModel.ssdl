@@ -107,6 +107,7 @@
     <Property Name="are_Id" Type="int" Nullable="false" />
     <Property Name="tipmo_id" Type="int" Nullable="false" />
     <Property Name="tpv_Id" Type="int" Nullable="false" />
+    <Property Name="tperm_Id" Type="int" Nullable="false" />
     <Property Name="sol_GralDescripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_GralJefeInmediato" Type="nvarchar" MaxLength="100" />
     <Property Name="sol_GralCorreoJefeInmediato" Type="nvarchar" MaxLength="50" />
@@ -145,11 +146,13 @@
     <Property Name="sol_ApreCargoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_Acper_Nuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="sol_RequeCantidad" Type="float" />
+    <Property Name="sol_RequeCantidad" Type="float" Nullable="false" />
+    <Property Name="sol_PerlaFechaInicio" Type="datetime" Nullable="false" />
+    <Property Name="sol_PerlaFechaRetorno" Type="datetime" Nullable="false" />
     <Property Name="sol_UsuarioCrea" Type="int" Nullable="false" />
     <Property Name="sol_FechaCrea" Type="datetime" Nullable="false" />
-    <Property Name="sol_UsuarioModifica" Type="int" Nullable="false" />
-    <Property Name="sol_FechaModifica" Type="datetime" Nullable="false" />
+    <Property Name="sol_UsuarioModifica" Type="int" />
+    <Property Name="sol_FechaModifica" Type="datetime" />
   </EntityType>
   <EntityType Name="tbTipoMovimiento">
     <Key>
@@ -322,6 +325,18 @@
       </Principal>
       <Dependent Role="tbSolicitud">
         <PropertyRef Name="tipmo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id">
+    <End Role="tbTipoPermiso" Type="Self.tbTipoPermiso" Multiplicity="1" />
+    <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoPermiso">
+        <PropertyRef Name="tperm_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tperm_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -637,6 +652,7 @@
     <Parameter Name="are_Id" Type="int" Mode="In" />
     <Parameter Name="tipmo_id" Type="int" Mode="In" />
     <Parameter Name="tpv_Id" Type="int" Mode="In" />
+    <Parameter Name="tperm_Id" Type="int" Mode="In" />
     <Parameter Name="sol_GralDescripcion" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_GralJefeInmediato" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_GralCorreoJefeInmediato" Type="nvarchar" Mode="In" />
@@ -675,6 +691,8 @@
     <Parameter Name="sol_ApreCargoTecn" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_ApreLink" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_Acper_Nuevo" Type="nvarchar" Mode="In" />
+    <Parameter Name="sol_PerlaFechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="sol_PerlaFechaRetorno" Type="datetime" Mode="In" />
     <Parameter Name="sol_UsuarioCrea" Type="int" Mode="In" />
     <Parameter Name="sol_FechaCrea" Type="datetime" Mode="In" />
     <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />
@@ -729,6 +747,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id">
       <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id">
+      <End Role="tbTipoPermiso" EntitySet="tbTipoPermiso" />
       <End Role="tbSolicitud" EntitySet="tbSolicitud" />
     </AssociationSet>
     <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id">

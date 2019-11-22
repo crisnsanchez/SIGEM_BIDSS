@@ -105,6 +105,9 @@
     <EntitySetMapping Name="tbSolicitud">
       <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
         <MappingFragment StoreEntitySet="tbSolicitud">
+          <ScalarProperty Name="sol_PerlaFechaRetorno" ColumnName="sol_PerlaFechaRetorno" />
+          <ScalarProperty Name="sol_PerlaFechaInicio" ColumnName="sol_PerlaFechaInicio" />
+          <ScalarProperty Name="tperm_Id" ColumnName="tperm_Id" />
           <ScalarProperty Name="sol_Id" ColumnName="sol_Id" />
           <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
           <ScalarProperty Name="tipsol_Id" ColumnName="tipsol_Id" />

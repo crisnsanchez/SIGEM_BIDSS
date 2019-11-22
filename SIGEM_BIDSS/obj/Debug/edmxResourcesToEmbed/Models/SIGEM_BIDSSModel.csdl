@@ -160,11 +160,11 @@
     <Property Name="sol_ApreCargoTecn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="sol_ApreLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="sol_Acper_Nuevo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="sol_RequeCantidad" Type="Double" />
+    <Property Name="sol_RequeCantidad" Type="Double" Nullable="false" />
     <Property Name="sol_UsuarioCrea" Type="Int32" Nullable="false" />
     <Property Name="sol_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="sol_UsuarioModifica" Type="Int32" Nullable="false" />
-    <Property Name="sol_FechaModifica" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sol_UsuarioModifica" Type="Int32" />
+    <Property Name="sol_FechaModifica" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tbArea" Relationship="Self.FK_Gral_tbSolicitud_tbArea_are_Id" FromRole="tbSolicitud" ToRole="tbArea" />
     <NavigationProperty Name="tbEmpleado" Relationship="Self.FK_Gral_tbSolicitud_tbEmpleado_emp_Id" FromRole="tbSolicitud" ToRole="tbEmpleado" />
     <NavigationProperty Name="tbMoneda" Relationship="Self.FK_Gral_tbSolicitud_tbMoneda_tmo_Id" FromRole="tbSolicitud" ToRole="tbMoneda" />
@@ -173,6 +173,10 @@
     <NavigationProperty Name="tbTipoSalario" Relationship="Self.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" FromRole="tbSolicitud" ToRole="tbTipoSalario" />
     <NavigationProperty Name="tbTipoSolicitud" Relationship="Self.FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id" FromRole="tbSolicitud" ToRole="tbTipoSolicitud" />
     <NavigationProperty Name="tbTipoViatico" Relationship="Self.FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id" FromRole="tbSolicitud" ToRole="tbTipoViatico" />
+    <Property Name="tperm_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbTipoPermiso" Relationship="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" FromRole="tbSolicitud" ToRole="tbTipoPermiso" />
+    <Property Name="sol_PerlaFechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="sol_PerlaFechaRetorno" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <EntityType Name="tbTipoMovimiento">
     <Key>
@@ -196,6 +200,7 @@
     <Property Name="tperm_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="tperm_UsuarioModifica" Type="Int32" />
     <Property Name="tperm_FechaModifica" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" FromRole="tbTipoPermiso" ToRole="tbSolicitud" />
   </EntityType>
   <EntityType Name="tbTipoSalario">
     <Key>
@@ -705,6 +710,7 @@
       <Parameter Name="are_Id" Mode="In" Type="Int32" />
       <Parameter Name="tipmo_id" Mode="In" Type="Int32" />
       <Parameter Name="tpv_Id" Mode="In" Type="Int32" />
+      <Parameter Name="tperm_Id" Mode="In" Type="Int32" />
       <Parameter Name="sol_GralDescripcion" Mode="In" Type="String" />
       <Parameter Name="sol_GralJefeInmediato" Mode="In" Type="String" />
       <Parameter Name="sol_GralCorreoJefeInmediato" Mode="In" Type="String" />
@@ -743,6 +749,8 @@
       <Parameter Name="sol_ApreCargoTecn" Mode="In" Type="String" />
       <Parameter Name="sol_ApreLink" Mode="In" Type="String" />
       <Parameter Name="sol_Acper_Nuevo" Mode="In" Type="String" />
+      <Parameter Name="sol_PerlaFechaInicio" Mode="In" Type="DateTime" />
+      <Parameter Name="sol_PerlaFechaRetorno" Mode="In" Type="DateTime" />
       <Parameter Name="sol_UsuarioCrea" Mode="In" Type="Int32" />
       <Parameter Name="sol_FechaCrea" Mode="In" Type="DateTime" />
       <Parameter Name="sol_UsuarioModifica" Mode="In" Type="Int32" />
@@ -768,6 +776,10 @@
       <Parameter Name="tperm__Descripcion" Mode="In" Type="String" />
       <Parameter Name="tperm__UsuarioModifica" Mode="In" Type="Int32" />
     </FunctionImport>
+    <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id">
+      <End Role="tbTipoPermiso" EntitySet="tbTipoPermiso" />
+      <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="SDP_tbMunicipio_Select_Result">
     <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -862,4 +874,16 @@
   <ComplexType Name="UDP_Gral_tbMoneda_Update_Result">
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
   </ComplexType>
+  <Association Name="FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id">
+    <End Type="SIGEM_BIDSSModel.tbTipoPermiso" Role="tbTipoPermiso" Multiplicity="1" />
+    <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbTipoPermiso">
+        <PropertyRef Name="tperm_Id" />
+      </Principal>
+      <Dependent Role="tbSolicitud">
+        <PropertyRef Name="tperm_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

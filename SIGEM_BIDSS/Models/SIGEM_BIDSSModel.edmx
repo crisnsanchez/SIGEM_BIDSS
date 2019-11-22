@@ -112,6 +112,7 @@
           <Property Name="are_Id" Type="int" Nullable="false" />
           <Property Name="tipmo_id" Type="int" Nullable="false" />
           <Property Name="tpv_Id" Type="int" Nullable="false" />
+          <Property Name="tperm_Id" Type="int" Nullable="false" />
           <Property Name="sol_GralDescripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_GralJefeInmediato" Type="nvarchar" MaxLength="100" />
           <Property Name="sol_GralCorreoJefeInmediato" Type="nvarchar" MaxLength="50" />
@@ -127,9 +128,10 @@
           <Property Name="sol_AnviHospedaje" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_AnviTrasladoHacia" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_AnsolMonto" Type="float" Nullable="false" />
-          <Property Name="sol_perFechaRegreso" Type="datetime" Nullable="false" />
-          <Property Name="sol_perMedioDia" Type="bit" Nullable="false" />
-          <Property Name="sol_perCantidadDias" Type="int" Nullable="false" />
+          <Property Name="sol_PerFechaRegreso" Type="datetime" Nullable="false" />
+          <Property Name="sol_PerMedioDia" Type="bit" Nullable="false" />
+          <Property Name="sol_PerFechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="sol_PerCantidadDias" Type="int" Nullable="false" />
           <Property Name="sol_ReemMonto" Type="float" Nullable="false" />
           <Property Name="sol_ReemFechaMonto" Type="datetime" Nullable="false" />
           <Property Name="sol_ReemProveedor" Type="nchar" MaxLength="10" Nullable="false" />
@@ -150,11 +152,11 @@
           <Property Name="sol_ApreCargoTecn" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="sol_Acper_Nuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="sol_RequeCantidad" Type="float" />
+          <Property Name="sol_RequeCantidad" Type="float" Nullable="false" />
           <Property Name="sol_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="sol_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="sol_UsuarioModifica" Type="int" Nullable="false" />
-          <Property Name="sol_FechaModifica" Type="datetime" Nullable="false" />
+          <Property Name="sol_UsuarioModifica" Type="int" />
+          <Property Name="sol_FechaModifica" Type="datetime" />
         </EntityType>
         <EntityType Name="tbTipoMovimiento">
           <Key>
@@ -327,6 +329,18 @@
             </Principal>
             <Dependent Role="tbSolicitud">
               <PropertyRef Name="tipmo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id">
+          <End Role="tbTipoPermiso" Type="Self.tbTipoPermiso" Multiplicity="1" />
+          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoPermiso">
+              <PropertyRef Name="tperm_Id" />
+            </Principal>
+            <Dependent Role="tbSolicitud">
+              <PropertyRef Name="tperm_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -642,6 +656,7 @@
           <Parameter Name="are_Id" Type="int" Mode="In" />
           <Parameter Name="tipmo_id" Type="int" Mode="In" />
           <Parameter Name="tpv_Id" Type="int" Mode="In" />
+          <Parameter Name="tperm_Id" Type="int" Mode="In" />
           <Parameter Name="sol_GralDescripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="sol_GralJefeInmediato" Type="nvarchar" Mode="In" />
           <Parameter Name="sol_GralCorreoJefeInmediato" Type="nvarchar" Mode="In" />
@@ -657,9 +672,10 @@
           <Parameter Name="sol_AnviHospedaje" Type="nvarchar" Mode="In" />
           <Parameter Name="sol_AnviTrasladoHacia" Type="nvarchar" Mode="In" />
           <Parameter Name="sol_AnsolMonto" Type="float" Mode="In" />
-          <Parameter Name="sol_perFechaRegreso" Type="datetime" Mode="In" />
-          <Parameter Name="sol_perMedioDia" Type="bit" Mode="In" />
-          <Parameter Name="sol_perCantidadDias" Type="int" Mode="In" />
+          <Parameter Name="sol_PerFechaRegreso" Type="datetime" Mode="In" />
+          <Parameter Name="sol_PerMedioDia" Type="bit" Mode="In" />
+          <Parameter Name="sol_PerFechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="sol_PerCantidadDias" Type="int" Mode="In" />
           <Parameter Name="sol_ReemMonto" Type="float" Mode="In" />
           <Parameter Name="sol_ReemFechaMonto" Type="datetime" Mode="In" />
           <Parameter Name="sol_ReemProveedor" Type="nchar" Mode="In" />
@@ -734,6 +750,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id">
             <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
+            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id">
+            <End Role="tbTipoPermiso" EntitySet="tbTipoPermiso" />
             <End Role="tbSolicitud" EntitySet="tbSolicitud" />
           </AssociationSet>
           <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" Association="Self.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id">
@@ -921,11 +941,11 @@
           <Property Name="sol_ApreCargoTecn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="sol_ApreLink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="sol_Acper_Nuevo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="sol_RequeCantidad" Type="Double" />
+          <Property Name="sol_RequeCantidad" Type="Double" Nullable="false" />
           <Property Name="sol_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="sol_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="sol_UsuarioModifica" Type="Int32" Nullable="false" />
-          <Property Name="sol_FechaModifica" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_UsuarioModifica" Type="Int32" />
+          <Property Name="sol_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbArea" Relationship="Self.FK_Gral_tbSolicitud_tbArea_are_Id" FromRole="tbSolicitud" ToRole="tbArea" />
           <NavigationProperty Name="tbEmpleado" Relationship="Self.FK_Gral_tbSolicitud_tbEmpleado_emp_Id" FromRole="tbSolicitud" ToRole="tbEmpleado" />
           <NavigationProperty Name="tbMoneda" Relationship="Self.FK_Gral_tbSolicitud_tbMoneda_tmo_Id" FromRole="tbSolicitud" ToRole="tbMoneda" />
@@ -934,6 +954,14 @@
           <NavigationProperty Name="tbTipoSalario" Relationship="Self.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" FromRole="tbSolicitud" ToRole="tbTipoSalario" />
           <NavigationProperty Name="tbTipoSolicitud" Relationship="Self.FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id" FromRole="tbSolicitud" ToRole="tbTipoSolicitud" />
           <NavigationProperty Name="tbTipoViatico" Relationship="Self.FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id" FromRole="tbSolicitud" ToRole="tbTipoViatico" />
+          <Property Name="tperm_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbTipoPermiso" Relationship="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" FromRole="tbSolicitud" ToRole="tbTipoPermiso" />
+          <Property Name="sol_PerlaFechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_PerlaFechaRetorno" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_PerFechaRegreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_PerMedioDia" Type="Boolean" Nullable="false" />
+          <Property Name="sol_PerFechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="sol_PerCantidadDias" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tbTipoMovimiento">
           <Key>
@@ -957,6 +985,7 @@
           <Property Name="tperm_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tperm_UsuarioModifica" Type="Int32" />
           <Property Name="tperm_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" FromRole="tbTipoPermiso" ToRole="tbSolicitud" />
         </EntityType>
         <EntityType Name="tbTipoSalario">
           <Key>
@@ -1457,6 +1486,30 @@
             <Parameter Name="tipmo_Movimiento" Mode="In" Type="String" />
             <Parameter Name="tipmo_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbMoneda_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result)">
+            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+            <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbMoneda_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Update_Result)">
+            <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
+            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+            <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbTipoPermiso_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result)">
+            <Parameter Name="tperm_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tperm_UsuarioCrea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbTipoPermiso_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Update_Result)">
+            <Parameter Name="tperm_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tperm__Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tperm__UsuarioModifica" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id">
+            <End Role="tbTipoPermiso" EntitySet="tbTipoPermiso" />
+            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+          </AssociationSet>
           <FunctionImport Name="UDP_Gral_tSolicitudInsertar" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int16" />
             <Parameter Name="tipsol_Id" Mode="In" Type="Int32" />
@@ -1466,6 +1519,7 @@
             <Parameter Name="are_Id" Mode="In" Type="Int32" />
             <Parameter Name="tipmo_id" Mode="In" Type="Int32" />
             <Parameter Name="tpv_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tperm_Id" Mode="In" Type="Int32" />
             <Parameter Name="sol_GralDescripcion" Mode="In" Type="String" />
             <Parameter Name="sol_GralJefeInmediato" Mode="In" Type="String" />
             <Parameter Name="sol_GralCorreoJefeInmediato" Mode="In" Type="String" />
@@ -1481,9 +1535,10 @@
             <Parameter Name="sol_AnviHospedaje" Mode="In" Type="String" />
             <Parameter Name="sol_AnviTrasladoHacia" Mode="In" Type="String" />
             <Parameter Name="sol_AnsolMonto" Mode="In" Type="Double" />
-            <Parameter Name="sol_perFechaRegreso" Mode="In" Type="DateTime" />
-            <Parameter Name="sol_perMedioDia" Mode="In" Type="Boolean" />
-            <Parameter Name="sol_perCantidadDias" Mode="In" Type="Int32" />
+            <Parameter Name="sol_PerFechaRegreso" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_PerMedioDia" Mode="In" Type="Boolean" />
+            <Parameter Name="sol_PerFechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="sol_PerCantidadDias" Mode="In" Type="Int32" />
             <Parameter Name="sol_ReemMonto" Mode="In" Type="Double" />
             <Parameter Name="sol_ReemFechaMonto" Mode="In" Type="DateTime" />
             <Parameter Name="sol_ReemProveedor" Mode="In" Type="String" />
@@ -1508,26 +1563,6 @@
             <Parameter Name="sol_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="sol_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="sol_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbMoneda_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result)">
-            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
-            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
-            <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbMoneda_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Update_Result)">
-            <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
-            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
-            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
-            <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoPermiso_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result)">
-            <Parameter Name="tperm_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="tperm_UsuarioCrea" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoPermiso_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Update_Result)">
-            <Parameter Name="tperm_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tperm__Descripcion" Mode="In" Type="String" />
-            <Parameter Name="tperm__UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
@@ -1608,9 +1643,6 @@
         <ComplexType Name="UDP_Gral_TipoMovimiento_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <ComplexType Name="UDP_Gral_tSolicitudInsertar_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <ComplexType Name="UDP_Gral_tbTipoPermiso_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
@@ -1621,6 +1653,21 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbMoneda_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <Association Name="FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id">
+          <End Type="SIGEM_BIDSSModel.tbTipoPermiso" Role="tbTipoPermiso" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoPermiso">
+              <PropertyRef Name="tperm_Id" />
+            </Principal>
+            <Dependent Role="tbSolicitud">
+              <PropertyRef Name="tperm_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_Gral_tSolicitudInsertar_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
       </Schema>
@@ -1733,6 +1780,11 @@
           <EntitySetMapping Name="tbSolicitud">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
               <MappingFragment StoreEntitySet="tbSolicitud">
+                <ScalarProperty Name="sol_PerCantidadDias" ColumnName="sol_PerCantidadDias" />
+                <ScalarProperty Name="sol_PerFechaInicio" ColumnName="sol_PerFechaInicio" />
+                <ScalarProperty Name="sol_PerMedioDia" ColumnName="sol_PerMedioDia" />
+                <ScalarProperty Name="sol_PerFechaRegreso" ColumnName="sol_PerFechaRegreso" />
+                <ScalarProperty Name="tperm_Id" ColumnName="tperm_Id" />
                 <ScalarProperty Name="sol_Id" ColumnName="sol_Id" />
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="tipsol_Id" ColumnName="tipsol_Id" />
@@ -1757,9 +1809,6 @@
                 <ScalarProperty Name="sol_AnviHospedaje" ColumnName="sol_AnviHospedaje" />
                 <ScalarProperty Name="sol_AnviTrasladoHacia" ColumnName="sol_AnviTrasladoHacia" />
                 <ScalarProperty Name="sol_AnsolMonto" ColumnName="sol_AnsolMonto" />
-                <ScalarProperty Name="sol_perFechaRegreso" ColumnName="sol_perFechaRegreso" />
-                <ScalarProperty Name="sol_perMedioDia" ColumnName="sol_perMedioDia" />
-                <ScalarProperty Name="sol_perCantidadDias" ColumnName="sol_perCantidadDias" />
                 <ScalarProperty Name="sol_ReemMonto" ColumnName="sol_ReemMonto" />
                 <ScalarProperty Name="sol_ReemFechaMonto" ColumnName="sol_ReemFechaMonto" />
                 <ScalarProperty Name="sol_ReemProveedor" ColumnName="sol_ReemProveedor" />
@@ -2038,13 +2087,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tSolicitudInsertar" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tSolicitudInsertar" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMoneda_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result">
@@ -2069,6 +2111,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoPermiso_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoPermiso_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tSolicitudInsertar" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tSolicitudInsertar" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

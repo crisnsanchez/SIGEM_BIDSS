@@ -3076,6 +3076,7 @@
     <Content Include="Views\TipoPermiso\Details.cshtml" />
     <Content Include="Views\TipoPermiso\Edit.cshtml" />
     <Content Include="Views\TipoPermiso\Index.cshtml" />
+    <Content Include="Views\Solicitud\_PermisoLaboral.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

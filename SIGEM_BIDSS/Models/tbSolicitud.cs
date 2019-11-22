@@ -61,11 +61,18 @@ namespace SIGEM_BIDSS.Models
         public string sol_ApreCargoTecn { get; set; }
         public string sol_ApreLink { get; set; }
         public string sol_Acper_Nuevo { get; set; }
-        public Nullable<double> sol_RequeCantidad { get; set; }
+        public double sol_RequeCantidad { get; set; }
         public int sol_UsuarioCrea { get; set; }
         public System.DateTime sol_FechaCrea { get; set; }
-        public int sol_UsuarioModifica { get; set; }
-        public System.DateTime sol_FechaModifica { get; set; }
+        public Nullable<int> sol_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> sol_FechaModifica { get; set; }
+        public int tperm_Id { get; set; }
+        public System.DateTime sol_PerlaFechaInicio { get; set; }
+        public System.DateTime sol_PerlaFechaRetorno { get; set; }
+        public System.DateTime sol_PerFechaRegreso { get; set; }
+        public bool sol_PerMedioDia { get; set; }
+        public System.DateTime sol_PerFechaInicio { get; set; }
+        public int sol_PerCantidadDias { get; set; }
     
         public virtual tbArea tbArea { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }
@@ -75,5 +82,6 @@ namespace SIGEM_BIDSS.Models
         public virtual tbTipoSalario tbTipoSalario { get; set; }
         public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
         public virtual tbTipoViatico tbTipoViatico { get; set; }
+        public virtual tbTipoPermiso tbTipoPermiso { get; set; }
     }
 }
