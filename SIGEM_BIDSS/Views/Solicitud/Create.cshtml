@@ -86,15 +86,15 @@
 
                 <div id="containerCreate" class="form-group">
                     @{
-                        //int _value = _funtion.TipodeSolicitudSearch(GeneralFunctions.AccionPersonal);
+//int _value = _funtion.TipodeSolicitudSearch(GeneralFunctions.AccionPersonal);
                         @*if (Model.tipsol_Id == _value)
                         {
                 @Html.Partial("_AccionPersonal", new tbSolicitud());
             }*@
 
-                        switch (Model.tipsol_Id)
-                        {
-                            case GeneralFunctions.AccionPersonal:
+                    switch (Model.tipsol_Id)
+                    {
+                        case GeneralFunctions.AccionPersonal:
                                 @Html.Partial("_AccionPersonal", new tbSolicitud());
                                 break;
                             case GeneralFunctions.SolicitudPermisoLaboral:

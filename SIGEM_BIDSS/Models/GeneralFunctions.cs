@@ -39,7 +39,9 @@ namespace SIGEM_BIDSS.Models
             {
                 AccionPersonal = TipodeSolicitudSearch("Accion Personal"),
                 AnticipodeViaticos = TipodeSolicitudSearch("Anticipo de Viaticos"),
+                SolicitudPermisoLaboral = TipodeSolicitudSearch("Solicitud Permiso Laboral"),
                 RequisicionCompra = TipodeSolicitudSearch("Requisicion de Compra")
+             
             };
             return obtipsol;
         }
