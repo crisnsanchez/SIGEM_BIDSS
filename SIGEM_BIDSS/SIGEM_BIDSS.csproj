@@ -3077,7 +3077,8 @@
     <Content Include="Views\tbTipoPermiso\Edit.cshtml" />
     <Content Include="Views\tbTipoPermiso\Index.cshtml" />
     <Content Include="Views\Solicitud\_PermisoLaboral.cshtml" />
-    <Content Include="Views\Solicitud\LiquidacionAnticipoSalario.cshtml" />
+    <Content Include="Views\Solicitud\_LiquidacionAnticipoSalario.cshtml" />
+    <Content Include="Views\Solicitud\_CheklistCapacitaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

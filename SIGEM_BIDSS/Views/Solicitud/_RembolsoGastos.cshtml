@@ -1,1 +1,112 @@
-﻿
+﻿@model SIGEM_BIDSS.Models.tbSolicitud
+@using SIGEM_BIDSS.Models
+
+@Html.HiddenFor(model => model.tperm_Id, new { Value = "1" })
+@Html.HiddenFor(model => model.sol_PerCantidadDias, new { Value = "1" })
+@Html.HiddenFor(model => model.sol_PerFechaInicio, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.sol_PerlaFechaRetorno, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.sol_PerMedioDia, new { Value = "1" })
+@*@Html.HiddenFor(model => model.sol_GralCorreoJefeInmediato, new { Value = "----" })*@
+@Html.HiddenFor(model => model.tmo_Id, new { Value = "1" })
+@Html.HiddenFor(model => model.sol_AnsolMonto, new { Value = "1" })
+@Html.HiddenFor(model => model.pto_Id, new { Value = "1" })
+@Html.HiddenFor(model => model.tpsal_id, new { Value = "1" })
+@Html.HiddenFor(model => model.tpv_Id, new { Value = "1" })
+@Html.HiddenFor(model => model.sol_AnviHospedaje, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_AnviTrasladoHacia, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_Anvi_Cliente, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_Anvi_LugarDestino, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_Anvi_PropositoVisita, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_AprCiudad, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_AprNombreEmpresa, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_AprRtn, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_ApreCargoTecn, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_ApreLink, new { Value = "---" })
+@Html.HiddenFor(model => model.sol_ApreCorreoAdm, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_ApreContactoAdm, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_ApreCorreoTecn, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_ApreNombreTecn, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_ApreTelefono, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_ApreTelefonoTecn, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_GralComentario, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_GralJustificacion, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_ReemNoFactura, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_ReemProveedor, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_ReemCargoA, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_AprDireccion, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_AnviFechaViaje, new { Value = "1900/01/01" })
+
+@Html.HiddenFor(model => model.sol_ReemFechaGastos, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.sol_ReemFechaMonto, new { Value = "1900/01/01" })
+
+
+
+
+<div id="container" class="form-group">
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_ReemFechaGastos, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_ReemFechaGastos, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_ReemFechaGastos, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_ReemProveedor, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_Acper_Anterior, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_Acper_Anterior, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_ReemProveedor, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_Acper_Anterior, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_Acper_Anterior, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_ReemCargoA, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_ReemCargoA, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_ReemCargoA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.tbMoneda.tmo_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tbMoneda.tmo_Id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.tbMoneda.tmo_Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_ReemMonto, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_ReemMonto, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_ReemMonto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_ReemNoFactura, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_ReemNoFactura, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_ReemNoFactura, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_ReemNoFactura, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_ReemNoFactura, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_ReemNoFactura, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_ReemMontoTotal, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_ReemMontoTotal, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_ReemMontoTotal, "", new { @class = "text-danger" })
+        </div>d
+    </div>
+</div>
+
+
