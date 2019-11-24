@@ -28,6 +28,10 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.Message = "Your contact page.";
             return View();
         }
-
+        public ActionResult Error500()
+        {
+            ViewBag.Message = "Your contact page.";
+            return View();
+        }
     }
 }

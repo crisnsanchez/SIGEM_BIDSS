@@ -109,6 +109,9 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Empleado/Create
         public ActionResult Create()
         {
+            var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
+
+            string fullName = userClaims?.FindFirst("name")?.Value;
             ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");

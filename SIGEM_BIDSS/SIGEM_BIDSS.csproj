@@ -349,6 +349,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\background.jpg" />
     <Content Include="Content\img\descarga.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\Profile_Pics\22.jpg" />
@@ -3080,6 +3081,7 @@
     <Content Include="Views\Solicitud\_LiquidacionAnticipoSalario.cshtml" />
     <Content Include="Views\Solicitud\_CheklistCapacitaciones.cshtml" />
     <Content Include="Views\Solicitud\Index.cshtml" />
+    <Content Include="Views\Home\Error500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
