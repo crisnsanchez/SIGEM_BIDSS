@@ -88,7 +88,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.sol_PerCantidadDias, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.sol_PerCantidadDias, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.sol_PerCantidadDias, new { htmlAttributes = new { @class = "form-control" @OnKeyPress = "return soloNumeros(event)" } })
             @Html.ValidationMessageFor(model => model.sol_PerCantidadDias, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -97,5 +97,9 @@
 
 
 
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Content/template/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
 
-
+<script src="~/Scripts/app/ValidacionesGenerales.js"></script>

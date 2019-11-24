@@ -6,138 +6,144 @@
     GeneralFunctions _funtion = new GeneralFunctions();
 }
 
+<link href="~/Content/template/plugins/datepicker/datepicker3.css" rel="stylesheet" />
 
-    <div class="card card-primary card-outline">
-        <div class="card-header d-flex p-0 ui-sortable-handle">
-            <h3 class="card-title p-3">
-                <i class="fa fa-upload mr-1"></i>
-                Registrar Solicitud
-            </h3>
-            <ul class="nav nav-pills ml-auto p-2">
-                <li class="nav-item">
-                    @Html.ActionLink("Regresar", "Solicitud", "Menu", null, new { @class = "btn btn-primary" })
-                </li>
-            </ul>
-        </div>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-upload mr-1"></i>
+            Registrar Solicitud
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Solicitud", "Menu", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.tipsol_Id)
-            @Html.HiddenFor(model => model.emp_Id)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.tipsol_Id)
 
-            <div class="form-horizontal">
-                <div class="card-body">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Emp_Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Emp_Name, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.EmpNames } })
-                        </div>
+        <div class="form-horizontal">
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("emp_Id", (SelectList)ViewBag.emp_Id, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.are_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.sol_GralDescripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.sol_GralDescripcion, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.sol_GralDescripcion, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.sol_GralJefeInmediato, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.sol_GralJefeInmediato, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.sol_GralJefeInmediato, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.sol_GralCorreoJefeInmediato, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.sol_GralCorreoJefeInmediato, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.sol_GralCorreoJefeInmediato, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.sol_GralComentario, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.sol_GralComentario, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.sol_GralComentario, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.sol_GralFechaSolicitud, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.sol_GralFechaSolicitud, new { htmlAttributes = new { @class = "form-control" }, Value = System.DateTime.Now })
-                            @Html.ValidationMessageFor(model => model.sol_GralFechaSolicitud, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-
-                    <div id="containerCreate" class="form-group">
-                        @{
-
-
-                            switch (Model.tipsol_Id)
-                            {
-                                case GeneralFunctions.AccionPersonal:
-                                    @Html.Partial("_AccionPersonal", new tbSolicitud());
-                                    break;
-                                case GeneralFunctions.SolicitudPermisoLaboral:
-                                    @Html.Partial("_PermisoLaboral", new tbSolicitud());
-                                    break;
-                                case GeneralFunctions.SolicitudAnticipoViaticos:
-                                    @Html.Partial("_AnticipoViatico", new tbSolicitud());
-                                    break;
-                                case GeneralFunctions.SolicitudAnticipoSalario:
-                                    @Html.Partial("_AnticipoSalario", new tbSolicitud());
-                                    break;
-                                case GeneralFunctions.LiquidacionAnticipoSalario:
-                                    @Html.Partial("_LiquidacionAnticipoSalario", new tbSolicitud());
-                                    break;
-                                case GeneralFunctions.RequisicionCompra:
-                                    @Html.Partial("_RequisicionCompra", new tbSolicitud());
-                                    break;
-                                case GeneralFunctions.RembolsoGastos:
-                                    @Html.Partial("_RembolsoGastos", new tbSolicitud());
-                                    break;
-
-                                default:
-                                    @Html.Label("Opcion3");
-                                    break;
-                            }
-                        }
-                    </div>
-
-
-
-
-
-                    <div class="form-group">
-                        <div class="col-md-offset-4 col-md-10">
-                            <input type="submit" value="Guardar" class="btn btn-primary" />
-                            @Html.ActionLink("Cancelar", "Solicitud", "Menu", null, new { @class = "btn btn-default" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.are_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sol_GralDescripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.sol_GralDescripcion, new { htmlAttributes = new { @class = "form-control" ,@OnKeyPress = "return soloLetras(event)" } })
+                        @Html.ValidationMessageFor(model => model.sol_GralDescripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sol_GralJefeInmediato, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.sol_GralJefeInmediato, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.sol_GralJefeInmediato, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sol_GralCorreoJefeInmediato, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.sol_GralCorreoJefeInmediato, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.sol_GralCorreoJefeInmediato, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sol_GralComentario, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.sol_GralComentario, new { htmlAttributes = new { @class = "form-control"} })
+                        @Html.ValidationMessageFor(model => model.sol_GralComentario, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sol_GralFechaSolicitud, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.sol_GralFechaSolicitud, new { htmlAttributes = new { @class = "form-control" }, Value = System.DateTime.Now })
+                        @Html.ValidationMessageFor(model => model.sol_GralFechaSolicitud, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div id="containerCreate" class="form-group">
+                    @{
+
+
+                        switch (Model.tipsol_Id)
+                        {
+                            case GeneralFunctions.AccionPersonal:
+                                @Html.Partial("_AccionPersonal", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.SolicitudPermisoLaboral:
+                                @Html.Partial("_PermisoLaboral", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.SolicitudAnticipoViaticos:
+                                @Html.Partial("_AnticipoViatico", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.SolicitudAnticipoSalario:
+                                @Html.Partial("_AnticipoSalario", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.LiquidacionAnticipoSalario:
+                                @Html.Partial("_LiquidacionAnticipoSalario", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.RequisicionCompra:
+                                @Html.Partial("_RequisicionCompra", new tbSolicitud());
+                                break;
+                            case GeneralFunctions.RembolsoGastos:
+                                @Html.Partial("_RembolsoGastos", new tbSolicitud());
+                                break;
+
+                            default:
+                                @Html.Label("Opcion3");
+                                break;
+                        }
+                    }
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-10">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Solicitud", "Menu", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
             </div>
 
-        }
-    </div>
+        </div>
+
+    }
+</div>
 
 @section Scripts {
-    <script src="~/Content/template/dist/js/Solicitud.js"></script>
 
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/template/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Content/template/dist/js/Solicitud.js"></script>
+    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }
