@@ -123,9 +123,10 @@
     <Property Name="sol_AnviHospedaje" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_AnviTrasladoHacia" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_AnsolMonto" Type="float" Nullable="false" />
-    <Property Name="sol_perFechaRegreso" Type="datetime" Nullable="false" />
-    <Property Name="sol_perMedioDia" Type="bit" Nullable="false" />
-    <Property Name="sol_perCantidadDias" Type="int" Nullable="false" />
+    <Property Name="sol_PerFechaRegreso" Type="datetime" Nullable="false" />
+    <Property Name="sol_PerMedioDia" Type="bit" Nullable="false" />
+    <Property Name="sol_PerFechaInicio" Type="datetime" Nullable="false" />
+    <Property Name="sol_PerCantidadDias" Type="int" Nullable="false" />
     <Property Name="sol_ReemMonto" Type="float" Nullable="false" />
     <Property Name="sol_ReemFechaMonto" Type="datetime" Nullable="false" />
     <Property Name="sol_ReemProveedor" Type="nchar" MaxLength="10" Nullable="false" />
@@ -147,8 +148,6 @@
     <Property Name="sol_ApreLink" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_Acper_Nuevo" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_RequeCantidad" Type="float" Nullable="false" />
-    <Property Name="sol_PerlaFechaInicio" Type="datetime" Nullable="false" />
-    <Property Name="sol_PerlaFechaRetorno" Type="datetime" Nullable="false" />
     <Property Name="sol_UsuarioCrea" Type="int" Nullable="false" />
     <Property Name="sol_FechaCrea" Type="datetime" Nullable="false" />
     <Property Name="sol_UsuarioModifica" Type="int" />
@@ -668,9 +667,10 @@
     <Parameter Name="sol_AnviHospedaje" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_AnviTrasladoHacia" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_AnsolMonto" Type="float" Mode="In" />
-    <Parameter Name="sol_perFechaRegreso" Type="datetime" Mode="In" />
-    <Parameter Name="sol_perMedioDia" Type="bit" Mode="In" />
-    <Parameter Name="sol_perCantidadDias" Type="int" Mode="In" />
+    <Parameter Name="sol_PerFechaRegreso" Type="datetime" Mode="In" />
+    <Parameter Name="sol_PerMedioDia" Type="bit" Mode="In" />
+    <Parameter Name="sol_PerFechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="sol_PerCantidadDias" Type="int" Mode="In" />
     <Parameter Name="sol_ReemMonto" Type="float" Mode="In" />
     <Parameter Name="sol_ReemFechaMonto" Type="datetime" Mode="In" />
     <Parameter Name="sol_ReemProveedor" Type="nchar" Mode="In" />
@@ -691,8 +691,7 @@
     <Parameter Name="sol_ApreCargoTecn" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_ApreLink" Type="nvarchar" Mode="In" />
     <Parameter Name="sol_Acper_Nuevo" Type="nvarchar" Mode="In" />
-    <Parameter Name="sol_PerlaFechaInicio" Type="datetime" Mode="In" />
-    <Parameter Name="sol_PerlaFechaRetorno" Type="datetime" Mode="In" />
+    <Parameter Name="sol_RequeCantidad" Type="float" Mode="In" />
     <Parameter Name="sol_UsuarioCrea" Type="int" Mode="In" />
     <Parameter Name="sol_FechaCrea" Type="datetime" Mode="In" />
     <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />

@@ -58,22 +58,22 @@ namespace SIGEM_BIDSS.Controllers
     ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
     if (ModelState.IsValid)
     {
-      try
-      {
-        var MensajeError = "";
-        IEnumerable<object> list = null;
-        var _date = Convert.ToDateTime(tbSolicitud.sol_GralFechaSolicitud);
-        list = db.UDP_Gral_tSolicitudInsertar(tbSolicitud.emp_Id, tbSolicitud.tipsol_Id, tbSolicitud.pto_Id, tbSolicitud.tpsal_id, tbSolicitud.tmo_Id, 
-            tbSolicitud.are_Id, tbSolicitud.tipmo_id, tbSolicitud.tpv_Id,tbSolicitud.tperm_Id, tbSolicitud.sol_GralDescripcion, tbSolicitud.sol_GralJefeInmediato, 
-            tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralComentario, tbSolicitud.sol_GralJustificacion, _date,
-            _date, tbSolicitud.sol_Anvi_Cliente, tbSolicitud.sol_Anvi_LugarDestino, tbSolicitud.sol_Acper_Anterior, 
-            tbSolicitud.sol_Anvi_PropositoVisita, tbSolicitud.sol_Anvi_DiasVisita, tbSolicitud.sol_AnviHospedaje, tbSolicitud.sol_AnviTrasladoHacia, 
-            tbSolicitud.sol_AnsolMonto,tbSolicitud.sol_PerFechaRegreso,tbSolicitud.sol_PerMedioDia,tbSolicitud.sol_PerFechaInicio,tbSolicitud.sol_PerCantidadDias,tbSolicitud.sol_ReemMonto,
-            _date, tbSolicitud.sol_ReemProveedor, tbSolicitud.sol_ReemCargoA, _date,
-            tbSolicitud.sol_ReemNoFactura, tbSolicitud.sol_ReemMontoTotal, tbSolicitud.sol_AprRtn, tbSolicitud.sol_AprNombreEmpresa, tbSolicitud.sol_AprCiudad,
-            tbSolicitud.sol_AprDireccion, tbSolicitud.sol_ApreTelefono, tbSolicitud.sol_ApreContactoAdm, tbSolicitud.sol_ApreCorreoAdm, 
-            tbSolicitud.sol_ApreNombreTecn, tbSolicitud.sol_ApreTelefonoTecn, tbSolicitud.sol_ApreCorreoTecn, tbSolicitud.sol_ApreCargoTecn, 
-            tbSolicitud.sol_ApreLink, tbSolicitud.sol_Acper_Nuevo, _functions.GetUser(), _functions.DatetimeNow(), _functions.GetUser(), _functions.DatetimeNow());
+                try
+                {
+                    var MensajeError = "";
+                    IEnumerable<object> list = null;
+                    var _date = Convert.ToDateTime(tbSolicitud.sol_GralFechaSolicitud);
+                    list = db.UDP_Gral_tSolicitudInsertar(tbSolicitud.emp_Id,tbSolicitud.tipsol_Id,tbSolicitud.pto_Id,tbSolicitud.tpsal_id, tbSolicitud.tmo_Id,
+                    tbSolicitud.are_Id,tbSolicitud.tipmo_id,tbSolicitud.tpv_Id,tbSolicitud.tperm_Id,tbSolicitud.sol_GralDescripcion,tbSolicitud.sol_GralJefeInmediato,
+                    tbSolicitud.sol_GralCorreoJefeInmediato,tbSolicitud.sol_GralComentario,tbSolicitud.sol_GralJustificacion,tbSolicitud.sol_GralFechaSolicitud,
+                    tbSolicitud.sol_AnviFechaViaje,tbSolicitud.sol_Anvi_Cliente,tbSolicitud.sol_Anvi_LugarDestino,tbSolicitud.sol_Acper_Anterior,
+                    tbSolicitud.sol_Anvi_PropositoVisita,tbSolicitud.sol_Anvi_DiasVisita,tbSolicitud.sol_AnviHospedaje,tbSolicitud.sol_AnviTrasladoHacia, 
+                    tbSolicitud.sol_AnsolMonto,tbSolicitud.sol_PerFechaRegreso,tbSolicitud.sol_PerMedioDia,tbSolicitud.sol_PerFechaInicio,tbSolicitud.sol_PerCantidadDias,
+                    tbSolicitud.sol_ReemMonto,tbSolicitud.sol_ReemFechaMonto,tbSolicitud.sol_ReemProveedor,tbSolicitud.sol_ReemCargoA,tbSolicitud.sol_ReemFechaGastos,
+                    tbSolicitud.sol_ReemNoFactura, tbSolicitud.sol_ReemMontoTotal,tbSolicitud.sol_AprRtn,tbSolicitud.sol_AprNombreEmpresa,tbSolicitud.sol_AprCiudad,
+                    tbSolicitud.sol_AprDireccion,tbSolicitud.sol_ApreTelefono,tbSolicitud.sol_ApreContactoAdm,tbSolicitud.sol_ApreCorreoAdm,tbSolicitud.sol_ApreNombreTecn,
+                    tbSolicitud.sol_ApreTelefonoTecn,tbSolicitud.sol_ApreCorreoTecn,tbSolicitud.sol_ApreCargoTecn,tbSolicitud.sol_ApreLink,tbSolicitud.sol_Acper_Nuevo, 
+                    tbSolicitud.sol_RequeCantidad, _functions.GetUser(), _functions.DatetimeNow(), _functions.GetUser(), _functions.DatetimeNow());
         foreach (UDP_Gral_tSolicitudInsertar_Result AccionPersonal in list)
 
         MensajeError = AccionPersonal.MensajeError;
@@ -85,7 +85,7 @@ namespace SIGEM_BIDSS.Controllers
         }
         else
         {
-        return RedirectToAction("AccionPersonal", "Solicitud", tbSolicitud.tipsol_Id);
+        return RedirectToAction("Menu", "Solicitud", tbSolicitud.tipsol_Id);
         }
       }
       catch (Exception Ex)

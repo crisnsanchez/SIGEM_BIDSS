@@ -23,6 +23,7 @@ namespace SIGEM_BIDSS.Models
         public int are_Id { get; set; }
         public int tipmo_id { get; set; }
         public int tpv_Id { get; set; }
+        public int tperm_Id { get; set; }
         public string sol_GralDescripcion { get; set; }
         public string sol_GralJefeInmediato { get; set; }
         public string sol_GralCorreoJefeInmediato { get; set; }
@@ -38,9 +39,10 @@ namespace SIGEM_BIDSS.Models
         public string sol_AnviHospedaje { get; set; }
         public string sol_AnviTrasladoHacia { get; set; }
         public double sol_AnsolMonto { get; set; }
-        public System.DateTime sol_perFechaRegreso { get; set; }
-        public bool sol_perMedioDia { get; set; }
-        public int sol_perCantidadDias { get; set; }
+        public System.DateTime sol_PerFechaRegreso { get; set; }
+        public bool sol_PerMedioDia { get; set; }
+        public System.DateTime sol_PerFechaInicio { get; set; }
+        public int sol_PerCantidadDias { get; set; }
         public double sol_ReemMonto { get; set; }
         public System.DateTime sol_ReemFechaMonto { get; set; }
         public string sol_ReemProveedor { get; set; }
@@ -66,22 +68,15 @@ namespace SIGEM_BIDSS.Models
         public System.DateTime sol_FechaCrea { get; set; }
         public Nullable<int> sol_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> sol_FechaModifica { get; set; }
-        public int tperm_Id { get; set; }
-        public System.DateTime sol_PerlaFechaInicio { get; set; }
-        public System.DateTime sol_PerlaFechaRetorno { get; set; }
-        public System.DateTime sol_PerFechaRegreso { get; set; }
-        public bool sol_PerMedioDia { get; set; }
-        public System.DateTime sol_PerFechaInicio { get; set; }
-        public int sol_PerCantidadDias { get; set; }
     
         public virtual tbArea tbArea { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbMoneda tbMoneda { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
         public virtual tbTipoMovimiento tbTipoMovimiento { get; set; }
+        public virtual tbTipoPermiso tbTipoPermiso { get; set; }
         public virtual tbTipoSalario tbTipoSalario { get; set; }
         public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
         public virtual tbTipoViatico tbTipoViatico { get; set; }
-        public virtual tbTipoPermiso tbTipoPermiso { get; set; }
     }
 }

@@ -102,67 +102,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbSolicitud">
-      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
-        <MappingFragment StoreEntitySet="tbSolicitud">
-          <ScalarProperty Name="sol_PerlaFechaRetorno" ColumnName="sol_PerlaFechaRetorno" />
-          <ScalarProperty Name="sol_PerlaFechaInicio" ColumnName="sol_PerlaFechaInicio" />
-          <ScalarProperty Name="tperm_Id" ColumnName="tperm_Id" />
-          <ScalarProperty Name="sol_Id" ColumnName="sol_Id" />
-          <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-          <ScalarProperty Name="tipsol_Id" ColumnName="tipsol_Id" />
-          <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
-          <ScalarProperty Name="tpsal_id" ColumnName="tpsal_id" />
-          <ScalarProperty Name="tmo_Id" ColumnName="tmo_Id" />
-          <ScalarProperty Name="are_Id" ColumnName="are_Id" />
-          <ScalarProperty Name="tipmo_id" ColumnName="tipmo_id" />
-          <ScalarProperty Name="tpv_Id" ColumnName="tpv_Id" />
-          <ScalarProperty Name="sol_GralDescripcion" ColumnName="sol_GralDescripcion" />
-          <ScalarProperty Name="sol_GralJefeInmediato" ColumnName="sol_GralJefeInmediato" />
-          <ScalarProperty Name="sol_GralCorreoJefeInmediato" ColumnName="sol_GralCorreoJefeInmediato" />
-          <ScalarProperty Name="sol_GralComentario" ColumnName="sol_GralComentario" />
-          <ScalarProperty Name="sol_GralJustificacion" ColumnName="sol_GralJustificacion" />
-          <ScalarProperty Name="sol_GralFechaSolicitud" ColumnName="sol_GralFechaSolicitud" />
-          <ScalarProperty Name="sol_AnviFechaViaje" ColumnName="sol_AnviFechaViaje" />
-          <ScalarProperty Name="sol_Anvi_Cliente" ColumnName="sol_Anvi_Cliente" />
-          <ScalarProperty Name="sol_Anvi_LugarDestino" ColumnName="sol_Anvi_LugarDestino" />
-          <ScalarProperty Name="sol_Acper_Anterior" ColumnName="sol_Acper_Anterior" />
-          <ScalarProperty Name="sol_Anvi_PropositoVisita" ColumnName="sol_Anvi_PropositoVisita" />
-          <ScalarProperty Name="sol_Anvi_DiasVisita" ColumnName="sol_Anvi_DiasVisita" />
-          <ScalarProperty Name="sol_AnviHospedaje" ColumnName="sol_AnviHospedaje" />
-          <ScalarProperty Name="sol_AnviTrasladoHacia" ColumnName="sol_AnviTrasladoHacia" />
-          <ScalarProperty Name="sol_AnsolMonto" ColumnName="sol_AnsolMonto" />
-          <ScalarProperty Name="sol_perFechaRegreso" ColumnName="sol_perFechaRegreso" />
-          <ScalarProperty Name="sol_perMedioDia" ColumnName="sol_perMedioDia" />
-          <ScalarProperty Name="sol_perCantidadDias" ColumnName="sol_perCantidadDias" />
-          <ScalarProperty Name="sol_ReemMonto" ColumnName="sol_ReemMonto" />
-          <ScalarProperty Name="sol_ReemFechaMonto" ColumnName="sol_ReemFechaMonto" />
-          <ScalarProperty Name="sol_ReemProveedor" ColumnName="sol_ReemProveedor" />
-          <ScalarProperty Name="sol_ReemCargoA" ColumnName="sol_ReemCargoA" />
-          <ScalarProperty Name="sol_ReemFechaGastos" ColumnName="sol_ReemFechaGastos" />
-          <ScalarProperty Name="sol_ReemNoFactura" ColumnName="sol_ReemNoFactura" />
-          <ScalarProperty Name="sol_ReemMontoTotal" ColumnName="sol_ReemMontoTotal" />
-          <ScalarProperty Name="sol_AprRtn" ColumnName="sol_AprRtn" />
-          <ScalarProperty Name="sol_AprNombreEmpresa" ColumnName="sol_AprNombreEmpresa" />
-          <ScalarProperty Name="sol_AprCiudad" ColumnName="sol_AprCiudad" />
-          <ScalarProperty Name="sol_AprDireccion" ColumnName="sol_AprDireccion" />
-          <ScalarProperty Name="sol_ApreTelefono" ColumnName="sol_ApreTelefono" />
-          <ScalarProperty Name="sol_ApreContactoAdm" ColumnName="sol_ApreContactoAdm" />
-          <ScalarProperty Name="sol_ApreCorreoAdm" ColumnName="sol_ApreCorreoAdm" />
-          <ScalarProperty Name="sol_ApreNombreTecn" ColumnName="sol_ApreNombreTecn" />
-          <ScalarProperty Name="sol_ApreTelefonoTecn" ColumnName="sol_ApreTelefonoTecn" />
-          <ScalarProperty Name="sol_ApreCorreoTecn" ColumnName="sol_ApreCorreoTecn" />
-          <ScalarProperty Name="sol_ApreCargoTecn" ColumnName="sol_ApreCargoTecn" />
-          <ScalarProperty Name="sol_ApreLink" ColumnName="sol_ApreLink" />
-          <ScalarProperty Name="sol_Acper_Nuevo" ColumnName="sol_Acper_Nuevo" />
-          <ScalarProperty Name="sol_RequeCantidad" ColumnName="sol_RequeCantidad" />
-          <ScalarProperty Name="sol_UsuarioCrea" ColumnName="sol_UsuarioCrea" />
-          <ScalarProperty Name="sol_FechaCrea" ColumnName="sol_FechaCrea" />
-          <ScalarProperty Name="sol_UsuarioModifica" ColumnName="sol_UsuarioModifica" />
-          <ScalarProperty Name="sol_FechaModifica" ColumnName="sol_FechaModifica" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbTipoMovimiento">
       <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbTipoMovimiento">
         <MappingFragment StoreEntitySet="tbTipoMovimiento">
@@ -413,13 +352,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tSolicitudInsertar" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tSolicitudInsertar">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result">
-          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMoneda_Insert">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result">
@@ -444,6 +376,73 @@
     <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoPermiso_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoPermiso_Update">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Update_Result">
+          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tbSolicitud">
+      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
+        <MappingFragment StoreEntitySet="tbSolicitud">
+          <ScalarProperty Name="sol_FechaModifica" ColumnName="sol_FechaModifica" />
+          <ScalarProperty Name="sol_UsuarioModifica" ColumnName="sol_UsuarioModifica" />
+          <ScalarProperty Name="sol_FechaCrea" ColumnName="sol_FechaCrea" />
+          <ScalarProperty Name="sol_UsuarioCrea" ColumnName="sol_UsuarioCrea" />
+          <ScalarProperty Name="sol_RequeCantidad" ColumnName="sol_RequeCantidad" />
+          <ScalarProperty Name="sol_Acper_Nuevo" ColumnName="sol_Acper_Nuevo" />
+          <ScalarProperty Name="sol_ApreLink" ColumnName="sol_ApreLink" />
+          <ScalarProperty Name="sol_ApreCargoTecn" ColumnName="sol_ApreCargoTecn" />
+          <ScalarProperty Name="sol_ApreCorreoTecn" ColumnName="sol_ApreCorreoTecn" />
+          <ScalarProperty Name="sol_ApreTelefonoTecn" ColumnName="sol_ApreTelefonoTecn" />
+          <ScalarProperty Name="sol_ApreNombreTecn" ColumnName="sol_ApreNombreTecn" />
+          <ScalarProperty Name="sol_ApreCorreoAdm" ColumnName="sol_ApreCorreoAdm" />
+          <ScalarProperty Name="sol_ApreContactoAdm" ColumnName="sol_ApreContactoAdm" />
+          <ScalarProperty Name="sol_ApreTelefono" ColumnName="sol_ApreTelefono" />
+          <ScalarProperty Name="sol_AprDireccion" ColumnName="sol_AprDireccion" />
+          <ScalarProperty Name="sol_AprCiudad" ColumnName="sol_AprCiudad" />
+          <ScalarProperty Name="sol_AprNombreEmpresa" ColumnName="sol_AprNombreEmpresa" />
+          <ScalarProperty Name="sol_AprRtn" ColumnName="sol_AprRtn" />
+          <ScalarProperty Name="sol_ReemMontoTotal" ColumnName="sol_ReemMontoTotal" />
+          <ScalarProperty Name="sol_ReemNoFactura" ColumnName="sol_ReemNoFactura" />
+          <ScalarProperty Name="sol_ReemFechaGastos" ColumnName="sol_ReemFechaGastos" />
+          <ScalarProperty Name="sol_ReemCargoA" ColumnName="sol_ReemCargoA" />
+          <ScalarProperty Name="sol_ReemProveedor" ColumnName="sol_ReemProveedor" />
+          <ScalarProperty Name="sol_ReemFechaMonto" ColumnName="sol_ReemFechaMonto" />
+          <ScalarProperty Name="sol_ReemMonto" ColumnName="sol_ReemMonto" />
+          <ScalarProperty Name="sol_PerCantidadDias" ColumnName="sol_PerCantidadDias" />
+          <ScalarProperty Name="sol_PerFechaInicio" ColumnName="sol_PerFechaInicio" />
+          <ScalarProperty Name="sol_PerMedioDia" ColumnName="sol_PerMedioDia" />
+          <ScalarProperty Name="sol_PerFechaRegreso" ColumnName="sol_PerFechaRegreso" />
+          <ScalarProperty Name="sol_AnsolMonto" ColumnName="sol_AnsolMonto" />
+          <ScalarProperty Name="sol_AnviTrasladoHacia" ColumnName="sol_AnviTrasladoHacia" />
+          <ScalarProperty Name="sol_AnviHospedaje" ColumnName="sol_AnviHospedaje" />
+          <ScalarProperty Name="sol_Anvi_DiasVisita" ColumnName="sol_Anvi_DiasVisita" />
+          <ScalarProperty Name="sol_Anvi_PropositoVisita" ColumnName="sol_Anvi_PropositoVisita" />
+          <ScalarProperty Name="sol_Acper_Anterior" ColumnName="sol_Acper_Anterior" />
+          <ScalarProperty Name="sol_Anvi_LugarDestino" ColumnName="sol_Anvi_LugarDestino" />
+          <ScalarProperty Name="sol_Anvi_Cliente" ColumnName="sol_Anvi_Cliente" />
+          <ScalarProperty Name="sol_AnviFechaViaje" ColumnName="sol_AnviFechaViaje" />
+          <ScalarProperty Name="sol_GralFechaSolicitud" ColumnName="sol_GralFechaSolicitud" />
+          <ScalarProperty Name="sol_GralJustificacion" ColumnName="sol_GralJustificacion" />
+          <ScalarProperty Name="sol_GralComentario" ColumnName="sol_GralComentario" />
+          <ScalarProperty Name="sol_GralCorreoJefeInmediato" ColumnName="sol_GralCorreoJefeInmediato" />
+          <ScalarProperty Name="sol_GralJefeInmediato" ColumnName="sol_GralJefeInmediato" />
+          <ScalarProperty Name="sol_GralDescripcion" ColumnName="sol_GralDescripcion" />
+          <ScalarProperty Name="tperm_Id" ColumnName="tperm_Id" />
+          <ScalarProperty Name="tpv_Id" ColumnName="tpv_Id" />
+          <ScalarProperty Name="tipmo_id" ColumnName="tipmo_id" />
+          <ScalarProperty Name="are_Id" ColumnName="are_Id" />
+          <ScalarProperty Name="tmo_Id" ColumnName="tmo_Id" />
+          <ScalarProperty Name="tpsal_id" ColumnName="tpsal_id" />
+          <ScalarProperty Name="pto_Id" ColumnName="pto_Id" />
+          <ScalarProperty Name="tipsol_Id" ColumnName="tipsol_Id" />
+          <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+          <ScalarProperty Name="sol_Id" ColumnName="sol_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tSolicitudInsertar" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tSolicitudInsertar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result">
           <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
         </ComplexTypeMapping>
       </ResultMapping>

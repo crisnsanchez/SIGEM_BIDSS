@@ -34,13 +34,13 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbMoneda> tbMoneda { get; set; }
         public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
         public virtual DbSet<tbPuesto> tbPuesto { get; set; }
-        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
         public virtual DbSet<tbTipoMovimiento> tbTipoMovimiento { get; set; }
         public virtual DbSet<tbTipoPermiso> tbTipoPermiso { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
+        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -874,7 +874,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoPermiso_Update_Result>("UDP_Gral_tbTipoPermiso_Update", tperm_IdParameter, tperm__DescripcionParameter, tperm__UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tSolicitudInsertar_Result> UDP_Gral_tSolicitudInsertar(Nullable<short> emp_Id, Nullable<int> tipsol_Id, Nullable<int> pto_Id, Nullable<int> tpsal_id, Nullable<short> tmo_Id, Nullable<int> are_Id, Nullable<int> tipmo_id, Nullable<int> tpv_Id, Nullable<int> tperm_Id, string sol_GralDescripcion, string sol_GralJefeInmediato, string sol_GralCorreoJefeInmediato, string sol_GralComentario, string sol_GralJustificacion, Nullable<System.DateTime> sol_GralFechaSolicitud, Nullable<System.DateTime> sol_AnviFechaViaje, string sol_Anvi_Cliente, string sol_Anvi_LugarDestino, string sol_Acper_Anterior, string sol_Anvi_PropositoVisita, Nullable<int> sol_Anvi_DiasVisita, string sol_AnviHospedaje, string sol_AnviTrasladoHacia, Nullable<double> sol_AnsolMonto, Nullable<System.DateTime> sol_PerFechaRegreso, Nullable<bool> sol_PerMedioDia, Nullable<System.DateTime> sol_PerFechaInicio, Nullable<int> sol_PerCantidadDias, Nullable<double> sol_ReemMonto, Nullable<System.DateTime> sol_ReemFechaMonto, string sol_ReemProveedor, string sol_ReemCargoA, Nullable<System.DateTime> sol_ReemFechaGastos, string sol_ReemNoFactura, Nullable<double> sol_ReemMontoTotal, string sol_AprRtn, string sol_AprNombreEmpresa, string sol_AprCiudad, string sol_AprDireccion, string sol_ApreTelefono, string sol_ApreContactoAdm, string sol_ApreCorreoAdm, string sol_ApreNombreTecn, string sol_ApreTelefonoTecn, string sol_ApreCorreoTecn, string sol_ApreCargoTecn, string sol_ApreLink, string sol_Acper_Nuevo, Nullable<int> sol_UsuarioCrea, Nullable<System.DateTime> sol_FechaCrea, Nullable<int> sol_UsuarioModifica, Nullable<System.DateTime> sol_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tSolicitudInsertar_Result> UDP_Gral_tSolicitudInsertar(Nullable<short> emp_Id, Nullable<int> tipsol_Id, Nullable<int> pto_Id, Nullable<int> tpsal_id, Nullable<short> tmo_Id, Nullable<int> are_Id, Nullable<int> tipmo_id, Nullable<int> tpv_Id, Nullable<int> tperm_Id, string sol_GralDescripcion, string sol_GralJefeInmediato, string sol_GralCorreoJefeInmediato, string sol_GralComentario, string sol_GralJustificacion, Nullable<System.DateTime> sol_GralFechaSolicitud, Nullable<System.DateTime> sol_AnviFechaViaje, string sol_Anvi_Cliente, string sol_Anvi_LugarDestino, string sol_Acper_Anterior, string sol_Anvi_PropositoVisita, Nullable<int> sol_Anvi_DiasVisita, string sol_AnviHospedaje, string sol_AnviTrasladoHacia, Nullable<double> sol_AnsolMonto, Nullable<System.DateTime> sol_PerFechaRegreso, Nullable<bool> sol_PerMedioDia, Nullable<System.DateTime> sol_PerFechaInicio, Nullable<int> sol_PerCantidadDias, Nullable<double> sol_ReemMonto, Nullable<System.DateTime> sol_ReemFechaMonto, string sol_ReemProveedor, string sol_ReemCargoA, Nullable<System.DateTime> sol_ReemFechaGastos, string sol_ReemNoFactura, Nullable<double> sol_ReemMontoTotal, string sol_AprRtn, string sol_AprNombreEmpresa, string sol_AprCiudad, string sol_AprDireccion, string sol_ApreTelefono, string sol_ApreContactoAdm, string sol_ApreCorreoAdm, string sol_ApreNombreTecn, string sol_ApreTelefonoTecn, string sol_ApreCorreoTecn, string sol_ApreCargoTecn, string sol_ApreLink, string sol_Acper_Nuevo, Nullable<double> sol_RequeCantidad, Nullable<int> sol_UsuarioCrea, Nullable<System.DateTime> sol_FechaCrea, Nullable<int> sol_UsuarioModifica, Nullable<System.DateTime> sol_FechaModifica)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -1068,6 +1068,10 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("sol_Acper_Nuevo", sol_Acper_Nuevo) :
                 new ObjectParameter("sol_Acper_Nuevo", typeof(string));
     
+            var sol_RequeCantidadParameter = sol_RequeCantidad.HasValue ?
+                new ObjectParameter("sol_RequeCantidad", sol_RequeCantidad) :
+                new ObjectParameter("sol_RequeCantidad", typeof(double));
+    
             var sol_UsuarioCreaParameter = sol_UsuarioCrea.HasValue ?
                 new ObjectParameter("sol_UsuarioCrea", sol_UsuarioCrea) :
                 new ObjectParameter("sol_UsuarioCrea", typeof(int));
@@ -1084,7 +1088,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("sol_FechaModifica", sol_FechaModifica) :
                 new ObjectParameter("sol_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tSolicitudInsertar_Result>("UDP_Gral_tSolicitudInsertar", emp_IdParameter, tipsol_IdParameter, pto_IdParameter, tpsal_idParameter, tmo_IdParameter, are_IdParameter, tipmo_idParameter, tpv_IdParameter, tperm_IdParameter, sol_GralDescripcionParameter, sol_GralJefeInmediatoParameter, sol_GralCorreoJefeInmediatoParameter, sol_GralComentarioParameter, sol_GralJustificacionParameter, sol_GralFechaSolicitudParameter, sol_AnviFechaViajeParameter, sol_Anvi_ClienteParameter, sol_Anvi_LugarDestinoParameter, sol_Acper_AnteriorParameter, sol_Anvi_PropositoVisitaParameter, sol_Anvi_DiasVisitaParameter, sol_AnviHospedajeParameter, sol_AnviTrasladoHaciaParameter, sol_AnsolMontoParameter, sol_PerFechaRegresoParameter, sol_PerMedioDiaParameter, sol_PerFechaInicioParameter, sol_PerCantidadDiasParameter, sol_ReemMontoParameter, sol_ReemFechaMontoParameter, sol_ReemProveedorParameter, sol_ReemCargoAParameter, sol_ReemFechaGastosParameter, sol_ReemNoFacturaParameter, sol_ReemMontoTotalParameter, sol_AprRtnParameter, sol_AprNombreEmpresaParameter, sol_AprCiudadParameter, sol_AprDireccionParameter, sol_ApreTelefonoParameter, sol_ApreContactoAdmParameter, sol_ApreCorreoAdmParameter, sol_ApreNombreTecnParameter, sol_ApreTelefonoTecnParameter, sol_ApreCorreoTecnParameter, sol_ApreCargoTecnParameter, sol_ApreLinkParameter, sol_Acper_NuevoParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter, sol_UsuarioModificaParameter, sol_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tSolicitudInsertar_Result>("UDP_Gral_tSolicitudInsertar", emp_IdParameter, tipsol_IdParameter, pto_IdParameter, tpsal_idParameter, tmo_IdParameter, are_IdParameter, tipmo_idParameter, tpv_IdParameter, tperm_IdParameter, sol_GralDescripcionParameter, sol_GralJefeInmediatoParameter, sol_GralCorreoJefeInmediatoParameter, sol_GralComentarioParameter, sol_GralJustificacionParameter, sol_GralFechaSolicitudParameter, sol_AnviFechaViajeParameter, sol_Anvi_ClienteParameter, sol_Anvi_LugarDestinoParameter, sol_Acper_AnteriorParameter, sol_Anvi_PropositoVisitaParameter, sol_Anvi_DiasVisitaParameter, sol_AnviHospedajeParameter, sol_AnviTrasladoHaciaParameter, sol_AnsolMontoParameter, sol_PerFechaRegresoParameter, sol_PerMedioDiaParameter, sol_PerFechaInicioParameter, sol_PerCantidadDiasParameter, sol_ReemMontoParameter, sol_ReemFechaMontoParameter, sol_ReemProveedorParameter, sol_ReemCargoAParameter, sol_ReemFechaGastosParameter, sol_ReemNoFacturaParameter, sol_ReemMontoTotalParameter, sol_AprRtnParameter, sol_AprNombreEmpresaParameter, sol_AprCiudadParameter, sol_AprDireccionParameter, sol_ApreTelefonoParameter, sol_ApreContactoAdmParameter, sol_ApreCorreoAdmParameter, sol_ApreNombreTecnParameter, sol_ApreTelefonoTecnParameter, sol_ApreCorreoTecnParameter, sol_ApreCargoTecnParameter, sol_ApreLinkParameter, sol_Acper_NuevoParameter, sol_RequeCantidadParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter, sol_UsuarioModificaParameter, sol_FechaModificaParameter);
         }
     }
 }
