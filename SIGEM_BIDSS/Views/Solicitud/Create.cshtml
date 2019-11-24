@@ -6,6 +6,7 @@
     GeneralFunctions _funtion = new GeneralFunctions();
 }
 
+<link href="~/Content/template/plugins/datepicker/datepicker3.css" rel="stylesheet" />
 
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
@@ -46,7 +47,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.sol_GralDescripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.sol_GralDescripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.sol_GralDescripcion, new { htmlAttributes = new { @class = "form-control" ,@OnKeyPress = "return soloLetras(event)" } })
                         @Html.ValidationMessageFor(model => model.sol_GralDescripcion, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -70,7 +71,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.sol_GralComentario, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.sol_GralComentario, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.sol_GralComentario, new { htmlAttributes = new { @class = "form-control"} })
                         @Html.ValidationMessageFor(model => model.sol_GralComentario, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -88,9 +89,9 @@
                     @{
 
 
-                    switch (Model.tipsol_Id)
-                    {
-                        case GeneralFunctions.AccionPersonal:
+                        switch (Model.tipsol_Id)
+                        {
+                            case GeneralFunctions.AccionPersonal:
                                 @Html.Partial("_AccionPersonal", new tbSolicitud());
                                 break;
                             case GeneralFunctions.SolicitudPermisoLaboral:
@@ -137,7 +138,12 @@
 </div>
 
 @section Scripts {
-    <script src="~/Content/template/dist/js/Solicitud.js"></script>
 
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/template/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Content/template/dist/js/Solicitud.js"></script>
+    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
 }

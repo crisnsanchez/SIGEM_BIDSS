@@ -746,8 +746,6 @@ C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.cs
 C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.dll
 C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb
 C:\Users\crist\Documents\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.cache
-C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInputs.cache
-C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.cache
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.dll.config
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.dll
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.pdb
@@ -859,6 +857,8 @@ C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\bin\es\System.Web.WebPages.resources.dll
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.cache
+C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInputs.cache
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CopyComplete
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.dll
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb
