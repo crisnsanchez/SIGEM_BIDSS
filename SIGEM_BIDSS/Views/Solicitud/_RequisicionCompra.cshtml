@@ -43,20 +43,21 @@
 
 
 <div class="form-horizontal">
-    <h4>Solicitudes</h4>
+    <h4>Requisición*</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <form>
         <div class="form-group">
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.sol_RequeCantidad, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.sol_RequeCantidad, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.sol_RequeCantidad, "Cantidad", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.sol_RequeCantidad, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", @autocomplete = "off", onkeypress = "return soloNumeros(event)" } })
+                @Html.ValidationMessageFor(model => model.sol_RequeCantidad,"" , new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.sol_GralJustificacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.sol_GralJustificacion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.sol_GralJustificacion, "Justifique" , htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.sol_GralJustificacion, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @style = "text-transform:uppercase;", onkeypress = "return soloLetras(event)" } })
                 @Html.ValidationMessageFor(model => model.sol_GralJustificacion, "", new { @class = "text-danger" })
             </div>
         </div>
