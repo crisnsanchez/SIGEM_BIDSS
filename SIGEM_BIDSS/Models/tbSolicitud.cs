@@ -67,7 +67,7 @@ namespace SIGEM_BIDSS.Models
         public int sol_UsuarioCrea { get; set; }
         public System.DateTime sol_FechaCrea { get; set; }
         public Nullable<int> sol_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> sol_FechaModifica { get; set; }
+        public System.DateTime sol_FechaModifica { get; set; }
     
         public virtual tbArea tbArea { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }

@@ -17,11 +17,13 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Solicitud
         public ActionResult Index()
         {
+           
             return View();
         }
 
         public ActionResult Create(tbSolicitud tbSolicitud, int _tipsol_Id)
         {
+           
             try
             {
                 var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
@@ -49,6 +51,8 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.tmo_id = new SelectList(db.tbMoneda, "tmo_id", "tmo_Abreviatura");
                     ViewBag.tipmo_id = new SelectList(db.tbTipoMovimiento, "tipmo_id", "tipmo_Movimiento");
                     ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+                    ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion");
+                    ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
 
                     return View(tbSolicitud);
                 }
@@ -70,8 +74,8 @@ namespace SIGEM_BIDSS.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create([Bind(Include = "emp_Id,tipsol_Id, pto_Id, tpsal_id, tmo_Id, are_Id, tipmo_id, tpv_Id, sol_GralDescripcion, sol_GralJefeInmediato, sol_GralCorreoJefeInmediato, sol_GralComentario, sol_GralJustificacion, sol_GralFechaSolicitud, sol_AnviFechaViaje, sol_Anvi_Cliente, sol_Anvi_LugarDestino, sol_Acper_Anterior, sol_Anvi_PropositoVisita, sol_Anvi_DiasVisita, sol_AnviHospedaje, sol_AnviTrasladoHacia, sol_AnsolMonto, sol_perFechaRegreso, sol_perMedioDia, sol_perCantidadDias, sol_ReemMonto, sol_ReemFechaMonto, sol_ReemProveedor, sol_ReemCargoA, sol_ReemFechaGastos, sol_ReemNoFactura, sol_ReemMontoTotal, sol_AprRtn, sol_AprNombreEmpresa, sol_AprCiudad, sol_AprDireccion, sol_ApreTelefono, sol_ApreContactoAdm, sol_ApreCorreoAdm, sol_ApreNombreTecn, sol_ApreTelefonoTecn, sol_ApreCorreoTecn, sol_ApreCargoTecn, sol_ApreLink, sol_Acper_Nuevo, sol_UsuarioCrea, sol_FechaCrea, sol_UsuarioModifica, sol_FechaModifica," +
-        "tperm_Id,sol_PerFechaRegreso,sol_PerMedioDia,sol_PerFechaInicio,sol_PerCantidadDias, Emp_Name")] tbSolicitud tbSolicitud)
+        public ActionResult Create([Bind(Include = "sol_Id, emp_Id, tipsol_Id, pto_Id, tpsal_id, tmo_Id, are_Id, tipmo_id, tpv_Id, tperm_Id, sol_GralDescripcion, sol_GralJefeInmediato, sol_GralCorreoJefeInmediato, sol_GralComentario, sol_GralJustificacion, sol_GralFechaSolicitud, sol_AnviFechaViaje, sol_Anvi_Cliente, sol_Anvi_LugarDestino, sol_Acper_Anterior, sol_Anvi_PropositoVisita, sol_Anvi_DiasVisita, sol_AnviHospedaje, sol_AnviTrasladoHacia, sol_AnsolMonto, sol_PerFechaRegreso, sol_PerMedioDia, sol_PerFechaInicio, sol_PerCantidadDias, sol_ReemMonto, sol_ReemFechaMonto, sol_ReemProveedor, sol_ReemCargoA, sol_ReemFechaGastos, sol_ReemNoFactura, sol_ReemMontoTotal, sol_AprRtn, sol_AprNombreEmpresa, sol_AprCiudad, sol_AprDireccion, sol_ApreTelefono, sol_ApreContactoAdm, sol_ApreCorreoAdm, sol_ApreNombreTecn, sol_ApreTelefonoTecn, sol_ApreCorreoTecn, sol_ApreCargoTecn, sol_ApreLink, sol_Acper_Nuevo, sol_RequeCantidad, sol_UsuarioCrea," +
+            " sol_FechaCrea, sol_UsuarioModifica, sol_FechaModifica, Emp_Name")] tbSolicitud tbSolicitud)
         {
 
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
@@ -81,6 +85,8 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.tmo_id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
             ViewBag.tipmo_id = new SelectList(db.tbTipoMovimiento, "tipmo_id", "tipmo_Movimiento");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+            ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion");
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             if (ModelState.IsValid)
             {
                 try
@@ -110,7 +116,9 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Menu", "Solicitud", tbSolicitud.tipsol_Id);
+                        TempData["smserror"] = "Solicitud Realizada con Exito.";
+                        ViewBag.smserror = TempData["smserror"];
+                        return RedirectToAction("Solicitud", "Menu", tbSolicitud.tipsol_Id);
                     }
                 }
                 catch (Exception Ex)

@@ -1,9 +1,4 @@
-﻿//DATE PICKET
-$("#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud").datepicker({
-    format: "dd/mm/yyyy",
-    language: "es",
-    daysOfWeekDisabled: "0"
-}).datepicker('setDate', new Date());
+﻿
 
 
 
@@ -23,4 +18,9 @@ function soloNumeros(e) {
     tecla = (document.all) ? e.keyCode : e.which;
     tecla = String.fromCharCode(tecla)
     return /^[0-9]+$/.test(tecla);
+}
+
+///Validacion para no pegar caracteres
+function Caracteres(string) {
+    var out = '';
 }
