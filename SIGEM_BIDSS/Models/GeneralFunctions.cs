@@ -54,7 +54,18 @@ namespace SIGEM_BIDSS.Models
         }
 
 
-//public const string AccionPersonal = "Accion Personal";
+        public const int intDefault = 1;
+        public const string stringDefault = "-----";
+        public const string dateDefault = "01/01/1900";
+
+
+
+
+
+
+
+
+        //public const string AccionPersonal = "Accion Personal";
         public const int AccionPersonal = 1;
         public const int SolicitudPermisoLaboral = 2;
         public const int SolicitudAnticipoViaticos = 3;

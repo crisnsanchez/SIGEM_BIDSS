@@ -1,15 +1,8 @@
 ﻿//DATE PICKET
 $("#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud").datepicker({
-    dateFormat: 'mm/dd/yy',
-    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-    minDate: '-100Y',
-    maxDate: '-18Y',
-    prevText: 'Ant',
-    nextText: 'Sig',
-    changeMonth: true,
-    changeYear: true,
-    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+    format: "dd/mm/yyyy",
+    language: "es",
+    daysOfWeekDisabled: "0"
 }).datepicker('setDate', new Date());
 
 

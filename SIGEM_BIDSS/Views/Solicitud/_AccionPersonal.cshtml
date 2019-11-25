@@ -1,78 +1,81 @@
 ﻿@model SIGEM_BIDSS.Models.tbSolicitud
 @using SIGEM_BIDSS.Models
 
-@Html.HiddenFor(model => model.tperm_Id, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_PerCantidadDias, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_PerFechaInicio, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.tperm_Id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.tmo_Id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_AnsolMonto, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.pto_Id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.tpsal_id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.tpv_Id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_PerCantidadDias, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_PerMedioDia, new { Value =GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_AnviHospedaje, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AnviTrasladoHacia, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_Anvi_Cliente, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_Anvi_LugarDestino, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_Anvi_PropositoVisita, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AprCiudad, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AprNombreEmpresa, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AprRtn, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreCargoTecn, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreLink, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreCorreoAdm, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreContactoAdm, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreCorreoTecn, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreNombreTecn, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreTelefono, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreTelefonoTecn, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_GralComentario, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_GralJustificacion, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ReemNoFactura, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ReemProveedor, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ReemCargoA, new { Value =  GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AprDireccion, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AnviFechaViaje, new { Value = GeneralFunctions.dateDefault })
+@Html.HiddenFor(model => model.sol_PerFechaInicio, new { Value = GeneralFunctions.dateDefault })
+@Html.HiddenFor(model => model.sol_ReemFechaGastos, new { Value = GeneralFunctions.dateDefault })
+@Html.HiddenFor(model => model.sol_ReemFechaMonto, new { Value = GeneralFunctions.dateDefault })
 
-@Html.HiddenFor(model => model.sol_PerMedioDia, new { Value = "1" })
-
-@Html.HiddenFor(model => model.tmo_Id, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_AnsolMonto, new { Value = "1" })
-@Html.HiddenFor(model => model.pto_Id, new { Value = "1" })
-@Html.HiddenFor(model => model.tpsal_id, new { Value = "1" })
-@Html.HiddenFor(model => model.tpv_Id, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_AnviHospedaje, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_AnviTrasladoHacia, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_Anvi_Cliente, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_Anvi_LugarDestino, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_Anvi_PropositoVisita, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_AprCiudad, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_AprNombreEmpresa, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_AprRtn, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_ApreCargoTecn, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_ApreLink, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_ApreCorreoAdm, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreContactoAdm, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreCorreoTecn, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreNombreTecn, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreTelefono, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreTelefonoTecn, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_GralComentario, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_GralJustificacion, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ReemNoFactura, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ReemProveedor, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ReemCargoA, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_AprDireccion, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_AnviFechaViaje, new { Value = "1900/01/01" })
-
-@Html.HiddenFor(model => model.sol_ReemFechaGastos, new { Value = "1900/01/01" })
-@Html.HiddenFor(model => model.sol_ReemFechaMonto, new { Value = "1900/01/01" })
-
-
-
-
-<div id="inline_content">
-
-    <input type="radio" name="typeAcPer" value="1"> Aumento de Sueldo
-    <br>
-    <input type="radio" name="typeAcPer" value="2"> Cambio de Puesto
-    <br>
-    <input type="radio" name="typeAcPer" value="3"> Renuncia
-    <br>
-    <input type="radio" name="typeAcPer" value="4"> Despido
-</div>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Create" class="btn btn-default" />
+<div class="col" name="tipmo_id">
+    <div id="inline_content" class="form-group">
+        <div class="custom-control custom-radio">
+            @Html.RadioButtonFor(model => model.tipmo_id, "1", htmlAttributes: new { @id = "id_1", @class = "custom-control-input" })
+            <label for="id_1" class="custom-control-label">Aumento de Sueldo</label>
+        </div>
+        <div class="custom-control custom-radio">
+            @Html.RadioButtonFor(model => model.tipmo_id, "2", htmlAttributes: new { @id = "id_2", @class = "custom-control-input" })
+            <label for="id_2" class="custom-control-label">Cambio de Puesto</label>
+        </div>
+        <div class="custom-control custom-radio">
+            @Html.RadioButtonFor(model => model.tipmo_id, "3", htmlAttributes: new { @id = "id_3", @class = "custom-control-input" })
+            <label for="id_3" class="custom-control-label">Renuncia</label>
+        </div>
+        <div class="custom-control custom-radio">
+            @Html.RadioButtonFor(model => model.tipmo_id, "4", htmlAttributes: new { @id = "id_4", @class = "custom-control-input" })
+            <label for="id_4" class="custom-control-label">Despido</label>
+        </div>
     </div>
+
 </div>
 
-<div id="container" class="form-group">
+<div id="container" class="form-group" name="vstipmo_id">
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_Acper_Nuevo, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.sol_Acper_Anterior, htmlAttributes: new { @id = "lblsol_Acper_Anterior", @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.sol_Acper_Nuevo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.sol_Acper_Anterior, new { htmlAttributes = new { @class = "form-control", Value = GeneralFunctions.stringDefault } })
+            @Html.ValidationMessageFor(model => model.sol_Acper_Anterior, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.sol_Acper_Nuevo, htmlAttributes: new { @id = "lblsol_Acper_Nuevo", @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sol_Acper_Nuevo, new { htmlAttributes = new { @class = "form-control", Value = GeneralFunctions.stringDefault } })
             @Html.ValidationMessageFor(model => model.sol_Acper_Nuevo, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.sol_Acper_Anterior, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.sol_Acper_Anterior, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.sol_Acper_Anterior, "", new { @class = "text-danger" })
-        </div>
-    </div>
+
 </div>
+
+
 
