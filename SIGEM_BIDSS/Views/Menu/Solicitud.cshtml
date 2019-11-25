@@ -4,9 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using  SIGEM_BIDSS.Models
+@using SIGEM_BIDSS.Models
+
+@if (ViewBag.smserror != "" && ViewBag.smserror != null)
+{
+    <div class="col-md-12" id="mensaje">
+        <div class="alert alert-light alert-default-light">
+
+            <button type="button" class="close" data-dissmiss="alert" aria-hidden="true">@Html.ActionLink("x", "Solicitud", new { @class = "btn btn-primary " })</button>
+            <h4><i class="icon fa fa-info"></i>         Alerta</h4>
+            <h2>@ViewBag.smserror</h2>
 
 
+        </div>
+    </div>
+}
 
 <style>
     .azul {
@@ -64,7 +76,7 @@
 
 
             <div class="col-lg-3 col-6">
-              
+
                 <div class="small-box bg-danger">
                     <div class="inner">
 
@@ -101,7 +113,7 @@
 
             </div>
         </div>
-        </div><!-- /.container-fluid -->
+    </div><!-- /.container-fluid -->
 </section>
 
 
@@ -160,20 +172,20 @@
             </div>
 
             @*<div class="col-lg-3 col-6">
-                 small box 
-                <div class="small-box bg-primary">
-                    <div class="inner">
-                        <h4>Acción Personal </h4>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                    </div>
-                    @{
+                     small box
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h4>Acción Personal </h4>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        @{
 
-                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.AccionPersonal })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
-                    }
-                </div>
-            </div>*@
+                            <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.AccionPersonal })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                        }
+                    </div>
+                </div>*@
 
 
         </div>
@@ -189,18 +201,18 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
             @*<div class="col-lg-3 col-6">
-                 small box 
-                <div class="small-box bg-primary">
-                    <div class="inner">
+                     small box
+                    <div class="small-box bg-primary">
+                        <div class="inner">
 
-                        <h4>Checklist Capaciones </h4>
+                            <h4>Checklist Capaciones </h4>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="@Url.Action("SolicitudAnticipoViatico","Solicitudes", new { _tipsol_Id = GeneralFunctions. })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="@Url.Action("SolicitudAnticipoViatico","Solicitudes", new { _tipsol_Id = GeneralFunctions. })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>*@
+                </div>*@
 
 
 

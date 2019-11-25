@@ -58,7 +58,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.sol_PerFechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-7">
             @Html.EditorFor(model => model.sol_PerFechaInicio, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_PerFechaInicio, "", new { @class = "text-danger" })
         </div>
@@ -66,9 +66,9 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.sol_PerFechaRegreso, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-7">
             <div class="checkbox">
-                @Html.EditorFor(model => model.sol_PerFechaRegreso)
+                @Html.EditorFor(model => model.sol_PerFechaRegreso, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sol_PerFechaRegreso, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -78,7 +78,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.sol_PerMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-7">
             @Html.EditorFor(model => model.sol_PerMedioDia, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_PerMedioDia, "", new { @class = "text-danger" })
         </div>
@@ -86,7 +86,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.sol_PerCantidadDias, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-7">
             @Html.EditorFor(model => model.sol_PerCantidadDias, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
             @Html.ValidationMessageFor(model => model.sol_PerCantidadDias, "", new { @class = "text-danger" })
         </div>
@@ -100,5 +100,19 @@
 <script src="~/Content/template/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+<script>
 
-<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+    //DATE PICKET
+$("#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud").datepicker({
+    dateFormat: 'mm/dd/yy',
+    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+    minDate: '-100Y',
+    maxDate: '-18Y',
+    prevText: 'Ant',
+    nextText: 'Sig',
+    changeMonth: true,
+    changeYear: true,
+    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+}).datepicker('setDate', new Date());
+</script>

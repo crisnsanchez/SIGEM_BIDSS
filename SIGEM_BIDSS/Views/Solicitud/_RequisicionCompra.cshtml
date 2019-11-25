@@ -1,11 +1,26 @@
 ﻿@model SIGEM_BIDSS.Models.tbSolicitud
 @using SIGEM_BIDSS.Models
 
-@Html.HiddenFor(model => model.tperm_Id, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_PerFechaInicio, new { Value = "1900/01/01" })
-@Html.HiddenFor(model => model.sol_PerCantidadDias, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_PerFechaRegreso, new { Value = "1900/01/01" })
 @Html.HiddenFor(model => model.sol_PerMedioDia, new { Value = true })
+
+@Html.HiddenFor(model => model.sol_PerCantidadDias, new { Value = "1" })
+
+@Html.HiddenFor(model => model.tperm_Id, new { Value = "1" })
+
+@Html.HiddenFor(model => model.sol_Anvi_DiasVisita, new { Value = "1" })
+
+@Html.HiddenFor(model => model.sol_UsuarioCrea, new { Value = "1" })
+
+@Html.HiddenFor(model => model.sol_Anvi_DiasVisita, new { Value = "1" })
+
+@Html.HiddenFor(model => model.sol_ReemMonto, new { Value = "1" })
+
+@Html.HiddenFor(model => model.sol_ReemMontoTotal, new { Value = "1" })
+
+@Html.HiddenFor(model => model.sol_PerFechaInicio, new { Value = "1900/01/01" })
+
+@Html.HiddenFor(model => model.sol_PerFechaRegreso, new { Value = "1900/01/01" })
+
 @Html.HiddenFor(model => model.tmo_Id, new { Value = "1" })
 @Html.HiddenFor(model => model.tipmo_id, new { Value = "1" })
 @Html.HiddenFor(model => model.sol_AnsolMonto, new { Value = "1" })
@@ -13,8 +28,6 @@
 @Html.HiddenFor(model => model.tpsal_id, new { Value = "3" })
 @Html.HiddenFor(model => model.tpv_Id, new { Value = "1" })
 @Html.HiddenFor(model => model.sol_AnviHospedaje, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_Acper_Anterior, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_Acper_Nuevo, new { Value = "---" })
 @Html.HiddenFor(model => model.sol_AnviTrasladoHacia, new { Value = "---" })
 @Html.HiddenFor(model => model.sol_Anvi_Cliente, new { Value = "---" })
 @Html.HiddenFor(model => model.sol_Anvi_LugarDestino, new { Value = "---" })
@@ -30,15 +43,22 @@
 @Html.HiddenFor(model => model.sol_ApreNombreTecn, new { Value = "----" })
 @Html.HiddenFor(model => model.sol_ApreTelefono, new { Value = "----" })
 @Html.HiddenFor(model => model.sol_ApreTelefonoTecn, new { Value = "----" })
+
 @Html.HiddenFor(model => model.sol_ReemNoFactura, new { Value = "----" })
 @Html.HiddenFor(model => model.sol_ReemProveedor, new { Value = "----" })
 @Html.HiddenFor(model => model.sol_ReemCargoA, new { Value = "----" })
 @Html.HiddenFor(model => model.sol_AprDireccion, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_UsuarioModifica, new { Value = "1" })
 @Html.HiddenFor(model => model.sol_AnviFechaViaje, new { Value = "1900/01/01" })
-@Html.HiddenFor(model => model.sol_FechaModifica, new { Value = "1900/01/01" })
 @Html.HiddenFor(model => model.sol_ReemFechaGastos, new { Value = "1900/01/01" })
 @Html.HiddenFor(model => model.sol_ReemFechaMonto, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.sol_Acper_Anterior, new { Value = "----" })
+@Html.HiddenFor(model => model.sol_Acper_Nuevo, new { Value = "----" })
+
+@Html.HiddenFor(model => model.sol_UsuarioModifica, new { Value = "1" })
+
+@Html.HiddenFor(model => model.sol_FechaCrea, new { Value = "1900/01/01" })
+
+@Html.HiddenFor(model => model.sol_FechaModifica, new { Value = "1900/01/01" })
 
 
 
@@ -51,11 +71,11 @@
             @Html.LabelFor(model => model.sol_RequeCantidad, "Cantidad", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.sol_RequeCantidad, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", @autocomplete = "off", onkeypress = "return soloNumeros(event)" } })
-                @Html.ValidationMessageFor(model => model.sol_RequeCantidad,"" , new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.sol_RequeCantidad, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.sol_GralJustificacion, "Justifique" , htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.sol_GralJustificacion, "Justifique", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.sol_GralJustificacion, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @style = "text-transform:uppercase;", onkeypress = "return soloLetras(event)" } })
                 @Html.ValidationMessageFor(model => model.sol_GralJustificacion, "", new { @class = "text-danger" })
@@ -64,4 +84,17 @@
     </form>
 
 </div>
-
+<script>
+$("#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud").datepicker({
+    dateFormat: 'mm/dd/yy',
+    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+    minDate: '-100Y',
+    maxDate: '-18Y',
+    prevText: 'Ant',
+    nextText: 'Sig',
+    changeMonth: true,
+    changeYear: true,
+    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+}).datepicker('setDate', new Date());
+</script>

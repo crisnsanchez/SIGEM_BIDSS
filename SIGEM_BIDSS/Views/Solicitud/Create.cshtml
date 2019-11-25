@@ -39,8 +39,8 @@
                 <div class="form-group col-md-3">
                     @Html.LabelFor(model => model.are_Id, htmlAttributes: new { @class = "control-label col-md-8" })
 
-                   @* @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control" } })*@
-                     @Html.DropDownList("are_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @* @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownList("are_Id", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
                 </div>
 
@@ -143,6 +143,7 @@
         return /^[0-9]+$/.test(tecla);
     }
 </script>
+
 @section Scripts {
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -152,4 +153,20 @@
     <script src="~/Content/template/dist/js/Solicitud.js"></script>
     <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        //DATE PICKET
+        $("#sol_GralFechaSolicitud").datepicker({
+            dateFormat: 'mm/dd/yy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            minDate: '-100Y',
+            maxDate: '-18Y',
+            prevText: 'Ant',
+            nextText: 'Sig',
+            changeMonth: true,
+            changeYear: true,
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+        }).datepicker('setDate', new Date());
+    </script>
 }
