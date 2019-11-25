@@ -18,7 +18,15 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSangre
         public ActionResult Index()
         {
-            return View(db.tbTipoSangre.ToList());
+            try
+            {
+                return View(db.tbTipoSangre.ToList());
+
+            }
+            catch (Exception Ex)
+            {
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // GET: TipoSangre/Details/5

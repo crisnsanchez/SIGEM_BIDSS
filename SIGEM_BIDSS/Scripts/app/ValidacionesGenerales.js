@@ -1,5 +1,10 @@
-﻿
-
+﻿//----------Datepicker
+$('#sol_GralFechaSolicitud').datepicker({
+    format: "dd/mm/yyyy",
+    startDate: "01/01/1990",
+    language: "es",
+    daysOfWeekDisabled: "0"
+});
 
 
 //////SOLO LETRAS

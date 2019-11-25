@@ -12,13 +12,13 @@ namespace SIGEM_BIDSS
                       "~/Content/template/plugins/font-awesome/css/font-awesome.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/adminlte").Include(
-                     "~/Content/template/dist/css/adminlte.min.css"));
-
-            bundles.Add(new ScriptBundle("~/Content/all").Include(
-                       "~/Content/template/plugins/fontawesome-free/css/all.min.css"));
+                  "~/Content/template/dist/css/adminlte.min.css"));
 
             bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
                         "~/Content/template/plugins/jquery/jquery.min.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/jquery-ui").Include(
+                     "~/Content/template/plugins/jquery-ui/jquery-ui.min.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
                         "~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"));
@@ -26,8 +26,9 @@ namespace SIGEM_BIDSS
             bundles.Add(new ScriptBundle("~/Scripts/adminlte").Include(
                         "~/Content/template/dist/js/adminlte.min.js"));
 
-
-
+            bundles.Add(new ScriptBundle("~/Scripts/dataTables").Include(
+                        "~/Content/template/plugins/datatables/jquery.dataTables.js," +
+                        "~/Content/template/plugins/datatables/dataTables.bootstrap4.js"));
         }
     }
 }

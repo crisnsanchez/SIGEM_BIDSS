@@ -1901,23 +1901,6 @@
     <Content Include="Content\template\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\template\plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\template\plugins\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\all.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\all.min.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\brands.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\brands.min.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\fontawesome.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\fontawesome.min.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\regular.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\regular.min.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\solid.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\solid.min.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\svg-with-js.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\svg-with-js.min.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\v4-shims.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\css\v4-shims.min.css" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-brands-400.svg" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-regular-400.svg" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-solid-900.svg" />
     <Content Include="Content\template\plugins\fullcalendar-bootstrap\LICENSE.txt" />
     <Content Include="Content\template\plugins\fullcalendar-bootstrap\main.css" />
     <Content Include="Content\template\plugins\fullcalendar-bootstrap\main.esm.js" />
@@ -3042,18 +3025,6 @@
     <Content Include="Content\template\plugins\summernote\summernote.js.map" />
     <Content Include="Content\template\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.scss" />
     <Content Include="Content\template\plugins\toastr\toastr.js.map" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-brands-400.eot" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-brands-400.ttf" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-brands-400.woff" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-brands-400.woff2" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-regular-400.eot" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-regular-400.ttf" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-regular-400.woff" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-regular-400.woff2" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-solid-900.eot" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-solid-900.ttf" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-solid-900.woff" />
-    <Content Include="Content\template\plugins\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <EntityDeploy Include="Models\SIGEM_BIDSSModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SIGEM_BIDSSModel.Designer.cs</LastGenOutput>

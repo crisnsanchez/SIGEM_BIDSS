@@ -58,11 +58,7 @@ namespace SIGEM_BIDSS.Models
         public const string stringDefault = "-----";
         public const string dateDefault = "01/01/1900";
 
-
-
-
-
-
+        public const bool boolDefault = false;
 
 
         //public const string AccionPersonal = "Accion Personal";

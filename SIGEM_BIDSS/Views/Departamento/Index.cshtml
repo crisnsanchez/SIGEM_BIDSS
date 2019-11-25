@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!-- DataTables -->
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
 <div class="card card-primary card-outline">
@@ -29,7 +30,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.dep_Nombre)
                     </th>
-
                     <th>ACCIONES</th>
                 </tr>
             </thead>
@@ -54,17 +54,13 @@
             </tbody>
         </table>
     </div>
-</div>
-@section Scripts {
-    <!-- Bootstrap 4 -->
-    <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="~/Content/template/dist/js/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+</div>
+
+@section Scripts {
     <!-- DataTables -->
     <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+    <script src="~/Content/template/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {

@@ -108,10 +108,10 @@
             @if (!Request.IsAuthenticated)
             {
                 <!-- If the user is not authenticated, display the sign-in button -->
-            <a class="navbar-text" href="@Url.Action("SignIn", "Login")">
-                <i class="fa fa-sign-in mr-2"></i>
-                Iniciar Sesion
-            </a>
+                <a class="navbar-text" href="@Url.Action("SignIn", "Login")">
+                    <i class="fa fa-sign-in mr-2"></i>
+                    Iniciar Sesion
+                </a>
             }
             else
             {
