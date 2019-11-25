@@ -25,28 +25,29 @@
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.tipsol_Id)
+        @Html.HiddenFor(model => model.emp_Id)
 
         <div class="form-horizontal">
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Emp_Name, "Nombre Empleado",htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Emp_Name, "Nombre Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-7">
-                        @Html.EditorFor(model => model.Emp_Name, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.EmpNames } })
+                        @Html.EditorFor(model => model.Emp_Name, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.EmpNames, @readonly = "readonly" } })
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.are_Id, "Area Id",htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-7">
-                        @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", @onkeypress = "return soloNumeros(event)" } })
-                        @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
-                    </div>
+                <div class="form-group col-md-3">
+                    @Html.LabelFor(model => model.are_Id, htmlAttributes: new { @class = "control-label col-md-8" })
+
+                   @* @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control" } })*@
+                     @Html.DropDownList("are_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.sol_GralDescripcion, "Descripcion", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-7">
-                        @Html.EditorFor(model => model.sol_GralDescripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @style = "text-transform:uppercase;", onkeypress = "return soloLetras(event)" } })
+                        @Html.EditorFor(model => model.sol_GralDescripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
                         @Html.ValidationMessageFor(model => model.sol_GralDescripcion, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.sol_GralJefeInmediato, "Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-7">
-                        @Html.EditorFor(model => model.sol_GralJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @style = "text-transform:uppercase;", onkeypress = "return soloLetras(event)" } })
+                        @Html.EditorFor(model => model.sol_GralJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
                         @Html.ValidationMessageFor(model => model.sol_GralJefeInmediato, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -62,7 +63,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.sol_GralCorreoJefeInmediato, "Correo Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-7">
-                        @Html.EditorFor(model => model.sol_GralCorreoJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @style = "text-transform:uppercase;", onkeypress = "return soloLetras(event)" } })
+                        @Html.EditorFor(model => model.sol_GralCorreoJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
                         @Html.ValidationMessageFor(model => model.sol_GralCorreoJefeInmediato, "", new { @class = "text-danger" })
                     </div>
                 </div>

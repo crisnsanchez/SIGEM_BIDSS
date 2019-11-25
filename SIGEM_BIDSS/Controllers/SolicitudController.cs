@@ -49,6 +49,8 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.tmo_id = new SelectList(db.tbMoneda, "tmo_id", "tmo_Abreviatura");
                     ViewBag.tipmo_id = new SelectList(db.tbTipoMovimiento, "tipmo_id", "tipmo_Movimiento");
                     ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+                    ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion");
+                    ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
 
                     return View(tbSolicitud);
                 }
@@ -81,6 +83,8 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.tmo_id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
             ViewBag.tipmo_id = new SelectList(db.tbTipoMovimiento, "tipmo_id", "tipmo_Movimiento");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+            ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion");
+            ViewBag.areId = new SelectList(db.tbArea, "areId", "are_Descripcion");
             if (ModelState.IsValid)
             {
                 try
@@ -110,7 +114,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Menu", "Solicitud", tbSolicitud.tipsol_Id);
+                        return RedirectToAction("Solicitud", "Menu", tbSolicitud.tipsol_Id);
                     }
                 }
                 catch (Exception Ex)
