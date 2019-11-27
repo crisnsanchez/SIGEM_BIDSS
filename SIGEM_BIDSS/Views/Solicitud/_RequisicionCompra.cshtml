@@ -8,7 +8,7 @@
 @Html.HiddenFor(model => model.sol_PerMedioDia, new { Value = GeneralFunctions.boolDefault })
 
 @Html.HiddenFor(model => model.sol_PerCantidadDias, new { Value = GeneralFunctions.intDefault })
-
+@Html.HiddenFor(model => model.sol_GralDescripcion, new { Value = GeneralFunctions.stringDefault })
 
 @Html.HiddenFor(model => model.tperm_Id, new { Value = GeneralFunctions.intDefault })
 
@@ -80,7 +80,7 @@
 
 
 <div class="form-horizontal">
-   
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <form>
         <div class="form-group">

@@ -61,7 +61,8 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.tipsol_Id)
         @Html.HiddenFor(model => model.emp_Id)
-
+        @Html.HiddenFor(model => model.Emp_Name)
+        @Html.HiddenFor(model => model.Emp_Mail)
 
 
         <div class="form-horizontal">
@@ -157,9 +158,9 @@
             </div>
         </div>
 
- 
-}
-    </div>
+
+    }
+</div>
     <script>
         function soloNumeros(e) {
             tecla = (document.all) ? e.keyCode : e.which;

@@ -15,6 +15,7 @@
 @Html.HiddenFor(model => model.sol_Anvi_Cliente, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_Anvi_LugarDestino, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_Anvi_PropositoVisita, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_GralDescripcion, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_AprCiudad, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_AprNombreEmpresa, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_AprRtn, new { Value = GeneralFunctions.stringDefault })
@@ -102,7 +103,7 @@
         </div>
     </div>
 
-        @*<div class="form-group">
+    @*<div class="form-group">
             @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-7">
                 @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
@@ -111,7 +112,7 @@
         </div>*@
 
 
-        @*<div class="form-group">
+    @*<div class="form-group">
             @Html.LabelFor(model => model.sol_PerMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-7">
                 @Html.EditorFor(model => model.sol_PerMedioDia, new { htmlAttributes = new { @class = "form-control" } })
@@ -119,7 +120,7 @@
             </div>
         </div>*@
 
-        @*<div class="form-group">
+    @*<div class="form-group">
             @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-7">
                 @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
@@ -137,38 +138,38 @@
 
     </div>
 
-        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-        <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 
-        @*<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    @*<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
         <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>*@
-        <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
-        @*<script src="~/Scripts/app/ValidacionesGenerales.js"></script>*@
+    <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+    @*<script src="~/Scripts/app/ValidacionesGenerales.js"></script>*@
 
-        <script type="text/javascript">
-            function ShowHideDiv(chkCantDias) {
-                var sol_PerMedioDia = document.getElementById("sol_PerFechaMedioDia");
-                sol_PerMedioDia.style.display = chkCantDias.checked ? "block" : "none";
+    <script type="text/javascript">
+        function ShowHideDiv(chkCantDias) {
+            var sol_PerMedioDia = document.getElementById("sol_PerFechaMedioDia");
+            sol_PerMedioDia.style.display = chkCantDias.checked ? "block" : "none";
 
-            }
-        </script>
-        <label for="chkCantDias">
+        }
+    </script>
+    <label for="chkCantDias">
 
-            ¿Permiso Medio Dia?
-            <input type="checkbox" id="chkCantDias" onclick="ShowHideDiv(this)" />
-        </label>
-        <hr />
+        ¿Permiso Medio Dia?
+        <input type="checkbox" id="chkCantDias" onclick="ShowHideDiv(this)" />
+    </label>
+    <hr />
 
 
-        <div id="sol_PerFechaMedioDia">
+    <div id="sol_PerFechaMedioDia">
 
-            @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-7">
-                @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.sol_PerFechaMedioDia, "", new { @class = "text-danger" })
-            </div>
+        @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-7">
+            @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sol_PerFechaMedioDia, "", new { @class = "text-danger" })
         </div>
     </div>
+</div>
 
 
 

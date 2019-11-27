@@ -20,6 +20,7 @@
 @Html.HiddenFor(model => model.sol_AprCiudad, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_AprNombreEmpresa, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_AprRtn, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_GralDescripcion, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_ApreCargoTecn, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_ApreLink, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_ApreCorreoAdm, new { Value = GeneralFunctions.stringDefault })
@@ -58,14 +59,14 @@
     }
 </style>
 
-<br/>
+<br />
 <h4 style="font-weight:bold;">Tipo Movimiento</h4>
 <br />
 <div class="col" name="tipmo_id">
     <div id="inline_content" class="form-group">
         <div class="custom-control custom-radio">
             @Html.RadioButtonFor(model => model.tipmo_id, "1", htmlAttributes: new { @id = "id_1", @class = "custom-control-input" })
-            <label for="id_1" class="custom-control-label"  style="font-size:120%"; >Aumento de Sueldo</label>
+            <label for="id_1" class="custom-control-label" style="font-size:120%" ;>Aumento de Sueldo</label>
         </div>
         <div class="custom-control custom-radio">
             @Html.RadioButtonFor(model => model.tipmo_id, "2", htmlAttributes: new { @id = "id_2", @class = "custom-control-input" })
@@ -73,11 +74,11 @@
         </div>
         <div class="custom-control custom-radio">
             @Html.RadioButtonFor(model => model.tipmo_id, "3", htmlAttributes: new { @id = "id_3", @class = "custom-control-input" })
-            <label for="id_3" class="custom-control-label" style="font-size:120%"; >Renuncia</label>
+            <label for="id_3" class="custom-control-label" style="font-size:120%" ;>Renuncia</label>
         </div>
         <div class="custom-control custom-radio">
             @Html.RadioButtonFor(model => model.tipmo_id, "4", htmlAttributes: new { @id = "id_4", @class = "custom-control-input" })
-            <label for="id_4" class="custom-control-label" style="font-size:120%";>Despido</label>
+            <label for="id_4" class="custom-control-label" style="font-size:120%" ;>Despido</label>
         </div>
     </div>
 

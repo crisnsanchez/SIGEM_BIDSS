@@ -45,10 +45,9 @@ namespace SIGEM_BIDSS.Controllers
 
                     tbSolicitud.tipsol_Id = _tipsol_Id;
                     tbSolicitud.emp_Id = _emailExistDB;
-                    var EmpData = (from _tbemp in db.tbEmpleado where _tbemp.emp_Id == _emailExistDB select new { nombreEmpleado = _tbemp.emp_Nombres + " " + _tbemp.emp_Apellidos, tbempJefe = _tbemp.emp_CorreoElectronico }).FirstOrDefault();
-                    tbSolicitud.Emp_Name = EmpData.nombreEmpleado;
+                    ViewBag.EmpNames = (from _tbemp in db.tbEmpleado where _tbemp.emp_Id == _emailExistDB select _tbemp.emp_Nombres + " " + _tbemp.emp_Apellidos).FirstOrDefault();
                     tbSolicitud.Emp_Mail = _emailAD;
-                    ViewBag.EmpNames = EmpData.nombreEmpleado;
+                    //ViewBag.EmpNames = EmpData.nombreEmpleado;
                     ViewBag.tipsol_Id = new SelectList(db.tbTipoSolicitud, "tipsol_Id", "tipsol_Descripcion");
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
                     ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
@@ -79,7 +78,7 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
 
         public ActionResult Create([Bind(Include = "sol_Id, emp_Id, tipsol_Id, pto_Id, tpsal_id, tmo_Id, are_Id, tipmo_id, tpv_Id, tperm_Id, sol_GralDescripcion, sol_GralJefeInmediato, sol_GralCorreoJefeInmediato, sol_GralComentario, sol_GralJustificacion, sol_GralFechaSolicitud, sol_AnviFechaViaje, sol_Anvi_Cliente, sol_Anvi_LugarDestino, sol_Acper_Anterior, sol_Anvi_PropositoVisita, sol_Anvi_DiasVisita, sol_AnviHospedaje, sol_AnviTrasladoHacia, sol_AnsolMonto, sol_PerFechaRegreso, sol_PerMedioDia, sol_PerFechaMedioDia ,sol_PerFechaInicio, sol_PerCantidadDias, sol_ReemMonto, sol_ReemFechaMonto, sol_ReemProveedor, sol_ReemCargoA, sol_ReemFechaGastos, sol_ReemNoFactura, sol_ReemMontoTotal, sol_AprRtn, sol_AprNombreEmpresa, sol_AprCiudad, sol_AprDireccion, sol_ApreTelefono, sol_ApreContactoAdm, sol_ApreCorreoAdm, sol_ApreNombreTecn, sol_ApreTelefonoTecn, sol_ApreCorreoTecn, sol_ApreCargoTecn, sol_ApreLink, sol_Acper_Nuevo, sol_RequeCantidad, sol_UsuarioCrea," +
-            " sol_FechaCrea, sol_UsuarioModifica, sol_FechaModifica, Emp_Name, Emp_Mail")] tbSolicitud tbSolicitud)
+            " sol_FechaCrea, sol_UsuarioModifica, sol_FechaModifica, Emp_Name,Emp_Mail")] tbSolicitud tbSolicitud)
         {
            
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
@@ -120,10 +119,10 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        string emaildestino = tbSolicitud.Emp_Mail;
-                        string usuario = tbSolicitud.Emp_Name;
-                        SendMail(emaildestino, usuario, emaildestino);
-                        SendMail(tbSolicitud.sol_GralCorreoJefeInmediato, usuario, emaildestino);
+                        //string emaildestino = tbSolicitud.Emp_Mail;
+                        //string usuario = tbSolicitud.Emp_Name;
+                        //SendMail(emaildestino, usuario, emaildestino);
+                        //SendMail(tbSolicitud.sol_GralCorreoJefeInmediato, usuario, emaildestino);
 
 
 
@@ -140,50 +139,57 @@ namespace SIGEM_BIDSS.Controllers
                     return View(tbSolicitud);
                 }
             }
-            return View(tbSolicitud);
+            return RedirectToAction("Solicitud", "Menu", tbSolicitud.tipsol_Id);
         }
+    //    [HttpGet]
+    //    public void SendMail(string emaildestino, string usuario, string _whomail)
+    //    {
+    //        string password = "";
+    //        string emailsalida = "sigembidss@gmail.com";
+    //        string passwordsalida = "QdZwAxesc12";
+    //        string asunto = "Solicitud";
+    //        System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+    //        msg.To.Add(emaildestino);
+    //        msg.From = new MailAddress(emailsalida, "SIGEM", System.Text.Encoding.UTF8);
+    //        msg.Subject = asunto;
+    //        msg.SubjectEncoding = System.Text.Encoding.UTF8;
+    //        string strMensaje = null;
+    //        if (_whomail != emaildestino)
+    //        {
+    //            strMensaje = string.Format("El Usuario: {0} con correo: {1}, hizo una solicitud", usuario, _whomail);
+              
 
-        public void SendMail(string emaildestino, string usuario,string _whomail)
-        {
-            string password = "";
-            string emailsalida = "sigembidss@gmail.com";
-            string passwordsalida = "QdZwAxesc12";
-            string asunto = "Solicitud";
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(emaildestino);
-            msg.From = new MailAddress(emailsalida, "SIGEM", System.Text.Encoding.UTF8);
-            msg.Subject = asunto;
-            msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            string strMensaje = null;
-            if (_whomail != emaildestino)
-            {
-                strMensaje = string.Format("El Usuario: {0} con correo: {1}, hizo una solicitud", usuario, _whomail);
-            }
-            else
-            {
-                strMensaje = string.Format("El Usuario: {0} hizo una solicitud", usuario);
-            }
 
-            msg.Body = string.Format(strMensaje, usuario);
-            msg.BodyEncoding = System.Text.Encoding.UTF8;
-            msg.IsBodyHtml = true;
-            msg.Priority = System.Net.Mail.MailPriority.High;
+    //        }
+    //        else
+    //        {
+    //            strMensaje = string.Format("El Usuario: {0} hizo una solicitud", usuario);
+              
+    //        }
 
-            SmtpClient client = new SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential(emailsalida, passwordsalida);
-            client.Port = 25;
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true; //Esto es para que se vaya a través de SSL que es obligatorio con Gmail
-            try
-            {
-                client.Send(msg);
-            }
-            catch (System.Net.Mail.SmtpException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
-            }
+    //        msg.Body = string.Format(strMensaje, usuario);
+    //        msg.BodyEncoding = System.Text.Encoding.UTF8;
+    //        msg.IsBodyHtml = true;
+    //        msg.Priority = System.Net.Mail.MailPriority.High;
 
-        }
+    //        SmtpClient client = new SmtpClient();
+    //        client.Credentials = new System.Net.NetworkCredential(emailsalida, passwordsalida);
+    //        client.Port = 25;
+    //        client.Host = "smtp.gmail.com";
+    //        client.EnableSsl = true; //Esto es para que se vaya a través de SSL que es obligatorio con Gmail
+    //        try
+    //        {
+    //            client.Send(msg);
+                       
+    //}
+    //        catch (System.Net.Mail.SmtpException ex)
+    //        {
+    //            Console.WriteLine(ex.Message);
+
+    //            Console.ReadLine();
+               
+    //        }
+
+    //    }
     }
 }
