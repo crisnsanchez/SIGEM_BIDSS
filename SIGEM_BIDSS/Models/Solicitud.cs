@@ -7,169 +7,179 @@ using System.Web;
 
 namespace SIGEM_BIDSS.Models
 {  [MetadataType(typeof(SolicitudMetaData))]
+
+
+
+    public partial class tbSolicitud
+    {
+        [NotMapped]
+        [Display(Name = "Nombre Empleado")]
+        public string Emp_Name { get; set; }
+
+    }
     public class SolicitudMetaData
     {
 
-        [Display(Name = "ID SOLICITUD")]
+        [Display(Name = "Id Solicitud")]
         public int sol_Id { get; set; }
 
-        [Display(Name = "EMPLEADO")]
+        [Display(Name = "Empleado")]
         public short emp_Id { get; set; }
 
-        [Display(Name = "TIPO SOLICITUD")]
+        [Display(Name = "Tipo Solicitud")]
         public int tipsol_Id { get; set; }
 
-        [Display(Name = "PUESTO")]
+        [Display(Name = "Cargo")]
         public int pto_Id { get; set; }
 
-        [Display(Name = "ID TIPO SALARIO")]
+        [Display(Name = "Tipo Salario")]
         public int tpsal_id { get; set; }
 
-        [Display(Name = "ID TIPO MONEDA")]
+        [Display(Name = "Moneda")]
         public short tmo_Id { get; set; }
 
-        [Display(Name = "ID AREA")]
+        [Display(Name = "Area")]
         public int are_Id { get; set; }
 
-        [Display(Name = "ID TIPO MOVIMIENTO")]
+        [Display(Name = "Tipo Movimiento")]
         public int tipmo_id { get; set; }
 
-        [Display(Name = "ID TIPO VIATICO")]
+        [Display(Name = "Tipo Viatico")]
         public int tpv_Id { get; set; }
 
-        [Display(Name = "ID TIPO PERMISO")]
+        [Display(Name = "Tipo Permiso")]
         public int tperm_Id { get; set; }
 
-        [Display(Name = "DESCRIPCION GENERAL")]
+        [Display(Name = "Descripcion")]
         public string sol_GralDescripcion { get; set; }
 
-        [Display(Name = "JEFE INMEDIATO")]
+        [Display(Name = "Jefe Inmediato")]
         public string sol_GralJefeInmediato { get; set; }
 
-        [Display(Name = "CORREO JEFE INMEDIATO")]
+        [Display(Name = "Correo Jefe Inmediato")]
         public string sol_GralCorreoJefeInmediato { get; set; }
 
-        [Display(Name = "COMENTARIO GENERAL")]
+        [Display(Name = "Comentario General")]
         public string sol_GralComentario { get; set; }
 
-        [Display(Name = "JUSTIFICACION GENERAL")]
+        [Display(Name = "Justificacion")]
         public string sol_GralJustificacion { get; set; }
 
-        [Display(Name = "FECHA SOLICITUD")]
+        [Display(Name = "Fecha Solicitud")]
         public System.DateTime sol_GralFechaSolicitud { get; set; }
 
-        [Display(Name = "FECHA VIAJE")]
+        [Display(Name = "Fecha Viaje")]
         public System.DateTime sol_AnviFechaViaje { get; set; }
 
-        [Display(Name = "CLIENTE")]
+        [Display(Name = "Cliente")]
         public string sol_Anvi_Cliente { get; set; }
 
-        [Display(Name = "LUGAR DE DESTINO")]
+        [Display(Name = "Lugar Destino")]
         public string sol_Anvi_LugarDestino { get; set; }
 
-        [Display(Name = "PUESTO ANTERIOR")]
+        [Display(Name = "Puesto Anterior")]
         public string sol_Acper_Anterior { get; set; }
 
-        [Display(Name = "PROPOSITO VISITA")]
+        [Display(Name = "Proposito Visita")]
         public string sol_Anvi_PropositoVisita { get; set; }
 
-        [Display(Name = "DIAS VISITA")]
+        [Display(Name = "Dias Visita")]
         public int sol_Anvi_DiasVisita { get; set; }
 
-        [Display(Name = "HOSPEDAJE")]
+        [Display(Name = "Hospedaje")]
         public string sol_AnviHospedaje { get; set; }
 
-        [Display(Name = "TRASLADO HACIA")]
+        [Display(Name = "Traslado Hacia")]
         public string sol_AnviTrasladoHacia { get; set; }
 
-        [Display(Name = "MONTO")]
+        [Display(Name = "Monto")]
         public double sol_AnsolMonto { get; set; }
 
-        [Display(Name = "FECHA REGRESO")]
+        [Display(Name = "Fecha Regreso")]
         public System.DateTime sol_PerFechaRegreso { get; set; }
 
-        [Display(Name = "PERMISO MEDIO DIA")]
+        [Display(Name = "Permiso Medio Dia")]
         public bool sol_PerMedioDia { get; set; }
 
-        [Display(Name = "FECHA INICIO PERMISO")]
+        [Display(Name = "Fecha de Inicio")]
         public System.DateTime sol_PerFechaInicio { get; set; }
 
-        [Display(Name = "CANTIDAD DIAS")]
+        [Display(Name = "Cantidad Dias")]
         public int sol_PerCantidadDias { get; set; }
 
-        [Display(Name = "MONTO REEMBOLSO")]
+        [Display(Name = "Monto Rembolso")]
         public double sol_ReemMonto { get; set; }
 
-        [Display(Name = "FECHA MONTO")]
+        [Display(Name = "Fecha Monto")]
         public System.DateTime sol_ReemFechaMonto { get; set; }
 
-        [Display(Name = "PROVEEDOR REEMBOLSO")]
+        [Display(Name = "Proveedor")]
         public string sol_ReemProveedor { get; set; }
 
-        [Display(Name = "CARGO")]
+        [Display(Name = "Cargo")]
         public string sol_ReemCargoA { get; set; }
 
-        [Display(Name = "FECHA GASTOS REEMBOLSOS")]
+        [Display(Name = "Fecha Gastos")]
         public System.DateTime sol_ReemFechaGastos { get; set; }
 
-        [Display(Name = "No FACTURA REEMBOLSO")]
+        [Display(Name = "No Factura Rembolso")]
         public string sol_ReemNoFactura { get; set; }
 
-        [Display(Name = "TOTAL REEMBOLSO")]
+        [Display(Name = "Total Rembolso")]
         public double sol_ReemMontoTotal { get; set; }
 
         [Display(Name = "RTN")]
         public string sol_AprRtn { get; set; }
 
-        [Display(Name = "NOMBRE EMPRESA")]
+        [Display(Name = "Nombre Empresa")]
         public string sol_AprNombreEmpresa { get; set; }
 
-        [Display(Name = "CUIDAD")]
+        [Display(Name = "Ciudad")]
         public string sol_AprCiudad { get; set; }
 
-        [Display(Name = "DIRECCION")]
+        [Display(Name = "Dirección")]
         public string sol_AprDireccion { get; set; }
 
-        [Display(Name = "TELEFONO")]
+        [Display(Name = "Telefóno")]
         public string sol_ApreTelefono { get; set; }
 
-        [Display(Name = "CONTACTO ADMINISTRACIÓN")]
+        [Display(Name = "Contacto Administración")]
         public string sol_ApreContactoAdm { get; set; }
 
-        [Display(Name = "CORREO ADMINISTRACIÓN")]
+        [Display(Name = "Correo Administración")]
         public string sol_ApreCorreoAdm { get; set; }
 
-        [Display(Name = "NOMBRE TECNICO")]
+        [Display(Name = "Nombre Tecnico")]
         public string sol_ApreNombreTecn { get; set; }
 
-        [Display(Name = "TELÉFONO TECNICO")]
+        [Display(Name = "Teléfono Tecnico")]
         public string sol_ApreTelefonoTecn { get; set; }
 
-        [Display(Name = "cORREO TECNICO")]
+        [Display(Name = "Correo Tecnico")]
         public string sol_ApreCorreoTecn { get; set; }
 
-        [Display(Name = "CARGO TECNICO")]
+        [Display(Name = "Cargo Tecnico")]
         public string sol_ApreCargoTecn { get; set; }
 
         [Display(Name = "LINK")]
         public string sol_ApreLink { get; set; }
 
-        [Display(Name = "NUEVO")]
+        [Display(Name = "Nuevo")]
         public string sol_Acper_Nuevo { get; set; }
 
-        [Display(Name = "CANTIDAD")]
+        [Display(Name = "Cantidad")]
         public double sol_RequeCantidad { get; set; }
 
-        [Display(Name = "USUARIO CREA")]
+        [Display(Name = "Usuario")]
         public int sol_UsuarioCrea { get; set; }
 
-        [Display(Name = "FECHA CREA")]
+        [Display(Name = "Fecha Crea")]
         public System.DateTime sol_FechaCrea { get; set; }
 
-        [Display(Name = "USUARIO MODIFICA")]
+        [Display(Name = "Usuario Modifica")]
         public Nullable<int> sol_UsuarioModifica { get; set; }
 
-        [Display(Name = "FECHA MODIFICA")]
+        [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> sol_FechaModifica { get; set; }
 
         public virtual tbArea tbArea { get; set; }
@@ -184,11 +194,5 @@ namespace SIGEM_BIDSS.Models
     }
 
 
-    public partial class tbSolicitud
-    {
-        [NotMapped]
-        [Display(Name = "EMPLEADO")]
-        public string Emp_Name { get; set; }
-        
-    }
+ 
 }
