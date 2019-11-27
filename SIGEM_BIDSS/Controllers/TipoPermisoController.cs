@@ -17,22 +17,38 @@ namespace SIGEM_BIDSS.Controllers
         // GET: tbTipoPermiso
         public ActionResult Index()
         {
-            return View(db.tbTipoPermiso.ToList());
+            try
+            {
+                return View(db.tbTipoPermiso.ToList());
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // GET: tbTipoPermiso/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
+                if (tbTipoPermiso == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoPermiso);
             }
-            tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
-            if (tbTipoPermiso == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+
+                throw;
             }
-            return View(tbTipoPermiso);
         }
 
         // GET: tbTipoPermiso/Create
@@ -82,16 +98,24 @@ namespace SIGEM_BIDSS.Controllers
         // GET: tbTipoPermiso/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
+                if (tbTipoPermiso == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoPermiso);
             }
-            tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
-            if (tbTipoPermiso == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
+                //throw;
+                return RedirectToAction("Error500", "Home");
             }
-            return View(tbTipoPermiso);
         }
 
         // POST: tbTipoPermiso/Edit/5
@@ -134,16 +158,24 @@ namespace SIGEM_BIDSS.Controllers
         // GET: tbTipoPermiso/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
+                if (tbTipoPermiso == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoPermiso);
             }
-            tbTipoPermiso tbTipoPermiso = db.tbTipoPermiso.Find(id);
-            if (tbTipoPermiso == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
+                //throw;
+                return RedirectToAction("Error500", "Home");
             }
-            return View(tbTipoPermiso);
         }
 
         // POST: tbTipoPermiso/Delete/5
