@@ -16,6 +16,9 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Nombre Empleado")]
         public string Emp_Name { get; set; }
 
+        [NotMapped]
+        public string Emp_Mail { get; set; }
+
     }
     public class SolicitudMetaData
     {
