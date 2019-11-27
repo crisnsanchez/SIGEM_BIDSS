@@ -3125,7 +3125,6 @@
     <Content Include="Views\Cargos\Index.cshtml" />
     <Content Include="Views\Solicitud\_RequisicionCompra.cshtml" />
     <Content Include="Views\Solicitud\_AnticipoViatico.cshtml" />
-    <Content Include="Views\Solicitud\_AnticipoSalario.cshtml" />
     <Content Include="Views\Solicitud\_RembolsoGastos.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Moneda\Create.cshtml" />
@@ -3143,6 +3142,7 @@
     <Content Include="Views\Solicitud\_CheklistCapacitaciones.cshtml" />
     <Content Include="Views\Solicitud\Index.cshtml" />
     <Content Include="Views\Home\Error500.cshtml" />
+    <Content Include="Views\Solicitud\_AnticipoSalario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

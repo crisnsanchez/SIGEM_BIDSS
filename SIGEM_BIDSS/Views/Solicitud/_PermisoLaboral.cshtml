@@ -1,43 +1,70 @@
 ﻿@model SIGEM_BIDSS.Models.tbSolicitud
 @using SIGEM_BIDSS.Models
+<link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+@Html.HiddenFor(model => model.tmo_Id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.pto_Id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.tpsal_id, new { Value = GeneralFunctions.tiposalario })
+@Html.HiddenFor(model => model.tpv_Id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.tipsol_Id, new { Value = GeneralFunctions.tiposoli })
+@Html.HiddenFor(model => model.tipmo_id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.are_Id, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_AnsolMonto, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_AnviHospedaje, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AnviTrasladoHacia, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_Anvi_Cliente, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_Anvi_LugarDestino, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_Anvi_PropositoVisita, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AprCiudad, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AprNombreEmpresa, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AprRtn, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreCargoTecn, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreLink, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreCorreoAdm, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreContactoAdm, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreCorreoTecn, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreNombreTecn, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreTelefono, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ApreTelefonoTecn, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_GralComentario, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_GralJustificacion, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ReemNoFactura, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ReemProveedor, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_ReemCargoA, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AprDireccion, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_AnviFechaViaje, new { Value = GeneralFunctions.dateDefault })
+
+@Html.HiddenFor(model => model.sol_ReemFechaGastos, new { Value = GeneralFunctions.dateDefault })
+@Html.HiddenFor(model => model.sol_ReemFechaMonto, new { Value = GeneralFunctions.dateDefault })
+@Html.HiddenFor(model => model.sol_Anvi_DiasVisita, new { Value = GeneralFunctions.intDefault })
+
+@Html.HiddenFor(model => model.sol_FechaCrea, new { Value = GeneralFunctions.dateDefault })
+
+@Html.HiddenFor(model => model.sol_ReemMonto, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_ReemMontoTotal, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_RequeCantidad, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_UsuarioCrea, new { Value = GeneralFunctions.intDefault })
+@Html.HiddenFor(model => model.sol_UsuarioModifica, new { Value = GeneralFunctions.intDefault })
+
+@Html.HiddenFor(model => model.sol_Acper_Anterior, new { Value = GeneralFunctions.stringDefault })
+@Html.HiddenFor(model => model.sol_Acper_Nuevo, new { Value = GeneralFunctions.stringDefault })
 
 
-@Html.HiddenFor(model => model.tmo_Id, new { Value = "1" })
-@Html.HiddenFor(model => model.tipmo_id, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_AnsolMonto, new { Value = "1" })
-@Html.HiddenFor(model => model.pto_Id, new { Value = "1" })
-@Html.HiddenFor(model => model.tpsal_id, new { Value = "3" })
-@Html.HiddenFor(model => model.tpv_Id, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_AnviHospedaje, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_AnviTrasladoHacia, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_Anvi_Cliente, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_Anvi_LugarDestino, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_Anvi_PropositoVisita, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_AprCiudad, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_AprNombreEmpresa, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_AprRtn, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_ApreCargoTecn, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_ApreLink, new { Value = "---" })
-@Html.HiddenFor(model => model.sol_ApreCorreoAdm, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreContactoAdm, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreCorreoTecn, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreNombreTecn, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreTelefono, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ApreTelefonoTecn, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_GralComentario, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_GralJustificacion, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ReemNoFactura, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ReemProveedor, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_ReemCargoA, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_AprDireccion, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_AnviFechaViaje, new { Value = "1900/01/01" })
-@Html.HiddenFor(model => model.sol_ReemFechaGastos, new { Value = "1900/01/01" })
-@Html.HiddenFor(model => model.sol_ReemFechaMonto, new { Value = "1900/01/01" })
-@Html.HiddenFor(model => model.sol_Acper_Anterior, new { Value = "----" })
-@Html.HiddenFor(model => model.sol_Acper_Nuevo, new { Value = "----" })
 
-@Html.HiddenFor(model => model.sol_UsuarioModifica, new { Value = "1" })
-@Html.HiddenFor(model => model.sol_FechaModifica, new { Value = "1900/01/01" })
+@Html.HiddenFor(model => model.sol_FechaModifica, new { Value = GeneralFunctions.dateDefault })
+
+
+
+<style>
+
+
+    .aviso {
+        font-family: AriaL;
+        font-size: 110%;
+        font-weight: bold;
+        color: #383839;
+    }
+</style>
 
 
 
@@ -46,27 +73,28 @@
 
 
 
-    <div class="form-group col-md-3">
-        @Html.LabelFor(model => model.tperm_Id, htmlAttributes: new { @class = "control-label col-md-8" })
-        @*@Html.EditorFor(model => model.tperm_Id, new { htmlAttributes = new { @class = "form-control" } })*@
-        @Html.DropDownList("tperm_Id", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.tperm_Id, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <span class="aviso">8-</span> @Html.LabelFor(model => model.tperm_Id, "Tipo Permiso", htmlAttributes: new { @class = "control-label col-md-8" })
+        <div class="col-md-6">
+            @*@Html.EditorFor(model => model.tperm_Id, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.DropDownList("tperm_Id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tperm_Id, "", new { @class = "text-danger" })
+        </div>
     </div>
 
 
 
-
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_PerFechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-7">
+        <span class="aviso">9-</span> @Html.LabelFor(model => model.sol_PerFechaInicio, "Fecha Inicio Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_PerFechaInicio, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_PerFechaInicio, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_PerFechaRegreso, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-7">
+        <span class="aviso">10-</span>@Html.LabelFor(model => model.sol_PerFechaRegreso, "Fecha Regreso Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
             <div class="checkbox">
                 @Html.EditorFor(model => model.sol_PerFechaRegreso, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sol_PerFechaRegreso, "", new { @class = "text-danger" })
@@ -74,45 +102,90 @@
         </div>
     </div>
 
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sol_PerFechaMedioDia, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.sol_PerMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.sol_PerMedioDia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sol_PerMedioDia, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sol_PerFechaMedioDia, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_PerMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-7">
-            @Html.EditorFor(model => model.sol_PerMedioDia, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.sol_PerMedioDia, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        <span class="aviso">11-</span> @Html.LabelFor(model => model.sol_PerCantidadDias, "Cantidad Dias", htmlAttributes: new { @class = "control-label col-md-2" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.sol_PerCantidadDias, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-7">
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_PerCantidadDias, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
             @Html.ValidationMessageFor(model => model.sol_PerCantidadDias, "", new { @class = "text-danger" })
         </div>
+
     </div>
 
-</div>
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+
+        @*<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+        <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>*@
+        <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+        @*<script src="~/Scripts/app/ValidacionesGenerales.js"></script>*@
+
+        <script type="text/javascript">
+            function ShowHideDiv(chkCantDias) {
+                var sol_PerMedioDia = document.getElementById("sol_PerFechaMedioDia");
+                sol_PerMedioDia.style.display = chkCantDias.checked ? "block" : "none";
+
+            }
+        </script>
+        <label for="chkCantDias">
+
+            ¿Permiso Medio Dia?
+            <input type="checkbox" id="chkCantDias" onclick="ShowHideDiv(this)" />
+        </label>
+        <hr />
+
+
+        <div id="sol_PerFechaMedioDia">
+
+            @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sol_PerFechaMedioDia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
 
 
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Content/template/plugins/datepicker/bootstrap-datepicker.js"></script>
-<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-<script>
 
-    //DATE PICKET
-$("#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud").datepicker({
-    dateFormat: 'mm/dd/yy',
-    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-    minDate: '-100Y',
-    maxDate: '-18Y',
-    prevText: 'Ant',
-    nextText: 'Sig',
-    changeMonth: true,
-    changeYear: true,
-    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-}).datepicker('setDate', new Date());
-</script>
+
+@*<script type="text/javascript">
+        function ShowHideDiv(chkPassport) {
+            var dvPassport = document.getElementById("dvPassport");
+            dvPassport.style.display = chkPassport.checked ? "block" : "none";
+        }
+    </script>
+    <label for="chkPassport">
+        <input type="checkbox" id="chkPassport" onclick="ShowHideDiv(this)" />
+        Do you have Passport?
+    </label>
+    <hr />
+    <div id="dvPassport" style="display: none">
+        Passport Number:
+        <input type="text" id="txtPassportNumber" />
+    </div>*@

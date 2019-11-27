@@ -3,18 +3,12 @@
 
 @Html.HiddenFor(model => model.tperm_Id, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.tmo_Id, new { Value = GeneralFunctions.intDefault })
-
 @Html.HiddenFor(model => model.pto_Id, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.tpsal_id, new { Value = GeneralFunctions.tiposalario })
 @Html.HiddenFor(model => model.tpv_Id, new { Value = GeneralFunctions.intDefault })
-
 @Html.HiddenFor(model => model.tipsol_Id, new { Value = GeneralFunctions.tiposoli })
-
 @Html.HiddenFor(model => model.tipmo_id, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.are_Id, new { Value = GeneralFunctions.intDefault })
-
-
-
 @Html.HiddenFor(model => model.sol_AnsolMonto, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.sol_PerCantidadDias, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.sol_PerMedioDia, new { Value = GeneralFunctions.boolDefault })
@@ -23,9 +17,6 @@
 @Html.HiddenFor(model => model.sol_Anvi_Cliente, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_Anvi_LugarDestino, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_Anvi_PropositoVisita, new { Value = GeneralFunctions.stringDefault })
-
-
-
 @Html.HiddenFor(model => model.sol_AprCiudad, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_AprNombreEmpresa, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_AprRtn, new { Value = GeneralFunctions.stringDefault })
@@ -49,50 +40,60 @@
 @Html.HiddenFor(model => model.sol_ReemFechaMonto, new { Value = GeneralFunctions.dateDefault })
 @Html.HiddenFor(model => model.sol_Anvi_DiasVisita, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.sol_PerFechaRegreso, new { Value = GeneralFunctions.dateDefault })
-
 @Html.HiddenFor(model => model.sol_FechaCrea, new { Value = GeneralFunctions.dateDefault })
-
 @Html.HiddenFor(model => model.sol_PerFechaMedioDia, new { Value = GeneralFunctions.dateDefault })
 @Html.HiddenFor(model => model.sol_ReemMonto, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.sol_ReemMontoTotal, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.sol_RequeCantidad, new { Value = GeneralFunctions.intDefault })
-
 @Html.HiddenFor(model => model.sol_UsuarioCrea, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.sol_UsuarioModifica, new { Value = GeneralFunctions.intDefault })
 
+<style>
+
+    .aviso {
+        font-family: AriaL;
+        font-size: 110%;
+        font-weight: bold;
+        color: #383839;
+    }
+</style>
+
+<br/>
+<h4 style="font-weight:bold;">Tipo Movimiento</h4>
+<br />
 <div class="col" name="tipmo_id">
     <div id="inline_content" class="form-group">
         <div class="custom-control custom-radio">
             @Html.RadioButtonFor(model => model.tipmo_id, "1", htmlAttributes: new { @id = "id_1", @class = "custom-control-input" })
-            <label for="id_1" class="custom-control-label">Aumento de Sueldo</label>
+            <label for="id_1" class="custom-control-label"  style="font-size:120%"; >Aumento de Sueldo</label>
         </div>
         <div class="custom-control custom-radio">
             @Html.RadioButtonFor(model => model.tipmo_id, "2", htmlAttributes: new { @id = "id_2", @class = "custom-control-input" })
-            <label for="id_2" class="custom-control-label">Cambio de Puesto</label>
+            <label for="id_2" class="custom-control-label" style="font-size:120%;">Cambio de Puesto</label>
         </div>
         <div class="custom-control custom-radio">
             @Html.RadioButtonFor(model => model.tipmo_id, "3", htmlAttributes: new { @id = "id_3", @class = "custom-control-input" })
-            <label for="id_3" class="custom-control-label">Renuncia</label>
+            <label for="id_3" class="custom-control-label" style="font-size:120%"; >Renuncia</label>
         </div>
         <div class="custom-control custom-radio">
             @Html.RadioButtonFor(model => model.tipmo_id, "4", htmlAttributes: new { @id = "id_4", @class = "custom-control-input" })
-            <label for="id_4" class="custom-control-label">Despido</label>
+            <label for="id_4" class="custom-control-label" style="font-size:120%";>Despido</label>
         </div>
     </div>
 
 </div>
-
+<br />
 <div id="container" class="form-group" name="vstipmo_id">
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_Acper_Anterior, htmlAttributes: new { @id = "lblsol_Acper_Anterior", @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <span class="aviso">6-</span>  @Html.LabelFor(model => model.sol_Acper_Anterior, htmlAttributes: new { @id = "lblsol_Acper_Anterior", @class = "control-label col-md-2" })
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_Acper_Anterior, new { htmlAttributes = new { @class = "form-control", Value = GeneralFunctions.stringDefault } })
             @Html.ValidationMessageFor(model => model.sol_Acper_Anterior, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_Acper_Nuevo, htmlAttributes: new { @id = "lblsol_Acper_Nuevo", @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <span class="aviso">7-</span> @Html.LabelFor(model => model.sol_Acper_Nuevo, htmlAttributes: new { @id = "lblsol_Acper_Nuevo", @class = "control-label col-md-2" })
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_Acper_Nuevo, new { htmlAttributes = new { @class = "form-control", Value = GeneralFunctions.stringDefault } })
             @Html.ValidationMessageFor(model => model.sol_Acper_Nuevo, "", new { @class = "text-danger" })
         </div>
