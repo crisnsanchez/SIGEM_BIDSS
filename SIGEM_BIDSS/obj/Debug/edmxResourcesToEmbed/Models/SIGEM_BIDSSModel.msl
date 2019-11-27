@@ -380,6 +380,13 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tSolicitudInsertar" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tSolicitudInsertar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result">
+          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="tbSolicitud">
       <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitud">
         <MappingFragment StoreEntitySet="tbSolicitud">
@@ -409,6 +416,7 @@
           <ScalarProperty Name="sol_ReemFechaMonto" ColumnName="sol_ReemFechaMonto" />
           <ScalarProperty Name="sol_ReemMonto" ColumnName="sol_ReemMonto" />
           <ScalarProperty Name="sol_PerCantidadDias" ColumnName="sol_PerCantidadDias" />
+          <ScalarProperty Name="sol_PerFechaMedioDia" ColumnName="sol_PerFechaMedioDia" />
           <ScalarProperty Name="sol_PerFechaInicio" ColumnName="sol_PerFechaInicio" />
           <ScalarProperty Name="sol_PerMedioDia" ColumnName="sol_PerMedioDia" />
           <ScalarProperty Name="sol_PerFechaRegreso" ColumnName="sol_PerFechaRegreso" />
@@ -440,12 +448,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="UDP_Gral_tSolicitudInsertar" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tSolicitudInsertar">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tSolicitudInsertar_Result">
-          <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

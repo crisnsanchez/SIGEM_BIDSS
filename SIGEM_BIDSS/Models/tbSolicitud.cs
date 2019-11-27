@@ -40,8 +40,9 @@ namespace SIGEM_BIDSS.Models
         public string sol_AnviTrasladoHacia { get; set; }
         public double sol_AnsolMonto { get; set; }
         public System.DateTime sol_PerFechaRegreso { get; set; }
-        public bool sol_PerMedioDia { get; set; }
+        public Nullable<bool> sol_PerMedioDia { get; set; }
         public System.DateTime sol_PerFechaInicio { get; set; }
+        public Nullable<System.DateTime> sol_PerFechaMedioDia { get; set; }
         public int sol_PerCantidadDias { get; set; }
         public double sol_ReemMonto { get; set; }
         public System.DateTime sol_ReemFechaMonto { get; set; }
@@ -67,7 +68,7 @@ namespace SIGEM_BIDSS.Models
         public int sol_UsuarioCrea { get; set; }
         public System.DateTime sol_FechaCrea { get; set; }
         public Nullable<int> sol_UsuarioModifica { get; set; }
-        public System.DateTime sol_FechaModifica { get; set; }
+        public Nullable<System.DateTime> sol_FechaModifica { get; set; }
     
         public virtual tbArea tbArea { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }

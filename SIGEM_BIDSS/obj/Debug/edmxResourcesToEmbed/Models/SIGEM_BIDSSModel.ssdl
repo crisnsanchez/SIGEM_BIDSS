@@ -124,8 +124,9 @@
     <Property Name="sol_AnviTrasladoHacia" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="sol_AnsolMonto" Type="float" Nullable="false" />
     <Property Name="sol_PerFechaRegreso" Type="datetime" Nullable="false" />
-    <Property Name="sol_PerMedioDia" Type="bit" Nullable="false" />
+    <Property Name="sol_PerMedioDia" Type="bit" />
     <Property Name="sol_PerFechaInicio" Type="datetime" Nullable="false" />
+    <Property Name="sol_PerFechaMedioDia" Type="datetime" />
     <Property Name="sol_PerCantidadDias" Type="int" Nullable="false" />
     <Property Name="sol_ReemMonto" Type="float" Nullable="false" />
     <Property Name="sol_ReemFechaMonto" Type="datetime" Nullable="false" />
@@ -670,6 +671,7 @@
     <Parameter Name="sol_PerFechaRegreso" Type="datetime" Mode="In" />
     <Parameter Name="sol_PerMedioDia" Type="bit" Mode="In" />
     <Parameter Name="sol_PerFechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="sol_PerFechaMedioDia" Type="datetime" Mode="In" />
     <Parameter Name="sol_PerCantidadDias" Type="int" Mode="In" />
     <Parameter Name="sol_ReemMonto" Type="float" Mode="In" />
     <Parameter Name="sol_ReemFechaMonto" Type="datetime" Mode="In" />
