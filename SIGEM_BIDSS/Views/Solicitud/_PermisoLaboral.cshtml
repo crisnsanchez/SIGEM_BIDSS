@@ -55,7 +55,16 @@
 
 
 
+<style>
 
+
+    .aviso {
+        font-family: AriaL;
+        font-size: 110%;
+        font-weight: bold;
+        color: #383839;
+    }
+</style>
 
 
 
@@ -64,27 +73,28 @@
 
 
 
-    <div class="form-group col-md-3">
-        @Html.LabelFor(model => model.tperm_Id, "Tipo Permiso", htmlAttributes: new { @class = "control-label col-md-8" })
-        @*@Html.EditorFor(model => model.tperm_Id, new { htmlAttributes = new { @class = "form-control" } })*@
-        @Html.DropDownList("tperm_Id", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.tperm_Id, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <span class="aviso">8-</span> @Html.LabelFor(model => model.tperm_Id, "Tipo Permiso", htmlAttributes: new { @class = "control-label col-md-8" })
+        <div class="col-md-6">
+            @*@Html.EditorFor(model => model.tperm_Id, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.DropDownList("tperm_Id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tperm_Id, "", new { @class = "text-danger" })
+        </div>
     </div>
 
 
 
-
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_PerFechaInicio, "Fecha Inicio Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-7">
+        <span class="aviso">9-</span> @Html.LabelFor(model => model.sol_PerFechaInicio, "Fecha Inicio Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_PerFechaInicio, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_PerFechaInicio, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_PerFechaRegreso, "Fecha Regreso Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-7">
+        <span class="aviso">10-</span>@Html.LabelFor(model => model.sol_PerFechaRegreso, "Fecha Regreso Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
             <div class="checkbox">
                 @Html.EditorFor(model => model.sol_PerFechaRegreso, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sol_PerFechaRegreso, "", new { @class = "text-danger" })
@@ -92,7 +102,7 @@
         </div>
     </div>
 
-    @*<div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-7">
                 @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
@@ -101,7 +111,7 @@
         </div>*@
 
 
-    @*<div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.sol_PerMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-7">
                 @Html.EditorFor(model => model.sol_PerMedioDia, new { htmlAttributes = new { @class = "form-control" } })
@@ -109,7 +119,7 @@
             </div>
         </div>*@
 
-    @*<div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-7">
                 @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
@@ -118,47 +128,47 @@
         </div>*@
 
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_PerCantidadDias, "Cantidad Dias", htmlAttributes: new { @class = "control-label col-md-2" })
+        <span class="aviso">11-</span> @Html.LabelFor(model => model.sol_PerCantidadDias, "Cantidad Dias", htmlAttributes: new { @class = "control-label col-md-2" })
 
-        <div class="col-md-7">
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_PerCantidadDias, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
             @Html.ValidationMessageFor(model => model.sol_PerCantidadDias, "", new { @class = "text-danger" })
         </div>
 
     </div>
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 
-    @*<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+        @*<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
         <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>*@
-    <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
-    @*<script src="~/Scripts/app/ValidacionesGenerales.js"></script>*@
+        <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+        @*<script src="~/Scripts/app/ValidacionesGenerales.js"></script>*@
 
-    <script type="text/javascript">
-        function ShowHideDiv(chkCantDias) {
-            var sol_PerMedioDia = document.getElementById("sol_PerFechaMedioDia");
-            sol_PerMedioDia.style.display = chkCantDias.checked ? "block" : "none";
+        <script type="text/javascript">
+            function ShowHideDiv(chkCantDias) {
+                var sol_PerMedioDia = document.getElementById("sol_PerFechaMedioDia");
+                sol_PerMedioDia.style.display = chkCantDias.checked ? "block" : "none";
 
-        }
-    </script>
-    <label for="chkCantDias">
+            }
+        </script>
+        <label for="chkCantDias">
 
-        ¿Permiso Medio Dia?
-        <input type="checkbox" id="chkCantDias" onclick="ShowHideDiv(this)" />
-    </label>
-    <hr />
+            ¿Permiso Medio Dia?
+            <input type="checkbox" id="chkCantDias" onclick="ShowHideDiv(this)" />
+        </label>
+        <hr />
 
 
-    <div id="sol_PerFechaMedioDia">
+        <div id="sol_PerFechaMedioDia">
 
-        @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-7">
-            @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.sol_PerFechaMedioDia, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-7">
+                @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sol_PerFechaMedioDia, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
-</div>
 
 
 
