@@ -8,6 +8,41 @@
 
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
 
+
+<style>
+
+    .validation-error {
+        color: red;
+        font-size: small;
+    }
+
+    .validation-summary-errors {
+        color: red;
+        font-size: small;
+    }
+
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
+
+    #tmo_Nombre {
+        text-transform: uppercase;
+    }
+
+    #tmo_Abreviatura {
+        text-transform: uppercase;
+    }
+
+    .aviso {
+        font-family: AriaL;
+        font-size: 110%;
+        font-weight: bold;
+        color: #383839;
+    }
+</style>
+
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -27,151 +62,137 @@
         @Html.HiddenFor(model => model.tipsol_Id)
         @Html.HiddenFor(model => model.emp_Id)
 
-       
+
 
         <div class="form-horizontal">
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                   
-                    @Html.LabelFor(model => model.Emp_Name, "Nombre Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-7">
+
+                    <span class="aviso">1-</span> @Html.LabelFor(model => model.Emp_Name, "Nombre Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
                         @Html.EditorFor(model => model.Emp_Name, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.EmpNames, @readonly = "readonly" } })
                     </div>
                 </div>
-                <div class="form-group col-md-7">
-                    @Html.LabelFor(model => model.are_Id, "Area", htmlAttributes: new { @class = "control-label col-md-8" })
-
-                    @* @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.DropDownList("are_Id", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
-                </div>
-
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.sol_GralDescripcion, "Descripcion", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-7">
-                        @Html.EditorFor(model => model.sol_GralDescripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
-                        @Html.ValidationMessageFor(model => model.sol_GralDescripcion, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
-
                 <div class="form-group">
-                    @Html.LabelFor(model => model.sol_GralJefeInmediato, "Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-7">
-                        @Html.EditorFor(model => model.sol_GralJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
-                        @Html.ValidationMessageFor(model => model.sol_GralJefeInmediato, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                    <span class="aviso">2-</span>@Html.LabelFor(model => model.are_Id, "Area", htmlAttributes: new { @class = "control-label col-md-8" })
+                    <div class="col-md-6">
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.sol_GralCorreoJefeInmediato, "Correo Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-7">
+                        @* @Html.EditorFor(model => model.are_Id, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownList("are_Id", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <span class="aviso">3-</span>@Html.LabelFor(model => model.sol_GralJefeInmediato, "Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.sol_GralJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.ValidationMessageFor(model => model.sol_GralJefeInmediato, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <span class="aviso">4-</span>@Html.LabelFor(model => model.sol_GralCorreoJefeInmediato, "Correo Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
                         @Html.EditorFor(model => model.sol_GralCorreoJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
                         @Html.ValidationMessageFor(model => model.sol_GralCorreoJefeInmediato, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
-                @*<div class="form-group">
-                    @Html.LabelFor(model => model.sol_GralComentario, "Comentario", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-7">
-                        @Html.EditorFor(model => model.sol_GralComentario, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @style = "text-transform:uppercase;", onkeypress = "return soloLetras(event)" } })
-                        @Html.ValidationMessageFor(model => model.sol_GralComentario, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.sol_GralFechaSolicitud, "Fecha de la Solicitud", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-7">
-                        @Html.EditorFor(model => model.sol_GralFechaSolicitud, new { htmlAttributes = new { @class = "form-control" }, Value = System.DateTime.Now })
-                        @Html.ValidationMessageFor(model => model.sol_GralFechaSolicitud, "", new { @class = "text-danger" })
-                    </div>
-                </div>
 
 
-                <div id="containerCreate" class="form-group">
-                    @{
-
-
-                        switch (Model.tipsol_Id)
-                        {
-                            case GeneralFunctions.AccionPersonal:
-                                @Html.Partial("_AccionPersonal", new tbSolicitud());
-                                break;
-                            case GeneralFunctions.SolicitudPermisoLaboral:
-                                @Html.Partial("_PermisoLaboral", new tbSolicitud());
-                                break;
-                            case GeneralFunctions.SolicitudAnticipoViaticos:
-                                @Html.Partial("_AnticipoViatico", new tbSolicitud());
-                                break;
-                            case GeneralFunctions.SolicitudAnticipoSalario:
-                                @Html.Partial("_AnticipoSalario", new tbSolicitud());
-                                break;
-                            case GeneralFunctions.LiquidacionAnticipoSalario:
-                                @Html.Partial("_LiquidacionAnticipoSalario", new tbSolicitud());
-                                break;
-                            case GeneralFunctions.RequisicionCompra:
-                                @Html.Partial("_RequisicionCompra", new tbSolicitud());
-                                break;
-                            case GeneralFunctions.RembolsoGastos:
-                                @Html.Partial("_RembolsoGastos", new tbSolicitud());
-                                break;
-
-                            default:
-                                @Html.Label("Opcion3");
-                                break;
-                        }
-                    }
-                </div>
-
-
-
-
-
-                <div class="form-group">
-                    <div class="col-md-offset-4 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Solicitud", "Menu", null, new { @class = "btn btn-default" })
-                    </div>
+                <span class="aviso">5-</span>@Html.LabelFor(model => model.sol_GralFechaSolicitud, "Fecha de la Solicitud", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.sol_GralFechaSolicitud, new { htmlAttributes = new { @class = "form-control" }, Value = System.DateTime.Now })
+                    @Html.ValidationMessageFor(model => model.sol_GralFechaSolicitud, "", new { @class = "text-danger" })
                 </div>
             </div>
 
+
+            <div id="containerCreate" class="form-group">
+                @{
+
+
+                    switch (Model.tipsol_Id)
+                    {
+                        case GeneralFunctions.AccionPersonal:
+                            @Html.Partial("_AccionPersonal", new tbSolicitud());
+                            break;
+                        case GeneralFunctions.SolicitudPermisoLaboral:
+                            @Html.Partial("_PermisoLaboral", new tbSolicitud());
+                            break;
+                        case GeneralFunctions.SolicitudAnticipoViaticos:
+                            @Html.Partial("_AnticipoViatico", new tbSolicitud());
+                            break;
+                        case GeneralFunctions.SolicitudAnticipoSalario:
+                            @Html.Partial("_AnticipoSalario", new tbSolicitud());
+                            break;
+                        case GeneralFunctions.LiquidacionAnticipoSalario:
+                            @Html.Partial("_LiquidacionAnticipoSalario", new tbSolicitud());
+                            break;
+                        case GeneralFunctions.RequisicionCompra:
+                            @Html.Partial("_RequisicionCompra", new tbSolicitud());
+                            break;
+                        case GeneralFunctions.RembolsoGastos:
+                            @Html.Partial("_RembolsoGastos", new tbSolicitud());
+                            break;
+
+                        default:
+                            @Html.Label("Opcion3");
+                            break;
+                    }
+                }
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Solicitud", "Menu", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
         </div>
 
-    }
-</div>
-<script>
-    function soloNumeros(e) {
-        tecla = (document.all) ? e.keyCode : e.which;
-        tecla = String.fromCharCode(tecla)
-        return /^[0-9]+$/.test(tecla);
-    }
-</script>
-
-@section Scripts {
-
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
-    <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-    <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="~/Content/template/dist/js/Solicitud.js"></script>
-    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-    <script src="~/Scripts/app/_AccionPersonal.js"></script>
-    @Scripts.Render("~/bundles/jqueryval")
-    <script>
-
-        //DATE PICKET
-        $("#sol_GralFechaSolicitud").datepicker({
-            dateFormat: 'mm/dd/yy',
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-            minDate: '-100Y',
-            maxDate: '-18Y',
-            prevText: 'Ant',
-            nextText: 'Sig',
-            changeMonth: true,
-            changeYear: true,
-            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-        }).datepicker('setDate', new Date());
-    </script>
+ 
 }
+    </div>
+    <script>
+        function soloNumeros(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            tecla = String.fromCharCode(tecla)
+            return /^[0-9]+$/.test(tecla);
+        }
+    </script>
+
+    @section Scripts {
+
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+        <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+        <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+        <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="~/Content/template/dist/js/Solicitud.js"></script>
+        <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+        <script src="~/Scripts/app/_AccionPersonal.js"></script>
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+
+            //DATE PICKET
+            $("#sol_GralFechaSolicitud").datepicker({
+                dateFormat: 'mm/dd/yy',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                minDate: '-100Y',
+                maxDate: '-18Y',
+                prevText: 'Ant',
+                nextText: 'Sig',
+                changeMonth: true,
+                changeYear: true,
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+            }).datepicker('setDate', new Date());
+        </script>
+    }
