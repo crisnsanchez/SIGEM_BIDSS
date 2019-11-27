@@ -55,9 +55,13 @@ namespace SIGEM_BIDSS.Models
 
 
         public const int intDefault = 1;
+        public const int tiposalario = 3;
+        public const int tiposoli = 2;
+
+
         public const string stringDefault = "-----";
         public const string dateDefault = "01/01/1900";
-
+        public const string date2 = "1900/01/01";
         public const bool boolDefault = false;
 
 
