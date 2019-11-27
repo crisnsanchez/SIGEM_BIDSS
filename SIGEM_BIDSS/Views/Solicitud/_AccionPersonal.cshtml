@@ -50,58 +50,54 @@
 @Html.HiddenFor(model => model.sol_UsuarioModifica, new { Value = GeneralFunctions.intDefault })
 
 <style>
-
-    .aviso {
-        font-family: AriaL;
-        font-size: 110%;
-        font-weight: bold;
-        color: #383839;
-    }
 </style>
+<div class="form-horizontal">
+    <div class="card-body">
+        <br />
+        <h4 class="col-md-10" style="font-weight:bold;">Tipo Movimiento</h4>
+        <br />
+        <div class="col" name="tipmo_id">
+            <div id="inline_content" class="form-group">
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(model => model.tipmo_id, "1", htmlAttributes: new { @id = "id_1", @class = "custom-control-input" })
+                    <label for="id_1" class="custom-control-label" style="font-size:120%" ;>Aumento de Sueldo</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(model => model.tipmo_id, "2", htmlAttributes: new { @id = "id_2", @class = "custom-control-input" })
+                    <label for="id_2" class="custom-control-label" style="font-size:120%;">Cambio de Puesto</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(model => model.tipmo_id, "3", htmlAttributes: new { @id = "id_3", @class = "custom-control-input" })
+                    <label for="id_3" class="custom-control-label" style="font-size:120%" ;>Renuncia</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    @Html.RadioButtonFor(model => model.tipmo_id, "4", htmlAttributes: new { @id = "id_4", @class = "custom-control-input" })
+                    <label for="id_4" class="custom-control-label" style="font-size:120%" ;>Despido</label>
+                </div>
+            </div>
 
-<br />
-<h4 style="font-weight:bold;">Tipo Movimiento</h4>
-<br />
-<div class="col" name="tipmo_id">
-    <div id="inline_content" class="form-group">
-        <div class="custom-control custom-radio">
-            @Html.RadioButtonFor(model => model.tipmo_id, "1", htmlAttributes: new { @id = "id_1", @class = "custom-control-input" })
-            <label for="id_1" class="custom-control-label" style="font-size:120%" ;>Aumento de Sueldo</label>
         </div>
-        <div class="custom-control custom-radio">
-            @Html.RadioButtonFor(model => model.tipmo_id, "2", htmlAttributes: new { @id = "id_2", @class = "custom-control-input" })
-            <label for="id_2" class="custom-control-label" style="font-size:120%;">Cambio de Puesto</label>
+        <br />
+        <div id="container" class="form-group" name="vstipmo_id">
+            <div class="form-group">
+                <span class="aviso">6-</span>  @Html.LabelFor(model => model.sol_Acper_Anterior, htmlAttributes: new { @id = "lblsol_Acper_Anterior", @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.sol_Acper_Anterior, new { htmlAttributes = new { @class = "form-control", Value = GeneralFunctions.stringDefault } })
+                    @Html.ValidationMessageFor(model => model.sol_Acper_Anterior, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <span class="aviso">7-</span> @Html.LabelFor(model => model.sol_Acper_Nuevo, htmlAttributes: new { @id = "lblsol_Acper_Nuevo", @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.sol_Acper_Nuevo, new { htmlAttributes = new { @class = "form-control", Value = GeneralFunctions.stringDefault } })
+                    @Html.ValidationMessageFor(model => model.sol_Acper_Nuevo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
         </div>
-        <div class="custom-control custom-radio">
-            @Html.RadioButtonFor(model => model.tipmo_id, "3", htmlAttributes: new { @id = "id_3", @class = "custom-control-input" })
-            <label for="id_3" class="custom-control-label" style="font-size:120%" ;>Renuncia</label>
-        </div>
-        <div class="custom-control custom-radio">
-            @Html.RadioButtonFor(model => model.tipmo_id, "4", htmlAttributes: new { @id = "id_4", @class = "custom-control-input" })
-            <label for="id_4" class="custom-control-label" style="font-size:120%" ;>Despido</label>
-        </div>
+
     </div>
+
+
 
 </div>
-<br />
-<div id="container" class="form-group" name="vstipmo_id">
-    <div class="form-group">
-        <span class="aviso">6-</span>  @Html.LabelFor(model => model.sol_Acper_Anterior, htmlAttributes: new { @id = "lblsol_Acper_Anterior", @class = "control-label col-md-2" })
-        <div class="col-md-6">
-            @Html.EditorFor(model => model.sol_Acper_Anterior, new { htmlAttributes = new { @class = "form-control", Value = GeneralFunctions.stringDefault } })
-            @Html.ValidationMessageFor(model => model.sol_Acper_Anterior, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <span class="aviso">7-</span> @Html.LabelFor(model => model.sol_Acper_Nuevo, htmlAttributes: new { @id = "lblsol_Acper_Nuevo", @class = "control-label col-md-2" })
-        <div class="col-md-6">
-            @Html.EditorFor(model => model.sol_Acper_Nuevo, new { htmlAttributes = new { @class = "form-control", Value = GeneralFunctions.stringDefault } })
-            @Html.ValidationMessageFor(model => model.sol_Acper_Nuevo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-</div>
-
-
-
