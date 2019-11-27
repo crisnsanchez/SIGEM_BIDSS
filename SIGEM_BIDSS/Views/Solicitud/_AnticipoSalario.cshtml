@@ -48,22 +48,30 @@
 @Html.HiddenFor(model => model.sol_Acper_Nuevo, new { Value = GeneralFunctions.stringDefault })
 @Html.HiddenFor(model => model.sol_FechaModifica, new { Value = GeneralFunctions.dateDefault })
 
+<style>
 
+    .aviso {
+        font-family: AriaL;
+        font-size: 110%;
+        font-weight: bold;
+        color: #383839;
+    }
+</style>
 
 
 
 <div class="form-horizontal">
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_AnsolMonto, "Monto Solicitado", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <span class="aviso">6-</span>  @Html.LabelFor(model => model.sol_AnsolMonto, "Monto Solicitado", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_AnsolMonto, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_AnsolMonto, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.tpsal_id, "Correspondiente a un adelanto sobre:", htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-10">
+        <span class="aviso">7-</span> @Html.LabelFor(model => model.tpsal_id, "Correspondiente a un adelanto sobre:", htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-6">
             @Html.DropDownList("tpsal_id", null, htmlAttributes: new { @class = "form-control" })
 
             @*@Html.EditorFor(model => model.tpsal_id, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -73,8 +81,8 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_GralJustificacion, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <span class="aviso">8-</span>   @Html.LabelFor(model => model.sol_GralJustificacion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_GralJustificacion, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_GralJustificacion, "", new { @class = "text-danger" })
         </div>
@@ -84,16 +92,16 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_GralDescripcion, "Recibí de BIDSS Technoology la cantidad de LPS:", htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-10">
+        <span class="aviso">9-</span>  @Html.LabelFor(model => model.sol_GralDescripcion, "Recibí de BIDSS Technoology la cantidad de LPS:", htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_GralDescripcion, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_GralDescripcion, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.sol_GralComentario, "Por concepto de adelanto de: ", htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-10">
+        <span class="aviso">10-</span>@Html.LabelFor(model => model.sol_GralComentario, "Por concepto de adelanto de: ", htmlAttributes: new { @class = "control-label col-md-5" })
+        <div class="col-md-6">
             @Html.EditorFor(model => model.sol_GralComentario, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.sol_GralComentario, "", new { @class = "text-danger" })
         </div>
