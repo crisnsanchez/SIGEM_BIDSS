@@ -18,22 +18,38 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSolicitud
         public ActionResult Index()
         {
-            return View(db.tbTipoSolicitud.ToList());
+            try
+            {
+                return View(db.tbTipoSolicitud.ToList());
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // GET: TipoSolicitud/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
+                if (tbTipoSolicitud == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoSolicitud);
             }
-            tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
-            if (tbTipoSolicitud == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
+                //throw;
+                return RedirectToAction("Error500", "Home");
             }
-            return View(tbTipoSolicitud);
         }
 
         // GET: TipoSolicitud/Create
@@ -85,16 +101,24 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSolicitud/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
+                if (tbTipoSolicitud == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoSolicitud);
             }
-            tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
-            if (tbTipoSolicitud == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
+                //throw;
+                return RedirectToAction("Error500", "Home");
             }
-            return View(tbTipoSolicitud);
         }
 
         // POST: TipoSolicitud/Edit/5
@@ -138,16 +162,24 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSolicitud/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
+                if (tbTipoSolicitud == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoSolicitud);
             }
-            tbTipoSolicitud tbTipoSolicitud = db.tbTipoSolicitud.Find(id);
-            if (tbTipoSolicitud == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
+                //throw;
+                return RedirectToAction("Error500", "Home");
             }
-            return View(tbTipoSolicitud);
         }
 
         // POST: TipoSolicitud/Delete/5

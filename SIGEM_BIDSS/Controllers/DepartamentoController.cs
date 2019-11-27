@@ -21,29 +21,53 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Departamento
         public ActionResult Index()
         {
-            return View(db.tbDepartamento.ToList());
+            try
+            {
+                return View(db.tbDepartamento.ToList());
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // GET: Departamento/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbDepartamento tbDepartamento = db.tbDepartamento.Find(id);
+                if (tbDepartamento == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbDepartamento);
             }
-            tbDepartamento tbDepartamento = db.tbDepartamento.Find(id);
-            if (tbDepartamento == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
+                //throw;
+                return RedirectToAction("Error500", "Home");
             }
-            return View(tbDepartamento);
         }
 
         // GET: Departamento/Create
         public ActionResult Create()
         {
-            Session["tbMunicipio"] = null;
-            return View();
+            try
+            {
+                Session["tbMunicipio"] = null;
+                return View();
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // POST: Departamento/Create
@@ -116,20 +140,28 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Departamento/Edit/5
         public ActionResult Edit(string id)
         {
-            Session["tbMunicipio"] = null;
             try
             {
-                ViewBag.smserror = TempData["smserror"].ToString();
-            }
-            catch { }
+                Session["tbMunicipio"] = null;
+                try
+                {
+                    ViewBag.smserror = TempData["smserror"].ToString();
+                }
+                catch { }
 
-            if (id == null)
-            {
-                return RedirectToAction("Index");
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                tbDepartamento tbDepartamento = db.tbDepartamento.Find(id);
+
+                return View(tbDepartamento);
             }
-            tbDepartamento tbDepartamento = db.tbDepartamento.Find(id);
-            
-            return View(tbDepartamento);
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // POST: Departamento/Edit/5
