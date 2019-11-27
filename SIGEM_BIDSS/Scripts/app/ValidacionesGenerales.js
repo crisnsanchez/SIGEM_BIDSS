@@ -40,6 +40,7 @@ $('#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud,#sol_PerFech
 
 
 //////SOLO LETRAS
+
 function soloLetras(e) {
     tecla = (document.all) ? e.keyCode : e.which;
     tecla = String.fromCharCode(tecla)

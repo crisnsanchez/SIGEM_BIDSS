@@ -12,14 +12,10 @@ namespace SIGEM_BIDSS.Models
     {
         [NotMapped]
         public List<tbEmpleado> EmpleadoList { get; set; }
-
         [NotMapped]
         public string ge_Id { get; set; }
-
         [NotMapped]
         public string ge_Description { get; set; }
-
-
     }
 
 
