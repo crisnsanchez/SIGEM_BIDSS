@@ -20,19 +20,11 @@ namespace SIGEM_BIDSS.Controllers
         /// </summary>
         public void SignIn()
         {
-            try
+            if (!Request.IsAuthenticated)
             {
-                if (!Request.IsAuthenticated)
-                {
-                    HttpContext.GetOwinContext().Authentication.Challenge(
-                        new AuthenticationProperties { RedirectUri = "/" },
-                        OpenIdConnectAuthenticationDefaults.AuthenticationType);
-                }
-            }
-            catch (System.Exception)
-            {
-
-                throw;
+                HttpContext.GetOwinContext().Authentication.Challenge(
+                    new AuthenticationProperties { RedirectUri = "/" },
+                    OpenIdConnectAuthenticationDefaults.AuthenticationType);
             }
         }
 
@@ -41,17 +33,9 @@ namespace SIGEM_BIDSS.Controllers
         /// </summary>
         public void SignOut()
         {
-            try
-            {
-                HttpContext.GetOwinContext().Authentication.SignOut(
-                           OpenIdConnectAuthenticationDefaults.AuthenticationType,
-                           CookieAuthenticationDefaults.AuthenticationType);
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
+            HttpContext.GetOwinContext().Authentication.SignOut(
+                    OpenIdConnectAuthenticationDefaults.AuthenticationType,
+                    CookieAuthenticationDefaults.AuthenticationType);
         }
     }
 }

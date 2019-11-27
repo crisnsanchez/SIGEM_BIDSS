@@ -18,38 +18,22 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoViatico
         public ActionResult Index()
         {
-            try
-            {
-                return View(db.tbTipoViatico.ToList());
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            return View(db.tbTipoViatico.ToList());
         }
 
         // GET: TipoViatico/Details/5
         public ActionResult Details(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoViatico tbTipoViatico = db.tbTipoViatico.Find(id);
-                if (tbTipoViatico == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoViatico);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoViatico tbTipoViatico = db.tbTipoViatico.Find(id);
+            if (tbTipoViatico == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoViatico);
         }
 
         // GET: TipoViatico/Create
@@ -99,24 +83,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoViatico/Edit/5
         public ActionResult Edit(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoViatico tbTipoViatico = db.tbTipoViatico.Find(id);
-                if (tbTipoViatico == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoViatico);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoViatico tbTipoViatico = db.tbTipoViatico.Find(id);
+            if (tbTipoViatico == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoViatico);
         }
 
         // POST: TipoViatico/Edit/5

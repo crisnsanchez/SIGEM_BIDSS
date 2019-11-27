@@ -17,54 +17,30 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Cargos
         public ActionResult Index()
         {
-            try
-            {
-                var tbPuesto = db.tbPuesto.Include(t => t.tbArea);
-                return View(tbPuesto.ToList());
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            var tbPuesto = db.tbPuesto.Include(t => t.tbArea);
+            return View(tbPuesto.ToList());
         }
 
         // GET: Cargos/Details/5
         public ActionResult Details(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbPuesto tbPuesto = db.tbPuesto.Find(id);
-                if (tbPuesto == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbPuesto);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbPuesto tbPuesto = db.tbPuesto.Find(id);
+            if (tbPuesto == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbPuesto);
         }
 
         // GET: Cargos/Create
         public ActionResult Create()
         {
-            try
-            {
-                ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
-                return View();
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
+            return View();
         }
 
         // POST: Cargos/Create
@@ -112,25 +88,17 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Cargos/Edit/5
         public ActionResult Edit(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbPuesto tbPuesto = db.tbPuesto.Find(id);
-                if (tbPuesto == null)
-                {
-                    return HttpNotFound();
-                }
-                ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
-                return View(tbPuesto);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbPuesto tbPuesto = db.tbPuesto.Find(id);
+            if (tbPuesto == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
+            return View(tbPuesto);
         }
 
         // POST: Cargos/Edit/5
@@ -173,24 +141,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Cargos/Delete/5
         public ActionResult Delete(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbPuesto tbPuesto = db.tbPuesto.Find(id);
-                if (tbPuesto == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbPuesto);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbPuesto tbPuesto = db.tbPuesto.Find(id);
+            if (tbPuesto == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbPuesto);
         }
 
         // POST: Cargos/Delete/5

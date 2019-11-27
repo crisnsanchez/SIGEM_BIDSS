@@ -17,38 +17,22 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSalario
         public ActionResult Index()
         {
-            try
-            {
-                return View(db.tbTipoSalario.ToList());
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            return View(db.tbTipoSalario.ToList());
         }
 
         // GET: TipoSalario/Details/5
         public ActionResult Details(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
-                if (tbTipoSalario == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoSalario);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
+            if (tbTipoSalario == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoSalario);
         }
 
         // GET: TipoSalario/Create
@@ -96,27 +80,19 @@ namespace SIGEM_BIDSS.Controllers
             }
 
         }
-        // GET: TipoSalario/Edit/5
-        public ActionResult Edit(int? id)
+            // GET: TipoSalario/Edit/5
+            public ActionResult Edit(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
-                if (tbTipoSalario == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoSalario);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
+            if (tbTipoSalario == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoSalario);
         }
 
         // POST: TipoSalario/Edit/5
@@ -132,7 +108,7 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         IEnumerable<Object> List = null;
                         string Msj = "";
-                        List = db.UDP_Gral_tbTipoSalario_Update(tbTipoSalario.tpsal_id, tbTipoSalario.tpsal_Descripcion, 1);
+                        List = db.UDP_Gral_tbTipoSalario_Update(tbTipoSalario.tpsal_id,tbTipoSalario.tpsal_Descripcion, 1);
                         foreach (UDP_Gral_tbTipoSalario_Update_Result Permiso in List)
                             Msj = Permiso.MensajeError;
                         if (Msj.StartsWith("-1"))
@@ -163,24 +139,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSalario/Delete/5
         public ActionResult Delete(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
-                if (tbTipoSalario == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoSalario);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
+            if (tbTipoSalario == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoSalario);
         }
 
         // POST: TipoSalario/Delete/5

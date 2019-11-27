@@ -18,52 +18,28 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Area
         public ActionResult Index()
         {
-            try
-            {
-                return View(db.tbArea.ToList());
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            return View(db.tbArea.ToList());
         }
 
         // GET: Area/Details/5
         public ActionResult Details(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbArea tbArea = db.tbArea.Find(id);
-                if (tbArea == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbArea);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbArea tbArea = db.tbArea.Find(id);
+            if (tbArea == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbArea);
         }
 
         // GET: Area/Create
         public ActionResult Create()
         {
-            try
-            {
-                return View();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return View();
         }
 
         // POST: Area/Create
@@ -105,24 +81,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Area/Edit/5
         public ActionResult Edit(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbArea tbArea = db.tbArea.Find(id);
-                if (tbArea == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbArea);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbArea tbArea = db.tbArea.Find(id);
+            if (tbArea == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbArea);
         }
 
         // POST: Area/Edit/5

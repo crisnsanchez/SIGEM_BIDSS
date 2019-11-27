@@ -20,16 +20,8 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Empleado
         public ActionResult Index()
         {
-            try
-            {
-                var tbEmpleado = db.tbEmpleado.Include(t => t.tbMunicipio).Include(t => t.tbPuesto).Include(t => t.tbTipoSangre);
-                return View(tbEmpleado.ToList());
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            var tbEmpleado = db.tbEmpleado.Include(t => t.tbMunicipio).Include(t => t.tbPuesto).Include(t => t.tbTipoSangre);
+            return View(tbEmpleado.ToList());
         }
 
 
@@ -73,24 +65,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Empleado/Details/5
         public ActionResult Details(short? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbEmpleado tbEmpleado = db.tbEmpleado.Find(id);
-                if (tbEmpleado == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbEmpleado);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbEmpleado tbEmpleado = db.tbEmpleado.Find(id);
+            if (tbEmpleado == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbEmpleado);
         }
 
         // GET: Empleado/Activar/5
@@ -125,25 +109,17 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Empleado/Create
         public ActionResult Create()
         {
-            try
-            {
-                var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
+            var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
 
-                string fullName = userClaims?.FindFirst("name")?.Value;
-                ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
-                ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
-                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");
-                ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description");
-                ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
-                ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+            string fullName = userClaims?.FindFirst("name")?.Value;
+            ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+            ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
+            ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");
+            ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description");
+            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
+            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
 
-                return View();
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            return View();
         }
 
         // POST: Empleado/Create
@@ -250,35 +226,27 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Empleado/Edit/5
         public ActionResult Edit(short? id)
         {
-            try
+           
+
+
+
+
+            if (id == null)
             {
-
-
-
-
-
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbEmpleado tbEmpleado = db.tbEmpleado.Find(id);
-                if (tbEmpleado == null)
-                {
-                    return HttpNotFound();
-                }
-                ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_Id);
-                ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
-                ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
-                ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
-                ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", db.tbMunicipio.Find(tbEmpleado.mun_Id).dep_codigo);
-                return View(tbEmpleado);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbEmpleado tbEmpleado = db.tbEmpleado.Find(id);
+            if (tbEmpleado == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_Id);
+            ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
+            ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+            ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
+            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
+            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre",db.tbMunicipio.Find(tbEmpleado.mun_Id).dep_codigo);
+            return View(tbEmpleado);
         }
 
         // POST: Empleado/Edit/5

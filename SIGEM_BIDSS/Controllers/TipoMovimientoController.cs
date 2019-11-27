@@ -18,38 +18,22 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoMovimiento
         public ActionResult Index()
         {
-            try
-            {
-                return View(db.tbTipoMovimiento.ToList());
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            return View(db.tbTipoMovimiento.ToList());
         }
 
         // GET: TipoMovimiento/Details/5
         public ActionResult Details(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
-                if (tbTipoMovimiento == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoMovimiento);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
+            if (tbTipoMovimiento == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoMovimiento);
         }
 
         // GET: TipoMovimiento/Create
@@ -99,24 +83,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoMovimiento/Edit/5
         public ActionResult Edit(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
-                if (tbTipoMovimiento == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoMovimiento);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
+            if (tbTipoMovimiento == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoMovimiento);
         }
 
         // POST: TipoMovimiento/Edit/5

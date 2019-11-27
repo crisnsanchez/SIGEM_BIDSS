@@ -17,38 +17,22 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Moneda
         public ActionResult Index()
         {
-            try
-            {
-                return View(db.tbMoneda.ToList());
-            }
-            catch (Exception Ex)
-            {
-                //throw;
-                return RedirectToAction("Error500", "Home");
-            }
+            return View(db.tbMoneda.ToList());
         }
 
         // GET: Moneda/Details/5
         public ActionResult Details(short? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbMoneda tbMoneda = db.tbMoneda.Find(id);
-                if (tbMoneda == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbMoneda);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbMoneda tbMoneda = db.tbMoneda.Find(id);
+            if (tbMoneda == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbMoneda);
         }
 
         // GET: Moneda/Create
@@ -98,24 +82,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Moneda/Edit/5
         public ActionResult Edit(short? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbMoneda tbMoneda = db.tbMoneda.Find(id);
-                if (tbMoneda == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbMoneda);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbMoneda tbMoneda = db.tbMoneda.Find(id);
+            if (tbMoneda == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbMoneda);
         }
 
         // POST: Moneda/Edit/5

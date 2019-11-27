@@ -32,24 +32,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSangre/Details/5
         public ActionResult Details(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoSangre tbTipoSangre = db.tbTipoSangre.Find(id);
-                if (tbTipoSangre == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoSangre);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoSangre tbTipoSangre = db.tbTipoSangre.Find(id);
+            if (tbTipoSangre == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoSangre);
         }
 
         // GET: TipoSangre/Create
@@ -98,24 +90,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSangre/Edit/5
         public ActionResult Edit(int? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                tbTipoSangre tbTipoSangre = db.tbTipoSangre.Find(id);
-                if (tbTipoSangre == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(tbTipoSangre);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception Ex)
+            tbTipoSangre tbTipoSangre = db.tbTipoSangre.Find(id);
+            if (tbTipoSangre == null)
             {
-                //throw;
-                return RedirectToAction("Error500", "Home");
+                return HttpNotFound();
             }
+            return View(tbTipoSangre);
         }
 
         // POST: TipoSangre/Edit/5
