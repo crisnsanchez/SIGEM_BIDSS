@@ -14,6 +14,13 @@ namespace SIGEM_BIDSS
             bundles.Add(new StyleBundle("~/Content/adminlte").Include(
                   "~/Content/template/dist/css/adminlte.min.css"));
 
+            bundles.Add(new StyleBundle("~/Content/sweetalert2").Include(
+                 "~/Content/template/plugins/sweetalert2/sweetalert2.min.css"));
+
+
+
+
+
             bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
                         "~/Content/template/plugins/jquery/jquery.min.js"));
 
@@ -29,6 +36,9 @@ namespace SIGEM_BIDSS
             bundles.Add(new ScriptBundle("~/Scripts/dataTables").Include(
                         "~/Content/template/plugins/datatables/jquery.dataTables.js," +
                         "~/Content/template/plugins/datatables/dataTables.bootstrap4.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/sweetalert2").Include(
+                        "~/Content/template/plugins/sweetalert2/sweetalert2.min.js"));
         }
     }
 }

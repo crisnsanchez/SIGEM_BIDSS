@@ -18,6 +18,7 @@ namespace SIGEM_BIDSS.Controllers
         }
         public ActionResult Catalogo()
         {
+            TempData["getswalfunction"] = TempData["swalfunction"];
             return View();
         }
         public ActionResult Empleados()

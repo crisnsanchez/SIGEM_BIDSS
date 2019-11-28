@@ -119,16 +119,15 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        //string emaildestino = tbSolicitud.Emp_Mail;
-                        //string usuario = tbSolicitud.Emp_Name;
-                        //SendMail(emaildestino, usuario, emaildestino);
-                        //SendMail(tbSolicitud.sol_GralCorreoJefeInmediato, usuario, emaildestino);
-
-
-
+                        string emaildestino = tbSolicitud.Emp_Mail;
+                        string usuario = tbSolicitud.Emp_Name;
+                        SendMail(emaildestino, usuario, emaildestino);
+                        SendMail(tbSolicitud.sol_GralCorreoJefeInmediato, usuario, emaildestino);
 
                         TempData["smserror"] = "Solicitud Realizada con Exito.";
                         ViewBag.smserror = TempData["smserror"];
+                        TempData["swalfunction"] = "true";
+
                         return RedirectToAction("Solicitud", "Menu", tbSolicitud.tipsol_Id);
                     }
                 }
@@ -141,55 +140,60 @@ namespace SIGEM_BIDSS.Controllers
             }
             return RedirectToAction("Solicitud", "Menu", tbSolicitud.tipsol_Id);
         }
-    //    [HttpGet]
-    //    public void SendMail(string emaildestino, string usuario, string _whomail)
-    //    {
-    //        string password = "";
-    //        string emailsalida = "sigembidss@gmail.com";
-    //        string passwordsalida = "QdZwAxesc12";
-    //        string asunto = "Solicitud";
-    //        System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-    //        msg.To.Add(emaildestino);
-    //        msg.From = new MailAddress(emailsalida, "SIGEM", System.Text.Encoding.UTF8);
-    //        msg.Subject = asunto;
-    //        msg.SubjectEncoding = System.Text.Encoding.UTF8;
-    //        string strMensaje = null;
-    //        if (_whomail != emaildestino)
-    //        {
-    //            strMensaje = string.Format("El Usuario: {0} con correo: {1}, hizo una solicitud", usuario, _whomail);
-              
 
 
-    //        }
-    //        else
-    //        {
-    //            strMensaje = string.Format("El Usuario: {0} hizo una solicitud", usuario);
-              
-    //        }
 
-    //        msg.Body = string.Format(strMensaje, usuario);
-    //        msg.BodyEncoding = System.Text.Encoding.UTF8;
-    //        msg.IsBodyHtml = true;
-    //        msg.Priority = System.Net.Mail.MailPriority.High;
 
-    //        SmtpClient client = new SmtpClient();
-    //        client.Credentials = new System.Net.NetworkCredential(emailsalida, passwordsalida);
-    //        client.Port = 25;
-    //        client.Host = "smtp.gmail.com";
-    //        client.EnableSsl = true; //Esto es para que se vaya a través de SSL que es obligatorio con Gmail
-    //        try
-    //        {
-    //            client.Send(msg);
-                       
-    //}
-    //        catch (System.Net.Mail.SmtpException ex)
-    //        {
-    //            Console.WriteLine(ex.Message);
 
-    //            Console.ReadLine();
-               
-    //        }
 
-    //    }
+        public void SendMail(string emaildestino, string usuario, string _whomail)
+        {
+            string password = "";
+            string emailsalida = "sigembidss@gmail.com";
+            string passwordsalida = "QdZwAxesc12";
+            string asunto = "Solicitud";
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(emaildestino);
+            msg.From = new MailAddress(emailsalida, "SIGEM", System.Text.Encoding.UTF8);
+            msg.Subject = asunto;
+            msg.SubjectEncoding = System.Text.Encoding.UTF8;
+            string strMensaje = null;
+            if (_whomail != emaildestino)
+            {
+                strMensaje = string.Format("El Usuario: {0} con correo: {1}, hizo una solicitud", usuario, _whomail);
+
+
+
+            }
+            else
+            {
+                strMensaje = string.Format("El Usuario: {0} hizo una solicitud", usuario);
+
+            }
+
+            msg.Body = string.Format(strMensaje, usuario);
+            msg.BodyEncoding = System.Text.Encoding.UTF8;
+            msg.IsBodyHtml = true;
+            msg.Priority = System.Net.Mail.MailPriority.High;
+
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential(emailsalida, passwordsalida);
+            client.Port = 25;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true; //Esto es para que se vaya a través de SSL que es obligatorio con Gmail
+            try
+            {
+                client.Send(msg);
+
+            }
+            catch (System.Net.Mail.SmtpException ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                Console.ReadLine();
+
+            }
+
+        }
     }
 }
