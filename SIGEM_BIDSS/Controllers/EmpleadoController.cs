@@ -202,7 +202,7 @@ namespace SIGEM_BIDSS.Controllers
                 catch (Exception Ex)
                 {
 
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador." + Ex.Message.ToString());
                     ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_Id);
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                     ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
@@ -303,6 +303,7 @@ namespace SIGEM_BIDSS.Controllers
                         ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                         ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                         ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
+                        ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
 
                         return View(tbEmpleado);
                     }
@@ -320,6 +321,7 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                     ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                     ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
+                    ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
 
                     return View(tbEmpleado);
                 }

@@ -40,7 +40,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="form-group col-md-6">
                                 <div class="card-body box-profile">
                                     <div class="text-center">
@@ -126,7 +126,7 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-11">
                             @Html.LabelFor(model => model.emp_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
 
                             @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control" } })
@@ -139,7 +139,7 @@
 
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-6">
                             <label class="control-label col-md-4">Departamento@*<span style="color:red"> *</span>*@</label>
                             @Html.DropDownList("dep_Codigo", null, "Seleccione Departamento", new { @class = "form-control" })
                             <p id="Departamento">@Html.ValidationMessageFor(muni => test.dep_codigo)</p>
