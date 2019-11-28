@@ -45,9 +45,10 @@ namespace SIGEM_BIDSS.Controllers
 
                     tbSolicitud.tipsol_Id = _tipsol_Id;
                     tbSolicitud.emp_Id = _emailExistDB;
-                    ViewBag.EmpNames = (from _tbemp in db.tbEmpleado where _tbemp.emp_Id == _emailExistDB select _tbemp.emp_Nombres + " " + _tbemp.emp_Apellidos).FirstOrDefault();
+                    var EmpData = (from _tbemp in db.tbEmpleado where _tbemp.emp_Id == _emailExistDB select new { nombreEmpleado = _tbemp.emp_Nombres + " " + _tbemp.emp_Apellidos, emailJefe = _tbemp.emp_CorreoElectronico }).FirstOrDefault();
+                    tbSolicitud.Emp_Name = EmpData.nombreEmpleado;
                     tbSolicitud.Emp_Mail = _emailAD;
-                    //ViewBag.EmpNames = EmpData.nombreEmpleado;
+                    ViewBag.EmpNames = EmpData.nombreEmpleado;
                     ViewBag.tipsol_Id = new SelectList(db.tbTipoSolicitud, "tipsol_Id", "tipsol_Descripcion");
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
                     ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
@@ -161,14 +162,10 @@ namespace SIGEM_BIDSS.Controllers
             if (_whomail != emaildestino)
             {
                 strMensaje = string.Format("El Usuario: {0} con correo: {1}, hizo una solicitud", usuario, _whomail);
-
-
-
             }
             else
             {
                 strMensaje = string.Format("El Usuario: {0} hizo una solicitud", usuario);
-
             }
 
             msg.Body = string.Format(strMensaje, usuario);
@@ -184,14 +181,11 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
                 client.Send(msg);
-
             }
             catch (System.Net.Mail.SmtpException ex)
             {
                 Console.WriteLine(ex.Message);
-
                 Console.ReadLine();
-
             }
 
         }
