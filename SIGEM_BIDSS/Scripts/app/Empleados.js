@@ -1,18 +1,26 @@
 ﻿
 
 /////DATE PICKER
-$("#emp_FechaNacimiento,#emp_FechaIngreso,#emp_FechaIngreso").datepicker({
-    dateFormat: 'mm/dd/yy',
-    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
-    minDate: '-100Y',
-    maxDate: '-18Y',
-    prevText: 'Ant',
-    nextText: 'Sig',
-    changeMonth: true,
-    changeYear: true,
-    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
-}).datepicker('setDate', new Date());
+//----------Datepicker
+$('#emp_FechaNacimiento').datepicker({
+    format: "dd/mm/yyyy",
+    startDate: "01/01/1990",
+    language: "es",
+    daysOfWeekDisabled: "0"
+});
+
+//$("#emp_FechaNacimiento,#emp_FechaIngreso,#emp_FechaIngreso").datepicker({
+//    dateFormat: 'mm/dd/yy',
+//    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+//    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+//    minDate: '-100Y',
+//    maxDate: '-18Y',
+//    prevText: 'Ant',
+//    nextText: 'Sig',
+//    changeMonth: true,
+//    changeYear: true,
+//    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+//}).datepicker('setDate', new Date());
 
 
 

@@ -8,7 +8,8 @@
 @{
     var test = new SIGEM_BIDSS.Models.tbMunicipio();
 }
-<link href="~/Content/template/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+@*<link href="~/Content/template/plugins/datepicker/datepicker3.css" rel="stylesheet" />*@
+<link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
 
 
 <div class="card card-primary card-outline">
@@ -33,7 +34,7 @@
         @Html.HiddenFor(model => model.emp_RazonInactivacion, new { Value = "----" })
         @Html.HiddenFor(model => model.emp_FechaIngreso, new { Value = "----" })
         @Html.HiddenFor(model => model.emp_PathImage, new { Value = "----" })
-        
+
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
             <div class="card-body">
@@ -164,10 +165,13 @@
     }
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Content/template/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/app/Empleados.js"></script>
+
+
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="~/Scripts/app/Empleados.js"></script>
+
     <script type="text/javascript">
         $('#emp_Telefono').inputmask('(999) 9999-9999')
 
