@@ -18,22 +18,38 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Estado
         public ActionResult Index()
         {
-            return View(db.tbEstado.ToList());
+            try
+            {
+                return View(db.tbEstado.ToList());
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // GET: Estado/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbEstado tbEstado = db.tbEstado.Find(id);
+                if (tbEstado == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbEstado);
             }
-            tbEstado tbEstado = db.tbEstado.Find(id);
-            if (tbEstado == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
+                //throw;
+                return RedirectToAction("Error500", "Home");
             }
-            return View(tbEstado);
         }
 
         // GET: Estado/Create
@@ -83,18 +99,26 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Estado/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbEstado tbEstado = db.tbEstado.Find(id);
-            if (tbEstado == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbEstado);
-        }
 
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbEstado tbEstado = db.tbEstado.Find(id);
+                if (tbEstado == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbEstado);
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
+        }
         // POST: Estado/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.

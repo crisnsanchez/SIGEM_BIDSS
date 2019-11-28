@@ -17,30 +17,55 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Cargos
         public ActionResult Index()
         {
-            var tbPuesto = db.tbPuesto.Include(t => t.tbArea);
-            return View(tbPuesto.ToList());
+            try
+            {
+                var tbPuesto = db.tbPuesto.Include(t => t.tbArea);
+                return View(tbPuesto.ToList());
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
+
 
         // GET: Cargos/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbPuesto tbPuesto = db.tbPuesto.Find(id);
+                if (tbPuesto == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbPuesto);
             }
-            tbPuesto tbPuesto = db.tbPuesto.Find(id);
-            if (tbPuesto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbPuesto);
-        }
 
-        // GET: Cargos/Create
-        public ActionResult Create()
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
+        }
+            // GET: Cargos/Create
+            public ActionResult Create()
         {
-            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
-            return View();
+            try
+            {
+                ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
+                return View();
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // POST: Cargos/Create
@@ -88,17 +113,24 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Cargos/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbPuesto tbPuesto = db.tbPuesto.Find(id);
+                if (tbPuesto == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
+                return View(tbPuesto);
             }
-            tbPuesto tbPuesto = db.tbPuesto.Find(id);
-            if (tbPuesto == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
+                return RedirectToAction("Error500", "Home");
             }
-            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
-            return View(tbPuesto);
         }
 
         // POST: Cargos/Edit/5

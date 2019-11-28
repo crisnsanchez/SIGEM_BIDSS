@@ -18,22 +18,37 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoMovimiento
         public ActionResult Index()
         {
-            return View(db.tbTipoMovimiento.ToList());
+            try
+            {
+                return View(db.tbTipoMovimiento.ToList());
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // GET: TipoMovimiento/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
+                if (tbTipoMovimiento == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoMovimiento);
             }
-            tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
-            if (tbTipoMovimiento == null)
+            catch(Exception Ex)
             {
-                return HttpNotFound();
+                return RedirectToAction("Error500", "Home");
             }
-            return View(tbTipoMovimiento);
         }
 
         // GET: TipoMovimiento/Create
@@ -83,18 +98,25 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoMovimiento/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
+                if (tbTipoMovimiento == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoMovimiento);
             }
-            tbTipoMovimiento tbTipoMovimiento = db.tbTipoMovimiento.Find(id);
-            if (tbTipoMovimiento == null)
+            catch (Exception Ex)
             {
-                return HttpNotFound();
-            }
-            return View(tbTipoMovimiento);
-        }
+                return RedirectToAction("Error500", "Home");
 
+            }
+        }
         // POST: TipoMovimiento/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.

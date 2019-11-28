@@ -17,26 +17,42 @@ namespace SIGEM_BIDSS.Controllers
         // GET: TipoSalario
         public ActionResult Index()
         {
-            return View(db.tbTipoSalario.ToList());
+            try
+            {
+                return View(db.tbTipoSalario.ToList());
+            }
+            catch (Exception Ex)
+            {
+                //throw;
+                return RedirectToAction("Error500", "Home");
+            }
         }
-
         // GET: TipoSalario/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
+                if (tbTipoSalario == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbTipoSalario);
             }
-            tbTipoSalario tbTipoSalario = db.tbTipoSalario.Find(id);
-            if (tbTipoSalario == null)
+
+            catch (Exception Ex)
             {
-                return HttpNotFound();
-            }
-            return View(tbTipoSalario);
+                return RedirectToAction("Error500", "Home");
+            
+          }
         }
 
         // GET: TipoSalario/Create
-        public ActionResult Create()
+            public ActionResult Create()
         {
             return View();
         }
@@ -83,7 +99,9 @@ namespace SIGEM_BIDSS.Controllers
             // GET: TipoSalario/Edit/5
             public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try { 
+
+              if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -93,6 +111,11 @@ namespace SIGEM_BIDSS.Controllers
                 return HttpNotFound();
             }
             return View(tbTipoSalario);
+            }
+            catch(Exception EX)
+            {
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // POST: TipoSalario/Edit/5
