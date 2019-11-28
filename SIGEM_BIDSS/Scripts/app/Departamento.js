@@ -261,8 +261,8 @@ function AgregarMunicipiosDT() {
     }
     else {
 
-        //$('#dep_Codigo').prop('disabled', true);
-        //$('#dep_Nombre').prop('disabled', true);
+        $('#dep_Codigo').prop('readonly', true);
+        $('#dep_Nombre').prop('readonly', true);
         $('#Valida').prop('disabled', false);
 
         var tbMunicipio = GetMunicipio();
@@ -271,7 +271,7 @@ function AgregarMunicipiosDT() {
         table.row.add([
             tbMunicipio.mun_Codigo,
             tbMunicipio.mun_Nombre.toUpperCase().trim(),
-            '<button id = "removeMunicipios" class= "btn btn-danger btn-xs eliminar" type = "button">Quitar</button>',
+            '<button id = "removeMunicipios" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>',
         ]).draw(false);
 
         _ValuesTrue = { _Bool : true, _tbMunicipio : tbMunicipio }
