@@ -18,7 +18,7 @@
 
     .validation-summary-errors {
         color: red;
-        font-size: small;
+        font-size: small;   
     }
 
     .required:after {
@@ -83,25 +83,25 @@
                         @Html.DropDownList("are_Id", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
                     </div>
-
-
-
-                    <div class="form-group">
-                        <span class="aviso">3-</span>@Html.LabelFor(model => model.sol_GralJefeInmediato, "Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.sol_GralJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
-                            @Html.ValidationMessageFor(model => model.sol_GralJefeInmediato, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <span class="aviso">4-</span>@Html.LabelFor(model => model.sol_GralCorreoJefeInmediato, "Correo Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.sol_GralCorreoJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
-                        @Html.ValidationMessageFor(model => model.sol_GralCorreoJefeInmediato, "", new { @class = "text-danger" })
-                    </div>
                 </div>
 
 
+                <div class="form-group">
+                    <span class="aviso">3-</span>@Html.LabelFor(model => model.sol_GralJefeInmediato, "Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.sol_GralJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                        @Html.ValidationMessageFor(model => model.sol_GralJefeInmediato, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+ 
+            <div class="form-group">
+                <span class="aviso">4-</span>@Html.LabelFor(model => model.sol_GralCorreoJefeInmediato, "Correo Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.sol_GralCorreoJefeInmediato, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
+                    @Html.ValidationMessageFor(model => model.sol_GralCorreoJefeInmediato, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
 
                 <span class="aviso">5-</span>@Html.LabelFor(model => model.sol_GralFechaSolicitud, "Fecha de la Solicitud", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-6">
@@ -109,47 +109,48 @@
                     @Html.ValidationMessageFor(model => model.sol_GralFechaSolicitud, "", new { @class = "text-danger" })
                 </div>
             </div>
+        </div>
 
 
-            <div id="containerCreate" class="form-group">
-                @{
+        <div id="containerCreate" class="form-group">
+            @{
 
 
-                    switch (Model.tipsol_Id)
-                    {
-                        case GeneralFunctions.AccionPersonal:
-                            @Html.Partial("_AccionPersonal", new tbSolicitud());
-                            break;
-                        case GeneralFunctions.SolicitudPermisoLaboral:
-                            @Html.Partial("_PermisoLaboral", new tbSolicitud());
-                            break;
-                        case GeneralFunctions.SolicitudAnticipoViaticos:
-                            @Html.Partial("_AnticipoViatico", new tbSolicitud());
-                            break;
-                        case GeneralFunctions.SolicitudAnticipoSalario:
-                            @Html.Partial("_AnticipoSalario", new tbSolicitud());
-                            break;
-                        case GeneralFunctions.LiquidacionAnticipoSalario:
-                            @Html.Partial("_LiquidacionAnticipoSalario", new tbSolicitud());
-                            break;
-                        case GeneralFunctions.RequisicionCompra:
-                            @Html.Partial("_RequisicionCompra", new tbSolicitud());
-                            break;
-                        case GeneralFunctions.RembolsoGastos:
-                            @Html.Partial("_RembolsoGastos", new tbSolicitud());
-                            break;
+                switch (Model.tipsol_Id)
+                {
+                    case GeneralFunctions.AccionPersonal:
+                        @Html.Partial("_AccionPersonal", new tbSolicitud());
+                        break;
+                    case GeneralFunctions.SolicitudPermisoLaboral:
+                        @Html.Partial("_PermisoLaboral", new tbSolicitud());
+                        break;
+                    case GeneralFunctions.SolicitudAnticipoViaticos:
+                        @Html.Partial("_AnticipoViatico", new tbSolicitud());
+                        break;
+                    case GeneralFunctions.SolicitudAnticipoSalario:
+                        @Html.Partial("_AnticipoSalario", new tbSolicitud());
+                        break;
+                    case GeneralFunctions.LiquidacionAnticipoSalario:
+                        @Html.Partial("_LiquidacionAnticipoSalario", new tbSolicitud());
+                        break;
+                    case GeneralFunctions.RequisicionCompra:
+                        @Html.Partial("_RequisicionCompra", new tbSolicitud());
+                        break;
+                    case GeneralFunctions.RembolsoGastos:
+                        @Html.Partial("_RembolsoGastos", new tbSolicitud());
+                        break;
 
-                        default:
-                            @Html.Label("Opcion3");
-                            break;
-                    }
+                    default:
+                        @Html.Label("Opcion3");
+                        break;
                 }
-            </div>
+            }
+        </div>
 
 
 
 
-
+        <div class="card-body">
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-10">
                     <input type="submit" value="Guardar" class="btn btn-primary" />
@@ -158,7 +159,7 @@
             </div>
         </div>
 
-
+    </div>
     }
 </div>
     <script>
