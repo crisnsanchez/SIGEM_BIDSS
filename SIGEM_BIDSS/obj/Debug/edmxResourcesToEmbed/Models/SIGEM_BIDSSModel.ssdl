@@ -137,7 +137,7 @@
     <Key>
       <PropertyRef Name="insf_IdInstitucionFinanciera" />
     </Key>
-    <Property Name="insf_IdInstitucionFinanciera" Type="int" Nullable="false" />
+    <Property Name="insf_IdInstitucionFinanciera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="insf_DescInstitucionFinanc" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="insf_Contacto" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="insf_Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -171,24 +171,6 @@
     <Property Name="mun_FechaCrea" Type="datetime" Nullable="false" />
     <Property Name="mun_UsuarioModifica" Type="int" />
     <Property Name="mun_FechaModifica" Type="datetime" />
-  </EntityType>
-  <EntityType Name="tbParametro">
-    <Key>
-      <PropertyRef Name="par_Id" />
-    </Key>
-    <Property Name="par_Id" Type="tinyint" Nullable="false" />
-    <Property Name="par_NombreEmpresa" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="par_TelefonoEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="par_CorreoEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="par_PhotoLog" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="parEmisor" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="par_Password" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="par_Mensaje" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="par_Asunto" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="par_Destinatario" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="par_Servidor" Type="nchar" MaxLength="150" Nullable="false" />
-    <Property Name="par_Puerto" Type="int" Nullable="false" />
-    <Property Name="par_PathLogo" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="tbPuesto">
     <Key>
@@ -780,6 +762,21 @@
     <Parameter Name="est_Descripcion" Type="nvarchar" Mode="In" />
     <Parameter Name="est_UsuarioModifica" Type="int" Mode="In" />
   </Function>
+  <Function Name="UDP_Gral_tbInstitucionesFinancieras_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="insf_DescInstitucionFinanc" Type="varchar" Mode="In" />
+    <Parameter Name="insf_Contacto" Type="varchar" Mode="In" />
+    <Parameter Name="insf_Telefono" Type="varchar" Mode="In" />
+    <Parameter Name="insf_Correo" Type="varchar" Mode="In" />
+    <Parameter Name="insf_UsuarioCrea" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbInstitucionesFinancieras_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
+    <Parameter Name="insf_DescInstitucionFinanc" Type="varchar" Mode="In" />
+    <Parameter Name="insf_Contacto" Type="varchar" Mode="In" />
+    <Parameter Name="insf_Telefono" Type="varchar" Mode="In" />
+    <Parameter Name="insf_Correo" Type="varchar" Mode="In" />
+    <Parameter Name="insf_UsuarioCrea" Type="int" Mode="In" />
+  </Function>
   <Function Name="UDP_Gral_tbMoneda_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="tmo_Abreviatura" Type="varchar" Mode="In" />
     <Parameter Name="tmo_Nombre" Type="nvarchar" Mode="In" />
@@ -806,6 +803,34 @@
     <Parameter Name="dep_Codigo" Type="char" Mode="In" />
     <Parameter Name="mun_Nombre" Type="varchar" Mode="In" />
     <Parameter Name="mun_UsuarioModifica" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbParametro_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="par_Id" Type="tinyint" Mode="In" />
+    <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Emisor" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Mensaje" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Asunto" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Destinatario" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Servidor" Type="nchar" Mode="In" />
+    <Parameter Name="par_Puerto" Type="int" Mode="In" />
+    <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UDP_Gral_tbParametro_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+    <Parameter Name="par_Id" Type="tinyint" Mode="In" />
+    <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Emisor" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Mensaje" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Asunto" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Destinatario" Type="nvarchar" Mode="In" />
+    <Parameter Name="par_Servidor" Type="nchar" Mode="In" />
+    <Parameter Name="par_Puerto" Type="int" Mode="In" />
+    <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbPuesto_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="are_Id" Type="int" Mode="In" />
@@ -949,7 +974,6 @@
     <EntitySet Name="tbInstitucionesFinancieras" EntityType="Self.tbInstitucionesFinancieras" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbMoneda" EntityType="Self.tbMoneda" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbMunicipio" EntityType="Self.tbMunicipio" Schema="Gral" store:Type="Tables" />
-    <EntitySet Name="tbParametro" EntityType="Self.tbParametro" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbPuesto" EntityType="Self.tbPuesto" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbSolicitud" EntityType="Self.tbSolicitud" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoMovimiento" EntityType="Self.tbTipoMovimiento" Schema="Gral" store:Type="Tables" />

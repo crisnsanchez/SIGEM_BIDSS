@@ -200,9 +200,6 @@
     <Compile Include="Models\tbInstitucionesFinancieras.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbParametro.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TipoPermiso.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\GeneralFunctions.cs" />

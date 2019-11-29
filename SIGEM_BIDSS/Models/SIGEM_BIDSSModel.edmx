@@ -142,7 +142,7 @@
           <Key>
             <PropertyRef Name="insf_IdInstitucionFinanciera" />
           </Key>
-          <Property Name="insf_IdInstitucionFinanciera" Type="int" Nullable="false" />
+          <Property Name="insf_IdInstitucionFinanciera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="insf_DescInstitucionFinanc" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="insf_Contacto" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="insf_Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -176,24 +176,6 @@
           <Property Name="mun_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="mun_UsuarioModifica" Type="int" />
           <Property Name="mun_FechaModifica" Type="datetime" />
-        </EntityType>
-        <EntityType Name="tbParametro">
-          <Key>
-            <PropertyRef Name="par_Id" />
-          </Key>
-          <Property Name="par_Id" Type="tinyint" Nullable="false" />
-          <Property Name="par_NombreEmpresa" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="par_TelefonoEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="par_CorreoEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="par_PhotoLog" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="parEmisor" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="par_Password" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="par_Mensaje" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="par_Asunto" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="par_Destinatario" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="par_Servidor" Type="nchar" MaxLength="150" Nullable="false" />
-          <Property Name="par_Puerto" Type="int" Nullable="false" />
-          <Property Name="par_PathLogo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="tbPuesto">
           <Key>
@@ -785,6 +767,21 @@
           <Parameter Name="est_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="est_UsuarioModifica" Type="int" Mode="In" />
         </Function>
+        <Function Name="UDP_Gral_tbInstitucionesFinancieras_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="insf_DescInstitucionFinanc" Type="varchar" Mode="In" />
+          <Parameter Name="insf_Contacto" Type="varchar" Mode="In" />
+          <Parameter Name="insf_Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="insf_Correo" Type="varchar" Mode="In" />
+          <Parameter Name="insf_UsuarioCrea" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_Gral_tbInstitucionesFinancieras_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
+          <Parameter Name="insf_DescInstitucionFinanc" Type="varchar" Mode="In" />
+          <Parameter Name="insf_Contacto" Type="varchar" Mode="In" />
+          <Parameter Name="insf_Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="insf_Correo" Type="varchar" Mode="In" />
+          <Parameter Name="insf_UsuarioCrea" Type="int" Mode="In" />
+        </Function>
         <Function Name="UDP_Gral_tbMoneda_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="tmo_Abreviatura" Type="varchar" Mode="In" />
           <Parameter Name="tmo_Nombre" Type="nvarchar" Mode="In" />
@@ -811,6 +808,34 @@
           <Parameter Name="dep_Codigo" Type="char" Mode="In" />
           <Parameter Name="mun_Nombre" Type="varchar" Mode="In" />
           <Parameter Name="mun_UsuarioModifica" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_Gral_tbParametro_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="par_Id" Type="tinyint" Mode="In" />
+          <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Emisor" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Mensaje" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Asunto" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Destinatario" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Servidor" Type="nchar" Mode="In" />
+          <Parameter Name="par_Puerto" Type="int" Mode="In" />
+          <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UDP_Gral_tbParametro_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="par_Id" Type="tinyint" Mode="In" />
+          <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Emisor" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Mensaje" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Asunto" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Destinatario" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_Servidor" Type="nchar" Mode="In" />
+          <Parameter Name="par_Puerto" Type="int" Mode="In" />
+          <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UDP_Gral_tbPuesto_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="are_Id" Type="int" Mode="In" />
@@ -954,7 +979,6 @@
           <EntitySet Name="tbInstitucionesFinancieras" EntityType="Self.tbInstitucionesFinancieras" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbMoneda" EntityType="Self.tbMoneda" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbMunicipio" EntityType="Self.tbMunicipio" Schema="Gral" store:Type="Tables" />
-          <EntitySet Name="tbParametro" EntityType="Self.tbParametro" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbPuesto" EntityType="Self.tbPuesto" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbSolicitud" EntityType="Self.tbSolicitud" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbTipoMovimiento" EntityType="Self.tbTipoMovimiento" Schema="Gral" store:Type="Tables" />
@@ -1701,7 +1725,6 @@
           <EntitySet Name="tbDeduccionInstitucionFinanciera" EntityType="SIGEM_BIDSSModel.tbDeduccionInstitucionFinanciera" />
           <EntitySet Name="tbHistorialdeSolicitud" EntityType="SIGEM_BIDSSModel.tbHistorialdeSolicitud" />
           <EntitySet Name="tbInstitucionesFinancieras" EntityType="SIGEM_BIDSSModel.tbInstitucionesFinancieras" />
-          <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
           <AssociationSet Name="FK_Gral_tbRegistrosdeSolicitud_tbArea_are_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbArea_are_Id">
             <End Role="tbArea" EntitySet="tbArea" />
             <End Role="tbHistorialdeSolicitud" EntitySet="tbHistorialdeSolicitud" />
@@ -1746,6 +1769,49 @@
             <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
             <End Role="tbHistorialdeSolicitud" EntitySet="tbHistorialdeSolicitud" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Gral_tbInstitucionesFinancieras_Insert" ReturnType="Collection(String)">
+            <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
+            <Parameter Name="insf_Contacto" Mode="In" Type="String" />
+            <Parameter Name="insf_Telefono" Mode="In" Type="String" />
+            <Parameter Name="insf_Correo" Mode="In" Type="String" />
+            <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbInstitucionesFinancieras_Update" ReturnType="Collection(String)">
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
+            <Parameter Name="insf_Contacto" Mode="In" Type="String" />
+            <Parameter Name="insf_Telefono" Mode="In" Type="String" />
+            <Parameter Name="insf_Correo" Mode="In" Type="String" />
+            <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbParametro_Insert" ReturnType="Collection(String)">
+            <Parameter Name="par_Id" Mode="In" Type="Byte" />
+            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_Emisor" Mode="In" Type="String" />
+            <Parameter Name="par_Password" Mode="In" Type="String" />
+            <Parameter Name="par_Mensaje" Mode="In" Type="String" />
+            <Parameter Name="par_Asunto" Mode="In" Type="String" />
+            <Parameter Name="par_Destinatario" Mode="In" Type="String" />
+            <Parameter Name="par_Servidor" Mode="In" Type="String" />
+            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
+            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbParametro_Update" ReturnType="Collection(String)">
+            <Parameter Name="par_Id" Mode="In" Type="Byte" />
+            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_Emisor" Mode="In" Type="String" />
+            <Parameter Name="par_Password" Mode="In" Type="String" />
+            <Parameter Name="par_Mensaje" Mode="In" Type="String" />
+            <Parameter Name="par_Asunto" Mode="In" Type="String" />
+            <Parameter Name="par_Destinatario" Mode="In" Type="String" />
+            <Parameter Name="par_Servidor" Mode="In" Type="String" />
+            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
+            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2118,24 +2184,6 @@
           <Property Name="insf_FechaModifica" Type="DateTime" Precision="3" />
           <Property Name="insf_Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" FromRole="tbInstitucionesFinancieras" ToRole="tbDeduccionInstitucionFinanciera" />
-        </EntityType>
-        <EntityType Name="tbParametro">
-          <Key>
-            <PropertyRef Name="par_Id" />
-          </Key>
-          <Property Name="par_Id" Type="Byte" Nullable="false" />
-          <Property Name="par_NombreEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="par_TelefonoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_CorreoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_PhotoLog" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="parEmisor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="par_Mensaje" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="par_Asunto" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="par_Destinatario" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="par_Servidor" Type="String" Nullable="false" MaxLength="150" FixedLength="true" Unicode="true" />
-          <Property Name="par_Puerto" Type="Int32" Nullable="false" />
-          <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Gral_tbRegistrosdeSolicitud_tbArea_are_Id">
           <End Type="SIGEM_BIDSSModel.tbArea" Role="tbArea" Multiplicity="1" />
@@ -2815,25 +2863,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbParametro">
-            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
-              <MappingFragment StoreEntitySet="tbParametro">
-                <ScalarProperty Name="par_PathLogo" ColumnName="par_PathLogo" />
-                <ScalarProperty Name="par_Puerto" ColumnName="par_Puerto" />
-                <ScalarProperty Name="par_Servidor" ColumnName="par_Servidor" />
-                <ScalarProperty Name="par_Destinatario" ColumnName="par_Destinatario" />
-                <ScalarProperty Name="par_Asunto" ColumnName="par_Asunto" />
-                <ScalarProperty Name="par_Mensaje" ColumnName="par_Mensaje" />
-                <ScalarProperty Name="par_Password" ColumnName="par_Password" />
-                <ScalarProperty Name="parEmisor" ColumnName="parEmisor" />
-                <ScalarProperty Name="par_PhotoLog" ColumnName="par_PhotoLog" />
-                <ScalarProperty Name="par_CorreoEmpresa" ColumnName="par_CorreoEmpresa" />
-                <ScalarProperty Name="par_TelefonoEmpresa" ColumnName="par_TelefonoEmpresa" />
-                <ScalarProperty Name="par_NombreEmpresa" ColumnName="par_NombreEmpresa" />
-                <ScalarProperty Name="par_Id" ColumnName="par_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbInstitucionesFinancieras_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInstitucionesFinancieras_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbInstitucionesFinancieras_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInstitucionesFinancieras_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbParametro_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbParametro_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbParametro_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbParametro_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

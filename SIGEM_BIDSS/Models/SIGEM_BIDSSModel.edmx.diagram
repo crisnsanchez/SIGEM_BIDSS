@@ -37,7 +37,6 @@
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbDeduccionInstitucionFinanciera" Width="1.5" PointX="7.5" PointY="6.5" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbHistorialdeSolicitud" Width="1.5" PointX="15" PointY="7.75" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbInstitucionesFinancieras" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="7.375" PointY="11.125" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbArea_are_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" />

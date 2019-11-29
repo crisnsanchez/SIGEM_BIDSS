@@ -541,24 +541,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbParametro">
-      <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
-        <MappingFragment StoreEntitySet="tbParametro">
-          <ScalarProperty Name="par_PathLogo" ColumnName="par_PathLogo" />
-          <ScalarProperty Name="par_Puerto" ColumnName="par_Puerto" />
-          <ScalarProperty Name="par_Servidor" ColumnName="par_Servidor" />
-          <ScalarProperty Name="par_Destinatario" ColumnName="par_Destinatario" />
-          <ScalarProperty Name="par_Asunto" ColumnName="par_Asunto" />
-          <ScalarProperty Name="par_Mensaje" ColumnName="par_Mensaje" />
-          <ScalarProperty Name="par_Password" ColumnName="par_Password" />
-          <ScalarProperty Name="parEmisor" ColumnName="parEmisor" />
-          <ScalarProperty Name="par_PhotoLog" ColumnName="par_PhotoLog" />
-          <ScalarProperty Name="par_CorreoEmpresa" ColumnName="par_CorreoEmpresa" />
-          <ScalarProperty Name="par_TelefonoEmpresa" ColumnName="par_TelefonoEmpresa" />
-          <ScalarProperty Name="par_NombreEmpresa" ColumnName="par_NombreEmpresa" />
-          <ScalarProperty Name="par_Id" ColumnName="par_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbInstitucionesFinancieras_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInstitucionesFinancieras_Insert" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbInstitucionesFinancieras_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInstitucionesFinancieras_Update" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbParametro_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbParametro_Insert" />
+    <FunctionImportMapping FunctionImportName="UDP_Gral_tbParametro_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbParametro_Update" />
   </EntityContainerMapping>
 </Mapping>
