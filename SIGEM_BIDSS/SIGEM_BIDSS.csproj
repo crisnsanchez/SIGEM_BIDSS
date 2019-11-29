@@ -172,6 +172,7 @@
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
+    <Compile Include="Controllers\HistorialdeSolicitudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -3165,6 +3166,11 @@
     <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
+    <Content Include="Views\HistorialdeSolicitud\Create.cshtml" />
+    <Content Include="Views\HistorialdeSolicitud\Delete.cshtml" />
+    <Content Include="Views\HistorialdeSolicitud\Details.cshtml" />
+    <Content Include="Views\HistorialdeSolicitud\Edit.cshtml" />
+    <Content Include="Views\HistorialdeSolicitud\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
