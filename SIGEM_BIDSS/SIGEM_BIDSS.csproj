@@ -190,6 +190,18 @@
     <Compile Include="Models\Departamentos.cs" />
     <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\Solicitud.cs" />
+    <Compile Include="Models\tbDeduccionInstitucionFinanciera.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbHistorialdeSolicitud.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbInstitucionesFinancieras.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbParametro.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoPermiso.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\GeneralFunctions.cs" />

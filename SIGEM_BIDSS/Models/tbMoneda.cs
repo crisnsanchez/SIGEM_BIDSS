@@ -18,6 +18,7 @@ namespace SIGEM_BIDSS.Models
         public tbMoneda()
         {
             this.tbSolicitud = new HashSet<tbSolicitud>();
+            this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
         }
     
         public short tmo_Id { get; set; }
@@ -30,5 +31,7 @@ namespace SIGEM_BIDSS.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
     }
 }

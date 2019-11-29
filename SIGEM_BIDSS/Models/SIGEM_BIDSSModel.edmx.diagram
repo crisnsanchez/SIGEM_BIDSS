@@ -34,6 +34,21 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbDeduccionInstitucionFinanciera" Width="1.5" PointX="7.5" PointY="6.5" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbHistorialdeSolicitud" Width="1.5" PointX="15" PointY="7.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbInstitucionesFinancieras" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="7.375" PointY="11.125" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbArea_are_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbEmpleado_emp_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbMoneda_tmo_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbPuesto_pto_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoMovimiento_tipmo_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoPermiso_tperm_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSalario_tpsal_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -41,6 +41,10 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
         public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
+        public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
+        public virtual DbSet<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
+        public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
+        public virtual DbSet<tbParametro> tbParametro { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {

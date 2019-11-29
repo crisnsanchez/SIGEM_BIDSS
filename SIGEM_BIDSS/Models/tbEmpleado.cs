@@ -18,6 +18,8 @@ namespace SIGEM_BIDSS.Models
         public tbEmpleado()
         {
             this.tbSolicitud = new HashSet<tbSolicitud>();
+            this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
+            this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
         }
     
         public short emp_Id { get; set; }
@@ -47,5 +49,9 @@ namespace SIGEM_BIDSS.Models
         public virtual tbTipoSangre tbTipoSangre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
     }
 }
