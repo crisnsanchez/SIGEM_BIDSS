@@ -173,6 +173,7 @@
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
@@ -3155,6 +3156,11 @@
     <Content Include="Views\Solicitud\_AnticipoSalario.cshtml" />
     <Content Include="Views\Solicitud\_ChecklistCapacitaciones.cshtml" />
     <Content Include="Views\Solicitud\_LiquidacionAnticipoSalario.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
+    <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
