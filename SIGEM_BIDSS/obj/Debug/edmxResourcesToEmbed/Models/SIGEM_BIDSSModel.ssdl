@@ -768,6 +768,7 @@
     <Parameter Name="insf_Telefono" Type="varchar" Mode="In" />
     <Parameter Name="insf_Correo" Type="varchar" Mode="In" />
     <Parameter Name="insf_UsuarioCrea" Type="int" Mode="In" />
+    <Parameter Name="insf_Activo" Type="bit" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbInstitucionesFinancieras_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
@@ -776,6 +777,7 @@
     <Parameter Name="insf_Telefono" Type="varchar" Mode="In" />
     <Parameter Name="insf_Correo" Type="varchar" Mode="In" />
     <Parameter Name="insf_UsuarioCrea" Type="int" Mode="In" />
+    <Parameter Name="insf_Activo" Type="bit" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbMoneda_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="tmo_Abreviatura" Type="varchar" Mode="In" />

@@ -49,11 +49,35 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             if (ModelState.IsValid)
-            {
-                db.tbInstitucionesFinancieras.Add(tbInstitucionesFinancieras);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbInstitucionesFinancieras_Insert(tbInstitucionesFinancieras.insf_DescInstitucionFinanc,
+                                                                         tbInstitucionesFinancieras.insf_Contacto,
+                                                                         tbInstitucionesFinancieras.insf_Telefono,
+                                                                         tbInstitucionesFinancieras.insf_Correo,1,
+                                                                         tbInstitucionesFinancieras.insf_Activo);
+                    foreach (UDP_Gral_tbInstitucionesFinancieras_Insert_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
+
 
             return View(tbInstitucionesFinancieras);
         }
@@ -81,11 +105,36 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(tbInstitucionesFinancieras).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbInstitucionesFinancieras_Update(tbInstitucionesFinancieras.insf_IdInstitucionFinanciera,tbInstitucionesFinancieras.insf_DescInstitucionFinanc,
+                                                                         tbInstitucionesFinancieras.insf_Contacto,
+                                                                         tbInstitucionesFinancieras.insf_Telefono,
+                                                                         tbInstitucionesFinancieras.insf_Correo, 1,
+                                                                         tbInstitucionesFinancieras.insf_Activo);
+                    foreach (UDP_Gral_tbInstitucionesFinancieras_Update_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
+
+
             return View(tbInstitucionesFinancieras);
         }
 

@@ -1098,60 +1098,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tSolicitudInsertar_Result>("UDP_Gral_tSolicitudInsertar", emp_IdParameter, tipsol_IdParameter, pto_IdParameter, tpsal_idParameter, tmo_IdParameter, are_IdParameter, tipmo_idParameter, tpv_IdParameter, tperm_IdParameter, sol_GralDescripcionParameter, sol_GralJefeInmediatoParameter, sol_GralCorreoJefeInmediatoParameter, sol_GralComentarioParameter, sol_GralJustificacionParameter, sol_GralFechaSolicitudParameter, sol_AnviFechaViajeParameter, sol_Anvi_ClienteParameter, sol_Anvi_LugarDestinoParameter, sol_Acper_AnteriorParameter, sol_Anvi_PropositoVisitaParameter, sol_Anvi_DiasVisitaParameter, sol_AnviHospedajeParameter, sol_AnviTrasladoHaciaParameter, sol_AnsolMontoParameter, sol_PerFechaRegresoParameter, sol_PerMedioDiaParameter, sol_PerFechaInicioParameter, sol_PerFechaMedioDiaParameter, sol_PerCantidadDiasParameter, sol_ReemMontoParameter, sol_ReemFechaMontoParameter, sol_ReemProveedorParameter, sol_ReemCargoAParameter, sol_ReemFechaGastosParameter, sol_ReemNoFacturaParameter, sol_ReemMontoTotalParameter, sol_AprRtnParameter, sol_AprNombreEmpresaParameter, sol_AprCiudadParameter, sol_AprDireccionParameter, sol_ApreTelefonoParameter, sol_ApreContactoAdmParameter, sol_ApreCorreoAdmParameter, sol_ApreNombreTecnParameter, sol_ApreTelefonoTecnParameter, sol_ApreCorreoTecnParameter, sol_ApreCargoTecnParameter, sol_ApreLinkParameter, sol_Acper_NuevoParameter, sol_RequeCantidadParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter, sol_UsuarioModificaParameter, sol_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbInstitucionesFinancieras_Insert(string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea)
-        {
-            var insf_DescInstitucionFinancParameter = insf_DescInstitucionFinanc != null ?
-                new ObjectParameter("insf_DescInstitucionFinanc", insf_DescInstitucionFinanc) :
-                new ObjectParameter("insf_DescInstitucionFinanc", typeof(string));
-    
-            var insf_ContactoParameter = insf_Contacto != null ?
-                new ObjectParameter("insf_Contacto", insf_Contacto) :
-                new ObjectParameter("insf_Contacto", typeof(string));
-    
-            var insf_TelefonoParameter = insf_Telefono != null ?
-                new ObjectParameter("insf_Telefono", insf_Telefono) :
-                new ObjectParameter("insf_Telefono", typeof(string));
-    
-            var insf_CorreoParameter = insf_Correo != null ?
-                new ObjectParameter("insf_Correo", insf_Correo) :
-                new ObjectParameter("insf_Correo", typeof(string));
-    
-            var insf_UsuarioCreaParameter = insf_UsuarioCrea.HasValue ?
-                new ObjectParameter("insf_UsuarioCrea", insf_UsuarioCrea) :
-                new ObjectParameter("insf_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbInstitucionesFinancieras_Insert", insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioCreaParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Gral_tbInstitucionesFinancieras_Update(Nullable<int> insf_IdInstitucionFinanciera, string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea)
-        {
-            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
-                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
-                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
-    
-            var insf_DescInstitucionFinancParameter = insf_DescInstitucionFinanc != null ?
-                new ObjectParameter("insf_DescInstitucionFinanc", insf_DescInstitucionFinanc) :
-                new ObjectParameter("insf_DescInstitucionFinanc", typeof(string));
-    
-            var insf_ContactoParameter = insf_Contacto != null ?
-                new ObjectParameter("insf_Contacto", insf_Contacto) :
-                new ObjectParameter("insf_Contacto", typeof(string));
-    
-            var insf_TelefonoParameter = insf_Telefono != null ?
-                new ObjectParameter("insf_Telefono", insf_Telefono) :
-                new ObjectParameter("insf_Telefono", typeof(string));
-    
-            var insf_CorreoParameter = insf_Correo != null ?
-                new ObjectParameter("insf_Correo", insf_Correo) :
-                new ObjectParameter("insf_Correo", typeof(string));
-    
-            var insf_UsuarioCreaParameter = insf_UsuarioCrea.HasValue ?
-                new ObjectParameter("insf_UsuarioCrea", insf_UsuarioCrea) :
-                new ObjectParameter("insf_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbInstitucionesFinancieras_Update", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioCreaParameter);
-        }
-    
         public virtual ObjectResult<string> UDP_Gral_tbParametro_Insert(Nullable<byte> par_Id, string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_Emisor, string par_Password, string par_Mensaje, string par_Asunto, string par_Destinatario, string par_Servidor, Nullable<int> par_Puerto, string par_PathLogo)
         {
             var par_IdParameter = par_Id.HasValue ?
@@ -1256,6 +1202,68 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("par_PathLogo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbParametro_Update", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_EmisorParameter, par_PasswordParameter, par_MensajeParameter, par_AsuntoParameter, par_DestinatarioParameter, par_ServidorParameter, par_PuertoParameter, par_PathLogoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbInstitucionesFinancieras_Insert_Result> UDP_Gral_tbInstitucionesFinancieras_Insert(string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea, Nullable<bool> insf_Activo)
+        {
+            var insf_DescInstitucionFinancParameter = insf_DescInstitucionFinanc != null ?
+                new ObjectParameter("insf_DescInstitucionFinanc", insf_DescInstitucionFinanc) :
+                new ObjectParameter("insf_DescInstitucionFinanc", typeof(string));
+    
+            var insf_ContactoParameter = insf_Contacto != null ?
+                new ObjectParameter("insf_Contacto", insf_Contacto) :
+                new ObjectParameter("insf_Contacto", typeof(string));
+    
+            var insf_TelefonoParameter = insf_Telefono != null ?
+                new ObjectParameter("insf_Telefono", insf_Telefono) :
+                new ObjectParameter("insf_Telefono", typeof(string));
+    
+            var insf_CorreoParameter = insf_Correo != null ?
+                new ObjectParameter("insf_Correo", insf_Correo) :
+                new ObjectParameter("insf_Correo", typeof(string));
+    
+            var insf_UsuarioCreaParameter = insf_UsuarioCrea.HasValue ?
+                new ObjectParameter("insf_UsuarioCrea", insf_UsuarioCrea) :
+                new ObjectParameter("insf_UsuarioCrea", typeof(int));
+    
+            var insf_ActivoParameter = insf_Activo.HasValue ?
+                new ObjectParameter("insf_Activo", insf_Activo) :
+                new ObjectParameter("insf_Activo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbInstitucionesFinancieras_Insert_Result>("UDP_Gral_tbInstitucionesFinancieras_Insert", insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioCreaParameter, insf_ActivoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbInstitucionesFinancieras_Update_Result> UDP_Gral_tbInstitucionesFinancieras_Update(Nullable<int> insf_IdInstitucionFinanciera, string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea, Nullable<bool> insf_Activo)
+        {
+            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
+                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
+                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
+    
+            var insf_DescInstitucionFinancParameter = insf_DescInstitucionFinanc != null ?
+                new ObjectParameter("insf_DescInstitucionFinanc", insf_DescInstitucionFinanc) :
+                new ObjectParameter("insf_DescInstitucionFinanc", typeof(string));
+    
+            var insf_ContactoParameter = insf_Contacto != null ?
+                new ObjectParameter("insf_Contacto", insf_Contacto) :
+                new ObjectParameter("insf_Contacto", typeof(string));
+    
+            var insf_TelefonoParameter = insf_Telefono != null ?
+                new ObjectParameter("insf_Telefono", insf_Telefono) :
+                new ObjectParameter("insf_Telefono", typeof(string));
+    
+            var insf_CorreoParameter = insf_Correo != null ?
+                new ObjectParameter("insf_Correo", insf_Correo) :
+                new ObjectParameter("insf_Correo", typeof(string));
+    
+            var insf_UsuarioCreaParameter = insf_UsuarioCrea.HasValue ?
+                new ObjectParameter("insf_UsuarioCrea", insf_UsuarioCrea) :
+                new ObjectParameter("insf_UsuarioCrea", typeof(int));
+    
+            var insf_ActivoParameter = insf_Activo.HasValue ?
+                new ObjectParameter("insf_Activo", insf_Activo) :
+                new ObjectParameter("insf_Activo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbInstitucionesFinancieras_Update_Result>("UDP_Gral_tbInstitucionesFinancieras_Update", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioCreaParameter, insf_ActivoParameter);
         }
     }
 }

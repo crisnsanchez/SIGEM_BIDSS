@@ -673,21 +673,6 @@
       <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
       <End Role="tbHistorialdeSolicitud" EntitySet="tbHistorialdeSolicitud" />
     </AssociationSet>
-    <FunctionImport Name="UDP_Gral_tbInstitucionesFinancieras_Insert" ReturnType="Collection(String)">
-      <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
-      <Parameter Name="insf_Contacto" Mode="In" Type="String" />
-      <Parameter Name="insf_Telefono" Mode="In" Type="String" />
-      <Parameter Name="insf_Correo" Mode="In" Type="String" />
-      <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="UDP_Gral_tbInstitucionesFinancieras_Update" ReturnType="Collection(String)">
-      <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
-      <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
-      <Parameter Name="insf_Contacto" Mode="In" Type="String" />
-      <Parameter Name="insf_Telefono" Mode="In" Type="String" />
-      <Parameter Name="insf_Correo" Mode="In" Type="String" />
-      <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="UDP_Gral_tbParametro_Insert" ReturnType="Collection(String)">
       <Parameter Name="par_Id" Mode="In" Type="Byte" />
       <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
@@ -715,6 +700,23 @@
       <Parameter Name="par_Servidor" Mode="In" Type="String" />
       <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
       <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbInstitucionesFinancieras_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbInstitucionesFinancieras_Insert_Result)">
+      <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
+      <Parameter Name="insf_Contacto" Mode="In" Type="String" />
+      <Parameter Name="insf_Telefono" Mode="In" Type="String" />
+      <Parameter Name="insf_Correo" Mode="In" Type="String" />
+      <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
+      <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbInstitucionesFinancieras_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbInstitucionesFinancieras_Update_Result)">
+      <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+      <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
+      <Parameter Name="insf_Contacto" Mode="In" Type="String" />
+      <Parameter Name="insf_Telefono" Mode="In" Type="String" />
+      <Parameter Name="insf_Correo" Mode="In" Type="String" />
+      <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
+      <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="SDP_tbMunicipio_Select_Result">
@@ -1221,4 +1223,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="UDP_Gral_tbInstitucionesFinancieras_Insert_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbInstitucionesFinancieras_Update_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
 </Schema>

@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+
+namespace SIGEM_BIDSS.Models
+{
+    [MetadataType(typeof(InstFinacierasMetaData))]
+    public partial class tbInstitucionesFinancieras
+    {
+
+    }
+
+    public class InstFinacierasMetaData
+    {
+        [Display(Name = "ID")]
+        public int insf_IdInstitucionFinanciera { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Institucion Finaciera")]
+        public string insf_DescInstitucionFinanc { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Nombre Contacto")]
+        public string insf_Contacto { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Telefono")]
+        public string insf_Telefono { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Correo Electronico")]
+        public string insf_Correo { get; set; }
+        [Display(Name = "Usuario Crea")]
+        public int insf_UsuarioCrea { get; set; }
+        [Display(Name = "Fecha Crea")]
+        public System.DateTime insf_FechaCrea { get; set; }
+        [Display(Name = "Usuario Modifica")]
+        public Nullable<int> insf_UsuarioModifica { get; set; }
+        [Display(Name = "Fecha de Modifica")]
+        public Nullable<System.DateTime> insf_FechaModifica { get; set; }
+        [Display(Name = "Activo")]
+        public bool insf_Activo { get; set; }
+    }
+}
