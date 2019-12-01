@@ -54,34 +54,34 @@
                     <div class="form-row">
                         <div class="col-md-3 mb-4">
                             @Html.LabelFor(model => model.par_NombreEmpresa, htmlAttributes: new { @class = "control-label col-md-10" })
-                            @Html.EditorFor(model => model.par_NombreEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.par_NombreEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @onkeypress = "return soloLetras(event)" } })
                             @Html.ValidationMessageFor(model => model.par_NombreEmpresa, null, new { style = "color:red", id = "errornombreempresa" })
                         </div>
                         <div class="col-md-3 mb-4">
                             @Html.LabelFor(model => model.par_TelefonoEmpresa, htmlAttributes: new { @class = "control-label col-md-10" })
-                            @Html.EditorFor(model => model.par_TelefonoEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.par_TelefonoEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @onkeypress = "return soloLetras(event)" } })
                             @Html.ValidationMessageFor(model => model.par_TelefonoEmpresa, null, new { style = "color:red", id = "errortelefonoempresa" })
                         </div>
                         <div class="col-md-3 mb-4">
                             @Html.LabelFor(model => model.par_CorreoEmpresa, htmlAttributes: new { @class = "control-label col-md-10" })
-                            @Html.EditorFor(model => model.par_CorreoEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.par_CorreoEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.par_CorreoEmpresa, null, new { style = "color:red", id = "errorcorreoempresa" })
                         </div>
                         <div class="col-md-3 mb-4">
                             @Html.LabelFor(model => model.par_Emisor, htmlAttributes: new { @class = "control-label col-md-8" })
-                            @Html.EditorFor(model => model.par_Emisor, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.par_Emisor, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.par_Emisor, null, new { style = "color:red", id = "erroremisor" })
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Password, htmlAttributes: new { @class = "control-label col-md-8" })
-                            @Html.EditorFor(model => model.par_Password, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)", @type = "password" } })
+                            @Html.EditorFor(model => model.par_Password, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @type = "password", @onkeypress = "return Passworddd(event)" } })
                             @Html.ValidationMessageFor(model => model.par_Password, null, new { style = "color:red", id = "errorpassword" })
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Mensaje, htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.EditorFor(model => model.par_Mensaje, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", onkeypress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.par_Mensaje, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @onkeypress = "return soloLetras(event)" } })
                             @Html.ValidationMessageFor(model => model.par_Mensaje, null, new { style = "color:red", id = "errorMensaje" })
                         </div>
 
@@ -93,13 +93,13 @@
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Destinatario, htmlAttributes: new { @class = "control-label col-md-6" })
 
-                            @Html.EditorFor(model => model.par_Destinatario, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.par_Destinatario, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
 
                             @Html.ValidationMessageFor(model => model.par_Destinatario, null, new { style = "color:red", id = "errorDestinatario" })
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Puerto, htmlAttributes: new { @class = "control-label col-md-8" })
-                            @Html.EditorFor(model => model.par_Puerto, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.par_Puerto, new { htmlAttributes = new { @class = "form-control", @minlength = "0", @maxlength = "2", @type = "text",@autocomplete = "off", @onkeypress = "return soloNumeros(event)" } })
                             @Html.ValidationMessageFor(model => model.par_Puerto, null, new { style = "color:red", id = "errorPuerto" })
                         </div>
                     </div>
@@ -109,7 +109,7 @@
 
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Servidor, htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.EditorFor(model => model.par_Servidor, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.par_Servidor, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off"} })
                             @Html.ValidationMessageFor(model => model.par_Servidor, null, new { style = "color:red", id = "errorServidor" })
                         </div>
 

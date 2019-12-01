@@ -192,9 +192,9 @@ namespace SIGEM_BIDSS.Controllers
                             {
                                 string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
                                 string Archivo = tbParametro.par_Id + Extension;
-                                path = Path.Combine(Server.MapPath("~/Logo"), Archivo);
+                                path = Path.Combine(Server.MapPath("~/Content/Profile_Pics/"), Archivo);
                                 FotoPath.SaveAs(path);
-                                tbParametro.par_PathLogo = "~/Logo/" + Archivo;
+                                tbParametro.par_PathLogo = "~/Content/Profile_Pics/" + Archivo;
                             }
                             else
                             {
