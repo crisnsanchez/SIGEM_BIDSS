@@ -172,6 +172,23 @@
     <Property Name="mun_UsuarioModifica" Type="int" />
     <Property Name="mun_FechaModifica" Type="datetime" />
   </EntityType>
+  <EntityType Name="tbParametro">
+    <Key>
+      <PropertyRef Name="par_Id" />
+    </Key>
+    <Property Name="par_Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="par_NombreEmpresa" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="par_TelefonoEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="par_CorreoEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="par_Emisor" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="par_Password" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="par_Mensaje" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="par_Asunto" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="par_Destinatario" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="par_Servidor" Type="nchar" MaxLength="150" Nullable="false" />
+    <Property Name="par_Puerto" Type="int" Nullable="false" />
+    <Property Name="par_PathLogo" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
   <EntityType Name="tbPuesto">
     <Key>
       <PropertyRef Name="pto_Id" />
@@ -622,6 +639,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="ConteoParametro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="conteo" Type="int" Mode="In" />
+  </Function>
   <Function Name="SDP_tbAnticipoSalario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
     <Parameter Name="tipsol_id" Type="int" Mode="In" />
   </Function>
@@ -807,7 +827,6 @@
     <Parameter Name="mun_UsuarioModifica" Type="int" Mode="In" />
   </Function>
   <Function Name="UDP_Gral_tbParametro_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-    <Parameter Name="par_Id" Type="tinyint" Mode="In" />
     <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
     <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
     <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
@@ -976,6 +995,7 @@
     <EntitySet Name="tbInstitucionesFinancieras" EntityType="Self.tbInstitucionesFinancieras" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbMoneda" EntityType="Self.tbMoneda" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbMunicipio" EntityType="Self.tbMunicipio" Schema="Gral" store:Type="Tables" />
+    <EntitySet Name="tbParametro" EntityType="Self.tbParametro" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbPuesto" EntityType="Self.tbPuesto" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbSolicitud" EntityType="Self.tbSolicitud" Schema="Gral" store:Type="Tables" />
     <EntitySet Name="tbTipoMovimiento" EntityType="Self.tbTipoMovimiento" Schema="Gral" store:Type="Tables" />

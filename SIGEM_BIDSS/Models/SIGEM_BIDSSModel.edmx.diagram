@@ -48,6 +48,7 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSalario_tpsal_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="7.375" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

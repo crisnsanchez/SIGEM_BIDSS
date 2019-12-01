@@ -673,34 +673,6 @@
       <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
       <End Role="tbHistorialdeSolicitud" EntitySet="tbHistorialdeSolicitud" />
     </AssociationSet>
-    <FunctionImport Name="UDP_Gral_tbParametro_Insert" ReturnType="Collection(String)">
-      <Parameter Name="par_Id" Mode="In" Type="Byte" />
-      <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
-      <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
-      <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
-      <Parameter Name="par_Emisor" Mode="In" Type="String" />
-      <Parameter Name="par_Password" Mode="In" Type="String" />
-      <Parameter Name="par_Mensaje" Mode="In" Type="String" />
-      <Parameter Name="par_Asunto" Mode="In" Type="String" />
-      <Parameter Name="par_Destinatario" Mode="In" Type="String" />
-      <Parameter Name="par_Servidor" Mode="In" Type="String" />
-      <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
-      <Parameter Name="par_PathLogo" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="UDP_Gral_tbParametro_Update" ReturnType="Collection(String)">
-      <Parameter Name="par_Id" Mode="In" Type="Byte" />
-      <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
-      <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
-      <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
-      <Parameter Name="par_Emisor" Mode="In" Type="String" />
-      <Parameter Name="par_Password" Mode="In" Type="String" />
-      <Parameter Name="par_Mensaje" Mode="In" Type="String" />
-      <Parameter Name="par_Asunto" Mode="In" Type="String" />
-      <Parameter Name="par_Destinatario" Mode="In" Type="String" />
-      <Parameter Name="par_Servidor" Mode="In" Type="String" />
-      <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
-      <Parameter Name="par_PathLogo" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="UDP_Gral_tbInstitucionesFinancieras_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbInstitucionesFinancieras_Insert_Result)">
       <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
       <Parameter Name="insf_Contacto" Mode="In" Type="String" />
@@ -717,6 +689,37 @@
       <Parameter Name="insf_Correo" Mode="In" Type="String" />
       <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
       <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
+    <FunctionImport Name="UDP_Gral_tbParametro_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbParametro_Insert_Result)">
+      <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
+      <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
+      <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
+      <Parameter Name="par_Emisor" Mode="In" Type="String" />
+      <Parameter Name="par_Password" Mode="In" Type="String" />
+      <Parameter Name="par_Mensaje" Mode="In" Type="String" />
+      <Parameter Name="par_Asunto" Mode="In" Type="String" />
+      <Parameter Name="par_Destinatario" Mode="In" Type="String" />
+      <Parameter Name="par_Servidor" Mode="In" Type="String" />
+      <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
+      <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UDP_Gral_tbParametro_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbParametro_Update_Result)">
+      <Parameter Name="par_Id" Mode="In" Type="Byte" />
+      <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
+      <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
+      <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
+      <Parameter Name="par_Emisor" Mode="In" Type="String" />
+      <Parameter Name="par_Password" Mode="In" Type="String" />
+      <Parameter Name="par_Mensaje" Mode="In" Type="String" />
+      <Parameter Name="par_Asunto" Mode="In" Type="String" />
+      <Parameter Name="par_Destinatario" Mode="In" Type="String" />
+      <Parameter Name="par_Servidor" Mode="In" Type="String" />
+      <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
+      <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ConteoParametro" ReturnType="Collection(SIGEM_BIDSSModel.ConteoParametro_Result)">
+      <Parameter Name="conteo" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="SDP_tbMunicipio_Select_Result">
@@ -1228,5 +1231,31 @@
   </ComplexType>
   <ComplexType Name="UDP_Gral_tbInstitucionesFinancieras_Update_Result">
     <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <EntityType Name="tbParametro">
+    <Key>
+      <PropertyRef Name="par_Id" />
+    </Key>
+    <Property Name="par_Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="par_NombreEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="par_TelefonoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="par_CorreoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="par_Emisor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="par_Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="par_Mensaje" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="par_Asunto" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="par_Destinatario" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="par_Servidor" Type="String" Nullable="false" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="par_Puerto" Type="Int32" Nullable="false" />
+    <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="UDP_Gral_tbParametro_Insert_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="UDP_Gral_tbParametro_Update_Result">
+    <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="ConteoParametro_Result">
+    <Property Type="Int32" Name="Conteo" Nullable="false" />
   </ComplexType>
 </Schema>

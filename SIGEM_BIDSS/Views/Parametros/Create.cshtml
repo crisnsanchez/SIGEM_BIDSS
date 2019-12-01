@@ -1,0 +1,150 @@
+﻿@model SIGEM_BIDSS.Models.tbParametro
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-upload mr-1"></i>
+            Crear Parametro
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+
+    @using (Html.BeginForm("Create", "Parametros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group col-md-6">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                        <img src="~/Content/img/descarga.jpg" class="product-image" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.par_PathLogo, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input id="CargarFoto" value="Cargar Fotografía" name="FotoPath" type="file" class="custom-file-input">
+                                            <label id="lblCargarFoto" class="custom-file-label" for="CargarFoto"></label>
+                                        </div>
+                                        <div class="input-group-append">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form>
+
+
+                    <div class="form-row">
+                        <div class="col-md-3 mb-4">
+                            @Html.LabelFor(model => model.par_NombreEmpresa, htmlAttributes: new { @class = "control-label col-md-10" })
+                            @Html.EditorFor(model => model.par_NombreEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.ValidationMessageFor(model => model.par_NombreEmpresa, null, new { style = "color:red", id = "errornombreempresa" })
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            @Html.LabelFor(model => model.par_TelefonoEmpresa, htmlAttributes: new { @class = "control-label col-md-10" })
+                            @Html.EditorFor(model => model.par_TelefonoEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.ValidationMessageFor(model => model.par_TelefonoEmpresa, null, new { style = "color:red", id = "errortelefonoempresa" })
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            @Html.LabelFor(model => model.par_CorreoEmpresa, htmlAttributes: new { @class = "control-label col-md-10" })
+                            @Html.EditorFor(model => model.par_CorreoEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.ValidationMessageFor(model => model.par_CorreoEmpresa, null, new { style = "color:red", id = "errorcorreoempresa" })
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            @Html.LabelFor(model => model.par_Emisor, htmlAttributes: new { @class = "control-label col-md-8" })
+                            @Html.EditorFor(model => model.par_Emisor, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.ValidationMessageFor(model => model.par_Emisor, null, new { style = "color:red", id = "erroremisor" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.par_Password, htmlAttributes: new { @class = "control-label col-md-8" })
+                            @Html.EditorFor(model => model.par_Password, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)", @type = "password" } })
+                            @Html.ValidationMessageFor(model => model.par_Password, null, new { style = "color:red", id = "errorpassword" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.par_Mensaje, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EditorFor(model => model.par_Mensaje, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", onkeypress = "return soloLetras(event)" } })
+                            @Html.ValidationMessageFor(model => model.par_Mensaje, null, new { style = "color:red", id = "errorMensaje" })
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.par_Asunto, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EditorFor(model => model.par_Asunto, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.par_Asunto, null, new { style = "color:red", id = "errorAsunto" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.par_Destinatario, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                            @Html.EditorFor(model => model.par_Destinatario, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+
+                            @Html.ValidationMessageFor(model => model.par_Destinatario, null, new { style = "color:red", id = "errorDestinatario" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.par_Puerto, htmlAttributes: new { @class = "control-label col-md-8" })
+                            @Html.EditorFor(model => model.par_Puerto, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.ValidationMessageFor(model => model.par_Puerto, null, new { style = "color:red", id = "errorPuerto" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.par_Servidor, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.EditorFor(model => model.par_Servidor, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", onkeypress = "return soloLetras(event)" } })
+                            @Html.ValidationMessageFor(model => model.par_Servidor, null, new { style = "color:red", id = "errorServidor" })
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-10">
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    }
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/app/Parametros.js"></script>
+  
+
+
+
+    <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+
+    <script type="text/javascript">
+        $('#par_TelefonoEmpresa').inputmask('(999) 9999-9999')
+
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });
+    </script>
+
+</div>
+
+
