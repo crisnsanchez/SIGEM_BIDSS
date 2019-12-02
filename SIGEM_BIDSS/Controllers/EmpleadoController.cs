@@ -164,11 +164,11 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
                         {
-                            string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
+                                string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
                                 int _NamePicture = (from _tbemp in db.tbEmpleado select _tbemp.emp_Id).Count() + 1;
                                 string Archivo = _NamePicture + Extension;
                                 //string Archivo = tbEmpleado.emp_Id + Extension;
-                                //path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
+                                path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
                                 FotoPath.SaveAs(path);
                             tbEmpleado.emp_PathImage = "~/Content/Profile_Pics/" + Archivo;
                         }

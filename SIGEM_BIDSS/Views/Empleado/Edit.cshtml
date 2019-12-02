@@ -60,9 +60,8 @@
                                 @Html.LabelFor(model => model.emp_PathImage, htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input id="CargarFoto" value="Cargar Fotografía" name="FotoPath" type="file" class="custom-file-input" id="exampleInputFile">
-
-                                        <label class="custom-file-label" for="exampleInputFile">@Url.Content(Model.emp_PathImage)</label>
+                                        <input id="CargarFoto" value="Cargar Fotografía" name="FotoPath" type="file" class="custom-file-input">
+                                        <label id="lblCargarFoto" class="custom-file-label" for="CargarFoto"></label>
                                     </div>
                                     <div class="input-group-append">
                                     </div>
@@ -231,4 +230,4 @@
     </script>
 
 </div>
-        </div>
+ 
