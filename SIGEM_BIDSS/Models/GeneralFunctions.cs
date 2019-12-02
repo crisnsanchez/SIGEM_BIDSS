@@ -54,6 +54,8 @@ namespace SIGEM_BIDSS.Models
             return tipsol;
         }
 
+        public const string Pass = "QdZwAxesc12";
+
 
         public const int intDefault = 1;
         public const int tiposalario = 3;

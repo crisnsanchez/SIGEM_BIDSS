@@ -1,9 +1,13 @@
 ﻿using SIGEM_BIDSS.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
+using System.Xml;
+using System.Xml.Xsl;
 
 namespace SIGEM_BIDSS.Controllers
 {
@@ -27,6 +31,9 @@ namespace SIGEM_BIDSS.Controllers
            
             try
             {
+
+                string lvMensajeError = "";
+
                 var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
 
                 string fullName = userClaims?.FindFirst("name")?.Value;
@@ -63,6 +70,10 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch (Exception Ex)
             {
+                TempData["controllerName"] = RouteData.Values["controller"];
+                TempData["actionName"]= RouteData.Values["action"];
+                TempData["idValue"] = _tipsol_Id;
+
                 return RedirectToAction("Error500","Home");
             }
 
@@ -120,10 +131,9 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        string emaildestino = tbSolicitud.Emp_Mail;
-                        string usuario = tbSolicitud.Emp_Name;
-                        SendMail(emaildestino, usuario, emaildestino);
-                        SendMail(tbSolicitud.sol_GralCorreoJefeInmediato, usuario, emaildestino);
+                        
+                        string lvMensajeError = "";
+                        LeerDatos(out lvMensajeError, tbSolicitud.Emp_Mail,tbSolicitud.Emp_Name);
 
                         TempData["smserror"] = "Solicitud Realizada con Exito.";
                         ViewBag.smserror = TempData["smserror"];
@@ -143,51 +153,107 @@ namespace SIGEM_BIDSS.Controllers
         }
 
 
-
-
-
-
-        public void SendMail(string emaildestino, string usuario, string _whomail)
+        public int LeerDatos(out string pvMensajeError, string _Destinatario, string _DestinatarioName)
         {
-            string password = "";
-            string emailsalida = "sigembidss@gmail.com";
-            string passwordsalida = "QdZwAxesc12";
-            string asunto = "Solicitud";
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(emaildestino);
-            msg.From = new MailAddress(emailsalida, "SIGEM", System.Text.Encoding.UTF8);
-            msg.Subject = asunto;
-            msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            string strMensaje = null;
-            if (_whomail != emaildestino)
-            {
-                strMensaje = string.Format("El Usuario: {0} con correo: {1}, hizo una solicitud", usuario, _whomail);
-            }
-            else
-            {
-                strMensaje = string.Format("El Usuario: {0} hizo una solicitud", usuario);
-            }
-
-            msg.Body = string.Format(strMensaje, usuario);
-            msg.BodyEncoding = System.Text.Encoding.UTF8;
-            msg.IsBodyHtml = true;
-            msg.Priority = System.Net.Mail.MailPriority.High;
-
-            SmtpClient client = new SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential(emailsalida, passwordsalida);
-            client.Port = 25;
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true; //Esto es para que se vaya a través de SSL que es obligatorio con Gmail
             try
             {
-                client.Send(msg);
-            }
-            catch (System.Net.Mail.SmtpException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
-            }
+                pvMensajeError = "";
+                string lsSubject = "",
+                        lsRutaPlantilla = "",
+                        lsXMLDatos = "",
+                        lsXMLEnvio = "";
+                lsSubject = "REF:(VIA-000000001)";
+                lsRutaPlantilla = @"C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Content\Email\index.xml";
 
+                lsXMLDatos = @"<principal>
+                         <to>" + _Destinatario + "</to>" +
+                            @"<from>Jani</from>" +
+                            @"<heading>Reminder</heading>
+                        <body>Don't forget me this weekend!</body>
+                        </principal>";
+                var _Parameters = (from _tbParm in db.tbParametro select _tbParm ).FirstOrDefault();
+                EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
+                enviarCorreo(_Parameters.par_Emisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _Destinatario, _Parameters.par_Servidor, _Parameters.par_Puerto);
+                return 0;
+            }
+            catch (Exception Ex)
+            {
+
+                throw;
+            }
         }
+
+        private Boolean EmailGenerar_Body(string psRutaPlantilla, string psXML, out string psXMLEnvio)
+        {
+            psXMLEnvio = "";
+            try
+            {
+                //Leer
+                XmlTextReader reader = new XmlTextReader(psRutaPlantilla);
+                reader.Read();
+
+                //Cargar
+                XslCompiledTransform xslt = new XslCompiledTransform();
+                xslt.Load(reader);
+
+                XmlReader xmlData = XmlReader.Create(new StringReader(psXML));
+
+                XmlWriterSettings Configuraciones = new XmlWriterSettings();
+                Configuraciones.OmitXmlDeclaration = true;
+                Configuraciones.ConformanceLevel = ConformanceLevel.Fragment;
+                //Configuraciones.Encoding = Encoding.UTF8;
+                Configuraciones.CloseOutput = false;
+
+                //Empieza a hacer el match
+                using (StringWriter sw = new StringWriter())
+                using (XmlWriter xwo = XmlWriter.Create(sw, Configuraciones)) // xslt.OutputSettings use OutputSettings of xsl, so it can be output as HTML
+                {
+                    xslt.Transform(xmlData, null, xwo);
+                    psXMLEnvio = sw.ToString();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                psXMLEnvio = "";
+                return false;
+            }
+        }
+
+        public int enviarCorreo(string psEmisor, string psPassword, string psMensaje, string psAsunto, string psDestinatario, string psServidor, int psPuerto)
+        {
+            //      0 = Ok      //
+            //      1 = Error   //
+
+            MailMessage correos = new MailMessage();
+            SmtpClient envios = new SmtpClient();
+
+            try
+            {
+                correos.To.Clear();
+                correos.Body = "";
+                correos.Subject = "";
+                correos.Body = psMensaje;
+                correos.BodyEncoding = System.Text.Encoding.UTF8;
+                correos.Subject = psAsunto;
+                correos.IsBodyHtml = true;
+                correos.To.Add(psDestinatario.Trim());
+                correos.From = new MailAddress(psEmisor);
+                envios.Credentials = new NetworkCredential(psEmisor, psPassword);
+                // Datos del servidor //
+                envios.Host = psServidor;
+                envios.Port = psPuerto;
+                envios.EnableSsl = true;
+                //Función de envío de correo //
+                envios.Send(correos);
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                return 1;
+            }
+        }
+
     }
 }
