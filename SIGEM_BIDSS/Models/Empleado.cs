@@ -26,89 +26,89 @@ namespace SIGEM_BIDSS.Models
     public class EmpleadosMetaData
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "ID EMPLEADO")]
+        [Display(Name = "Id Empleado")]
         public short emp_Id { get; set; }
 
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "NOMBRES")]
+        [Display(Name = "Nombres")]
         public string emp_Nombres { get; set; }
 
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "APELLIDOS")]
+        [Display(Name = "Apellidos")]
         public string emp_Apellidos { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "SEXO")]
+        [Display(Name = "Sexo")]
         public string emp_Sexo { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "FECHA NACIMIENTO")]
+        [Display(Name = "Fecha Nacimiento")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public string emp_FechaNacimiento { get; set; }
 
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "IDENTIFICACIÓN")]
+        [Display(Name = "Identificación")]
         public string emp_Identificacion { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "TELEFÓNO")]
+        [Display(Name = "Teléfono")]
         public string emp_Telefono { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "CORREO ELECTRONICO")]
+        [Display(Name = "Correo Electrónico")]
         public string emp_CorreoElectronico { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "TIPO SANGRE")]
+        [Display(Name = "Tipo Sangre")]
         public int tps_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "PUESTO DE TRABAJO")]
+        [Display(Name = "Puesto De Trabajo")]
         public int pto_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "FECHA INGRESÓ")]
+        [Display(Name = "Fecha Ingresó A La Empresa")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public string emp_FechaIngreso { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "DIRECCIÓN")]
+        [Display(Name = "Dirección")]
         public string emp_Direccion { get; set; }
 
 
 
-        [Display(Name = "FECHA INACTIVACIÓN")]
+        [Display(Name = "Razón Inactivación")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public string emp_RazonInactivacion { get; set; }
 
 
 
-        [Display(Name = "ESTADO")]
+        [Display(Name = "Estado")]
         public int est_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "IMAGEN")]
+        [Display(Name = "Imagen")]
         public string emp_PathImage { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "MUNICIPIO")]
+        [Display(Name = "Municipio")]
         public string mun_Id { get; set; }
 
 
-        [Display(Name = "USUARIO CREA")]
+        [Display(Name = "Usuario Crea")]
         public Nullable<int> emp_UsuarioCrea { get; set; }
 
-        [Display(Name = "FECHA CREA")]
+        [Display(Name = "Fecha Crea")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> emp_FechaCrea { get; set; }
 
-        [Display(Name = "USUARIO MODIFICA")]
+        [Display(Name = "Usuario Modifica")]
         public Nullable<int> emp_UsuarioModifica { get; set; }
 
-        [Display(Name = "FECHA MODIFICA")]
+        [Display(Name = "Fecha Modifica")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
 

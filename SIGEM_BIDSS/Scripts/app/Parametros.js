@@ -146,3 +146,118 @@ $('#par_CorreoEmpresa').change(function (e) {
 
 
 });
+
+
+$('#par_Servidor').change(function (e) {
+    var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var EmailId = this.value;
+    correo = $("#par_Servidor").val();
+
+    if (emailRegex.test(EmailId)) {
+        $('#errorServidor').text('');
+        this.style.backgroundColor = "";
+        console.log("hola1");
+    }
+
+    else {
+        if (correo != "") {
+            console.log("hola2");
+            valido = document.getElementById('errorServidor');
+            valido.innerText = "Dirección de Servidor Incorrecto";
+            return false
+
+        }
+    }
+
+
+});
+
+$('#par_Emisor').change(function (e) {
+    var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var EmailId = this.value;
+    correo = $("#par_Emisor").val();
+
+    if (emailRegex.test(EmailId)) {
+        $('#erroremisor').text('');
+        this.style.backgroundColor = "";
+        console.log("hola1");
+    }
+
+    else {
+        if (correo != "") {
+            console.log("hola2");
+            valido = document.getElementById('erroremisor');
+            valido.innerText = "Dirección de Correo Electrónico de Emisor Incorrecto";
+            return false
+
+        }
+    }
+
+
+});
+
+
+$('#par_Destinatario').change(function (e) {
+    var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var EmailId = this.value;
+    correo = $("#par_Epar_Destinatariomisor").val();
+
+    if (emailRegex.test(EmailId)) {
+        $('#errorDestinatario').text('');
+        this.style.backgroundColor = "";
+        console.log("hola1");
+    }
+
+    else {
+        if (correo != "") {
+            console.log("hola2");
+            valido = document.getElementById('errorDestinatario');
+            valido.innerText = "Dirección de Correo Electrónico de Destinatario Incorrecto";
+            return false
+
+        }
+    }
+
+
+});
+
+function soloNumeros(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    tecla = String.fromCharCode(tecla)
+    return /^[0-9]+$/.test(tecla);
+}
+
+$(document).on('blur', '#par_Password', function () {
+    var usu_Password = $('#par_Password').val().trim();
+    valido = document.getElementById('Password');
+    if (usu_Password.length < 8) {
+        valido.innerText = "Longitud debe ser de 8 caracteres.";
+        //$('#usu_Password').focus();
+    }
+});
+
+function Passworddd(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    tecla = String.fromCharCode(tecla)
+    return /^[0-9a-zA-Z-_.#*]+$/.test(tecla);
+}
+
+
+
+function mostrarPassword() {
+    var cambio = document.getElementById("txtPassword");
+    if (cambio.type == "password") {
+        cambio.type = "text";
+        $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+    } else {
+        cambio.type = "password";
+        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+    }
+}
+
+$(document).ready(function () {
+    //CheckBox mostrar contraseña
+    $('#ShowPassword').click(function () {
+        $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+    });
+});

@@ -129,7 +129,9 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono,emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,emp_Estado,emp_PathImage,mun_Id,emp_UsuarioCrea,emp_FechaCrea,emp_UsuarioModifica,emp_FechaModifica")] tbEmpleado tbEmpleado ,  HttpPostedFileBase FotoPath)
+        public ActionResult Create([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono," +
+            "emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,emp_Estado,emp_PathImage,mun_Id,emp_UsuarioCrea,emp_FechaCrea," +
+            "emp_UsuarioModifica,emp_FechaModifica")] tbEmpleado tbEmpleado ,  HttpPostedFileBase FotoPath)
         {
 
              tbEmpleado.emp_PathImage = "----";
@@ -162,10 +164,12 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
                         {
-                            string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
-                            string Archivo = tbEmpleado.emp_Id + Extension;
-                            path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
-                            FotoPath.SaveAs(path);
+                                string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
+                                int _NamePicture = (from _tbemp in db.tbEmpleado select _tbemp.emp_Id).Count() + 1;
+                                string Archivo = _NamePicture + Extension;
+                                //string Archivo = tbEmpleado.emp_Id + Extension;
+                                path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
+                                FotoPath.SaveAs(path);
                             tbEmpleado.emp_PathImage = "~/Content/Profile_Pics/" + Archivo;
                         }
                         else
@@ -201,7 +205,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 catch (Exception Ex)
                 {
-
+                
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador." + Ex.Message.ToString());
                     ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_Id);
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);

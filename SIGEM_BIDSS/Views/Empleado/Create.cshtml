@@ -32,10 +32,11 @@
         @Html.HiddenFor(model => model.emp_UsuarioModifica, new { Value = "1" })
         @Html.HiddenFor(model => model.emp_FechaModifica, new { Value = "2019-12-12" })
         @Html.HiddenFor(model => model.emp_RazonInactivacion, new { Value = "----" })
-        @Html.HiddenFor(model => model.emp_FechaIngreso, new { Value = "----" })
+
         @Html.HiddenFor(model => model.emp_PathImage, new { Value = "----" })
 
         @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-horizontal">
             <div class="card-body">
                 <div class="form-group">
@@ -65,7 +66,7 @@
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                             @Html.LabelFor(model => model.emp_Nombres, htmlAttributes: new { @class = "control-label col-md-4" })
                             @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @OnKeyPress = "return soloLetras(event)" } })
                             <p id="Nombres" style="color:red">@Html.ValidationMessageFor(model => model.emp_Nombres, "", new { @class = "text-danger" })</p>
@@ -99,6 +100,8 @@
                             @Html.DropDownList("emp_Sexo", null, htmlAttributes: new { @class = "form-control" })
                             <p style="color:red">@Html.ValidationMessageFor(model => model.emp_Sexo)</p>
                         </div>
+
+
                     </div>
 
 
@@ -126,11 +129,18 @@
                     </div>
                     <div class="form-row">
 
-                        <div class="form-group col-md-11">
+                        <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.emp_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
 
                             @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            @Html.LabelFor(model => model.emp_FechaIngreso, htmlAttributes: new { @class = "control-label col-md-8" })
+
+                            @Html.EditorFor(model => model.emp_FechaIngreso, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.emp_FechaIngreso, "", new { @class = "text-danger" })
                         </div>
 
 
