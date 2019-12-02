@@ -56,7 +56,7 @@ namespace SIGEM_BIDSS.Models
 
 
         public const int intDefault = 1;
-        public const int tiposalario = 3;
+        public const int tiposalario = 1;
         public const int tiposoli = 2;
 
 
