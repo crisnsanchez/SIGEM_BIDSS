@@ -7,23 +7,14 @@ $('#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud,#sol_PerFech
 });
 
 
+//max length en campos
+$(document).ready(function () {
+    $("#tperm_Descripcion")[0].maxLength = 50;
+
+})
 
 
-document.getElementById('insf_Correo').addEventListener('input', function () {
-    campo = event.target;
-    valido = document.getElementById('emailOK');
-    //selector = document.getElementById('emp_CorreoElectronico')
-    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
-    if (emailRegex.test(campo.value)) {
-        valido.innerText = "";
-        $('#emp_CorreoElectronico').removeClass('is-invalid');
-    } else {
-        valido.innerText = "Correo Inválido";
-        $('#emp_CorreoElectronico').focus();
-        $('#emp_CorreoElectronico').addClass('is-invalid');
-    }
-});
+
 
 
 

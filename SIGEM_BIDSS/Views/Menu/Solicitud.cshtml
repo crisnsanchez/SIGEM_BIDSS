@@ -34,69 +34,83 @@
     }
 </style>
 
+<!-- SELECT2 EXAMPLE -->
+<div class="card card-default">
+    <div class="card-header" style="color:dodgerblue">
+        <h3 class="card-title" style="        font-family:Arial">SOLICITUDES</h3>
 
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
 
-<section class="content">
-    <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
         <div class="row">
 
-            <div class="col-lg-3 col-6 ">
-                <!-- small box -->
-                <div class="small-box bg-primary">
-                    <div class="inner">
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
 
-                        <h4>Liquidacion Anticipo Salario </h4>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    @{
+                        <div class="col-lg-3 ">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
 
-                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.SolicitudAnticipoViaticos })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
-                    }
-                </div>
-            </div>
+                                    <h4>Liquidacion Anticipo Salario </h4>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                @{
 
-            <div class="col-lg-3 col-6  ">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h4>Solicitud Permiso Laboral</h4>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-person-add"></i>
-                    </div>
-                    @{
+                                    <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.SolicitudAnticipoViaticos })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                                }
+                            </div>
+                        </div>
 
-                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.SolicitudPermisoLaboral })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
-                    }
-                </div>
-            </div>
+                        <div class="col-lg-3  ">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h4>Solicitud Anticipo De Viáticos</h4>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                </div>
+                                @{
 
-
-
-
-
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h4> Solicitud Requisición de Compra</h4>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                    </div>
-                    @{
-
-                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.RequisicionCompra })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
-                    }
-                </div>
-            </div>
+                                    <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.SolicitudAnticipoViaticos })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                                }
+                            </div>
 
 
-            <div class="col-lg-3 col-6">
-              
+                        </div>
+
+
+
+
+
+                        <div class="col-lg-3">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h4> Solicitud Requisición de Compra</h4>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                @{
+
+                                    <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.RequisicionCompra })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                                }
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3">
+                            <div class="color">
                 <!-- small box -->
                     <div class="small-box bg-primary">
                         <div class="inner">
@@ -113,24 +127,43 @@
                     </div>
             </div>
 
-            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+
+            <!-- /.col -->
         </div>
-</section>
+        <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
 
+    </div>
+</div>
+<!-- /.card -->
+<div class="card card-default">
+    <div class="card-header" style="color:dodgerblue">
+        <h3 class="card-title" style="        font-family:Arial">SOLICITUDES</h3>
 
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fa fa-minus"></i></button>
 
-<section class="content">
-    <div class="container-fluid">
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+
         <!-- Small boxes (Stat box) -->
         <div class="row">
 
-
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3 ">
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
 
-                        <h4>Accion Personal</h4>
+                        <h4>Solicitud Acción Personal </h4>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -142,34 +175,42 @@
                 </div>
             </div>
 
-
-
-            <div class="col-lg-3 col-6">
-
-                <div class="small-box bg-warning">
-                    <div class="inner">
-
-                        <h4>Solicitud Anticipo Viatico</h4>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    @{
-
-                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.SolicitudAnticipoViaticos })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
-                    }
-                </div>
-            </div>
-
-
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3  ">
                 <!-- small box -->
-                <div class="small-box bg-danger">
+
+
+
+                <div class="small-box bg-primary">
                     <div class="inner">
-                        <h4> Reembolso de Gastos </h4>
+                        <h4>Solicitud Permiso Laboral</h4>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
+                    </div>
+                    @{
+
+                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.SolicitudPermisoLaboral })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    }
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+
+
+            <div class="col-lg-3">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h4>Reembolso de Gastos</h4>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
                     </div>
                     @{
 
@@ -178,34 +219,41 @@
                 </div>
             </div>
 
-                    <div class="col-lg-3 col-6">
 
-                        <div class="small-box bg-primary">
-                            <div class="inner">
-
-                                <h4>Historial Solicitud </h4>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-bag"></i>
-                            </div>
-                            <a href="@Url.Action("Index","HistorialdeSolicitud")" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
-                        </div>
+            <div class="col-lg-3">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h4>Solicitud </h4>
                     </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    @{
 
-
-
-
+                        <a href="@Url.Action("Create","Solicitud", new { _tipsol_Id = GeneralFunctions.RembolsoGastos })" class="small-box-footer">Más Información <i class="fa fa-arrow-circle-right"></i></a>
+                    }
                 </div>
             </div>
 
+        </div>
 
-    <!-- /.container-fluid -->
-</section>
+        <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+
+    </div>
+</div>
 
 
 
 
 
-<section class="content">
-<!-- /.container-fluid -->
-</section>
+
+
+
+
+
+
+

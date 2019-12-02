@@ -2,7 +2,7 @@
 
 /////DATE PICKER
 //----------Datepicker
-$('#emp_FechaNacimiento').datepicker({
+$('#emp_FechaNacimiento,#emp_FechaIngreso').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1990",
     language: "es",
