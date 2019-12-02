@@ -28,23 +28,23 @@ namespace SIGEM_BIDSS.Models
         }
     
         public virtual DbSet<tbArea> tbArea { get; set; }
-        public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
         public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbEstado> tbEstado { get; set; }
-        public virtual DbSet<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
-        public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
         public virtual DbSet<tbMoneda> tbMoneda { get; set; }
         public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
-        public virtual DbSet<tbParametro> tbParametro { get; set; }
         public virtual DbSet<tbPuesto> tbPuesto { get; set; }
-        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
         public virtual DbSet<tbTipoMovimiento> tbTipoMovimiento { get; set; }
         public virtual DbSet<tbTipoPermiso> tbTipoPermiso { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
+        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
+        public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
+        public virtual DbSet<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
+        public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
+        public virtual DbSet<tbParametro> tbParametro { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -1099,112 +1099,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tSolicitudInsertar_Result>("UDP_Gral_tSolicitudInsertar", emp_IdParameter, tipsol_IdParameter, pto_IdParameter, tpsal_idParameter, tmo_IdParameter, are_IdParameter, tipmo_idParameter, tpv_IdParameter, tperm_IdParameter, sol_GralDescripcionParameter, sol_GralJefeInmediatoParameter, sol_GralCorreoJefeInmediatoParameter, sol_GralComentarioParameter, sol_GralJustificacionParameter, sol_GralFechaSolicitudParameter, sol_AnviFechaViajeParameter, sol_Anvi_ClienteParameter, sol_Anvi_LugarDestinoParameter, sol_Acper_AnteriorParameter, sol_Anvi_PropositoVisitaParameter, sol_Anvi_DiasVisitaParameter, sol_AnviHospedajeParameter, sol_AnviTrasladoHaciaParameter, sol_AnsolMontoParameter, sol_PerFechaRegresoParameter, sol_PerMedioDiaParameter, sol_PerFechaInicioParameter, sol_PerFechaMedioDiaParameter, sol_PerCantidadDiasParameter, sol_ReemMontoParameter, sol_ReemFechaMontoParameter, sol_ReemProveedorParameter, sol_ReemCargoAParameter, sol_ReemFechaGastosParameter, sol_ReemNoFacturaParameter, sol_ReemMontoTotalParameter, sol_AprRtnParameter, sol_AprNombreEmpresaParameter, sol_AprCiudadParameter, sol_AprDireccionParameter, sol_ApreTelefonoParameter, sol_ApreContactoAdmParameter, sol_ApreCorreoAdmParameter, sol_ApreNombreTecnParameter, sol_ApreTelefonoTecnParameter, sol_ApreCorreoTecnParameter, sol_ApreCargoTecnParameter, sol_ApreLinkParameter, sol_Acper_NuevoParameter, sol_RequeCantidadParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter, sol_UsuarioModificaParameter, sol_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Gral_tbParametro_Insert(Nullable<byte> par_Id, string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_Emisor, string par_Password, string par_Mensaje, string par_Asunto, string par_Destinatario, string par_Servidor, Nullable<int> par_Puerto, string par_PathLogo)
-        {
-            var par_IdParameter = par_Id.HasValue ?
-                new ObjectParameter("par_Id", par_Id) :
-                new ObjectParameter("par_Id", typeof(byte));
-    
-            var par_NombreEmpresaParameter = par_NombreEmpresa != null ?
-                new ObjectParameter("par_NombreEmpresa", par_NombreEmpresa) :
-                new ObjectParameter("par_NombreEmpresa", typeof(string));
-    
-            var par_TelefonoEmpresaParameter = par_TelefonoEmpresa != null ?
-                new ObjectParameter("par_TelefonoEmpresa", par_TelefonoEmpresa) :
-                new ObjectParameter("par_TelefonoEmpresa", typeof(string));
-    
-            var par_CorreoEmpresaParameter = par_CorreoEmpresa != null ?
-                new ObjectParameter("par_CorreoEmpresa", par_CorreoEmpresa) :
-                new ObjectParameter("par_CorreoEmpresa", typeof(string));
-    
-            var par_EmisorParameter = par_Emisor != null ?
-                new ObjectParameter("par_Emisor", par_Emisor) :
-                new ObjectParameter("par_Emisor", typeof(string));
-    
-            var par_PasswordParameter = par_Password != null ?
-                new ObjectParameter("par_Password", par_Password) :
-                new ObjectParameter("par_Password", typeof(string));
-    
-            var par_MensajeParameter = par_Mensaje != null ?
-                new ObjectParameter("par_Mensaje", par_Mensaje) :
-                new ObjectParameter("par_Mensaje", typeof(string));
-    
-            var par_AsuntoParameter = par_Asunto != null ?
-                new ObjectParameter("par_Asunto", par_Asunto) :
-                new ObjectParameter("par_Asunto", typeof(string));
-    
-            var par_DestinatarioParameter = par_Destinatario != null ?
-                new ObjectParameter("par_Destinatario", par_Destinatario) :
-                new ObjectParameter("par_Destinatario", typeof(string));
-    
-            var par_ServidorParameter = par_Servidor != null ?
-                new ObjectParameter("par_Servidor", par_Servidor) :
-                new ObjectParameter("par_Servidor", typeof(string));
-    
-            var par_PuertoParameter = par_Puerto.HasValue ?
-                new ObjectParameter("par_Puerto", par_Puerto) :
-                new ObjectParameter("par_Puerto", typeof(int));
-    
-            var par_PathLogoParameter = par_PathLogo != null ?
-                new ObjectParameter("par_PathLogo", par_PathLogo) :
-                new ObjectParameter("par_PathLogo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbParametro_Insert", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_EmisorParameter, par_PasswordParameter, par_MensajeParameter, par_AsuntoParameter, par_DestinatarioParameter, par_ServidorParameter, par_PuertoParameter, par_PathLogoParameter);
-        }
-    
-        public virtual ObjectResult<string> UDP_Gral_tbParametro_Update(Nullable<byte> par_Id, string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_Emisor, string par_Password, string par_Mensaje, string par_Asunto, string par_Destinatario, string par_Servidor, Nullable<int> par_Puerto, string par_PathLogo)
-        {
-            var par_IdParameter = par_Id.HasValue ?
-                new ObjectParameter("par_Id", par_Id) :
-                new ObjectParameter("par_Id", typeof(byte));
-    
-            var par_NombreEmpresaParameter = par_NombreEmpresa != null ?
-                new ObjectParameter("par_NombreEmpresa", par_NombreEmpresa) :
-                new ObjectParameter("par_NombreEmpresa", typeof(string));
-    
-            var par_TelefonoEmpresaParameter = par_TelefonoEmpresa != null ?
-                new ObjectParameter("par_TelefonoEmpresa", par_TelefonoEmpresa) :
-                new ObjectParameter("par_TelefonoEmpresa", typeof(string));
-    
-            var par_CorreoEmpresaParameter = par_CorreoEmpresa != null ?
-                new ObjectParameter("par_CorreoEmpresa", par_CorreoEmpresa) :
-                new ObjectParameter("par_CorreoEmpresa", typeof(string));
-    
-            var par_EmisorParameter = par_Emisor != null ?
-                new ObjectParameter("par_Emisor", par_Emisor) :
-                new ObjectParameter("par_Emisor", typeof(string));
-    
-            var par_PasswordParameter = par_Password != null ?
-                new ObjectParameter("par_Password", par_Password) :
-                new ObjectParameter("par_Password", typeof(string));
-    
-            var par_MensajeParameter = par_Mensaje != null ?
-                new ObjectParameter("par_Mensaje", par_Mensaje) :
-                new ObjectParameter("par_Mensaje", typeof(string));
-    
-            var par_AsuntoParameter = par_Asunto != null ?
-                new ObjectParameter("par_Asunto", par_Asunto) :
-                new ObjectParameter("par_Asunto", typeof(string));
-    
-            var par_DestinatarioParameter = par_Destinatario != null ?
-                new ObjectParameter("par_Destinatario", par_Destinatario) :
-                new ObjectParameter("par_Destinatario", typeof(string));
-    
-            var par_ServidorParameter = par_Servidor != null ?
-                new ObjectParameter("par_Servidor", par_Servidor) :
-                new ObjectParameter("par_Servidor", typeof(string));
-    
-            var par_PuertoParameter = par_Puerto.HasValue ?
-                new ObjectParameter("par_Puerto", par_Puerto) :
-                new ObjectParameter("par_Puerto", typeof(int));
-    
-            var par_PathLogoParameter = par_PathLogo != null ?
-                new ObjectParameter("par_PathLogo", par_PathLogo) :
-                new ObjectParameter("par_PathLogo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbParametro_Update", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_EmisorParameter, par_PasswordParameter, par_MensajeParameter, par_AsuntoParameter, par_DestinatarioParameter, par_ServidorParameter, par_PuertoParameter, par_PathLogoParameter);
-        }
-    
         public virtual ObjectResult<UDP_Gral_tbInstitucionesFinancieras_Insert_Result> UDP_Gral_tbInstitucionesFinancieras_Insert(string insf_DescInstitucionFinanc, string insf_Contacto, string insf_Telefono, string insf_Correo, Nullable<int> insf_UsuarioCrea, Nullable<bool> insf_Activo)
         {
             var insf_DescInstitucionFinancParameter = insf_DescInstitucionFinanc != null ?
@@ -1265,6 +1159,117 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("insf_Activo", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbInstitucionesFinancieras_Update_Result>("UDP_Gral_tbInstitucionesFinancieras_Update", insf_IdInstitucionFinancieraParameter, insf_DescInstitucionFinancParameter, insf_ContactoParameter, insf_TelefonoParameter, insf_CorreoParameter, insf_UsuarioCreaParameter, insf_ActivoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbParametro_Insert_Result> UDP_Gral_tbParametro_Insert(string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_Emisor, string par_Password, string par_Mensaje, string par_Asunto, string par_Destinatario, string par_Servidor, Nullable<int> par_Puerto, string par_PathLogo)
+        {
+            var par_NombreEmpresaParameter = par_NombreEmpresa != null ?
+                new ObjectParameter("par_NombreEmpresa", par_NombreEmpresa) :
+                new ObjectParameter("par_NombreEmpresa", typeof(string));
+    
+            var par_TelefonoEmpresaParameter = par_TelefonoEmpresa != null ?
+                new ObjectParameter("par_TelefonoEmpresa", par_TelefonoEmpresa) :
+                new ObjectParameter("par_TelefonoEmpresa", typeof(string));
+    
+            var par_CorreoEmpresaParameter = par_CorreoEmpresa != null ?
+                new ObjectParameter("par_CorreoEmpresa", par_CorreoEmpresa) :
+                new ObjectParameter("par_CorreoEmpresa", typeof(string));
+    
+            var par_EmisorParameter = par_Emisor != null ?
+                new ObjectParameter("par_Emisor", par_Emisor) :
+                new ObjectParameter("par_Emisor", typeof(string));
+    
+            var par_PasswordParameter = par_Password != null ?
+                new ObjectParameter("par_Password", par_Password) :
+                new ObjectParameter("par_Password", typeof(string));
+    
+            var par_MensajeParameter = par_Mensaje != null ?
+                new ObjectParameter("par_Mensaje", par_Mensaje) :
+                new ObjectParameter("par_Mensaje", typeof(string));
+    
+            var par_AsuntoParameter = par_Asunto != null ?
+                new ObjectParameter("par_Asunto", par_Asunto) :
+                new ObjectParameter("par_Asunto", typeof(string));
+    
+            var par_DestinatarioParameter = par_Destinatario != null ?
+                new ObjectParameter("par_Destinatario", par_Destinatario) :
+                new ObjectParameter("par_Destinatario", typeof(string));
+    
+            var par_ServidorParameter = par_Servidor != null ?
+                new ObjectParameter("par_Servidor", par_Servidor) :
+                new ObjectParameter("par_Servidor", typeof(string));
+    
+            var par_PuertoParameter = par_Puerto.HasValue ?
+                new ObjectParameter("par_Puerto", par_Puerto) :
+                new ObjectParameter("par_Puerto", typeof(int));
+    
+            var par_PathLogoParameter = par_PathLogo != null ?
+                new ObjectParameter("par_PathLogo", par_PathLogo) :
+                new ObjectParameter("par_PathLogo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbParametro_Insert_Result>("UDP_Gral_tbParametro_Insert", par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_EmisorParameter, par_PasswordParameter, par_MensajeParameter, par_AsuntoParameter, par_DestinatarioParameter, par_ServidorParameter, par_PuertoParameter, par_PathLogoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbParametro_Update_Result> UDP_Gral_tbParametro_Update(Nullable<byte> par_Id, string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_Emisor, string par_Password, string par_Mensaje, string par_Asunto, string par_Destinatario, string par_Servidor, Nullable<int> par_Puerto, string par_PathLogo)
+        {
+            var par_IdParameter = par_Id.HasValue ?
+                new ObjectParameter("par_Id", par_Id) :
+                new ObjectParameter("par_Id", typeof(byte));
+    
+            var par_NombreEmpresaParameter = par_NombreEmpresa != null ?
+                new ObjectParameter("par_NombreEmpresa", par_NombreEmpresa) :
+                new ObjectParameter("par_NombreEmpresa", typeof(string));
+    
+            var par_TelefonoEmpresaParameter = par_TelefonoEmpresa != null ?
+                new ObjectParameter("par_TelefonoEmpresa", par_TelefonoEmpresa) :
+                new ObjectParameter("par_TelefonoEmpresa", typeof(string));
+    
+            var par_CorreoEmpresaParameter = par_CorreoEmpresa != null ?
+                new ObjectParameter("par_CorreoEmpresa", par_CorreoEmpresa) :
+                new ObjectParameter("par_CorreoEmpresa", typeof(string));
+    
+            var par_EmisorParameter = par_Emisor != null ?
+                new ObjectParameter("par_Emisor", par_Emisor) :
+                new ObjectParameter("par_Emisor", typeof(string));
+    
+            var par_PasswordParameter = par_Password != null ?
+                new ObjectParameter("par_Password", par_Password) :
+                new ObjectParameter("par_Password", typeof(string));
+    
+            var par_MensajeParameter = par_Mensaje != null ?
+                new ObjectParameter("par_Mensaje", par_Mensaje) :
+                new ObjectParameter("par_Mensaje", typeof(string));
+    
+            var par_AsuntoParameter = par_Asunto != null ?
+                new ObjectParameter("par_Asunto", par_Asunto) :
+                new ObjectParameter("par_Asunto", typeof(string));
+    
+            var par_DestinatarioParameter = par_Destinatario != null ?
+                new ObjectParameter("par_Destinatario", par_Destinatario) :
+                new ObjectParameter("par_Destinatario", typeof(string));
+    
+            var par_ServidorParameter = par_Servidor != null ?
+                new ObjectParameter("par_Servidor", par_Servidor) :
+                new ObjectParameter("par_Servidor", typeof(string));
+    
+            var par_PuertoParameter = par_Puerto.HasValue ?
+                new ObjectParameter("par_Puerto", par_Puerto) :
+                new ObjectParameter("par_Puerto", typeof(int));
+    
+            var par_PathLogoParameter = par_PathLogo != null ?
+                new ObjectParameter("par_PathLogo", par_PathLogo) :
+                new ObjectParameter("par_PathLogo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbParametro_Update_Result>("UDP_Gral_tbParametro_Update", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_EmisorParameter, par_PasswordParameter, par_MensajeParameter, par_AsuntoParameter, par_DestinatarioParameter, par_ServidorParameter, par_PuertoParameter, par_PathLogoParameter);
+        }
+    
+        public virtual ObjectResult<ConteoParametro_Result> ConteoParametro(Nullable<int> conteo)
+        {
+            var conteoParameter = conteo.HasValue ?
+                new ObjectParameter("conteo", conteo) :
+                new ObjectParameter("conteo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ConteoParametro_Result>("ConteoParametro", conteoParameter);
         }
     }
 }

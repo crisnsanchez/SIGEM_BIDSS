@@ -1,0 +1,111 @@
+﻿@model SIGEM_BIDSS.Models.tbParametro
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h4>Detalles Parámetro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.par_PathLogo)
+        </dt>
+        <dd>
+            @{
+                if (Model.par_PathLogo != null && Model.par_PathLogo != "")
+                {
+                    <img src="@Url.Content(Model.par_PathLogo)" alt="Fotografía" class="img-rounded" width="200" height="200">
+                }
+                else
+                {
+                    <img src="~/Content/img/NoImage.png" alt="Sin Fotografía" class="img-rounded" width="200" height="200">
+                }
+            }
+        <dt>
+            @Html.DisplayNameFor(model => model.par_NombreEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_NombreEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_TelefonoEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_TelefonoEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_CorreoEmpresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_CorreoEmpresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_Emisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_Emisor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_Mensaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_Mensaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_Asunto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_Asunto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_Destinatario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_Destinatario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_Servidor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_Servidor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.par_Puerto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.par_Puerto)
+        </dd>
+
+
+        @Html.ActionLink("Editar", "Edit", new { id = Model.par_Id }, new { @class = "btn btn-primary" })
+    </dl>
+</div>
+
