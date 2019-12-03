@@ -49,6 +49,13 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="7.375" PointY="11.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbInventarioCompra" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSueldos" Width="1.5" PointX="12.5" PointY="1.625" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleados_emp_Id_Plani_tbSueldos_emp_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Plani_tbSueldos_sue_Id_Gral_tbSueldos_sue_SueldoAnterior" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Plani_tbSueldos_sue_Id_Plani_tbSueldos_sue_SueldoAnterior" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

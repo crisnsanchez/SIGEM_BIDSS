@@ -29,7 +29,7 @@ namespace SIGEM_BIDSS.Controllers
 
         // GET: Municipio
         [HttpPost]
-        public JsonResult GetMunicipios(string CodDepartamento)
+        public JsonResult GetMunicipios(tbEmpleado.CodDepartamento)
         {
             var list = (from x in db.tbMunicipio where x.dep_codigo == CodDepartamento select new { mun_codigo = x.mun_codigo, mun_nombre = x.mun_nombre}).ToList();
                 /*db.tbMunicipio.Where(x=> x.dep_codigo==CodDepartamento).ToList();*/
@@ -48,7 +48,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
                 tbEmpleado empleado = db.tbEmpleado.Find(tbEmpleado.emp_Id);
-                 list = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, empleado.emp_Nombres, empleado.emp_Apellidos, empleado.emp_Sexo, empleado.emp_FechaNacimiento, empleado.emp_Identificacion, empleado.emp_Telefono, empleado.emp_CorreoElectronico, tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoinactivo, empleado.tps_Id, empleado.pto_Id, empleado.emp_FechaIngreso, empleado.emp_Direccion, empleado.emp_PathImage, empleado.mun_Id, empleado.emp_UsuarioCrea).ToList();
+                 list = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id,tbEmpleado.emp_Nombres,tbEmpleado.emp_Apellidos,tbEmpleado.emp_Sexo,tbEmpleado.emp_FechaNacimiento,tbEmpleado.emp_Identificacion,tbEmpleado.emp_Telefono,tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_EsJefe,tbEmpleado.emp_RazonInactivacion, tbEmpleado.est_Id, tbEmpleado.tps_Id, tbEmpleado.pto_Id,tbEmpleado.emp_FechaIngreso,tbEmpleado.emp_Direccion,tbEmpleado.emp_PathImage,tbEmpleado.mun_Id, tbEmpleado.emp_UsuarioCrea).ToList();
 
 
             }
@@ -93,8 +93,8 @@ namespace SIGEM_BIDSS.Controllers
             }
             tbEmpleado.emp_RazonInactivacion = "";
             IEnumerable<Object> List = null;
-            string Msj = "";
-            List = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoactivo, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id, 1);
+           tbEmpleado.Msj = "";
+            List = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id,tbEmpleado.emp_Nombres,tbEmpleado.emp_Apellidos,tbEmpleado.emp_Sexo,tbEmpleado.emp_FechaNacimiento,tbEmpleado.emp_Identificacion,tbEmpleado.emp_Telefono,tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_EsJefe,tbEmpleado.emp_RazonInactivacion, tbEmpleado.est_Id, tbEmpleado.tps_Id, tbEmpleado.pto_Id,tbEmpleado.emp_FechaIngreso,tbEmpleado.emp_Direccion,tbEmpleado.emp_PathImage,tbEmpleado.mun_Id, tbEmpleado.emp_UsuarioCrea, 1);
             foreach (UDP_Gral_tbEmpleado_Update_Result Empleado in List)
                 Msj = Empleado.MensajeError;
             if (Msj.StartsWith("-1"))
@@ -113,7 +113,7 @@ namespace SIGEM_BIDSS.Controllers
         {
             var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
 
-            string fullName = userClaims?.FindFirst("name")?.Value;
+           tbEmpleado.fullName = userClaims?.FindFirst("name")?.Value;
             ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");
@@ -164,10 +164,10 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
                         {
-                                string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
+                               tbEmpleado.Extension = Path.GetExtension(FotoPath.FileName).ToLower();
                                 int _NamePicture = (from _tbemp in db.tbEmpleado select _tbemp.emp_Id).Count() + 1;
-                                string Archivo = _NamePicture + Extension;
-                                //string Archivo = tbEmpleado.emp_Id + Extension;
+                               tbEmpleado.Archivo = _NamePicture + Extension;
+                                //tbEmpleado.Archivo = tbEmpleado.emp_Id + Extension;
                                 path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
                                 FotoPath.SaveAs(path);
                             tbEmpleado.emp_PathImage = "~/Content/Profile_Pics/" + Archivo;
@@ -183,8 +183,10 @@ namespace SIGEM_BIDSS.Controllers
                         }
                     }
                     IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbEmpleado_Insert(tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id, 1);
+                   tbEmpleado.Msj = "";
+                    List = db.UDP_Gral_tbEmpleado_Insert(tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento,
+                        tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_EsJefe,tbEmpleado.tps_Id,tbEmpleado.pto_Id,
+                        tbEmpleado.emp_FechaNacimiento,tbEmpleado.emp_Direccion,tbEmpleado.emp_PathImage,tbEmpleado.mun_Id,tbEmpleado.emp_UsuarioCrea);
                     foreach (UDP_Gral_tbEmpleado_Insert_Result Empleado in List)
                         Msj = Empleado.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -274,8 +276,8 @@ namespace SIGEM_BIDSS.Controllers
                         {
                             if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
                             {
-                                string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
-                                string Archivo = tbEmpleado.emp_Id + Extension;
+                               tbEmpleado.Extension = Path.GetExtension(FotoPath.FileName).ToLower();
+                               tbEmpleado.Archivo = tbEmpleado.emp_Id + Extension;
                                 path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
                                 FotoPath.SaveAs(path);
                                 tbEmpleado.emp_PathImage = "~/Content/Profile_Pics/" + Archivo;
@@ -296,8 +298,11 @@ namespace SIGEM_BIDSS.Controllers
 
 
                     IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo,tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_RazonInactivacion, tbEmpleado.est_Id, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id,1);
+                   tbEmpleado.Msj = "";
+                    List = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id,tbEmpleado.emp_Nombres,tbEmpleado.emp_Apellidos,tbEmpleado.emp_Sexo,tbEmpleado.emp_FechaNacimiento,
+                        tbEmpleado.emp_Identificacion,tbEmpleado.emp_Telefono,tbEmpleado.emp_CorreoElectronico,tbEmpleado.emp_EsJefe,tbEmpleado.emp_RazonInactivacion,
+                        tbEmpleado.est_Id, tbEmpleado.tps_Id, tbEmpleado.pto_Id,tbEmpleado.emp_FechaIngreso,tbEmpleado.emp_Direccion,tbEmpleado.emp_PathImage,tbEmpleado.mun_Id,
+                        tbEmpleado.emp_UsuarioCrea);
                     foreach (UDP_Gral_tbEmpleado_Update_Result Empleado in List)
                         Msj = Empleado.MensajeError;
                     if (Msj.StartsWith("-1"))

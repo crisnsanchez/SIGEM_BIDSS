@@ -137,7 +137,7 @@ namespace SIGEM_BIDSS.Controllers
 
                         TempData["smserror"] = "Solicitud Realizada con Exito.";
                         ViewBag.smserror = TempData["smserror"];
-                        TempData["swalfunction"] = "true";
+
 
                         return RedirectToAction("Solicitud", "Menu", tbSolicitud.tipsol_Id);
                     }
@@ -163,7 +163,7 @@ namespace SIGEM_BIDSS.Controllers
                         lsXMLDatos = "",
                         lsXMLEnvio = "";
                 lsSubject = "REF:(VIA-000000001)";
-                lsRutaPlantilla = @"C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Content\Email\index.xml";
+                lsRutaPlantilla = @"C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\Content\Email\index.xml";
 
                 lsXMLDatos = @"<principal>
                          <to>" + _Destinatario + "</to>" +

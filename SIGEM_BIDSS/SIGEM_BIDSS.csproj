@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\CodeQRController.cs" />
+    <Compile Include="Controllers\DeduccionInstitucionFinancierasController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Models\ConteoParametro_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
     <Compile Include="Models\InstitucionesFinacieras.cs" />
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\Departamentos.cs" />
@@ -214,7 +216,13 @@
     <Compile Include="Models\tbInstitucionesFinancieras.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbInventarioCompra.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbParametro.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbSueldos.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoPermiso.cs" />
@@ -3202,6 +3210,11 @@
     <Content Include="Views\Parametros\Edit.cshtml" />
     <Content Include="Views\Parametros\Index.cshtml" />
     <Content Include="Views\CodeQR\Index.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinancieras\Create.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinancieras\Delete.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinancieras\Details.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinancieras\Edit.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinancieras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
