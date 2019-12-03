@@ -1,5 +1,5 @@
 ﻿//----------Datepicker
-$('#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud,#sol_PerFechaMedioDia').datepicker({
+$('#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1990",
     language: "es",
