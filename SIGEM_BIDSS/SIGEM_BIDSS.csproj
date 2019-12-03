@@ -183,11 +183,14 @@
     <Compile Include="Controllers\HistorialdeSolicitudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
+    <Compile Include="Controllers\InventarioComprasController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
+    <Compile Include="Controllers\SueldosController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSalarioController.cs" />
@@ -3215,10 +3218,21 @@
     <Content Include="Views\DeduccionInstitucionFinancieras\Details.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Edit.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Index.cshtml" />
+    <Content Include="Views\Sueldos\Create.cshtml" />
+    <Content Include="Views\Sueldos\Delete.cshtml" />
+    <Content Include="Views\Sueldos\Details.cshtml" />
+    <Content Include="Views\Sueldos\Edit.cshtml" />
+    <Content Include="Views\Sueldos\Index.cshtml" />
+    <Content Include="Views\InventarioCompras\Create.cshtml" />
+    <Content Include="Views\InventarioCompras\Delete.cshtml" />
+    <Content Include="Views\InventarioCompras\Details.cshtml" />
+    <Content Include="Views\InventarioCompras\Edit.cshtml" />
+    <Content Include="Views\InventarioCompras\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Reportes\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbInventarioCompra>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.invCom_Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.invCom_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.invCom_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.invCom_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.invCom_FechaModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbSolicitud.sol_GralDescripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.invCom_Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.invCom_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.invCom_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.invCom_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.invCom_FechaModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbSolicitud.sol_GralDescripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.invCom_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.invCom_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.invCom_Id })
+        </td>
+    </tr>
+}
+
+</table>

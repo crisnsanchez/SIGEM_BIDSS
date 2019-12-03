@@ -1,0 +1,67 @@
+﻿@model SIGEM_BIDSS.Models.tbInventarioCompra
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbInventarioCompra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.invCom_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invCom_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invCom_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invCom_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invCom_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invCom_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invCom_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invCom_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invCom_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invCom_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbSolicitud.sol_GralDescripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbSolicitud.sol_GralDescripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.invCom_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

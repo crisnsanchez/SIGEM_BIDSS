@@ -1,0 +1,100 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbSueldos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sue_Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sue_Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sue_RazonInactivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sue_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sue_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ue_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sue_FechaModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbMoneda.tmo_Abreviatura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbSueldos2.sue_RazonInactivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbSueldos3.sue_RazonInactivo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sue_Cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sue_Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sue_RazonInactivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sue_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sue_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ue_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sue_FechaModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEmpleado1.emp_Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbMoneda.tmo_Abreviatura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbSueldos2.sue_RazonInactivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbSueldos3.sue_RazonInactivo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.sue_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.sue_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.sue_Id })
+        </td>
+    </tr>
+}
+
+</table>

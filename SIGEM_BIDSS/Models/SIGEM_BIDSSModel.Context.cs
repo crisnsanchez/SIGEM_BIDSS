@@ -28,24 +28,24 @@ namespace SIGEM_BIDSS.Models
         }
     
         public virtual DbSet<tbArea> tbArea { get; set; }
+        public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
         public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbEstado> tbEstado { get; set; }
+        public virtual DbSet<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
+        public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
+        public virtual DbSet<tbInventarioCompra> tbInventarioCompra { get; set; }
         public virtual DbSet<tbMoneda> tbMoneda { get; set; }
         public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
+        public virtual DbSet<tbParametro> tbParametro { get; set; }
         public virtual DbSet<tbPuesto> tbPuesto { get; set; }
+        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
         public virtual DbSet<tbTipoMovimiento> tbTipoMovimiento { get; set; }
         public virtual DbSet<tbTipoPermiso> tbTipoPermiso { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
-        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
-        public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
-        public virtual DbSet<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
-        public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
-        public virtual DbSet<tbParametro> tbParametro { get; set; }
-        public virtual DbSet<tbInventarioCompra> tbInventarioCompra { get; set; }
         public virtual DbSet<tbSueldos> tbSueldos { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
@@ -1280,6 +1280,36 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("emp_UsuarioCrea", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEmpleado_Update_Result>("UDP_Gral_tbEmpleado_Update", emp_IdParameter, emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoElectronicoParameter, emp_EsJefeParameter, emp_RazonInactivacionParameter, est_IdParameter, tps_IdParameter, pto_IdParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_PathImageParameter, mun_IdParameter, emp_UsuarioCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Gral_tbInventarioCompra_Insert(string invCom_Descripcion, Nullable<int> invCom_UsuarioCrea)
+        {
+            var invCom_DescripcionParameter = invCom_Descripcion != null ?
+                new ObjectParameter("invCom_Descripcion", invCom_Descripcion) :
+                new ObjectParameter("invCom_Descripcion", typeof(string));
+    
+            var invCom_UsuarioCreaParameter = invCom_UsuarioCrea.HasValue ?
+                new ObjectParameter("invCom_UsuarioCrea", invCom_UsuarioCrea) :
+                new ObjectParameter("invCom_UsuarioCrea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbInventarioCompra_Insert", invCom_DescripcionParameter, invCom_UsuarioCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Gral_tbInventarioCompra_Update(Nullable<int> invCom_Id, string invCom_Descripcion, Nullable<int> invCom_UsuarioCrea)
+        {
+            var invCom_IdParameter = invCom_Id.HasValue ?
+                new ObjectParameter("invCom_Id", invCom_Id) :
+                new ObjectParameter("invCom_Id", typeof(int));
+    
+            var invCom_DescripcionParameter = invCom_Descripcion != null ?
+                new ObjectParameter("invCom_Descripcion", invCom_Descripcion) :
+                new ObjectParameter("invCom_Descripcion", typeof(string));
+    
+            var invCom_UsuarioCreaParameter = invCom_UsuarioCrea.HasValue ?
+                new ObjectParameter("invCom_UsuarioCrea", invCom_UsuarioCrea) :
+                new ObjectParameter("invCom_UsuarioCrea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbInventarioCompra_Update", invCom_IdParameter, invCom_DescripcionParameter, invCom_UsuarioCreaParameter);
         }
     }
 }

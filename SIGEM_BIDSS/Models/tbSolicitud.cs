@@ -78,6 +78,8 @@ namespace SIGEM_BIDSS.Models
     
         public virtual tbArea tbArea { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbInventarioCompra> tbInventarioCompra { get; set; }
         public virtual tbMoneda tbMoneda { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
         public virtual tbTipoMovimiento tbTipoMovimiento { get; set; }
@@ -85,7 +87,5 @@ namespace SIGEM_BIDSS.Models
         public virtual tbTipoSalario tbTipoSalario { get; set; }
         public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
         public virtual tbTipoViatico tbTipoViatico { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbInventarioCompra> tbInventarioCompra { get; set; }
     }
 }
