@@ -108,6 +108,7 @@ namespace SIGEM_BIDSS.Controllers
                         return View(tbDepartamento);
                     }
                 }
+                TempData["swalfunction"] = "true";
                 return RedirectToAction("Index");
             }
             return View(tbDepartamento);
