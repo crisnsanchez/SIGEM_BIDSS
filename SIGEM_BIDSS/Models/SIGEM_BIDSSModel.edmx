@@ -721,6 +721,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_sol_Id">
+          <End Role="tbSolicitud" Type="Self.tbSolicitud" Multiplicity="1" />
+          <End Role="tbInventarioCompra" Type="Self.tbInventarioCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSolicitud">
+              <PropertyRef Name="sol_Id" />
+            </Principal>
+            <Dependent Role="tbInventarioCompra">
+              <PropertyRef Name="sol_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tps_Id">
           <End Role="tbTipoSangre" Type="Self.tbTipoSangre" Multiplicity="1" />
           <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="*" />
@@ -1221,6 +1233,10 @@
           <AssociationSet Name="FK_pto_Id" Association="Self.FK_pto_Id">
             <End Role="tbPuesto" EntitySet="tbPuesto" />
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sol_Id" Association="Self.FK_sol_Id">
+            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+            <End Role="tbInventarioCompra" EntitySet="tbInventarioCompra" />
           </AssociationSet>
           <AssociationSet Name="FK_tps_Id" Association="Self.FK_tps_Id">
             <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
@@ -1980,6 +1996,10 @@
             <Parameter Name="mun_Id" Mode="In" Type="String" />
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_sol_Id" Association="SIGEM_BIDSSModel.FK_sol_Id">
+            <End Role="tbSolicitud" EntitySet="tbSolicitud" />
+            <End Role="tbInventarioCompra" EntitySet="tbInventarioCompra" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2136,6 +2156,7 @@
           <NavigationProperty Name="tbTipoSalario" Relationship="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" FromRole="tbSolicitud" ToRole="tbTipoSalario" />
           <NavigationProperty Name="tbTipoSolicitud" Relationship="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSolicitud_tipsol_Id" FromRole="tbSolicitud" ToRole="tbTipoSolicitud" />
           <NavigationProperty Name="tbTipoViatico" Relationship="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoViatico_tpv_Id" FromRole="tbSolicitud" ToRole="tbTipoViatico" />
+          <NavigationProperty Name="tbInventarioCompra" Relationship="SIGEM_BIDSSModel.FK_sol_Id" FromRole="tbSolicitud" ToRole="tbInventarioCompra" />
         </EntityType>
         <Association Name="FK_Gral_tbSolicitud_tbArea_are_Id">
           <End Type="SIGEM_BIDSSModel.tbArea" Role="tbArea" Multiplicity="1" />
@@ -2522,6 +2543,7 @@
           <Property Name="invCom_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="invCom_UsuarioModifica" Type="Int32" />
           <Property Name="invCom_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbSolicitud" Relationship="SIGEM_BIDSSModel.FK_sol_Id" FromRole="tbInventarioCompra" ToRole="tbSolicitud" />
         </EntityType>
         <EntityType Name="tbSueldos">
           <Key>
@@ -2612,6 +2634,18 @@
         <ComplexType Name="UDP_Gral_tbEmpleado_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <Association Name="FK_sol_Id">
+          <End Type="SIGEM_BIDSSModel.tbSolicitud" Role="tbSolicitud" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbInventarioCompra" Role="tbInventarioCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSolicitud">
+              <PropertyRef Name="sol_Id" />
+            </Principal>
+            <Dependent Role="tbInventarioCompra">
+              <PropertyRef Name="sol_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

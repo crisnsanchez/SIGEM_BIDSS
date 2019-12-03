@@ -21,5 +21,7 @@ namespace SIGEM_BIDSS.Models
         public System.DateTime invCom_FechaCrea { get; set; }
         public Nullable<int> invCom_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> invCom_FechaModifica { get; set; }
+    
+        public virtual tbSolicitud tbSolicitud { get; set; }
     }
 }

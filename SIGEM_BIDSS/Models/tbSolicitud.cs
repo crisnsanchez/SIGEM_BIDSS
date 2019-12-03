@@ -14,6 +14,12 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbSolicitud
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbSolicitud()
+        {
+            this.tbInventarioCompra = new HashSet<tbInventarioCompra>();
+        }
+    
         public int sol_Id { get; set; }
         public short emp_Id { get; set; }
         public int tipsol_Id { get; set; }
@@ -79,5 +85,7 @@ namespace SIGEM_BIDSS.Models
         public virtual tbTipoSalario tbTipoSalario { get; set; }
         public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
         public virtual tbTipoViatico tbTipoViatico { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbInventarioCompra> tbInventarioCompra { get; set; }
     }
 }

@@ -56,6 +56,7 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Plani_tbSueldos_sue_Id_Gral_tbSueldos_sue_SueldoAnterior" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Plani_tbSueldos_sue_Id_Plani_tbSueldos_sue_SueldoAnterior" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_sol_Id" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
