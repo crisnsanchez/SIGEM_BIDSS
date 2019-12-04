@@ -74,7 +74,7 @@
 
 
         <div class="form-group">
-            <span class="aviso">8-</span> @Html.LabelFor(model => model.tperm_Id, "Tipo Permiso", htmlAttributes: new { @class = "control-label col-md-8" })
+             @Html.LabelFor(model => model.tperm_Id, "Tipo Permiso", htmlAttributes: new { @class = "control-label col-md-8" })
             <div class="col-md-6">
                 @*@Html.EditorFor(model => model.tperm_Id, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.DropDownList("tperm_Id", null, htmlAttributes: new { @class = "form-control" })
@@ -85,7 +85,7 @@
 
 
         <div class="form-group">
-            <span class="aviso">9-</span> @Html.LabelFor(model => model.sol_PerFechaInicio, "Fecha Inicio Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.sol_PerFechaInicio, "Fecha Inicio Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6">
                 @Html.EditorFor(model => model.sol_PerFechaInicio, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sol_PerFechaInicio, "", new { @class = "text-danger" })
@@ -128,7 +128,7 @@
             </div>*@
 
         <div class="form-group">
-            <span class="aviso">11-</span> @Html.LabelFor(model => model.sol_PerCantidadDias, "Cantidad Dias", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.sol_PerCantidadDias, "Cantidad Dias", htmlAttributes: new { @class = "control-label col-md-2" })
 
             <div class="col-md-6">
                 @Html.EditorFor(model => model.sol_PerCantidadDias, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
