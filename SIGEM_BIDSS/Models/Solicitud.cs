@@ -60,6 +60,9 @@ namespace SIGEM_BIDSS.Models
         public string sol_GralJefeInmediato { get; set; }
 
         [Display(Name = "Correo Jefe Inmediato")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "*Se requiere un correo electrónico")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "No es un Correo Electronico")]
         public string sol_GralCorreoJefeInmediato { get; set; }
 
         [Display(Name = "Comentario General")]

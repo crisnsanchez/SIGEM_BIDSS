@@ -22,13 +22,13 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Solicitud
         public ActionResult Index()
         {
-           
+
             return View();
         }
 
         public ActionResult Create(tbSolicitud tbSolicitud, int _tipsol_Id)
         {
-           
+
             try
             {
 
@@ -56,6 +56,7 @@ namespace SIGEM_BIDSS.Controllers
                     tbSolicitud.Emp_Name = EmpData.nombreEmpleado;
                     tbSolicitud.Emp_Mail = _emailAD;
                     ViewBag.EmpNames = EmpData.nombreEmpleado;
+                    ViewBag.Empleado = db.tbEmpleado.ToList();
                     ViewBag.tipsol_Id = new SelectList(db.tbTipoSolicitud, "tipsol_Id", "tipsol_Descripcion");
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
                     ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
@@ -71,10 +72,10 @@ namespace SIGEM_BIDSS.Controllers
             catch (Exception Ex)
             {
                 TempData["controllerName"] = RouteData.Values["controller"];
-                TempData["actionName"]= RouteData.Values["action"];
+                TempData["actionName"] = RouteData.Values["action"];
                 TempData["idValue"] = _tipsol_Id;
 
-                return RedirectToAction("Error500","Home");
+                return RedirectToAction("Error500", "Home");
             }
 
         }
@@ -92,7 +93,7 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "sol_Id, emp_Id, tipsol_Id, pto_Id, tpsal_id, tmo_Id, are_Id, tipmo_id, tpv_Id, tperm_Id, sol_GralDescripcion, sol_GralJefeInmediato, sol_GralCorreoJefeInmediato, sol_GralComentario, sol_GralJustificacion, sol_GralFechaSolicitud, sol_AnviFechaViaje, sol_Anvi_Cliente, sol_Anvi_LugarDestino, sol_Acper_Anterior, sol_Anvi_PropositoVisita, sol_Anvi_DiasVisita, sol_AnviHospedaje, sol_AnviTrasladoHacia, sol_AnsolMonto, sol_PerFechaRegreso, sol_PerMedioDia, sol_PerFechaMedioDia ,sol_PerFechaInicio, sol_PerCantidadDias, sol_ReemMonto, sol_ReemFechaMonto, sol_ReemProveedor, sol_ReemCargoA, sol_ReemFechaGastos, sol_ReemNoFactura, sol_ReemMontoTotal, sol_AprRtn, sol_AprNombreEmpresa, sol_AprCiudad, sol_AprDireccion, sol_ApreTelefono, sol_ApreContactoAdm, sol_ApreCorreoAdm, sol_ApreNombreTecn, sol_ApreTelefonoTecn, sol_ApreCorreoTecn, sol_ApreCargoTecn, sol_ApreLink, sol_Acper_Nuevo, sol_RequeCantidad, sol_UsuarioCrea," +
             " sol_FechaCrea, sol_UsuarioModifica, sol_FechaModifica, Emp_Name,Emp_Mail")] tbSolicitud tbSolicitud)
         {
-           
+
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.tipsol_Id = new SelectList(db.tbTipoSolicitud, "tipsol_Id", "tipsol_Descripcion");
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
@@ -131,9 +132,9 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        
+
                         string lvMensajeError = "";
-                        LeerDatos(out lvMensajeError, tbSolicitud.Emp_Mail,tbSolicitud.Emp_Name);
+                        LeerDatos(out lvMensajeError, tbSolicitud.Emp_Mail, tbSolicitud.Emp_Name);
 
                         TempData["smserror"] = "Solicitud Realizada con Exito.";
                         ViewBag.smserror = TempData["smserror"];
@@ -166,12 +167,12 @@ namespace SIGEM_BIDSS.Controllers
                 lsRutaPlantilla = @"C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Content\Email\index.xml";
 
                 lsXMLDatos = @"<principal>
-                         <to>" + _Destinatario + "</to>" +
+                            <to>" + _DestinatarioName + " " + _Destinatario + "</to>" +
                             @"<from>Jani</from>" +
                             @"<heading>Reminder</heading>
                         <body>Don't forget me this weekend!</body>
                         </principal>";
-                var _Parameters = (from _tbParm in db.tbParametro select _tbParm ).FirstOrDefault();
+                var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
                 EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
                 enviarCorreo(_Parameters.par_Emisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _Destinatario, _Parameters.par_Servidor, _Parameters.par_Puerto);
                 return 0;
@@ -255,5 +256,22 @@ namespace SIGEM_BIDSS.Controllers
             }
         }
 
+
+        public JsonResult GetEmp(int emp_Id)
+        {
+            object _EmpList = null;
+            try 
+            {
+                _EmpList = (from _emp in db.tbEmpleado
+                            where _emp.emp_Id == emp_Id
+                            select new { _jefeEmpName = _emp.emp_Nombres + " " + _emp.emp_Apellidos, _jefeEmpMail = _emp.emp_CorreoElectronico }).FirstOrDefault();
+
+            }
+            catch (Exception Ex)
+            {
+                _EmpList = Ex.Message.ToString();
+            }
+            return Json(_EmpList, JsonRequestBehavior.AllowGet);
+        }
     }
 }

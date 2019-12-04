@@ -8,10 +8,10 @@ $('#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud,#sol_PerFech
 
 
 //max length en campos
-$(document).ready(function () {
-    $("#tperm_Descripcion")[0].maxLength = 50;
+//$(document).ready(function () {
+//    $("#tperm_Descripcion")[0].maxLength = 50;
 
-})
+//})
 
 
 

@@ -3194,6 +3194,7 @@
     <Content Include="Views\Parametros\Details.cshtml" />
     <Content Include="Views\Parametros\Edit.cshtml" />
     <Content Include="Views\Parametros\Index.cshtml" />
+    <Content Include="Views\Solicitud\_Empleado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
