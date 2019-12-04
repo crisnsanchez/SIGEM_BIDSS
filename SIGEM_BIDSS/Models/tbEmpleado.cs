@@ -17,11 +17,11 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbEmpleado()
         {
+            this.tbSolicitud = new HashSet<tbSolicitud>();
+            this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
             this.tbSueldos = new HashSet<tbSueldos>();
             this.tbSueldos1 = new HashSet<tbSueldos>();
-            this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
-            this.tbSolicitud = new HashSet<tbSolicitud>();
         }
     
         public short emp_Id { get; set; }
@@ -47,18 +47,18 @@ namespace SIGEM_BIDSS.Models
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
+        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
         public virtual tbEstado tbEstado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
+        public virtual tbMunicipio tbMunicipio { get; set; }
+        public virtual tbPuesto tbPuesto { get; set; }
+        public virtual tbTipoSangre tbTipoSangre { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSueldos> tbSueldos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSueldos> tbSueldos1 { get; set; }
-        public virtual tbMunicipio tbMunicipio { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
-        public virtual tbPuesto tbPuesto { get; set; }
-        public virtual tbTipoSangre tbTipoSangre { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

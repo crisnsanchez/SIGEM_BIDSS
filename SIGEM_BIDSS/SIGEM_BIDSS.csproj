@@ -211,6 +211,12 @@
     <Compile Include="Models\parametro.cs" />
     <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Models\Sueldo.cs" />
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbBitacoraErrores.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbDeduccionInstitucionFinanciera.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -224,6 +230,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbParametro.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbParametro1.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbSueldos.cs">
