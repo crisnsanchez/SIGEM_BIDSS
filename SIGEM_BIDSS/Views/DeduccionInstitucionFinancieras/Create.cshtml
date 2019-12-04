@@ -43,82 +43,89 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
+        <div class="card-body">
+            <div class="form-row">
 
-        <h4>tbDeduccionInstitucionFinanciera</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.deif_IdDeduccionInstFinanciera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.deif_IdDeduccionInstFinanciera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.deif_IdDeduccionInstFinanciera, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.deif_IdDeduccionInstFinanciera, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.deif_IdDeduccionInstFinanciera, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.deif_IdDeduccionInstFinanciera, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.emp_Id, "emp_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.insf_IdInstitucionFinanciera, "insf_IdInstitucionFinanciera", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("insf_IdInstitucionFinanciera", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.deif_Monto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.deif_Monto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.deif_Monto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.deif_Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.deif_Comentarios, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.deif_Comentarios, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.deif_Activo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.deif_Activo)
-                    @Html.ValidationMessageFor(model => model.deif_Activo, "", new { @class = "text-danger" })
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.deif_Pagado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.deif_Pagado)
-                    @Html.ValidationMessageFor(model => model.deif_Pagado, "", new { @class = "text-danger" })
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.insf_IdInstitucionFinanciera, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("insf_IdInstitucionFinanciera", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.deif_Monto, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.deif_Monto, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.deif_Monto, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-4 col-md-10">
-                <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
-                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.deif_Comentarios, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.deif_Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.deif_Comentarios, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.deif_Activo, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.deif_Activo)
+                            @Html.ValidationMessageFor(model => model.deif_Activo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.deif_Pagado, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.deif_Pagado)
+                            @Html.ValidationMessageFor(model => model.deif_Pagado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+
         </div>
 
-
-    </div>
-    }
-
-</div>
+        </div>
+            }
+  </div>
