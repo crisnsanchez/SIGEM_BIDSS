@@ -17,7 +17,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: InstitucionesFinancieras
         public ActionResult Index()
         {
-            return View(db.tbInstitucionesFinancieras.ToList());
+            return View(db.tbInstitucionFinanciera.ToList());
         }
 
         // GET: InstitucionesFinancieras/Details/5
@@ -27,7 +27,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
+            tbInstitucionFinanciera tbInstitucionesFinancieras = db.tbInstitucionFinanciera.Find(id);
             if (tbInstitucionesFinancieras == null)
             {
                 return HttpNotFound();
@@ -46,19 +46,19 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
+        public ActionResult Create([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
             if (ModelState.IsValid)
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbInstitucionesFinancieras_Insert(tbInstitucionesFinancieras.insf_DescInstitucionFinanc,
-                                                                         tbInstitucionesFinancieras.insf_Contacto,
-                                                                         tbInstitucionesFinancieras.insf_Telefono,
-                                                                         tbInstitucionesFinancieras.insf_Correo,1,
-                                                                         tbInstitucionesFinancieras.insf_Activo);
-                    foreach (UDP_Gral_tbInstitucionesFinancieras_Insert_Result TipoSangre in List)
+                    List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Nombre,
+                                                                         tbInstitucionFinanciera.insf_Contacto,
+                                                                         tbInstitucionFinanciera.insf_Telefono,
+                                                                         tbInstitucionFinanciera.insf_Correo,1,
+                                                                         tbInstitucionFinanciera.insf_Activo);
+                    foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
@@ -79,7 +79,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-            return View(tbInstitucionesFinancieras);
+            return View(tbInstitucionFinanciera);
         }
 
         // GET: InstitucionesFinancieras/Edit/5
@@ -89,7 +89,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
+            tbInstitucionFinanciera tbInstitucionesFinancieras = db.tbInstitucionFinanciera.Find(id);
             if (tbInstitucionesFinancieras == null)
             {
                 return HttpNotFound();
@@ -102,19 +102,19 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionesFinancieras tbInstitucionesFinancieras)
+        public ActionResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
             if (ModelState.IsValid)
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbInstitucionesFinancieras_Update(tbInstitucionesFinancieras.insf_IdInstitucionFinanciera,tbInstitucionesFinancieras.insf_DescInstitucionFinanc,
-                                                                         tbInstitucionesFinancieras.insf_Contacto,
-                                                                         tbInstitucionesFinancieras.insf_Telefono,
-                                                                         tbInstitucionesFinancieras.insf_Correo, 1,
-                                                                         tbInstitucionesFinancieras.insf_Activo);
-                    foreach (UDP_Gral_tbInstitucionesFinancieras_Update_Result TipoSangre in List)
+                    List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
+                                                                         tbInstitucionFinanciera.insf_Contacto,
+                                                                         tbInstitucionFinanciera.insf_Telefono,
+                                                                         tbInstitucionFinanciera.insf_Correo, 1,
+                                                                         tbInstitucionFinanciera.insf_Activo);
+                    foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
@@ -135,7 +135,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-            return View(tbInstitucionesFinancieras);
+            return View(tbInstitucionFinanciera);
         }
 
         // GET: InstitucionesFinancieras/Delete/5
@@ -145,12 +145,12 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
-            if (tbInstitucionesFinancieras == null)
+            tbInstitucionFinanciera tbInstitucionFinanciera = db.tbInstitucionFinanciera.Find(id);
+            if (tbInstitucionFinanciera == null)
             {
                 return HttpNotFound();
             }
-            return View(tbInstitucionesFinancieras);
+            return View(tbInstitucionFinanciera);
         }
 
         // POST: InstitucionesFinancieras/Delete/5
@@ -158,8 +158,8 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbInstitucionesFinancieras tbInstitucionesFinancieras = db.tbInstitucionesFinancieras.Find(id);
-            db.tbInstitucionesFinancieras.Remove(tbInstitucionesFinancieras);
+            tbInstitucionFinanciera tbInstitucionFinanciera = db.tbInstitucionFinanciera.Find(id);
+            db.tbInstitucionFinanciera.Remove(tbInstitucionFinanciera);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

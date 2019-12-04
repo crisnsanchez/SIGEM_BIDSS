@@ -65,7 +65,7 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                     ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion");
                     ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
-                    ViewBag.invCom_Id = new SelectList(db.tbInventarioCompra, "invCom_Id", "invCom_Descripcion");
+                    //ViewBag.invCom_Id = new SelectList(db.tbInventarioCompra, "invCom_Id", "invCom_Descripcion");
                     return View(tbSolicitud);
                 }
             }
@@ -102,7 +102,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.tipmo_id = new SelectList(db.tbTipoMovimiento, "tipmo_id", "tipmo_Movimiento");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
             ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion");
-            ViewBag.invCom_Id = new SelectList(db.tbInventarioCompra, "invCom_Id", "invCom_Descripcion");
+            //ViewBag.invCom_Id = new SelectList(db.tbInventarioCompra, "invCom_Id", "invCom_Descripcion");
 
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             if (ModelState.IsValid)
@@ -111,21 +111,21 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     var MensajeError = "";
                     IEnumerable<object> list = null;
-                    var _date = Convert.ToDateTime(tbSolicitud.sol_GralFechaSolicitud);
-                    list = db.UDP_Gral_tSolicitudInsertar(tbSolicitud.emp_Id, tbSolicitud.tipsol_Id, tbSolicitud.pto_Id, tbSolicitud.tpsal_id, tbSolicitud.tmo_Id,
-                    tbSolicitud.are_Id, tbSolicitud.tipmo_id, tbSolicitud.tpv_Id, tbSolicitud.tperm_Id, tbSolicitud.invCom_Id, tbSolicitud.sol_GralDescripcion, tbSolicitud.sol_GralJefeInmediato,
-                    tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralComentario, tbSolicitud.sol_GralJustificacion, tbSolicitud.sol_GralFechaSolicitud,
-                    tbSolicitud.sol_AnviFechaViaje, tbSolicitud.sol_Anvi_Cliente, tbSolicitud.sol_Anvi_LugarDestino, tbSolicitud.sol_Acper_Anterior,
-                    tbSolicitud.sol_Anvi_PropositoVisita, tbSolicitud.sol_Anvi_DiasVisita, tbSolicitud.sol_AnviHospedaje, tbSolicitud.sol_AnviTrasladoHacia,
-                    tbSolicitud.sol_AnsolMonto, tbSolicitud.sol_PerFechaRegreso, tbSolicitud.sol_PerMedioDia, tbSolicitud.sol_PerFechaMedioDia, tbSolicitud.sol_PerFechaInicio, tbSolicitud.sol_PerCantidadDias,
-                    tbSolicitud.sol_ReemMonto, tbSolicitud.sol_ReemFechaMonto, tbSolicitud.sol_ReemProveedor, tbSolicitud.sol_ReemCargoA, tbSolicitud.sol_ReemFechaGastos,
-                    tbSolicitud.sol_ReemNoFactura, tbSolicitud.sol_ReemMontoTotal, tbSolicitud.sol_AprRtn, tbSolicitud.sol_AprNombreEmpresa, tbSolicitud.sol_AprCiudad,
-                    tbSolicitud.sol_AprDireccion, tbSolicitud.sol_ApreTelefono, tbSolicitud.sol_ApreContactoAdm, tbSolicitud.sol_ApreCorreoAdm, tbSolicitud.sol_ApreNombreTecn,
-                    tbSolicitud.sol_ApreTelefonoTecn, tbSolicitud.sol_ApreCorreoTecn, tbSolicitud.sol_ApreCargoTecn, tbSolicitud.sol_ApreLink, tbSolicitud.sol_Acper_Nuevo,
-                    tbSolicitud.sol_RequeCantidad, _functions.GetUser(), _functions.DatetimeNow(), _functions.GetUser(), _functions.DatetimeNow());
-                    foreach (UDP_Gral_tSolicitudInsertar_Result Solicitud in list)
+                    //var _date = Convert.ToDateTime(tbSolicitud.sol_GralFechaSolicitud);
+                    //list = db.UDP_Gral_tSolicitudInsertar(tbSolicitud.emp_Id, tbSolicitud.tipsol_Id, tbSolicitud.pto_Id, tbSolicitud.tpsal_id, tbSolicitud.tmo_Id,
+                    //tbSolicitud.are_Id, tbSolicitud.tipmo_id, tbSolicitud.tpv_Id, tbSolicitud.tperm_Id, tbSolicitud.invCom_Id, tbSolicitud.sol_GralDescripcion, tbSolicitud.sol_GralJefeInmediato,
+                    //tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralComentario, tbSolicitud.sol_GralJustificacion, tbSolicitud.sol_GralFechaSolicitud,
+                    //tbSolicitud.sol_AnviFechaViaje, tbSolicitud.sol_Anvi_Cliente, tbSolicitud.sol_Anvi_LugarDestino, tbSolicitud.sol_Acper_Anterior,
+                    //tbSolicitud.sol_Anvi_PropositoVisita, tbSolicitud.sol_Anvi_DiasVisita, tbSolicitud.sol_AnviHospedaje, tbSolicitud.sol_AnviTrasladoHacia,
+                    //tbSolicitud.sol_AnsolMonto, tbSolicitud.sol_PerFechaRegreso, tbSolicitud.sol_PerMedioDia, tbSolicitud.sol_PerFechaMedioDia, tbSolicitud.sol_PerFechaInicio, tbSolicitud.sol_PerCantidadDias,
+                    //tbSolicitud.sol_ReemMonto, tbSolicitud.sol_ReemFechaMonto, tbSolicitud.sol_ReemProveedor, tbSolicitud.sol_ReemCargoA, tbSolicitud.sol_ReemFechaGastos,
+                    //tbSolicitud.sol_ReemNoFactura, tbSolicitud.sol_ReemMontoTotal, tbSolicitud.sol_AprRtn, tbSolicitud.sol_AprNombreEmpresa, tbSolicitud.sol_AprCiudad,
+                    //tbSolicitud.sol_AprDireccion, tbSolicitud.sol_ApreTelefono, tbSolicitud.sol_ApreContactoAdm, tbSolicitud.sol_ApreCorreoAdm, tbSolicitud.sol_ApreNombreTecn,
+                    //tbSolicitud.sol_ApreTelefonoTecn, tbSolicitud.sol_ApreCorreoTecn, tbSolicitud.sol_ApreCargoTecn, tbSolicitud.sol_ApreLink, tbSolicitud.sol_Acper_Nuevo,
+                    //tbSolicitud.sol_RequeCantidad, _functions.GetUser(), _functions.DatetimeNow(), _functions.GetUser(), _functions.DatetimeNow());
+                    //foreach (UDP_Gral_tSolicitudInsertar_Result Solicitud in list)
 
-                        MensajeError = Solicitud.MensajeError;
+                        //MensajeError = Solicitud.MensajeError;
                     if (MensajeError.StartsWith("-1"))
                     {
 
@@ -135,8 +135,8 @@ namespace SIGEM_BIDSS.Controllers
                     else
                     {
 
-                        string lvMensajeError = "";
-                        LeerDatos(out lvMensajeError, tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralJefeInmediato, tbSolicitud.Emp_Name);
+                        //string lvMensajeError = "";
+                        //LeerDatos(out lvMensajeError, tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralJefeInmediato, tbSolicitud.Emp_Name);
 
                         TempData["smserror"] = "Solicitud Realizada con Exito.";
                         ViewBag.smserror = TempData["smserror"];
@@ -176,7 +176,7 @@ namespace SIGEM_BIDSS.Controllers
                         </principal>";
                 var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
                 EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
-                enviarCorreo(_Parameters.par_Emisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _empJefeMail, _Parameters.par_Servidor, _Parameters.par_Puerto);
+                enviarCorreo(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _empJefeMail, _Parameters.par_Servidor, _Parameters.par_Puerto);
                 return 0;
             }
             catch (Exception Ex)

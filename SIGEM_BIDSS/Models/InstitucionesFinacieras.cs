@@ -8,7 +8,7 @@ using System.Web;
 namespace SIGEM_BIDSS.Models
 {
     [MetadataType(typeof(InstFinacierasMetaData))]
-    public partial class tbInstitucionesFinancieras
+    public partial class tbInstitucionFinanciera
     {
 
     }
@@ -16,10 +16,10 @@ namespace SIGEM_BIDSS.Models
     public class InstFinacierasMetaData
     {
         [Display(Name = "ID")]
-        public int insf_IdInstitucionFinanciera { get; set; }
+        public int insf_Id { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Institucion Finaciera")]
-        public string insf_DescInstitucionFinanc { get; set; }
+        public string insf_Nombre { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Nombre Contacto")]
         public string insf_Contacto { get; set; }

@@ -20,8 +20,8 @@ namespace SIGEM_BIDSS.Models
             this.tbSolicitud = new HashSet<tbSolicitud>();
             this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
-            this.tbSueldos = new HashSet<tbSueldos>();
-            this.tbSueldos1 = new HashSet<tbSueldos>();
+            this.tbSueldo = new HashSet<tbSueldo>();
+            this.tbSueldo1 = new HashSet<tbSueldo>();
         }
     
         public short emp_Id { get; set; }
@@ -40,7 +40,7 @@ namespace SIGEM_BIDSS.Models
         public string emp_RazonInactivacion { get; set; }
         public int est_Id { get; set; }
         public string emp_PathImage { get; set; }
-        public string mun_Id { get; set; }
+        public string mun_codigo { get; set; }
         public Nullable<int> emp_UsuarioCrea { get; set; }
         public Nullable<System.DateTime> emp_FechaCrea { get; set; }
         public Nullable<int> emp_UsuarioModifica { get; set; }
@@ -57,8 +57,8 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSueldos> tbSueldos { get; set; }
+        public virtual ICollection<tbSueldo> tbSueldo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSueldos> tbSueldos1 { get; set; }
+        public virtual ICollection<tbSueldo> tbSueldo1 { get; set; }
     }
 }

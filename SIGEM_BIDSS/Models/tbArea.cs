@@ -17,7 +17,6 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbArea()
         {
-            this.tbSolicitud = new HashSet<tbSolicitud>();
             this.tbPuesto = new HashSet<tbPuesto>();
             this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
         }
@@ -29,8 +28,6 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> are_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> are_FechaModifica { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbPuesto> tbPuesto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

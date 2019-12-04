@@ -60,8 +60,8 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Plani_tbSueldos_Insert(tbSueldos.emp_Id, tbSueldos.tmo_Id, tbSueldos.sue_Cantidad, tbSueldos.sue_SueldoAnterior, tbSueldos.sue_Estado, tbSueldos.sue_RazonInactivo, 1);
-                    foreach (UDP_Plani_tbSueldos_Insert_Result sueldo in List)
+                    List = db.UDP_rrhh_tbSueldo_Insert(tbSueldos.emp_Id, tbSueldos.tmo_Id, tbSueldos.sue_Cantidad, tbSueldos.sue_SueldoAnterior, tbSueldos.sue_Estado, tbSueldos.sue_RazonInactivo, 1);
+                    foreach (UDP_rrhh_tbSueldo_Insert_Result sueldo in List)
                         Msj = sueldo.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {

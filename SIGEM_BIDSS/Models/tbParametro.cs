@@ -18,11 +18,8 @@ namespace SIGEM_BIDSS.Models
         public string par_NombreEmpresa { get; set; }
         public string par_TelefonoEmpresa { get; set; }
         public string par_CorreoEmpresa { get; set; }
-        public string par_Emisor { get; set; }
+        public string par_CorreoEmisor { get; set; }
         public string par_Password { get; set; }
-        public string par_Mensaje { get; set; }
-        public string par_Asunto { get; set; }
-        public string par_Destinatario { get; set; }
         public string par_Servidor { get; set; }
         public int par_Puerto { get; set; }
         public string par_PathLogo { get; set; }

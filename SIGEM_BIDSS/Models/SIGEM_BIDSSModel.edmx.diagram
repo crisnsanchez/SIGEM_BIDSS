@@ -4,35 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="09235ff55351436aa410b8d87afbc04c" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbBitacoraErrores" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitud" Width="1.5" PointX="6" PointY="12" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbArea" Width="1.5" PointX="3.75" PointY="37.625" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbDepartamento" Width="1.5" PointX="1.5" PointY="55.375" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbEstado" Width="1.5" PointX="1.5" PointY="45" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbHistorialdeSolicitud" Width="1.5" PointX="3" PointY="12.375" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbMoneda" Width="1.5" PointX="0.75" PointY="17.5" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbMunicipio" Width="1.5" PointX="1.5" PointY="51.25" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro1" Width="1.5" PointX="5.75" PointY="3.75" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbPuesto" Width="1.5" PointX="1.5" PointY="41.125" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoMovimiento" Width="1.5" PointX="3.75" PointY="7.625" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoPermiso" Width="1.5" PointX="3.75" PointY="4.25" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSalario" Width="1.5" PointX="3.75" PointY="31" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSangre" Width="1.5" PointX="1.5" PointY="48.125" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSolicitud" Width="1.5" PointX="3.75" PointY="1" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoViatico" Width="1.5" PointX="3.75" PointY="34.375" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbInventarioCompra" Width="1.5" PointX="3.75" PointY="26.875" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbDeduccionInstitucionFinanciera" Width="1.5" PointX="6" PointY="45.75" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbInstitucionesFinancieras" Width="1.5" PointX="3.75" PointY="52" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbEmpleado" Width="1.5" PointX="3.75" PointY="44.125" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSueldos" Width="1.5" PointX="9" PointY="16.75" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbAIventarioCompra_invCom_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbArea_are_Id" />
+      <Diagram DiagramId="09235ff55351436aa410b8d87afbc04c" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbBitacoraErrores" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitud" Width="1.5" PointX="13.5" PointY="14.375" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbArea" Width="1.5" PointX="0.75" PointY="19.375" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbDepartamento" Width="1.5" PointX="0.75" PointY="23.5" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbEstado" Width="1.5" PointX="3" PointY="26.875" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbHistorialdeSolicitud" Width="1.5" PointX="7.5" PointY="14.125" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbMoneda" Width="1.5" PointX="5.25" PointY="6.125" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbMunicipio" Width="1.5" PointX="3" PointY="23.375" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbPuesto" Width="1.5" PointX="3" PointY="19.25" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoMovimiento" Width="1.5" PointX="5.25" PointY="32" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoPermiso" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSalario" Width="1.5" PointX="5.25" PointY="25.375" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSangre" Width="1.5" PointX="3" PointY="15.25" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSolicitud" Width="1.5" PointX="5.25" PointY="28.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoViatico" Width="1.5" PointX="5.25" PointY="13.125" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbProducto" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbProductoCategoria" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbProductoSubcategoria" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbDeduccionInstitucionFinanciera" Width="1.5" PointX="10.5" PointY="14" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbInstitucionFinanciera" Width="1.5" PointX="8.25" PointY="10.125" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbEmpleado" Width="1.5" PointX="5.25" PointY="17.25" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbEmpleado_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbMoneda_tmo_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbPuesto_pto_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoMovimiento_tipmo_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoPermiso_tperm_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbSolicitud_tbTipoSalario_tpsal_Id" />
@@ -41,7 +37,7 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_are_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbArea_are_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_dep_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_est_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbEstado_est_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbEmpleado_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbMoneda_tmo_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbPuesto_pto_Id" />
@@ -50,12 +46,14 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSalario_tpsal_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbMunicipio_Gral_tbEmpleado_emp_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_pto_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tps_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_Gral_tbMunicipio_mun_codigo" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbPuesto_pto_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbTipoSangre_tps_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProductoSubcategoria_tbProductoCategoria_pcat_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSueldo" Width="1.5" PointX="10.5" PointY="7.875" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleados_emp_Id_Plani_tbSueldos_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Plani_tbSueldos_sue_Id_Gral_tbSueldos_sue_SueldoAnterior" />

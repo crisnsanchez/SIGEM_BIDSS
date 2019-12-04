@@ -183,11 +183,9 @@
     <Compile Include="Controllers\HistorialdeSolicitudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
-    <Compile Include="Controllers\InventarioComprasController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
-    <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
@@ -199,9 +197,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ConteoParametro_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
     <Compile Include="Models\InstitucionesFinacieras.cs" />
     <Compile Include="Models\Area.cs" />
@@ -211,7 +206,7 @@
     <Compile Include="Models\parametro.cs" />
     <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Models\Sueldo.cs" />
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\tbArea.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbBitacoraErrores.cs">
@@ -220,22 +215,64 @@
     <Compile Include="Models\tbDeduccionInstitucionFinanciera.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbDepartamento.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbEmpleado.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbEstado.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbHistorialdeSolicitud.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbInstitucionesFinancieras.cs">
+    <Compile Include="Models\tbInstitucionFinanciera.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbInventarioCompra.cs">
+    <Compile Include="Models\tbMoneda.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbMunicipio.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbParametro.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbParametro1.cs">
+    <Compile Include="Models\tbProducto.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbSueldos.cs">
+    <Compile Include="Models\tbProductoCategoria.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbProductoSubcategoria.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbPuesto.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbSolicitud.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbSueldo.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoMovimiento.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoPermiso.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoSalario.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoSangre.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoSolicitud.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbTipoViatico.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoPermiso.cs" />
@@ -261,54 +298,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SIGEM_BIDSSModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbArea.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbDepartamento.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbEmpleado.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbEstado.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbMoneda.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbMunicipio.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbPuesto.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbSolicitud.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbTipoMovimiento.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbTipoPermiso.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbTipoSalario.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbTipoSangre.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbTipoSolicitud.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbTipoViatico.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Moneda.cs" />
     <Compile Include="Models\TipoMoviento.cs" />
     <Compile Include="Models\TipoSangre.cs" />
     <Compile Include="Models\TipoSalario.cs" />
     <Compile Include="Models\TipoViatico.cs" />
     <Compile Include="Models\TipoSolicitud.cs" />
+    <Compile Include="Models\UDP_Conf_tbParametro_Count_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Gral_tbArea_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -321,9 +319,6 @@
     <Compile Include="Models\UDP_Gral_tbDepartamento_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Gral_tbEmpleado_Insert_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UDP_Gral_tbEmpleado_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -331,12 +326,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbEstado_Update_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_tbInstitucionesFinancieras_Insert_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_tbInstitucionesFinancieras_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbInventarioCompra_Insert_Result.cs">
@@ -358,12 +347,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbMunicipio_Update_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_tbParametro_Insert_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_tbParametro_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbPuesto_Insert_Result.cs">
@@ -411,10 +394,19 @@
     <Compile Include="Models\UDP_Gral_tSolicitudInsertar_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbSueldos_Insert_Result.cs">
+    <Compile Include="Models\UDP_Plani_tbInstitucionFinanciera_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UDP_Plani_tbSueldos_Update_Result.cs">
+    <Compile Include="Models\UDP_Plani_tbInstitucionFinanciera_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_rrhh_tbEmpleado_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_rrhh_tbSueldo_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_rrhh_tbSueldo_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -3229,22 +3221,12 @@
     <Content Include="Views\HistorialdeSolicitud\Details.cshtml" />
     <Content Include="Views\HistorialdeSolicitud\Edit.cshtml" />
     <Content Include="Views\HistorialdeSolicitud\Index.cshtml" />
-    <Content Include="Views\Parametros\Create.cshtml" />
-    <Content Include="Views\Parametros\Delete.cshtml" />
-    <Content Include="Views\Parametros\Details.cshtml" />
-    <Content Include="Views\Parametros\Edit.cshtml" />
-    <Content Include="Views\Parametros\Index.cshtml" />
     <Content Include="Views\CodeQR\Index.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Create.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Delete.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Details.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Edit.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Index.cshtml" />
-    <Content Include="Views\InventarioCompras\Create.cshtml" />
-    <Content Include="Views\InventarioCompras\Delete.cshtml" />
-    <Content Include="Views\InventarioCompras\Details.cshtml" />
-    <Content Include="Views\InventarioCompras\Edit.cshtml" />
-    <Content Include="Views\InventarioCompras\Index.cshtml" />
     <Content Include="Views\Sueldos\Create.cshtml" />
     <Content Include="Views\Sueldos\Delete.cshtml" />
     <Content Include="Views\Sueldos\Details.cshtml" />

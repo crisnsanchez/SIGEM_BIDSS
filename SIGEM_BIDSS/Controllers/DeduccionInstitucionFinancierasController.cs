@@ -17,7 +17,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: DeduccionInstitucionFinancieras
         public ActionResult Index()
         {
-            var tbDeduccionInstitucionFinanciera = db.tbDeduccionInstitucionFinanciera.Include(t => t.tbEmpleado).Include(t => t.tbInstitucionesFinancieras);
+            var tbDeduccionInstitucionFinanciera = db.tbDeduccionInstitucionFinanciera.Include(t => t.tbEmpleado).Include(t => t.tbInstitucionFinanciera);
             return View(tbDeduccionInstitucionFinanciera.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create()
         {
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
-            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionesFinancieras, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc");
+            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
-            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionesFinancieras, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
+            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
             return View(tbDeduccionInstitucionFinanciera);
         }
 
@@ -76,7 +76,7 @@ namespace SIGEM_BIDSS.Controllers
                 return HttpNotFound();
             }
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
-            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionesFinancieras, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
+            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
             return View(tbDeduccionInstitucionFinanciera);
         }
 
@@ -94,7 +94,7 @@ namespace SIGEM_BIDSS.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
-            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionesFinancieras, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
+            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
             return View(tbDeduccionInstitucionFinanciera);
         }
 
