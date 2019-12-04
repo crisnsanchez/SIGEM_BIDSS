@@ -27,17 +27,17 @@ namespace SIGEM_BIDSS.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<tbBitacoraErrores> tbBitacoraErrores { get; set; }
+        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
+        public virtual DbSet<tbParametro> tbParametro { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tbArea> tbArea { get; set; }
-        public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
-        public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbEstado> tbEstado { get; set; }
         public virtual DbSet<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
-        public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
-        public virtual DbSet<tbInventarioCompra> tbInventarioCompra { get; set; }
         public virtual DbSet<tbMoneda> tbMoneda { get; set; }
         public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
-        public virtual DbSet<tbParametro> tbParametro { get; set; }
+        public virtual DbSet<tbParametro1> tbParametro1 { get; set; }
         public virtual DbSet<tbPuesto> tbPuesto { get; set; }
         public virtual DbSet<tbTipoMovimiento> tbTipoMovimiento { get; set; }
         public virtual DbSet<tbTipoPermiso> tbTipoPermiso { get; set; }
@@ -45,8 +45,11 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
+        public virtual DbSet<tbInventarioCompra> tbInventarioCompra { get; set; }
+        public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
+        public virtual DbSet<tbInstitucionesFinancieras> tbInstitucionesFinancieras { get; set; }
+        public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbSueldos> tbSueldos { get; set; }
-        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
