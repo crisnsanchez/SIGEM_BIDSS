@@ -17,7 +17,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Sueldos
         public ActionResult Index()
         {
-            var tbSueldos = db.tbSueldos.Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMoneda).Include(t => t.tbSueldos2).Include(t => t.tbSueldos3);
+            var tbSueldos = db.tbSueldo.Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMoneda).Include(t => t.tbSueldo2).Include(t => t.tbSueldo3);
             return View(tbSueldos.ToList());
         }
 
@@ -28,12 +28,12 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbSueldos tbSueldos = db.tbSueldos.Find(id);
-            if (tbSueldos == null)
+            tbSueldo tbSueldo = db.tbSueldo.Find(id);
+            if (tbSueldo == null)
             {
                 return HttpNotFound();
             }
-            return View(tbSueldos);
+            return View(tbSueldo);
         }
 
         // GET: Sueldos/Create
@@ -42,8 +42,8 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
-            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldos, "sue_Id", "sue_RazonInactivo");
-            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldos, "sue_Id", "sue_RazonInactivo");
+            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldo, "sue_Id", "sue_RazonInactivo");
+            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldo, "sue_Id", "sue_RazonInactivo");
             return View();
         }
 
@@ -52,7 +52,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "sue_Id,emp_Id,tmo_Id,sue_Cantidad,sue_SueldoAnterior,sue_Estado,sue_RazonInactivo,sue_UsuarioCrea,sue_FechaCrea,ue_UsuarioModifica,sue_FechaModifica")] tbSueldos tbSueldos)
+        public ActionResult Create([Bind(Include = "sue_Id,emp_Id,tmo_Id,sue_Cantidad,sue_SueldoAnterior,sue_Estado,sue_RazonInactivo,sue_UsuarioCrea,sue_FechaCrea,ue_UsuarioModifica,sue_FechaModifica")] tbSueldo tbSueldo)
         {
           
             if (ModelState.IsValid)
@@ -60,17 +60,17 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_rrhh_tbSueldo_Insert(tbSueldos.emp_Id, tbSueldos.tmo_Id, tbSueldos.sue_Cantidad, tbSueldos.sue_SueldoAnterior, tbSueldos.sue_Estado, tbSueldos.sue_RazonInactivo, 1);
+                    List = db.UDP_rrhh_tbSueldo_Insert(tbSueldo.emp_Id, tbSueldo.tmo_Id, tbSueldo.sue_Cantidad, tbSueldo.sue_SueldoAnterior, tbSueldo.sue_Estado, tbSueldo.sue_RazonInactivo, 1);
                     foreach (UDP_rrhh_tbSueldo_Insert_Result sueldo in List)
                         Msj = sueldo.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldos.emp_Id);
-                        ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldos.tmo_Id);
+                        ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldo.emp_Id);
+                        ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldo.tmo_Id);
                         
                        
-                        return View(tbSueldos);
+                        return View(tbSueldo);
                     }
                     else
                     {
@@ -82,17 +82,17 @@ namespace SIGEM_BIDSS.Controllers
                 {
 
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador." + Ex.Message.ToString());
-                    ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldos.emp_Id);
-                    ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldos.tmo_Id);
+                    ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldo.emp_Id);
+                    ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldo.tmo_Id);
 
-                    return View(tbSueldos);
+                    return View(tbSueldo);
                 }
             else
             {
-                ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldos.emp_Id);
-                ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldos.tmo_Id);
+                ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldo.emp_Id);
+                ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldo.tmo_Id);
 
-                return View(tbSueldos);
+                return View(tbSueldo);
             }
     }
 
@@ -103,7 +103,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbSueldos tbSueldos = db.tbSueldos.Find(id);
+            tbSueldo tbSueldos = db.tbSueldo.Find(id);
             if (tbSueldos == null)
             {
                 return HttpNotFound();
@@ -111,8 +111,8 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldos.emp_Id);
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldos.emp_Id);
             ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldos.tmo_Id);
-            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldos, "sue_Id", "sue_RazonInactivo", tbSueldos.sue_SueldoAnterior);
-            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldos, "sue_Id", "sue_RazonInactivo", tbSueldos.sue_SueldoAnterior);
+            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldo, "sue_Id", "sue_RazonInactivo", tbSueldos.sue_SueldoAnterior);
+            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldo, "sue_Id", "sue_RazonInactivo", tbSueldos.sue_SueldoAnterior);
             return View(tbSueldos);
         }
 
@@ -121,20 +121,20 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,tmo_Id,sue_Cantidad,sue_SueldoAnterior,sue_Estado,sue_RazonInactivo,sue_UsuarioCrea,sue_FechaCrea,ue_UsuarioModifica,sue_FechaModifica")] tbSueldos tbSueldos)
+        public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,tmo_Id,sue_Cantidad,sue_SueldoAnterior,sue_Estado,sue_RazonInactivo,sue_UsuarioCrea,sue_FechaCrea,ue_UsuarioModifica,sue_FechaModifica")] tbSueldo tbSueldo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tbSueldos).State = EntityState.Modified;
+                db.Entry(tbSueldo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldos.emp_Id);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldos.emp_Id);
-            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldos.tmo_Id);
-            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldos, "sue_Id", "sue_RazonInactivo", tbSueldos.sue_SueldoAnterior);
-            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldos, "sue_Id", "sue_RazonInactivo", tbSueldos.sue_SueldoAnterior);
-            return View(tbSueldos);
+            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
+            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldo, "sue_Id", "sue_RazonInactivo", tbSueldo.sue_SueldoAnterior);
+            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldo, "sue_Id", "sue_RazonInactivo", tbSueldo.sue_SueldoAnterior);
+            return View(tbSueldo);
         }
 
         // GET: Sueldos/Delete/5
@@ -144,7 +144,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbSueldos tbSueldos = db.tbSueldos.Find(id);
+            tbSueldo tbSueldos = db.tbSueldo.Find(id);
             if (tbSueldos == null)
             {
                 return HttpNotFound();
@@ -157,8 +157,8 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbSueldos tbSueldos = db.tbSueldos.Find(id);
-            db.tbSueldos.Remove(tbSueldos);
+            tbSueldo tbSueldos = db.tbSueldo.Find(id);
+            db.tbSueldo.Remove(tbSueldos);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -7,7 +7,7 @@ using System.Web;
 namespace SIGEM_BIDSS.Models
 {
     [MetadataType(typeof(SueldoMetaData))]
-    public partial class tbSueldos
+    public partial class tbSueldo
     {
     }
 
