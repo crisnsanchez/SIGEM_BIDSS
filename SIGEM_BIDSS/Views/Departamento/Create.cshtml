@@ -7,11 +7,11 @@
 
 
 
-
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
-
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 
 
 <style>
@@ -116,7 +116,26 @@
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
 
+    <script>
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " -+'/áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = "8-37-39-46";
 
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                return false;
+            }
+        }
+    </script>
 
 
 }

@@ -48,7 +48,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
                 tbEmpleado empleado = db.tbEmpleado.Find(tbEmpleado.emp_Id);
-                 list = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, empleado.emp_Nombres, empleado.emp_Apellidos, empleado.emp_Sexo, empleado.emp_FechaNacimiento, empleado.emp_Identificacion, empleado.emp_Telefono, empleado.emp_CorreoElectronico, tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoinactivo, empleado.tps_Id, empleado.pto_Id, empleado.emp_FechaIngreso, empleado.emp_Direccion, empleado.emp_PathImage, empleado.mun_Id, empleado.emp_UsuarioCrea).ToList();
+                 list = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, empleado.emp_Nombres, empleado.emp_Apellidos, empleado.emp_Sexo, empleado.emp_FechaNacimiento, empleado.emp_Identificacion, empleado.emp_Telefono, empleado.emp_CorreoElectronico, tbEmpleado.emp_EsJefe,tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoinactivo, empleado.tps_Id, empleado.pto_Id, empleado.emp_FechaIngreso, empleado.emp_Direccion, empleado.emp_PathImage, empleado.mun_Id, empleado.emp_UsuarioCrea).ToList();
 
 
             }
@@ -94,7 +94,7 @@ namespace SIGEM_BIDSS.Controllers
             tbEmpleado.emp_RazonInactivacion = "";
             IEnumerable<Object> List = null;
             string Msj = "";
-            List = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoactivo, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id, 1);
+            List = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico,tbEmpleado.emp_EsJefe, tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoactivo, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id, 1);
             foreach (UDP_Gral_tbEmpleado_Update_Result Empleado in List)
                 Msj = Empleado.MensajeError;
             if (Msj.StartsWith("-1"))
@@ -118,6 +118,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");
             ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description");
+            ViewBag.emp_EsJefe = new SelectList(GFC.Jefe(), "jefe_id", "condicion");
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
             ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
 
@@ -130,7 +131,7 @@ namespace SIGEM_BIDSS.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono," +
-            "emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,emp_Estado,emp_PathImage,mun_Id,emp_UsuarioCrea,emp_FechaCrea," +
+            "emp_CorreoElectronico, emp_EsJefe ,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,emp_Estado,emp_PathImage,mun_Id,emp_UsuarioCrea,emp_FechaCrea," +
             "emp_UsuarioModifica,emp_FechaModifica")] tbEmpleado tbEmpleado ,  HttpPostedFileBase FotoPath)
         {
 
@@ -145,6 +146,7 @@ namespace SIGEM_BIDSS.Controllers
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                 ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                 ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
+                ViewBag.emp_EsJefe = new SelectList(GFC.Jefe(), "jefe_id", "condicion", tbEmpleado.emp_EsJefe);
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion",tbEmpleado.est_Id);
                 ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
                 return View(tbEmpleado);
@@ -184,7 +186,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbEmpleado_Insert(tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id, 1);
+                    List = db.UDP_Gral_tbEmpleado_Insert(tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_EsJefe,tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id, 1);
                     foreach (UDP_Gral_tbEmpleado_Insert_Result Empleado in List)
                         Msj = Empleado.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -194,12 +196,14 @@ namespace SIGEM_BIDSS.Controllers
                         ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                         ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                         ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
+                        ViewBag.emp_EsJefe = new SelectList(GFC.Jefe(), "jefe_id", "condicion", tbEmpleado.emp_EsJefe);
                         ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                         ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
                         return View(tbEmpleado);
                     }
                     else
                     {
+                        TempData["swalfunction"] = "true";
                         return RedirectToAction("Index");
                     }
                 }
@@ -211,6 +215,7 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                     ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                     ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
+                    ViewBag.emp_EsJefe = new SelectList(GFC.Jefe(), "jefe_id", "condicion", tbEmpleado.emp_EsJefe);
                     ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                     ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
 
@@ -222,6 +227,7 @@ namespace SIGEM_BIDSS.Controllers
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                 ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                 ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
+                ViewBag.emp_EsJefe = new SelectList(GFC.Jefe(), "jefe_id", "condicion", tbEmpleado.emp_EsJefe);
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                 ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
                 return View(tbEmpleado);
@@ -296,7 +302,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo,tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_RazonInactivacion, tbEmpleado.est_Id, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id,1);
+                    List = db.UDP_Gral_tbEmpleado_Update(tbEmpleado.emp_Id, tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo,tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico,tbEmpleado.emp_EsJefe, tbEmpleado.emp_RazonInactivacion, tbEmpleado.est_Id, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_Id,1);
                     foreach (UDP_Gral_tbEmpleado_Update_Result Empleado in List)
                         Msj = Empleado.MensajeError;
                     if (Msj.StartsWith("-1"))

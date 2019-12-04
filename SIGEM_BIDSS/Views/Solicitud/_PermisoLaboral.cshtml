@@ -1,7 +1,6 @@
 ﻿@model SIGEM_BIDSS.Models.tbSolicitud
 @using SIGEM_BIDSS.Models
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
-
 @Html.HiddenFor(model => model.tmo_Id, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.pto_Id, new { Value = GeneralFunctions.intDefault })
 @Html.HiddenFor(model => model.tpsal_id, new { Value = GeneralFunctions.tiposalario })
@@ -75,7 +74,7 @@
 
 
         <div class="form-group">
-            <span class="aviso">8-</span> @Html.LabelFor(model => model.tperm_Id, "Tipo Permiso", htmlAttributes: new { @class = "control-label col-md-8" })
+             @Html.LabelFor(model => model.tperm_Id, "Tipo Permiso", htmlAttributes: new { @class = "control-label col-md-8" })
             <div class="col-md-6">
                 @*@Html.EditorFor(model => model.tperm_Id, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.DropDownList("tperm_Id", null, htmlAttributes: new { @class = "form-control" })
@@ -86,7 +85,7 @@
 
 
         <div class="form-group">
-            <span class="aviso">9-</span> @Html.LabelFor(model => model.sol_PerFechaInicio, "Fecha Inicio Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.sol_PerFechaInicio, "Fecha Inicio Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-6">
                 @Html.EditorFor(model => model.sol_PerFechaInicio, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sol_PerFechaInicio, "", new { @class = "text-danger" })
@@ -94,7 +93,7 @@
         </div>
 
         <div class="form-group">
-            <span class="aviso">10-</span>@Html.LabelFor(model => model.sol_PerFechaRegreso, "Fecha Regreso Permiso", htmlAttributes: new { @class = "control-label col-md-2" })
+            <span class="aviso">10-</span>@Html.LabelFor(model => model.sol_PerFechaRegreso, "Fecha Regreso Permiso", htmlAttributes: new { @class = "control-label col-md-5" })
             <div class="col-md-6">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.sol_PerFechaRegreso, new { htmlAttributes = new { @class = "form-control" } })
@@ -129,7 +128,7 @@
             </div>*@
 
         <div class="form-group">
-            <span class="aviso">11-</span> @Html.LabelFor(model => model.sol_PerCantidadDias, "Cantidad Dias", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.sol_PerCantidadDias, "Cantidad Dias", htmlAttributes: new { @class = "control-label col-md-2" })
 
             <div class="col-md-6">
                 @Html.EditorFor(model => model.sol_PerCantidadDias, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
@@ -144,7 +143,7 @@
         @*<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
             <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>*@
         <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
-        @*<script src="~/Scripts/app/ValidacionesGenerales.js"></script>*@
+        <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
 
         <script type="text/javascript">
             function ShowHideDiv(chkCantDias) {
@@ -163,7 +162,7 @@
 
         <div id="sol_PerFechaMedioDia">
 
-            @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.sol_PerFechaMedioDia, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-7">
                 @Html.EditorFor(model => model.sol_PerFechaMedioDia, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sol_PerFechaMedioDia, "", new { @class = "text-danger" })

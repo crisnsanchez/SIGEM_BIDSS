@@ -18,7 +18,7 @@ namespace SIGEM_BIDSS.Models
     {
         [Display(Name = "Id Tipo Permiso")]
         public int tperm_Id{ get; set; }
-        [Display(Name = "Descripcion")]
+        [Display(Name = "Descripción")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MinLength(5, ErrorMessage = "Máximo {1} caracteres")]
         public string tperm_Descripcion { get; set; }

@@ -18,6 +18,15 @@ namespace SIGEM_BIDSS.Models
             return Hola;
         }
 
+        public List<tbEmpleado> Jefe()
+        {
+            List<tbEmpleado> lis = new List<tbEmpleado>();
+            lis.Add(new tbEmpleado { jefe_id =  false, condicion = "Seleccione Uno" });
+            lis.Add(new tbEmpleado { jefe_id = false, condicion = "No" });
+            lis.Add(new tbEmpleado { jefe_id = true, condicion = "Si" });
+            return lis;
+        }
+
         public DateTime DatetimeNow()
         {
             DateTime dt = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(-6)).DateTime;

@@ -97,6 +97,7 @@ namespace SIGEM_BIDSS.Controllers
                             else
                             {
                                 ModelState.AddModelError("FotoPath", "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .jpg");
+
                                 return View("Index");
                             }
                         }
@@ -117,6 +118,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+                        TempData["swalfunction"] = "true";
                         return RedirectToAction("Index");
                     }
 

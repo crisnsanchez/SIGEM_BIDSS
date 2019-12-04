@@ -19,6 +19,16 @@ namespace SIGEM_BIDSS.Models
         [NotMapped]
         public string ge_Description { get; set; }
 
+        [NotMapped]
+        public List<tbEmpleado> Jefe { get; set; }
+
+        [NotMapped]
+        public bool  jefe_id { get; set; }
+
+        [NotMapped]
+        public string condicion { get; set; }
+
+
 
     }
 

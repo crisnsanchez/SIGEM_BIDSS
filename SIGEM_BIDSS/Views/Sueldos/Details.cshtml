@@ -1,0 +1,115 @@
+﻿@model SIGEM_BIDSS.Models.tbSueldos
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbSueldos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sue_Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sue_Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sue_Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sue_Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sue_RazonInactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sue_RazonInactivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sue_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sue_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sue_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sue_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ue_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ue_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sue_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sue_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbMoneda.tmo_Abreviatura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbMoneda.tmo_Abreviatura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbSueldos2.sue_RazonInactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbSueldos2.sue_RazonInactivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbSueldos3.sue_RazonInactivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbSueldos3.sue_RazonInactivo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.sue_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

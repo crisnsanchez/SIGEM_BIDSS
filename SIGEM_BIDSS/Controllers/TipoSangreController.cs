@@ -79,6 +79,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+                        TempData["swalfunction"] = "true";
                         return RedirectToAction("Index");
                     }
                 }

@@ -18,6 +18,8 @@ namespace SIGEM_BIDSS.Models
         public tbEmpleado()
         {
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
+            this.tbSueldos = new HashSet<tbSueldos>();
+            this.tbSueldos1 = new HashSet<tbSueldos>();
             this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
             this.tbSolicitud = new HashSet<tbSolicitud>();
         }
@@ -30,6 +32,7 @@ namespace SIGEM_BIDSS.Models
         public string emp_Identificacion { get; set; }
         public string emp_Telefono { get; set; }
         public string emp_CorreoElectronico { get; set; }
+        public bool emp_EsJefe { get; set; }
         public int tps_Id { get; set; }
         public int pto_Id { get; set; }
         public string emp_FechaIngreso { get; set; }
@@ -46,12 +49,16 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual tbEstado tbEstado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSueldos> tbSueldos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSueldos> tbSueldos1 { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
         public virtual tbTipoSangre tbTipoSangre { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

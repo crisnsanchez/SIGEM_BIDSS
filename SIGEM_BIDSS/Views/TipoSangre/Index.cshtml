@@ -9,7 +9,7 @@
 
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
-
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
@@ -31,10 +31,10 @@
                         Id Tipo Sangre
                     </th>
                     <th>
-                        Descripcion
+                        Descripción
                     </th>
 
-                    <th>ACCIONES</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,7 +90,27 @@
                     }
                 });
         });
+        $(function () {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            _isBool = $('#vSwal').val();
+            console.log(_isBool)
+            if (_isBool == "true") {
+                console.log("Verdadero")
 
+                Toast.fire({
+                    type: 'success',
+                    title: 'Se ha guardado con Exito.'
+                })
+            }
+            else {
+                console.log("Falso")
+            }
+        });
     </script>
 
 }
