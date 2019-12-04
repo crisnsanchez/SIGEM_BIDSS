@@ -103,7 +103,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
             ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion");
             ViewBag.invCom_Id = new SelectList(db.tbInventarioCompra, "invCom_Id", "invCom_Descripcion");
-            
+
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             if (ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace SIGEM_BIDSS.Controllers
                     IEnumerable<object> list = null;
                     var _date = Convert.ToDateTime(tbSolicitud.sol_GralFechaSolicitud);
                     list = db.UDP_Gral_tSolicitudInsertar(tbSolicitud.emp_Id, tbSolicitud.tipsol_Id, tbSolicitud.pto_Id, tbSolicitud.tpsal_id, tbSolicitud.tmo_Id,
-                    tbSolicitud.are_Id, tbSolicitud.tipmo_id, tbSolicitud.tpv_Id, tbSolicitud.tperm_Id, tbSolicitud.invCom_Id,tbSolicitud.sol_GralDescripcion, tbSolicitud.sol_GralJefeInmediato,
+                    tbSolicitud.are_Id, tbSolicitud.tipmo_id, tbSolicitud.tpv_Id, tbSolicitud.tperm_Id, tbSolicitud.invCom_Id, tbSolicitud.sol_GralDescripcion, tbSolicitud.sol_GralJefeInmediato,
                     tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralComentario, tbSolicitud.sol_GralJustificacion, tbSolicitud.sol_GralFechaSolicitud,
                     tbSolicitud.sol_AnviFechaViaje, tbSolicitud.sol_Anvi_Cliente, tbSolicitud.sol_Anvi_LugarDestino, tbSolicitud.sol_Acper_Anterior,
                     tbSolicitud.sol_Anvi_PropositoVisita, tbSolicitud.sol_Anvi_DiasVisita, tbSolicitud.sol_AnviHospedaje, tbSolicitud.sol_AnviTrasladoHacia,
@@ -136,7 +136,7 @@ namespace SIGEM_BIDSS.Controllers
                     {
 
                         string lvMensajeError = "";
-                        LeerDatos(out lvMensajeError, tbSolicitud.Emp_Mail, tbSolicitud.Emp_Name);
+                        LeerDatos(out lvMensajeError, tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralJefeInmediato, tbSolicitud.Emp_Name);
 
                         TempData["smserror"] = "Solicitud Realizada con Exito.";
                         ViewBag.smserror = TempData["smserror"];
@@ -156,7 +156,7 @@ namespace SIGEM_BIDSS.Controllers
         }
 
 
-        public int LeerDatos(out string pvMensajeError, string _Destinatario, string _DestinatarioName)
+        public int LeerDatos(out string pvMensajeError, string _empJefeMail, string _GralJefeInmediato, string _empName)
         {
             try
             {
@@ -169,14 +169,14 @@ namespace SIGEM_BIDSS.Controllers
                 lsRutaPlantilla = @"C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\Content\Email\index.xml";
 
                 lsXMLDatos = @"<principal>
-                            <to>" + _DestinatarioName + " " + _Destinatario + "</to>" +
-                            @"<from>Jani</from>" +
+                            <to>" + _GralJefeInmediato + "</to>" +
+                            @"<Employee>" + _empName + "</Employee>" +
                             @"<heading>Reminder</heading>
                         <body>Don't forget me this weekend!</body>
                         </principal>";
                 var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
                 EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
-                enviarCorreo(_Parameters.par_Emisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _Destinatario, _Parameters.par_Servidor, _Parameters.par_Puerto);
+                enviarCorreo(_Parameters.par_Emisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _empJefeMail, _Parameters.par_Servidor, _Parameters.par_Puerto);
                 return 0;
             }
             catch (Exception Ex)
@@ -262,7 +262,7 @@ namespace SIGEM_BIDSS.Controllers
         public JsonResult GetEmp(int emp_Id)
         {
             object _EmpList = null;
-            try 
+            try
             {
                 _EmpList = (from _emp in db.tbEmpleado
                             where _emp.emp_Id == emp_Id

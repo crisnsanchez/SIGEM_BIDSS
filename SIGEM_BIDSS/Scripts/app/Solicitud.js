@@ -45,7 +45,6 @@ $("#inline_content input[name='typeAcPer']").click(function () {
 
 $(document).on("click", "#tbEmp tbody tr td button#SeleccionarEmp", function () {
     var emp_Id = this.value;
-    console.log(emp_Id);
     GetEmpleado(emp_Id)
 })
 
