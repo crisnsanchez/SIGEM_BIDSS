@@ -14,22 +14,18 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbSolicitud
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbSolicitud()
-        {
-            this.tbInventarioCompra = new HashSet<tbInventarioCompra>();
-        }
-    
         public int sol_Id { get; set; }
         public short emp_Id { get; set; }
         public int tipsol_Id { get; set; }
         public int pto_Id { get; set; }
         public int tpsal_id { get; set; }
         public short tmo_Id { get; set; }
+        public string mun_Id { get; set; }
         public int are_Id { get; set; }
         public int tipmo_id { get; set; }
         public int tpv_Id { get; set; }
         public int tperm_Id { get; set; }
+        public Nullable<int> invCom_Id { get; set; }
         public string sol_GralDescripcion { get; set; }
         public string sol_GralJefeInmediato { get; set; }
         public string sol_GralCorreoJefeInmediato { get; set; }
@@ -78,8 +74,7 @@ namespace SIGEM_BIDSS.Models
     
         public virtual tbArea tbArea { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbInventarioCompra> tbInventarioCompra { get; set; }
+        public virtual tbInventarioCompra tbInventarioCompra { get; set; }
         public virtual tbMoneda tbMoneda { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
         public virtual tbTipoMovimiento tbTipoMovimiento { get; set; }

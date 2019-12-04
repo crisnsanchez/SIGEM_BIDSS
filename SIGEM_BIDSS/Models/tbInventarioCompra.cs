@@ -14,14 +14,20 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbInventarioCompra
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbInventarioCompra()
+        {
+            this.tbSolicitud = new HashSet<tbSolicitud>();
+        }
+    
         public int invCom_Id { get; set; }
-        public int sol_Id { get; set; }
         public string invCom_Descripcion { get; set; }
         public int invCom_UsuarioCrea { get; set; }
         public System.DateTime invCom_FechaCrea { get; set; }
         public Nullable<int> invCom_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> invCom_FechaModifica { get; set; }
     
-        public virtual tbSolicitud tbSolicitud { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

@@ -190,7 +190,6 @@
     <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSalarioController.cs" />
@@ -208,8 +207,10 @@
     <Compile Include="Models\Area.cs" />
     <Compile Include="Models\Departamentos.cs" />
     <Compile Include="Models\Empleado.cs" />
+    <Compile Include="Models\InventarioCompra.cs" />
     <Compile Include="Models\parametro.cs" />
     <Compile Include="Models\Solicitud.cs" />
+    <Compile Include="Models\Sueldo.cs" />
     <Compile Include="Models\tbDeduccionInstitucionFinanciera.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -329,6 +330,12 @@
     <Compile Include="Models\UDP_Gral_tbInstitucionesFinancieras_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Gral_tbInventarioCompra_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbInventarioCompra_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Gral_tbMoneda_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -393,6 +400,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tSolicitudInsertar_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbSueldos_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbSueldos_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -3218,16 +3231,16 @@
     <Content Include="Views\DeduccionInstitucionFinancieras\Details.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Edit.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Index.cshtml" />
-    <Content Include="Views\Sueldos\Create.cshtml" />
-    <Content Include="Views\Sueldos\Delete.cshtml" />
-    <Content Include="Views\Sueldos\Details.cshtml" />
-    <Content Include="Views\Sueldos\Edit.cshtml" />
-    <Content Include="Views\Sueldos\Index.cshtml" />
     <Content Include="Views\InventarioCompras\Create.cshtml" />
     <Content Include="Views\InventarioCompras\Delete.cshtml" />
     <Content Include="Views\InventarioCompras\Details.cshtml" />
     <Content Include="Views\InventarioCompras\Edit.cshtml" />
     <Content Include="Views\InventarioCompras\Index.cshtml" />
+    <Content Include="Views\Sueldos\Create.cshtml" />
+    <Content Include="Views\Sueldos\Delete.cshtml" />
+    <Content Include="Views\Sueldos\Details.cshtml" />
+    <Content Include="Views\Sueldos\Edit.cshtml" />
+    <Content Include="Views\Sueldos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

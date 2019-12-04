@@ -54,20 +54,47 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "sue_Id,emp_Id,tmo_Id,sue_Cantidad,sue_SueldoAnterior,sue_Estado,sue_RazonInactivo,sue_UsuarioCrea,sue_FechaCrea,ue_UsuarioModifica,sue_FechaModifica")] tbSueldos tbSueldos)
         {
+          
             if (ModelState.IsValid)
-            {
-                db.tbSueldos.Add(tbSueldos);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Plani_tbSueldos_Insert(tbSueldos.emp_Id, tbSueldos.tmo_Id, tbSueldos.sue_Cantidad, tbSueldos.sue_SueldoAnterior, tbSueldos.sue_Estado, tbSueldos.sue_RazonInactivo, 1);
+                    foreach (UDP_Plani_tbSueldos_Insert_Result sueldo in List)
+                        Msj = sueldo.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldos.emp_Id);
+                        ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldos.tmo_Id);
+                        
+                       
+                        return View(tbSueldos);
+                    }
+                    else
+                    {
+                        TempData["swalfunction"] = "true";
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
 
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldos.emp_Id);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldos.emp_Id);
-            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldos.tmo_Id);
-            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldos, "sue_Id", "sue_RazonInactivo", tbSueldos.sue_SueldoAnterior);
-            ViewBag.sue_SueldoAnterior = new SelectList(db.tbSueldos, "sue_Id", "sue_RazonInactivo", tbSueldos.sue_SueldoAnterior);
-            return View(tbSueldos);
-        }
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador." + Ex.Message.ToString());
+                    ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldos.emp_Id);
+                    ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldos.tmo_Id);
+
+                    return View(tbSueldos);
+                }
+            else
+            {
+                ViewBag.emp_id = new SelectList(db.tbEmpleado, "emp_Id", "emp_nombres", tbSueldos.emp_Id);
+                ViewBag.tmo_Id = new SelectList(db.tbEmpleado, "tmo_Id", "tmo_Abrievatura", tbSueldos.tmo_Id);
+
+                return View(tbSueldos);
+            }
+    }
 
         // GET: Sueldos/Edit/5
         public ActionResult Edit(int? id)

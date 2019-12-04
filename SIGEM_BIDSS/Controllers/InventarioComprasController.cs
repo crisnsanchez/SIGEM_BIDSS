@@ -17,8 +17,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: InventarioCompras
         public ActionResult Index()
         {
-            var tbInventarioCompra = db.tbInventarioCompra.Include(t => t.tbSolicitud);
-            return View(tbInventarioCompra.ToList());
+            return View(db.tbInventarioCompra.ToList());
         }
 
         // GET: InventarioCompras/Details/5
@@ -39,7 +38,6 @@ namespace SIGEM_BIDSS.Controllers
         // GET: InventarioCompras/Create
         public ActionResult Create()
         {
-            ViewBag.sol_Id = new SelectList(db.tbSolicitud, "sol_Id", "sol_GralDescripcion");
             return View();
         }
 
@@ -48,16 +46,36 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "invCom_Id,sol_Id,invCom_Descripcion,invCom_UsuarioCrea,invCom_FechaCrea,invCom_UsuarioModifica,invCom_FechaModifica")] tbInventarioCompra tbInventarioCompra)
+        public ActionResult Create([Bind(Include = "invCom_Id,invCom_Descripcion,invCom_UsuarioCrea,invCom_FechaCrea,invCom_UsuarioModifica,invCom_FechaModifica")] tbInventarioCompra tbInventarioCompra)
         {
             if (ModelState.IsValid)
             {
-                db.tbInventarioCompra.Add(tbInventarioCompra);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<object> _List = null;
+                    string MsjError = "";
+                    _List = db.UDP_Gral_tbInventarioCompra_Insert(tbInventarioCompra.invCom_Descripcion, 1);
+                    foreach (UDP_Gral_tbInventarioCompra_Insert_Result inv in _List)
+                        MsjError = inv.MensajeError;
+                    if (MsjError.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbInventarioCompra);
+                    }
+                    else
+                    {
+                        TempData["swalfunction"] = "true";
 
-            ViewBag.sol_Id = new SelectList(db.tbSolicitud, "sol_Id", "sol_GralDescripcion", tbInventarioCompra.sol_Id);
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbInventarioCompra);
+                }
+
+            }
             return View(tbInventarioCompra);
         }
 
@@ -73,7 +91,6 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.sol_Id = new SelectList(db.tbSolicitud, "sol_Id", "sol_GralDescripcion", tbInventarioCompra.sol_Id);
             return View(tbInventarioCompra);
         }
 
@@ -82,15 +99,32 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "invCom_Id,sol_Id,invCom_Descripcion,invCom_UsuarioCrea,invCom_FechaCrea,invCom_UsuarioModifica,invCom_FechaModifica")] tbInventarioCompra tbInventarioCompra)
+        public ActionResult Edit([Bind(Include = "invCom_Id,invCom_Descripcion,invCom_UsuarioCrea,invCom_FechaCrea,invCom_UsuarioModifica,invCom_FechaModifica")] tbInventarioCompra tbInventarioCompra)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tbInventarioCompra).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    IEnumerable<object> _List = null;
+                    string MsjError = "";
+                    _List = db.UDP_Gral_tbInventarioCompra_Update(tbInventarioCompra.invCom_Id, tbInventarioCompra.invCom_Descripcion, 1);
+                    foreach (UDP_Gral_tbInventarioCompra_Update_Result inv in _List)
+                        MsjError = inv.MensajeError;
+                    if (MsjError.StartsWith("-1"))
+                    {
+                        return View(tbInventarioCompra);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbInventarioCompra);
+                }
             }
-            ViewBag.sol_Id = new SelectList(db.tbSolicitud, "sol_Id", "sol_GralDescripcion", tbInventarioCompra.sol_Id);
             return View(tbInventarioCompra);
         }
 
