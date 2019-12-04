@@ -83,11 +83,17 @@ namespace SIGEM_BIDSS.Controllers
                     IEnumerable<object> _List = null;
                     string MsjError = "";
                     _List = db.UDP_Gral_tbArea_Insert(tbArea.are_Descripcion,1);
-                    foreach (UDP_Gral_tbArea_Insert_Result _Area in _List)
-                        MsjError = _Area.MensajeError;
+                    foreach (UDP_Gral_tbArea_Insert_Result Area in _List)
+                        MsjError = Area.MensajeError;
                     if (MsjError.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbArea);
+                    }
+                    if (MsjError.StartsWith("-2"))
+                    {
+                       
+                        ModelState.AddModelError("", "Ya existe un Área con el mismo nombre.");
                         return View(tbArea);
                     }
                     else
@@ -139,6 +145,12 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (db.tbArea.Any(a =>  a.are_Descripcion == tbArea.are_Descripcion && a.are_Id != tbArea.are_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe un Área con el mismo nombre.");
+                }
+
+
                 try
                 {
                     IEnumerable<object> _List = null;
@@ -148,6 +160,12 @@ namespace SIGEM_BIDSS.Controllers
                         MsjError = _Area.MensajeError;
                     if (MsjError.StartsWith("-1"))
                     {
+                        return View(tbArea);
+                    }
+                    if (MsjError.StartsWith("-2"))
+                    {
+
+                        ModelState.AddModelError("", "Ya existe un estado con el mismo nombre.");
                         return View(tbArea);
                     }
                     else
