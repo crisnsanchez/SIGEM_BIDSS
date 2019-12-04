@@ -7,10 +7,17 @@ using System.Web;
 namespace SIGEM_BIDSS.Models
 {
     [MetadataType(typeof(DeduccionInstitucionFinancieraMetadata))]
+  
+    public partial class tbDeduccionInstitucionFinanciera
+    {
+       
+    }
+
+
     public class DeduccionInstitucionFinancieraMetadata
     {
 
-  
+
         [Display(Name = "Id Deducción")]
         public int deif_IdDeduccionInstFinanciera { get; set; }
 
@@ -45,9 +52,5 @@ namespace SIGEM_BIDSS.Models
 
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbInstitucionesFinancieras tbInstitucionesFinancieras { get; set; }
-    }
-    public partial class tbDeduccionInstitucionFinanciera
-    {
-       
     }
 }
