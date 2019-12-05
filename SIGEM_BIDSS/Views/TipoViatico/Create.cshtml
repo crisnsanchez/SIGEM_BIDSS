@@ -36,7 +36,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-upload mr-1"></i>
-            Insertar Tipo Viatico
+            Insertar Tipo Viático
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -58,15 +58,16 @@
                         <p style="color:red">@Html.ValidationMessageFor(model => model.tpv_Descripcion, "", new { @class = "text-danger" })</p>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="form-group">
-                <div class="col-md-offset-4 col-md-10">
-                    <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
-                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-10">
+                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                    </div>
                 </div>
             </div>
+
         </div>
     }
 
@@ -99,7 +100,7 @@
 
 
     document.getElementById("Save").onclick = function () {
-        var txtObj = document.getElementById("des");
+        var txtObj = document.getElementById("");
         txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
         txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 

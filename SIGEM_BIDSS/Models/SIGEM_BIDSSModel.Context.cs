@@ -608,36 +608,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSolicitud_Update_Result>("UDP_Gral_tbTipoSolicitud_Update", tipsol_IdParameter, tipsol_DescripcionParameter, tipsol_UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoViatico_Insert_Result> UDP_Gral_tbTipoViatico_Insert(string tpv_Descripcion, Nullable<int> tpv_UsuarioCrea)
-        {
-            var tpv_DescripcionParameter = tpv_Descripcion != null ?
-                new ObjectParameter("tpv_Descripcion", tpv_Descripcion) :
-                new ObjectParameter("tpv_Descripcion", typeof(string));
-    
-            var tpv_UsuarioCreaParameter = tpv_UsuarioCrea.HasValue ?
-                new ObjectParameter("tpv_UsuarioCrea", tpv_UsuarioCrea) :
-                new ObjectParameter("tpv_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoViatico_Insert_Result>("UDP_Gral_tbTipoViatico_Insert", tpv_DescripcionParameter, tpv_UsuarioCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Gral_tbTipoViatico_Update_Result> UDP_Gral_tbTipoViatico_Update(Nullable<int> tpv_Id, string tpv_Descripcion, Nullable<int> tpv_UsuarioModifica)
-        {
-            var tpv_IdParameter = tpv_Id.HasValue ?
-                new ObjectParameter("tpv_Id", tpv_Id) :
-                new ObjectParameter("tpv_Id", typeof(int));
-    
-            var tpv_DescripcionParameter = tpv_Descripcion != null ?
-                new ObjectParameter("tpv_Descripcion", tpv_Descripcion) :
-                new ObjectParameter("tpv_Descripcion", typeof(string));
-    
-            var tpv_UsuarioModificaParameter = tpv_UsuarioModifica.HasValue ?
-                new ObjectParameter("tpv_UsuarioModifica", tpv_UsuarioModifica) :
-                new ObjectParameter("tpv_UsuarioModifica", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoViatico_Update_Result>("UDP_Gral_tbTipoViatico_Update", tpv_IdParameter, tpv_DescripcionParameter, tpv_UsuarioModificaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Gral_TipoMovimiento_Insert_Result> UDP_Gral_TipoMovimiento_Insert(string tipmo_Movimiento, Nullable<int> tipmo_UsuarioCrea)
         {
             var tipmo_MovimientoParameter = tipmo_Movimiento != null ?
@@ -1813,6 +1783,44 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("are_FechaModifica", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbArea_Update_Result>("UDP_Gral_tbArea_Update", are_IdParameter, are_DescripcionParameter, are_UsuarioModificaParameter, are_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoViatico_Insert_Result> UDP_Gral_tbTipoViatico_Insert(string tpv_Descripcion, Nullable<int> tpv_UsuarioCrea, string tpv_FechaCrea)
+        {
+            var tpv_DescripcionParameter = tpv_Descripcion != null ?
+                new ObjectParameter("tpv_Descripcion", tpv_Descripcion) :
+                new ObjectParameter("tpv_Descripcion", typeof(string));
+    
+            var tpv_UsuarioCreaParameter = tpv_UsuarioCrea.HasValue ?
+                new ObjectParameter("tpv_UsuarioCrea", tpv_UsuarioCrea) :
+                new ObjectParameter("tpv_UsuarioCrea", typeof(int));
+    
+            var tpv_FechaCreaParameter = tpv_FechaCrea != null ?
+                new ObjectParameter("tpv_FechaCrea", tpv_FechaCrea) :
+                new ObjectParameter("tpv_FechaCrea", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoViatico_Insert_Result>("UDP_Gral_tbTipoViatico_Insert", tpv_DescripcionParameter, tpv_UsuarioCreaParameter, tpv_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoViatico_Update_Result> UDP_Gral_tbTipoViatico_Update(Nullable<int> tpv_Id, string tpv_Descripcion, Nullable<int> tpv_UsuarioModifica, string tpv_FechaModifica)
+        {
+            var tpv_IdParameter = tpv_Id.HasValue ?
+                new ObjectParameter("tpv_Id", tpv_Id) :
+                new ObjectParameter("tpv_Id", typeof(int));
+    
+            var tpv_DescripcionParameter = tpv_Descripcion != null ?
+                new ObjectParameter("tpv_Descripcion", tpv_Descripcion) :
+                new ObjectParameter("tpv_Descripcion", typeof(string));
+    
+            var tpv_UsuarioModificaParameter = tpv_UsuarioModifica.HasValue ?
+                new ObjectParameter("tpv_UsuarioModifica", tpv_UsuarioModifica) :
+                new ObjectParameter("tpv_UsuarioModifica", typeof(int));
+    
+            var tpv_FechaModificaParameter = tpv_FechaModifica != null ?
+                new ObjectParameter("tpv_FechaModifica", tpv_FechaModifica) :
+                new ObjectParameter("tpv_FechaModifica", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoViatico_Update_Result>("UDP_Gral_tbTipoViatico_Update", tpv_IdParameter, tpv_DescripcionParameter, tpv_UsuarioModificaParameter, tpv_FechaModificaParameter);
         }
     }
 }
