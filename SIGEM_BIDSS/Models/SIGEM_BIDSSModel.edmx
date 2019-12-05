@@ -165,6 +165,17 @@
           <Property Name="tps_UsuarioModifica" Type="int" />
           <Property Name="tps_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbTipoSolicitud">
+          <Key>
+            <PropertyRef Name="tipsol_Id" />
+          </Key>
+          <Property Name="tipsol_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipsol_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipsol_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="tipsol_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="tipsol_UsuarioModifica" Type="int" />
+          <Property Name="tipsol_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbTipoTransporte">
           <Key>
             <PropertyRef Name="tptran_Id" />
@@ -513,36 +524,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="UDP_Acce_tbBitacoraErrores_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Acce">
-          <Parameter Name="bite_Controlador" Type="nvarchar" Mode="In" />
-          <Parameter Name="bite_Accion" Type="nvarchar" Mode="In" />
-          <Parameter Name="bite_Usuario" Type="nvarchar" Mode="In" />
-          <Parameter Name="bite_Fecha" Type="datetime" Mode="In" />
-          <Parameter Name="bite_MensajeError" Type="varchar(max)" Mode="In" />
-        </Function>
         <Function Name="UDP_Conf_tbParametro_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Conf">
           <Parameter Name="conteo" Type="int" Mode="In" />
-        </Function>
-        <Function Name="UDP_Conf_tbParametro_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Conf">
-          <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_CorreoEmisor" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Servidor" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Puerto" Type="int" Mode="In" />
-          <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="UDP_Conf_tbParametro_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Conf">
-          <Parameter Name="par_Id" Type="tinyint" Mode="In" />
-          <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_CorreoEmisor" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Servidor" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Puerto" Type="int" Mode="In" />
-          <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -891,6 +874,7 @@
           <EntitySet Name="tbTipoPermiso" EntityType="Self.tbTipoPermiso" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbTipoSalario" EntityType="Self.tbTipoSalario" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbTipoSangre" EntityType="Self.tbTipoSangre" Schema="Gral" store:Type="Tables" />
+          <EntitySet Name="tbTipoSolicitud" EntityType="Self.tbTipoSolicitud" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbTipoTransporte" EntityType="Self.tbTipoTransporte" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbTipoViatico" EntityType="Self.tbTipoViatico" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbProducto" EntityType="Self.tbProducto" Schema="Inv" store:Type="Tables" />
@@ -1127,20 +1111,6 @@
           <FunctionImport Name="UDP_Gral_TipoMovimiento_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_TipoMovimiento_Insert_Result)">
             <Parameter Name="tipmo_Movimiento" Mode="In" Type="String" />
             <Parameter Name="tipmo_UsuarioCrea" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbMoneda_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result)">
-            <Parameter Name="tmo_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
-            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
-            <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="tmo_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbMoneda_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Update_Result)">
-            <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
-            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
-            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
-            <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="tmo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbTipoPermiso_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result)">
             <Parameter Name="tperm_Descripcion" Mode="In" Type="String" />
@@ -1422,28 +1392,6 @@
             <Parameter Name="invCom_Descripcion" Mode="In" Type="String" />
             <Parameter Name="invCom_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbArea_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result)">
-            <Parameter Name="are_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="are_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="are_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbArea_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbArea_Update_Result)">
-            <Parameter Name="are_Id" Mode="In" Type="Int32" />
-            <Parameter Name="are_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="are_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="are_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Insert_Result)">
-            <Parameter Name="tpv_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="tpv_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="tpv_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result)">
-            <Parameter Name="tpv_Id" Mode="In" Type="Int32" />
-            <Parameter Name="tpv_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="tpv_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="tpv_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_rrhh_tbSueldo_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_rrhh_tbSueldo_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
@@ -1453,16 +1401,16 @@
             <Parameter Name="sue_RazonInactivo" Mode="In" Type="String" />
             <Parameter Name="suel_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbEstado_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbEstado_Insert_Result)">
+            <Parameter Name="est_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="est_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="est_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbEstado_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbEstado_Update_Result)">
             <Parameter Name="est_Id" Mode="In" Type="Int32" />
             <Parameter Name="est_Descripcion" Mode="In" Type="String" />
             <Parameter Name="est_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="est_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbEstado_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbEstado_Insert_Result)">
-            <Parameter Name="est_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="est_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="est_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="tbBitacoraErrores" EntityType="SIGEM_BIDSSModel.tbBitacoraErrores" />
           <EntitySet Name="tbAnticipoViatico" EntityType="SIGEM_BIDSSModel.tbAnticipoViatico" />
@@ -1477,6 +1425,7 @@
           <EntitySet Name="tbTipoPermiso" EntityType="SIGEM_BIDSSModel.tbTipoPermiso" />
           <EntitySet Name="tbTipoSalario" EntityType="SIGEM_BIDSSModel.tbTipoSalario" />
           <EntitySet Name="tbTipoSangre" EntityType="SIGEM_BIDSSModel.tbTipoSangre" />
+          <EntitySet Name="tbTipoSolicitud" EntityType="SIGEM_BIDSSModel.tbTipoSolicitud" />
           <EntitySet Name="tbTipoTransporte" EntityType="SIGEM_BIDSSModel.tbTipoTransporte" />
           <EntitySet Name="tbTipoViatico" EntityType="SIGEM_BIDSSModel.tbTipoViatico" />
           <EntitySet Name="tbProducto" EntityType="SIGEM_BIDSSModel.tbProducto" />
@@ -1558,33 +1507,52 @@
             <End Role="tbSueldo" EntitySet="tbSueldo" />
             <End Role="tbSueldo1" EntitySet="tbSueldo" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Acce_tbBitacoraErrores_Insert">
-            <Parameter Name="bite_Controlador" Mode="In" Type="String" />
-            <Parameter Name="bite_Accion" Mode="In" Type="String" />
-            <Parameter Name="bite_Usuario" Mode="In" Type="String" />
-            <Parameter Name="bite_Fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="bite_MensajeError" Mode="In" Type="String" />
+          <FunctionImport Name="UDP_Gral_tbArea_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result)">
+            <Parameter Name="are_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="are_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="are_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Conf_tbParametro_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result)">
-            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
-            <Parameter Name="par_Password" Mode="In" Type="String" />
-            <Parameter Name="par_Servidor" Mode="In" Type="String" />
-            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
-            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+          <FunctionImport Name="UDP_Gral_tbArea_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbArea_Update_Result)">
+            <Parameter Name="are_Id" Mode="In" Type="Int32" />
+            <Parameter Name="are_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="are_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="are_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Conf_tbParametro_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result)">
-            <Parameter Name="par_Id" Mode="In" Type="Byte" />
-            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
-            <Parameter Name="par_Password" Mode="In" Type="String" />
-            <Parameter Name="par_Servidor" Mode="In" Type="String" />
-            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
-            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+          <FunctionImport Name="UDP_Gral_tbMoneda_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result)">
+            <Parameter Name="tmo_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+            <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tmo_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbMoneda_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Update_Result)">
+            <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
+            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+            <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tmo_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbTipoMoneda_Insert">
+            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+            <Parameter Name="tmo_UsuarioCrea" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbTipoMoneda_Update">
+            <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
+            <Parameter Name="tmo_Abreviatura" Mode="In" Type="String" />
+            <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
+            <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbTipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Insert_Result)">
+            <Parameter Name="tpv_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tpv_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tpv_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbTipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result)">
+            <Parameter Name="tpv_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tpv_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tpv_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="tpv_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
@@ -1647,12 +1615,6 @@
         <ComplexType Name="UDP_Gral_tbTipoPermiso_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <ComplexType Name="UDP_Gral_tbMoneda_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbMoneda_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <ComplexType Name="UDP_Gral_tbEmpleado_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
@@ -1694,26 +1656,14 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="UDP_Gral_tbArea_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbArea_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbTipoViatico_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbTipoViatico_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <ComplexType Name="UDP_rrhh_tbSueldo_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbEstado_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbEstado_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbEstado_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <EntityType Name="tbBitacoraErrores">
           <Key>
@@ -1888,6 +1838,17 @@
           <Property Name="tps_UsuarioModifica" Type="Int32" />
           <Property Name="tps_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbTipoSangre_tps_Id" FromRole="tbTipoSangre" ToRole="tbEmpleado" />
+        </EntityType>
+        <EntityType Name="tbTipoSolicitud">
+          <Key>
+            <PropertyRef Name="tipsol_Id" />
+          </Key>
+          <Property Name="tipsol_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipsol_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipsol_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="tipsol_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tipsol_UsuarioModifica" Type="Int32" />
+          <Property Name="tipsol_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tbTipoTransporte">
           <Key>
@@ -2259,10 +2220,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_Conf_tbParametro_Insert_Result">
+        <ComplexType Name="UDP_Gral_tbArea_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbArea_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <ComplexType Name="UDP_Conf_tbParametro_Update_Result">
+        <ComplexType Name="UDP_Gral_tbMoneda_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbMoneda_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbTipoViatico_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbTipoViatico_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         </Schema>
@@ -2393,20 +2366,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMoneda_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbMoneda_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMoneda_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoPermiso_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoPermiso_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result">
@@ -2490,34 +2449,6 @@
           <FunctionImportMapping FunctionImportName="SDP_tbEmpleadosJefes_Select" FunctionName="SIGEM_BIDSSModel.Store.SDP_tbEmpleadosJefes_Select" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbInventarioCompra_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInventarioCompra_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbInventarioCompra_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInventarioCompra_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_rrhh_tbSueldo_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_rrhh_tbSueldo_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_rrhh_tbSueldo_Insert_Result">
@@ -2525,16 +2456,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbEstado_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEstado_Update" >
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbEstado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEstado_Insert" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbEstado_Update_Result">
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbEstado_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbEstado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEstado_Insert" >
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbEstado_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbEstado_Update" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbEstado_Insert_Result">
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbEstado_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -2712,6 +2643,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbTipoSolicitud">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbTipoSolicitud">
+              <MappingFragment StoreEntitySet="tbTipoSolicitud">
+                <ScalarProperty Name="tipsol_FechaModifica" ColumnName="tipsol_FechaModifica" />
+                <ScalarProperty Name="tipsol_UsuarioModifica" ColumnName="tipsol_UsuarioModifica" />
+                <ScalarProperty Name="tipsol_FechaCrea" ColumnName="tipsol_FechaCrea" />
+                <ScalarProperty Name="tipsol_UsuarioCrea" ColumnName="tipsol_UsuarioCrea" />
+                <ScalarProperty Name="tipsol_Descripcion" ColumnName="tipsol_Descripcion" />
+                <ScalarProperty Name="tipsol_Id" ColumnName="tipsol_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbTipoTransporte">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbTipoTransporte">
               <MappingFragment StoreEntitySet="tbTipoTransporte">
@@ -2853,17 +2796,46 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Acce_tbBitacoraErrores_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Acce_tbBitacoraErrores_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Insert" >
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Insert" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result">
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Update" >
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Update" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result">
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMoneda_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbMoneda_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMoneda_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMoneda_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoViatico_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoViatico_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
