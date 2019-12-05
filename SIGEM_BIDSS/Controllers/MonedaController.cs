@@ -13,6 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class MonedaController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
+        Helpers Function = new Helpers();
 
         // GET: Moneda
         public ActionResult Index()
@@ -65,17 +66,26 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "tmo_Id,tmo_Abreviatura,tmo_Nombre,tmo_UsuarioCrea,tmo_FechaCrea,tmo_UsuarioModifica,tmo_FechaModifica")] tbMoneda tbMoneda)
         {
             if (ModelState.IsValid)
-                try
-                {
+          
+
+            try
+            {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    //List = db.UDP_Gral_tbMoneda_Insert(tbMoneda.tmo_Id,tbMoneda.tmo_Abreviatura,tbMoneda.tmo_Nombre, 1);
+                    List = db.UDP_Gral_tbMoneda_Insert(tbMoneda.tmo_Id,tbMoneda.tmo_Abreviatura ,tbMoneda.tmo_Nombre, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbMoneda_Insert_Result Moneda in List)
                         Msj = Moneda.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
 
-                        return View();
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbMoneda);
+                    }
+                    if (Msj.StartsWith("-2"))
+                    {
+
+                        ModelState.AddModelError("", "Ya existe una Moneda con el mismo nombre.");
+                        return View(tbMoneda);
                     }
                     else
                     {
@@ -127,18 +137,27 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "tmo_Id,tmo_Abreviatura,tmo_Nombre,tmo_UsuarioCrea,tmo_FechaCrea,tmo_UsuarioModifica,tmo_FechaModifica")] tbMoneda tbMoneda)
         {
             if (ModelState.IsValid)
-                try
+                if (db.tbMoneda.Any(a => a.tmo_Nombre == tbMoneda.tmo_Nombre && a.tmo_Id != tbMoneda.tmo_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe una Moneda con el mismo nombre.");
+                    return View(tbMoneda);
+                }
+
+
+            try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    //List = db.UDP_Gral_tbMoneda_Update(tbMoneda.tmo_Id, tbMoneda.tmo_Abreviatura,tbMoneda.tmo_Nombre, 1);
+                    List = db.UDP_Gral_tbMoneda_Update(tbMoneda.tmo_Id, tbMoneda.tmo_Abreviatura,tbMoneda.tmo_Nombre, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbMoneda_Update_Result Moneda in List)
                         Msj = Moneda.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
 
-                        return View();
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbMoneda);
                     }
+             
                     else
                     {
                         return RedirectToAction("Index");
