@@ -1,0 +1,91 @@
+﻿@model SIGEM_BIDSS.Models.tbInstitucionFinanciera
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbInstitucionFinanciera</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_Contacto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_Contacto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_Correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_Correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insf_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insf_FechaModifica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.insf_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

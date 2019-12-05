@@ -86,7 +86,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<object> _List = null;
                     string MsjError = "";
-                    _List = db.UDP_Gral_tbArea_Insert(tbArea.are_Descripcion,1, String.Format("{0:HH:mm:ss}", DateTime.Now));
+                    //_List = db.UDP_Gral_tbArea_Insert(tbArea.are_Descripcion,1, String.Format("{0:HH:mm:ss}", DateTime.Now));
                     foreach (UDP_Gral_tbArea_Insert_Result Area in _List)
                         MsjError = Area.MensajeError;
                     if (MsjError.StartsWith("-1"))
@@ -159,7 +159,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<object> _List = null;
                     string MsjError = "";
-                    _List = db.UDP_Gral_tbArea_Update(tbArea.are_Id,tbArea.are_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
+                    //_List = db.UDP_Gral_tbArea_Update(tbArea.are_Id,tbArea.are_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
                     foreach (UDP_Gral_tbArea_Update_Result _Area in _List)
                         MsjError = _Area.MensajeError;
                     if (MsjError.StartsWith("-1"))

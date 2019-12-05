@@ -69,7 +69,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoViatico_Insert(tbTipoViatico.tpv_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
+                    //List = db.UDP_Gral_tbTipoViatico_Insert(tbTipoViatico.tpv_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
                     foreach (UDP_Gral_tbTipoViatico_Insert_Result tbViatico in List)
                         Msj = tbViatico.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -138,7 +138,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoViatico_Update(tbTipoViatico.tpv_Id, tbTipoViatico.tpv_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
+                    //List = db.UDP_Gral_tbTipoViatico_Update(tbTipoViatico.tpv_Id, tbTipoViatico.tpv_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
                     foreach (UDP_Gral_tbTipoViatico_Update_Result Viatico in List)
                         Msj = Viatico.MensajeError;
                     if (Msj.StartsWith("-1"))

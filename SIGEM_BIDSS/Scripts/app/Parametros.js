@@ -38,25 +38,10 @@ $('#par_CorreoEmpresa').change(function () {
     $('#errorcorreoempresa').hide();
 });
 
-$('#par_Emisor').change(function () {
+$('#par_CorreoEmisor').change(function () {
     $('#erroremisor').hide();
 });
 
-$('#par_Password').change(function () {
-    $('#errorpassword').hide();
-});
-
-$('#par_Mensaje').change(function () {
-    $('#errorMensaje').hide();
-});
-
-$('#par_Asunto').change(function () {
-    $('#errorAsunto').hide();
-});
-
-$('#par_Destinatario').change(function () {
-    $('#errorDestinatario').hide();
-});
 
 $('#par_Servidor').change(function () {
     $('#errorServidor').hide();
@@ -122,104 +107,40 @@ function CorreoElectronico(string) {//Algunos caracteres especiales para el corr
     return out;
 }
 
-//Validar Correo Electronico
-$('#par_CorreoEmpresa').change(function (e) {
-    var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    var EmailId = this.value;
-    correo = $("#par_CorreoEmpresa").val();
 
-    if (emailRegex.test(EmailId)) {
-        $('#errorcorreo').text('');
-        this.style.backgroundColor = "";
-        console.log("hola1");
+document.getElementById('par_CorreoEmpresa').addEventListener('input', function () {
+    campo = event.target;
+    valido = document.getElementById('emailOK');
+    //selector = document.getElementById('emp_CorreoElectronico')
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (emailRegex.test(campo.value)) {
+        valido.innerText = "";
+        $('#par_CorreoEmpresa').removeClass('is-invalid');
+    } else {
+        valido.innerText = "Correo Inválido";
+        $('#par_CorreoEmpresa').focus();
+        $('#par_CorreoEmpresa').addClass('is-invalid');
     }
-
-    else {
-        if (correo != "") {
-            console.log("hola2");
-            valido = document.getElementById('errorcorreo');
-            valido.innerText = "Dirección de Correo Electrónico Incorrecto";
-            return false
-
-        }
-    }
-
-
 });
 
 
-$('#par_Servidor').change(function (e) {
-    var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    var EmailId = this.value;
-    correo = $("#par_Servidor").val();
-
-    if (emailRegex.test(EmailId)) {
-        $('#errorServidor').text('');
-        this.style.backgroundColor = "";
-        console.log("hola1");
+document.getElementById('par_CorreoEmisor').addEventListener('input', function () {
+    campo = event.target;
+    valido = document.getElementById('emailEoK');
+    //selector = document.getElementById('emp_CorreoElectronico')
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (emailRegex.test(campo.value)) {
+        valido.innerText = "";
+        $('#par_CorreoEmisor').removeClass('is-invalid');
+    } else {
+        valido.innerText = "Correo Inválido";
+        $('#par_CorreoEmisor').focus();
+        $('#par_CorreoEmisor').addClass('is-invalid');
     }
-
-    else {
-        if (correo != "") {
-            console.log("hola2");
-            valido = document.getElementById('errorServidor');
-            valido.innerText = "Dirección de Servidor Incorrecto";
-            return false
-
-        }
-    }
-
-
 });
 
-$('#par_Emisor').change(function (e) {
-    var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    var EmailId = this.value;
-    correo = $("#par_Emisor").val();
-
-    if (emailRegex.test(EmailId)) {
-        $('#erroremisor').text('');
-        this.style.backgroundColor = "";
-        console.log("hola1");
-    }
-
-    else {
-        if (correo != "") {
-            console.log("hola2");
-            valido = document.getElementById('erroremisor');
-            valido.innerText = "Dirección de Correo Electrónico de Emisor Incorrecto";
-            return false
-
-        }
-    }
-
-
-});
-
-
-$('#par_Destinatario').change(function (e) {
-    var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    var EmailId = this.value;
-    correo = $("#par_Epar_Destinatariomisor").val();
-
-    if (emailRegex.test(EmailId)) {
-        $('#errorDestinatario').text('');
-        this.style.backgroundColor = "";
-        console.log("hola1");
-    }
-
-    else {
-        if (correo != "") {
-            console.log("hola2");
-            valido = document.getElementById('errorDestinatario');
-            valido.innerText = "Dirección de Correo Electrónico de Destinatario Incorrecto";
-            return false
-
-        }
-    }
-
-
-});
 
 function soloNumeros(e) {
     tecla = (document.all) ? e.keyCode : e.which;
@@ -261,3 +182,23 @@ $(document).ready(function () {
         $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
     });
 });
+
+///----------validar solo letras
+function soloLetras(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " -+'/áéíóúabcdefghijklmnñopqrstuvwxyz";
+    especiales = "8-37-39-46";
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}

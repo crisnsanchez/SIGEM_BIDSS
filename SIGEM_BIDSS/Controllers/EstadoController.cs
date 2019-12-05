@@ -82,13 +82,13 @@ namespace SIGEM_BIDSS.Controllers
                     {
                        
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View(tbEstado);
+                        return View();
                     }
                     if (Msj.StartsWith("-2"))
                     {
                         
                         ModelState.AddModelError("", "Ya existe un estado con el mismo nombre.");
-                        return View(tbEstado);
+                        return View();
                     }
                     else
                     {
@@ -99,10 +99,10 @@ namespace SIGEM_BIDSS.Controllers
                 {
                    
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbEstado);
+                    return View();
                 }
             }
-            return View(tbEstado);
+            return View();
 
         }
 

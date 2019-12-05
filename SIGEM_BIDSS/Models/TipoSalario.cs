@@ -17,14 +17,11 @@ namespace SIGEM_BIDSS.Models
 
     public class TipoSalarioMetaData
     {
-        [Display(Name = "Id Tipo Salario")]
+        [Display(Name = "ID")]
         public int tpsal_id { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Descripcion")]
-        [MinLength(5, ErrorMessage = "Minimo {1} caracteres")]
+
+        [Display(Name = "Descripción")]
         public string tpsal_Descripcion { get; set; }
-
-
 
         [Display(Name = "Usuario Crea")]
         public int tpsal_UsuarioCrea { get; set; }
@@ -37,8 +34,5 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> tpsal_FechaModifica { get; set; }
-
-     
-        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

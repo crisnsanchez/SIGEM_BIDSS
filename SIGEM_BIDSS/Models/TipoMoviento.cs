@@ -19,8 +19,6 @@ namespace SIGEM_BIDSS.Models
         public int tipmo_id { get; set; }
 
         [Display(Name = "Descripción")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [MinLength(5, ErrorMessage = "Minimo {1} caracteres")]
         public string tipmo_Movimiento { get; set; }
 
         [Display(Name = "Usuario Crea")]
@@ -34,8 +32,5 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> tipmo_FechaModifica { get; set; }
-
-     
-        public virtual ICollection<tbSolicitud> tbSolicitud { get; set; }
     }
 }

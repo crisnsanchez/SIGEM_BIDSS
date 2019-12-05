@@ -18,39 +18,48 @@ namespace SIGEM_BIDSS.Models
     {
 
 
-        [Display(Name = "Id Deducción")]
+        [Display(Name = "ID")]
         public int deif_IdDeduccionInstFinanciera { get; set; }
 
-        [Display(Name = "Id Empleado")]
-        public short emp_Id { get; set; }
 
-        [Display(Name = "Id Institución Financiera")]
+        [Display(Name = "Empleado")]
+        public int emp_Id { get; set; }
+
+
+        [Display(Name = "Institucion Financiera")]
         public int insf_IdInstitucionFinanciera { get; set; }
 
-        [Display(Name = "Monto Deducción")]
+
+        [Display(Name = "Monto")]
         public Nullable<decimal> deif_Monto { get; set; }
 
-        [Display(Name = "Comentarios")]
+
+        [Display(Name = "Comentario")]
         public string deif_Comentarios { get; set; }
 
 
         [Display(Name = "Usuario Crea")]
         public int deif_UsuarioCrea { get; set; }
 
-        [Display(Name = "Fecha Crea")]
+
+        [Display(Name = "Fecha crea")]
         public System.DateTime deif_FechaCrea { get; set; }
 
         [Display(Name = "Usuario Modifica")]
         public Nullable<int> deif_UsuarioModifica { get; set; }
 
+
         [Display(Name = "Fecha Modifica")]
         public Nullable<System.DateTime> deif_FechaModifica { get; set; }
 
-        [Display(Name = "Deducción Activo")]
+        [Display(Name = "Activo")]
         public bool deif_Activo { get; set; }
+
+
+        [Display(Name = "Pagado")]
         public Nullable<bool> deif_Pagado { get; set; }
 
         public virtual tbEmpleado tbEmpleado { get; set; }
-        public virtual tbInstitucionFinanciera tbInstitucionesFinancieras { get; set; }
+        public virtual tbInstitucionFinanciera tbInstitucionFinanciera { get; set; }
     }
 }
