@@ -927,11 +927,13 @@
         <Function Name="UDP_Gral_tbArea_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="are_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="are_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="are_FechaCrea" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UDP_Gral_tbArea_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="are_Id" Type="int" Mode="In" />
           <Parameter Name="are_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="are_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="are_FechaModifica" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UDP_Gral_tbDepartamento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="dep_Codigo" Type="char" Mode="In" />
@@ -988,33 +990,6 @@
           <Parameter Name="dep_Codigo" Type="char" Mode="In" />
           <Parameter Name="mun_Nombre" Type="varchar" Mode="In" />
           <Parameter Name="mun_UsuarioModifica" Type="int" Mode="In" />
-        </Function>
-        <Function Name="UDP_Gral_tbParametro_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-          <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Emisor" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Mensaje" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Asunto" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Destinatario" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Servidor" Type="nchar" Mode="In" />
-          <Parameter Name="par_Puerto" Type="int" Mode="In" />
-          <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="UDP_Gral_tbParametro_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-          <Parameter Name="par_Id" Type="tinyint" Mode="In" />
-          <Parameter Name="par_NombreEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Emisor" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Mensaje" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Asunto" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Destinatario" Type="nvarchar" Mode="In" />
-          <Parameter Name="par_Servidor" Type="nchar" Mode="In" />
-          <Parameter Name="par_Puerto" Type="int" Mode="In" />
-          <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="UDP_Gral_tbPuesto_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="are_Id" Type="int" Mode="In" />
@@ -1447,15 +1422,6 @@
             <Parameter Name="sol_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="sol_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="sol_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbArea_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result)">
-            <Parameter Name="are_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="are_UsuarioCrea" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbArea_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbArea_Update_Result)">
-            <Parameter Name="are_Id" Mode="In" Type="Int32" />
-            <Parameter Name="are_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="are_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbDepartamento_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbDepartamento_Insert_Result)">
             <Parameter Name="dep_Codigo" Mode="In" Type="String" />
@@ -1981,7 +1947,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="SDP_tbEmpleadosJefes_Select">
-            <Parameter Name="emp_EsJefe" Mode="In" Type="Boolean" />
+          <Parameter Name="emp_EsJefe" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbInventarioCompra_Insert">
             <Parameter Name="invCom_Descripcion" Mode="In" Type="String" />
@@ -1992,6 +1958,17 @@
             <Parameter Name="invCom_Descripcion" Mode="In" Type="String" />
             <Parameter Name="invCom_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbArea_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result)">
+            <Parameter Name="are_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="are_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="are_FechaCrea" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbArea_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbArea_Update_Result)">
+            <Parameter Name="are_Id" Mode="In" Type="Int32" />
+            <Parameter Name="are_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="are_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="are_FechaModifica" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2001,12 +1978,6 @@
           <Property Type="DateTime" Name="mun_FechaCrea" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="mun_UsuarioModifica" Nullable="true" />
           <Property Type="DateTime" Name="mun_FechaModifica" Nullable="true" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbArea_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbArea_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbDepartamento_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
@@ -2929,6 +2900,12 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="UDP_Gral_tbArea_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbArea_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2952,20 +2929,6 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_CrearAccionPersonal" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_CrearAccionPersonal" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_ReembolsoGastos" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_ReembolsoGastos" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbAnticipoSalario" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbAnticipoSalario" />
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbDepartamento_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbDepartamento_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbDepartamento_Insert_Result">
@@ -3155,8 +3118,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbParametro_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbParametro_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbParametro_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbParametro_Update" />
           <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Count" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Count" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Count_Result">
@@ -3624,6 +3585,20 @@
           <FunctionImportMapping FunctionImportName="SDP_tbEmpleadosJefes_Select" FunctionName="SIGEM_BIDSSModel.Store.SDP_tbEmpleadosJefes_Select" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbInventarioCompra_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInventarioCompra_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbInventarioCompra_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInventarioCompra_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbArea_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbArea_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbArea_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

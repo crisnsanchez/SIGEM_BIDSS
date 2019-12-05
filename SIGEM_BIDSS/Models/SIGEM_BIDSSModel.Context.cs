@@ -340,36 +340,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Gral_tbAnticipoSalario", emp_IdParameter, tipsol_IdParameter, pto_IdParameter, tpsal_idParameter, tmo_idParameter, are_IdParameter, tipmo_idParameter, tpv_IdParameter, sol_GralDescripcionParameter, sol_GralJefeInmediatoParameter, sol_GralCorreoJefeInmediatoParameter, sol_GralComentarioParameter, sol_GralJustificacionParameter, sol_GralFechaSolicitudParameter, sol_AnsolMontoParameter, sol_UsuarioCreaParameter, sol_FechaCreaParameter, sol_UsuarioModificaParameter, sol_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbArea_Insert_Result> UDP_Gral_tbArea_Insert(string are_Descripcion, Nullable<int> are_UsuarioCrea)
-        {
-            var are_DescripcionParameter = are_Descripcion != null ?
-                new ObjectParameter("are_Descripcion", are_Descripcion) :
-                new ObjectParameter("are_Descripcion", typeof(string));
-    
-            var are_UsuarioCreaParameter = are_UsuarioCrea.HasValue ?
-                new ObjectParameter("are_UsuarioCrea", are_UsuarioCrea) :
-                new ObjectParameter("are_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbArea_Insert_Result>("UDP_Gral_tbArea_Insert", are_DescripcionParameter, are_UsuarioCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Gral_tbArea_Update_Result> UDP_Gral_tbArea_Update(Nullable<int> are_Id, string are_Descripcion, Nullable<int> are_UsuarioModifica)
-        {
-            var are_IdParameter = are_Id.HasValue ?
-                new ObjectParameter("are_Id", are_Id) :
-                new ObjectParameter("are_Id", typeof(int));
-    
-            var are_DescripcionParameter = are_Descripcion != null ?
-                new ObjectParameter("are_Descripcion", are_Descripcion) :
-                new ObjectParameter("are_Descripcion", typeof(string));
-    
-            var are_UsuarioModificaParameter = are_UsuarioModifica.HasValue ?
-                new ObjectParameter("are_UsuarioModifica", are_UsuarioModifica) :
-                new ObjectParameter("are_UsuarioModifica", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbArea_Update_Result>("UDP_Gral_tbArea_Update", are_IdParameter, are_DescripcionParameter, are_UsuarioModificaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Gral_tbDepartamento_Insert_Result> UDP_Gral_tbDepartamento_Insert(string dep_Codigo, string dep_Nombre, Nullable<int> dep_UsuarioCrea, Nullable<System.DateTime> dep_FechaCrea)
         {
             var dep_CodigoParameter = dep_Codigo != null ?
@@ -1805,6 +1775,44 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("invCom_UsuarioCrea", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Gral_tbInventarioCompra_Update", invCom_IdParameter, invCom_DescripcionParameter, invCom_UsuarioCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbArea_Insert_Result> UDP_Gral_tbArea_Insert(string are_Descripcion, Nullable<int> are_UsuarioCrea, string are_FechaCrea)
+        {
+            var are_DescripcionParameter = are_Descripcion != null ?
+                new ObjectParameter("are_Descripcion", are_Descripcion) :
+                new ObjectParameter("are_Descripcion", typeof(string));
+    
+            var are_UsuarioCreaParameter = are_UsuarioCrea.HasValue ?
+                new ObjectParameter("are_UsuarioCrea", are_UsuarioCrea) :
+                new ObjectParameter("are_UsuarioCrea", typeof(int));
+    
+            var are_FechaCreaParameter = are_FechaCrea != null ?
+                new ObjectParameter("are_FechaCrea", are_FechaCrea) :
+                new ObjectParameter("are_FechaCrea", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbArea_Insert_Result>("UDP_Gral_tbArea_Insert", are_DescripcionParameter, are_UsuarioCreaParameter, are_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbArea_Update_Result> UDP_Gral_tbArea_Update(Nullable<int> are_Id, string are_Descripcion, Nullable<int> are_UsuarioModifica, string are_FechaModifica)
+        {
+            var are_IdParameter = are_Id.HasValue ?
+                new ObjectParameter("are_Id", are_Id) :
+                new ObjectParameter("are_Id", typeof(int));
+    
+            var are_DescripcionParameter = are_Descripcion != null ?
+                new ObjectParameter("are_Descripcion", are_Descripcion) :
+                new ObjectParameter("are_Descripcion", typeof(string));
+    
+            var are_UsuarioModificaParameter = are_UsuarioModifica.HasValue ?
+                new ObjectParameter("are_UsuarioModifica", are_UsuarioModifica) :
+                new ObjectParameter("are_UsuarioModifica", typeof(int));
+    
+            var are_FechaModificaParameter = are_FechaModifica != null ?
+                new ObjectParameter("are_FechaModifica", are_FechaModifica) :
+                new ObjectParameter("are_FechaModifica", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbArea_Update_Result>("UDP_Gral_tbArea_Update", are_IdParameter, are_DescripcionParameter, are_UsuarioModificaParameter, are_FechaModificaParameter);
         }
     }
 }
