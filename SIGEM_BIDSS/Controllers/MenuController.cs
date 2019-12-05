@@ -28,8 +28,8 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Solicitud()
         {
             try { ViewBag.smserror = TempData["smserror"].ToString(); } catch { }
-            var tiposol = (from _dbt in db.tbTipoSolicitud select(_dbt.tipsol_Descripcion) );
-            return View(tiposol);
+            //var tiposol = (from _dbt in db.tbTipoSolicitud select(_dbt.tipsol_Descripcion) );
+            return View(/*tiposol*/);
         }
     }
 }

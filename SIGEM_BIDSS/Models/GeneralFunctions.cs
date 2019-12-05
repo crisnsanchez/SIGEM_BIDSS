@@ -37,31 +37,31 @@ namespace SIGEM_BIDSS.Models
             int _user = 1;
             return _user;
         }
-        public int tipsol_Id(int _TipoSolicitud)
-        {
-            int tipsol = db.tbTipoSolicitud.Find(_TipoSolicitud).tipsol_Id;
-            return tipsol;
-        }
+        //public int tipsol_Id(int _TipoSolicitud)
+        //{
+         
+        //    //return tipsol;
+        //}
         public object TipodeSolicitud()
         {
             object obtipsol = new
             {
-                AccionPersonal = TipodeSolicitudSearch("Accion Personal"),
-                AnticipodeViaticos = TipodeSolicitudSearch("Anticipo de Viaticos"),
-                SolicitudPermisoLaboral = TipodeSolicitudSearch("Solicitud Permiso Laboral"),
-                RequisicionCompra = TipodeSolicitudSearch("Requisicion de Compra"),
-                AnticipoSalario = TipodeSolicitudSearch("Anticipo de Salario")
+                //AccionPersonal = TipodeSolicitudSearch("Accion Personal"),
+                //AnticipodeViaticos = TipodeSolicitudSearch("Anticipo de Viaticos"),
+                //SolicitudPermisoLaboral = TipodeSolicitudSearch("Solicitud Permiso Laboral"),
+                //RequisicionCompra = TipodeSolicitudSearch("Requisicion de Compra"),
+                //AnticipoSalario = TipodeSolicitudSearch("Anticipo de Salario")
 
             };
             return obtipsol;
         }
 
-        public int TipodeSolicitudSearch(string _strtiposolSearch)
-        {
-            if (_strtiposolSearch == null || _strtiposolSearch == "") { return 0; }
-            int tipsol = (from _dbtts in db.tbTipoSolicitud where (_dbtts.tipsol_Descripcion == _strtiposolSearch) select (_dbtts.tipsol_Id)).FirstOrDefault();
-            return tipsol;
-        }
+        //public int TipodeSolicitudSearch(string _strtiposolSearch)
+        //{
+        //    if (_strtiposolSearch == null || _strtiposolSearch == "") { return 0; }
+        //    //int tipsol = (from _dbtts in db.tbTipoSolicitud where (_dbtts.tipsol_Descripcion == _strtiposolSearch) select (_dbtts.tipsol_Id)).FirstOrDefault();
+        //    //return ;
+        //}
 
         public const string Pass = "QdZwAxesc12";
 

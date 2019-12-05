@@ -195,7 +195,7 @@ namespace SIGEM_BIDSS.Models
         public virtual tbTipoMovimiento tbTipoMovimiento { get; set; }
         public virtual tbTipoPermiso tbTipoPermiso { get; set; }
         public virtual tbTipoSalario tbTipoSalario { get; set; }
-        public virtual tbTipoSolicitud tbTipoSolicitud { get; set; }
+     
         public virtual tbTipoViatico tbTipoViatico { get; set; }
     }
 

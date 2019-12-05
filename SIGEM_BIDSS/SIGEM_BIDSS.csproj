@@ -180,7 +180,6 @@
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
-    <Compile Include="Controllers\HistorialdeSolicitudController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionesFinancierasController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -191,7 +190,6 @@
     <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSalarioController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
-    <Compile Include="Controllers\TipoSolicitudController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -271,9 +269,6 @@
     <Compile Include="Models\tbTipoSangre.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbTipoSolicitud.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbTipoViatico.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -305,7 +300,6 @@
     <Compile Include="Models\TipoSangre.cs" />
     <Compile Include="Models\TipoSalario.cs" />
     <Compile Include="Models\TipoViatico.cs" />
-    <Compile Include="Models\TipoSolicitud.cs" />
     <Compile Include="Models\UDP_Conf_tbParametro_Count_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -3211,11 +3205,6 @@
     <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Edit.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Index.cshtml" />
-    <Content Include="Views\HistorialdeSolicitud\Create.cshtml" />
-    <Content Include="Views\HistorialdeSolicitud\Delete.cshtml" />
-    <Content Include="Views\HistorialdeSolicitud\Details.cshtml" />
-    <Content Include="Views\HistorialdeSolicitud\Edit.cshtml" />
-    <Content Include="Views\HistorialdeSolicitud\Index.cshtml" />
     <Content Include="Views\CodeQR\Index.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Create.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Delete.cshtml" />
