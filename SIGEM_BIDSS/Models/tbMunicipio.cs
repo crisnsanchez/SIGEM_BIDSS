@@ -17,6 +17,7 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbMunicipio()
         {
+            this.tbAnticipoViatico = new HashSet<tbAnticipoViatico>();
             this.tbEmpleado = new HashSet<tbEmpleado>();
         }
     
@@ -28,6 +29,8 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> mun_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> mun_FechaModifica { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico { get; set; }
         public virtual tbDepartamento tbDepartamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }

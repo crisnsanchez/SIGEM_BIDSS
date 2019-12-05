@@ -14,20 +14,11 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbTipoPermiso
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbTipoPermiso()
-        {
-            this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
-        }
-    
         public int tperm_Id { get; set; }
         public string tperm_Descripcion { get; set; }
         public int tperm_UsuarioCrea { get; set; }
         public System.DateTime tperm_FechaCrea { get; set; }
         public Nullable<int> tperm_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tperm_FechaModifica { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
     }
 }

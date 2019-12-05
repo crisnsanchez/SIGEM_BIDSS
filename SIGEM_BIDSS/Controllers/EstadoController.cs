@@ -14,6 +14,7 @@ namespace SIGEM_BIDSS.Controllers
     public class EstadoController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
+        Helpers Function = new Helpers();
 
         // GET: Estado
         public ActionResult Index()
@@ -65,35 +66,44 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "est_Id,est_Descripcion,est_UsuarioCrea,est_FechaCrea,est_UsuarioModifica,est_FechaModifica")] tbEstado tbEstado)
         {
+
             if (ModelState.IsValid)
+            {
+
+
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbEstado_Insert(tbEstado.est_Descripcion, 1);
-                    foreach (UDP_Gral_tbEstado_Insert_Result TipoSangre in List)
-                        Msj = TipoSangre.MensajeError;
+                    List = db.UDP_Gral_tbEstado_Insert(tbEstado.est_Descripcion, 1, Function.DatetimeNow());
+                    foreach (UDP_Gral_tbEstado_Insert_Result estado in List)
+                        Msj = estado.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
+                       
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View();
+                        return View(tbEstado);
+                    }
+                    if (Msj.StartsWith("-2"))
+                    {
+                        
+                        ModelState.AddModelError("", "Ya existe un estado con el mismo nombre.");
+                        return View(tbEstado);
                     }
                     else
                     {
-                        TempData["swalfunction"] = "true";
                         return RedirectToAction("Index");
                     }
                 }
                 catch (Exception Ex)
                 {
-
+                   
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
+                    return View(tbEstado);
                 }
-
-
-
+            }
             return View(tbEstado);
+
         }
 
 
@@ -132,9 +142,9 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbEstado_Update(tbEstado.est_Id, tbEstado.est_Descripcion, 1);
-                    foreach (UDP_Gral_tbEstado_Update_Result TipoSangre in List)
-                        Msj = TipoSangre.MensajeError;
+                    List = db.UDP_Gral_tbEstado_Update(tbEstado.est_Id, tbEstado.est_Descripcion, 1, Function.DatetimeNow());
+                    foreach (UDP_Gral_tbEstado_Update_Result estado in List)
+                        Msj = estado.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
                        

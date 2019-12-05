@@ -28,11 +28,11 @@ namespace SIGEM_BIDSS.Models
         }
     
         public virtual DbSet<tbBitacoraErrores> tbBitacoraErrores { get; set; }
+        public virtual DbSet<tbAnticipoViatico> tbAnticipoViatico { get; set; }
         public virtual DbSet<tbParametro> tbParametro { get; set; }
         public virtual DbSet<tbArea> tbArea { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
         public virtual DbSet<tbEstado> tbEstado { get; set; }
-        public virtual DbSet<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
         public virtual DbSet<tbMoneda> tbMoneda { get; set; }
         public virtual DbSet<tbMunicipio> tbMunicipio { get; set; }
         public virtual DbSet<tbPuesto> tbPuesto { get; set; }
@@ -40,6 +40,8 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbTipoPermiso> tbTipoPermiso { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
+        public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
+        public virtual DbSet<tbTipoTransporte> tbTipoTransporte { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
         public virtual DbSet<tbProducto> tbProducto { get; set; }
         public virtual DbSet<tbProductoCategoria> tbProductoCategoria { get; set; }
@@ -374,36 +376,6 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("dep_UsuarioModifica", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDepartamento_Update_Result>("UDP_Gral_tbDepartamento_Update", dep_CodigoParameter, dep_NombreParameter, dep_UsuarioModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Gral_tbEstado_Insert_Result> UDP_Gral_tbEstado_Insert(string est_Descripcion, Nullable<int> est_UsuarioCrea)
-        {
-            var est_DescripcionParameter = est_Descripcion != null ?
-                new ObjectParameter("est_Descripcion", est_Descripcion) :
-                new ObjectParameter("est_Descripcion", typeof(string));
-    
-            var est_UsuarioCreaParameter = est_UsuarioCrea.HasValue ?
-                new ObjectParameter("est_UsuarioCrea", est_UsuarioCrea) :
-                new ObjectParameter("est_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEstado_Insert_Result>("UDP_Gral_tbEstado_Insert", est_DescripcionParameter, est_UsuarioCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Gral_tbEstado_Update_Result> UDP_Gral_tbEstado_Update(Nullable<int> est_Id, string est_Descripcion, Nullable<int> est_UsuarioModifica)
-        {
-            var est_IdParameter = est_Id.HasValue ?
-                new ObjectParameter("est_Id", est_Id) :
-                new ObjectParameter("est_Id", typeof(int));
-    
-            var est_DescripcionParameter = est_Descripcion != null ?
-                new ObjectParameter("est_Descripcion", est_Descripcion) :
-                new ObjectParameter("est_Descripcion", typeof(string));
-    
-            var est_UsuarioModificaParameter = est_UsuarioModifica.HasValue ?
-                new ObjectParameter("est_UsuarioModifica", est_UsuarioModifica) :
-                new ObjectParameter("est_UsuarioModifica", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEstado_Update_Result>("UDP_Gral_tbEstado_Update", est_IdParameter, est_DescripcionParameter, est_UsuarioModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbMunicipio_Delete_Result> UDP_Gral_tbMunicipio_Delete(string mun_Codigo)
@@ -1831,6 +1803,44 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("suel_UsuarioCrea", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbSueldo_Insert_Result>("UDP_rrhh_tbSueldo_Insert", emp_IdParameter, tmo_IdParameter, sue_CantidadParameter, sue_SueldoAnteriorParameter, sue_EstadoParameter, sue_RazonInactivoParameter, suel_UsuarioCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbEstado_Insert_Result> UDP_Gral_tbEstado_Insert(string est_Descripcion, Nullable<int> est_UsuarioCrea, Nullable<System.DateTime> est_FechaCrea)
+        {
+            var est_DescripcionParameter = est_Descripcion != null ?
+                new ObjectParameter("est_Descripcion", est_Descripcion) :
+                new ObjectParameter("est_Descripcion", typeof(string));
+    
+            var est_UsuarioCreaParameter = est_UsuarioCrea.HasValue ?
+                new ObjectParameter("est_UsuarioCrea", est_UsuarioCrea) :
+                new ObjectParameter("est_UsuarioCrea", typeof(int));
+    
+            var est_FechaCreaParameter = est_FechaCrea.HasValue ?
+                new ObjectParameter("est_FechaCrea", est_FechaCrea) :
+                new ObjectParameter("est_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEstado_Insert_Result>("UDP_Gral_tbEstado_Insert", est_DescripcionParameter, est_UsuarioCreaParameter, est_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbEstado_Update_Result> UDP_Gral_tbEstado_Update(Nullable<int> est_Id, string est_Descripcion, Nullable<int> est_UsuarioModifica, Nullable<System.DateTime> est_FechaModifica)
+        {
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var est_DescripcionParameter = est_Descripcion != null ?
+                new ObjectParameter("est_Descripcion", est_Descripcion) :
+                new ObjectParameter("est_Descripcion", typeof(string));
+    
+            var est_UsuarioModificaParameter = est_UsuarioModifica.HasValue ?
+                new ObjectParameter("est_UsuarioModifica", est_UsuarioModifica) :
+                new ObjectParameter("est_UsuarioModifica", typeof(int));
+    
+            var est_FechaModificaParameter = est_FechaModifica.HasValue ?
+                new ObjectParameter("est_FechaModifica", est_FechaModifica) :
+                new ObjectParameter("est_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbEstado_Update_Result>("UDP_Gral_tbEstado_Update", est_IdParameter, est_DescripcionParameter, est_UsuarioModificaParameter, est_FechaModificaParameter);
         }
     }
 }
