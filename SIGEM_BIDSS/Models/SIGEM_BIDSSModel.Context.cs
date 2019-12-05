@@ -40,7 +40,6 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbTipoPermiso> tbTipoPermiso { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
-        public virtual DbSet<tbTipoSolicitud> tbTipoSolicitud { get; set; }
         public virtual DbSet<tbTipoTransporte> tbTipoTransporte { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
         public virtual DbSet<tbProducto> tbProducto { get; set; }
