@@ -105,7 +105,7 @@ namespace SIGEM_BIDSS.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Municipio")]
-        public string mun_Id { get; set; }
+        public string mun_codigo { get; set; }
 
 
         [Display(Name = "Usuario Crea")]

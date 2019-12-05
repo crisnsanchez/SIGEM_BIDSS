@@ -160,9 +160,9 @@
                             <p id="Departamento">@Html.ValidationMessageFor(muni => test.dep_codigo)</p>
                         </div>
                         <div class="form-group col-md-5">
-                            @Html.LabelFor(model => model.mun_Id, "Municipio", new { @class = "control-label col-md-5" })
-                            @Html.DropDownList("mun_Id", null, "Seleccione Municipios", htmlAttributes: new { @class = "form-control" })
-                            <p id="Municipio" style="color:red">@Html.ValidationMessageFor(model => model.mun_Id)</p>
+                            @Html.LabelFor(model => model.mun_codigo, "Municipio", new { @class = "control-label col-md-5" })
+                            @Html.DropDownList("mun_codigo", null, "Seleccione Municipios", htmlAttributes: new { @class = "form-control" })
+                            <p id="Municipio" style="color:red">@Html.ValidationMessageFor(model => model.mun_codigo)</p>
                         </div>
 
                     </div>

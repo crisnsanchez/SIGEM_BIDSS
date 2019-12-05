@@ -114,7 +114,7 @@ namespace SIGEM_BIDSS.Controllers
             var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
 
             string fullName = userClaims?.FindFirst("name")?.Value;
-            ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");
             ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description");
@@ -142,7 +142,7 @@ namespace SIGEM_BIDSS.Controllers
                 TempData["smserror"] = "Imagen requerida.";
                 ViewBag.smserror = TempData["smserror"];
 
-                ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                 ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                 ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
@@ -192,7 +192,7 @@ namespace SIGEM_BIDSS.Controllers
                     if (Msj.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                        ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                         ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                         ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                         ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
@@ -211,7 +211,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                 
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador." + Ex.Message.ToString());
-                    ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                    ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                     ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                     ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
@@ -223,7 +223,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
             else
             {
-                ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                 ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                 ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
@@ -252,7 +252,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
             ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
@@ -308,7 +308,7 @@ namespace SIGEM_BIDSS.Controllers
                     if (Msj.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                        ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                         ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                         ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                         ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
@@ -326,7 +326,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
 
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                    ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                     ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                     ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
@@ -337,7 +337,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
             else
             {
-                ViewBag.mun_Id = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                 ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
