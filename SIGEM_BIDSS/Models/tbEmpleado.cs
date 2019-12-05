@@ -17,7 +17,8 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbEmpleado()
         {
-            this.tbHistorialdeSolicitud = new HashSet<tbHistorialdeSolicitud>();
+            this.tbAnticipoViatico = new HashSet<tbAnticipoViatico>();
+            this.tbAnticipoViatico1 = new HashSet<tbAnticipoViatico>();
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
             this.tbSueldo = new HashSet<tbSueldo>();
             this.tbSueldo1 = new HashSet<tbSueldo>();
@@ -45,9 +46,11 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> emp_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
     
-        public virtual tbEstado tbEstado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbHistorialdeSolicitud> tbHistorialdeSolicitud { get; set; }
+        public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico1 { get; set; }
+        public virtual tbEstado tbEstado { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
         public virtual tbTipoSangre tbTipoSangre { get; set; }

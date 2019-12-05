@@ -14,6 +14,7 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoViaticoController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
+        Helpers Function = new Helpers();
 
         // GET: TipoViatico
         public ActionResult Index()
@@ -69,7 +70,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoViatico_Insert(tbTipoViatico.tpv_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
+                    List = db.UDP_Gral_tbTipoViatico_Insert(tbTipoViatico.tpv_Descripcion, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoViatico_Insert_Result tbViatico in List)
                         Msj = tbViatico.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -132,26 +133,27 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "tpv_Id,tpv_Descripcion,tpv_UsuarioCrea,tpv_FechaCrea,tpv_UsuarioModifica,tpv_FechaModifica")] tbTipoViatico tbTipoViatico)
         {
             if (ModelState.IsValid)
-
+                if (db.tbTipoViatico.Any(a => a.tpv_Descripcion == tbTipoViatico.tpv_Descripcion && a.tpv_Id != tbTipoViatico.tpv_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe un Tipo Viático con el mismo nombre.");
+                    return View(tbTipoViatico);
+                }
 
             try
             {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoViatico_Update(tbTipoViatico.tpv_Id, tbTipoViatico.tpv_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
+                    List = db.UDP_Gral_tbTipoViatico_Update(tbTipoViatico.tpv_Id, tbTipoViatico.tpv_Descripcion, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoViatico_Update_Result Viatico in List)
                         Msj = Viatico.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-                      
-                        return View();
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
                     }
 
-                    if (db.tbTipoViatico.Any(a => a.tpv_Descripcion == tbTipoViatico.tpv_Descripcion && a.tpv_Id != tbTipoViatico.tpv_Id))
-                    {
-                        ModelState.AddModelError("", "Ya existe un Tipo Viático con el mismo nombre.");
-                        return View(tbTipoViatico);
-                    }
+                
 
                     else
                     {

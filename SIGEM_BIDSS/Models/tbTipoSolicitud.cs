@@ -12,13 +12,13 @@ namespace SIGEM_BIDSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbTipoPermiso
+    public partial class tbTipoSolicitud
     {
-        public int tperm_Id { get; set; }
-        public string tperm_Descripcion { get; set; }
-        public int tperm_UsuarioCrea { get; set; }
-        public System.DateTime tperm_FechaCrea { get; set; }
-        public Nullable<int> tperm_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> tperm_FechaModifica { get; set; }
+        public int tipsol_Id { get; set; }
+        public string tipsol_Descripcion { get; set; }
+        public int tipsol_UsuarioCrea { get; set; }
+        public System.DateTime tipsol_FechaCrea { get; set; }
+        public Nullable<int> tipsol_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> tipsol_FechaModifica { get; set; }
     }
 }
