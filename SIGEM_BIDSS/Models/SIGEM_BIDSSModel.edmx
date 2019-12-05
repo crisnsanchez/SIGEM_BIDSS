@@ -202,17 +202,6 @@
           <Property Name="tps_UsuarioModifica" Type="int" />
           <Property Name="tps_FechaModifica" Type="datetime" />
         </EntityType>
-        <EntityType Name="tbTipoSolicitud">
-          <Key>
-            <PropertyRef Name="tipsol_Id" />
-          </Key>
-          <Property Name="tipsol_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipsol_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="tipsol_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="tipsol_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="tipsol_UsuarioModifica" Type="int" />
-          <Property Name="tipsol_FechaModifica" Type="datetime" />
-        </EntityType>
         <EntityType Name="tbTipoViatico">
           <Key>
             <PropertyRef Name="tpv_Id" />
@@ -487,18 +476,6 @@
             </Principal>
             <Dependent Role="tbHistorialdeSolicitud">
               <PropertyRef Name="tpsal_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id">
-          <End Role="tbTipoSolicitud" Type="Self.tbTipoSolicitud" Multiplicity="1" />
-          <End Role="tbHistorialdeSolicitud" Type="Self.tbHistorialdeSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoSolicitud">
-              <PropertyRef Name="tipsol_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialdeSolicitud">
-              <PropertyRef Name="tipsol_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1016,7 +993,6 @@
           <EntitySet Name="tbTipoPermiso" EntityType="Self.tbTipoPermiso" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbTipoSalario" EntityType="Self.tbTipoSalario" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbTipoSangre" EntityType="Self.tbTipoSangre" Schema="Gral" store:Type="Tables" />
-          <EntitySet Name="tbTipoSolicitud" EntityType="Self.tbTipoSolicitud" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbTipoViatico" EntityType="Self.tbTipoViatico" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbProducto" EntityType="Self.tbProducto" Schema="Inv" store:Type="Tables" />
           <EntitySet Name="tbProductoCategoria" EntityType="Self.tbProductoCategoria" Schema="Inv" store:Type="Tables" />
@@ -1075,10 +1051,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Gral_tbRegistrosdeSolicitud_tbTipoSalario_tpsal_Id" Association="Self.FK_Gral_tbRegistrosdeSolicitud_tbTipoSalario_tpsal_Id">
             <End Role="tbTipoSalario" EntitySet="tbTipoSalario" />
-            <End Role="tbHistorialdeSolicitud" EntitySet="tbHistorialdeSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id" Association="Self.FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id">
-            <End Role="tbTipoSolicitud" EntitySet="tbTipoSolicitud" />
             <End Role="tbHistorialdeSolicitud" EntitySet="tbHistorialdeSolicitud" />
           </AssociationSet>
           <AssociationSet Name="FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id" Association="Self.FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id">
@@ -1611,7 +1583,6 @@
           <EntitySet Name="tbTipoPermiso" EntityType="SIGEM_BIDSSModel.tbTipoPermiso" />
           <EntitySet Name="tbTipoSalario" EntityType="SIGEM_BIDSSModel.tbTipoSalario" />
           <EntitySet Name="tbTipoSangre" EntityType="SIGEM_BIDSSModel.tbTipoSangre" />
-          <EntitySet Name="tbTipoSolicitud" EntityType="SIGEM_BIDSSModel.tbTipoSolicitud" />
           <EntitySet Name="tbTipoViatico" EntityType="SIGEM_BIDSSModel.tbTipoViatico" />
           <EntitySet Name="tbProducto" EntityType="SIGEM_BIDSSModel.tbProducto" />
           <EntitySet Name="tbProductoCategoria" EntityType="SIGEM_BIDSSModel.tbProductoCategoria" />
@@ -1658,10 +1629,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Gral_tbRegistrosdeSolicitud_tbTipoSalario_tpsal_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSalario_tpsal_Id">
             <End Role="tbTipoSalario" EntitySet="tbTipoSalario" />
-            <End Role="tbHistorialdeSolicitud" EntitySet="tbHistorialdeSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id">
-            <End Role="tbTipoSolicitud" EntitySet="tbTipoSolicitud" />
             <End Role="tbHistorialdeSolicitud" EntitySet="tbHistorialdeSolicitud" />
           </AssociationSet>
           <AssociationSet Name="FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id">
@@ -1974,7 +1941,6 @@
           <NavigationProperty Name="tbTipoMovimiento" Relationship="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoMovimiento_tipmo_Id" FromRole="tbHistorialdeSolicitud" ToRole="tbTipoMovimiento" />
           <NavigationProperty Name="tbTipoPermiso" Relationship="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoPermiso_tperm_Id" FromRole="tbHistorialdeSolicitud" ToRole="tbTipoPermiso" />
           <NavigationProperty Name="tbTipoSalario" Relationship="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSalario_tpsal_Id" FromRole="tbHistorialdeSolicitud" ToRole="tbTipoSalario" />
-          <NavigationProperty Name="tbTipoSolicitud" Relationship="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id" FromRole="tbHistorialdeSolicitud" ToRole="tbTipoSolicitud" />
           <NavigationProperty Name="tbTipoViatico" Relationship="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoViatico_tpv_Id" FromRole="tbHistorialdeSolicitud" ToRole="tbTipoViatico" />
         </EntityType>
         <EntityType Name="tbMoneda">
@@ -2067,18 +2033,6 @@
           <Property Name="tps_UsuarioModifica" Type="Int32" />
           <Property Name="tps_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbTipoSangre_tps_Id" FromRole="tbTipoSangre" ToRole="tbEmpleado" />
-        </EntityType>
-        <EntityType Name="tbTipoSolicitud">
-          <Key>
-            <PropertyRef Name="tipsol_Id" />
-          </Key>
-          <Property Name="tipsol_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipsol_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tipsol_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="tipsol_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="tipsol_UsuarioModifica" Type="Int32" />
-          <Property Name="tipsol_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbHistorialdeSolicitud" Relationship="SIGEM_BIDSSModel.FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id" FromRole="tbTipoSolicitud" ToRole="tbHistorialdeSolicitud" />
         </EntityType>
         <EntityType Name="tbTipoViatico">
           <Key>
@@ -2339,18 +2293,6 @@
             </Principal>
             <Dependent Role="tbHistorialdeSolicitud">
               <PropertyRef Name="tpsal_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Gral_tbRegistrosdeSolicitud_tbTipoSolicitud_tipsol_Id">
-          <End Type="SIGEM_BIDSSModel.tbTipoSolicitud" Role="tbTipoSolicitud" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbHistorialdeSolicitud" Role="tbHistorialdeSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbTipoSolicitud">
-              <PropertyRef Name="tipsol_Id" />
-            </Principal>
-            <Dependent Role="tbHistorialdeSolicitud">
-              <PropertyRef Name="tipsol_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2976,18 +2918,6 @@
                 <ScalarProperty Name="tps_UsuarioCrea" ColumnName="tps_UsuarioCrea" />
                 <ScalarProperty Name="tps_nombre" ColumnName="tps_nombre" />
                 <ScalarProperty Name="tps_Id" ColumnName="tps_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbTipoSolicitud">
-            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbTipoSolicitud">
-              <MappingFragment StoreEntitySet="tbTipoSolicitud">
-                <ScalarProperty Name="tipsol_FechaModifica" ColumnName="tipsol_FechaModifica" />
-                <ScalarProperty Name="tipsol_UsuarioModifica" ColumnName="tipsol_UsuarioModifica" />
-                <ScalarProperty Name="tipsol_FechaCrea" ColumnName="tipsol_FechaCrea" />
-                <ScalarProperty Name="tipsol_UsuarioCrea" ColumnName="tipsol_UsuarioCrea" />
-                <ScalarProperty Name="tipsol_Descripcion" ColumnName="tipsol_Descripcion" />
-                <ScalarProperty Name="tipsol_Id" ColumnName="tipsol_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
