@@ -19,7 +19,7 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Nombre Empleado")]
        
-        public short emp_Id { get; set; }
+        public int emp_Id { get; set; }
 
 
         [Display(Name = "Nombre Moneda")]

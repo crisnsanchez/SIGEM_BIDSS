@@ -186,7 +186,6 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
-    <Compile Include="Controllers\SolicitudController.cs" />
     <Compile Include="Controllers\SueldosController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
@@ -255,9 +254,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPuesto.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbSolicitud.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbSueldo.cs">
@@ -3193,16 +3189,11 @@
     <Content Include="Views\TipoSalario\Details.cshtml" />
     <Content Include="Views\TipoSalario\Edit.cshtml" />
     <Content Include="Views\TipoSalario\Index.cshtml" />
-    <Content Include="Views\Solicitud\Create.cshtml" />
-    <Content Include="Views\Solicitud\_AccionPersonal.cshtml" />
     <Content Include="Views\Cargos\Create.cshtml" />
     <Content Include="Views\Cargos\Delete.cshtml" />
     <Content Include="Views\Cargos\Details.cshtml" />
     <Content Include="Views\Cargos\Edit.cshtml" />
     <Content Include="Views\Cargos\Index.cshtml" />
-    <Content Include="Views\Solicitud\_RequisicionCompra.cshtml" />
-    <Content Include="Views\Solicitud\_AnticipoViatico.cshtml" />
-    <Content Include="Views\Solicitud\_RembolsoGastos.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Moneda\Create.cshtml" />
     <Content Include="Views\Moneda\Delete.cshtml" />
@@ -3214,12 +3205,7 @@
     <Content Include="Views\tbTipoPermiso\Details.cshtml" />
     <Content Include="Views\tbTipoPermiso\Edit.cshtml" />
     <Content Include="Views\tbTipoPermiso\Index.cshtml" />
-    <Content Include="Views\Solicitud\_PermisoLaboral.cshtml" />
-    <Content Include="Views\Solicitud\Index.cshtml" />
     <Content Include="Views\Home\Error500.cshtml" />
-    <Content Include="Views\Solicitud\_AnticipoSalario.cshtml" />
-    <Content Include="Views\Solicitud\_ChecklistCapacitaciones.cshtml" />
-    <Content Include="Views\Solicitud\_LiquidacionAnticipoSalario.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Create.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Delete.cshtml" />
     <Content Include="Views\InstitucionesFinancieras\Details.cshtml" />

@@ -28,7 +28,6 @@ namespace SIGEM_BIDSS.Models
         }
     
         public virtual DbSet<tbBitacoraErrores> tbBitacoraErrores { get; set; }
-        public virtual DbSet<tbSolicitud> tbSolicitud { get; set; }
         public virtual DbSet<tbParametro> tbParametro { get; set; }
         public virtual DbSet<tbArea> tbArea { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
@@ -621,8 +620,12 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_TipoMovimiento_Insert_Result>("UDP_Gral_TipoMovimiento_Insert", tipmo_MovimientoParameter, tipmo_UsuarioCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbMoneda_Insert_Result> UDP_Gral_tbMoneda_Insert(string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioCrea)
+        public virtual ObjectResult<UDP_Gral_tbMoneda_Insert_Result> UDP_Gral_tbMoneda_Insert(Nullable<int> tmo_Id, string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioCrea, string tmo_FechaCrea)
         {
+            var tmo_IdParameter = tmo_Id.HasValue ?
+                new ObjectParameter("tmo_Id", tmo_Id) :
+                new ObjectParameter("tmo_Id", typeof(int));
+    
             var tmo_AbreviaturaParameter = tmo_Abreviatura != null ?
                 new ObjectParameter("tmo_Abreviatura", tmo_Abreviatura) :
                 new ObjectParameter("tmo_Abreviatura", typeof(string));
@@ -635,10 +638,14 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tmo_UsuarioCrea", tmo_UsuarioCrea) :
                 new ObjectParameter("tmo_UsuarioCrea", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMoneda_Insert_Result>("UDP_Gral_tbMoneda_Insert", tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioCreaParameter);
+            var tmo_FechaCreaParameter = tmo_FechaCrea != null ?
+                new ObjectParameter("tmo_FechaCrea", tmo_FechaCrea) :
+                new ObjectParameter("tmo_FechaCrea", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMoneda_Insert_Result>("UDP_Gral_tbMoneda_Insert", tmo_IdParameter, tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioCreaParameter, tmo_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbMoneda_Update_Result> UDP_Gral_tbMoneda_Update(Nullable<short> tmo_Id, string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioModifica)
+        public virtual ObjectResult<UDP_Gral_tbMoneda_Update_Result> UDP_Gral_tbMoneda_Update(Nullable<short> tmo_Id, string tmo_Abreviatura, string tmo_Nombre, Nullable<int> tmo_UsuarioModifica, string tmo_FechaModifica)
         {
             var tmo_IdParameter = tmo_Id.HasValue ?
                 new ObjectParameter("tmo_Id", tmo_Id) :
@@ -656,7 +663,11 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tmo_UsuarioModifica", tmo_UsuarioModifica) :
                 new ObjectParameter("tmo_UsuarioModifica", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMoneda_Update_Result>("UDP_Gral_tbMoneda_Update", tmo_IdParameter, tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioModificaParameter);
+            var tmo_FechaModificaParameter = tmo_FechaModifica != null ?
+                new ObjectParameter("tmo_FechaModifica", tmo_FechaModifica) :
+                new ObjectParameter("tmo_FechaModifica", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMoneda_Update_Result>("UDP_Gral_tbMoneda_Update", tmo_IdParameter, tmo_AbreviaturaParameter, tmo_NombreParameter, tmo_UsuarioModificaParameter, tmo_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbTipoPermiso_Insert_Result> UDP_Gral_tbTipoPermiso_Insert(string tperm_Descripcion, Nullable<int> tperm_UsuarioCrea)
@@ -1306,39 +1317,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbEmpleado_Update_Result>("UDP_rrhh_tbEmpleado_Update", emp_IdParameter, emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoElectronicoParameter, emp_EsJefeParameter, emp_RazonInactivacionParameter, est_IdParameter, tps_IdParameter, pto_IdParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_PathImageParameter, mun_IdParameter, emp_UsuarioCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_rrhh_tbSueldo_Insert_Result> UDP_rrhh_tbSueldo_Insert(Nullable<short> emp_Id, Nullable<short> tmo_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_SueldoAnterior, Nullable<bool> sue_Estado, string sue_RazonInactivo, Nullable<int> suel_UsuarioCrea)
-        {
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(short));
-    
-            var tmo_IdParameter = tmo_Id.HasValue ?
-                new ObjectParameter("tmo_Id", tmo_Id) :
-                new ObjectParameter("tmo_Id", typeof(short));
-    
-            var sue_CantidadParameter = sue_Cantidad.HasValue ?
-                new ObjectParameter("sue_Cantidad", sue_Cantidad) :
-                new ObjectParameter("sue_Cantidad", typeof(decimal));
-    
-            var sue_SueldoAnteriorParameter = sue_SueldoAnterior.HasValue ?
-                new ObjectParameter("sue_SueldoAnterior", sue_SueldoAnterior) :
-                new ObjectParameter("sue_SueldoAnterior", typeof(int));
-    
-            var sue_EstadoParameter = sue_Estado.HasValue ?
-                new ObjectParameter("sue_Estado", sue_Estado) :
-                new ObjectParameter("sue_Estado", typeof(bool));
-    
-            var sue_RazonInactivoParameter = sue_RazonInactivo != null ?
-                new ObjectParameter("sue_RazonInactivo", sue_RazonInactivo) :
-                new ObjectParameter("sue_RazonInactivo", typeof(string));
-    
-            var suel_UsuarioCreaParameter = suel_UsuarioCrea.HasValue ?
-                new ObjectParameter("suel_UsuarioCrea", suel_UsuarioCrea) :
-                new ObjectParameter("suel_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbSueldo_Insert_Result>("UDP_rrhh_tbSueldo_Insert", emp_IdParameter, tmo_IdParameter, sue_CantidadParameter, sue_SueldoAnteriorParameter, sue_EstadoParameter, sue_RazonInactivoParameter, suel_UsuarioCreaParameter);
-        }
-    
         public virtual ObjectResult<UDP_rrhh_tbSueldo_Update_Result> UDP_rrhh_tbSueldo_Update(Nullable<int> sue_Id, Nullable<short> emp_Id, Nullable<short> tmo_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_SueldoAnterior, Nullable<bool> sue_Estado, string sue_RazonInactivo, Nullable<int> sue_UsuarioCrea)
         {
             var sue_IdParameter = sue_Id.HasValue ?
@@ -1821,6 +1799,39 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tpv_FechaModifica", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoViatico_Update_Result>("UDP_Gral_tbTipoViatico_Update", tpv_IdParameter, tpv_DescripcionParameter, tpv_UsuarioModificaParameter, tpv_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_rrhh_tbSueldo_Insert_Result> UDP_rrhh_tbSueldo_Insert(Nullable<int> emp_Id, Nullable<short> tmo_Id, Nullable<decimal> sue_Cantidad, Nullable<int> sue_SueldoAnterior, Nullable<bool> sue_Estado, string sue_RazonInactivo, Nullable<int> suel_UsuarioCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var tmo_IdParameter = tmo_Id.HasValue ?
+                new ObjectParameter("tmo_Id", tmo_Id) :
+                new ObjectParameter("tmo_Id", typeof(short));
+    
+            var sue_CantidadParameter = sue_Cantidad.HasValue ?
+                new ObjectParameter("sue_Cantidad", sue_Cantidad) :
+                new ObjectParameter("sue_Cantidad", typeof(decimal));
+    
+            var sue_SueldoAnteriorParameter = sue_SueldoAnterior.HasValue ?
+                new ObjectParameter("sue_SueldoAnterior", sue_SueldoAnterior) :
+                new ObjectParameter("sue_SueldoAnterior", typeof(int));
+    
+            var sue_EstadoParameter = sue_Estado.HasValue ?
+                new ObjectParameter("sue_Estado", sue_Estado) :
+                new ObjectParameter("sue_Estado", typeof(bool));
+    
+            var sue_RazonInactivoParameter = sue_RazonInactivo != null ?
+                new ObjectParameter("sue_RazonInactivo", sue_RazonInactivo) :
+                new ObjectParameter("sue_RazonInactivo", typeof(string));
+    
+            var suel_UsuarioCreaParameter = suel_UsuarioCrea.HasValue ?
+                new ObjectParameter("suel_UsuarioCrea", suel_UsuarioCrea) :
+                new ObjectParameter("suel_UsuarioCrea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbSueldo_Insert_Result>("UDP_rrhh_tbSueldo_Insert", emp_IdParameter, tmo_IdParameter, sue_CantidadParameter, sue_SueldoAnteriorParameter, sue_EstadoParameter, sue_RazonInactivoParameter, suel_UsuarioCreaParameter);
         }
     }
 }

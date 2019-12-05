@@ -69,7 +69,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbMoneda_Insert(tbMoneda.tmo_Abreviatura ,tbMoneda.tmo_Nombre, 1);
+                    //List = db.UDP_Gral_tbMoneda_Insert(tbMoneda.tmo_Id,tbMoneda.tmo_Abreviatura,tbMoneda.tmo_Nombre, 1);
                     foreach (UDP_Gral_tbMoneda_Insert_Result Moneda in List)
                         Msj = Moneda.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -131,7 +131,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbMoneda_Update(tbMoneda.tmo_Id, tbMoneda.tmo_Abreviatura,tbMoneda.tmo_Nombre, 1);
+                    //List = db.UDP_Gral_tbMoneda_Update(tbMoneda.tmo_Id, tbMoneda.tmo_Abreviatura,tbMoneda.tmo_Nombre, 1);
                     foreach (UDP_Gral_tbMoneda_Update_Result Moneda in List)
                         Msj = Moneda.MensajeError;
                     if (Msj.StartsWith("-1"))

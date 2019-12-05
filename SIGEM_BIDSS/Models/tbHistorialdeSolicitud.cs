@@ -15,7 +15,7 @@ namespace SIGEM_BIDSS.Models
     public partial class tbHistorialdeSolicitud
     {
         public int sol_Id { get; set; }
-        public short emp_Id { get; set; }
+        public int emp_Id { get; set; }
         public int tipsol_Id { get; set; }
         public int pto_Id { get; set; }
         public int tpsal_id { get; set; }

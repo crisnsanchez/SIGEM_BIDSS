@@ -37,7 +37,7 @@ namespace SIGEM_BIDSS.Models
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Id Empleado")]
-        public short emp_Id { get; set; }
+        public int emp_Id { get; set; }
 
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]

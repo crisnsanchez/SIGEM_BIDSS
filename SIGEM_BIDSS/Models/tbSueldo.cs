@@ -22,7 +22,7 @@ namespace SIGEM_BIDSS.Models
         }
     
         public int sue_Id { get; set; }
-        public short emp_Id { get; set; }
+        public int emp_Id { get; set; }
         public short tmo_Id { get; set; }
         public Nullable<decimal> sue_Cantidad { get; set; }
         public Nullable<int> sue_SueldoAnterior { get; set; }

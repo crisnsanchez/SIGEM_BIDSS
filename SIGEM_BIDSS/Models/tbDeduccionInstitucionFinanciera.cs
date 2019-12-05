@@ -15,7 +15,7 @@ namespace SIGEM_BIDSS.Models
     public partial class tbDeduccionInstitucionFinanciera
     {
         public int deif_IdDeduccionInstFinanciera { get; set; }
-        public short emp_Id { get; set; }
+        public int emp_Id { get; set; }
         public int insf_IdInstitucionFinanciera { get; set; }
         public Nullable<decimal> deif_Monto { get; set; }
         public string deif_Comentarios { get; set; }
