@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class InstitucionFinancieraController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-
+        Helpers Function = new Helpers();
         // GET: InstitucionFinanciera
         public ActionResult Index()
         {
@@ -52,10 +52,13 @@ namespace SIGEM_BIDSS.Controllers
             {
                 IEnumerable<Object> List = null;
                 string Msj = "";
-                List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Nombre,
+                List = db.UDP_Plani_tbInstitucionFinanciera_Insert(  tbInstitucionFinanciera.insf_Id,
+                                                                     tbInstitucionFinanciera.insf_Nombre,
                                                                      tbInstitucionFinanciera.insf_Contacto,
                                                                      tbInstitucionFinanciera.insf_Telefono,
-                                                                     tbInstitucionFinanciera.insf_Correo, 1,
+                                                                     tbInstitucionFinanciera.insf_Correo,
+                                                                     1,
+                                                                     Function.DatetimeNow(),
                                                                      tbInstitucionFinanciera.insf_Activo);
                 foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
@@ -112,6 +115,7 @@ namespace SIGEM_BIDSS.Controllers
                                                                          tbInstitucionFinanciera.insf_Contacto,
                                                                          tbInstitucionFinanciera.insf_Telefono,
                                                                          tbInstitucionFinanciera.insf_Correo, 1,
+                                                                         Function.DatetimeNow(),
                                                                          tbInstitucionFinanciera.insf_Activo);
                     foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
