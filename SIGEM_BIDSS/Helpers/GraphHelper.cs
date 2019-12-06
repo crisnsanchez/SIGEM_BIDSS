@@ -72,6 +72,11 @@ namespace SIGEM_BIDSS.Helpers
                         requestMessage.Headers.Authorization =
                             new AuthenticationHeaderValue("Bearer", result.AccessToken);
                     }));
+           
         }
+
+
+
+       
     }
 }

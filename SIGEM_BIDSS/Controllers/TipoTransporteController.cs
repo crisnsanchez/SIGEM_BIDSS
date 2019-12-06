@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoTransporteController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
         // GET: TipoTransporte
         public ActionResult Index()
         {
