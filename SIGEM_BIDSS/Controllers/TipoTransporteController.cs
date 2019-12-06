@@ -10,7 +10,7 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class TipoTransporteController : Controller
+    public class TipoTransporteController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         Models.Helpers Function = new Models.Helpers();
