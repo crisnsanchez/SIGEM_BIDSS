@@ -432,6 +432,23 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMunicipio_Update_Result>("UDP_Gral_tbMunicipio_Update", mun_CodigoParameter, dep_CodigoParameter, mun_NombreParameter, mun_UsuarioModificaParameter);
         }
     
+        public virtual ObjectResult<UDP_Gral_tbPuesto_Insert_Result> UDP_Gral_tbPuesto_Insert(Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioCrea)
+        {
+            var are_IdParameter = are_Id.HasValue ?
+                new ObjectParameter("are_Id", are_Id) :
+                new ObjectParameter("are_Id", typeof(int));
+    
+            var pto_DescripcionParameter = pto_Descripcion != null ?
+                new ObjectParameter("pto_Descripcion", pto_Descripcion) :
+                new ObjectParameter("pto_Descripcion", typeof(string));
+    
+            var pto_UsuarioCreaParameter = pto_UsuarioCrea.HasValue ?
+                new ObjectParameter("pto_UsuarioCrea", pto_UsuarioCrea) :
+                new ObjectParameter("pto_UsuarioCrea", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Insert_Result>("UDP_Gral_tbPuesto_Insert", are_IdParameter, pto_DescripcionParameter, pto_UsuarioCreaParameter);
+        }
+    
         public virtual ObjectResult<UDP_Gral_tbPuesto_Update_Result> UDP_Gral_tbPuesto_Update(Nullable<int> pto_Id, Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioModifica)
         {
             var pto_IdParameter = pto_Id.HasValue ?
@@ -1920,27 +1937,6 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tptran_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoTransporte_Update_Result>("UDP_Gral_tbTipoTransporte_Update", tptran_IdParameter, tptran_DescripcionParameter, tptran_UsuarioModificaParameter, tptran_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Gral_tbPuesto_Insert_Result> UDP_Gral_tbPuesto_Insert(Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioCrea, Nullable<System.DateTime> pto_FechaCrea)
-        {
-            var are_IdParameter = are_Id.HasValue ?
-                new ObjectParameter("are_Id", are_Id) :
-                new ObjectParameter("are_Id", typeof(int));
-    
-            var pto_DescripcionParameter = pto_Descripcion != null ?
-                new ObjectParameter("pto_Descripcion", pto_Descripcion) :
-                new ObjectParameter("pto_Descripcion", typeof(string));
-    
-            var pto_UsuarioCreaParameter = pto_UsuarioCrea.HasValue ?
-                new ObjectParameter("pto_UsuarioCrea", pto_UsuarioCrea) :
-                new ObjectParameter("pto_UsuarioCrea", typeof(int));
-    
-            var pto_FechaCreaParameter = pto_FechaCrea.HasValue ?
-                new ObjectParameter("pto_FechaCrea", pto_FechaCrea) :
-                new ObjectParameter("pto_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Insert_Result>("UDP_Gral_tbPuesto_Insert", are_IdParameter, pto_DescripcionParameter, pto_UsuarioCreaParameter, pto_FechaCreaParameter);
         }
     }
 }
