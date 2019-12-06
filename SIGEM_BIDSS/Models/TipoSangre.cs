@@ -17,12 +17,11 @@ namespace SIGEM_BIDSS.Models
     public class TipoSangreMetaData
     {
 
-        [Display(Name = "Id Tipo Sangre")]
+        [Display(Name = "ID")]
         public int tps_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Descripcion")]
-        [MinLength(2, ErrorMessage = "Minimo {1} caracteres")]
+        [Display(Name = "Nombre")] 
         public string tps_nombre { get; set; }
 
         [Display(Name = "Usuario Crea")]
