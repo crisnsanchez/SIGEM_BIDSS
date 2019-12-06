@@ -14,7 +14,6 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoSangreController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
 
         // GET: TipoSangre
         public ActionResult Index()
@@ -70,19 +69,13 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_nombre, 1, Function.DatetimeNow());
+                    //List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_nombre, 1);
                     foreach (UDP_Gral_tbTipoSangre_Insert_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
-                    }
-                    if (Msj.StartsWith("-2"))
-                    {
-
-                        ModelState.AddModelError("", "Ya existe un tipo sangre con el mismo nombre.");
-                        return View(tbTipoSangre);
                     }
                     else
                     {
@@ -135,19 +128,13 @@ namespace SIGEM_BIDSS.Controllers
             {
                 IEnumerable<Object> List = null;
                 string Msj = "";
-                List = db.UDP_Gral_tbTipoSangre_Update(tbTipoSangre.tps_Id,tbTipoSangre.tps_nombre, 1, Function.DatetimeNow());
+                //List = db.UDP_Gral_tbTipoSangre_Update(1,tbTipoSangre.tps_nombre, 1);
                 foreach (UDP_Gral_tbTipoSangre_Update_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
                 if (Msj.StartsWith("-1"))
                 {
                    
                     return View();
-                }
-                if (Msj.StartsWith("-2"))
-                {
-
-                    ModelState.AddModelError("", "Ya existe un estado con el mismo nombre.");
-                    return View(tbTipoSangre);
                 }
                 else
                 {

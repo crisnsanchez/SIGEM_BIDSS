@@ -864,7 +864,6 @@ C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS
 C:\Users\PaulaDiaz\Documents\Visual Studio 2015\Projects\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb
 C:\Users\JoseDubon\OneDrive - BI-DSS\Documentos\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\QRCoder.dll
 C:\Users\JoseDubon\OneDrive - BI-DSS\Documentos\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Drawing.Common.dll
-C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.dll.config
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.pdb
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\roslyn\csc.exe
@@ -988,4 +987,5 @@ C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Graph.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Graph.Core.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Identity.Client.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.cache
+C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.dll.config
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInputs.cache
