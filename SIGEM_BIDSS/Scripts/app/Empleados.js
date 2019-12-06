@@ -38,6 +38,17 @@ $(document).ready(function () {
     //$("#emp_Telefono")[0].maxLength = 8;
     $("#emp_Correo").attr("autocomplete", "randomString");
     $("#ban_NombreContacto").attr("autocomplete", "randomString");
+
+
+
+
+
+    $('#municipio').hide();
+
+
+    var muni = $('#municipios').val();
+    if (muni == "true") { GetMunicipios() } else { console.log(muni); }
+
 })
     
 
@@ -88,8 +99,15 @@ $(document).on("change", "#dep_Codigo", function () {
     GetMunicipios();
 });
 
+
+
+
 function GetMunicipios() {
-    var CodDepartamento = $('#dep_Codigo').val();
+
+  
+    var CodDepartamento = $('#dep_Codigo').val(),
+        _selectedMun = $('#selectedMun').val();
+    console.log(CodDepartamento)
     $.ajax({
         url: "/Empleado/GetMunicipios",
         method: "POST",
@@ -98,19 +116,33 @@ function GetMunicipios() {
         data: JSON.stringify({ CodDepartamento: CodDepartamento }),
     })
         .done(function (data) {
+            $('#municipio').show();
             if (data.length > 0) {
-                $('#mun_Id').empty();
-                $('#mun_Id').append("<option value=''>Seleccione Municipio</option>");
+                $('#mun_codigo').empty();
+                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
                 $.each(data, function (key, val) {
-                    $('#mun_Id').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
+                    $('#mun_codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
                 });
                 console.log(data)
-                $('#mun_Id').trigger("chosen:updated");
+                $('#mun_codigo').trigger("chosen:updated");
+                if (_selectedMun != null || _selectedMun != "") {
+                    $("#mun_codigo option[value='" + _selectedMun + "']").attr("selected", true);
+                } else { console.log("No es") }
             }
             else {
-                $('#mun_Id').empty();
-                $('#mun_Id').append("<option value=''>Seleccione Municipio</option>");
+                $('#mun_codigo').empty();
+                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
             }
         });
+
+
+
+  
+    
+
+       
+
+
+   
 }
 
