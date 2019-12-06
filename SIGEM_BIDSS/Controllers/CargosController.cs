@@ -13,6 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class CargosController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Cargos
         public ActionResult Index()
@@ -79,16 +80,22 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
 
             {
+                ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbPuesto_Insert(tbPuesto.are_Id, tbPuesto.pto_Descripcion, 1);
+                    List = db.UDP_Gral_tbPuesto_Insert(tbPuesto.are_Id, tbPuesto.pto_Descripcion, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbPuesto_Insert_Result Puesto in List)
                         Msj = Puesto.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    if (Msj.StartsWith("-2"))
+                    {
+                        ModelState.AddModelError("", "Ya existe un Cargo con el mismo nombre..");
                         return View();
                     }
                     else
@@ -106,7 +113,6 @@ namespace SIGEM_BIDSS.Controllers
 
             }
 
-            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             return View(tbPuesto);
         }
 
