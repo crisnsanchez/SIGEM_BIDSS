@@ -14,7 +14,7 @@ using SIGEM_BIDSS.Models;
 namespace SIGEM_BIDSS.Controllers
 {
     [Authorize]
-    public class EmpleadoController : Controller
+    public class EmpleadoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         private GeneralFunctions GFC = new GeneralFunctions();
@@ -108,17 +108,17 @@ namespace SIGEM_BIDSS.Controllers
         {
 
 
-            string lvMensajeError = "";
+            //string lvMensajeError = "";
 
-            var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
+            //var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
 
-            string fullName = userClaims?.FindFirst("name")?.Value;
-            string[] names = fullName.Split(' ');
-            ViewBag.firstName = names.First();
-            ViewBag.lastName = names.Last();
+            //string fullName = userClaims?.FindFirst("name")?.Value;
+            //string[] names = fullName.Split(' ');
+            //ViewBag.firstName = names.First();
+            //ViewBag.lastName = names.Last();
 
           
-            ViewBag.Email = userClaims?.FindFirst("preferred_username")?.Value;
+            //ViewBag.Email = userClaims?.FindFirst("preferred_username")?.Value;
             ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");
@@ -150,16 +150,16 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-                string lvMensajeError = "";
+                //string lvMensajeError = "";
 
-                var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
+                //var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
 
-                string fullName = userClaims?.FindFirst("name")?.Value;
-                string[] names = fullName.Split(' ');
-                ViewBag.firstName = names.First();
-                ViewBag.lastName = names.Last();
+                //string fullName = userClaims?.FindFirst("name")?.Value;
+                //string[] names = fullName.Split(' ');
+                //ViewBag.firstName = names.First();
+                //ViewBag.lastName = names.Last();
 
-                var _emailAD = userClaims?.FindFirst("preferred_username")?.Value;
+                //var _emailAD = userClaims?.FindFirst("preferred_username")?.Value;
 
 
 
