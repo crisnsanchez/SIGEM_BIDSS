@@ -68,12 +68,12 @@
                         <div class="form-group col-md-4">
 
                             @Html.LabelFor(model => model.emp_Nombres, htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @OnKeyPress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @Value=  ViewBag.firstName , @ReadOnly = "Readonly" } })
                             <p id="Nombres" style="color:red">@Html.ValidationMessageFor(model => model.emp_Nombres, "", new { @class = "text-danger" })</p>
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.emp_Apellidos, htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;" } })
+                            @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @Value = ViewBag.lastName, @ReadOnly= "Readonly"} })
                             <p id="Apellidos" style="color:red">@Html.ValidationMessageFor(model => model.emp_Apellidos, "", new { @class = "text-danger" })</p>
                         </div>
                         <div class="col-md-3 mb-4">
@@ -104,13 +104,13 @@
 
                     </div>
 
-
+                  
                     <div class="form-row">
 
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.emp_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-8" })
 
-                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.Email , @ReadOnly = "Readonly" } })
                             <p id="emailOK" style="color:red">@Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger" })</p>
                         </div>
                         
@@ -135,7 +135,7 @@
 
                             @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger" })
-                        </div>
+                       </div>
 
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.emp_FechaIngreso, htmlAttributes: new { @class = "control-label col-md-8" })
@@ -146,7 +146,7 @@
 
                         <div class="form-group col-md-3">
                             @Html.LabelFor(model => model.emp_EsJefe, "¿Es Jefe?" , htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.DropDownList("emp_EsJefe", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.CheckBoxFor(model => model.emp_EsJefe,new { @class = "form-control" })
                             <p style="color:red">@Html.ValidationMessageFor(model => model.emp_EsJefe)</p>
                         </div>
                     </div>
