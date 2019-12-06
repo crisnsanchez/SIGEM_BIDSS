@@ -52,11 +52,11 @@ namespace SIGEM_BIDSS.Controllers
             {
                 IEnumerable<Object> List = null;
                 string Msj = "";
-                List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Nombre,
-                                                                     tbInstitucionFinanciera.insf_Contacto,
-                                                                     tbInstitucionFinanciera.insf_Telefono,
-                                                                     tbInstitucionFinanciera.insf_Correo, 1,
-                                                                     tbInstitucionFinanciera.insf_Activo);
+                //List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Nombre,
+                //                                                     tbInstitucionFinanciera.insf_Contacto,
+                //                                                     tbInstitucionFinanciera.insf_Telefono,
+                //                                                     tbInstitucionFinanciera.insf_Correo, 1,
+                //                                                     tbInstitucionFinanciera.insf_Activo);
                 foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
                 if (Msj.StartsWith("-1"))
@@ -108,11 +108,11 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
-                                                                         tbInstitucionFinanciera.insf_Contacto,
-                                                                         tbInstitucionFinanciera.insf_Telefono,
-                                                                         tbInstitucionFinanciera.insf_Correo, 1,
-                                                                         tbInstitucionFinanciera.insf_Activo);
+                    //List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
+                    //                                                     tbInstitucionFinanciera.insf_Contacto,
+                    //                                                     tbInstitucionFinanciera.insf_Telefono,
+                    //                                                     tbInstitucionFinanciera.insf_Correo, 1,
+                    //                                                     tbInstitucionFinanciera.insf_Activo);
                     foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))

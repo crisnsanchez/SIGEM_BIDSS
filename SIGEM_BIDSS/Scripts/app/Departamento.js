@@ -32,21 +32,21 @@ $(window).ready(function () {
 
 
 //-----------Bloquear Ctrl + C y Ctrl + V
-$('#dep_Codigo, #dep_Nombre, #mun_codigo, #mun_nombre').bind('keydown', function (event) {
-    if (event.ctrlKey || event.metaKey) {
-        switch (String.fromCharCode(event.which).toLowerCase()) {
-            case 'c':
-                event.preventDefault();
-                console.log("Ctrl + C")
-                break;
-            case 'v':
-                console.log("Ctrl + V")
+//$('#dep_Codigo, #dep_Nombre, #mun_codigo, #mun_nombre').bind('keydown', function (event) {
+//    if (event.ctrlKey || event.metaKey) {
+//        switch (String.fromCharCode(event.which).toLowerCase()) {
+//            case 'c':
+//                event.preventDefault();
+//                console.log("Ctrl + C")
+//                break;
+//            case 'v':
+//                console.log("Ctrl + V")
 
-                event.preventDefault();
-                break;
-        }
-    }
-})
+//                event.preventDefault();
+//                break;
+//        }
+//    }
+//})
 
 
 //-----------Aceptar solo numeros en los textbox
@@ -56,7 +56,10 @@ function soloNumeros(e) {
     return /^[0-9]+$/.test(tecla);
 }
 
-
+function noespaciosincio(e) {
+    var valor = e.value.replace(/^ */, '');
+    e.value = valor;
+}
 
 ///----------validar solo letras
 function soloLetras(e) {
@@ -175,8 +178,7 @@ function AgregarMunicipiosDT() {
 
     }
     //------------------------------Fin Validaciones Departamento------------------------------
-
-
+  
     //------------------------------Validaciones Municipio------------------------------
     //---------------------------------------------------------------------------------------
     //------------------------------Validaciones Codigo Municipio------------------------------
@@ -238,7 +240,7 @@ function AgregarMunicipiosDT() {
 
             if (_MunCodigo && MunCodigo == _MunCodigoTabla) {
                 $('#MunCodigoExistCodigoError').text('');
-                $('#ValidationMunCodigoCreate').after('<ul id="MunCodigoExistCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Ya existe el codigo de municipio</ul>');
+                $('#ValidationMunCodigoCreate').after('<ul id="MunCodigoExistCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Ya existe el código de municipio</ul>');
                 _MunCodigo = false;
             } else if (_MunCodigo) {
                 $('#MunCodigoExistCodigoError').text('');
@@ -445,303 +447,42 @@ $(document).ready(function () {
         });
 });
 
+$('#dep_Codigo').change(function () {
+    $('#ValidationDepCodigoCreate').hide();
+});
 
+$('#dep_CodigoCodigoError').change(function () {
+    $('#ValidationDepCodigoCreate').hide();
+});
 
+$('#dep_CodigoLegthCodigoError').change(function () {
+    $('#ValidationDepCodigoCreate').hide();
+});
 
+$('#dep_CodigoLegthLessCodigoError').change(function () {
+    $('#ValidationDepCodigoCreate').hide();
+});
 
+$('#dep_Nombre').change(function () {
+    $('#ValidationDepNombreCreate').hide();
+    
 
+});
 
+$('#mun_codigo').change(function () {
+    $('#ValidationMunCodigoCreate').hide();
+});
 
+$('#mun_nombre').change(function () {
+    $('#ValidationMunNombreCreate').hide();
+});
 
+$('#mun_CodigoEdit_').change(function () {
+    $('#mun_CodigoEdit_').hide();
+});
 
+$('#mun_nombre').change(function () {
+    $('#mun_NombreEdit_').hide();
+});
 
 
-
-
-
-
-
-
-
-
-
-
-
-//////////////////////////////////////
-//function btnActualizar(mun_Codigo) {
-
-//    var Municipio = mun_Codigo;
-//    var Depatamento = $('#dep_Codigo').val();
-//    var NombreMunicipio = $("#MunNombre_" + mun_Codigo).val();
-
-
-//    console.log(Municipio);
-//    console.log(NombreMunicipio);
-//    console.log(Depatamento);
-
-//    $.ajax({
-//        url: "/Departamento/ActualizarMunicipio",
-//        method: "POST",
-//        dataType: 'json',
-//        contentType: "application/json; charset=utf-8",
-//        data: JSON.stringify({ mun_Codigo: Municipio, dep_Codigo: Depatamento, mun_Nombre: NombreMunicipio }),
-//    }).done(function (data) {
-//        if (data == '') {
-//            location.reload();
-//        }
-//        else if (data == '-1') {
-//            $('#MensajeError' + mun_Codigo).text('');
-//            $('#ValidationMessageFor' + mun_Codigo).after('<ul id="MensajeError' + mun_Codigo + '" class="validation-summary-errors text-danger">No se ha podido Actualizar el registro.</ul>');
-//        }
-//        else {
-//            $('#MensajeError' + mun_Codigo).text('');
-//            $('#ValidationMessageFor' + mun_Codigo).after('<ul id="MensajeError' + mun_Codigo + '" class="validation-summary-errors text-danger">Campo Requerido</ul>');
-//        }
-//    });
-//}
-
-
-
-
-
-
-
-//////////////////////////////////////
-////GUARDAR MUNICIPIOS
-//$('#btnGuardar').click(function () {
-//    var munCodigo = $('#mun_Codigo').val();
-//    var munNombre = $('#mun_Nombre').val();
-
-//    if (munNombre == '') {
-//        $('#mun_Nombre').text('');
-//        $('#errorCodigo').text('');
-//        $('#errorNombre').text('');
-//        $('#ValidationNombre').after('<ul id="errorNombre" class="validation-summary-errors text-danger">Campo Municipio Requerido</ul>');
-
-//    }
-
-
-//    else if (munCodigo == '') {
-//        $('#mun_Nombre').text('');
-//        $('#errorCodigo').text('');
-//        $('#errorNombre').text('');
-//        $('#ValidationCodigoUpdate').after('<ul id="errorCodigo" class="validation-summary-errors text-danger">Campo Codigo Municipio Requerido</ul>');
-
-//    }
-
-//    else {
-//        var tbMunicipio = GetMunicipio();
-//        $.ajax({
-//            url: "/Departamento/GuardarMun",
-//            method: "POST",
-//            dataType: 'json',
-//            contentType: "application/json; charset=utf-8",
-//            data: JSON.stringify({ tbMunicipio: tbMunicipio }),
-
-//        })
-//            .done(function (data) {
-//                if (data == '') {
-//                    $('#ValidationNombreUpdate').after('<ul id="ValidationNombreUpdate" class="validation-summary-errors text-danger">No se pudo actualizar el registro, contacte con el administrador</ul>');
-//                }
-//                else {
-//                    window.location.href = '/Departamento/Index';
-//                }
-//            })
-//    }
-//});'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////
-////Guardar Municipio Modales
-//$('#btnNuevo').click(function () {
-
-//    var CodigoMun = $('#mun_Codigo').val();
-//    var Depatamento = $('#dep_Codigo').val();
-//    var NombreMun = $('#mun_Nombre').val();
-
-//    console.log(CodigoMun)
-//    console.log(NombreMun)
-//    //var munCodigo = $('#mun_Codigo').val();
-//    //var munNombre = $('#mun_Nombre').val();
-
-
-//    if (CodigoMun == '') {
-//        $('#mun_Codigo').text('');
-//        $('#errorCodigo').text('');
-//        $('#errorNombre').text('');
-//        $('#ValidationNombre').after('<ul id="errorNombre" class="validation-summary-errors text-danger">Campo Municipio Requerido</ul>');
-//        console.log('HOLAAAA')
-//    }
-
-//    else if (NombreMun == '') {
-//        $('#mun_Nombre').text('');
-//        $('#errorCodigo').text('');
-//        $('#errorNombre').text('');
-//        $('#ValidationCodigoUpdate').after('<ul id="errorCodigo" class="validation-summary-errors text-danger">Campo Codigo Municipio Requerido</ul>');
-//        console.log('ADIOS')
-//    }
-
-//    else {
-//        $.ajax({
-//            url: "/Departamento/GuardarMunicipioModal",
-//            method: "POST",
-//            dataType: 'json',
-//            contentType: "application/json; charset=utf-8",
-//            data: JSON.stringify({ mun_Codigo: CodigoMun, dep_Codigo: Depatamento, mun_Nombre: NombreMun }),
-
-//        })
-//            .done(function (data) {
-//                if (data == '') {
-//                    $('#ValidationNombreUpdate').after('<ul id="ValidationNombreUpdate" class="validation-summary-errors text-danger">No se pudo actualizar el registro, contacte con el administrador</ul>');
-//                }
-//                else {
-//                    window.location.href = '/Departamento/Index';
-//                }
-//            })
-//    }
-//});
-
-
-
-
-
-
-
-
-//$("#mun_NombreEdit").change(function () {
-//    var str = $("#mun_NombreEdit").val();
-//    var res = str.toUpperCase();
-//    $("#mun_NombreEdit").val(res);
-//});
-
-//$("#mun_NombreEdit").on("keypress", function () {
-//    $input = $(this);
-//    setTimeout(function () {
-//        $input.val($input.val().toUpperCase());
-//    }, 50);
-//})
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////
-
-//$(document).ready(function () {
-
-//    $('#dep_Nombre').on('input', function (e) {
-//        if (!/^[ a-záéíóúüñ]*$/i.test(this.value)) {
-//            this.value = this.value.replace(/[^ a-záéíóúüñ]+/ig, "");
-//        }
-//    });
-
-//    $('#mun_NombreEdit').on('input', function (e) {
-//        if (!/^[ a-záéíóúüñ]*$/i.test(this.value)) {
-//            this.value = this.value.replace(/[^ a-záéíóúüñ]+/ig, "");
-//        }
-//    });
-
-//    $('#mun_NombreEdit_').on('input', function (e) {
-//        if (!/^[ a-záéíóúüñ]*$/i.test(this.value)) {
-//            this.value = this.value.replace(/[^ a-záéíóúüñ]+/ig, "");
-//        }
-//    });
-
-
-
-//    //Bloqueo de Botón//
-//    $('#mun_NombreEdit_').change(function () {
-//        if ($(this).val() == 0) {
-//            $('#BtnsubmitMunicipio').attr('disabled', 'disabled');
-//        }
-//        else {
-//            $('#BtnsubmitMunicipio').removeAttr("disabled");
-//        }
-//    });
-
-
-
-//})
-
-
-
-
-//$('#btnNuevoEdit').click(function () {
-//    var depCodigo = $('#dep_Codigo').val();
-//    $.ajax({
-//        url: "/Departamento/GuardarMuninicipio",
-//        method: "POST",
-//        dataType: 'json',
-//        contentType: "application/json; charset=utf-8",
-//        data: JSON.stringify({ depCodigo: depCodigo }),
-//    })
-//        .done(function (data) {
-//            if (data == '-1') {
-//                $('#ValidationCreate').text('');
-//                $('#ValidationCreate_').after('<ul id="ValidationCreate" class="validation-summary-errors text-danger">No se pudo guardar el registro, contacte al administrador</ul>');
-//            }
-//            else {
-//                window.location.href = '/Departamento/Edit/' + depCodigo;
-//            }
-//        })
-//});
-
-//$("#mun_NombreEdit_").change(function () {
-//    var str = $("#mun_NombreEdit").val();
-//    var res = str.toUpperCase();
-//    $("#mun_NombreEdit").val(res);
-//});
-
-//$("#mun_NombreEdit_").on("keypress", function () {
-//    $input = $(this);
-//    setTimeout(function () {
-//        $input.val($input.val().toUpperCase());
-//    }, 50);
-//})
-
-
-
-
-
-
-
-
-
-//$(document).on("click", "#tblMunicipiosEdit tbody tr td button#removeMunicipiosEdit", function () {
-//    _values = EliminarMunicipiosDT(this)
-
-//    $.ajax({
-//        url: "/Departamento/RemoveMunicipios",
-//        method: "POST",
-//        dataType: 'json',
-//        contentType: "application/json; charset=utf-8",
-//        data: JSON.stringify({ Municipios: _values.Municipios }),
-//    });
-//});

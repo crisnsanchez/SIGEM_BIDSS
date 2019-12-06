@@ -189,6 +189,7 @@
     <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSalarioController.cs" />
     <Compile Include="Controllers\TipoSangreController.cs" />
+    <Compile Include="Controllers\TipoTransporteController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -303,6 +304,7 @@
     <Compile Include="Models\TipoSangre.cs" />
     <Compile Include="Models\TipoSalario.cs" />
     <Compile Include="Models\TipoViatico.cs" />
+    <Compile Include="Models\Transporte.cs" />
     <Compile Include="Models\UDP_Conf_tbParametro_Count_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -385,6 +387,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoSolicitud_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoTransporte_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoTransporte_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoViatico_Insert_Result.cs">
@@ -3225,6 +3233,11 @@
     <Content Include="Views\InstitucionFinanciera\Details.cshtml" />
     <Content Include="Views\InstitucionFinanciera\Edit.cshtml" />
     <Content Include="Views\InstitucionFinanciera\Index.cshtml" />
+    <Content Include="Views\TipoTransporte\Create.cshtml" />
+    <Content Include="Views\TipoTransporte\Delete.cshtml" />
+    <Content Include="Views\TipoTransporte\Details.cshtml" />
+    <Content Include="Views\TipoTransporte\Edit.cshtml" />
+    <Content Include="Views\TipoTransporte\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

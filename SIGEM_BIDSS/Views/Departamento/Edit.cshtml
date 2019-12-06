@@ -55,13 +55,16 @@
                         @Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label" })
 
                         @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
-                        @Html.ValidationMessageFor(model => model.dep_Codigo)
+                        <div id="ValidationDepCodigoCreate">
+                            @Html.ValidationMessageFor(model => model.dep_Codigo, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                     <div class="form-group col-md-3">
                         @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label , required" })
-
-                        @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @onkeypress = "return soloLetras(event)", @style = "text-transform:uppercase;" } })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.dep_Nombre)</p>
+                        @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @style = "text-transform:uppercase;" , @onkeyup = "noespaciosincio(this)" } })
+                        <div id="ValidationDepNombreCreate">
+                            @Html.ValidationMessageFor(model => model.dep_Nombre, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </form>
@@ -122,7 +125,7 @@
 
                                     <div class="col-7">
                                         @Html.LabelFor(model => Municipio.mun_nombre, new { @class = "control-label , required" })
-                                        <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
+                                        <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="100" autocomplete="off" style="text-transform:uppercase;" onkeyup = "noespaciosincio(this)" />
                                         <div id="ValidationMunNombreCreate">
                                             @Html.ValidationMessageFor(model => Municipio.mun_nombre)
                                         </div>
@@ -179,7 +182,7 @@
                                     </div>
                                     <div class="col-auto">
                                         @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
-                                        <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; style="text-transform:uppercase;" maxlength="150" autocomplete="off"/>
+                                        <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; style="text-transform:uppercase;" maxlength="100" autocomplete="off"/>
                                         @Html.ValidationMessageFor(m => Municipio.mun_nombre)
                                     </div>
 
