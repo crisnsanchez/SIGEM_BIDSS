@@ -10,7 +10,7 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class tbTipoPermisoController : Controller
+    public class tbTipoPermisoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 

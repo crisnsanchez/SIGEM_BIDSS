@@ -13,7 +13,7 @@ using SIGEM_BIDSS.Models;
 namespace SIGEM_BIDSS.Controllers
 {
     [Authorize]
-    public class AreaController : Controller
+    public class AreaController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class CodeQRController : Controller
+    public class CodeQRController : BaseController
     {
         // GET: CodeQR
         public ActionResult Index()

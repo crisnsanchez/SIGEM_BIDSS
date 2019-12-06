@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace SIGEM_BIDSS.Controllers
 {
     [Authorize]
-    public class MenuController : Controller
+    public class MenuController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         // GET: Menu
