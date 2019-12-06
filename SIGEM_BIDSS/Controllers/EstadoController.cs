@@ -75,7 +75,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbEstado_Insert(tbEstado.est_Id,tbEstado.est_Descripcion, 1, Function.DatetimeNow());
+                    List = db.UDP_Gral_tbEstado_Insert(tbEstado.est_Descripcion, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbEstado_Insert_Result estado in List)
                         Msj = estado.MensajeError;
                     if (Msj.StartsWith("-1"))

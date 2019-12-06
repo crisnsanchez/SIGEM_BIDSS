@@ -56,7 +56,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoTransporte_Insert(tbTipoTransporte.tptran_Id,tbTipoTransporte.tptran_Descripcion, 1, Function.DatetimeNow());
+                    List = db.UDP_Gral_tbTipoTransporte_Insert(tbTipoTransporte.tptran_Descripcion, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoTransporte_Insert_Result trans in List)
                         Msj = trans.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -68,7 +68,7 @@ namespace SIGEM_BIDSS.Controllers
                     if (Msj.StartsWith("-2"))
                     {
 
-                        ModelState.AddModelError("", "Ya existe un estado con el mismo nombre.");
+                        ModelState.AddModelError("", "Ya existe un Tipo Transporte con el mismo nombre.");
                         return View();
                     }
                     else

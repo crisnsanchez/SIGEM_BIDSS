@@ -14,7 +14,7 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoViaticoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-
+        Models.Helpers Function = new Models.Helpers();
         // GET: TipoViatico
         public ActionResult Index()
         {
@@ -69,7 +69,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    //List = db.UDP_Gral_tbTipoViatico_Insert(tbTipoViatico.tpv_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
+                    List = db.UDP_Gral_tbTipoViatico_Insert(tbTipoViatico.tpv_Descripcion, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoViatico_Insert_Result tbViatico in List)
                         Msj = tbViatico.MensajeError;
                     if (Msj.StartsWith("-1"))
