@@ -1,41 +1,52 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license.
+
+using SIGEM_BIDSS.TokenStorage;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
+using System.Security.Claims;
+using System.Web;
+using System.Web.Mvc;
 
 namespace SIGEM_BIDSS.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
         public ActionResult Index()
         {
             return View();
         }
-
-        /// <summary>
-        /// Send an OpenID Connect sign-in request.
-        /// Alternatively, you can just decorate the SignIn method with the [Authorize] attribute
-        /// </summary>
-        public void SignIn()
+        public ActionResult SignIn()
         {
             if (!Request.IsAuthenticated)
             {
-                HttpContext.GetOwinContext().Authentication.Challenge(
-                    new AuthenticationProperties { RedirectUri = "/Home" },
+                // Signal OWIN to send an authorization request to Azure
+                Request.GetOwinContext().Authentication.Challenge(
+                    new AuthenticationProperties { RedirectUri = "/" },
                     OpenIdConnectAuthenticationDefaults.AuthenticationType);
+                return RedirectToAction("Index", "Home");
             }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            };
         }
 
-        /// <summary>
-        /// Send an OpenID Connect sign-out request.
-        /// </summary>
-        public void SignOut()
+        public ActionResult SignOut()
         {
-            HttpContext.GetOwinContext().Authentication.SignOut(
-                    OpenIdConnectAuthenticationDefaults.AuthenticationType,
+            if (Request.IsAuthenticated)
+            {
+                var tokenStore = new SessionTokenStore(null,
+                    System.Web.HttpContext.Current, ClaimsPrincipal.Current);
+
+                tokenStore.Clear();
+
+                Request.GetOwinContext().Authentication.SignOut(
                     CookieAuthenticationDefaults.AuthenticationType);
+            }
+
+            return View("Index");
         }
     }
 }
