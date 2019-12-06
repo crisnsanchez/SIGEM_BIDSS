@@ -16,7 +16,7 @@ namespace SIGEM_BIDSS.Controllers
     public class AreaController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Area
         public ActionResult Index()
