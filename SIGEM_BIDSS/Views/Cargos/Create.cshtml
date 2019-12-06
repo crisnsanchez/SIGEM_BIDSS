@@ -58,7 +58,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.are_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-sm-4">
-                        @Html.DropDownListFor(model => model.are_Id, (SelectList)ViewBag.Area, new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.are_Id, (SelectList)ViewBag.are_Id, new { @class = "form-control" })
 
                         @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger" })
                     </div>
@@ -72,14 +72,11 @@
                         <p style="color:red">@Html.ValidationMessageFor(model => model.pto_Descripcion, "", new { @class = "text-danger" })</p>
                     </div>
                 </div>
-
-            </div>
-
-
-            <div class="form-group">
-                <div class="col-md-offset-4 col-md-10">
-                    <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
-                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-10">
+                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,7 +111,7 @@
 
 
     document.getElementById("Save").onclick = function () {
-        var txtObj = document.getElementById("des");
+        var txtObj = document.getElementById("");
         txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
         txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 

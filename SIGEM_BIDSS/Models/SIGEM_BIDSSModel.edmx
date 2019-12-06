@@ -716,6 +716,7 @@
           <Parameter Name="are_Id" Type="int" Mode="In" />
           <Parameter Name="pto_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="pto_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="pto_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Gral_tbPuesto_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="pto_Id" Type="int" Mode="In" />
@@ -1081,11 +1082,6 @@
             <Parameter Name="dep_Codigo" Mode="In" Type="String" />
             <Parameter Name="mun_Nombre" Mode="In" Type="String" />
             <Parameter Name="mun_UsuarioModifica" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbPuesto_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Insert_Result)">
-            <Parameter Name="are_Id" Mode="In" Type="Int32" />
-            <Parameter Name="pto_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="pto_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbPuesto_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Update_Result)">
             <Parameter Name="pto_Id" Mode="In" Type="Int32" />
@@ -1587,6 +1583,12 @@
             <Parameter Name="tptran_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tptran_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbPuesto_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Insert_Result)">
+            <Parameter Name="are_Id" Mode="In" Type="Int32" />
+            <Parameter Name="pto_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="pto_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="pto_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -1610,9 +1612,6 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbMunicipio_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbPuesto_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbPuesto_Update_Result">
@@ -2273,6 +2272,9 @@
         <ComplexType Name="UDP_Gral_tbTipoTransporte_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Gral_tbPuesto_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2327,13 +2329,6 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbMunicipio_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMunicipio_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbPuesto_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbPuesto_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -2886,6 +2881,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoTransporte_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoTransporte_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoTransporte_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbPuesto_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbPuesto_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
