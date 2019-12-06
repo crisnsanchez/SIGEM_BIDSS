@@ -5,11 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+
+
 @{
     var test = new SIGEM_BIDSS.Models.tbMunicipio();
 }
 @*<link href="~/Content/template/plugins/datepicker/datepicker3.css" rel="stylesheet" />*@
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+<input type="hidden" id="municipios" value="@ViewBag.muni" />
+<input type="hidden" id="selectedMun" value="@ViewBag.selectedMun" />
 
 
 <div class="card card-primary card-outline">
@@ -68,12 +73,12 @@
                         <div class="form-group col-md-4">
 
                             @Html.LabelFor(model => model.emp_Nombres, htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @OnKeyPress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @Value = ViewBag.firstName, @ReadOnly = "Readonly" } })
                             <p id="Nombres" style="color:red">@Html.ValidationMessageFor(model => model.emp_Nombres, "", new { @class = "text-danger" })</p>
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.emp_Apellidos, htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;" } })
+                            @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @Value = ViewBag.lastName, @ReadOnly = "Readonly" } })
                             <p id="Apellidos" style="color:red">@Html.ValidationMessageFor(model => model.emp_Apellidos, "", new { @class = "text-danger" })</p>
                         </div>
                         <div class="col-md-3 mb-4">
@@ -110,10 +115,10 @@
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.emp_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-8" })
 
-                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.Email, @ReadOnly = "Readonly" } })
                             <p id="emailOK" style="color:red">@Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger" })</p>
                         </div>
-                        
+
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.pto_Id, htmlAttributes: new { @class = "control-label col-md-8" })
                             @Html.DropDownList("pto_Id", null, htmlAttributes: new { @class = "form-control" })
@@ -138,28 +143,29 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.emp_FechaIngreso, htmlAttributes: new { @class = "control-label col-md-8" })
+                            @Html.LabelFor(model => model.emp_FechaIngreso, htmlAttributes: new { @class = "control-label col-md-10" })
 
                             @Html.EditorFor(model => model.emp_FechaIngreso, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.emp_FechaIngreso, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group col-md-3">
-                            @Html.LabelFor(model => model.emp_EsJefe, "¿Es Jefe?" , htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.DropDownList("emp_EsJefe", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.LabelFor(model => model.emp_EsJefe, "¿Es Jefe?", htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.CheckBoxFor(model => model.emp_EsJefe, new { @class = "form-control" })
                             <p style="color:red">@Html.ValidationMessageFor(model => model.emp_EsJefe)</p>
                         </div>
                     </div>
                     <div class="form-row">
-                       
+
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
+
                             <label class="control-label col-md-4">Departamento@*<span style="color:red"> *</span>*@</label>
                             @Html.DropDownList("dep_Codigo", null, "Seleccione Departamento", new { @class = "form-control" })
                             <p id="Departamento">@Html.ValidationMessageFor(muni => test.dep_codigo)</p>
                         </div>
-                        <div class="form-group col-md-5">
+                        <div id="municipio" class="form-group col-md-5">
                             @Html.LabelFor(model => model.mun_codigo, "Municipio", new { @class = "control-label col-md-5" })
                             @Html.DropDownList("mun_codigo", null, "Seleccione Municipios", htmlAttributes: new { @class = "form-control" })
                             <p id="Municipio" style="color:red">@Html.ValidationMessageFor(model => model.mun_codigo)</p>
@@ -181,11 +187,12 @@
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/Scripts/app/Empleados.js"></script>
-
+    <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
 
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+
+    <script src="~/Scripts/app/Empleados.js"></script>
 
     <script type="text/javascript">
         $('#emp_Telefono').inputmask('(999) 9999-9999')
@@ -194,7 +201,6 @@
             bsCustomFileInput.init();
         });
     </script>
-
 </div>
 
 

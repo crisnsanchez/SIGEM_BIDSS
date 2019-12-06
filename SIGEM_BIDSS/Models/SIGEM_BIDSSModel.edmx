@@ -681,15 +681,6 @@
           <Parameter Name="est_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="est_FechaModifica" Type="datetime" Mode="In" />
         </Function>
-        <Function Name="UDP_Gral_tbInventarioCompra_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-          <Parameter Name="invCom_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="invCom_UsuarioCrea" Type="int" Mode="In" />
-        </Function>
-        <Function Name="UDP_Gral_tbInventarioCompra_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
-          <Parameter Name="invCom_Id" Type="int" Mode="In" />
-          <Parameter Name="invCom_Descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="invCom_UsuarioCrea" Type="int" Mode="In" />
-        </Function>
         <Function Name="UDP_Gral_tbMoneda_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="tmo_Id" Type="int" Mode="In" />
           <Parameter Name="tmo_Abreviatura" Type="varchar" Mode="In" />
@@ -1225,23 +1216,6 @@
             <Parameter Name="mun_Id" Mode="In" Type="String" />
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbInstitucionFinanciera_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Insert_Result)">
-            <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
-            <Parameter Name="insf_Contacto" Mode="In" Type="String" />
-            <Parameter Name="insf_Telefono" Mode="In" Type="String" />
-            <Parameter Name="insf_Correo" Mode="In" Type="String" />
-            <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbInstitucionFinanciera_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Update_Result)">
-            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
-            <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
-            <Parameter Name="insf_Contacto" Mode="In" Type="String" />
-            <Parameter Name="insf_Telefono" Mode="In" Type="String" />
-            <Parameter Name="insf_Correo" Mode="In" Type="String" />
-            <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbParametro_Insert">
             <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
             <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
@@ -1584,6 +1558,23 @@
             <End Role="tbSueldo" EntitySet="tbSueldo" />
             <End Role="tbSueldo1" EntitySet="tbSueldo" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Plani_tbInstitucionFinanciera_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Insert_Result)">
+            <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
+            <Parameter Name="insf_Contacto" Mode="In" Type="String" />
+            <Parameter Name="insf_Telefono" Mode="In" Type="String" />
+            <Parameter Name="insf_Correo" Mode="In" Type="String" />
+            <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbInstitucionFinanciera_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Update_Result)">
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
+            <Parameter Name="insf_Contacto" Mode="In" Type="String" />
+            <Parameter Name="insf_Telefono" Mode="In" Type="String" />
+            <Parameter Name="insf_Correo" Mode="In" Type="String" />
+            <Parameter Name="insf_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="insf_Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -1658,12 +1649,6 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_rrhh_tbEmpleado_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbInstitucionFinanciera_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbInstitucionFinanciera_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Conf_tbParametro_Count_Result">
@@ -2264,6 +2249,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Plani_tbInstitucionFinanciera_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbInstitucionFinanciera_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2413,20 +2404,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionFinanciera_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbInstitucionFinanciera_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionFinanciera_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbInstitucionFinanciera_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Count" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Count" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Count_Result">
@@ -2473,8 +2450,6 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SIGEM_BIDSSModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SIGEM_BIDSSModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="SDP_tbEmpleadosJefes_Select" FunctionName="SIGEM_BIDSSModel.Store.SDP_tbEmpleadosJefes_Select" />
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbInventarioCompra_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInventarioCompra_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbInventarioCompra_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbInventarioCompra_Update" />
           <FunctionImportMapping FunctionImportName="UDP_rrhh_tbSueldo_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_rrhh_tbSueldo_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_rrhh_tbSueldo_Insert_Result">
@@ -2869,6 +2844,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionFinanciera_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbInstitucionFinanciera_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionFinanciera_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbInstitucionFinanciera_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

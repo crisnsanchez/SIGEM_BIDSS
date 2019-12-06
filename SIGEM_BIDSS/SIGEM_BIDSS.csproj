@@ -189,7 +189,6 @@
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
-    <Compile Include="Controllers\CodeQRController.cs" />
     <Compile Include="Controllers\DeduccionInstitucionFinancierasController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />

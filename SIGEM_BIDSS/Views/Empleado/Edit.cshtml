@@ -8,6 +8,11 @@
 @{
     var test = new SIGEM_BIDSS.Models.tbMunicipio();
 }
+
+
+
+<input type="hidden" id="municipios" value="@ViewBag.muni" />
+<input type="hidden" id="selectedMun" value="@ViewBag.selectedMun" />
 @*<link href="~/Content/template/plugins/datepicker/datepicker3.css" rel="stylesheet" />*@
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
 <div class="card card-primary card-outline">
@@ -25,14 +30,12 @@
 
     @using (Html.BeginForm("Edit", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.HiddenFor(model => model.emp_UsuarioCrea, new { Value = "1" })
-        @Html.HiddenFor(model => model.emp_FechaCrea, new { Value = "2019-11-11" })
+
         @Html.HiddenFor(model => model.emp_UsuarioModifica, new { Value = "1" })
         @Html.HiddenFor(model => model.emp_FechaModifica, new { Value = "2019-12-12" })
         @Html.HiddenFor(model => model.emp_RazonInactivacion, new { Value = "----" })
-        @Html.HiddenFor(model => model.emp_FechaIngreso, new { Value = "----" })
-        @Html.HiddenFor(model => model.emp_PathImage, new { Value = "----" })
-        @Html.HiddenFor(model => model.est_Id, new { Value = "1" })
+
+
 
         <div class="form-horizontal">
             <div class="form-horizontal">
@@ -41,6 +44,9 @@
                 <div class="card-body">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.emp_Id)
+                    @Html.HiddenFor(model => model.emp_PathImage)
+                    @Html.HiddenFor(model => model.emp_FechaIngreso)
+                    @*@Html.HiddenFor(model => model.est_Id)*@
 
                     <div class="row">
                         <div class="col-md-7">
@@ -50,11 +56,14 @@
                                         @{if (Model.emp_PathImage != null && Model.emp_PathImage != "")
                                             {
                                                 <img src="@Url.Content(Model.emp_PathImage)" class="product-image" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
+
                                             }
                                             else
                                             {
                                                 <img src="~/Content/img/descarga.jpg" class="product-image img-circle" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
-                                            }}
+
+                                            }
+                                        }
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -62,7 +71,10 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input id="CargarFoto" value="Cargar Fotografía" name="FotoPath" type="file" class="custom-file-input">
-                                            <label id="lblCargarFoto" class="custom-file-label" for="CargarFoto"></label>
+                                            <label id="lblCargarFoto" class="custom-file-label" for="CargarFoto">
+                                                @if (Model.emp_PathImage != null && Model.emp_PathImage != "")
+                                                {@Url.Content(Model.emp_PathImage)}
+                                            </label>
                                         </div>
                                         <div class="input-group-append">
                                         </div>
@@ -77,12 +89,12 @@
                                 <div class="form-group col-md-4">
 
                                     @Html.LabelFor(model => model.emp_Nombres, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @OnKeyPress = "return soloLetras(event)" } })
+                                    @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", @ReadOnly = "Readonly" } })
                                     @Html.ValidationMessageFor(model => model.emp_Nombres, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group col-md-4">
                                     @Html.LabelFor(model => model.emp_Apellidos, htmlAttributes: new { @class = "control-label col-md-4" })
-                                    @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloLetras(event)", @style = "text-transform:uppercase;" } })
+                                    @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", @ReadOnly = "Readonly" } })
                                     @Html.ValidationMessageFor(model => model.emp_Apellidos, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group col-md-4">
@@ -124,7 +136,7 @@
                                 <div class="form-group col-md-4">
                                     @Html.LabelFor(model => model.emp_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-7" })
 
-                                    @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control", @ReadOnly = "Readonly" } })
                                     <p id="emailOK" style="color:red">@Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger" })</p>
 
                                 </div>
@@ -162,7 +174,11 @@
                                     @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger" })
 
                                 </div>
-
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.emp_EsJefe, "¿Es Jefe?", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    @Html.CheckBoxFor(model => model.emp_EsJefe, new { @class = "form-control" })
+                                    <p style="color:red">@Html.ValidationMessageFor(model => model.emp_EsJefe)</p>
+                                </div>
 
                                 @*<div class="form-group col-md-4">
                                         @Html.LabelFor(model => model.est_Id, htmlAttributes: new { @class = "control-label col-md-6" })
@@ -222,13 +238,21 @@
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/Scripts/app/Empleados.js"></script>
+
+
+
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/app/Empleados.js"></script>
+
 
     <script type="text/javascript">
         $('#emp_Telefono').inputmask('(999) 9999-9999')
+
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });
     </script>
 
 </div>
- 
+

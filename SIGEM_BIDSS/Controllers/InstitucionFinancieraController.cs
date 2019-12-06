@@ -48,14 +48,37 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.tbInstitucionFinanciera.Add(tbInstitucionFinanciera);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                IEnumerable<Object> List = null;
+                string Msj = "";
+                List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Nombre,
+                                                                     tbInstitucionFinanciera.insf_Contacto,
+                                                                     tbInstitucionFinanciera.insf_Telefono,
+                                                                     tbInstitucionFinanciera.insf_Correo, 1,
+                                                                     tbInstitucionFinanciera.insf_Activo);
+                foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
+                    Msj = TipoSangre.MensajeError;
+                if (Msj.StartsWith("-1"))
+                {
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception Ex)
+            {
+
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
             }
 
-            return View(tbInstitucionFinanciera);
+
+
+            return View();
         }
 
         // GET: InstitucionFinanciera/Edit/5
@@ -81,11 +104,36 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
             if (ModelState.IsValid)
-            {
-                db.Entry(tbInstitucionFinanciera).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
+                                                                         tbInstitucionFinanciera.insf_Contacto,
+                                                                         tbInstitucionFinanciera.insf_Telefono,
+                                                                         tbInstitucionFinanciera.insf_Correo, 1,
+                                                                         tbInstitucionFinanciera.insf_Activo);
+                    foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
+
+
             return View(tbInstitucionFinanciera);
         }
 
