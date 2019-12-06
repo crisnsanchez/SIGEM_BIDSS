@@ -10,7 +10,7 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class InstitucionFinancieraController : Controller
+    public class InstitucionFinancieraController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         Helpers Function = new Helpers();

@@ -57,6 +57,15 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Graph, Version=1.20.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.1.20.0\lib\net45\Microsoft.Graph.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Graph.Core, Version=1.18.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.Core.1.18.0\lib\net45\Microsoft.Graph.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=4.7.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.4.7.1\lib\net45\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.3.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
@@ -106,12 +115,16 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -172,7 +185,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\DeduccionInstitucionFinancierasController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
@@ -193,6 +208,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GraphHelper.cs" />
+    <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
     <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\InstitucionesFinacieras.cs" />
@@ -419,6 +436,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="TokenStorage\SessionTokenStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Email\index.html" />
@@ -3109,6 +3127,7 @@
     </Content>
     <Content Include="Content\template\plugins\datepicker\css\bootstrap-datepicker3.css.map" />
     <Content Include="Content\template\plugins\datepicker\css\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="PrivateSettings.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -3229,6 +3248,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Reportes\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

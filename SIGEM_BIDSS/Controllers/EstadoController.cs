@@ -11,10 +11,10 @@ using SIGEM_BIDSS.Models;
 namespace SIGEM_BIDSS.Controllers
 {
     [Authorize]
-    public class EstadoController : Controller
+    public class EstadoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Estado
         public ActionResult Index()

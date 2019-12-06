@@ -10,10 +10,10 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class MonedaController : Controller
+    public class MonedaController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Helpers Function = new Helpers();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: Moneda
         public ActionResult Index()
