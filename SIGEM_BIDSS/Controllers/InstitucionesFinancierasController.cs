@@ -10,98 +10,99 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class InstitucionFinancieraController : Controller
+    public class InstitucionesFinancierasController : Controller
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 
-        // GET: InstitucionFinanciera
+        // GET: InstitucionesFinancieras
         public ActionResult Index()
         {
             return View(db.tbInstitucionFinanciera.ToList());
         }
 
-        // GET: InstitucionFinanciera/Details/5
+        // GET: InstitucionesFinancieras/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbInstitucionFinanciera tbInstitucionFinanciera = db.tbInstitucionFinanciera.Find(id);
-            if (tbInstitucionFinanciera == null)
+            tbInstitucionFinanciera tbInstitucionesFinancieras = db.tbInstitucionFinanciera.Find(id);
+            if (tbInstitucionesFinancieras == null)
             {
                 return HttpNotFound();
             }
-            return View(tbInstitucionFinanciera);
+            return View(tbInstitucionesFinancieras);
         }
 
-        // GET: InstitucionFinanciera/Create
+        // GET: InstitucionesFinancieras/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: InstitucionFinanciera/Create
+        // POST: InstitucionesFinancieras/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica")] tbInstitucionFinanciera tbInstitucionFinanciera)
+        public ActionResult Create([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
-            try
-            {
-                IEnumerable<Object> List = null;
-                string Msj = "";
-                List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Nombre,
-                                                                     tbInstitucionFinanciera.insf_Contacto,
-                                                                     tbInstitucionFinanciera.insf_Telefono,
-                                                                     tbInstitucionFinanciera.insf_Correo, 1,
-                                                                     tbInstitucionFinanciera.insf_Activo);
-                foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
-                    Msj = TipoSangre.MensajeError;
-                if (Msj.StartsWith("-1"))
+            if (ModelState.IsValid)
+                try
                 {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Nombre,
+                                                                         tbInstitucionFinanciera.insf_Contacto,
+                                                                         tbInstitucionFinanciera.insf_Telefono,
+                                                                         tbInstitucionFinanciera.insf_Correo,1,
+                                                                         tbInstitucionFinanciera.insf_Activo);
+                    foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View();
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (Exception Ex)
-            {
-
-                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                return View();
-            }
 
 
 
-            return View();
+            return View(tbInstitucionFinanciera);
         }
 
-        // GET: InstitucionFinanciera/Edit/5
+        // GET: InstitucionesFinancieras/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbInstitucionFinanciera tbInstitucionFinanciera = db.tbInstitucionFinanciera.Find(id);
-            if (tbInstitucionFinanciera == null)
+            tbInstitucionFinanciera tbInstitucionesFinancieras = db.tbInstitucionFinanciera.Find(id);
+            if (tbInstitucionesFinancieras == null)
             {
                 return HttpNotFound();
             }
-            return View(tbInstitucionFinanciera);
+            return View(tbInstitucionesFinancieras);
         }
 
-        // POST: InstitucionFinanciera/Edit/5
+        // POST: InstitucionesFinancieras/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica")] tbInstitucionFinanciera tbInstitucionFinanciera)
+        public ActionResult Edit([Bind(Include = "insf_IdInstitucionFinanciera,insf_DescInstitucionFinanc,insf_Contacto,insf_Telefono,insf_Correo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
             if (ModelState.IsValid)
                 try
@@ -137,7 +138,7 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbInstitucionFinanciera);
         }
 
-        // GET: InstitucionFinanciera/Delete/5
+        // GET: InstitucionesFinancieras/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -152,7 +153,7 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbInstitucionFinanciera);
         }
 
-        // POST: InstitucionFinanciera/Delete/5
+        // POST: InstitucionesFinancieras/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
