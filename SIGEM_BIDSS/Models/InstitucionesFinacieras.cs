@@ -28,7 +28,7 @@ namespace SIGEM_BIDSS.Models
         public string insf_Telefono { get; set; }
 
 
-        [Display(Name = "Correo")]
+        [Display(Name = "Correo Electrónico")]
         public string insf_Correo { get; set; }
 
         [Display(Name = "Activo")]
