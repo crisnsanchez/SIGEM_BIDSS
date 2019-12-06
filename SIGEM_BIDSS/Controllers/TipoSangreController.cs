@@ -69,7 +69,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_nombre, 1);
+                    //List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_nombre, 1);
                     foreach (UDP_Gral_tbTipoSangre_Insert_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -128,7 +128,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 IEnumerable<Object> List = null;
                 string Msj = "";
-                List = db.UDP_Gral_tbTipoSangre_Update(1,tbTipoSangre.tps_nombre, 1);
+                //List = db.UDP_Gral_tbTipoSangre_Update(1,tbTipoSangre.tps_nombre, 1);
                 foreach (UDP_Gral_tbTipoSangre_Update_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
                 if (Msj.StartsWith("-1"))
