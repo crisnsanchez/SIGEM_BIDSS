@@ -23,7 +23,7 @@ namespace SIGEM_BIDSS.Controllers
             if (!Request.IsAuthenticated)
             {
                 HttpContext.GetOwinContext().Authentication.Challenge(
-                    new AuthenticationProperties { RedirectUri = "/" },
+                    new AuthenticationProperties { RedirectUri = "/Home" },
                     OpenIdConnectAuthenticationDefaults.AuthenticationType);
             }
         }
