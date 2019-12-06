@@ -94,7 +94,7 @@
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Servidor, htmlAttributes: new { @class = "control-label col-md-4" })
                             @Html.EditorFor(model => model.par_Servidor, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
-                            @Html.ValidationMessageFor(model => model.par_Servidor, null, new { style = "color:red", id = "errorServidor" })
+                            <p id="servidor" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoEmisor, "", new { @class = "text-danger" })</p>
                         </div>
 
                     </div>

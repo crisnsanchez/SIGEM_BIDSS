@@ -52,7 +52,6 @@ $('#par_Puerto').change(function () {
 });
 
 
-
 $('#CargarFoto').change(function () {
     $('#errorlogo').hide();
 });
@@ -141,6 +140,22 @@ document.getElementById('par_CorreoEmisor').addEventListener('input', function (
     }
 });
 
+document.getElementById('par_Servidor').addEventListener('input', function () {
+    campo = event.target;
+    valido = document.getElementById('servidor');
+    //selector = document.getElementById('emp_CorreoElectronico')
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (emailRegex.test(campo.value)) {
+        valido.innerText = "";
+        $('#par_Servidor').removeClass('is-invalid');
+    } else {
+        valido.innerText = "Correo Inválido";
+        $('#par_Servidor').focus();
+        $('#par_Servidor').addClass('is-invalid');
+    }
+});
+
 
 function soloNumeros(e) {
     tecla = (document.all) ? e.keyCode : e.which;
@@ -202,3 +217,4 @@ function soloLetras(e) {
         return false;
     }
 }
+

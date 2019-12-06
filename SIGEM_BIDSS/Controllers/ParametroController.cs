@@ -98,6 +98,7 @@ namespace SIGEM_BIDSS.Controllers
                             else
                             {
                                 ModelState.AddModelError("FotoPath", "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .jpg");
+
                                 return View("Index");
                             }
                         }
@@ -105,8 +106,8 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<object> List = null;
                     var MsjError = "";
-                    //List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo
-                    //);
+                    List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo
+                        );
                     foreach (UDP_Conf_tbParametro_Insert_Result parametro in List)
                         MsjError = parametro.MensajeError;
 
@@ -169,17 +170,83 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor,par_Password,par_Servidor,par_Puerto,par_PathLogo")] tbParametro tbParametro)
+        public ActionResult Edit(byte? id, [Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor, par_Password ,par_Servidor,par_Puerto,par_PathLogo")] tbParametro tbParametro,
+       HttpPostedFileBase FotoPath)
+
         {
+            var path = "";
+            var UsFoto = db.tbParametro.Select(s => new { s.par_Id, s.par_PathLogo }).Where(x => x.par_Id == tbParametro.par_Id).ToList();
+            if (UsFoto.Count() != 0 && UsFoto != null)
+            {
+                for (int i = 0; i < UsFoto.Count(); i++)
+                    path = Convert.ToString(UsFoto[i].par_PathLogo);
+            }
             if (ModelState.IsValid)
             {
-                db.Entry(tbParametro).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    tbParametro.par_PathLogo = path;
+                    if (FotoPath != null)
+                    {
+                        if (FotoPath.ContentLength > 0)
+                        {
+                            if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
+                            {
+                                string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
+                                string Archivo = tbParametro.par_Id + Extension;
+                                path = Path.Combine(Server.MapPath("~/Content/Profile_Pics/"), Archivo);
+                                FotoPath.SaveAs(path);
+                                tbParametro.par_PathLogo = "~/Content/Profile_Pics/" + Archivo;
+                            }
+                            else
+                            {
+                                if (path != null)
+                                    tbParametro.par_PathLogo = path;
+                                ModelState.AddModelError("FotoPath", "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .png ó .jpg");
+                                return View(tbParametro);
+                            }
+                        }
+                    }
+                    tbParametro vtbparametro = db.tbParametro.Find(id);
+
+                    IEnumerable<object> List = null;
+                    var MsjError = "";
+                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo);
+                    foreach (UDP_Conf_tbParametro_Update_Result parametro in List)
+                        MsjError = parametro.MensajeError;
+                    if (MsjError.StartsWith("-1"))
+                    {
+
+                        ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
+                        return RedirectToAction("Edit/" + MsjError);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
+                    return RedirectToAction("Index");
+                }
+               
             }
+
+            if (path != null)
+                tbParametro.par_PathLogo = path;
             return View(tbParametro);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
         // GET: tbParametroes/Delete/5
         public ActionResult Delete(byte? id)
         {
@@ -204,15 +271,6 @@ namespace SIGEM_BIDSS.Controllers
             db.tbParametro.Remove(tbParametro);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -202,6 +202,9 @@
     <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\InventarioCompra.cs" />
     <Compile Include="Models\parametro.cs" />
+    <Compile Include="Models\SDP_tbMunicipio_Select_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
@@ -281,9 +284,6 @@
     <Compile Include="Models\GeneralFunctions.cs" />
     <Compile Include="Models\Municipios.cs" />
     <Compile Include="Models\Puesto.cs" />
-    <Compile Include="Models\SDP_tbMunicipio_Select_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SIGEM_BIDSSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

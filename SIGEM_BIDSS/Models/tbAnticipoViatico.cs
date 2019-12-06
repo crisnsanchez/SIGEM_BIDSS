@@ -15,6 +15,7 @@ namespace SIGEM_BIDSS.Models
     public partial class tbAnticipoViatico
     {
         public int Anvi_Id { get; set; }
+        public string Anvi_Correlativo { get; set; }
         public int emp_Id { get; set; }
         public int Anvi_JefeInmediato { get; set; }
         public string Anvi_Comentario { get; set; }
@@ -25,7 +26,7 @@ namespace SIGEM_BIDSS.Models
         public string Anvi_PropositoVisita { get; set; }
         public int Anvi_DiasVisita { get; set; }
         public bool Anvi_Hospedaje { get; set; }
-        public Nullable<int> Anvi_tptran_Id { get; set; }
+        public int Anvi_tptran_Id { get; set; }
         public bool Anvi_Autorizacion { get; set; }
         public int Anvi_UsuarioCrea { get; set; }
         public System.DateTime Anvi_FechaCrea { get; set; }
