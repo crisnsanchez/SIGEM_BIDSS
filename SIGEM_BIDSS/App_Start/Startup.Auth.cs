@@ -11,11 +11,11 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Notifications;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
+using System;
 using System.Configuration;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using System;
 
 namespace SIGEM_BIDSS
 {
@@ -23,11 +23,11 @@ namespace SIGEM_BIDSS
     {
         // Load configuration settings from PrivateSettings.config
         private static string appId = ConfigurationManager.AppSettings["ida:AppId"];
-        private static string authority = ConfigurationManager.AppSettings["ida:Authority"];
         private static string appSecret = ConfigurationManager.AppSettings["ida:AppSecret"];
         private static string redirectUri = ConfigurationManager.AppSettings["ida:RedirectUri"];
         private static string graphScopes = ConfigurationManager.AppSettings["ida:AppScopes"];
-
+        private static string tenant = ConfigurationManager.AppSettings["ida:Tenant"];
+        string authority = String.Format(System.Globalization.CultureInfo.InvariantCulture, ConfigurationManager.AppSettings["ida:Authority"], tenant);
 
 
         public void ConfigureAuth(IAppBuilder app)
@@ -47,14 +47,20 @@ namespace SIGEM_BIDSS
                     TokenValidationParameters = new TokenValidationParameters
                     {
                         // For demo purposes only, see below
-                        ValidateIssuer = false
-
+                        ValidateIssuer = false,
+                        IssuerValidator = (issuer, token, tvp) =>
+                        {
+                            if (issuer == tenant)
+                                return issuer;
+                            else
+                                throw new SecurityTokenInvalidIssuerException("Invalid issuer");
+                        }
                         // In a real multi-tenant app, you would add logic to determine whether the
                         // issuer was from an authorized tenant
                         //ValidateIssuer = true,
                         //IssuerValidator = (issuer, token, tvp) =>
                         //{
-                        //  if (MyCustomc(issuer))
+                        //  if (MyCustomTenantValidation(issuer))
                         //  {
                         //    return issuer;
                         //  }
