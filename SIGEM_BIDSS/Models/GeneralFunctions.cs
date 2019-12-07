@@ -62,6 +62,10 @@ namespace SIGEM_BIDSS.Models
         //    //int tipsol = (from _dbtts in db.tbTipoSolicitud where (_dbtts.tipsol_Descripcion == _strtiposolSearch) select (_dbtts.tipsol_Id)).FirstOrDefault();
         //    //return ;
         //}
+        public const string _isCreated = "Created";
+        public const string _isEdited = "Edited";
+
+
 
         public const string Pass = "QdZwAxesc12";
 
@@ -87,6 +91,9 @@ namespace SIGEM_BIDSS.Models
         public const int RembolsoGastos = 7;
         public const int empleadoinactivo = 2;
         public const int empleadoactivo = 1;
+        public const bool instfinDenegar = false;
+        public const bool instfinAceptar = true;
+
     }
 
 
