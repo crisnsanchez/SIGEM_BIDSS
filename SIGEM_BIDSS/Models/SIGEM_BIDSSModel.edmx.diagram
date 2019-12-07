@@ -45,6 +45,7 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleados_emp_Id_Plani_tbSueldos_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Plani_tbSueldos_sue_Id_Gral_tbSueldos_sue_SueldoAnterior" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Plani_tbSueldos_sue_Id_Plani_tbSueldos_sue_SueldoAnterior" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

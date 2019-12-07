@@ -14,7 +14,7 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoMovimientoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-
+        GeneralFunctions _function = new GeneralFunctions();
         // GET: TipoMovimiento
         public ActionResult Index()
         {
@@ -62,24 +62,25 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tipmo_id,tipmo_Movimiento,tipmo_UsuarioCrea,tipmo_FechaCrea,tipmo_UsuarioModifica,tipmo_FechaModifica")] tbTipoMovimiento tbTipoMovimiento)
+        public ActionResult Create([Bind(Include = "tipmo_id,tipmo_Movimiento")] tbTipoMovimiento tbTipoMovimiento)
         {
             if (ModelState.IsValid)
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_TipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, 1);
-                    foreach (UDP_Gral_TipoMovimiento_Insert_Result tbMovimiento in List)
+                    List = db.UDP_Gral_tbTipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, 1, _function.DatetimeNow());
+                    foreach (UDP_Gral_tbTipoMovimiento_Insert_Result tbMovimiento in List)
                         Msj = tbMovimiento.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        
+                        ModelState.AddModelError("Codigo Error" + Msj, "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
                     else
                     {
-                        TempData["swalfunction"] = "true";
+                        TempData["swalfunction"] = GeneralFunctions._isCreated;
                         return RedirectToAction("Index");
                     }
                 }
@@ -123,23 +124,24 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tipmo_id,tipmo_Movimiento,tipmo_UsuarioCrea,tipmo_FechaCrea,tipmo_UsuarioModifica,tipmo_FechaModifica")] tbTipoMovimiento tbTipoMovimiento)
+        public ActionResult Edit([Bind(Include = "tipmo_id,tipmo_Movimiento")] tbTipoMovimiento tbTipoMovimiento)
         {
             if (ModelState.IsValid)
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, 1);
+                    List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, 1,_function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoMovimiento_Update_Result Movimiento in List)
                         Msj = Movimiento.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-                     
+                        ModelState.AddModelError("Codigo Error" + Msj, "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
                     else
                     {
+                        TempData["swalfunction"] = GeneralFunctions._isEdited;
                         return RedirectToAction("Index");
                     }
                 }

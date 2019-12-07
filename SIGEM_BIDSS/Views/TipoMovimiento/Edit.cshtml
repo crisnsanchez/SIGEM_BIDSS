@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.tipmo_Movimiento, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
-                                        @Html.EditorFor(model => model.tipmo_Movimiento, new { htmlAttributes = new { @class = "form-control", maxlength = "100", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                                        @Html.EditorFor(model => model.tipmo_Movimiento, new { htmlAttributes = new { @class = "form-control", maxlength = "25", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                                         @Html.ValidationMessageFor(model => model.tipmo_Movimiento, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -78,41 +78,6 @@
 }
 
 
-<script>
-    ///validar solo letras
-    ///validar solo letras
-    function soloLetras(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = "$# '/áéíóúabcdefghijklmnñopqrstuvwxyz";
-        especiales = "8-37-39-46";
-
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-
-        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-            return false;
-        }
-    }
-    function noespaciosincio(e) {
-        var valor = e.value.replace(/^ */, '');
-        e.value = valor;
-    }
-
-
-
-    document.getElementById("Save").onclick = function () {
-        var txtObj = document.getElementById("des");
-        txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
-        txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
-
-
-
-
-    };
-</script>
+@section Scripts {
+    <script src="~/Scripts/app/General_PCAE.js"></script>
+}
