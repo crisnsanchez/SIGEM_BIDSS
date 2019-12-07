@@ -43,7 +43,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr data-id="@item.insf_Id">
                         <td>
                             @Html.DisplayFor(modelItem => item.insf_Nombre)
                         </td>
@@ -62,12 +62,12 @@
 
                             @if (item.insf_Activo == GeneralFunctions.instfinAceptar)
                             {
-                                <input type="button" id="Activar" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalRazonInactivacion" value="Inactivar" />
+                                <input type="button" id="Desactivar" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalRazonInactivacion" value="Inactivar" />
                                 <input type="hidden" id="_Insf_Id" value="@item.insf_Id" />
                             }
                             else if (item.insf_Activo == GeneralFunctions.instfinDenegar)
                             {
-                                @Html.ActionLink("Activar", "Activate", new { id = item.insf_Id }, new { @class = "btn btn-success btn-xs", @Style = "width:55px" })
+                                @Html.ActionLink("Activar", "ActivarInstitucionFinanciera", new { insf_Id = item.insf_Id }, new { @class = "btn btn-success btn-xs", @Style = "width:55px" })
                             }
                         </td>
                     </tr>
@@ -80,21 +80,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <input id="instfinanciera" type="hidden" />
                 <h4 class="modal-title" id="myModalLabel">¿Desea Inactivar?</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @*<div class="modal-body">
-                <h5 class="control-label col-md-8 required">Escriba la razón de Inactivación.</h5>
-                <div class="form-group">
-                    <input id="_tbInac_Id" type="hidden" value="" />
-                    <textarea class="form-control" id="emp_RazonInactivacion" name="emp_RazonInactivacion" rows="5" cols="5"></textarea>
-                    <p style="color:red" id="emp_RazonInactivacion">
-                    </p>
-                </div>
-            </div>*@
+           
             <div class="modal-footer">
+
                 <button class="btn btn-primary" type="submit" id="btnRaInac">Inactivar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             </div>
@@ -111,47 +105,29 @@
 
 
     <script>
-        const contador = 1;
 
-        function GetValInac() {
-            var InstitucionFinanciera = {
-                insf_Id: $("#_tbInac_Id").val(),
-                insf_Activo: $('#insf_Activo').val(),
-                insf_FechaCrea: contador
-            };
-            return InstitucionFinanciera;
-        }
-
-        $(document).on("click", "#dataTable tbody tr td input#Activar", function () {
+        $(document).on("click", "#dataTable tbody tr td input#Desactivar", function () {
             _Insf_Id = $(this).closest('tr').data('id');
-            $("#_tbInac_Id").val(_Insf_Id);
+            $("#instfinanciera").val(_Insf_Id);
             console.log(_Insf_Id)
         })
-        //$('#').click(function () {
-        ///INHABILITAR EMPLEADO
+     
+       
         $('#btnRaInac').click(function () {
-            var insf_Activo = $('#insf_Activon').val();
-            if (insf_Activo == '' || insf_Activo == '*****') {
-                $('#MessageError').text('');
-                $('#CodigoError').text('');
-                $('#NombreError').text('');
-                $('#insf_Activo').after('<ul id="MessageError" class="validation-summary-errors text-danger">Campo Requerido</ul>');
-            }
-            else {
-                var tbInstitucionFinanciera = GetValInac();
-                $.ajax({
-                    url: "/InstitucionFinanciera/instfinDenegar",
-                    method: "POST",
-                    dataType: 'json',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ tbInstitucionFinanciera: tbInstitucionFinanciera }),
-                })
-                    .done(function (data) {
-                        $("_tbInac_Id").val("");
-                        window.location.href = "/institucionFinanciera/Index"
-                    });
-            }
+            insf_Id = $("#instfinanciera").val()
+            $.ajax({
+                url: "/InstitucionFinanciera/InactivarInstitucionFinanciera",
+                method: "POST",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ insf_Id: insf_Id }),
+            })
+                .done(function (data) {
+                    $("_tbInac_Id").val("");
+                    window.location.href = "/institucionFinanciera/Index"
+                });
         });
+
 
     </script>
 
