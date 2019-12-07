@@ -3,10 +3,15 @@
 $(function () {
     var vinput = document.getElementsByTagName('input');
     vinput.ondrop = function (e) {
-    e.preventDefault();
-    //alert("esta acción está prohibida");
-}
-
+        e.preventDefault();
+        //alert("esta acción está prohibida");
+    }
+    getElementsByTagName('input').each(function (item) {
+        item.ondrop = function (e) {
+            e.preventDefault();
+            //alert("esta acción está prohibida");
+        }
+    });
 })
 
 
