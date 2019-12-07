@@ -54,8 +54,8 @@
                         </td>
 
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.insf_Id }, new { @class = "btn btn-primary btn-sm" })
-                            @Html.ActionLink("Detalles", "Details", new { id = item.insf_Id }, new { @class = "btn btn-default btn-sm" })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.insf_Id }, new { @class = "btn btn-primary btn-xs" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.insf_Id }, new { @class = "btn btn-default btn-xs" })
                         </td>
                     </tr>
                 }
@@ -67,13 +67,11 @@
 
 @section Scripts {
 
-    <!-- Bootstrap 4 -->
-    <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
     <!-- DataTables -->
     <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+
 
 
 

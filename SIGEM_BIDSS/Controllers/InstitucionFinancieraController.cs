@@ -10,9 +10,10 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class InstitucionFinancieraController : Controller
+    public class InstitucionFinancieraController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: InstitucionFinanciera
         public ActionResult Index()
@@ -52,11 +53,12 @@ namespace SIGEM_BIDSS.Controllers
             {
                 IEnumerable<Object> List = null;
                 string Msj = "";
-                //List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Nombre,
-                //                                                     tbInstitucionFinanciera.insf_Contacto,
-                //                                                     tbInstitucionFinanciera.insf_Telefono,
-                //                                                     tbInstitucionFinanciera.insf_Correo, 1,
-                //                                                     tbInstitucionFinanciera.insf_Activo);
+                List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
+                                                                     tbInstitucionFinanciera.insf_Contacto,
+                                                                     tbInstitucionFinanciera.insf_Telefono,
+                                                                     tbInstitucionFinanciera.insf_Correo, 1,
+                                                                     Function.DatetimeNow(),
+                                                                     tbInstitucionFinanciera.insf_Activo);
                 foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
                 if (Msj.StartsWith("-1"))
@@ -108,11 +110,12 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    //List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
-                    //                                                     tbInstitucionFinanciera.insf_Contacto,
-                    //                                                     tbInstitucionFinanciera.insf_Telefono,
-                    //                                                     tbInstitucionFinanciera.insf_Correo, 1,
-                    //                                                     tbInstitucionFinanciera.insf_Activo);
+                    List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
+                                                                         tbInstitucionFinanciera.insf_Contacto,
+                                                                         tbInstitucionFinanciera.insf_Telefono,
+                                                                         tbInstitucionFinanciera.insf_Correo, 1,
+                                                                            Function.DatetimeNow(),
+                                                                         tbInstitucionFinanciera.insf_Activo);
                     foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
