@@ -13,6 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class tbTipoPermisoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
+        Models.Helpers Function = new Models.Helpers();
 
         // GET: tbTipoPermiso
         public ActionResult Index()
@@ -72,13 +73,20 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoPermiso_Insert(tbTipoPermiso.tperm_Descripcion, 1);
+                    List = db.UDP_Gral_tbTipoPermiso_Insert(tbTipoPermiso.tperm_Descripcion, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoPermiso_Insert_Result Permiso in List)
                         Msj = Permiso.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
 
                         return View();
+                    }
+                    if(Msj.StartsWith("-2"))
+                    {
+
+
+                        ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
+                        return View(tbTipoPermiso);
                     }
                     else
                     {

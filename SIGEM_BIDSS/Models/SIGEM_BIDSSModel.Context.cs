@@ -436,7 +436,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoMovimiento_Update_Result> UDP_Gral_tbTipoMovimiento_Update(Nullable<int> tipmo_id, string tipmo_Movimiento, Nullable<int> tipmo_UsuarioModifica)
+        public virtual ObjectResult<UDP_Gral_tbTipoMovimiento_Update_Result> UDP_Gral_tbTipoMovimiento_Update(Nullable<int> tipmo_id, string tipmo_Movimiento, Nullable<int> tipmo_UsuarioModifica, Nullable<System.DateTime> tipmo_FechaModifica)
         {
             var tipmo_idParameter = tipmo_id.HasValue ?
                 new ObjectParameter("tipmo_id", tipmo_id) :
@@ -450,7 +450,11 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tipmo_UsuarioModifica", tipmo_UsuarioModifica) :
                 new ObjectParameter("tipmo_UsuarioModifica", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoMovimiento_Update_Result>("UDP_Gral_tbTipoMovimiento_Update", tipmo_idParameter, tipmo_MovimientoParameter, tipmo_UsuarioModificaParameter);
+            var tipmo_FechaModificaParameter = tipmo_FechaModifica.HasValue ?
+                new ObjectParameter("tipmo_FechaModifica", tipmo_FechaModifica) :
+                new ObjectParameter("tipmo_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoMovimiento_Update_Result>("UDP_Gral_tbTipoMovimiento_Update", tipmo_idParameter, tipmo_MovimientoParameter, tipmo_UsuarioModificaParameter, tipmo_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbTipoSalario_Insert_Result> UDP_Gral_tbTipoSalario_Insert(string tpsal_Descripcion, Nullable<int> tpsal_UsuarioCrea)
@@ -562,19 +566,6 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tipmo_UsuarioCrea", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_TipoMovimiento_Insert_Result>("UDP_Gral_TipoMovimiento_Insert", tipmo_MovimientoParameter, tipmo_UsuarioCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Gral_tbTipoPermiso_Insert_Result> UDP_Gral_tbTipoPermiso_Insert(string tperm_Descripcion, Nullable<int> tperm_UsuarioCrea)
-        {
-            var tperm_DescripcionParameter = tperm_Descripcion != null ?
-                new ObjectParameter("tperm_Descripcion", tperm_Descripcion) :
-                new ObjectParameter("tperm_Descripcion", typeof(string));
-    
-            var tperm_UsuarioCreaParameter = tperm_UsuarioCrea.HasValue ?
-                new ObjectParameter("tperm_UsuarioCrea", tperm_UsuarioCrea) :
-                new ObjectParameter("tperm_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoPermiso_Insert_Result>("UDP_Gral_tbTipoPermiso_Insert", tperm_DescripcionParameter, tperm_UsuarioCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbTipoPermiso_Update_Result> UDP_Gral_tbTipoPermiso_Update(Nullable<int> tperm_Id, string tperm__Descripcion, Nullable<int> tperm__UsuarioModifica)
@@ -1941,6 +1932,23 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("dep_UsuarioModifica", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDepartamento_Update_Result>("UDP_Gral_tbDepartamento_Update", dep_CodigoParameter, dep_NombreParameter, dep_UsuarioModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoPermiso_Insert_Result> UDP_Gral_tbTipoPermiso_Insert(string tperm_Descripcion, Nullable<int> tperm_UsuarioCrea, Nullable<System.DateTime> tperm_FechaCrea)
+        {
+            var tperm_DescripcionParameter = tperm_Descripcion != null ?
+                new ObjectParameter("tperm_Descripcion", tperm_Descripcion) :
+                new ObjectParameter("tperm_Descripcion", typeof(string));
+    
+            var tperm_UsuarioCreaParameter = tperm_UsuarioCrea.HasValue ?
+                new ObjectParameter("tperm_UsuarioCrea", tperm_UsuarioCrea) :
+                new ObjectParameter("tperm_UsuarioCrea", typeof(int));
+    
+            var tperm_FechaCreaParameter = tperm_FechaCrea.HasValue ?
+                new ObjectParameter("tperm_FechaCrea", tperm_FechaCrea) :
+                new ObjectParameter("tperm_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoPermiso_Insert_Result>("UDP_Gral_tbTipoPermiso_Insert", tperm_DescripcionParameter, tperm_UsuarioCreaParameter, tperm_FechaCreaParameter);
         }
     }
 }

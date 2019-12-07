@@ -130,7 +130,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, 1);
+                    //List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, 1,);
                     foreach (UDP_Gral_tbTipoMovimiento_Update_Result Movimiento in List)
                         Msj = Movimiento.MensajeError;
                     if (Msj.StartsWith("-1"))
