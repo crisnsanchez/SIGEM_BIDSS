@@ -36,6 +36,48 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbInstitucionFinanciera);
         }
 
+
+        //INACTIVAR EMPLEADO
+        [HttpPost]
+        public JsonResult InactivarInstitucionFinanciera(int  insf_Id)
+        {
+            IEnumerable<Object> list = null;
+            try
+            {
+                tbInstitucionFinanciera institucionfinanciera = db.tbInstitucionFinanciera.Find(insf_Id);
+                list = db.UDP_Plani_tbInstitucionFinanciera_Update(insf_Id, institucionfinanciera.insf_Nombre,
+                                                                         institucionfinanciera.insf_Contacto,
+                                                                         institucionfinanciera.insf_Telefono,
+                                                                         institucionfinanciera.insf_Correo,1 ,
+                                                                            Function.DatetimeNow(),
+                                                                         GeneralFunctions.instfinDenegar);
+            }
+            catch(Exception Ex)
+            {
+
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ActivarInstitucionFinanciera(int insf_Id)
+        {
+            IEnumerable<Object> list = null;
+            try
+            {
+                tbInstitucionFinanciera institucionfinanciera = db.tbInstitucionFinanciera.Find(insf_Id);
+                list = db.UDP_Plani_tbInstitucionFinanciera_Update(insf_Id, institucionfinanciera.insf_Nombre,
+                                                                         institucionfinanciera.insf_Contacto,
+                                                                         institucionfinanciera.insf_Telefono,
+                                                                         institucionfinanciera.insf_Correo, 1,
+                                                                            Function.DatetimeNow(),
+                                                                         GeneralFunctions.instfinAceptar);
+            }
+            catch (Exception Ex)
+            {
+
+            }
+            return RedirectToAction("Index");
+        }
         // GET: InstitucionFinanciera/Create
         public ActionResult Create()
         {
