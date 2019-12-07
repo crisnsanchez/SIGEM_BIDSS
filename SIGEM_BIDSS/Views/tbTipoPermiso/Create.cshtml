@@ -50,7 +50,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.tperm_Descripcion, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.tperm_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", @onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                        @Html.EditorFor(model => model.tperm_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                         <p style="color:red">@Html.ValidationMessageFor(model => model.tperm_Descripcion, "", new { @class = "text-danger" })</p>
                     </div>
                 </div>
@@ -63,46 +63,47 @@
             </div>
 
 
-         
+
         </div>
     }
 
+
     <script>
-            ///validar solo letras
-  
-            function soloLetras(e) {
-                key = e.keyCode || e.which;
-                tecla = String.fromCharCode(key).toLowerCase();
-                letras = "'/áéíóúabcdefghijklmnñopqrstuvwxyz";
-                especiales = "8-37-39-46";
+        ///validar solo letras
+        ///validar solo letras
+        function soloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " '/áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = "8-37-39-46";
 
-                tecla_especial = false
-                for (var i in especiales) {
-                    if (key == especiales[i]) {
-                        tecla_especial = true;
-                        break;
-                    }
-                }
-
-                if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-                    return false;
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
                 }
             }
-            function noespaciosincio(e) {
-                var valor = e.value.replace(/^ */, '');
-                e.value = valor;
+
+            if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                return false;
             }
+        }
+        function noespaciosincio(e) {
+            var valor = e.value.replace(/^ */, '');
+            e.value = valor;
+        }
 
 
 
-            document.getElementById("Save").onclick = function () {
-                var txtObj = document.getElementById("");
-                txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
-                txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
+        document.getElementById("Save").onclick = function () {
+            var txtObj = document.getElementById("");
+            txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
+            txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 
 
 
 
-            };
+        };
     </script>
 </div>
