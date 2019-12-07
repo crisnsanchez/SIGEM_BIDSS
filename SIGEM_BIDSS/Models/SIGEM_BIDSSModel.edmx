@@ -761,6 +761,7 @@
         <Function Name="UDP_Gral_tbTipoPermiso_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="tperm_Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="tperm_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="tperm_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Gral_tbTipoPermiso_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="tperm_Id" Type="int" Mode="In" />
@@ -1122,10 +1123,6 @@
             <Parameter Name="tipsol_Id" Mode="In" Type="Int32" />
             <Parameter Name="tipsol_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tipsol_UsuarioModifica" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoPermiso_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result)">
-            <Parameter Name="tperm_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="tperm_UsuarioCrea" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbTipoPermiso_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Update_Result)">
             <Parameter Name="tperm_Id" Mode="In" Type="Int32" />
@@ -1605,6 +1602,11 @@
             <Parameter Name="tipmo_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tipmo_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbTipoPermiso_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result)">
+            <Parameter Name="tperm_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="tperm_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tperm_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -1649,9 +1651,6 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbTipoPermiso_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbTipoPermiso_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbEmpleado_Update_Result">
@@ -2306,6 +2305,9 @@
         <ComplexType Name="UDP_Gral_tbTipoMovimiento_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Gral_tbTipoPermiso_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2388,13 +2390,6 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSangre_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSangre_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoPermiso_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoPermiso_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -2906,6 +2901,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMovimiento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMovimiento_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoMovimiento_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoPermiso_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoPermiso_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoPermiso_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

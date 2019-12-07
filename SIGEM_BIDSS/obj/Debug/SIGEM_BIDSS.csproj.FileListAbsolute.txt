@@ -988,4 +988,3 @@ C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Graph.Core.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Identity.Client.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.cache
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\SIGEM_BIDSS.dll.config
-C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInputs.cache
