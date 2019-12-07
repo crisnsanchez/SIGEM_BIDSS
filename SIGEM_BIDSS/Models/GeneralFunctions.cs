@@ -62,6 +62,10 @@ namespace SIGEM_BIDSS.Models
         //    //int tipsol = (from _dbtts in db.tbTipoSolicitud where (_dbtts.tipsol_Descripcion == _strtiposolSearch) select (_dbtts.tipsol_Id)).FirstOrDefault();
         //    //return ;
         //}
+        public const string _isCreated = "Created";
+        public const string _isEdited = "Edited";
+
+
 
         public const string Pass = "QdZwAxesc12";
 

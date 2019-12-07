@@ -8,7 +8,7 @@ using System.Web;
 namespace SIGEM_BIDSS.Models
 {
     [MetadataType(typeof(MonedaMetaData))]
-    public partial class tbTipoMoneda
+    public partial class tbMoneda
     {
 
         [NotMapped]
@@ -25,7 +25,7 @@ namespace SIGEM_BIDSS.Models
         [MinLength(3, ErrorMessage = "Minimo {1} caracteres")]
         public string tmo_Abreviatura { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Moneda")]
+        [Display(Name = "Nombre")]
         public string tmo_Nombre { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Usuario Crea")]

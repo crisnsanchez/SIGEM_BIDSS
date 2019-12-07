@@ -49,8 +49,8 @@
 
 
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.tipmo_id }, new { @class = "btn btn-primary btn-sm" })
-                            @Html.ActionLink("Detalles", "Details", new { id = item.tipmo_id }, new { @class = "btn btn-default btn-sm" })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.tipmo_id }, new { @class = "btn btn-primary btn-xs" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.tipmo_id }, new { @class = "btn btn-default btn-xs" })
                         </td>
                     </tr>
                 }
@@ -61,60 +61,11 @@
 
 @section Scripts {
 
-    <!-- Bootstrap 4 -->
-    <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables -->
     <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#dataTable').DataTable(
-                {
-                    "searching": true,
-                    "lengthChange": true,
-                    "oLanguage": {
-                        "oPaginate": {
-                            "sNext": "Siguiente",
-                            "sPrevious": "Anterior",
-                        },
-                        "sProcessing": "Procesando...",
-                        "sLengthMenu": "Mostrar _MENU_ registros",
-                        "sZeroRecords": "No se encontraron resultados",
-                        "sEmptyTable": "Ningún dato disponible en esta tabla",
-                        "sEmptyTable": "No hay registros",
-                        "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-                        "sSearch": "Buscar",
-                        "sInfo": "Mostrando _START_ a _END_ Entradas",
-                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    }
-                });
-        });
-        $(function () {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            _isBool = $('#vSwal').val();
-            console.log(_isBool)
-            if (_isBool == "true") {
-                console.log("Verdadero")
-
-                Toast.fire({
-                    type: 'success',
-                    title: 'Se ha guardado con Exito.'
-                })
-            }
-            else {
-                console.log("Falso")
-            }
-        });
-    </script>
+    <!-- JS de Funciones Generales -->
+    <script src="~/Scripts/app/General.js"></script>
 
 }
 

@@ -28,10 +28,10 @@
             <thead>
                 <tr>
                     <th>
-                        ID
+                      ID
                     </th>
                     <th>
-                        Descripción
+                        Nombre
                     </th>
 
                     <th>Acciones</th>
@@ -49,8 +49,8 @@
                         </td>
 
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.tps_Id }, new { @class = "btn btn-primary btn-sm" })
-                            @Html.ActionLink("Detalles", "Details", new { id = item.tps_Id }, new { @class = "btn btn-default btn-sm" })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.tps_Id }, new { @class = "btn btn-primary btn-xs" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.tps_Id }, new { @class = "btn btn-default btn-xs" })
                         </td>
                     </tr>
                 }

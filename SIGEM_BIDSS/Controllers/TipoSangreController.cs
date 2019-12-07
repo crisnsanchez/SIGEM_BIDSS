@@ -70,7 +70,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_nombre, 1, Function.DatetimeNow());
+                  List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_nombre, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoSangre_Insert_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -80,9 +80,8 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     if (Msj.StartsWith("-2"))
                     {
-
-                        ModelState.AddModelError("", "Ya existe un tipo sangre con el mismo nombre.");
-                        return View(tbTipoSangre);
+                        ModelState.AddModelError("", "Ya existe un Tipo de sangre con el mismo nombre.");
+                        return View();
                     }
                     else
                     {
@@ -131,23 +130,23 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tps_Id,tps_nombre,tps_UsuarioCrea,tps_FechaCrea,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
         {
+
+            if (db.tbTipoSangre.Any(a => a.tps_nombre == tbTipoSangre.tps_nombre && a.tps_Id != tbTipoSangre.tps_Id))
+            {
+                ModelState.AddModelError("", "Ya existe un Tipo de sangre con el mismo nombre.");
+                return View(tbTipoSangre);
+            }
             try
             {
                 IEnumerable<Object> List = null;
                 string Msj = "";
-                List = db.UDP_Gral_tbTipoSangre_Update(tbTipoSangre.tps_Id,tbTipoSangre.tps_nombre, 1, Function.DatetimeNow());
+                List = db.UDP_Gral_tbTipoSangre_Update(1,tbTipoSangre.tps_nombre, 1, Function.DatetimeNow());
                 foreach (UDP_Gral_tbTipoSangre_Update_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
                 if (Msj.StartsWith("-1"))
                 {
                    
                     return View();
-                }
-                if (Msj.StartsWith("-2"))
-                {
-
-                    ModelState.AddModelError("", "Ya existe un Área con el mismo nombre.");
-                    return View(tbTipoSangre    );
                 }
                 else
                 {

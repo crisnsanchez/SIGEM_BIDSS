@@ -379,6 +379,9 @@
     <Compile Include="Models\UDP_Gral_tbPuesto_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Gral_tbTipoMovimiento_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoMovimiento_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -416,9 +419,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoViatico_Update_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Gral_TipoMovimiento_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tSolicitudInsertar_Result.cs">
@@ -862,6 +862,8 @@
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Scripts\app\General.js" />
+    <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
     <Content Include="Scripts\app\Solicitud.js" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />

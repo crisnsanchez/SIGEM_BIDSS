@@ -153,6 +153,7 @@ namespace SIGEM_BIDSS.Controllers
                 if (db.tbArea.Any(a =>  a.are_Descripcion == tbArea.are_Descripcion && a.are_Id != tbArea.are_Id))
                 {
                     ModelState.AddModelError("", "Ya existe un Área con el mismo nombre.");
+                    return View(tbArea);
                 }
 
 
