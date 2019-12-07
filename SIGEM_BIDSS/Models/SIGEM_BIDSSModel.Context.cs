@@ -483,23 +483,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSalario_Update_Result>("UDP_Gral_tbTipoSalario_Update", tpsal_IdParameter, tpsal_DescripcionParameter, tpsal_UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Nombre, Nullable<int> tps_UsuarioCrea, Nullable<System.DateTime> tps_FechaCrea)
-        {
-            var tps_NombreParameter = tps_Nombre != null ?
-                new ObjectParameter("tps_Nombre", tps_Nombre) :
-                new ObjectParameter("tps_Nombre", typeof(string));
-    
-            var tps_UsuarioCreaParameter = tps_UsuarioCrea.HasValue ?
-                new ObjectParameter("tps_UsuarioCrea", tps_UsuarioCrea) :
-                new ObjectParameter("tps_UsuarioCrea", typeof(int));
-    
-            var tps_FechaCreaParameter = tps_FechaCrea.HasValue ?
-                new ObjectParameter("tps_FechaCrea", tps_FechaCrea) :
-                new ObjectParameter("tps_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Insert_Result>("UDP_Gral_tbTipoSangre_Insert", tps_NombreParameter, tps_UsuarioCreaParameter, tps_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Gral_tbTipoSangre_Update_Result> UDP_Gral_tbTipoSangre_Update(Nullable<int> tps_Id, string tps_Nombre, Nullable<int> tps_UsuarioModifica, Nullable<System.DateTime> tps_FechaModifica)
         {
             var tps_IdParameter = tps_Id.HasValue ?
@@ -1941,6 +1924,23 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("dep_UsuarioModifica", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbDepartamento_Update_Result>("UDP_Gral_tbDepartamento_Update", dep_CodigoParameter, dep_NombreParameter, dep_UsuarioModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Nombre, Nullable<int> tps_UsuarioCrea, Nullable<System.DateTime> tps_FechaCrea)
+        {
+            var tps_NombreParameter = tps_Nombre != null ?
+                new ObjectParameter("tps_Nombre", tps_Nombre) :
+                new ObjectParameter("tps_Nombre", typeof(string));
+    
+            var tps_UsuarioCreaParameter = tps_UsuarioCrea.HasValue ?
+                new ObjectParameter("tps_UsuarioCrea", tps_UsuarioCrea) :
+                new ObjectParameter("tps_UsuarioCrea", typeof(int));
+    
+            var tps_FechaCreaParameter = tps_FechaCrea.HasValue ?
+                new ObjectParameter("tps_FechaCrea", tps_FechaCrea) :
+                new ObjectParameter("tps_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Insert_Result>("UDP_Gral_tbTipoSangre_Insert", tps_NombreParameter, tps_UsuarioCreaParameter, tps_FechaCreaParameter);
         }
     }
 }

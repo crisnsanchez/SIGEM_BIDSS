@@ -87,6 +87,9 @@ namespace SIGEM_BIDSS.Models
         public const int RembolsoGastos = 7;
         public const int empleadoinactivo = 2;
         public const int empleadoactivo = 1;
+        public const bool instfinDenegar = false;
+        public const bool instfinAceptar = true;
+
     }
 
 

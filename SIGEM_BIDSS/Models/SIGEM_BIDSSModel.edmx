@@ -34,6 +34,7 @@
           <Property Name="Anvi_tptran_Id" Type="int" Nullable="false" />
           <Property Name="Anvi_Autorizacion" Type="bit" Nullable="false" />
           <Property Name="Anvi_Comentario" Type="nvarchar" MaxLength="250" />
+          <Property Name="est_Id" Type="int" Nullable="false" />
           <Property Name="Anvi_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="Anvi_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="Anvi_UsuarioModifica" Type="int" />
@@ -319,6 +320,18 @@
             </Principal>
             <Dependent Role="tbAnticipoViatico">
               <PropertyRef Name="Anvi_JefeInmediato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbAnticipoViatico_tbEstado_est_Id">
+          <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
+          <End Role="tbAnticipoViatico" Type="Self.tbAnticipoViatico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbAnticipoViatico">
+              <PropertyRef Name="est_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -901,6 +914,10 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbAnticipoViatico" EntitySet="tbAnticipoViatico" />
           </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbAnticipoViatico_tbEstado_est_Id" Association="Self.FK_Adm_tbAnticipoViatico_tbEstado_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbAnticipoViatico" EntitySet="tbAnticipoViatico" />
+          </AssociationSet>
           <AssociationSet Name="FK_Adm_tbAnticipoViatico_tbMunicipio_mun_Codigo" Association="Self.FK_Adm_tbAnticipoViatico_tbMunicipio_mun_Codigo">
             <End Role="tbMunicipio" EntitySet="tbMunicipio" />
             <End Role="tbAnticipoViatico" EntitySet="tbAnticipoViatico" />
@@ -1088,11 +1105,6 @@
             <Parameter Name="tpsal_Id" Mode="In" Type="Int32" />
             <Parameter Name="tpsal_Descripcion" Mode="In" Type="String" />
             <Parameter Name="tpsal_UsuarioModifica" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbTipoSangre_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Insert_Result)">
-            <Parameter Name="tps_Nombre" Mode="In" Type="String" />
-            <Parameter Name="tps_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="tps_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbTipoSangre_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Update_Result)">
             <Parameter Name="tps_Id" Mode="In" Type="Int32" />
@@ -1580,6 +1592,15 @@
             <Parameter Name="dep_Nombre" Mode="In" Type="String" />
             <Parameter Name="dep_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_Adm_tbAnticipoViatico_tbEstado_est_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbAnticipoViatico" EntitySet="tbAnticipoViatico" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_Gral_tbTipoSangre_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Insert_Result)">
+            <Parameter Name="tps_Nombre" Mode="In" Type="String" />
+            <Parameter Name="tps_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="tps_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -1612,9 +1633,6 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbTipoSalario_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbTipoSangre_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbTipoSangre_Update_Result">
@@ -1728,6 +1746,8 @@
           <NavigationProperty Name="tbEmpleado1" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEmpleado_emp_Id_JefeInmediato" FromRole="tbAnticipoViatico" ToRole="tbEmpleado" />
           <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbMunicipio_mun_Codigo" FromRole="tbAnticipoViatico" ToRole="tbMunicipio" />
           <NavigationProperty Name="tbTipoTransporte" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbTipoTranporte_tptran_Id" FromRole="tbAnticipoViatico" ToRole="tbTipoTransporte" />
+          <Property Name="est_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id" FromRole="tbAnticipoViatico" ToRole="tbEstado" />
         </EntityType>
         <EntityType Name="tbParametro">
           <Key>
@@ -1778,6 +1798,7 @@
           <Property Name="est_UsuarioModifica" Type="Int32" />
           <Property Name="est_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbEmpleado" />
+          <NavigationProperty Name="tbAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbAnticipoViatico" />
         </EntityType>
         <EntityType Name="tbMoneda">
           <Key>
@@ -2266,6 +2287,21 @@
         <ComplexType Name="UDP_Gral_tbDepartamento_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <Association Name="FK_Adm_tbAnticipoViatico_tbEstado_est_Id">
+          <End Type="SIGEM_BIDSSModel.tbEstado" Role="tbEstado" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbAnticipoViatico" Role="tbAnticipoViatico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbAnticipoViatico">
+              <PropertyRef Name="est_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_Gral_tbTipoSangre_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2341,13 +2377,6 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSangre_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSangre_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -2499,6 +2528,7 @@
           <EntitySetMapping Name="tbAnticipoViatico">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbAnticipoViatico">
               <MappingFragment StoreEntitySet="tbAnticipoViatico">
+                <ScalarProperty Name="est_Id" ColumnName="est_Id" />
                 <ScalarProperty Name="Anvi_FechaModifica" ColumnName="Anvi_FechaModifica" />
                 <ScalarProperty Name="Anvi_UsuarioModifica" ColumnName="Anvi_UsuarioModifica" />
                 <ScalarProperty Name="Anvi_FechaCrea" ColumnName="Anvi_FechaCrea" />
@@ -2865,6 +2895,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbDepartamento_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbDepartamento_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbDepartamento_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSangre_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSangre_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

@@ -32,10 +32,12 @@ namespace SIGEM_BIDSS.Models
         public System.DateTime Anvi_FechaCrea { get; set; }
         public Nullable<int> Anvi_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> Anvi_FechaModifica { get; set; }
+        public int est_Id { get; set; }
     
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbEmpleado tbEmpleado1 { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbTipoTransporte tbTipoTransporte { get; set; }
+        public virtual tbEstado tbEstado { get; set; }
     }
 }
