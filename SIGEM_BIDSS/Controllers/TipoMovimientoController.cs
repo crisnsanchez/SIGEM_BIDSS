@@ -69,9 +69,9 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_TipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, 1);
-                    foreach (UDP_Gral_TipoMovimiento_Insert_Result tbMovimiento in List)
-                        Msj = tbMovimiento.MensajeError;
+                    //List = db.UDP_Gral_TipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, 1);
+                    //foreach (UDP_Gral_TipoMovimiento_Insert_Result tbMovimiento in List)
+                    //    Msj = tbMovimiento.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
