@@ -128,8 +128,14 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tperm_Id,tperm_Descripcion,tperm_UsuarioCrea,tperm_FechaCrea,tperm_UsuarioModifica,tperm_FechaModifica")] tbTipoPermiso tbTipoPermiso)
         {
+            if (db.tbTipoPermiso.Any(a => a.tperm_Descripcion == tbTipoPermiso.tperm_Descripcion && a.tperm_Id != tbTipoPermiso.tperm_Id))
+            {
+                ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
+                return View(tbTipoPermiso);
+            }
             try
             {
+
                 IEnumerable<Object> List = null;
                 string Msj = "";
                 List = db.UDP_Gral_tbTipoPermiso_Update(tbTipoPermiso.tperm_Id,tbTipoPermiso.tperm_Descripcion, 1);
@@ -138,6 +144,7 @@ namespace SIGEM_BIDSS.Controllers
                 if (Msj.StartsWith("-1"))
                 {
 
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View();
                 }
                 else
