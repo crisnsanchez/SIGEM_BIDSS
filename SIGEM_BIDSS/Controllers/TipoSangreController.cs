@@ -78,6 +78,11 @@ namespace SIGEM_BIDSS.Controllers
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
+                    if (Msj.StartsWith("-2"))
+                    {
+                        ModelState.AddModelError("", "Ya existe un Tipo de sangre con el mismo nombre.");
+                        return View();
+                    }
                     else
                     {
                         TempData["swalfunction"] = "true";
@@ -128,7 +133,7 @@ namespace SIGEM_BIDSS.Controllers
 
             if (db.tbTipoSangre.Any(a => a.tps_nombre == tbTipoSangre.tps_nombre && a.tps_Id != tbTipoSangre.tps_Id))
             {
-                ModelState.AddModelError("", "Ya existe un Nombre con el mismo nombre.");
+                ModelState.AddModelError("", "Ya existe un Tipo de sangre con el mismo nombre.");
                 return View(tbTipoSangre);
             }
             try
