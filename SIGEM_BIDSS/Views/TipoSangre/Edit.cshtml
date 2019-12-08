@@ -42,6 +42,7 @@
     </div>
     @using (Html.BeginForm())
     {
+        @Html.HiddenFor(model=> Model.tps_Id)
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">

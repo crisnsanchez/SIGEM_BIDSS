@@ -128,7 +128,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tps_Id,tps_nombre,tps_UsuarioCrea,tps_FechaCrea,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
+        public ActionResult Edit([Bind(Include = "tps_Id,tps_nombre,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
         {
 
             if (db.tbTipoSangre.Any(a => a.tps_nombre == tbTipoSangre.tps_nombre && a.tps_Id != tbTipoSangre.tps_Id))
@@ -140,7 +140,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 IEnumerable<Object> List = null;
                 string Msj = "";
-                List = db.UDP_Gral_tbTipoSangre_Update(1,tbTipoSangre.tps_nombre, 1, Function.DatetimeNow());
+                List = db.UDP_Gral_tbTipoSangre_Update(tbTipoSangre.tps_Id,tbTipoSangre.tps_nombre, 1, Function.DatetimeNow());
                 foreach (UDP_Gral_tbTipoSangre_Update_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
                 if (Msj.StartsWith("-1"))
