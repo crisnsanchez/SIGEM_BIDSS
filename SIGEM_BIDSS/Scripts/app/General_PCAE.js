@@ -1,18 +1,5 @@
 ﻿//JS General para Pantallas Create y Edit
 
-$(function () {
-    var vinput = document.getElementsByTagName('input');
-    vinput.ondrop = function (e) {
-        e.preventDefault();
-        //alert("esta acción está prohibida");
-    }
-    getElementsByTagName('input').each(function (item) {
-        item.ondrop = function (e) {
-            e.preventDefault();
-            //alert("esta acción está prohibida");
-        }
-    });
-})
 
 
 //-----------Bloquear Ctrl + C y Ctrl + V
