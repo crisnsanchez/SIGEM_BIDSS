@@ -67,6 +67,12 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
                 try
                 {
+                    if (isDuplicated(tbTipoMovimiento.tipmo_Movimiento))
+                    {
+                        ModelState.AddModelError("", "Ya existe este registro, porfavor ingrese otro.");
+                        return View(tbTipoMovimiento);
+                    }
+
                     IEnumerable<Object> List = null;
                     string Msj = "";
                     List = db.UDP_Gral_tbTipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, 1, _function.DatetimeNow());
@@ -102,6 +108,7 @@ namespace SIGEM_BIDSS.Controllers
         {
             try
             {
+
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -129,6 +136,12 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
                 try
                 {
+                    if (isDuplicated(tbTipoMovimiento.tipmo_Movimiento))
+                    {
+                        ModelState.AddModelError("", "Ya existe este registro, porfavor ingrese otro.");
+                        return View(tbTipoMovimiento);
+                    }
+
                     IEnumerable<Object> List = null;
                     string Msj = "";
                     List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, 1,_function.DatetimeNow());
@@ -181,6 +194,27 @@ namespace SIGEM_BIDSS.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+        public bool isDuplicated(string tipmo_Movimiento)
+        {
+            bool _boolExist = false;
+            try
+            {
+                int _Exist = (from _tbM in db.tbTipoMovimiento where _tbM.tipmo_Movimiento == tipmo_Movimiento select _tbM).Count();
+                if (_Exist >= 1)
+                {
+                   return _boolExist = true;
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw;
+            }
+            return _boolExist;
+        }
+
 
         protected override void Dispose(bool disposing)
         {

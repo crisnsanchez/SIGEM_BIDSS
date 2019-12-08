@@ -15,9 +15,11 @@ namespace SIGEM_BIDSS.Models
 
     public class TipoMovientoMetaData
     {
+
         [Display(Name = "ID")]
         public int tipmo_id { get; set; }
 
+        [Required]
         [Display(Name = "Descripción")]
         public string tipmo_Movimiento { get; set; }
 
