@@ -3265,6 +3265,8 @@
     <Content Include="Views\AnticipoViatico\Details.cshtml" />
     <Content Include="Views\AnticipoViatico\Edit.cshtml" />
     <Content Include="Views\AnticipoViatico\Index.cshtml" />
+    <Content Include="Views\Menu\Configuracion.cshtml" />
+    <Content Include="Views\Menu\Planilla.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
