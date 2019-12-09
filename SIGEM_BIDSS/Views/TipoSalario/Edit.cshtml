@@ -46,12 +46,7 @@
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.tpsal_id)
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.tpsal_id, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.tpsal_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.tpsal_id, "", new { @class = "text-danger" })
-                                </div>
+                          
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.tpsal_Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
@@ -75,7 +70,7 @@
 
         </div>
 
-    </div>
+   
 
 }
 
@@ -109,7 +104,7 @@
 
 
     document.getElementById("Save").onclick = function () {
-        var txtObj = document.getElementById("des");
+        var txtObj = document.getElementById("");
         txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
         txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 

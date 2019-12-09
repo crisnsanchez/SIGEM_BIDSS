@@ -24,13 +24,12 @@
             <thead>
                 <tr>
                     <th>
-                        Id Tipo Salario
-                    </th>
-        
+                      ID
+                   </th> 
                     <th>
-                      Descripcion
+                      Descripción
                     </th>
-                    <th>ACCIONES</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,8 +47,8 @@
 
 
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.tpsal_id }, new { @class = "btn btn-primary btn-sm" })
-                            @Html.ActionLink("Detalles", "Details", new { id = item.tpsal_id }, new { @class = "btn btn-default btn-sm" })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.tpsal_id }, new { @class = "btn btn-primary btn-xs" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.tpsal_id }, new { @class = "btn btn-default btn-xs" })
                         </td>
                     </tr>
                 }
