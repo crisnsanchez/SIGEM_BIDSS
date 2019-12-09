@@ -80,7 +80,7 @@ namespace SIGEM_BIDSS.Models
         public int pto_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Fecha Ingresó A La Empresa")]
+        [Display(Name = "Fecha ingresó a la empresa")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public string emp_FechaIngreso { get; set; }
 

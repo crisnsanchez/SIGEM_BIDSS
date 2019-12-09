@@ -76,6 +76,7 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "pto_Id,are_Id,pto_Descripcion,pto_UsuarioCrea,pto_FechaCrea,pto_UsuarioModifica,pto_FechaModifica")] tbPuesto tbPuesto)
         {
+            ViewBag.are_Id = new SelectList(db.tbPuesto, "are_Id", "are_Descripcion", tbPuesto.are_Id);
 
             if (ModelState.IsValid)
 
@@ -147,8 +148,17 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "pto_Id,are_Id,pto_Descripcion,pto_UsuarioCrea,pto_FechaCrea,pto_UsuarioModifica,pto_FechaModifica")] tbPuesto tbPuesto)
         {
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
+
+
             if (ModelState.IsValid)
-                try
+                if (db.tbPuesto.Any(a => a.pto_Descripcion == tbPuesto.pto_Descripcion && a.are_Id == tbPuesto.are_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe un cargo con el mismo nombre.");
+                    return View(tbPuesto);
+                }
+
+            try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";

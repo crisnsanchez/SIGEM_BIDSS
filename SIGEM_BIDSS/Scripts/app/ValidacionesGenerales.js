@@ -43,9 +43,6 @@ $('#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud').datepicker
 
 
 
-_value = document.getElementsByClassName('txtBox').value;
-document.getElementById('tipmo_Movimiento').value = _value.trimStart();
-
 
 
 //////SOLO LETRAS

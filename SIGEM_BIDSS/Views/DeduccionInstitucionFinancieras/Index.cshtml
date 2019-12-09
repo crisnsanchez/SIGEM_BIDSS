@@ -43,7 +43,7 @@
                         @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.tbInstitucionesFinancieras.insf_DescInstitucionFinanc)
+                        @Html.DisplayNameFor(model => model.tbInstitucionFinanciera.insf_Nombre)
                     </th>
                     <th>Acciones</th>
                 </tr>
@@ -70,12 +70,12 @@
                         @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.tbInstitucionesFinancieras.insf_DescInstitucionFinanc)
+                        @Html.DisplayFor(modelItem => item.tbInstitucionFinanciera.insf_Nombre)
                     </td>
 
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.deif_IdDeduccionInstFinanciera }, new { @class = "btn btn-primary btn-sm" })
-                        @Html.ActionLink("Detalles", "Details", new { id = item.deif_IdDeduccionInstFinanciera }, new { @class = "btn btn-default btn-sm" })
+                        @Html.ActionLink("Editar", "Edit", new { id = item.deif_IdDeduccionInstFinanciera }, new { @class = "btn btn-primary btn-xs" })
+                        @Html.ActionLink("Detalles", "Details", new { id = item.deif_IdDeduccionInstFinanciera }, new { @class = "btn btn-default btn-xs" })
                     </td>
                 </tr>
             }
