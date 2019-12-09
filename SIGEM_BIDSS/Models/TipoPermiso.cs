@@ -16,7 +16,7 @@ namespace SIGEM_BIDSS.Models
 
     public class TipoPermisoMetaData
     {
-        [Display(Name = "Id Tipo Permiso")]
+        [Display(Name = "ID")]
         public int tperm_Id{ get; set; }
         [Display(Name = "Descripción")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
