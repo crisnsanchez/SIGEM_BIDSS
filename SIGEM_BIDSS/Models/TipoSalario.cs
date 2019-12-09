@@ -21,6 +21,7 @@ namespace SIGEM_BIDSS.Models
         public int tpsal_id { get; set; }
 
         [Display(Name = "Descripción")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string tpsal_Descripcion { get; set; }
 
         [Display(Name = "Usuario Crea")]

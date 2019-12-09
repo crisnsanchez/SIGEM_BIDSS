@@ -436,36 +436,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoSalario_Insert_Result> UDP_Gral_tbTipoSalario_Insert(string tpsal_Descripcion, Nullable<int> tpsal_UsuarioCrea)
-        {
-            var tpsal_DescripcionParameter = tpsal_Descripcion != null ?
-                new ObjectParameter("tpsal_Descripcion", tpsal_Descripcion) :
-                new ObjectParameter("tpsal_Descripcion", typeof(string));
-    
-            var tpsal_UsuarioCreaParameter = tpsal_UsuarioCrea.HasValue ?
-                new ObjectParameter("tpsal_UsuarioCrea", tpsal_UsuarioCrea) :
-                new ObjectParameter("tpsal_UsuarioCrea", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSalario_Insert_Result>("UDP_Gral_tbTipoSalario_Insert", tpsal_DescripcionParameter, tpsal_UsuarioCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Gral_tbTipoSalario_Update_Result> UDP_Gral_tbTipoSalario_Update(Nullable<int> tpsal_Id, string tpsal_Descripcion, Nullable<int> tpsal_UsuarioModifica)
-        {
-            var tpsal_IdParameter = tpsal_Id.HasValue ?
-                new ObjectParameter("tpsal_Id", tpsal_Id) :
-                new ObjectParameter("tpsal_Id", typeof(int));
-    
-            var tpsal_DescripcionParameter = tpsal_Descripcion != null ?
-                new ObjectParameter("tpsal_Descripcion", tpsal_Descripcion) :
-                new ObjectParameter("tpsal_Descripcion", typeof(string));
-    
-            var tpsal_UsuarioModificaParameter = tpsal_UsuarioModifica.HasValue ?
-                new ObjectParameter("tpsal_UsuarioModifica", tpsal_UsuarioModifica) :
-                new ObjectParameter("tpsal_UsuarioModifica", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSalario_Update_Result>("UDP_Gral_tbTipoSalario_Update", tpsal_IdParameter, tpsal_DescripcionParameter, tpsal_UsuarioModificaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Nombre, Nullable<int> tps_UsuarioCrea, Nullable<System.DateTime> tps_FechaCrea)
         {
             var tps_NombreParameter = tps_Nombre != null ?
@@ -1953,6 +1923,48 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tps_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Update_Result>("UDP_Gral_tbTipoSangre_Update", tps_IdParameter, tps_NombreParameter, tps_UsuarioModificaParameter, tps_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoSalario_Insert_Result> UDP_Gral_tbTipoSalario_Insert(Nullable<int> tpsal_id, string tpsal_Descripcion, Nullable<int> tpsal_UsuarioCrea, Nullable<System.DateTime> tpsal_FechaCrea)
+        {
+            var tpsal_idParameter = tpsal_id.HasValue ?
+                new ObjectParameter("tpsal_id", tpsal_id) :
+                new ObjectParameter("tpsal_id", typeof(int));
+    
+            var tpsal_DescripcionParameter = tpsal_Descripcion != null ?
+                new ObjectParameter("tpsal_Descripcion", tpsal_Descripcion) :
+                new ObjectParameter("tpsal_Descripcion", typeof(string));
+    
+            var tpsal_UsuarioCreaParameter = tpsal_UsuarioCrea.HasValue ?
+                new ObjectParameter("tpsal_UsuarioCrea", tpsal_UsuarioCrea) :
+                new ObjectParameter("tpsal_UsuarioCrea", typeof(int));
+    
+            var tpsal_FechaCreaParameter = tpsal_FechaCrea.HasValue ?
+                new ObjectParameter("tpsal_FechaCrea", tpsal_FechaCrea) :
+                new ObjectParameter("tpsal_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSalario_Insert_Result>("UDP_Gral_tbTipoSalario_Insert", tpsal_idParameter, tpsal_DescripcionParameter, tpsal_UsuarioCreaParameter, tpsal_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoSalario_Update_Result> UDP_Gral_tbTipoSalario_Update(Nullable<int> tpsal_Id, string tpsal_Descripcion, Nullable<int> tpsal_UsuarioModifica, Nullable<System.DateTime> tpsal_FechaModifica)
+        {
+            var tpsal_IdParameter = tpsal_Id.HasValue ?
+                new ObjectParameter("tpsal_Id", tpsal_Id) :
+                new ObjectParameter("tpsal_Id", typeof(int));
+    
+            var tpsal_DescripcionParameter = tpsal_Descripcion != null ?
+                new ObjectParameter("tpsal_Descripcion", tpsal_Descripcion) :
+                new ObjectParameter("tpsal_Descripcion", typeof(string));
+    
+            var tpsal_UsuarioModificaParameter = tpsal_UsuarioModifica.HasValue ?
+                new ObjectParameter("tpsal_UsuarioModifica", tpsal_UsuarioModifica) :
+                new ObjectParameter("tpsal_UsuarioModifica", typeof(int));
+    
+            var tpsal_FechaModificaParameter = tpsal_FechaModifica.HasValue ?
+                new ObjectParameter("tpsal_FechaModifica", tpsal_FechaModifica) :
+                new ObjectParameter("tpsal_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSalario_Update_Result>("UDP_Gral_tbTipoSalario_Update", tpsal_IdParameter, tpsal_DescripcionParameter, tpsal_UsuarioModificaParameter, tpsal_FechaModificaParameter);
         }
     }
 }
