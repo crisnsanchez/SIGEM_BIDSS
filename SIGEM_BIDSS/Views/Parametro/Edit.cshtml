@@ -80,7 +80,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Password, htmlAttributes: new { @class = "control-label col-md-8" })
-                            @Html.EditorFor(model => model.par_Password, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off", onkeypress = "return Passworddd(event)", @type = "password", @ID = "txtPassword" } })
+                            @Html.EditorFor(model => model.par_Password, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", @autocomplete = "off", onkeypress = "return Passworddd(event)", @type = "password", @ID = "txtPassword" } })
                             @Html.ValidationMessageFor(model => model.par_Password, null, new { style = "color:red", id = "errorpassword" })
                             @*<button id="show_password" class="btn btn-primary btn-xs" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>*@
                         </div>
@@ -88,13 +88,13 @@
 
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Puerto, htmlAttributes: new { @class = "control-label col-md-8" })
-                            @Html.EditorFor(model => model.par_Puerto, new { htmlAttributes = new { @class = "form-control", @minlength = "2", @maxlength = "4", @autocomplete = "off", @onkeypress = "return soloNumeros(event)", @type = "text" } })
+                            @Html.EditorFor(model => model.par_Puerto, new { htmlAttributes = new { @class = "form-control", @minlength = "2", @maxlength = "10", @autocomplete = "off", @onkeypress = "return soloNumeros(event)", @type = "text" } })
                             @Html.ValidationMessageFor(model => model.par_Puerto, null, new { style = "color:red", id = "errorPuerto" })
                         </div>
 
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Servidor, htmlAttributes: new { @class = "control-label col-md-4" })
-                            @Html.EditorFor(model => model.par_Servidor, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off" } })
+                            @Html.EditorFor(model => model.par_Servidor, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off" } })
                             <p id="servidor" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoEmisor, "", new { @class = "text-danger" })</p>
                         </div>
                     </div>
