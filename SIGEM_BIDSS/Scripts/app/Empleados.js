@@ -33,7 +33,7 @@ function soloNumeros(e) {
 $(document).ready(function () {
     $("#emp_Nombres")[0].maxLength = 50;
     $("#emp_Apellidos")[0].maxLength = 50;
-    $("#emp_Identificacion")[0].maxLength = 13;
+    $("#emp_Identificacion")[0].maxLength = 25;
     $("#emp_CorreoElectronico")[0].maxLength = 100;
     //$("#emp_Telefono")[0].maxLength = 8;
     $("#emp_Correo").attr("autocomplete", "randomString");
@@ -48,6 +48,16 @@ $(document).ready(function () {
 
     var muni = $('#municipios').val();
     if (muni == "true") { GetMunicipios() } else { console.log(muni); }
+
+
+
+
+
+    $('#municipio').hide();
+
+
+    var are = $('#municipios').val();
+    if (are == "true") { GetMunicipios() } else { console.log(are); }
 
 })
     
