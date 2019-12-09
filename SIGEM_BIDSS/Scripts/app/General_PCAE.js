@@ -1,31 +1,8 @@
 ﻿//JS General para Pantallas Create y Edit
 
 
-
-//-----------Bloquear Ctrl + C y Ctrl + V
-//$('input').bind('keydown', function (event) {
-//        if ($('#txtrut').val().length == 0) {
-//            alert('Ingrese rut');
-//            return false;
-//        }
-//    }
-//if (event.ctrlKey || event.metaKey) {
-//    switch (String.fromCharCode(event.which).toLowerCase()) {
-//        case 'c':
-//            event.preventDefault();
-//            console.log("Ctrl + C")
-//            break;
-//        case 'v':
-//            console.log("Ctrl + V")
-
-//            event.preventDefault();
-//            break;
-//    }
-//}
-//)
 document.addEventListener("input", function () {
-    //console.log($("input").attr("id"));
-    $("input[type=text]", 'form').each(function () {
+    $("input[type='text']", 'form').each(function () {
         _id = $(this).attr("id");
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
@@ -92,11 +69,12 @@ document.getElementById("Save").onclick = function () {
 };
 
 
+
 document.getElementById('insf_Correo').addEventListener('input', function () {
     campo = event.target;
-    valido = document.getElementById('emailOK');
+    valido = document.getElementById('emailEoK');
     //selector = document.getElementById('emp_CorreoElectronico')
-    emailRegex = /"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"/i;
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono
     if (emailRegex.test(campo.value)) {
         valido.innerText = "";

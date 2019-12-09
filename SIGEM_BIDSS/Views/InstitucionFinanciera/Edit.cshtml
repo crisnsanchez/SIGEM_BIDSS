@@ -74,15 +74,15 @@
                 <div class="form-group ">
                     @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @OnKeyPress = "return soloNumeros(event)" } })
+                        @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", maxlength = "50",autocomplete = "off", @OnKeyPress = "return soloNumeros(event)" } })
                         @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label col-md-8" })
                         <div class="col-sm-4">
-                            @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                            <p id="emailOK" style="color:red">@Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger" })</p>
+                            @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", maxlength = "50" } })
+                            <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger" })</p>
                         </div>
                     </div>
 
@@ -114,3 +114,11 @@
     <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
     <script src="~/Scripts/app/General_PCAE.js"></script>
 
+
+    <script type="text/javascript">
+        $('#insf_Telefono').inputmask('(999) 9999-9999')
+
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });
+    </script>

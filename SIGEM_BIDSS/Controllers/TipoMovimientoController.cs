@@ -75,7 +75,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, 1, _function.DatetimeNow());
+                    List = db.UDP_Gral_tbTipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, _function.GetUser(), _function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoMovimiento_Insert_Result tbMovimiento in List)
                         Msj = tbMovimiento.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -144,7 +144,8 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, 1,_function.DatetimeNow());
+                    int dsa = _function.GetUser();
+                    List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, _function.GetUser(), _function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoMovimiento_Update_Result Movimiento in List)
                         Msj = Movimiento.MensajeError;
                     if (Msj.StartsWith("-1"))

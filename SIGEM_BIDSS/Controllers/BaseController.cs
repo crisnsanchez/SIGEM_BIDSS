@@ -40,13 +40,14 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     // Add the user to the view bag
                     ViewBag.User = tokenStore.GetUserDetails();
+
                 }
                 else
                 {
                     // The session has lost data. This happens often
                     // when debugging. Log out so the user can log back in
                     Request.GetOwinContext().Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-                    filterContext.Result = RedirectToAction("Index", "Home");
+                    filterContext.Result = RedirectToAction("Index", "Login");
                 }
             }
 
