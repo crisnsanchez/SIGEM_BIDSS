@@ -23,16 +23,7 @@ namespace SIGEM_BIDSS.Models
             Hola.Add(new tbEmpleado { ge_Id = "M", ge_Description = "Masculino" });
             return Hola;
         }
-
-        //public List<tbEmpleado> Jefe()
-        //{
-        //    List<tbEmpleado> lis = new List<tbEmpleado>();
-        //    lis.Add(new tbEmpleado { jefe_id =  false, condicion = "Seleccione Uno" });
-        //    lis.Add(new tbEmpleado { jefe_id = false, condicion = "No" });
-        //    lis.Add(new tbEmpleado { jefe_id = true, condicion = "Si" });
-        //    return lis;
-        //}
-
+        
         public DateTime DatetimeNow()
         {
             DateTime dt = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(-6)).DateTime;
@@ -43,31 +34,7 @@ namespace SIGEM_BIDSS.Models
             int _user = 1;
             return _user;
         }
-        //public int tipsol_Id(int _TipoSolicitud)
-        //{
-         
-        //    //return tipsol;
-        //}
-        public object TipodeSolicitud()
-        {
-            object obtipsol = new
-            {
-                //AccionPersonal = TipodeSolicitudSearch("Accion Personal"),
-                //AnticipodeViaticos = TipodeSolicitudSearch("Anticipo de Viaticos"),
-                //SolicitudPermisoLaboral = TipodeSolicitudSearch("Solicitud Permiso Laboral"),
-                //RequisicionCompra = TipodeSolicitudSearch("Requisicion de Compra"),
-                //AnticipoSalario = TipodeSolicitudSearch("Anticipo de Salario")
-
-            };
-            return obtipsol;
-        }
-
-        //public int TipodeSolicitudSearch(string _strtiposolSearch)
-        //{
-        //    if (_strtiposolSearch == null || _strtiposolSearch == "") { return 0; }
-        //    //int tipsol = (from _dbtts in db.tbTipoSolicitud where (_dbtts.tipsol_Descripcion == _strtiposolSearch) select (_dbtts.tipsol_Id)).FirstOrDefault();
-        //    //return ;
-        //}
+      
         public const string _isCreated = "Created";
         public const string _isEdited = "Edited";
 
@@ -118,6 +85,113 @@ namespace SIGEM_BIDSS.Models
 
             return _user;
         }
+
+        //Call
+        //string lvMensajeError = "";
+        //LeerDatos(out lvMensajeError, tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralJefeInmediato, tbSolicitud.Emp_Name);
+
+        public int LeerDatos(out string pvMensajeError, string _empJefeMail, string _GralJefeInmediato, string _empName)
+        {
+            try
+            {
+                pvMensajeError = "";
+                string lsSubject = "",
+                        lsRutaPlantilla = "",
+                        lsXMLDatos = "",
+                        lsXMLEnvio = "";
+                lsSubject = "REF:(VIA-000000001)";
+                lsRutaPlantilla = @"C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Content\Email\index.xml";
+
+                lsXMLDatos = @"<principal>
+                              <nref>REF:(VIA-000000001)</nref>
+                              <to>" + _GralJefeInmediato + "</to>" +
+                              @"<from>" + _empName + "</from>" +
+                              "</principal>";
+
+                var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
+                enviarCorreo(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _empJefeMail, _Parameters.par_Servidor, _Parameters.par_Puerto);
+                return 0;
+            }
+            catch (Exception Ex)
+            {
+
+                throw;
+            }
+        }
+
+        private Boolean EmailGenerar_Body(string psRutaPlantilla, string psXML, out string psXMLEnvio)
+        {
+            psXMLEnvio = "";
+            try
+            {
+                //Leer
+                XmlTextReader reader = new XmlTextReader(psRutaPlantilla);
+                reader.Read();
+
+                //Cargar
+                XslCompiledTransform xslt = new XslCompiledTransform();
+                xslt.Load(reader);
+
+                XmlReader xmlData = XmlReader.Create(new StringReader(psXML));
+
+                XmlWriterSettings Configuraciones = new XmlWriterSettings();
+                Configuraciones.OmitXmlDeclaration = true;
+                Configuraciones.ConformanceLevel = ConformanceLevel.Fragment;
+                //Configuraciones.Encoding = Encoding.UTF8;
+                Configuraciones.CloseOutput = false;
+
+                //Empieza a hacer el match
+                using (StringWriter sw = new StringWriter())
+                using (XmlWriter xwo = XmlWriter.Create(sw, Configuraciones)) // xslt.OutputSettings use OutputSettings of xsl, so it can be output as HTML
+                {
+                    xslt.Transform(xmlData, null, xwo);
+                    psXMLEnvio = sw.ToString();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                psXMLEnvio = "";
+                return false;
+            }
+        }
+
+        public int enviarCorreo(string psEmisor, string psPassword, string psMensaje, string psAsunto, string psDestinatario, string psServidor, int psPuerto)
+        {
+            //      0 = Ok      //
+            //      1 = Error   //
+
+            MailMessage correos = new MailMessage();
+            SmtpClient envios = new SmtpClient();
+
+            try
+            {
+                correos.To.Clear();
+                correos.Body = "";
+                correos.Subject = "";
+                correos.Body = psMensaje;
+                correos.BodyEncoding = System.Text.Encoding.UTF8;
+                correos.Subject = psAsunto;
+                correos.IsBodyHtml = true;
+                correos.To.Add(psDestinatario.Trim());
+                correos.From = new MailAddress(psEmisor);
+                envios.Credentials = new NetworkCredential(psEmisor, psPassword);
+                // Datos del servidor //
+                envios.Host = psServidor;
+                envios.Port = psPuerto;
+                envios.EnableSsl = true;
+                //Función de envío de correo //
+                envios.Send(correos);
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                return 1;
+            }
+        }
+
 
         //Estados Solicitud
         public const int Enviada = 1;
