@@ -186,6 +186,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AnticipoViaticoController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
@@ -223,6 +224,7 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Solicitud.cs" />
+    <Compile Include="Models\Solicitud\AnticipoViatico.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -322,6 +324,9 @@
     <Compile Include="Models\TipoSalario.cs" />
     <Compile Include="Models\TipoViatico.cs" />
     <Compile Include="Models\Transporte.cs" />
+    <Compile Include="Models\UDP_Adm_tbAnticipoViatico_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Conf_tbParametro_Count_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -862,6 +867,7 @@
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Scripts\app\DataTables.js" />
     <Content Include="Scripts\app\General.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
@@ -3112,6 +3118,7 @@
     <Content Include="Scripts\app\Departamento.js" />
     <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\app\Municipio.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
     <Content Include="Scripts\app\ValidacionesGenerales.js" />
     <Content Include="Scripts\app\_AccionPersonal.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -3253,6 +3260,11 @@
     <Content Include="Views\TipoTransporte\Edit.cshtml" />
     <Content Include="Views\TipoTransporte\Index.cshtml" />
     <Content Include="web.config" />
+    <Content Include="Views\AnticipoViatico\Create.cshtml" />
+    <Content Include="Views\AnticipoViatico\Delete.cshtml" />
+    <Content Include="Views\AnticipoViatico\Details.cshtml" />
+    <Content Include="Views\AnticipoViatico\Edit.cshtml" />
+    <Content Include="Views\AnticipoViatico\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

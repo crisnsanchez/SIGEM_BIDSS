@@ -527,6 +527,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="UDP_Acce_tbBitacoraErrores_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Acce">
+          <Parameter Name="bite_Controlador" Type="nvarchar" Mode="In" />
+          <Parameter Name="bite_Accion" Type="nvarchar" Mode="In" />
+          <Parameter Name="bite_Usuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="bite_Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="bite_MensajeError" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UDP_Adm_tbAnticipoViatico_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="Anvi_JefeInmediato" Type="int" Mode="In" />
+          <Parameter Name="Anvi_GralFechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="Anvi_FechaViaje" Type="datetime" Mode="In" />
+          <Parameter Name="Anvi_Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="mun_Codigo" Type="char" Mode="In" />
+          <Parameter Name="Anvi_PropositoVisita" Type="nvarchar" Mode="In" />
+          <Parameter Name="Anvi_DiasVisita" Type="int" Mode="In" />
+          <Parameter Name="Anvi_Hospedaje" Type="bit" Mode="In" />
+          <Parameter Name="Anvi_tptran_Id" Type="int" Mode="In" />
+          <Parameter Name="Anvi_Autorizacion" Type="bit" Mode="In" />
+          <Parameter Name="Anvi_Comentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="Anvi_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="Anvi_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Conf_tbParametro_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Conf">
           <Parameter Name="conteo" Type="int" Mode="In" />
         </Function>
@@ -1613,6 +1637,30 @@
             <Parameter Name="tpsal_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="tpsal_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Acce_tbBitacoraErrores_Insert">
+            <Parameter Name="bite_Controlador" Mode="In" Type="String" />
+            <Parameter Name="bite_Accion" Mode="In" Type="String" />
+            <Parameter Name="bite_Usuario" Mode="In" Type="String" />
+            <Parameter Name="bite_Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="bite_MensajeError" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbAnticipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Anvi_JefeInmediato" Mode="In" Type="Int32" />
+            <Parameter Name="Anvi_GralFechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="Anvi_FechaViaje" Mode="In" Type="DateTime" />
+            <Parameter Name="Anvi_Cliente" Mode="In" Type="String" />
+            <Parameter Name="mun_Codigo" Mode="In" Type="String" />
+            <Parameter Name="Anvi_PropositoVisita" Mode="In" Type="String" />
+            <Parameter Name="Anvi_DiasVisita" Mode="In" Type="Int32" />
+            <Parameter Name="Anvi_Hospedaje" Mode="In" Type="Boolean" />
+            <Parameter Name="Anvi_tptran_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Anvi_Autorizacion" Mode="In" Type="Boolean" />
+            <Parameter Name="Anvi_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Anvi_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Anvi_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2314,6 +2362,9 @@
         <ComplexType Name="UDP_Gral_tbTipoSalario_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Adm_tbAnticipoViatico_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2914,6 +2965,14 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoSalario_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoSalario_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbTipoSalario_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Acce_tbBitacoraErrores_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Acce_tbBitacoraErrores_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAnticipoViatico_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

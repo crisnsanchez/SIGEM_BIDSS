@@ -1966,5 +1966,95 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSalario_Update_Result>("UDP_Gral_tbTipoSalario_Update", tpsal_IdParameter, tpsal_DescripcionParameter, tpsal_UsuarioModificaParameter, tpsal_FechaModificaParameter);
         }
+    
+        public virtual int UDP_Acce_tbBitacoraErrores_Insert(string bite_Controlador, string bite_Accion, string bite_Usuario, Nullable<System.DateTime> bite_Fecha, string bite_MensajeError)
+        {
+            var bite_ControladorParameter = bite_Controlador != null ?
+                new ObjectParameter("bite_Controlador", bite_Controlador) :
+                new ObjectParameter("bite_Controlador", typeof(string));
+    
+            var bite_AccionParameter = bite_Accion != null ?
+                new ObjectParameter("bite_Accion", bite_Accion) :
+                new ObjectParameter("bite_Accion", typeof(string));
+    
+            var bite_UsuarioParameter = bite_Usuario != null ?
+                new ObjectParameter("bite_Usuario", bite_Usuario) :
+                new ObjectParameter("bite_Usuario", typeof(string));
+    
+            var bite_FechaParameter = bite_Fecha.HasValue ?
+                new ObjectParameter("bite_Fecha", bite_Fecha) :
+                new ObjectParameter("bite_Fecha", typeof(System.DateTime));
+    
+            var bite_MensajeErrorParameter = bite_MensajeError != null ?
+                new ObjectParameter("bite_MensajeError", bite_MensajeError) :
+                new ObjectParameter("bite_MensajeError", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_Acce_tbBitacoraErrores_Insert", bite_ControladorParameter, bite_AccionParameter, bite_UsuarioParameter, bite_FechaParameter, bite_MensajeErrorParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbAnticipoViatico_Insert_Result> UDP_Adm_tbAnticipoViatico_Insert(Nullable<int> emp_Id, Nullable<int> anvi_JefeInmediato, Nullable<System.DateTime> anvi_GralFechaSolicitud, Nullable<System.DateTime> anvi_FechaViaje, string anvi_Cliente, string mun_Codigo, string anvi_PropositoVisita, Nullable<int> anvi_DiasVisita, Nullable<bool> anvi_Hospedaje, Nullable<int> anvi_tptran_Id, Nullable<bool> anvi_Autorizacion, string anvi_Comentario, Nullable<int> est_Id, Nullable<int> anvi_UsuarioCrea, Nullable<System.DateTime> anvi_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var anvi_JefeInmediatoParameter = anvi_JefeInmediato.HasValue ?
+                new ObjectParameter("Anvi_JefeInmediato", anvi_JefeInmediato) :
+                new ObjectParameter("Anvi_JefeInmediato", typeof(int));
+    
+            var anvi_GralFechaSolicitudParameter = anvi_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("Anvi_GralFechaSolicitud", anvi_GralFechaSolicitud) :
+                new ObjectParameter("Anvi_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var anvi_FechaViajeParameter = anvi_FechaViaje.HasValue ?
+                new ObjectParameter("Anvi_FechaViaje", anvi_FechaViaje) :
+                new ObjectParameter("Anvi_FechaViaje", typeof(System.DateTime));
+    
+            var anvi_ClienteParameter = anvi_Cliente != null ?
+                new ObjectParameter("Anvi_Cliente", anvi_Cliente) :
+                new ObjectParameter("Anvi_Cliente", typeof(string));
+    
+            var mun_CodigoParameter = mun_Codigo != null ?
+                new ObjectParameter("mun_Codigo", mun_Codigo) :
+                new ObjectParameter("mun_Codigo", typeof(string));
+    
+            var anvi_PropositoVisitaParameter = anvi_PropositoVisita != null ?
+                new ObjectParameter("Anvi_PropositoVisita", anvi_PropositoVisita) :
+                new ObjectParameter("Anvi_PropositoVisita", typeof(string));
+    
+            var anvi_DiasVisitaParameter = anvi_DiasVisita.HasValue ?
+                new ObjectParameter("Anvi_DiasVisita", anvi_DiasVisita) :
+                new ObjectParameter("Anvi_DiasVisita", typeof(int));
+    
+            var anvi_HospedajeParameter = anvi_Hospedaje.HasValue ?
+                new ObjectParameter("Anvi_Hospedaje", anvi_Hospedaje) :
+                new ObjectParameter("Anvi_Hospedaje", typeof(bool));
+    
+            var anvi_tptran_IdParameter = anvi_tptran_Id.HasValue ?
+                new ObjectParameter("Anvi_tptran_Id", anvi_tptran_Id) :
+                new ObjectParameter("Anvi_tptran_Id", typeof(int));
+    
+            var anvi_AutorizacionParameter = anvi_Autorizacion.HasValue ?
+                new ObjectParameter("Anvi_Autorizacion", anvi_Autorizacion) :
+                new ObjectParameter("Anvi_Autorizacion", typeof(bool));
+    
+            var anvi_ComentarioParameter = anvi_Comentario != null ?
+                new ObjectParameter("Anvi_Comentario", anvi_Comentario) :
+                new ObjectParameter("Anvi_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var anvi_UsuarioCreaParameter = anvi_UsuarioCrea.HasValue ?
+                new ObjectParameter("Anvi_UsuarioCrea", anvi_UsuarioCrea) :
+                new ObjectParameter("Anvi_UsuarioCrea", typeof(int));
+    
+            var anvi_FechaCreaParameter = anvi_FechaCrea.HasValue ?
+                new ObjectParameter("Anvi_FechaCrea", anvi_FechaCrea) :
+                new ObjectParameter("Anvi_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoViatico_Insert_Result>("UDP_Adm_tbAnticipoViatico_Insert", emp_IdParameter, anvi_JefeInmediatoParameter, anvi_GralFechaSolicitudParameter, anvi_FechaViajeParameter, anvi_ClienteParameter, mun_CodigoParameter, anvi_PropositoVisitaParameter, anvi_DiasVisitaParameter, anvi_HospedajeParameter, anvi_tptran_IdParameter, anvi_AutorizacionParameter, anvi_ComentarioParameter, est_IdParameter, anvi_UsuarioCreaParameter, anvi_FechaCreaParameter);
+        }
     }
 }

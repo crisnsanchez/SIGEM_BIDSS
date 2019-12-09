@@ -43,8 +43,8 @@ $('#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud').datepicker
 
 
 
-_value = document.getElementsByClassName('txtBox').value;
-document.getElementById('tipmo_Movimiento').value = _value.trimStart();
+//_value = document.getElementsByClassName('txtBox').value;
+//document.getElementById('tipmo_Movimiento').value = _value.trimStart();
 
 
 
@@ -68,4 +68,15 @@ function soloNumeros(e) {
 ///Validacion para no pegar caracteres
 function Caracteres(string) {
     var out = '';
+}
+
+//Get Current Date
+function GetTodayDate() {
+    var tdate = new Date();
+    var dd = tdate.getDate(); //yields day
+    var MM = tdate.getMonth(); //yields month
+    var yyyy = tdate.getFullYear(); //yields year
+    var currentDate = dd + "/" + (MM + 1) + "/" + yyyy;
+
+    return currentDate;
 }
