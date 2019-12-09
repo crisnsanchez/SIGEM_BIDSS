@@ -76,7 +76,7 @@ namespace SIGEM_BIDSS.Controllers
             {
 
             }
-            return RedirectToAction("Index");
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
         // GET: InstitucionFinanciera/Create
         public ActionResult Create()
@@ -100,7 +100,7 @@ namespace SIGEM_BIDSS.Controllers
                                                                      tbInstitucionFinanciera.insf_Telefono,
                                                                      tbInstitucionFinanciera.insf_Correo, 1,
                                                                      Function.DatetimeNow(),
-                                                                     tbInstitucionFinanciera.insf_Activo);
+                                                                true);
                 foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
                 if (Msj.StartsWith("-1"))

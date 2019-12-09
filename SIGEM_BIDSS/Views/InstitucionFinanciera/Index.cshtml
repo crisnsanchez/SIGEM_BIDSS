@@ -67,8 +67,8 @@
                             }
                             else if (item.insf_Activo == GeneralFunctions.instfinDenegar)
                             {
-
-                                @Html.ActionLink("Activar", "ActivarInstitucionFinanciera", new { insf_Id = item.insf_Id }, new { @class = "btn btn-success btn-xs", @Style = "width:55px" })
+                                <input type="button" id="Activar" class="btn btn-success btn-xs" data-toggle="modal" data-target="#ModalRazonActivacion" value="Activar" />
+                                <input type="hidden" id="_Insf_Id" value="@item.insf_Id" />
                             }
                         </td>
                     </tr>
@@ -96,7 +96,25 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="ModalRazonActivacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <input id="instfinanciera" type="hidden" />
+                <h4 class="modal-title" id="myModalLabel">¿Está seguro que desea activar el registro seleccionado?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
+            <div class="modal-footer">
+
+                <button class="btn btn-primary" type="submit" id="btnAc">Activar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
 
 
@@ -106,6 +124,34 @@
 
 
     <script>
+
+
+        $(document).on("click", "#dataTable tbody tr td input#Activar", function () {
+            _Insf_Id = $(this).closest('tr').data('id');
+            $("#instfinanciera").val(_Insf_Id);
+        })
+
+
+        $('#btnAc').click(function () {
+            insf_Id = $("#instfinanciera").val()
+            $.ajax({
+                url: "/InstitucionFinanciera/ActivarInstitucionFinanciera",
+                method: "POST",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ insf_Id: insf_Id }),
+                success: function () {
+
+                    location.reload();
+                }
+            })
+                .done(function (data) {
+                
+                    window.location.href = "/institucionFinanciera/Index"
+                });
+        });
+
+
 
         $(document).on("click", "#dataTable tbody tr td input#Desactivar", function () {
             _Insf_Id = $(this).closest('tr').data('id');
