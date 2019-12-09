@@ -86,7 +86,7 @@ function noespaciosincio(e) {
 
 //Eliminar espacios al principio y al final de la cadena de texto en el textbox
 document.getElementById("Save").onclick = function () {
-    var txtObj = document.getElementById("des");
+    var txtObj = document.getElementById("");
     txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
     txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 };
