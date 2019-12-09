@@ -19,19 +19,23 @@ namespace SIGEM_BIDSS.Models
         public int insf_Id { get; set; }
 
         [Display(Name = "Nombre")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string insf_Nombre { get; set; }
 
         [Display(Name = "Contacto")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string insf_Contacto { get; set; }
 
         [Display(Name = "Teléfono")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string insf_Telefono { get; set; }
 
 
         [Display(Name = "Correo Electrónico")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string insf_Correo { get; set; }
 
-        [Display(Name = "Activo")]
+        [Display(Name = "¿Es Activo?")]
         public bool insf_Activo { get; set; }
 
         [Display(Name = "Usuario Crea")]

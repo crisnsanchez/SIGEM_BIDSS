@@ -25,13 +25,13 @@
             <thead>
                 <tr>
                     <th>
-                        ID
+                        @Html.DisplayNameFor(model => model.pto_Id)
                     </th>
                     <th>
-                        Nombre
+                        @Html.DisplayNameFor(model => model.pto_Descripcion)
                     </th>
                     <th>
-                        Área
+                        @Html.DisplayNameFor(model => model.are_Id)
                     </th>
 
                     <th>Acciones</th>
@@ -51,8 +51,8 @@
                             @Html.DisplayFor(modelItem => item.tbArea.are_Descripcion)
                         </td>
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.pto_Id }, new { @class = "btn btn-primary btn-sm" })
-                            @Html.ActionLink("Detalles", "Details", new { id = item.pto_Id }, new { @class = "btn btn-default btn-sm" })
+                            @Html.ActionLink("Editar", "Edit", new { id = item.pto_Id }, new { @class = "btn btn-primary btn-xs" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.pto_Id }, new { @class = "btn btn-default btn-xs" })
                         </td>
                     </tr>
                 }

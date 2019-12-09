@@ -28,13 +28,13 @@
             <thead>
                 <tr>
                     <th>
-                        Nombre
+                        @Html.DisplayNameFor(model => model.insf_Nombre)
                     </th>
                     <th>
-                        Contacto
+                        @Html.DisplayNameFor(model => model.insf_Contacto)
                     </th>
                     <th>
-                        Correo Electrónico
+                        @Html.DisplayNameFor(model => model.insf_Correo)
                     </th>
 
                     <th>Acciones</th>
@@ -67,6 +67,7 @@
                             }
                             else if (item.insf_Activo == GeneralFunctions.instfinDenegar)
                             {
+
                                 @Html.ActionLink("Activar", "ActivarInstitucionFinanciera", new { insf_Id = item.insf_Id }, new { @class = "btn btn-success btn-xs", @Style = "width:55px" })
                             }
                         </td>

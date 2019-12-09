@@ -108,6 +108,11 @@ namespace SIGEM_BIDSS.Controllers
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View();
                 }
+                if (Msj.StartsWith("-2"))
+                {
+                    ModelState.AddModelError("", "Ya existe una Institución con el mismo nombre.");
+                    return View();
+                }
                 else
                 {
                     return RedirectToAction("Index");
@@ -148,8 +153,14 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
             if (ModelState.IsValid)
-                try
+                if (db.tbInstitucionFinanciera.Any(a => a.insf_Nombre == tbInstitucionFinanciera.insf_Nombre && a.insf_Id != tbInstitucionFinanciera.insf_Id))
                 {
+                    ModelState.AddModelError("", "Ya existe una Institución con el mismo nombre.");
+                    return View(tbInstitucionFinanciera);
+                }
+
+            try
+            {
                     IEnumerable<Object> List = null;
                     string Msj = "";
                     List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
@@ -177,9 +188,7 @@ namespace SIGEM_BIDSS.Controllers
                     return View();
                 }
 
-
-
-            return View(tbInstitucionFinanciera);
+            
         }
 
         // GET: InstitucionFinanciera/Delete/5
