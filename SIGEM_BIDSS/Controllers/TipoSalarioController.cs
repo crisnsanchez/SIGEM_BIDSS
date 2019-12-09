@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoSalarioController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-
+        Models.Helpers Function = new Models.Helpers();
         // GET: TipoSalario
         public ActionResult Index()
         {
@@ -50,7 +50,7 @@ namespace SIGEM_BIDSS.Controllers
             
           }
         }
-
+        
         // GET: TipoSalario/Create
             public ActionResult Create()
         {
@@ -70,12 +70,17 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         IEnumerable<Object> List = null;
                         string Msj = "";
-                        List = db.UDP_Gral_tbTipoSalario_Insert(tbTipoSalario.tpsal_Descripcion, 1);
+                        List = db.UDP_Gral_tbTipoSalario_Insert(tbTipoSalario.tpsal_id,tbTipoSalario.tpsal_Descripcion, 1, Function.DatetimeNow());
                         foreach (UDP_Gral_tbTipoSalario_Insert_Result Permiso in List)
                             Msj = Permiso.MensajeError;
                         if (Msj.StartsWith("-1"))
                         {
-
+                            ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                            return View();
+                        }
+                        if (Msj.StartsWith("-2"))
+                        {
+                            ModelState.AddModelError("", "Ya existe un Tipo de salario con el mismo nombre.");
                             return View();
                         }
                         else
@@ -126,13 +131,21 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tpsal_id,tpsal_Descripcion,tpsal_UsuarioCrea,tpsal_FechaCrea,tpsal_UsuarioModifica,tpsal_FechaModifica")] tbTipoSalario tbTipoSalario)
         {
+
             {
                 if (ModelState.IsValid)
-                    try
+
+
+                    if (db.tbTipoSalario.Any(a => a.tpsal_Descripcion == tbTipoSalario.tpsal_Descripcion && a.tpsal_id != tbTipoSalario.tpsal_id))
+                    {
+                        ModelState.AddModelError("", "Ya existe un Tipo de salario con el mismo nombre.");
+                        return View(tbTipoSalario);
+                    }
+                try
                     {
                         IEnumerable<Object> List = null;
                         string Msj = "";
-                        List = db.UDP_Gral_tbTipoSalario_Update(tbTipoSalario.tpsal_id,tbTipoSalario.tpsal_Descripcion, 1);
+                        List = db.UDP_Gral_tbTipoSalario_Update(tbTipoSalario.tpsal_id,tbTipoSalario.tpsal_Descripcion, 1, Function.DatetimeNow());
                         foreach (UDP_Gral_tbTipoSalario_Update_Result Permiso in List)
                             Msj = Permiso.MensajeError;
                         if (Msj.StartsWith("-1"))

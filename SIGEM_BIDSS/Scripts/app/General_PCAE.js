@@ -61,7 +61,7 @@ function NoSpace(e) {
 function soloLetras(e) {
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toLowerCase();
-    letras = "$# '/áéíóúabcdefghijk+-lmnñopqrstuvwxyz";
+    letras = " '/áéíóúabcdefghijklmnñopqrstuvwxyz";
     especiales = "8-37-39-46";
 
     tecla_especial = false
@@ -86,8 +86,24 @@ function noespaciosincio(e) {
 
 //Eliminar espacios al principio y al final de la cadena de texto en el textbox
 document.getElementById("Save").onclick = function () {
-    var txtObj = document.getElementById("des");
+    var txtObj = document.getElementById("");
     txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
     txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 };
 
+
+document.getElementById('insf_Correo').addEventListener('input', function () {
+    campo = event.target;
+    valido = document.getElementById('emailOK');
+    //selector = document.getElementById('emp_CorreoElectronico')
+    emailRegex = /"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (emailRegex.test(campo.value)) {
+        valido.innerText = "";
+        $('#insf_Correo').removeClass('is-invalid');
+    } else {
+        valido.innerText = "Correo Inválido";
+        $('#insf_Correo').focus();
+        $('#insf_Correo').addClass('is-invalid');
+    }
+});

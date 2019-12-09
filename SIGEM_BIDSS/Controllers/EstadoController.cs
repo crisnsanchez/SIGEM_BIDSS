@@ -138,8 +138,15 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "est_Id,est_Descripcion,est_UsuarioCrea,est_FechaCrea,est_UsuarioModifica,est_FechaModifica")] tbEstado tbEstado)
         {
             if (ModelState.IsValid)
-                try
+
+                if (db.tbEstado.Any(a => a.est_Descripcion == tbEstado.est_Descripcion && a.est_Id != tbEstado.est_Id))
                 {
+                    ModelState.AddModelError("", "Ya existe una estado con el mismo nombre.");
+                    return View(tbEstado);
+                }
+
+            try
+            {
                     IEnumerable<Object> List = null;
                     string Msj = "";
                     List = db.UDP_Gral_tbEstado_Update(tbEstado.est_Id, tbEstado.est_Descripcion, 1, Function.DatetimeNow());
@@ -163,8 +170,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
 
 
-
-            return View(tbEstado);
+            
         }
 
 
