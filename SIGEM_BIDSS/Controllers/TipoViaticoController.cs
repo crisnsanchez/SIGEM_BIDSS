@@ -79,9 +79,8 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     if (Msj.StartsWith("-2"))
                     {
-
-                        ModelState.AddModelError("", "Ya existe un Tipo Viático con el mismo nombre.");
-                        return View(tbTipoViatico);
+                        ModelState.AddModelError("", "Ya existe un tipo de viático con el mismo nombre.");
+                        return View();
                     }
                     else
                     {
@@ -129,16 +128,20 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tpv_Id,tpv_Descripcion,tpv_UsuarioCrea,tpv_FechaCrea,tpv_UsuarioModifica,tpv_FechaModifica")] tbTipoViatico tbTipoViatico)
+        public ActionResult Edit([Bind(Include = "tpv_Id,tpv_Descripcion,tpv_UsuarioModifica,tpv_FechaModifica")] tbTipoViatico tbTipoViatico)
         {
             if (ModelState.IsValid)
-
+                if (db.tbTipoViatico.Any(a => a.tpv_Descripcion == tbTipoViatico.tpv_Descripcion && a.tpv_Id != tbTipoViatico.tpv_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe un tipo de viático con el mismo nombre.");
+                    return View(tbTipoViatico);
+                }
 
             try
             {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    //List = db.UDP_Gral_tbTipoViatico_Update(tbTipoViatico.tpv_Id, tbTipoViatico.tpv_Descripcion, 1, String.Format("{0:HH:mm:ss}", DateTime.Now));
+                    List = db.UDP_Gral_tbTipoViatico_Update(tbTipoViatico.tpv_Id, tbTipoViatico.tpv_Descripcion, 1, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoViatico_Update_Result Viatico in List)
                         Msj = Viatico.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -147,11 +150,7 @@ namespace SIGEM_BIDSS.Controllers
                         return View();
                     }
 
-                    if (db.tbTipoViatico.Any(a => a.tpv_Descripcion == tbTipoViatico.tpv_Descripcion && a.tpv_Id != tbTipoViatico.tpv_Id))
-                    {
-                        ModelState.AddModelError("", "Ya existe un Tipo Viático con el mismo nombre.");
-                        return View(tbTipoViatico);
-                    }
+                    
 
                     else
                     {

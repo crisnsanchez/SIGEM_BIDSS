@@ -340,7 +340,9 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_rrhh_tbEmpleado_Update(tbEmpleado.emp_Id, tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo,tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico,tbEmpleado.emp_EsJefe, tbEmpleado.emp_RazonInactivacion, tbEmpleado.est_Id, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_codigo,1);
+                    List = db.UDP_rrhh_tbEmpleado_Update(tbEmpleado.emp_Id, tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos, tbEmpleado.emp_Sexo,tbEmpleado.emp_FechaNacimiento,
+                        tbEmpleado.emp_Identificacion, tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico,tbEmpleado.emp_EsJefe, tbEmpleado.emp_RazonInactivacion,
+                        tbEmpleado.est_Id, tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_codigo,1);
                     foreach (UDP_rrhh_tbEmpleado_Update_Result Empleado in List)
                         Msj = Empleado.MensajeError;
                     if (Msj.StartsWith("-1"))
