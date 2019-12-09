@@ -1,31 +1,8 @@
 ﻿//JS General para Pantallas Create y Edit
 
 
-
-//-----------Bloquear Ctrl + C y Ctrl + V
-//$('input').bind('keydown', function (event) {
-//        if ($('#txtrut').val().length == 0) {
-//            alert('Ingrese rut');
-//            return false;
-//        }
-//    }
-//if (event.ctrlKey || event.metaKey) {
-//    switch (String.fromCharCode(event.which).toLowerCase()) {
-//        case 'c':
-//            event.preventDefault();
-//            console.log("Ctrl + C")
-//            break;
-//        case 'v':
-//            console.log("Ctrl + V")
-
-//            event.preventDefault();
-//            break;
-//    }
-//}
-//)
 document.addEventListener("input", function () {
-    //console.log($("input").attr("id"));
-    $("input[type=text]", 'form').each(function () {
+    $("input[type='text']", 'form').each(function () {
         _id = $(this).attr("id");
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
