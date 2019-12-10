@@ -1,0 +1,67 @@
+﻿@model SIGEM_BIDSS.Models.tbUnidadMedida
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbUnidadMedida</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.uni_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uni_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uni_Abreviatura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uni_Abreviatura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uni_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uni_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uni_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uni_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uni_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uni_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uni_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uni_FechaModifica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.uni_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

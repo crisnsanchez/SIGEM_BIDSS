@@ -207,6 +207,7 @@
     <Compile Include="Controllers\TipoSangreController.cs" />
     <Compile Include="Controllers\TipoTransporteController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
+    <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3132,6 +3133,7 @@
     <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\app\Municipio.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
+    <Content Include="Scripts\app\InstitucionFinaciera.js" />
     <Content Include="Scripts\app\ValidacionesGenerales.js" />
     <Content Include="Scripts\app\_AccionPersonal.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -3285,6 +3287,11 @@
     <Content Include="Views\AnticipoSalario\Details.cshtml" />
     <Content Include="Views\AnticipoSalario\Edit.cshtml" />
     <Content Include="Views\AnticipoSalario\Index.cshtml" />
+    <Content Include="Views\UnidadMedida\Create.cshtml" />
+    <Content Include="Views\UnidadMedida\Delete.cshtml" />
+    <Content Include="Views\UnidadMedida\Details.cshtml" />
+    <Content Include="Views\UnidadMedida\Edit.cshtml" />
+    <Content Include="Views\UnidadMedida\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

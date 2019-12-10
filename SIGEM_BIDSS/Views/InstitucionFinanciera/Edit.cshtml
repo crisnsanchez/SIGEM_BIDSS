@@ -28,7 +28,7 @@
         text-transform: uppercase;
     }
 
-    #insf_DescInstitucionFinanc {
+    #insf_Nombre {
         text-transform: uppercase;
     }
 </style>
@@ -74,7 +74,7 @@
                 <div class="form-group ">
                     @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", maxlength = "50",autocomplete = "off", @OnKeyPress = "return soloNumeros(event)" } })
+                        @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", @OnKeyPress = "return soloNumeros(event)" } })
                         @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger" })
                     </div>
 
@@ -113,6 +113,7 @@
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
     <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
     <script src="~/Scripts/app/General_PCAE.js"></script>
+    <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
 
 
     <script type="text/javascript">
