@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class UnidadMedidaController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        private GeneralFunctions GFC = new GeneralFunctions();
+        Models.Helpers Function = new Models.Helpers();
         // GET: UnidadMedida
         public ActionResult Index()
         {
@@ -49,14 +49,45 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "uni_Id,uni_Descripcion,uni_Abreviatura,uni_UsuarioCrea,uni_FechaCrea,uni_UsuarioModifica,uni_FechaModifica")] tbUnidadMedida tbUnidadMedida)
         {
             if (ModelState.IsValid)
-            {
-                db.tbUnidadMedida.Add(tbUnidadMedida);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+
+
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbUnidadMedida_Insert(tbUnidadMedida.uni_Id,tbUnidadMedida.uni_Descripcion, tbUnidadMedida.uni_Abreviatura,  1, Function.DatetimeNow());
+                    foreach (UDP_Gral_tbUnidadMedida_Insert_Result Moneda in List)
+                        Msj = Moneda.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbUnidadMedida);
+                    }
+                    if (Msj.StartsWith("-2"))
+                    {
+
+                        ModelState.AddModelError("", "Ya existe una Unidad con el mismo nombre.");
+                        return View(tbUnidadMedida);
+                    }
+                    else
+                    {
+                        TempData["swalfunction"] = "true";
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
 
             return View(tbUnidadMedida);
+
+
         }
+
 
         // GET: UnidadMedida/Edit/5
         public ActionResult Edit(int? id)
@@ -80,15 +111,45 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "uni_Id,uni_Descripcion,uni_Abreviatura,uni_UsuarioCrea,uni_FechaCrea,uni_UsuarioModifica,uni_FechaModifica")] tbUnidadMedida tbUnidadMedida)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbUnidadMedida).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(tbUnidadMedida);
-        }
 
+            if (ModelState.IsValid)
+                if (db.tbUnidadMedida.Any(a => a.uni_Descripcion == tbUnidadMedida.uni_Descripcion && a.uni_Id != tbUnidadMedida.uni_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe una Unidad con el mismo nombre.");
+                    return View(tbUnidadMedida);
+                }
+
+
+            try
+            {
+                IEnumerable<Object> List = null;
+                string Msj = "";
+                List = db.UDP_Gral_tbUnidadMedida_Update(tbUnidadMedida.uni_Id, tbUnidadMedida.uni_Descripcion, tbUnidadMedida.uni_Abreviatura, 1, Function.DatetimeNow());
+                foreach (UDP_Gral_tbUnidadMedida_Update_Result Moneda in List)
+                    Msj = Moneda.MensajeError;
+                if (Msj.StartsWith("-1"))
+                {
+
+
+                    return View(tbUnidadMedida);
+                }
+
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception Ex)
+            {
+
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
+
+            
+
+
+        }
         // GET: UnidadMedida/Delete/5
         public ActionResult Delete(int? id)
         {

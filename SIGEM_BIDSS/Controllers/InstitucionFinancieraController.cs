@@ -104,9 +104,8 @@ namespace SIGEM_BIDSS.Controllers
                 foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
                     Msj = TipoSangre.MensajeError;
                 if (Msj.StartsWith("-1"))
-                {
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
+                { 
+                    return View(tbInstitucionFinanciera);
                 }
                 if (Msj.StartsWith("-2"))
                 {
@@ -173,8 +172,8 @@ namespace SIGEM_BIDSS.Controllers
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View();
+                       
+                        return View(tbInstitucionFinanciera);
                     }
                     else
                     {
