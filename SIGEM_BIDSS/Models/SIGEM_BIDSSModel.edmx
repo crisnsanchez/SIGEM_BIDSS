@@ -85,6 +85,17 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="tbActividadEconomica">
+          <Key>
+            <PropertyRef Name="acte_Id" />
+          </Key>
+          <Property Name="acte_Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="acte_Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="acte_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="acte_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="acte_UsuarioModifica" Type="int" />
+          <Property Name="acte_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbArea">
           <Key>
             <PropertyRef Name="are_Id" />
@@ -718,6 +729,17 @@
           <Parameter Name="sol_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="sol_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Gral_tbActividadEconomica_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="acte_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="acte_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="acte_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Gral_tbActividadEconomica_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="acte_Id" Type="int" Mode="In" />
+          <Parameter Name="acte_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="acte_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="acte_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Gral_tbAnticipoSalario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="emp_Id" Type="smallint" Mode="In" />
           <Parameter Name="tipsol_Id" Type="int" Mode="In" />
@@ -973,6 +995,7 @@
           <EntitySet Name="tbAnticipoViatico" EntityType="Self.tbAnticipoViatico" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbParametro" EntityType="Self.tbParametro" Schema="Conf" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbActividadEconomica" EntityType="Self.tbActividadEconomica" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbArea" EntityType="Self.tbArea" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbDepartamento" EntityType="Self.tbDepartamento" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbEstado" EntityType="Self.tbEstado" Schema="Gral" store:Type="Tables" />
@@ -1740,6 +1763,18 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
+          <EntitySet Name="tbActividadEconomica" EntityType="SIGEM_BIDSSModel.tbActividadEconomica" />
+          <FunctionImport Name="UDP_Gral_tbActividadEconomica_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbActividadEconomica_Insert_Result)">
+            <Parameter Name="acte_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="acte_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="acte_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbActividadEconomica_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbActividadEconomica_Update_Result)">
+            <Parameter Name="acte_Id" Mode="In" Type="Int32" />
+            <Parameter Name="acte_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="acte_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="acte_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2490,6 +2525,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tbActividadEconomica">
+          <Key>
+            <PropertyRef Name="acte_Id" />
+          </Key>
+          <Property Name="acte_Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="acte_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="acte_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="acte_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="acte_UsuarioModifica" Type="Int32" />
+          <Property Name="acte_FechaModifica" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="UDP_Gral_tbActividadEconomica_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbActividadEconomica_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3140,6 +3192,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbActividadEconomica">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbActividadEconomica">
+              <MappingFragment StoreEntitySet="tbActividadEconomica">
+                <ScalarProperty Name="acte_FechaModifica" ColumnName="acte_FechaModifica" />
+                <ScalarProperty Name="acte_UsuarioModifica" ColumnName="acte_UsuarioModifica" />
+                <ScalarProperty Name="acte_FechaCrea" ColumnName="acte_FechaCrea" />
+                <ScalarProperty Name="acte_UsuarioCrea" ColumnName="acte_UsuarioCrea" />
+                <ScalarProperty Name="acte_Descripcion" ColumnName="acte_Descripcion" />
+                <ScalarProperty Name="acte_Id" ColumnName="acte_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbActividadEconomica_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbActividadEconomica_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbActividadEconomica_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbActividadEconomica_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbActividadEconomica_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbActividadEconomica_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

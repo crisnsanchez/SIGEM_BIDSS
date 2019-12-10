@@ -49,6 +49,7 @@
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSueldo" Width="1.5" PointX="11.25" PointY="10.375" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbActividadEconomica" Width="1.5" PointX="16.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

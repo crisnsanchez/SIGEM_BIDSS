@@ -51,6 +51,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbInstitucionFinanciera> tbInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbSueldo> tbSueldo { get; set; }
+        public virtual DbSet<tbActividadEconomica> tbActividadEconomica { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -2106,6 +2107,44 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Ansal_FechaCrea", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoSalario_Insert_Result>("UDP_Adm_tbAnticipoSalario_Insert", emp_IdParameter, ansal_JefeInmediatoParameter, ansal_GralFechaSolicitudParameter, ansal_MontoSolicitadoParameter, tpsal_idParameter, ansal_JustificacionParameter, ansal_ComentarioParameter, est_IdParameter, ansal_RazonRechazoParameter, ansal_UsuarioCreaParameter, ansal_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbActividadEconomica_Insert_Result> UDP_Gral_tbActividadEconomica_Insert(string acte_Descripcion, Nullable<int> acte_UsuarioCrea, Nullable<System.DateTime> acte_FechaCrea)
+        {
+            var acte_DescripcionParameter = acte_Descripcion != null ?
+                new ObjectParameter("acte_Descripcion", acte_Descripcion) :
+                new ObjectParameter("acte_Descripcion", typeof(string));
+    
+            var acte_UsuarioCreaParameter = acte_UsuarioCrea.HasValue ?
+                new ObjectParameter("acte_UsuarioCrea", acte_UsuarioCrea) :
+                new ObjectParameter("acte_UsuarioCrea", typeof(int));
+    
+            var acte_FechaCreaParameter = acte_FechaCrea.HasValue ?
+                new ObjectParameter("acte_FechaCrea", acte_FechaCrea) :
+                new ObjectParameter("acte_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbActividadEconomica_Insert_Result>("UDP_Gral_tbActividadEconomica_Insert", acte_DescripcionParameter, acte_UsuarioCreaParameter, acte_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbActividadEconomica_Update_Result> UDP_Gral_tbActividadEconomica_Update(Nullable<int> acte_Id, string acte_Descripcion, Nullable<int> acte_UsuarioModifica, Nullable<System.DateTime> acte_FechaModifica)
+        {
+            var acte_IdParameter = acte_Id.HasValue ?
+                new ObjectParameter("acte_Id", acte_Id) :
+                new ObjectParameter("acte_Id", typeof(int));
+    
+            var acte_DescripcionParameter = acte_Descripcion != null ?
+                new ObjectParameter("acte_Descripcion", acte_Descripcion) :
+                new ObjectParameter("acte_Descripcion", typeof(string));
+    
+            var acte_UsuarioModificaParameter = acte_UsuarioModifica.HasValue ?
+                new ObjectParameter("acte_UsuarioModifica", acte_UsuarioModifica) :
+                new ObjectParameter("acte_UsuarioModifica", typeof(int));
+    
+            var acte_FechaModificaParameter = acte_FechaModifica.HasValue ?
+                new ObjectParameter("acte_FechaModifica", acte_FechaModifica) :
+                new ObjectParameter("acte_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbActividadEconomica_Update_Result>("UDP_Gral_tbActividadEconomica_Update", acte_IdParameter, acte_DescripcionParameter, acte_UsuarioModificaParameter, acte_FechaModificaParameter);
         }
     }
 }
