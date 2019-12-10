@@ -21,7 +21,7 @@ namespace SIGEM_BIDSS.Models
         public int tpv_Id { get; set; }
 
         [Display(Name = "Descripción")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requeridossssss")]
         [MinLength(5, ErrorMessage = "Minimo {1} caracteres")]
         public string tpv_Descripcion { get; set; }
 
