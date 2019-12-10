@@ -35,27 +35,14 @@ $(document).ready(function () {
     $("#emp_Apellidos")[0].maxLength = 50;
     $("#emp_Identificacion")[0].maxLength = 25;
     $("#emp_CorreoElectronico")[0].maxLength = 100;
-    //$("#emp_Telefono")[0].maxLength = 8;
+   
     $("#emp_Correo").attr("autocomplete", "randomString");
     $("#ban_NombreContacto").attr("autocomplete", "randomString");
 
 
 
-
-
-    $('#municipio').hide();
-
-
     var muni = $('#municipios').val();
     if (muni == "true") { GetMunicipios() } else { console.log(muni); }
-
-
-
-
-
-    $('#municipio').hide();
-
-
     var are = $('#municipios').val();
     if (are == "true") { GetMunicipios() } else { console.log(are); }
 
@@ -91,7 +78,19 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#imgpreview').attr('src', e.target.result);
+            const maxLength = 2000000
+            console.log(e.loaded + "" + e.total)
+            console.log(e)
+            if (e.loaded < maxLength) {
+                document.getElementById('ImageLength').innerText = ""
+                $('#imgpreview').attr('src', e.target.result);
+            }
+            else {
+                $('#imgpreview').attr('src',"../../Content/img/descarga.jpg");
+                document.getElementById('lblCargarFoto').innerText = ""
+                document.getElementById('CargarFoto').value = ""
+                document.getElementById('ImageLength').innerText = "Limite Excedido"
+            }
         }
         reader.readAsDataURL(input.files[0]);
     }
@@ -108,10 +107,7 @@ $(document).on("change", "#dep_Codigo", function () {
 
 
 
-
 function GetMunicipios() {
-
-  
     var CodDepartamento = $('#dep_Codigo').val(),
         _selectedMun = $('#selectedMun').val();
     console.log(CodDepartamento)
@@ -142,14 +138,40 @@ function GetMunicipios() {
             }
         });
 
+}
 
+////OBTENER AREA
+$(document).on("change", "#are_Id", function () {
+    Getpuesto();
+});
 
-  
-    
+function Getpuesto() {
+    var are_Id = $('#are_Id').val()
+    console.log(are_Id)
+    $.ajax({
+        url: "/Empleado/Getpuesto",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ are_Id: are_Id }),
+    })
+        .done(function (data) {
+           
+            if (data.length > 0) {
+                $('#pto_Id').empty();
+                $('#pto_Id').append("<option value=''>Seleccione Puesto</option>");
+                $.each(data, function (key, val) {
+                    $('#pto_Id').append("<option value=" + val.pto_Id + ">" + val.pto_Descripcion + "</option>");
+                });
+                console.log(data)
+                $('#pto_Id').trigger("chosen:updated");
+          
+            }
+            else {
+                $('#pto_Id').empty();
+                $('#pto_Id').append("<option value=''>Seleccione Puesto</option>");
+            }
+        });
 
-       
-
-
-   
 }
 

@@ -28,13 +28,14 @@
           <Property Name="Anvi_FechaViaje" Type="datetime" Nullable="false" />
           <Property Name="Anvi_Cliente" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="mun_Codigo" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="Anvi_PropositoVisita" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Anvi_PropositoVisita" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Anvi_DiasVisita" Type="int" Nullable="false" />
           <Property Name="Anvi_Hospedaje" Type="bit" Nullable="false" />
           <Property Name="Anvi_tptran_Id" Type="int" Nullable="false" />
           <Property Name="Anvi_Autorizacion" Type="bit" Nullable="false" />
           <Property Name="Anvi_Comentario" Type="nvarchar" MaxLength="250" />
           <Property Name="est_Id" Type="int" Nullable="false" />
+          <Property Name="Anvi_RazonRechazo" Type="nvarchar" MaxLength="250" />
           <Property Name="Anvi_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="Anvi_FechaCrea" Type="datetime" Nullable="false" />
           <Property Name="Anvi_UsuarioModifica" Type="int" />
@@ -266,7 +267,7 @@
           <Property Name="emp_Apellidos" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="emp_Sexo" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="emp_FechaNacimiento" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="emp_Identificacion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="emp_Identificacion" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="emp_Telefono" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="emp_CorreoElectronico" Type="nvarchar" MaxLength="50" />
           <Property Name="emp_EsJefe" Type="bit" Nullable="false" />
@@ -1778,7 +1779,7 @@
           <Property Name="Anvi_FechaViaje" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Anvi_Cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="mun_Codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="Anvi_PropositoVisita" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Anvi_PropositoVisita" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Anvi_DiasVisita" Type="Int32" Nullable="false" />
           <Property Name="Anvi_Hospedaje" Type="Boolean" Nullable="false" />
           <Property Name="Anvi_tptran_Id" Type="Int32" Nullable="false" />
@@ -1793,6 +1794,7 @@
           <NavigationProperty Name="tbTipoTransporte" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbTipoTranporte_tptran_Id" FromRole="tbAnticipoViatico" ToRole="tbTipoTransporte" />
           <Property Name="est_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id" FromRole="tbAnticipoViatico" ToRole="tbEstado" />
+          <Property Name="Anvi_RazonRechazo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbParametro">
           <Key>
@@ -2037,7 +2039,7 @@
           <Property Name="emp_Apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="emp_Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="emp_FechaNacimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="emp_Identificacion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="emp_Identificacion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="emp_Telefono" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="emp_CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="emp_EsJefe" Type="Boolean" Nullable="false" />
@@ -2556,6 +2558,7 @@
           <EntitySetMapping Name="tbAnticipoViatico">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbAnticipoViatico">
               <MappingFragment StoreEntitySet="tbAnticipoViatico">
+                <ScalarProperty Name="Anvi_RazonRechazo" ColumnName="Anvi_RazonRechazo" />
                 <ScalarProperty Name="est_Id" ColumnName="est_Id" />
                 <ScalarProperty Name="Anvi_FechaModifica" ColumnName="Anvi_FechaModifica" />
                 <ScalarProperty Name="Anvi_UsuarioModifica" ColumnName="Anvi_UsuarioModifica" />

@@ -13,7 +13,8 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class AnticipoViaticoController : Controller
+    [Authorize]
+    public class AnticipoViaticoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         GeneralFunctions Funtion = new GeneralFunctions();

@@ -39,9 +39,9 @@ namespace SIGEM_BIDSS.Controllers
 
         //GET puesto \
         [HttpPost] 
-        public JsonResult Getpuesto(string CodArea)
+        public JsonResult Getpuesto(int are_Id)
         {
-            var list = (from x in db.tbMunicipio where x.dep_codigo == CodArea select new { mun_codigo = x.mun_codigo, mun_nombre = x.mun_nombre }).ToList();
+            var list = (from x in db.tbPuesto where x.pto_Id == are_Id select new { pto_Id = x.pto_Id, pto_Descripcion = x.pto_Descripcion }).ToList();
             /*db.tbMunicipio.Where(x=> x.dep_codigo==CodDepartamento).ToList();*/
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -207,7 +207,7 @@ namespace SIGEM_BIDSS.Controllers
                         if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
                         {
                                 string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
-                                int _NamePicture = (from _tbemp in db.tbEmpleado select _tbemp.emp_Id).Count() + 1;
+                                string _NamePicture = tbEmpleado.emp_Identificacion;
                                 string Archivo = _NamePicture + Extension;
                                 //string Archivo = tbEmpleado.emp_Id + Extension;
                                 path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
@@ -302,7 +302,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
             ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
             ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
-            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion",db.tbPuesto.Find(tbEmpleado.pto_Id).are_Id);
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
             ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre",db.tbMunicipio.Find(tbEmpleado.mun_codigo).dep_codigo);
             return View(tbEmpleado);
@@ -331,7 +331,7 @@ namespace SIGEM_BIDSS.Controllers
                             if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
                             {
                                 string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
-                                string Archivo = tbEmpleado.emp_Id + Extension;
+                                string Archivo =  tbEmpleado.emp_Identificacion + Extension;
                                 path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
                                 FotoPath.SaveAs(path);
                                 tbEmpleado.emp_PathImage = "~/Content/Profile_Pics/" + Archivo;
