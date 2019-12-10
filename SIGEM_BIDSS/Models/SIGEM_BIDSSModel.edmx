@@ -891,6 +891,20 @@
           <Parameter Name="tpv_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="tpv_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Gral_tbUnidadMedida_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="uni_Id" Type="int" Mode="In" />
+          <Parameter Name="uni_Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="uni_Abreviatura" Type="nvarchar" Mode="In" />
+          <Parameter Name="uni_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="uni_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Gral_tbUnidadMedida_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
+          <Parameter Name="uni_Id" Type="int" Mode="In" />
+          <Parameter Name="uni_Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="uni_Abreviatura" Type="nvarchar" Mode="In" />
+          <Parameter Name="uni_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="uni_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Plani_tbInstitucionFinanciera_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="insf_Id" Type="int" Mode="In" />
           <Parameter Name="insf_DescInstitucionFinanc" Type="varchar" Mode="In" />
@@ -1740,6 +1754,20 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Gral_tbUnidadMedida_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbUnidadMedida_Insert_Result)">
+            <Parameter Name="uni_Id" Mode="In" Type="Int32" />
+            <Parameter Name="uni_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="uni_Abreviatura" Mode="In" Type="String" />
+            <Parameter Name="uni_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="uni_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Gral_tbUnidadMedida_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbUnidadMedida_Update_Result)">
+            <Parameter Name="uni_Id" Mode="In" Type="Int32" />
+            <Parameter Name="uni_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="uni_Abreviatura" Mode="In" Type="String" />
+            <Parameter Name="uni_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="uni_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2490,6 +2518,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Gral_tbUnidadMedida_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Gral_tbUnidadMedida_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3140,6 +3174,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbUnidadMedida_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbUnidadMedida_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbUnidadMedida_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbUnidadMedida_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbUnidadMedida_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbUnidadMedida_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

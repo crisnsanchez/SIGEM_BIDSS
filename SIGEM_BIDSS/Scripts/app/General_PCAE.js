@@ -11,12 +11,11 @@ document.addEventListener("input", function () {
 
 })
 
-
 //Funcion de Solo letras en el textbox
 function soloLetras(e) {
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toLowerCase();
-    letras = " '/áéíóúabcdefghijklmnñopqrstuvwxyz";
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
     especiales = "8-37-39-46";
 
     tecla_especial = false
@@ -33,20 +32,21 @@ function soloLetras(e) {
 }
 
 
+function soloLetrastIPOSANGRE(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " '+-áéíóúabcdefghijklmnñopqrstuvwxyz";
+    especiales = "8-37-39-46";
 
-
-document.getElementById('insf_Correo').addEventListener('input', function () {
-    campo = event.target;
-    valido = document.getElementById('emailEoK');
-    //selector = document.getElementById('emp_CorreoElectronico')
-    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
-    if (emailRegex.test(campo.value)) {
-        valido.innerText = "";
-        $('#insf_Correo').removeClass('is-invalid');
-    } else {
-        valido.innerText = "Correo Inválido";
-        $('#insf_Correo').focus();
-        $('#insf_Correo').addClass('is-invalid');
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
     }
-});
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
