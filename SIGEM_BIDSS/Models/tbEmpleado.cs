@@ -17,11 +17,12 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbEmpleado()
         {
+            this.tbAnticipoSalario = new HashSet<tbAnticipoSalario>();
+            this.tbAnticipoSalario1 = new HashSet<tbAnticipoSalario>();
             this.tbAnticipoViatico = new HashSet<tbAnticipoViatico>();
             this.tbAnticipoViatico1 = new HashSet<tbAnticipoViatico>();
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
             this.tbSueldo = new HashSet<tbSueldo>();
-            this.tbSueldo1 = new HashSet<tbSueldo>();
         }
     
         public int emp_Id { get; set; }
@@ -47,6 +48,10 @@ namespace SIGEM_BIDSS.Models
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAnticipoSalario> tbAnticipoSalario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAnticipoSalario> tbAnticipoSalario1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico1 { get; set; }
@@ -58,7 +63,5 @@ namespace SIGEM_BIDSS.Models
         public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSueldo> tbSueldo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSueldo> tbSueldo1 { get; set; }
     }
 }

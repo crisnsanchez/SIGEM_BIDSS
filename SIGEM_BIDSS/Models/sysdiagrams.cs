@@ -12,13 +12,12 @@ namespace SIGEM_BIDSS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbProducto
+    public partial class sysdiagrams
     {
-        public int pro_Id { get; set; }
-        public string pro_Descripcion { get; set; }
-        public int pro_UsuarioCrea { get; set; }
-        public System.DateTime pro_FechaCrea { get; set; }
-        public Nullable<int> pro_UsuarioModifica { get; set; }
-        public Nullable<System.DateTime> pro_FechaModifica { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
