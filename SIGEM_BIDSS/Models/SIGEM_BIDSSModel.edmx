@@ -75,26 +75,6 @@
           <Property Name="par_Puerto" Type="int" Nullable="false" />
           <Property Name="par_PathLogo" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'SIGEM_BIDSS.dbo.Gral].[tbUnidadMedida' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="Gral]_[tbUnidadMedida">
-          <Key>
-            <PropertyRef Name="uni_Id" />
-            <PropertyRef Name="uni_Descripcion" />
-            <PropertyRef Name="uni_Abreviatura" />
-            <PropertyRef Name="uni_UsuarioCrea" />
-            <PropertyRef Name="uni_FechaCrea" />
-            <PropertyRef Name="uni_UsuarioModifica" />
-            <PropertyRef Name="uni_FechaModifica" />
-          </Key>
-          <Property Name="uni_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="uni_Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="uni_Abreviatura" Type="char" MaxLength="5" Nullable="false" />
-          <Property Name="uni_UsuarioCrea" Type="int" Nullable="false" />
-          <Property Name="uni_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="uni_UsuarioModifica" Type="int" Nullable="false" />
-          <Property Name="uni_FechaModifica" Type="datetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -595,6 +575,19 @@ advertencia 6002: La tabla o vista 'SIGEM_BIDSS.dbo.Gral].[tbUnidadMedida' no ti
           <Parameter Name="bite_Fecha" Type="datetime" Mode="In" />
           <Parameter Name="bite_MensajeError" Type="varchar(max)" Mode="In" />
         </Function>
+        <Function Name="UDP_Adm_tbAnticipoSalario_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="Ansal_JefeInmediato" Type="int" Mode="In" />
+          <Parameter Name="Ansal_GralFechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="Ansal_MontoSolicitado" Type="decimal" Mode="In" />
+          <Parameter Name="tpsal_id" Type="int" Mode="In" />
+          <Parameter Name="Ansal_Justificacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ansal_Comentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="Ansal_RazonRechazo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ansal_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="Ansal_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Adm_tbAnticipoViatico_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="Anvi_JefeInmediato" Type="int" Mode="In" />
@@ -999,17 +992,6 @@ advertencia 6002: La tabla o vista 'SIGEM_BIDSS.dbo.Gral].[tbUnidadMedida' no ti
           <EntitySet Name="tbInstitucionFinanciera" EntityType="Self.tbInstitucionFinanciera" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbEmpleado" EntityType="Self.tbEmpleado" Schema="rrhh" store:Type="Tables" />
           <EntitySet Name="tbSueldo" EntityType="Self.tbSueldo" Schema="rrhh" store:Type="Tables" />
-          <EntitySet Name="Gral]_[tbUnidadMedida" EntityType="Self.Gral]_[tbUnidadMedida" store:Type="Tables" store:Schema="dbo" store:Name="Gral].[tbUnidadMedida">
-            <DefiningQuery>SELECT 
-    [Gral]]_[tbUnidadMedida].[uni_Id] AS [uni_Id], 
-    [Gral]]_[tbUnidadMedida].[uni_Descripcion] AS [uni_Descripcion], 
-    [Gral]]_[tbUnidadMedida].[uni_Abreviatura] AS [uni_Abreviatura], 
-    [Gral]]_[tbUnidadMedida].[uni_UsuarioCrea] AS [uni_UsuarioCrea], 
-    [Gral]]_[tbUnidadMedida].[uni_FechaCrea] AS [uni_FechaCrea], 
-    [Gral]]_[tbUnidadMedida].[uni_UsuarioModifica] AS [uni_UsuarioModifica], 
-    [Gral]]_[tbUnidadMedida].[uni_FechaModifica] AS [uni_FechaModifica]
-    FROM [dbo].[Gral]].[tbUnidadMedida] AS [Gral]]_[tbUnidadMedida]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id" Association="Self.FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id">
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbAnticipoSalario" EntitySet="tbAnticipoSalario" />
@@ -1665,7 +1647,6 @@ advertencia 6002: La tabla o vista 'SIGEM_BIDSS.dbo.Gral].[tbUnidadMedida' no ti
           <EntitySet Name="tbInstitucionFinanciera" EntityType="SIGEM_BIDSSModel.tbInstitucionFinanciera" />
           <EntitySet Name="tbEmpleado" EntityType="SIGEM_BIDSSModel.tbEmpleado" />
           <EntitySet Name="tbSueldo" EntityType="SIGEM_BIDSSModel.tbSueldo" />
-          <EntitySet Name="Gral___tbUnidadMedida" EntityType="SIGEM_BIDSSModel.Gral___tbUnidadMedida" />
           <AssociationSet Name="FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id">
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbAnticipoSalario" EntitySet="tbAnticipoSalario" />
@@ -1746,6 +1727,19 @@ advertencia 6002: La tabla o vista 'SIGEM_BIDSS.dbo.Gral].[tbUnidadMedida' no ti
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Adm_tbAnticipoSalario_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbAnticipoSalario_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_JefeInmediato" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_GralFechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="Ansal_MontoSolicitado" Mode="In" Type="Decimal" />
+            <Parameter Name="tpsal_id" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_Justificacion" Mode="In" Type="String" />
+            <Parameter Name="Ansal_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Ansal_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2253,24 +2247,6 @@ advertencia 6002: La tabla o vista 'SIGEM_BIDSS.dbo.Gral].[tbUnidadMedida' no ti
           <NavigationProperty Name="tbMoneda" Relationship="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" FromRole="tbSueldo" ToRole="tbMoneda" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" FromRole="tbSueldo" ToRole="tbEmpleado" />
         </EntityType>
-        <EntityType Name="Gral___tbUnidadMedida">
-          <Key>
-            <PropertyRef Name="uni_Id" />
-            <PropertyRef Name="uni_Descripcion" />
-            <PropertyRef Name="uni_Abreviatura" />
-            <PropertyRef Name="uni_UsuarioCrea" />
-            <PropertyRef Name="uni_FechaCrea" />
-            <PropertyRef Name="uni_UsuarioModifica" />
-            <PropertyRef Name="uni_FechaModifica" />
-          </Key>
-          <Property Name="uni_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="uni_Descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="uni_Abreviatura" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="uni_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="uni_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="uni_UsuarioModifica" Type="Int32" Nullable="false" />
-          <Property Name="uni_FechaModifica" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <Association Name="FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id">
           <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="1" />
           <End Type="SIGEM_BIDSSModel.tbAnticipoSalario" Role="tbAnticipoSalario" Multiplicity="*" />
@@ -2511,6 +2487,9 @@ advertencia 6002: La tabla o vista 'SIGEM_BIDSS.dbo.Gral].[tbUnidadMedida' no ti
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Adm_tbAnticipoSalario_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3154,19 +3133,13 @@ advertencia 6002: La tabla o vista 'SIGEM_BIDSS.dbo.Gral].[tbUnidadMedida' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Gral___tbUnidadMedida">
-            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.Gral___tbUnidadMedida">
-              <MappingFragment StoreEntitySet="Gral]_[tbUnidadMedida">
-                <ScalarProperty Name="uni_FechaModifica" ColumnName="uni_FechaModifica" />
-                <ScalarProperty Name="uni_UsuarioModifica" ColumnName="uni_UsuarioModifica" />
-                <ScalarProperty Name="uni_FechaCrea" ColumnName="uni_FechaCrea" />
-                <ScalarProperty Name="uni_UsuarioCrea" ColumnName="uni_UsuarioCrea" />
-                <ScalarProperty Name="uni_Abreviatura" ColumnName="uni_Abreviatura" />
-                <ScalarProperty Name="uni_Descripcion" ColumnName="uni_Descripcion" />
-                <ScalarProperty Name="uni_Id" ColumnName="uni_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAnticipoSalario_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAnticipoSalario_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAnticipoSalario_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

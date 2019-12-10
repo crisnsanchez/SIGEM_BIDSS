@@ -29,7 +29,6 @@
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbInstitucionFinanciera" Width="1.5" PointX="9" PointY="4" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbEmpleado" Width="1.5" PointX="6" PointY="8" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSueldo" Width="1.5" PointX="11.25" PointY="10" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.Gral___tbUnidadMedida" Width="1.5" PointX="15.75" PointY="4.875" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id_JefeInmediato" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbAnticipoSalario_tbEstado_est_Id" />
