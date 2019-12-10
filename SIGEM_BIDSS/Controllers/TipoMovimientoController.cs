@@ -69,7 +69,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     if (isDuplicated(tbTipoMovimiento.tipmo_Movimiento))
                     {
-                        ModelState.AddModelError("", "Ya existe este registro, porfavor ingrese otro.");
+                        ModelState.AddModelError("", "Este tipo de movimiento ya esta registrado.");
                         return View(tbTipoMovimiento);
                     }
 
@@ -138,13 +138,12 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     if (isDuplicated(tbTipoMovimiento.tipmo_Movimiento))
                     {
-                        ModelState.AddModelError("", "Ya existe este registro, porfavor ingrese otro.");
+                        ModelState.AddModelError("", "Este tipo de movimiento ya esta registrado.");
                         return View(tbTipoMovimiento);
                     }
 
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    int dsa = _function.GetUser();
                     List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, _function.GetUser(), _function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoMovimiento_Update_Result Movimiento in List)
                         Msj = Movimiento.MensajeError;

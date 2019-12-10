@@ -12,12 +12,11 @@ document.addEventListener("input", function () {
 })
 
 
-
 //Funcion de Solo letras en el textbox
 function soloLetras(e) {
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toLowerCase();
-    letras = " '/áé+-íóúabcdefghijklmnñopqrstuvwxyz";
+    letras = " '/áéíóúabcdefghijklmnñopqrstuvwxyz";
     especiales = "8-37-39-46";
 
     tecla_especial = false
