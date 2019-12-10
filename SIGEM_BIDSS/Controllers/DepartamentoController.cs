@@ -53,8 +53,10 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "dep_Codigo,dep_Nombre,dep_UsuarioCrea,dep_FechaCrea,dep_UsuarioModifica,dep_FechaModifica")] tbDepartamento tbDepartamento)
         {
+
             IEnumerable<object> list = null;
             IEnumerable<object> lista = null;
+            string UserName = "";
             string MensajeError = "";
             string MsjError = "";
             var listMunicipios = (List<tbMunicipio>)Session["tbMunicipio"];
@@ -69,7 +71,10 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     try
                     {
-                        list = db.UDP_Gral_tbDepartamento_Insert(tbDepartamento.dep_Codigo, tbDepartamento.dep_Nombre, 1, function.DatetimeNow());
+                        int EmployeeID = function.GetUser(out UserName);
+                        tbDepartamento.dep_UsuarioCrea = EmployeeID;
+
+                        list = db.UDP_Gral_tbDepartamento_Insert(tbDepartamento.dep_Codigo, tbDepartamento.dep_Nombre, EmployeeID, function.DatetimeNow());
                         foreach (UDP_Gral_tbDepartamento_Insert_Result departamento in list)
                             MsjError = departamento.MensajeError;
                         if (MsjError.StartsWith("-1"))
@@ -86,7 +91,7 @@ namespace SIGEM_BIDSS.Controllers
                                 {
                                     foreach (tbMunicipio mun in listMunicipios)
                                     {
-                                        lista = db.UDP_Gral_tbMunicipio_Insert(mun.mun_codigo, tbDepartamento.dep_Codigo, mun.mun_nombre,  1,function.DatetimeNow());
+                                        lista = db.UDP_Gral_tbMunicipio_Insert(mun.mun_codigo, tbDepartamento.dep_Codigo, mun.mun_nombre, EmployeeID, function.DatetimeNow());
                                         foreach (UDP_Gral_tbMunicipio_Insert_Result municipios in lista)
                                             MensajeError = municipios.MensajeError;
                                         if (MensajeError.StartsWith("-1"))
@@ -144,10 +149,14 @@ namespace SIGEM_BIDSS.Controllers
             {
                 IEnumerable<object> list = null;
                 string MsjError = "";
+                string UserName = "";
+                
                 {
                     try
                     {
-                        list = db.UDP_Gral_tbDepartamento_Update(tbDepartamento.dep_Codigo, tbDepartamento.dep_Nombre,1);
+                        int EmpleId = function.GetUser(out UserName);
+                        tbDepartamento.dep_UsuarioModifica = EmpleId;
+                        list = db.UDP_Gral_tbDepartamento_Update(tbDepartamento.dep_Codigo, tbDepartamento.dep_Nombre, EmpleId);
                         foreach (UDP_Gral_tbDepartamento_Update_Result dep in list)
                             MsjError = dep.MensajeError;
                         if (MsjError.StartsWith("-1"))
