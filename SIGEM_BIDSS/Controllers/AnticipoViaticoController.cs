@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IdentityModel.Claims;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Web;
-using System.IdentityModel.Claims;
-using System.IO;
 using System.Web.Mvc;
 using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
+    [Authorize]
     public class AnticipoViaticoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions Function = new GeneralFunctions();
+        GeneralFunctions Funtion = new GeneralFunctions();
 
         // GET: AnticipoViatico
         public ActionResult Index()
@@ -70,9 +71,9 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
                 bool Result = false;
-                int EmployeeID = Function.GetUser(out UserName);
+                int EmployeeID = Funtion.GetUser(out UserName);
                 tbAnticipoViatico.emp_Id = EmployeeID;
-                tbAnticipoViatico.Anvi_GralFechaSolicitud = Function.DatetimeNow();
+                tbAnticipoViatico.Anvi_GralFechaSolicitud = Funtion.DatetimeNow();
                 tbAnticipoViatico.est_Id = GeneralFunctions.Enviada;
 
                 if (tbAnticipoViatico.mun_Codigo == "Seleccione")
@@ -88,7 +89,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     Insert = db.UDP_Adm_tbAnticipoViatico_Insert(EmployeeID,
                                                                 tbAnticipoViatico.Anvi_JefeInmediato,
-                                                                Function.DatetimeNow(),
+                                                                Funtion.DatetimeNow(),
                                                                 tbAnticipoViatico.Anvi_FechaViaje,
                                                                 tbAnticipoViatico.Anvi_Cliente.ToUpper(),
                                                                 tbAnticipoViatico.mun_Codigo,
@@ -100,24 +101,20 @@ namespace SIGEM_BIDSS.Controllers
                                                                 tbAnticipoViatico.Anvi_Comentario,
                                                                 GeneralFunctions.Enviada,
                                                                 EmployeeID,
-                                                                Function.DatetimeNow());
+                                                                Funtion.DatetimeNow());
                     foreach (UDP_Adm_tbAnticipoViatico_Insert_Result Res in Insert)
                         ErrorMessage = Res.MensajeError;
 
                     if (ErrorMessage.StartsWith("-1"))
                     {
-                        Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorMessage);
+                        Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
                     }
                     else
                     {
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage);
-                        var EmpCreator = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select( x => new { x.emp_Id, nombre= x.emp_Nombres+" "+x.emp_Apellidos }).FirstOrDefault();
-                        var EmpReciver = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoViatico.Anvi_JefeInmediato).Select( x => new { x.emp_Id, nombre= x.emp_Nombres+" "+x.emp_Apellidos,x.emp_CorreoElectronico }).FirstOrDefault();
-                        Function.LeerDatosSol(out string pvMensajeError, EmpReciver.emp_CorreoElectronico, EmpReciver.nombre, EmpCreator.nombre);
-
-                        if (!Result)
-                            Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
+                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
+                        if(!Result)
+                            Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
 
                         return RedirectToAction("Index");
                     }
@@ -126,7 +123,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch(Exception ex)
             {
-                Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
+                Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
             }
             ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", dep_codigo);
             ViewBag.Anvi_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoViatico.Anvi_JefeInmediato);

@@ -14,20 +14,10 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbSueldo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbSueldo()
-        {
-            this.tbSueldo1 = new HashSet<tbSueldo>();
-            this.tbSueldo11 = new HashSet<tbSueldo>();
-        }
-    
         public int sue_Id { get; set; }
         public int emp_Id { get; set; }
-        public short tmo_Id { get; set; }
         public Nullable<decimal> sue_Cantidad { get; set; }
-        public Nullable<int> sue_SueldoAnterior { get; set; }
-        public bool sue_Estado { get; set; }
-        public string sue_RazonInactivo { get; set; }
+        public short tmo_Id { get; set; }
         public int sue_UsuarioCrea { get; set; }
         public Nullable<System.DateTime> sue_FechaCrea { get; set; }
         public Nullable<int> sue_UsuarioModifica { get; set; }
@@ -35,12 +25,5 @@ namespace SIGEM_BIDSS.Models
     
         public virtual tbMoneda tbMoneda { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }
-        public virtual tbEmpleado tbEmpleado1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSueldo> tbSueldo1 { get; set; }
-        public virtual tbSueldo tbSueldo2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSueldo> tbSueldo11 { get; set; }
-        public virtual tbSueldo tbSueldo3 { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace SIGEM_BIDSS.Models
         public string Anvi_Correlativo { get; set; }
         public int emp_Id { get; set; }
         public int Anvi_JefeInmediato { get; set; }
-        public string Anvi_Comentario { get; set; }
         public System.DateTime Anvi_GralFechaSolicitud { get; set; }
         public System.DateTime Anvi_FechaViaje { get; set; }
         public string Anvi_Cliente { get; set; }
@@ -28,17 +27,18 @@ namespace SIGEM_BIDSS.Models
         public bool Anvi_Hospedaje { get; set; }
         public int Anvi_tptran_Id { get; set; }
         public bool Anvi_Autorizacion { get; set; }
+        public string Anvi_Comentario { get; set; }
+        public int est_Id { get; set; }
+        public string Anvi_RazonRechazo { get; set; }
         public int Anvi_UsuarioCrea { get; set; }
         public System.DateTime Anvi_FechaCrea { get; set; }
         public Nullable<int> Anvi_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> Anvi_FechaModifica { get; set; }
-        public int est_Id { get; set; }
-        public string Anvi_RazonRechazo { get; set; }
     
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbEmpleado tbEmpleado1 { get; set; }
+        public virtual tbEstado tbEstado { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbTipoTransporte tbTipoTransporte { get; set; }
-        public virtual tbEstado tbEstado { get; set; }
     }
 }

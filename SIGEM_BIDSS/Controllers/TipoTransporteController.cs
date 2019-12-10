@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoTransporteController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
+        GeneralFunctions function = new GeneralFunctions(); 
         // GET: TipoTransporte
         public ActionResult Index()
         {
@@ -50,13 +50,16 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                string UserName = "";
 
                 try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoTransporte_Insert(tbTipoTransporte.tptran_Descripcion, 1, Function.DatetimeNow());
+                    int EmpleId = function.GetUser(out UserName);
+
+                    tbTipoTransporte.tptran_UsuarioCrea = EmpleId;
+                    List = db.UDP_Gral_tbTipoTransporte_Insert(tbTipoTransporte.tptran_Descripcion, EmpleId, function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoTransporte_Insert_Result trans in List)
                         Msj = trans.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -113,7 +116,11 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoTransporte_Update(tbTipoTransporte.tptran_Id, tbTipoTransporte.tptran_Descripcion, 1, Function.DatetimeNow());
+                    string UserName = "";
+                    int UsId = function.GetUser(out UserName);
+
+                    tbTipoTransporte.tptran_UsuarioModifica = UsId;
+                    List = db.UDP_Gral_tbTipoTransporte_Update(tbTipoTransporte.tptran_Id, tbTipoTransporte.tptran_Descripcion, UsId, function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoTransporte_Update_Result trans in List)
                         Msj = trans.MensajeError;
                     if (Msj.StartsWith("-1"))
