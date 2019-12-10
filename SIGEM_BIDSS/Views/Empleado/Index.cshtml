@@ -38,28 +38,15 @@
                     <th>
                         @Html.DisplayNameFor(model => model.emp_Apellidos)
                     </th>
-
                     <th>
                         @Html.DisplayNameFor(model => model.emp_Identificacion)
                     </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.emp_FechaIngreso)
-                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
                     </th>
-
-
                     <th>
                         @Html.DisplayNameFor(model => model.emp_Telefono)
                     </th>
-
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.emp_CorreoElectronico)
-                    </th>*@
-
-
-
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -76,19 +63,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.emp_Identificacion)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.emp_FechaIngreso)
-                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.emp_Telefono)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.emp_CorreoElectronico)
-                        </td>*@
-
                         <td>
                             @Html.ActionLink("Editar", "Edit", new { id = item.emp_Id }, new { @class = "btn btn-primary btn-xs " })
                             @Html.ActionLink("Detalles", "Details", new { id = item.emp_Id }, new { @class = "btn btn-default btn-xs" })

@@ -1,0 +1,108 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbAnticipoSalario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+<h2>Index</h2>
+
+
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-list mr-1"></i>
+            Listado de Solicitudes de Anticipo de Viáticos
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink(" Nuevo", "Create", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ansal_Correlativo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ansal_GralFechaSolicitud)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ansal_MontoSolicitado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ansal_Justificacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ansal_Comentario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbTipoSalario.tpsal_Descripcion)
+                    </th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ansal_Correlativo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ansal_GralFechaSolicitud)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ansal_MontoSolicitado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ansal_Justificacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ansal_Comentario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ansal_RazonRechazo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbTipoSalario.tpsal_Descripcion)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.Ansal_Id }) |
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section Scripts {
+
+
+
+    <!-- DataTables -->
+    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+
+    <script src="~/Scripts/app/DataTables.js"></script>
+
+
+
+}

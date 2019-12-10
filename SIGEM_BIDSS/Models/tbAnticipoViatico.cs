@@ -33,6 +33,7 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> Anvi_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> Anvi_FechaModifica { get; set; }
         public int est_Id { get; set; }
+        public string Anvi_RazonRechazo { get; set; }
     
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbEmpleado tbEmpleado1 { get; set; }

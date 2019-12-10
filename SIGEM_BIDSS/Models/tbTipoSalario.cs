@@ -14,11 +14,20 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbTipoSalario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbTipoSalario()
+        {
+            this.tbAnticipoSalario = new HashSet<tbAnticipoSalario>();
+        }
+    
         public int tpsal_id { get; set; }
         public string tpsal_Descripcion { get; set; }
         public int tpsal_UsuarioCrea { get; set; }
         public System.DateTime tpsal_FechaCrea { get; set; }
         public Nullable<int> tpsal_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tpsal_FechaModifica { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAnticipoSalario> tbAnticipoSalario { get; set; }
     }
 }

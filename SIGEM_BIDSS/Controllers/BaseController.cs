@@ -8,11 +8,13 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace SIGEM_BIDSS.Controllers
 {
     public abstract class BaseController : Controller
     {
+
         protected void Flash(string message, string debug = null)
         {
             var alerts = TempData.ContainsKey(Alert.AlertKey) ?
@@ -40,7 +42,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     // Add the user to the view bag
                     ViewBag.User = tokenStore.GetUserDetails();
-
+                    
                 }
                 else
                 {
@@ -52,6 +54,26 @@ namespace SIGEM_BIDSS.Controllers
             }
 
             base.OnActionExecuting(filterContext);
+        }
+    }
+
+
+    public class SessionManager : ActionFilterAttribute
+    {
+        GeneralFunctions Function = new GeneralFunctions();
+        public SessionManager()
+        {
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            string UserName = "";
+            int _Exist = Function.GetUser(out UserName);
+            var valuesSinAcceso = new RouteValueDictionary(new { action = "Create", controller = "Empleado" });
+            if (_Exist < 1)
+            {
+                filterContext.Result = new RedirectToRouteResult(valuesSinAcceso);
+            }
         }
     }
 }

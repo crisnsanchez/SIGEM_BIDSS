@@ -90,7 +90,7 @@ namespace SIGEM_BIDSS.Models
         //string lvMensajeError = "";
         //LeerDatos(out lvMensajeError, tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralJefeInmediato, tbSolicitud.Emp_Name);
 
-        public int LeerDatos(out string pvMensajeError, string _empJefeMail, string _GralJefeInmediato, string _empName)
+        public int LeerDatosSol(out string pvMensajeError, string _empJefeMail, string _GralJefeInmediato, string _empName)
         {
             try
             {
@@ -109,8 +109,8 @@ namespace SIGEM_BIDSS.Models
                               "</principal>";
 
                 var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
-                enviarCorreo(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _empJefeMail, _Parameters.par_Servidor, _Parameters.par_Puerto);
+                EmailGenerar_BodySol(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
+                enviarCorreoSol(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _empJefeMail, _Parameters.par_Servidor, _Parameters.par_Puerto);
                 return 0;
             }
             catch (Exception Ex)
@@ -120,7 +120,7 @@ namespace SIGEM_BIDSS.Models
             }
         }
 
-        private Boolean EmailGenerar_Body(string psRutaPlantilla, string psXML, out string psXMLEnvio)
+        private Boolean EmailGenerar_BodySol(string psRutaPlantilla, string psXML, out string psXMLEnvio)
         {
             psXMLEnvio = "";
             try
@@ -158,7 +158,7 @@ namespace SIGEM_BIDSS.Models
             }
         }
 
-        public int enviarCorreo(string psEmisor, string psPassword, string psMensaje, string psAsunto, string psDestinatario, string psServidor, int psPuerto)
+        public int enviarCorreoSol(string psEmisor, string psPassword, string psMensaje, string psAsunto, string psDestinatario, string psServidor, int psPuerto)
         {
             //      0 = Ok      //
             //      1 = Error   //

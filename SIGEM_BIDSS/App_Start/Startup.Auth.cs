@@ -48,13 +48,7 @@ namespace SIGEM_BIDSS
                     {
                         // For demo purposes only, see below
                         ValidateIssuer = false,
-                        IssuerValidator = (issuer, token, tvp) =>
-                        {
-                            if (issuer == tenant)
-                                return issuer;
-                            else
-                                throw new SecurityTokenInvalidIssuerException("Invalid issuer");
-                        }
+                        
                         // In a real multi-tenant app, you would add logic to determine whether the
                         // issuer was from an authorized tenant
                         //ValidateIssuer = true,
