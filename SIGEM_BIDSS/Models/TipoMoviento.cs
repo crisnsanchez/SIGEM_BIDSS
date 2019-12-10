@@ -19,9 +19,8 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "ID")]
         public int tipmo_id { get; set; }
 
-       
         [Display(Name = "Descripción")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
         public string tipmo_Movimiento { get; set; }
 
         [Display(Name = "Usuario Crea")]
