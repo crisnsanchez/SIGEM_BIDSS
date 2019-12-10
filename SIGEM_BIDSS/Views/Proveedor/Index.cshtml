@@ -1,0 +1,100 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbProveedor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_NombreContacto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_Direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_RTN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prov_FechaModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbActividadEconomica.acte_Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbMunicipio.dep_codigo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_NombreContacto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_Direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_RTN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prov_FechaModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbActividadEconomica.acte_Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbMunicipio.dep_codigo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.prov_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.prov_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.prov_Id })
+        </td>
+    </tr>
+}
+
+</table>

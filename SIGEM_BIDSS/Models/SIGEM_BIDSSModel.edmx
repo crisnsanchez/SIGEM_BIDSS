@@ -269,6 +269,24 @@
           <Property Name="pscat_FechaModifica" Type="datetime" />
           <Property Name="pscat_ISV" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbProveedor">
+          <Key>
+            <PropertyRef Name="prov_Id" />
+          </Key>
+          <Property Name="prov_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prov_Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="prov_NombreContacto" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="prov_Direccion" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="mun_codigo" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="prov_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="prov_Telefono" Type="varchar" MaxLength="25" />
+          <Property Name="prov_RTN" Type="varchar" MaxLength="14" />
+          <Property Name="acte_Id" Type="smallint" Nullable="false" />
+          <Property Name="prov_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="prov_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="prov_UsuarioModifica" Type="int" />
+          <Property Name="prov_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbDeduccionInstitucionFinanciera">
           <Key>
             <PropertyRef Name="deif_IdDeduccionInstFinanciera" />
@@ -471,6 +489,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Gral_tbActividadEconomica_tbProveedor_acte_Id">
+          <End Role="tbActividadEconomica" Type="Self.tbActividadEconomica" Multiplicity="1" />
+          <End Role="tbProveedor" Type="Self.tbProveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbActividadEconomica">
+              <PropertyRef Name="acte_Id" />
+            </Principal>
+            <Dependent Role="tbProveedor">
+              <PropertyRef Name="acte_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id">
           <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
           <End Role="tbDeduccionInstitucionFinanciera" Type="Self.tbDeduccionInstitucionFinanciera" Multiplicity="*" />
@@ -528,6 +558,18 @@
             </Principal>
             <Dependent Role="tbProductoSubcategoria">
               <PropertyRef Name="pcat_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo">
+          <End Role="tbMunicipio" Type="Self.tbMunicipio" Multiplicity="1" />
+          <End Role="tbProveedor" Type="Self.tbProveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_codigo" />
+            </Principal>
+            <Dependent Role="tbProveedor">
+              <PropertyRef Name="mun_codigo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1025,6 +1067,7 @@
           <EntitySet Name="tbUnidadMedida" EntityType="Self.tbUnidadMedida" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbProductoCategoria" EntityType="Self.tbProductoCategoria" Schema="Inv" store:Type="Tables" />
           <EntitySet Name="tbProductoSubcategoria" EntityType="Self.tbProductoSubcategoria" Schema="Inv" store:Type="Tables" />
+          <EntitySet Name="tbProveedor" EntityType="Self.tbProveedor" Schema="Inv" store:Type="Tables" />
           <EntitySet Name="tbDeduccionInstitucionFinanciera" EntityType="Self.tbDeduccionInstitucionFinanciera" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbInstitucionFinanciera" EntityType="Self.tbInstitucionFinanciera" Schema="Plani" store:Type="Tables" />
           <EntitySet Name="tbEmpleado" EntityType="Self.tbEmpleado" Schema="rrhh" store:Type="Tables" />
@@ -1073,6 +1116,10 @@
             <End Role="tbDepartamento" EntitySet="tbDepartamento" />
             <End Role="tbMunicipio" EntitySet="tbMunicipio" />
           </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbActividadEconomica_tbProveedor_acte_Id" Association="Self.FK_Gral_tbActividadEconomica_tbProveedor_acte_Id">
+            <End Role="tbActividadEconomica" EntitySet="tbActividadEconomica" />
+            <End Role="tbProveedor" EntitySet="tbProveedor" />
+          </AssociationSet>
           <AssociationSet Name="FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id" Association="Self.FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id">
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
@@ -1092,6 +1139,10 @@
           <AssociationSet Name="FK_Inv_tbProductoSubcategoria_tbProductoCategoria_pcat_Id" Association="Self.FK_Inv_tbProductoSubcategoria_tbProductoCategoria_pcat_Id">
             <End Role="tbProductoCategoria" EntitySet="tbProductoCategoria" />
             <End Role="tbProductoSubcategoria" EntitySet="tbProductoSubcategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo" Association="Self.FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbProveedor" EntitySet="tbProveedor" />
           </AssociationSet>
           <AssociationSet Name="FK_rrhh_tbEmpleado_Gral_tbMunicipio_mun_codigo" Association="Self.FK_rrhh_tbEmpleado_Gral_tbMunicipio_mun_codigo">
             <End Role="tbMunicipio" EntitySet="tbMunicipio" />
@@ -1803,6 +1854,15 @@
             <Parameter Name="uni_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="uni_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="tbProveedor" EntityType="SIGEM_BIDSSModel.tbProveedor" />
+          <AssociationSet Name="FK_Gral_tbActividadEconomica_tbProveedor_acte_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbActividadEconomica_tbProveedor_acte_Id">
+            <End Role="tbActividadEconomica" EntitySet="tbActividadEconomica" />
+            <End Role="tbProveedor" EntitySet="tbProveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo" Association="SIGEM_BIDSSModel.FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbProveedor" EntitySet="tbProveedor" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2101,6 +2161,7 @@
           <NavigationProperty Name="tbAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbMunicipio_mun_Codigo" FromRole="tbMunicipio" ToRole="tbAnticipoViatico" />
           <NavigationProperty Name="tbDepartamento" Relationship="SIGEM_BIDSSModel.FK_dep_Id" FromRole="tbMunicipio" ToRole="tbDepartamento" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_Gral_tbMunicipio_mun_codigo" FromRole="tbMunicipio" ToRole="tbEmpleado" />
+          <NavigationProperty Name="tbProveedor" Relationship="SIGEM_BIDSSModel.FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo" FromRole="tbMunicipio" ToRole="tbProveedor" />
         </EntityType>
         <EntityType Name="tbPuesto">
           <Key>
@@ -2563,6 +2624,7 @@
           <Property Name="acte_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="acte_UsuarioModifica" Type="Int32" />
           <Property Name="acte_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbProveedor" Relationship="SIGEM_BIDSSModel.FK_Gral_tbActividadEconomica_tbProveedor_acte_Id" FromRole="tbActividadEconomica" ToRole="tbProveedor" />
         </EntityType>
         <ComplexType Name="UDP_Gral_tbActividadEconomica_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
@@ -2576,6 +2638,50 @@
         <ComplexType Name="UDP_Gral_tbUnidadMedida_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="tbProveedor">
+          <Key>
+            <PropertyRef Name="prov_Id" />
+          </Key>
+          <Property Name="prov_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prov_Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="prov_NombreContacto" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="prov_Direccion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="mun_codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="prov_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="prov_Telefono" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="prov_RTN" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="acte_Id" Type="Int16" Nullable="false" />
+          <Property Name="prov_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="prov_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="prov_UsuarioModifica" Type="Int32" />
+          <Property Name="prov_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbActividadEconomica" Relationship="SIGEM_BIDSSModel.FK_Gral_tbActividadEconomica_tbProveedor_acte_Id" FromRole="tbProveedor" ToRole="tbActividadEconomica" />
+          <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo" FromRole="tbProveedor" ToRole="tbMunicipio" />
+        </EntityType>
+        <Association Name="FK_Gral_tbActividadEconomica_tbProveedor_acte_Id">
+          <End Type="SIGEM_BIDSSModel.tbActividadEconomica" Role="tbActividadEconomica" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbProveedor" Role="tbProveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbActividadEconomica">
+              <PropertyRef Name="acte_Id" />
+            </Principal>
+            <Dependent Role="tbProveedor">
+              <PropertyRef Name="acte_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo">
+          <End Type="SIGEM_BIDSSModel.tbMunicipio" Role="tbMunicipio" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbProveedor" Role="tbProveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_codigo" />
+            </Principal>
+            <Dependent Role="tbProveedor">
+              <PropertyRef Name="mun_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3266,6 +3372,25 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbProveedor">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbProveedor">
+              <MappingFragment StoreEntitySet="tbProveedor">
+                <ScalarProperty Name="prov_FechaModifica" ColumnName="prov_FechaModifica" />
+                <ScalarProperty Name="prov_UsuarioModifica" ColumnName="prov_UsuarioModifica" />
+                <ScalarProperty Name="prov_FechaCrea" ColumnName="prov_FechaCrea" />
+                <ScalarProperty Name="prov_UsuarioCrea" ColumnName="prov_UsuarioCrea" />
+                <ScalarProperty Name="acte_Id" ColumnName="acte_Id" />
+                <ScalarProperty Name="prov_RTN" ColumnName="prov_RTN" />
+                <ScalarProperty Name="prov_Telefono" ColumnName="prov_Telefono" />
+                <ScalarProperty Name="prov_Email" ColumnName="prov_Email" />
+                <ScalarProperty Name="mun_codigo" ColumnName="mun_codigo" />
+                <ScalarProperty Name="prov_Direccion" ColumnName="prov_Direccion" />
+                <ScalarProperty Name="prov_NombreContacto" ColumnName="prov_NombreContacto" />
+                <ScalarProperty Name="prov_Nombre" ColumnName="prov_Nombre" />
+                <ScalarProperty Name="prov_Id" ColumnName="prov_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
