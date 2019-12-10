@@ -207,7 +207,6 @@
     <Compile Include="Controllers\TipoSangreController.cs" />
     <Compile Include="Controllers\TipoTransporteController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
-    <Compile Include="Controllers\UnidadMedidaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -537,6 +536,9 @@
     <Content Include="Content\template\build\scss\_alerts.scss" />
     <Content Include="Content\template\build\scss\_bootstrap-variables.scss" />
     <Content Include="Content\template\build\scss\_brand.scss" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="Content\template\build\scss\_buttons.scss" />
     <Content Include="Content\template\build\scss\_callout.scss" />
     <Content Include="Content\template\build\scss\_cards.scss" />
@@ -3283,11 +3285,6 @@
     <Content Include="Views\AnticipoSalario\Details.cshtml" />
     <Content Include="Views\AnticipoSalario\Edit.cshtml" />
     <Content Include="Views\AnticipoSalario\Index.cshtml" />
-    <Content Include="Views\UnidadMedida\Create.cshtml" />
-    <Content Include="Views\UnidadMedida\Delete.cshtml" />
-    <Content Include="Views\UnidadMedida\Details.cshtml" />
-    <Content Include="Views\UnidadMedida\Edit.cshtml" />
-    <Content Include="Views\UnidadMedida\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
