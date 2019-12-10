@@ -5,63 +5,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-info  mr-1"></i>
+            Detalle Moneda
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="form-horizontal">
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    ID
+                </dt>
 
-<div>
-    <h4>tbUnidadMedida</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.uni_Descripcion)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.uni_Id)
+                </dd>
+                <dt>
+                    Nombre
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.uni_Descripcion)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.uni_Descripcion)
+                </dd>
+                <dt>
+                    Abreviatura
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.uni_Abreviatura)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.uni_Abreviatura)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.uni_Abreviatura)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.uni_UsuarioCrea)
-        </dt>
+            </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.uni_UsuarioCrea)
-        </dd>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-10">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.uni_Id }, new { @class = "btn btn-primary btn-sm" })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.uni_FechaCrea)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.uni_FechaCrea)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.uni_UsuarioModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.uni_UsuarioModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.uni_FechaModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.uni_FechaModifica)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.uni_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
