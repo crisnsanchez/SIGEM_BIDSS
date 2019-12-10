@@ -11,8 +11,6 @@ document.addEventListener("input", function () {
 
 })
 
-
-
 //Funcion de Solo letras en el textbox
 function soloLetras(e) {
     key = e.keyCode || e.which;

@@ -220,6 +220,7 @@
     <Compile Include="Models\Departamentos.cs" />
     <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\InventarioCompra.cs" />
+    <Compile Include="Models\UnidadMedidas.cs" />
     <Compile Include="Models\parametro.cs" />
     <Compile Include="Models\SDP_tbMunicipio_Select_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
@@ -434,6 +435,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoViatico_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbUnidadMedida_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbUnidadMedida_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tSolicitudInsertar_Result.cs">

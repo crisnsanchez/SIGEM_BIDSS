@@ -2107,5 +2107,55 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoSalario_Insert_Result>("UDP_Adm_tbAnticipoSalario_Insert", emp_IdParameter, ansal_JefeInmediatoParameter, ansal_GralFechaSolicitudParameter, ansal_MontoSolicitadoParameter, tpsal_idParameter, ansal_JustificacionParameter, ansal_ComentarioParameter, est_IdParameter, ansal_RazonRechazoParameter, ansal_UsuarioCreaParameter, ansal_FechaCreaParameter);
         }
+    
+        public virtual ObjectResult<UDP_Gral_tbUnidadMedida_Insert_Result> UDP_Gral_tbUnidadMedida_Insert(Nullable<int> uni_Id, string uni_Descripcion, string uni_Abreviatura, Nullable<int> uni_UsuarioCrea, Nullable<System.DateTime> uni_FechaCrea)
+        {
+            var uni_IdParameter = uni_Id.HasValue ?
+                new ObjectParameter("uni_Id", uni_Id) :
+                new ObjectParameter("uni_Id", typeof(int));
+    
+            var uni_DescripcionParameter = uni_Descripcion != null ?
+                new ObjectParameter("uni_Descripcion", uni_Descripcion) :
+                new ObjectParameter("uni_Descripcion", typeof(string));
+    
+            var uni_AbreviaturaParameter = uni_Abreviatura != null ?
+                new ObjectParameter("uni_Abreviatura", uni_Abreviatura) :
+                new ObjectParameter("uni_Abreviatura", typeof(string));
+    
+            var uni_UsuarioCreaParameter = uni_UsuarioCrea.HasValue ?
+                new ObjectParameter("uni_UsuarioCrea", uni_UsuarioCrea) :
+                new ObjectParameter("uni_UsuarioCrea", typeof(int));
+    
+            var uni_FechaCreaParameter = uni_FechaCrea.HasValue ?
+                new ObjectParameter("uni_FechaCrea", uni_FechaCrea) :
+                new ObjectParameter("uni_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbUnidadMedida_Insert_Result>("UDP_Gral_tbUnidadMedida_Insert", uni_IdParameter, uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioCreaParameter, uni_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbUnidadMedida_Update_Result> UDP_Gral_tbUnidadMedida_Update(Nullable<int> uni_Id, string uni_Descripcion, string uni_Abreviatura, Nullable<int> uni_UsuarioModifica, Nullable<System.DateTime> uni_FechaModifica)
+        {
+            var uni_IdParameter = uni_Id.HasValue ?
+                new ObjectParameter("uni_Id", uni_Id) :
+                new ObjectParameter("uni_Id", typeof(int));
+    
+            var uni_DescripcionParameter = uni_Descripcion != null ?
+                new ObjectParameter("uni_Descripcion", uni_Descripcion) :
+                new ObjectParameter("uni_Descripcion", typeof(string));
+    
+            var uni_AbreviaturaParameter = uni_Abreviatura != null ?
+                new ObjectParameter("uni_Abreviatura", uni_Abreviatura) :
+                new ObjectParameter("uni_Abreviatura", typeof(string));
+    
+            var uni_UsuarioModificaParameter = uni_UsuarioModifica.HasValue ?
+                new ObjectParameter("uni_UsuarioModifica", uni_UsuarioModifica) :
+                new ObjectParameter("uni_UsuarioModifica", typeof(int));
+    
+            var uni_FechaModificaParameter = uni_FechaModifica.HasValue ?
+                new ObjectParameter("uni_FechaModifica", uni_FechaModifica) :
+                new ObjectParameter("uni_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbUnidadMedida_Update_Result>("UDP_Gral_tbUnidadMedida_Update", uni_IdParameter, uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioModificaParameter, uni_FechaModificaParameter);
+        }
     }
 }
