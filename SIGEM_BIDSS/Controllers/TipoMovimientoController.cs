@@ -80,7 +80,6 @@ namespace SIGEM_BIDSS.Controllers
                         Msj = tbMovimiento.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-                        
                         ModelState.AddModelError("Codigo Error" + Msj, "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }

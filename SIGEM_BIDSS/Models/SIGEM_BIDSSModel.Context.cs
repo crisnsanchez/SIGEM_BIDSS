@@ -41,6 +41,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbTipoMovimiento> tbTipoMovimiento { get; set; }
         public virtual DbSet<tbTipoPermiso> tbTipoPermiso { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
+        public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoTransporte> tbTipoTransporte { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
         public virtual DbSet<tbUnidadMedida> tbUnidadMedida { get; set; }
@@ -52,7 +53,6 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbSueldo> tbSueldo { get; set; }
         public virtual DbSet<tbActividadEconomica> tbActividadEconomica { get; set; }
         public virtual DbSet<tbProveedor> tbProveedor { get; set; }
-        public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -438,6 +438,23 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pto_UsuarioModifica", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Nombre, Nullable<int> tps_UsuarioCrea, Nullable<System.DateTime> tps_FechaCrea)
+        {
+            var tps_NombreParameter = tps_Nombre != null ?
+                new ObjectParameter("tps_Nombre", tps_Nombre) :
+                new ObjectParameter("tps_Nombre", typeof(string));
+    
+            var tps_UsuarioCreaParameter = tps_UsuarioCrea.HasValue ?
+                new ObjectParameter("tps_UsuarioCrea", tps_UsuarioCrea) :
+                new ObjectParameter("tps_UsuarioCrea", typeof(int));
+    
+            var tps_FechaCreaParameter = tps_FechaCrea.HasValue ?
+                new ObjectParameter("tps_FechaCrea", tps_FechaCrea) :
+                new ObjectParameter("tps_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Insert_Result>("UDP_Gral_tbTipoSangre_Insert", tps_NombreParameter, tps_UsuarioCreaParameter, tps_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbTipoSolicitud_Insert_Result> UDP_Gral_tbTipoSolicitud_Insert(string tipsol_Descripcion, Nullable<int> tipsol_UsuarioCrea)
@@ -1891,6 +1908,27 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoPermiso_Insert_Result>("UDP_Gral_tbTipoPermiso_Insert", tperm_DescripcionParameter, tperm_UsuarioCreaParameter, tperm_FechaCreaParameter);
         }
     
+        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Update_Result> UDP_Gral_tbTipoSangre_Update(Nullable<int> tps_Id, string tps_Nombre, Nullable<int> tps_UsuarioModifica, Nullable<System.DateTime> tps_FechaModifica)
+        {
+            var tps_IdParameter = tps_Id.HasValue ?
+                new ObjectParameter("tps_Id", tps_Id) :
+                new ObjectParameter("tps_Id", typeof(int));
+    
+            var tps_NombreParameter = tps_Nombre != null ?
+                new ObjectParameter("tps_Nombre", tps_Nombre) :
+                new ObjectParameter("tps_Nombre", typeof(string));
+    
+            var tps_UsuarioModificaParameter = tps_UsuarioModifica.HasValue ?
+                new ObjectParameter("tps_UsuarioModifica", tps_UsuarioModifica) :
+                new ObjectParameter("tps_UsuarioModifica", typeof(int));
+    
+            var tps_FechaModificaParameter = tps_FechaModifica.HasValue ?
+                new ObjectParameter("tps_FechaModifica", tps_FechaModifica) :
+                new ObjectParameter("tps_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Update_Result>("UDP_Gral_tbTipoSangre_Update", tps_IdParameter, tps_NombreParameter, tps_UsuarioModificaParameter, tps_FechaModificaParameter);
+        }
+    
         public virtual ObjectResult<UDP_Gral_tbTipoSalario_Insert_Result> UDP_Gral_tbTipoSalario_Insert(Nullable<int> tpsal_id, string tpsal_Descripcion, Nullable<int> tpsal_UsuarioCrea, Nullable<System.DateTime> tpsal_FechaCrea)
         {
             var tpsal_idParameter = tpsal_id.HasValue ?
@@ -2160,42 +2198,57 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbUnidadMedida_Update_Result>("UDP_Gral_tbUnidadMedida_Update", uni_IdParameter, uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioModificaParameter, uni_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Descripcion, Nullable<int> tps_UsuarioCrea, Nullable<System.DateTime> tps_FechaCrea)
+        public virtual ObjectResult<UDP_Adm_tbAnticipoSalario_Update_Result> UDP_Adm_tbAnticipoSalario_Update(Nullable<int> ansal_Id, Nullable<int> emp_Id, Nullable<int> ansal_JefeInmediato, Nullable<System.DateTime> ansal_GralFechaSolicitud, Nullable<decimal> ansal_MontoSolicitado, Nullable<int> tpsal_id, string ansal_Justificacion, string ansal_Comentario, Nullable<int> est_Id, string ansal_RazonRechazo, Nullable<int> ansal_UsuarioModifica, Nullable<System.DateTime> ansal_FechaModifica)
         {
-            var tps_DescripcionParameter = tps_Descripcion != null ?
-                new ObjectParameter("tps_Descripcion", tps_Descripcion) :
-                new ObjectParameter("tps_Descripcion", typeof(string));
+            var ansal_IdParameter = ansal_Id.HasValue ?
+                new ObjectParameter("Ansal_Id", ansal_Id) :
+                new ObjectParameter("Ansal_Id", typeof(int));
     
-            var tps_UsuarioCreaParameter = tps_UsuarioCrea.HasValue ?
-                new ObjectParameter("tps_UsuarioCrea", tps_UsuarioCrea) :
-                new ObjectParameter("tps_UsuarioCrea", typeof(int));
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
     
-            var tps_FechaCreaParameter = tps_FechaCrea.HasValue ?
-                new ObjectParameter("tps_FechaCrea", tps_FechaCrea) :
-                new ObjectParameter("tps_FechaCrea", typeof(System.DateTime));
+            var ansal_JefeInmediatoParameter = ansal_JefeInmediato.HasValue ?
+                new ObjectParameter("Ansal_JefeInmediato", ansal_JefeInmediato) :
+                new ObjectParameter("Ansal_JefeInmediato", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Insert_Result>("UDP_Gral_tbTipoSangre_Insert", tps_DescripcionParameter, tps_UsuarioCreaParameter, tps_FechaCreaParameter);
-        }
+            var ansal_GralFechaSolicitudParameter = ansal_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("Ansal_GralFechaSolicitud", ansal_GralFechaSolicitud) :
+                new ObjectParameter("Ansal_GralFechaSolicitud", typeof(System.DateTime));
     
-        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Update_Result> UDP_Gral_tbTipoSangre_Update(Nullable<int> tps_Id, string tps_Descripcion, Nullable<int> tps_UsuarioModifica, Nullable<System.DateTime> tps_FechaModifica)
-        {
-            var tps_IdParameter = tps_Id.HasValue ?
-                new ObjectParameter("tps_Id", tps_Id) :
-                new ObjectParameter("tps_Id", typeof(int));
+            var ansal_MontoSolicitadoParameter = ansal_MontoSolicitado.HasValue ?
+                new ObjectParameter("Ansal_MontoSolicitado", ansal_MontoSolicitado) :
+                new ObjectParameter("Ansal_MontoSolicitado", typeof(decimal));
     
-            var tps_DescripcionParameter = tps_Descripcion != null ?
-                new ObjectParameter("tps_Descripcion", tps_Descripcion) :
-                new ObjectParameter("tps_Descripcion", typeof(string));
+            var tpsal_idParameter = tpsal_id.HasValue ?
+                new ObjectParameter("tpsal_id", tpsal_id) :
+                new ObjectParameter("tpsal_id", typeof(int));
     
-            var tps_UsuarioModificaParameter = tps_UsuarioModifica.HasValue ?
-                new ObjectParameter("tps_UsuarioModifica", tps_UsuarioModifica) :
-                new ObjectParameter("tps_UsuarioModifica", typeof(int));
+            var ansal_JustificacionParameter = ansal_Justificacion != null ?
+                new ObjectParameter("Ansal_Justificacion", ansal_Justificacion) :
+                new ObjectParameter("Ansal_Justificacion", typeof(string));
     
-            var tps_FechaModificaParameter = tps_FechaModifica.HasValue ?
-                new ObjectParameter("tps_FechaModifica", tps_FechaModifica) :
-                new ObjectParameter("tps_FechaModifica", typeof(System.DateTime));
+            var ansal_ComentarioParameter = ansal_Comentario != null ?
+                new ObjectParameter("Ansal_Comentario", ansal_Comentario) :
+                new ObjectParameter("Ansal_Comentario", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Update_Result>("UDP_Gral_tbTipoSangre_Update", tps_IdParameter, tps_DescripcionParameter, tps_UsuarioModificaParameter, tps_FechaModificaParameter);
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var ansal_RazonRechazoParameter = ansal_RazonRechazo != null ?
+                new ObjectParameter("Ansal_RazonRechazo", ansal_RazonRechazo) :
+                new ObjectParameter("Ansal_RazonRechazo", typeof(string));
+    
+            var ansal_UsuarioModificaParameter = ansal_UsuarioModifica.HasValue ?
+                new ObjectParameter("Ansal_UsuarioModifica", ansal_UsuarioModifica) :
+                new ObjectParameter("Ansal_UsuarioModifica", typeof(int));
+    
+            var ansal_FechaModificaParameter = ansal_FechaModifica.HasValue ?
+                new ObjectParameter("Ansal_FechaModifica", ansal_FechaModifica) :
+                new ObjectParameter("Ansal_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoSalario_Update_Result>("UDP_Adm_tbAnticipoSalario_Update", ansal_IdParameter, emp_IdParameter, ansal_JefeInmediatoParameter, ansal_GralFechaSolicitudParameter, ansal_MontoSolicitadoParameter, tpsal_idParameter, ansal_JustificacionParameter, ansal_ComentarioParameter, est_IdParameter, ansal_RazonRechazoParameter, ansal_UsuarioModificaParameter, ansal_FechaModificaParameter);
         }
     }
 }

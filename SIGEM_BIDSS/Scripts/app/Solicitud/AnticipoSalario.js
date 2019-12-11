@@ -1,9 +1,9 @@
 ﻿
-document.getElementById('frmsubmit').click(function () {
-    document.getElementsByTagName('form').submit()
-});
 
 
+$("#frmsubmit").click(function () {
+    $("form").submit()
+})
 
 
 //--Date Picker--//

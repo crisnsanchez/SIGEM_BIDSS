@@ -22,7 +22,7 @@
         </ul>
     </div>
     <div class="card-body">
-        <table class="table">
+        <table class="table table-bordered table-hover table-responsive" id="dataTable">
             <thead>
                 <tr>
                     <th>
@@ -39,9 +39,6 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Ansal_Comentario)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
@@ -72,16 +69,13 @@
                             @Html.DisplayFor(modelItem => item.Ansal_Comentario)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Ansal_RazonRechazo)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.tbTipoSalario.tpsal_Descripcion)
                         </td>
                         <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.Ansal_Id }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Ansal_Id }, new { @class = "btn btn-default btn-xs" })
                         </td>
                     </tr>
                 }
