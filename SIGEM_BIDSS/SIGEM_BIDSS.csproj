@@ -202,6 +202,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
+    <Compile Include="Controllers\SueldoController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSalarioController.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sueldo.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -3314,6 +3316,11 @@
     <Content Include="Views\ActividadEconomica\Details.cshtml" />
     <Content Include="Views\ActividadEconomica\Edit.cshtml" />
     <Content Include="Views\ActividadEconomica\Index.cshtml" />
+    <Content Include="Views\Sueldo\Create.cshtml" />
+    <Content Include="Views\Sueldo\Delete.cshtml" />
+    <Content Include="Views\Sueldo\Details.cshtml" />
+    <Content Include="Views\Sueldo\Edit.cshtml" />
+    <Content Include="Views\Sueldo\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
