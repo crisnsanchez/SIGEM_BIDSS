@@ -3329,6 +3329,11 @@
     <Content Include="Views\Proveedor\Details.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
+    <Content Include="Views\Sueldo\Create.cshtml" />
+    <Content Include="Views\Sueldo\Delete.cshtml" />
+    <Content Include="Views\Sueldo\Details.cshtml" />
+    <Content Include="Views\Sueldo\Edit.cshtml" />
+    <Content Include="Views\Sueldo\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
