@@ -4,128 +4,205 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 
-<h2>Details</h2>
 
-<div>
-    <h4>tbAnticipoSalario</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_Correlativo)
-        </dt>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-upload mr-1"></i>
+            Crear Empleado
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="form-horizontal">
+        <div class="card-body">
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.HiddenFor(model => model.Ansal_Id)
+                        @Html.DisplayNameFor(model => model.Ansal_Correlativo)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_Correlativo)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_Correlativo)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_GralFechaSolicitud)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_GralFechaSolicitud)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_GralFechaSolicitud)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_GralFechaSolicitud)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_MontoSolicitado)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_MontoSolicitado)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_MontoSolicitado)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_MontoSolicitado)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_Justificacion)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_Justificacion)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_Justificacion)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_Justificacion)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_Comentario)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_Comentario)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_Comentario)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_Comentario)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_RazonRechazo)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_RazonRechazo)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_UsuarioCrea)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_UsuarioCrea)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_UsuarioCrea)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_UsuarioCrea)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_FechaCrea)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_FechaCrea)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_FechaCrea)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_FechaCrea)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_UsuarioModifica)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_UsuarioModifica)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_UsuarioModifica)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_UsuarioModifica)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ansal_FechaModifica)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Ansal_FechaModifica)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ansal_FechaModifica)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Ansal_FechaModifica)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tbTipoSalario.tpsal_Descripcion)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbTipoSalario.tpsal_Descripcion)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tbTipoSalario.tpsal_Descripcion)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.tbTipoSalario.tpsal_Descripcion)
+                    </dd>
 
-    </dl>
+                </dl>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                        <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Ansal_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+<div class="modal fade" id="ModalApprove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">¿Está seguro que desea aprobar la solicitud?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="control-label col-md-8 required"></h5>
+                <div class="form-group">
+                   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" id="_ModalApprove">Aprobar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalReject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"> ¿Está seguro que desea rechazar la solicitud?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="control-label col-md-8 required"></h5>
+                <div class="form-group">
+                    <p class="col-form-label" id="">
+                        Razon de Rechazo
+                    </p>
+                    <textarea id="RazonInactivacion" class="form-control normalize"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" id="_ModalReject">Rechazar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/app/General_Details.js"></script>
+}

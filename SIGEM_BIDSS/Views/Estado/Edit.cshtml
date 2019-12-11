@@ -56,7 +56,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.est_Descripcion, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.est_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "100", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                        @Html.EditorFor(model => model.est_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @style = "text-transform:uppercase;", @onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                         <p style="color:red">@Html.ValidationMessageFor(model => model.est_Descripcion, "", new { @class = "text-danger" })</p>
                     </div>
                 </div>

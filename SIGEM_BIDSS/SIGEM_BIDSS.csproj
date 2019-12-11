@@ -186,6 +186,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ActividadEconomicaController.cs" />
     <Compile Include="Controllers\AnticipoSalarioController.cs" />
     <Compile Include="Controllers\AnticipoViaticoController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
@@ -201,6 +202,8 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\SueldoController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
     <Compile Include="Controllers\TipoSalarioController.cs" />
@@ -214,6 +217,7 @@
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
+    <Compile Include="Models\Economica.cs" />
     <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\InstitucionesFinacieras.cs" />
     <Compile Include="Models\Area.cs" />
@@ -234,6 +238,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbActividadEconomica.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbAnticipoSalario.cs">
@@ -276,6 +283,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbProductoSubcategoria.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbProveedor.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbPuesto.cs">
@@ -334,6 +344,9 @@
     <Compile Include="Models\UDP_Adm_tbAnticipoSalario_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Adm_tbAnticipoSalario_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Adm_tbAnticipoViatico_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -344,6 +357,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Conf_tbParametro_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbActividadEconomica_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbActividadEconomica_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbArea_Insert_Result.cs">
@@ -434,6 +453,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tbTipoViatico_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbUnidadMedida_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Gral_tbUnidadMedida_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tSolicitudInsertar_Result.cs">
@@ -883,6 +908,7 @@
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\app\DataTables.js" />
     <Content Include="Scripts\app\General.js" />
+    <Content Include="Scripts\app\General_Details.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
     <Content Include="Scripts\app\Solicitud.js" />
@@ -3132,6 +3158,7 @@
     <Content Include="Scripts\app\Departamento.js" />
     <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\app\Municipio.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoSalario.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
     <Content Include="Scripts\app\ValidacionesGenerales.js" />
@@ -3292,6 +3319,21 @@
     <Content Include="Views\UnidadMedida\Details.cshtml" />
     <Content Include="Views\UnidadMedida\Edit.cshtml" />
     <Content Include="Views\UnidadMedida\Index.cshtml" />
+    <Content Include="Views\ActividadEconomica\Create.cshtml" />
+    <Content Include="Views\ActividadEconomica\Delete.cshtml" />
+    <Content Include="Views\ActividadEconomica\Details.cshtml" />
+    <Content Include="Views\ActividadEconomica\Edit.cshtml" />
+    <Content Include="Views\ActividadEconomica\Index.cshtml" />
+    <Content Include="Views\Proveedor\Create.cshtml" />
+    <Content Include="Views\Proveedor\Delete.cshtml" />
+    <Content Include="Views\Proveedor\Details.cshtml" />
+    <Content Include="Views\Proveedor\Edit.cshtml" />
+    <Content Include="Views\Proveedor\Index.cshtml" />
+    <Content Include="Views\Sueldo\Create.cshtml" />
+    <Content Include="Views\Sueldo\Delete.cshtml" />
+    <Content Include="Views\Sueldo\Details.cshtml" />
+    <Content Include="Views\Sueldo\Edit.cshtml" />
+    <Content Include="Views\Sueldo\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

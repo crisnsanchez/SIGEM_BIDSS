@@ -2,92 +2,118 @@
 @{ string depCodigo = "";}
 @using SIGEM_BIDSS.Models;
 
+@{
+    tbMunicipio mun = new tbMunicipio();
+}
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
-<div class="ibox-title">
-    <h5>Listado Municipios</h5>
-    
-    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalregistro">Registrar Municipio</button>
-</div>
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => mun.mun_codigo, htmlAttributes: new { @class = "control-label col-sm-8 , required" })
+
+            <input type="text" id="mun_codigo" name="mun_codigo" placeholder="" onkeypress="return soloNumeros(event)" class="form-control" min="1" maxlength="2" autocomplete="off" />
+            <div id="ValidationMunCodigoCreate">
+                @Html.ValidationMessageFor(model => mun.mun_codigo)
+            </div>
+
+        </div>
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => mun.mun_nombre, htmlAttributes: new { @class = "control-label col-sm-8 , required" })
+
+            <input type="text" onkeypress="return soloLetras(event)" id="mun_nombre" name="mun_nombre" placeholder="" class="form-control" maxlength="100" autocomplete="off" style="text-transform:uppercase;" onkeyup="noespaciosincio(this)" />
+            <div id="ValidationMunNombreCreate">
+                @Html.ValidationMessageFor(model => mun.mun_nombre)
+            </div>
+
+        </div>
+        <div class="form-group col-md-5">
+            <button class="btn btn-primary" type="button" id="AgregarMunicipio">Añadir</button>
+        </div>
+    </div>
+
+
+</form>
 <br />
-    <table class="table table-bordered table-hover" id="dataTable">
-        <thead>
+<table class="table table-bordered table-hover" id="tblMunicipio">
+    <thead>
+        <tr>
+            <th>
+
+                @Html.DisplayNameFor(model => model.mun_codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mun_nombre)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            depCodigo = item.dep_codigo;
             <tr>
-                <th>
-                    
-                    @Html.DisplayNameFor(model => model.mun_codigo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.mun_nombre)
-                </th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                depCodigo = item.dep_codigo;
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.mun_codigo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.mun_nombre)
-                    </td>
-                    <td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mun_codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mun_nombre)
+                </td>
+                <td>
 
-                        <button type="button" class="btn btn-white btn-xs" onclick="EditMunicipioRecord('@item.mun_codigo')">Editar</button>
-                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalEliminar_@item.mun_codigo">Eliminar</button>
+                    <button type="button" class="btn btn-white btn-xs" onclick="EditMunicipioRecord('@item.mun_codigo')">Editar</button>
+                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalEliminar_@item.mun_codigo">Eliminar</button>
 
-                        <!-- ELIMINAR MODAL MUNICIPIO-->
+                    <!-- ELIMINAR MODAL MUNICIPIO-->
 
-                        <div class="modal fade" id="modalEliminar_@item.mun_codigo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Municipio</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Está seguro que quiere Eliminar ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        @Html.ActionLink("Sí", "EliminarMunicipio", new { id = item.mun_codigo, dep_codigo = item.dep_codigo }, new { @class = "btn btn-danger" })
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                    </div>
+                    <div class="modal fade" id="modalEliminar_@item.mun_codigo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Municipio</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Está seguro que quiere Eliminar ?
+                                </div>
+                                <div class="modal-footer">
+                                    @Html.ActionLink("Sí", "EliminarMunicipio", new { id = item.mun_codigo, dep_codigo = item.dep_codigo }, new { @class = "btn btn-danger" })
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                 </div>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#dataTable').DataTable(
-                {
-                    "searching": true,
-                    "lengthChange": true,
-                    "oLanguage": {
-                        "oPaginate": {
-                            "sNext": "Siguiente",
-                            "sPrevious": "Anterior",
-                        },
-                        "sProcessing": "Procesando...",
-                        "sLengthMenu": "Mostrar _MENU_ registros",
-                        "sZeroRecords": "No se encontraron resultados",
-                        "sEmptyTable": "Ningún dato disponible en esta tabla",
-                        "sEmptyTable": "No hay registros",
-                        "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-                        "sSearch": "Buscar",
-                        "sInfo": "Mostrando _START_ a _END_ Entradas",
-                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    }
-                });
-        });
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
 
-    </script>
+</table>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dataTable').DataTable(
+            {
+                "searching": true,
+                "lengthChange": true,
+                "oLanguage": {
+                    "oPaginate": {
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior",
+                    },
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sEmptyTable": "No hay registros",
+                    "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+                    "sSearch": "Buscar",
+                    "sInfo": "Mostrando _START_ a _END_ Entradas",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                }
+            });
+    });
+
+</script>

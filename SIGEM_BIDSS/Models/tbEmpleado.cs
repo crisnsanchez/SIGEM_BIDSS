@@ -58,10 +58,10 @@ namespace SIGEM_BIDSS.Models
         public virtual tbEstado tbEstado { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
-        public virtual tbTipoSangre tbTipoSangre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSueldo> tbSueldo { get; set; }
+        public virtual tbTipoSangre tbTipoSangre { get; set; }
     }
 }
