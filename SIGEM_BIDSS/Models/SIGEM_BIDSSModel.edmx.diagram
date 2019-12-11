@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoMovimiento" Width="1.5" PointX="13.75" PointY="8.875" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoPermiso" Width="1.5" PointX="13.75" PointY="11.875" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSalario" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSangre" Width="1.5" PointX="3.75" PointY="5.5" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoTransporte" Width="1.5" PointX="6" PointY="4.375" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoViatico" Width="1.5" PointX="11.75" PointY="14.875" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbUnidadMedida" Width="1.5" PointX="13.75" PointY="14.875" />
@@ -42,7 +41,6 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbEstado_est_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_Gral_tbMunicipio_mun_codigo" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbPuesto_pto_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbTipoSangre_tps_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProductoSubcategoria_tbProductoCategoria_pcat_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" />
@@ -53,6 +51,8 @@
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbProveedor" Width="1.5" PointX="18.625" PointY="0.75" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbActividadEconomica_tbProveedor_acte_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSangre" Width="1.5" PointX="16.375" PointY="6" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbTipoSangre_tps_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

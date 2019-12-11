@@ -21,7 +21,7 @@ namespace SIGEM_BIDSS.Models
         }
     
         public int tps_Id { get; set; }
-        public string tps_nombre { get; set; }
+        public string tps_Descripcion { get; set; }
         public int tps_UsuarioCrea { get; set; }
         public System.DateTime tps_FechaCrea { get; set; }
         public Nullable<int> tps_UsuarioModifica { get; set; }
