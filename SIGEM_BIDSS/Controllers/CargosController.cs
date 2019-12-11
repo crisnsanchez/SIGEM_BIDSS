@@ -96,7 +96,8 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     if (Msj.StartsWith("-2"))
                     {
-                        ModelState.AddModelError("", "Ya existe un Cargo con el mismo nombre..");
+                        ModelState.AddModelError("", "Esta área ya posee un cargo igual.");
+
                         return View();
                     }
                     else
@@ -154,7 +155,7 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
                 if (db.tbPuesto.Any(a => a.pto_Descripcion == tbPuesto.pto_Descripcion && a.are_Id == tbPuesto.are_Id))
                 {
-                    ModelState.AddModelError("", "Ya existe un cargo con el mismo nombre.");
+                    ModelState.AddModelError("", "Esta área ya posee un cargo igual.");
                     return View(tbPuesto);
                 }
 
