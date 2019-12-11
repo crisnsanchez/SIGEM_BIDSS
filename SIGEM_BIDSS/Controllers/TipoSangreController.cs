@@ -63,7 +63,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tps_Id,tps_nombre,tps_UsuarioCrea,tps_FechaCrea,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
+        public ActionResult Create([Bind(Include = "tps_Id,tps_Descripcion,tps_UsuarioCrea,tps_FechaCrea,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
         {
             if (ModelState.IsValid)
                 try
@@ -128,7 +128,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "tps_Id,tps_nombre,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
+        public ActionResult Edit([Bind(Include = "tps_Id,tps_Descripcion,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
         {
 
             if (db.tbTipoSangre.Any(a => a.tps_Descripcion == tbTipoSangre.tps_Descripcion && a.tps_Id != tbTipoSangre.tps_Id))
