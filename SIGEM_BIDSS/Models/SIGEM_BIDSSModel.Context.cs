@@ -2157,5 +2157,58 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbUnidadMedida_Update_Result>("UDP_Gral_tbUnidadMedida_Update", uni_IdParameter, uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioModificaParameter, uni_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<UDP_Adm_tbAnticipoSalario_Update_Result> UDP_Adm_tbAnticipoSalario_Update(Nullable<int> ansal_Id, Nullable<int> emp_Id, Nullable<int> ansal_JefeInmediato, Nullable<System.DateTime> ansal_GralFechaSolicitud, Nullable<decimal> ansal_MontoSolicitado, Nullable<int> tpsal_id, string ansal_Justificacion, string ansal_Comentario, Nullable<int> est_Id, string ansal_RazonRechazo, Nullable<int> ansal_UsuarioModifica, Nullable<System.DateTime> ansal_FechaModifica)
+        {
+            var ansal_IdParameter = ansal_Id.HasValue ?
+                new ObjectParameter("Ansal_Id", ansal_Id) :
+                new ObjectParameter("Ansal_Id", typeof(int));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var ansal_JefeInmediatoParameter = ansal_JefeInmediato.HasValue ?
+                new ObjectParameter("Ansal_JefeInmediato", ansal_JefeInmediato) :
+                new ObjectParameter("Ansal_JefeInmediato", typeof(int));
+    
+            var ansal_GralFechaSolicitudParameter = ansal_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("Ansal_GralFechaSolicitud", ansal_GralFechaSolicitud) :
+                new ObjectParameter("Ansal_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var ansal_MontoSolicitadoParameter = ansal_MontoSolicitado.HasValue ?
+                new ObjectParameter("Ansal_MontoSolicitado", ansal_MontoSolicitado) :
+                new ObjectParameter("Ansal_MontoSolicitado", typeof(decimal));
+    
+            var tpsal_idParameter = tpsal_id.HasValue ?
+                new ObjectParameter("tpsal_id", tpsal_id) :
+                new ObjectParameter("tpsal_id", typeof(int));
+    
+            var ansal_JustificacionParameter = ansal_Justificacion != null ?
+                new ObjectParameter("Ansal_Justificacion", ansal_Justificacion) :
+                new ObjectParameter("Ansal_Justificacion", typeof(string));
+    
+            var ansal_ComentarioParameter = ansal_Comentario != null ?
+                new ObjectParameter("Ansal_Comentario", ansal_Comentario) :
+                new ObjectParameter("Ansal_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var ansal_RazonRechazoParameter = ansal_RazonRechazo != null ?
+                new ObjectParameter("Ansal_RazonRechazo", ansal_RazonRechazo) :
+                new ObjectParameter("Ansal_RazonRechazo", typeof(string));
+    
+            var ansal_UsuarioModificaParameter = ansal_UsuarioModifica.HasValue ?
+                new ObjectParameter("Ansal_UsuarioModifica", ansal_UsuarioModifica) :
+                new ObjectParameter("Ansal_UsuarioModifica", typeof(int));
+    
+            var ansal_FechaModificaParameter = ansal_FechaModifica.HasValue ?
+                new ObjectParameter("Ansal_FechaModifica", ansal_FechaModifica) :
+                new ObjectParameter("Ansal_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoSalario_Update_Result>("UDP_Adm_tbAnticipoSalario_Update", ansal_IdParameter, emp_IdParameter, ansal_JefeInmediatoParameter, ansal_GralFechaSolicitudParameter, ansal_MontoSolicitadoParameter, tpsal_idParameter, ansal_JustificacionParameter, ansal_ComentarioParameter, est_IdParameter, ansal_RazonRechazoParameter, ansal_UsuarioModificaParameter, ansal_FechaModificaParameter);
+        }
     }
 }

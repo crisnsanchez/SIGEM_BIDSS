@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+    <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
@@ -88,8 +88,7 @@
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
-
-    <script src="~/Scripts/app/DataTables.js"></script>
+    <script src="~/Scripts/app/General.js"></script>
 
 
 

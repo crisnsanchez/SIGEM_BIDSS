@@ -23,7 +23,7 @@ namespace SIGEM_BIDSS.Models
             Hola.Add(new tbEmpleado { ge_Id = "M", ge_Description = "Masculino" });
             return Hola;
         }
-        
+
         public DateTime DatetimeNow()
         {
             DateTime dt = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(-6)).DateTime;
@@ -34,9 +34,24 @@ namespace SIGEM_BIDSS.Models
             int _user = 1;
             return _user;
         }
-      
+
+        //Catalogos
         public const string _isCreated = "Created";
         public const string _isEdited = "Edited";
+
+
+
+        //Solicitudes
+        public const string sol_Enviada = "Enviada";
+        public const string sol_Revisada = "Revisada";
+        public const string sol_Aprobada = "Aceptada";
+        public const string sol_Rechazada = "Rechazada";
+
+        //Estados Solicitud
+        public const int Enviada = 1;
+        public const int Revisada = 2;
+        public const int Aprobada = 3;
+        public const int Rechazada = 4;
 
 
 
@@ -75,7 +90,8 @@ namespace SIGEM_BIDSS.Models
             UserName = ClaimsPrincipal.Current.FindFirst("name").Value;
             email = ClaimsPrincipal.Current.FindFirst("preferred_username").Value;
 
-            var Usuario = db.tbEmpleado.Select(s => new {
+            var Usuario = db.tbEmpleado.Select(s => new
+            {
                 emp_Id = s.emp_Id,
                 emp_CorreoElectronico = s.emp_CorreoElectronico
             }).Where(x => x.emp_CorreoElectronico == email).ToList();
@@ -87,8 +103,6 @@ namespace SIGEM_BIDSS.Models
         }
 
         //Call
-        //string lvMensajeError = "";
-        //LeerDatos(out lvMensajeError, tbSolicitud.sol_GralCorreoJefeInmediato, tbSolicitud.sol_GralJefeInmediato, tbSolicitud.Emp_Name);
 
         public int LeerDatosSol(out string pvMensajeError, string _empJefeMail, string _GralJefeInmediato, string _empName)
         {
@@ -193,11 +207,7 @@ namespace SIGEM_BIDSS.Models
         }
 
 
-        //Estados Solicitud
-        public const int Enviada = 1;
-        public const int Revisada = 2;
-        public const int Aprobada = 3;
-        public const int Rechazada = 4;
+      
 
         //Bitácora de Errores
         public void BitacoraErrores(string Controller, string Action, string User, string ErrorMessage)

@@ -220,6 +220,9 @@
     <Compile Include="Models\Departamentos.cs" />
     <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\InventarioCompra.cs" />
+    <Compile Include="Models\UDP_Adm_tbAnticipoSalario_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UnidadMedidas.cs" />
     <Compile Include="Models\parametro.cs" />
     <Compile Include="Models\SDP_tbMunicipio_Select_Result.cs">
@@ -890,6 +893,7 @@
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\app\DataTables.js" />
     <Content Include="Scripts\app\General.js" />
+    <Content Include="Scripts\app\General_Details.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
     <Content Include="Scripts\app\Solicitud.js" />

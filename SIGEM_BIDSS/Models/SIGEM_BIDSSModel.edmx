@@ -588,6 +588,20 @@
           <Parameter Name="Ansal_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="Ansal_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Adm_tbAnticipoSalario_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="Ansal_Id" Type="int" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="Ansal_JefeInmediato" Type="int" Mode="In" />
+          <Parameter Name="Ansal_GralFechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="Ansal_MontoSolicitado" Type="decimal" Mode="In" />
+          <Parameter Name="tpsal_id" Type="int" Mode="In" />
+          <Parameter Name="Ansal_Justificacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ansal_Comentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="Ansal_RazonRechazo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ansal_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="Ansal_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Adm_tbAnticipoViatico_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="Anvi_JefeInmediato" Type="int" Mode="In" />
@@ -1768,6 +1782,20 @@
             <Parameter Name="uni_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="uni_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbAnticipoSalario_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbAnticipoSalario_Update_Result)">
+            <Parameter Name="Ansal_Id" Mode="In" Type="Int32" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_JefeInmediato" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_GralFechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="Ansal_MontoSolicitado" Mode="In" Type="Decimal" />
+            <Parameter Name="tpsal_id" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_Justificacion" Mode="In" Type="String" />
+            <Parameter Name="Ansal_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Ansal_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="Ansal_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2524,6 +2552,9 @@
         <ComplexType Name="UDP_Gral_tbUnidadMedida_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Adm_tbAnticipoSalario_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3184,6 +3215,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbUnidadMedida_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbUnidadMedida_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbUnidadMedida_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAnticipoSalario_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAnticipoSalario_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAnticipoSalario_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
