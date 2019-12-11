@@ -252,6 +252,31 @@ namespace SIGEM_BIDSS.Controllers
                 return false;
             }
         }
+        [HttpPost]
+        public JsonResult Approve(int id)
+        {
+            var list = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
+            if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Rechazada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                }
+            }
+            if (tbAnticipoSalario == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+                //return HttpNotFound();
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpPost]
         public JsonResult Reject(int id, string Ansal_RazonRechazo)

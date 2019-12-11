@@ -41,18 +41,18 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbTipoMovimiento> tbTipoMovimiento { get; set; }
         public virtual DbSet<tbTipoPermiso> tbTipoPermiso { get; set; }
         public virtual DbSet<tbTipoSalario> tbTipoSalario { get; set; }
-        public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbTipoTransporte> tbTipoTransporte { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
-        public virtual DbSet<tbUnidadMedida> tbUnidadMedida { get; set; }
         public virtual DbSet<tbProductoCategoria> tbProductoCategoria { get; set; }
         public virtual DbSet<tbProductoSubcategoria> tbProductoSubcategoria { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbInstitucionFinanciera> tbInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
-        public virtual DbSet<tbSueldo> tbSueldo { get; set; }
         public virtual DbSet<tbActividadEconomica> tbActividadEconomica { get; set; }
         public virtual DbSet<tbProveedor> tbProveedor { get; set; }
+        public virtual DbSet<tbUnidadMedida> tbUnidadMedida { get; set; }
+        public virtual DbSet<tbSueldo> tbSueldo { get; set; }
+        public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -440,11 +440,11 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Nombre, Nullable<int> tps_UsuarioCrea, Nullable<System.DateTime> tps_FechaCrea)
+        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Descripcion, Nullable<int> tps_UsuarioCrea, Nullable<System.DateTime> tps_FechaCrea)
         {
-            var tps_NombreParameter = tps_Nombre != null ?
-                new ObjectParameter("tps_Nombre", tps_Nombre) :
-                new ObjectParameter("tps_Nombre", typeof(string));
+            var tps_DescripcionParameter = tps_Descripcion != null ?
+                new ObjectParameter("tps_Descripcion", tps_Descripcion) :
+                new ObjectParameter("tps_Descripcion", typeof(string));
     
             var tps_UsuarioCreaParameter = tps_UsuarioCrea.HasValue ?
                 new ObjectParameter("tps_UsuarioCrea", tps_UsuarioCrea) :
@@ -454,7 +454,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tps_FechaCrea", tps_FechaCrea) :
                 new ObjectParameter("tps_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Insert_Result>("UDP_Gral_tbTipoSangre_Insert", tps_NombreParameter, tps_UsuarioCreaParameter, tps_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Insert_Result>("UDP_Gral_tbTipoSangre_Insert", tps_DescripcionParameter, tps_UsuarioCreaParameter, tps_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbTipoSolicitud_Insert_Result> UDP_Gral_tbTipoSolicitud_Insert(string tipsol_Descripcion, Nullable<int> tipsol_UsuarioCrea)
@@ -1908,15 +1908,15 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoPermiso_Insert_Result>("UDP_Gral_tbTipoPermiso_Insert", tperm_DescripcionParameter, tperm_UsuarioCreaParameter, tperm_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Update_Result> UDP_Gral_tbTipoSangre_Update(Nullable<int> tps_Id, string tps_Nombre, Nullable<int> tps_UsuarioModifica, Nullable<System.DateTime> tps_FechaModifica)
+        public virtual ObjectResult<UDP_Gral_tbTipoSangre_Update_Result> UDP_Gral_tbTipoSangre_Update(Nullable<int> tps_Id, string tps_Descripcion, Nullable<int> tps_UsuarioModifica, Nullable<System.DateTime> tps_FechaModifica)
         {
             var tps_IdParameter = tps_Id.HasValue ?
                 new ObjectParameter("tps_Id", tps_Id) :
                 new ObjectParameter("tps_Id", typeof(int));
     
-            var tps_NombreParameter = tps_Nombre != null ?
-                new ObjectParameter("tps_Nombre", tps_Nombre) :
-                new ObjectParameter("tps_Nombre", typeof(string));
+            var tps_DescripcionParameter = tps_Descripcion != null ?
+                new ObjectParameter("tps_Descripcion", tps_Descripcion) :
+                new ObjectParameter("tps_Descripcion", typeof(string));
     
             var tps_UsuarioModificaParameter = tps_UsuarioModifica.HasValue ?
                 new ObjectParameter("tps_UsuarioModifica", tps_UsuarioModifica) :
@@ -1926,7 +1926,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("tps_FechaModifica", tps_FechaModifica) :
                 new ObjectParameter("tps_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Update_Result>("UDP_Gral_tbTipoSangre_Update", tps_IdParameter, tps_NombreParameter, tps_UsuarioModificaParameter, tps_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbTipoSangre_Update_Result>("UDP_Gral_tbTipoSangre_Update", tps_IdParameter, tps_DescripcionParameter, tps_UsuarioModificaParameter, tps_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbTipoSalario_Insert_Result> UDP_Gral_tbTipoSalario_Insert(Nullable<int> tpsal_id, string tpsal_Descripcion, Nullable<int> tpsal_UsuarioCrea, Nullable<System.DateTime> tpsal_FechaCrea)

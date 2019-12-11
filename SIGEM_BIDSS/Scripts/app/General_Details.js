@@ -26,8 +26,26 @@ $(function () {
     }
 })
 
+////Approve
+$(document).on("click", "#_ModalApprove", function () {
+    SendDataApprove();
+});
 
 
+function SendDataApprove() {
+    var Ansal_Id = $('#Ansal_Id').val()
+    $.ajax({
+        url: "/AnticipoSalario/Approve",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: Ansal_Id}),
+    })
+        .done(function (data) {
+            location.reload()
+        });
+
+}
 
 
 ////Reject
@@ -51,3 +69,18 @@ function SendData() {
         });
 
 }
+
+//Funcion no aceptar espacios en el textbox
+document.addEventListener("input", function () {
+    $("textarea", 'body').each(function (e) {
+        _id = $(this).attr("id");
+        _value = document.getElementById(_id).value;
+        document.getElementById(_id).value = _value.trimStart();
+
+    });
+    $(".normalize", 'body').each(function (e) {
+        if (!/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)) {
+            this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
+        }
+    });
+});
