@@ -130,7 +130,7 @@ namespace SIGEM_BIDSS.Controllers
             //ViewBag.Email = userClaims?.FindFirst("preferred_username")?.Value;
             ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion");
-            ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre");
+            ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion");
             ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description");
     
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
@@ -183,7 +183,7 @@ namespace SIGEM_BIDSS.Controllers
                 ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                 ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                 ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
              
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion",tbEmpleado.est_Id);
@@ -235,7 +235,7 @@ namespace SIGEM_BIDSS.Controllers
                         ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                         ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                         ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-                        ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                        ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                         ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
                     
                         ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
@@ -257,7 +257,7 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                     ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-                    ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                    ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                     ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
                  
                     ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
@@ -271,7 +271,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                 ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
                 ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
@@ -300,7 +300,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             ViewBag.mun_codigo = new SelectList(db.tbMunicipio.Where(x => x.dep_codigo == _depto), "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
             ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-            ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+            ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
             ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion",db.tbPuesto.Find(tbEmpleado.pto_Id).are_Id);
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
@@ -363,7 +363,7 @@ namespace SIGEM_BIDSS.Controllers
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                         ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-                        ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                        ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                         ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                         ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
                         ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
@@ -383,7 +383,7 @@ namespace SIGEM_BIDSS.Controllers
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-                    ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                    ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                     ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                     ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                     ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
@@ -397,7 +397,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
-                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_nombre", tbEmpleado.tps_Id);
+                ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                 ViewBag.emp_Sexo = new SelectList(GFC.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
                 ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");

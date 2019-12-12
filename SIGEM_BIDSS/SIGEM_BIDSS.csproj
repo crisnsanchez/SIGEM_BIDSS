@@ -237,6 +237,7 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sueldo.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -3281,11 +3282,6 @@
     <Content Include="Views\DeduccionInstitucionFinancieras\Details.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Edit.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinancieras\Index.cshtml" />
-    <Content Include="Views\Sueldos\Create.cshtml" />
-    <Content Include="Views\Sueldos\Delete.cshtml" />
-    <Content Include="Views\Sueldos\Details.cshtml" />
-    <Content Include="Views\Sueldos\Edit.cshtml" />
-    <Content Include="Views\Sueldos\Index.cshtml" />
     <Content Include="Views\Parametro\Create.cshtml" />
     <Content Include="Views\Parametro\Delete.cshtml" />
     <Content Include="Views\Parametro\Details.cshtml" />
