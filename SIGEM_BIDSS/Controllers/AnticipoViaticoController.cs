@@ -13,7 +13,6 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    [Authorize]
     public class AnticipoViaticoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
@@ -44,13 +43,14 @@ namespace SIGEM_BIDSS.Controllers
         // GET: AnticipoViatico/Create
         public ActionResult Create()
         {
-            var JefeInmediato = db.tbEmpleado.Select(s => new {
+            var JefeInmediato = db.tbEmpleado.Select(s => new
+            {
                 emp_Id = s.emp_Id,
                 emp_Nombres = s.emp_Nombres,
                 emp_EsJefe = s.emp_EsJefe
-            }).Where(x=>x.emp_EsJefe==true).ToList();
+            }).Where(x => x.emp_EsJefe == true).ToList();
 
-            
+
             ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
             ViewBag.Anvi_JefeInmediato = new SelectList(JefeInmediato, "emp_Id", "emp_Nombres");
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
@@ -71,13 +71,16 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
                 bool Result = false;
-                int EmployeeID = Funtion.GetUser(out UserName);
+                int EmployeeID = 0;
+                EmployeeID = Funtion.GetUser(out UserName);
                 tbAnticipoViatico.emp_Id = EmployeeID;
                 tbAnticipoViatico.Anvi_GralFechaSolicitud = Funtion.DatetimeNow();
                 tbAnticipoViatico.est_Id = GeneralFunctions.Enviada;
 
                 if (tbAnticipoViatico.mun_Codigo == "Seleccione")
                     ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
+                else
+                    ViewBag.munCodigo = tbAnticipoViatico.mun_Codigo;
 
                 if (String.IsNullOrEmpty(dep_codigo))
                     ModelState.AddModelError("Anvi_UsuarioCrea", "El campo Departamento es obligatorio.");
@@ -86,7 +89,8 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<object> Insert = null;
                     string ErrorMessage = "";
-
+                    if (dep_codigo == "ajax")
+                        tbAnticipoViatico.Anvi_Autorizacion = true;
                     Insert = db.UDP_Adm_tbAnticipoViatico_Insert(EmployeeID,
                                                                 tbAnticipoViatico.Anvi_JefeInmediato,
                                                                 Funtion.DatetimeNow(),
@@ -113,15 +117,15 @@ namespace SIGEM_BIDSS.Controllers
                     else
                     {
                         Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
-                        if(!Result)
+                        if (!Result)
                             Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
 
-                        return RedirectToAction("Index");
+                        return Json("Index");
                     }
-                        
+
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
             }
@@ -129,7 +133,10 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.Anvi_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoViatico.Anvi_JefeInmediato);
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbAnticipoViatico.mun_Codigo);
             ViewBag.Anvi_tptran_Id = new SelectList(db.tbTipoTransporte, "tptran_Id", "tptran_Descripcion", tbAnticipoViatico.Anvi_tptran_Id);
-            return View(tbAnticipoViatico);
+            if(dep_codigo != "ajax")
+                return View("Create");
+            else
+                return Json("Create");
         }
 
         // GET: AnticipoViatico/Edit/5

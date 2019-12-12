@@ -243,17 +243,15 @@ namespace SIGEM_BIDSS.Models
             if (State)
             {
                 //Si todo está bien procedo a enviar correo
-                StateIn = enviarCorreo("magdaly2511@gmail.com", "Sinceridad251123", lsXMLEnvio, lsSubject, EmailDesti, "smtp.gmail.com", "25", out pvMensajeError);
-                if (StateIn == 1)
-                    BitacoraErrores("GeneralFunctions", "enviarCorreo", UserName, pvMensajeError);
-
-                return true;
+                var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                StateIn = enviarCorreo(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, EmailDesti, _Parameters.par_Servidor, _Parameters.par_Puerto.ToString(), out pvMensajeError);
+                if (StateIn != 1)
+                    return true;
+                else
+                    return false;
             }
             else
-            {
-                BitacoraErrores("GeneralFunctions", "EmailGenerar_Body", UserName, pvMensajeError);
                 return false;
-            }
 
         }
 
