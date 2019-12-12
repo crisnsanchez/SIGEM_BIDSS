@@ -71,7 +71,7 @@ namespace SIGEM_BIDSS.Controllers
                     if (Msj.StartsWith("-2"))
                     {
 
-                        ModelState.AddModelError("", "Ya existe un Tipo Transporte con el mismo nombre.");
+                        ModelState.AddModelError("", "Ya existe una Actividad Ecónomica con el mismo nombre.");
                         return View();
                     }
                     else
