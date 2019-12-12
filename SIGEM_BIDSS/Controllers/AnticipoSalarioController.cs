@@ -215,17 +215,17 @@ namespace SIGEM_BIDSS.Controllers
                 string ErrorMessage = "";
 
                 Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
-                    EmployeeID,
-                    tbAnticipoSalario.Ansal_JefeInmediato,
-                    Funtion.DatetimeNow(),
-                    tbAnticipoSalario.Ansal_MontoSolicitado,
-                    tbAnticipoSalario.tpsal_id,
-                    tbAnticipoSalario.Ansal_Justificacion,
-                    tbAnticipoSalario.Ansal_Comentario,
-                    tbAnticipoSalario.est_Id,
-                    tbAnticipoSalario.Ansal_RazonRechazo,
-                    EmployeeID,
-                    Funtion.DatetimeNow());
+                                                                EmployeeID,
+                                                                tbAnticipoSalario.Ansal_JefeInmediato,
+                                                                Funtion.DatetimeNow(),
+                                                                tbAnticipoSalario.Ansal_MontoSolicitado,
+                                                                tbAnticipoSalario.tpsal_id,
+                                                                tbAnticipoSalario.Ansal_Justificacion,
+                                                                tbAnticipoSalario.Ansal_Comentario,
+                                                                tbAnticipoSalario.est_Id,
+                                                                tbAnticipoSalario.Ansal_RazonRechazo,
+                                                                EmployeeID,
+                                                                Funtion.DatetimeNow());
                 foreach (UDP_Adm_tbAnticipoSalario_Update_Result Res in Update)
                     ErrorMessage = Res.MensajeError;
                 if (ErrorMessage.StartsWith("-1"))

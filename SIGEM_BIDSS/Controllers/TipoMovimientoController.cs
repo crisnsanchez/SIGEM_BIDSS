@@ -67,7 +67,7 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
                 try
                 {
-                    if (isDuplicated(tbTipoMovimiento.tipmo_Movimiento))
+                    if (isDuplicated(tbTipoMovimiento))
                     {
                         ModelState.AddModelError("", "Este tipo de movimiento ya esta registrado.");
                         return View(tbTipoMovimiento);
@@ -135,7 +135,7 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
                 try
                 {
-                    if (isDuplicated(tbTipoMovimiento.tipmo_Movimiento))
+                    if (isDuplicated(tbTipoMovimiento))
                     {
                         ModelState.AddModelError("", "Este tipo de movimiento ya esta registrado.");
                         return View(tbTipoMovimiento);
@@ -196,12 +196,12 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-        public bool isDuplicated(string tipmo_Movimiento)
+        public bool isDuplicated(tbTipoMovimiento tbTipoMovimiento)
         {
             bool _boolExist = false;
             try
             {
-                int _Exist = (from _tbM in db.tbTipoMovimiento where _tbM.tipmo_Movimiento == tipmo_Movimiento select _tbM).Count();
+                int _Exist = (from _tbM in db.tbTipoMovimiento where _tbM.tipmo_Movimiento == tbTipoMovimiento.tipmo_Movimiento && _tbM.tipmo_id != tbTipoMovimiento.tipmo_id select _tbM).Count();
                 if (_Exist >= 1)
                 {
                    return _boolExist = true;
