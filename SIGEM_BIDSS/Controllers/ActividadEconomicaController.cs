@@ -71,7 +71,7 @@ namespace SIGEM_BIDSS.Controllers
                     if (Msj.StartsWith("-2"))
                     {
 
-                        ModelState.AddModelError("", "Ya existe un Tipo Transporte con el mismo nombre.");
+                        ModelState.AddModelError("", "Ya existe una Actividad Ecónomica con el mismo nombre.");
                         return View();
                     }
                     else
@@ -112,7 +112,12 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "acte_Id,acte_Descripcion,acte_UsuarioCrea,acte_FechaCrea,acte_UsuarioModifica,acte_FechaModifica")] tbActividadEconomica tbActividadEconomica)
         {
             if (ModelState.IsValid)
-                try
+                if (db.tbActividadEconomica.Any(a => a.acte_Descripcion == tbActividadEconomica.acte_Descripcion && a.acte_Id != tbActividadEconomica.acte_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe una Actividad Ecónomica con el mismo nombre.");
+                    return View(tbActividadEconomica);
+                }
+            try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";

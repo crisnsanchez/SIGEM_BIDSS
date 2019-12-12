@@ -78,10 +78,14 @@
                                 <input type="button" id="RazonInactivacion" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalRazonInactivacion" value="Inactivar" />
                                 <input type="hidden" id="_emp_Id" value="@item.emp_Id" />
                             }
-                            else if(item.est_Id == GeneralFunctions.empleadoinactivo)
+                            else if (item.est_Id == GeneralFunctions.empleadoinactivo)
                             {
-                                @Html.ActionLink("Activar", "Activate", new { id = item.emp_Id }, new { @class = "btn btn-success btn-xs" , @Style="width:55px" })
+                                @Html.ActionLink("Activar", "Activate", new { id = item.emp_Id }, new { @class = "btn btn-success btn-xs", @Style = "width:55px" })
                             }
+                            @*@Html.ActionLink("Index","Sueldo"), new { id = item.emp_Id }, new { @class = "btn btn-success btn-xs", @Style = "width:55px" })*@
+
+                            <a href="@Url.Action("Index","Sueldo")" class="btn btn-danger btn-xs">Sueldo</a>
+
                         </td>
                     </tr>
                 }

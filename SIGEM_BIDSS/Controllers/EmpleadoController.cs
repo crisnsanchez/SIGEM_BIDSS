@@ -247,7 +247,10 @@ namespace SIGEM_BIDSS.Controllers
                     else
                     {
                         TempData["swalfunction"] = "true";
-                        return RedirectToAction("Index");
+                        int id = tbEmpleado.emp_Id;
+                        //Session["Empleado"]=tbEmpleado.emp_Id;
+                        var result = new SueldoController().Create(id);
+                        return result;
                     }
                 }
                 catch (Exception Ex)
