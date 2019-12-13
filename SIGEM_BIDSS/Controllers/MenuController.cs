@@ -40,5 +40,9 @@ namespace SIGEM_BIDSS.Controllers
         {
             return View();
         }
+        public ActionResult Inventario()
+        {
+            return View();
+        }
     }
 }

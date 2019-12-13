@@ -216,6 +216,7 @@
     </Compile>
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
     <Compile Include="Models\Economica.cs" />
     <Compile Include="Models\Helpers.cs" />
@@ -463,6 +464,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Gral_tSolicitudInsertar_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProveedor_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProveedor_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionFinanciera_Insert_Result.cs">
@@ -3330,6 +3337,7 @@
     <Content Include="Views\Sueldo\Details.cshtml" />
     <Content Include="Views\Sueldo\Edit.cshtml" />
     <Content Include="Views\Sueldo\Index.cshtml" />
+    <Content Include="Views\Menu\Inventario.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
