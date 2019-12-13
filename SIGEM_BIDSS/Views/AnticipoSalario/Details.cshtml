@@ -166,7 +166,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="button" id="_ModalApprove">Aprobar</button>
+                @{
+                    @Html.ActionLink("Aprobar", "Approve", new { id = Model.Ansal_Id }, new { @class = "btn btn-primary" })
+                }
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             </div>
         </div>

@@ -14,7 +14,6 @@
                     <td class="bg_dark email-section" style="text-align:center;background: rgba(0, 0, 0, .8);padding: 2.5em;">
                       <div class="heading-section heading-section-white" style="color: rgba(255, 255, 255, .8);">
                         <span class="subheading" style="margin-bottom: 20px !important;display: inline-block;font-size: 13px;text-transform: uppercase;letter-spacing: 2px;color: rgba(255, 255, 255, .4);position: relative;">Bienvenido</span>
-                        <span xmlns="http://www.w3.org/1999/xhtml" style="position: absolute;left: 0;right: 0;top:65px;content: '';width: 9%;height: 2px;background: #f3a333;margin: 0 auto;"></span>
                         <h2 style="font-size: 28px;font-family: line-height: 1;padding-bottom: 0;color: #000000;color: #ffffff;font-size: 28px;margin-top: 0;line-height: 1.4;">
                           <xsl:value-of select="to"/>
                         </h2>
@@ -28,7 +27,6 @@
                         <span class="subheading" style="margin-bottom: 24px !important;display: inline-block;font-size: 13px;text-transform: uppercase;letter-spacing: 2px;color: rgba(0, 0, 0, .4);position: relative;">
                           <xsl:value-of select="nref"/>
                         </span>
-                        <span xmlns="http://www.w3.org/1999/xhtml" style="position: absolute;left: 0;right: 0;top:240px;content: '';width: 7%;height: 2px;background: #f3a333;margin: 0 auto;"></span>
                         <p>
                           <h2 style="padding-bottom: 0;color: rgba(0, 0, 0, .4);font-size: 28px;margin-top: 0;line-height: 1.4;">
                             <xsl:value-of select="EmployeeName"/>

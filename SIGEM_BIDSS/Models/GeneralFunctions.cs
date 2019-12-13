@@ -112,113 +112,6 @@ namespace SIGEM_BIDSS.Models
             return _user;
         }
 
-        //Call
-
-        public int LeerDatosSol(out string pvMensajeError,string _Correlativo, string _empName, string _Mail, string MailTo, string _msj,string _RazonRechazo)
-        {
-            try
-            {
-                pvMensajeError = "";
-                string lsSubject = "",
-                        lsRutaPlantilla = "",
-                        lsXMLDatos = "",
-                        lsXMLEnvio = "";
-                lsSubject = "REF:("+ _Correlativo + ")";
-                lsRutaPlantilla = @"C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Content\Email\index.xml";
-
-                lsXMLDatos = @"<principal>
-                              <to>" + _empName + "</to>" +
-                              @"<nref>REF:(" + _Correlativo + ")</nref>" +
-                              @"<EmployeeName>" + _Mail + "</EmployeeName>" +
-                               @"<msj>" + _msj + "</msj>" +
-                                @"<RazonRechazo>" + _RazonRechazo + "</RazonRechazo>" +
-                             "</principal>";
-                
-                var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                EmailGenerar_BodySol(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
-                enviarCorreoSol(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, MailTo, _Parameters.par_Servidor, _Parameters.par_Puerto);
-                return 0;
-            }
-            catch (Exception Ex)
-            {
-                throw;
-            }
-        }
-
-        private Boolean EmailGenerar_BodySol(string psRutaPlantilla, string psXML, out string psXMLEnvio)
-        {
-            psXMLEnvio = "";
-            try
-            {
-                //Leer
-                XmlTextReader reader = new XmlTextReader(psRutaPlantilla);
-                reader.Read();
-
-                //Cargar
-                XslCompiledTransform xslt = new XslCompiledTransform();
-                xslt.Load(reader);
-
-                XmlReader xmlData = XmlReader.Create(new StringReader(psXML));
-
-                XmlWriterSettings Configuraciones = new XmlWriterSettings();
-                Configuraciones.OmitXmlDeclaration = true;
-                Configuraciones.ConformanceLevel = ConformanceLevel.Fragment;
-                //Configuraciones.Encoding = Encoding.UTF8;
-                Configuraciones.CloseOutput = false;
-
-                //Empieza a hacer el match
-                using (StringWriter sw = new StringWriter())
-                using (XmlWriter xwo = XmlWriter.Create(sw, Configuraciones)) // xslt.OutputSettings use OutputSettings of xsl, so it can be output as HTML
-                {
-                    xslt.Transform(xmlData, null, xwo);
-                    psXMLEnvio = sw.ToString();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                ex.Message.ToString();
-                psXMLEnvio = "";
-                return false;
-            }
-        }
-
-        public int enviarCorreoSol(string psEmisor, string psPassword, string psMensaje, string psAsunto, string psDestinatario, string psServidor, int psPuerto)
-        {
-            //      0 = Ok      //
-            //      1 = Error   //
-
-            MailMessage correos = new MailMessage();
-            SmtpClient envios = new SmtpClient();
-
-            try
-            {
-                correos.To.Clear();
-                correos.Body = "";
-                correos.Subject = "";
-                correos.Body = psMensaje;
-                correos.BodyEncoding = System.Text.Encoding.UTF8;
-                correos.Subject = psAsunto;
-                correos.IsBodyHtml = true;
-                correos.To.Add(psDestinatario.Trim());
-                correos.From = new MailAddress(psEmisor);
-                envios.Credentials = new NetworkCredential(psEmisor, psPassword);
-                // Datos del servidor //
-                envios.Host = psServidor;
-                envios.Port = psPuerto;
-                envios.EnableSsl = true;
-                //Función de envío de correo //
-                envios.Send(correos);
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                return 1;
-            }
-        }
-
-
-      
 
         //Bitácora de Errores
         public void BitacoraErrores(string Controller, string Action, string User, string ErrorMessage)
@@ -226,7 +119,7 @@ namespace SIGEM_BIDSS.Models
             db.UDP_Acce_tbBitacoraErrores_Insert(Controller, Action, User, DatetimeNow(), ErrorMessage);
         }
 
-        public bool LeerDatos(out string pvMensajeError, string Reference)
+        public bool LeerDatos(out string pvMensajeError, string Reference, string _empName, string _Mail, string MailTo, string _msj, string _RazonRechazo)
         {
             pvMensajeError = "";
             string UserName = "",
@@ -236,6 +129,18 @@ namespace SIGEM_BIDSS.Models
                     lsXMLDatos = "",
                     lsXMLEnvio = "";
 
+         
+            lsSubject = "REF:(" + Reference + ")";
+
+            lsXMLDatos = @"<principal>
+                        <to>" + _empName + "</to>" +
+                          @"<nref>REF:(" + Reference + ")</nref>" +
+                          @"<EmployeeName>" + _Mail + "</EmployeeName>" +
+                          @"<msj>" + _msj + "</msj>" +
+                          @"<RazonRechazo>" + _RazonRechazo + "</RazonRechazo>" +
+                         "</principal>";
+
+
             bool State = false;
             int StateIn = 0;
 
@@ -244,12 +149,11 @@ namespace SIGEM_BIDSS.Models
             GetUser(out UserName);
             lsSubject = Reference;
 
-            lsRutaPlantilla = System.AppContext.BaseDirectory + "Content\\Email\\AnticipoViatico.xml";
+            lsRutaPlantilla = System.AppContext.BaseDirectory + "Content\\Email\\Solicitud.xml";
 
             lsXMLDatos = @"<principal>
                               <UserFullName>" + UserName + "</UserFullName>"
                          + "</principal>";
-
             State = EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio, out pvMensajeError);
             if (State)
             {

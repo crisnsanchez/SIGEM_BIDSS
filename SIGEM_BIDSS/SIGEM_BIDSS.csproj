@@ -495,7 +495,7 @@
     <Compile Include="TokenStorage\SessionTokenStore.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Email\index.xml">
+    <Content Include="Content\Email\Solicitud.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\img\background.jpg" />

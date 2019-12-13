@@ -102,7 +102,7 @@ namespace SIGEM_BIDSS.Controllers
 
             try
             {
-                bool Result = false;
+                bool Result = false, ResultAdm = false;
                 int EmployeeID = Funtion.GetUser(out UserName);
                 tbAnticipoSalario.emp_Id = EmployeeID;
                 tbAnticipoSalario.Ansal_GralFechaSolicitud = Funtion.DatetimeNow();
@@ -133,13 +133,17 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
+                       
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                        Funtion.LeerDatosSol(out string pvMensajeError, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada,"");
-                        Funtion.LeerDatosSol(out string vMensajeError, ErrorMessage, "BI-DSS", GetEmployee.emp_Nombres, "paula.diaz@bi-dss.com", GeneralFunctions.msj_ToAdmin, "");
+                        if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                        var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
+                        ResultAdm = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
 
                         if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+
                         TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
                         return RedirectToAction("Index");
                     }
@@ -254,10 +258,8 @@ namespace SIGEM_BIDSS.Controllers
                             reject = " Razon de Rechazo:";
                             break;
                     }
+                    Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
 
-                    Funtion.LeerDatosSol(out string pvMensajeError, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, reject+" "+_msj, tbAnticipoSalario.Ansal_RazonRechazo);
-
-                    Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
                     if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                     return true;
                 }
