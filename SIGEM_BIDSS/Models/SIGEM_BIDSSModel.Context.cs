@@ -2206,7 +2206,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbSueldo_Insert_Result>("UDP_rrhh_tbSueldo_Insert", emp_IdParameter, sue_CantidadParameter, tmo_IdParameter, suel_UsuarioCreaParameter, suel_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_rrhh_tbSueldo_Update_Result> UDP_rrhh_tbSueldo_Update(Nullable<int> sue_Id, Nullable<short> emp_Id, Nullable<decimal> sue_Cantidad, Nullable<short> tmo_Id, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
+        public virtual ObjectResult<UDP_rrhh_tbSueldo_Update_Result> UDP_rrhh_tbSueldo_Update(Nullable<int> sue_Id, Nullable<int> emp_Id, Nullable<decimal> sue_Cantidad, Nullable<short> tmo_Id, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
         {
             var sue_IdParameter = sue_Id.HasValue ?
                 new ObjectParameter("sue_Id", sue_Id) :
@@ -2214,7 +2214,7 @@ namespace SIGEM_BIDSS.Models
     
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(short));
+                new ObjectParameter("emp_Id", typeof(int));
     
             var sue_CantidadParameter = sue_Cantidad.HasValue ?
                 new ObjectParameter("sue_Cantidad", sue_Cantidad) :

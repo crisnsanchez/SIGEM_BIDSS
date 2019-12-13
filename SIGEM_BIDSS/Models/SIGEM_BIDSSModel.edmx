@@ -1049,7 +1049,7 @@
         </Function>
         <Function Name="UDP_rrhh_tbSueldo_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="sue_Id" Type="int" Mode="In" />
-          <Parameter Name="emp_Id" Type="smallint" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="tmo_Id" Type="smallint" Mode="In" />
           <Parameter Name="sue_UsuarioModifica" Type="int" Mode="In" />
@@ -1877,7 +1877,7 @@
           </FunctionImport>
           <FunctionImport Name="UDP_rrhh_tbSueldo_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_rrhh_tbSueldo_Update_Result)">
             <Parameter Name="sue_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int16" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
             <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />

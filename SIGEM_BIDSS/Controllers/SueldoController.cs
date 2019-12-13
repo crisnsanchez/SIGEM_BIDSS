@@ -119,18 +119,12 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (db.tbArea.Any(a => a.are_Descripcion == tbArea.are_Descripcion && a.are_Id != tbArea.are_Id))
-                //{
-                //    ModelState.AddModelError("", "Ya existe un Área con el mismo nombre.");
-                //    return View(tbArea);
-                //}
-
-
+               
                 try
                 {
                     IEnumerable<object> _List = null;
                     string MsjError = "";
-                    _List = db.UDP_rrhh_tbSueldo_Update(tbSueldo.sue_Id,Convert.ToInt16(tbSueldo.emp_Id) ,tbSueldo.sue_Cantidad,tbSueldo.tmo_Id, 1, Function.DatetimeNow());
+                    _List = db.UDP_rrhh_tbSueldo_Update(tbSueldo.sue_Id, tbSueldo.emp_Id, tbSueldo.sue_Cantidad, tbSueldo.tmo_Id, 1, Function.DatetimeNow());
                     foreach (UDP_rrhh_tbSueldo_Update_Result _sueldo in _List)
                         MsjError = _sueldo.MensajeError;
                     if (MsjError.StartsWith("-1"))
