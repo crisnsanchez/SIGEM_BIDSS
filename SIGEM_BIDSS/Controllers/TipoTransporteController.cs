@@ -112,7 +112,12 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "tptran_Id,tptran_Descripcion,tptran_UsuarioCrea,tptran_FechaCrea,tptran_UsuarioModifica,tptran_FechaModifica")] tbTipoTransporte tbTipoTransporte)
         {
             if (ModelState.IsValid)
-                try
+                if (db.tbTipoTransporte.Any(a => a.tptran_Descripcion == tbTipoTransporte.tptran_Descripcion && a.tptran_Id != tbTipoTransporte.tptran_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe un Tipo de Transporte con el mismo nombre.");
+                    return View(tbTipoTransporte);
+                }
+            try
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";

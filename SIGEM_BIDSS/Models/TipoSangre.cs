@@ -22,7 +22,7 @@ namespace SIGEM_BIDSS.Models
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Nombre")] 
-        public string tps_nombre { get; set; }
+        public string tps_Descripcion { get; set; }
 
         [Display(Name = "Usuario Crea")]
         public int tps_UsuarioCrea { get; set; }

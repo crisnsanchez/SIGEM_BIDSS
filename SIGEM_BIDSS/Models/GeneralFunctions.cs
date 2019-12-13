@@ -42,10 +42,20 @@ namespace SIGEM_BIDSS.Models
 
 
         //Solicitudes
+        public const string msj_ToAdmin = "ha ingresado una solicitud";
+
+
         public const string sol_Enviada = "Enviada";
+        public const string msj_Enviada = "Su solicituda a sido ingresada con exito"; 
+
         public const string sol_Revisada = "Revisada";
+        public const string msj_Revisada = "Su solicituda a sido revisada";
+
         public const string sol_Aprobada = "Aceptada";
+        public const string msj_Aprobada = "Su solicituda a sido aprobada";
+
         public const string sol_Rechazada = "Rechazada";
+        public const string msj_Rechazada = "Su solicituda a sido rechazada";
 
         //Estados Solicitud
         public const int Enviada = 1;
@@ -104,7 +114,7 @@ namespace SIGEM_BIDSS.Models
 
         //Call
 
-        public int LeerDatosSol(out string pvMensajeError, string _empJefeMail, string _GralJefeInmediato, string _empName)
+        public int LeerDatosSol(out string pvMensajeError,string _Correlativo, string _empName, string _Mail, string MailTo, string _msj,string _RazonRechazo)
         {
             try
             {
@@ -113,23 +123,24 @@ namespace SIGEM_BIDSS.Models
                         lsRutaPlantilla = "",
                         lsXMLDatos = "",
                         lsXMLEnvio = "";
-                lsSubject = "REF:(VIA-000000001)";
+                lsSubject = "REF:("+ _Correlativo + ")";
                 lsRutaPlantilla = @"C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\Content\Email\index.xml";
 
                 lsXMLDatos = @"<principal>
-                              <nref>REF:(VIA-000000001)</nref>
-                              <to>" + _GralJefeInmediato + "</to>" +
-                              @"<from>" + _empName + "</from>" +
-                              "</principal>";
-
+                              <to>" + _empName + "</to>" +
+                              @"<nref>REF:(" + _Correlativo + ")</nref>" +
+                              @"<EmployeeName>" + _Mail + "</EmployeeName>" +
+                               @"<msj>" + _msj + "</msj>" +
+                                @"<RazonRechazo>" + _RazonRechazo + "</RazonRechazo>" +
+                             "</principal>";
+                
                 var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
                 EmailGenerar_BodySol(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio);
-                enviarCorreoSol(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, _empJefeMail, _Parameters.par_Servidor, _Parameters.par_Puerto);
+                enviarCorreoSol(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, MailTo, _Parameters.par_Servidor, _Parameters.par_Puerto);
                 return 0;
             }
             catch (Exception Ex)
             {
-
                 throw;
             }
         }

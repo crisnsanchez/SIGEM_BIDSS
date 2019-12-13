@@ -136,7 +136,8 @@ namespace SIGEM_BIDSS.Controllers
                         Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                        Funtion.LeerDatosSol(out string pvMensajeError, EmpJefe.emp_CorreoElectronico, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres);
+                        Funtion.LeerDatosSol(out string pvMensajeError, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada,"");
+                        Funtion.LeerDatosSol(out string vMensajeError, ErrorMessage, "BI-DSS", GetEmployee.emp_Nombres, "paula.diaz@bi-dss.com", GeneralFunctions.msj_ToAdmin, "");
 
                         if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                         TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
@@ -215,17 +216,17 @@ namespace SIGEM_BIDSS.Controllers
                 string ErrorMessage = "";
 
                 Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
-                    EmployeeID,
-                    tbAnticipoSalario.Ansal_JefeInmediato,
-                    Funtion.DatetimeNow(),
-                    tbAnticipoSalario.Ansal_MontoSolicitado,
-                    tbAnticipoSalario.tpsal_id,
-                    tbAnticipoSalario.Ansal_Justificacion,
-                    tbAnticipoSalario.Ansal_Comentario,
-                    tbAnticipoSalario.est_Id,
-                    tbAnticipoSalario.Ansal_RazonRechazo,
-                    EmployeeID,
-                    Funtion.DatetimeNow());
+                                                            EmployeeID,
+                                                            tbAnticipoSalario.Ansal_JefeInmediato,
+                                                            Funtion.DatetimeNow(),
+                                                            tbAnticipoSalario.Ansal_MontoSolicitado,
+                                                            tbAnticipoSalario.tpsal_id,
+                                                            tbAnticipoSalario.Ansal_Justificacion,
+                                                            tbAnticipoSalario.Ansal_Comentario,
+                                                            tbAnticipoSalario.est_Id,
+                                                            tbAnticipoSalario.Ansal_RazonRechazo,
+                                                            EmployeeID,
+                                                            Funtion.DatetimeNow());
                 foreach (UDP_Adm_tbAnticipoSalario_Update_Result Res in Update)
                     ErrorMessage = Res.MensajeError;
                 if (ErrorMessage.StartsWith("-1"))
@@ -236,10 +237,25 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 else
                 {
-
-                    var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                    //var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                     var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                    Funtion.LeerDatosSol(out string pvMensajeError, EmpJefe.emp_CorreoElectronico, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres);
+                    string _msj = "";
+                    var reject = "";
+                    switch (State)
+                    {
+                        case GeneralFunctions.Revisada:
+                            _msj = GeneralFunctions.msj_Revisada;
+                            break;
+                        case GeneralFunctions.Aprobada:
+                            _msj = GeneralFunctions.msj_Aprobada;
+                            break;
+                        case GeneralFunctions.Rechazada:
+                            _msj = GeneralFunctions.msj_Rechazada;
+                            reject = " Razon de Rechazo:";
+                            break;
+                    }
+
+                    Funtion.LeerDatosSol(out string pvMensajeError, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, reject+" "+_msj, tbAnticipoSalario.Ansal_RazonRechazo);
 
                     Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
                     if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
