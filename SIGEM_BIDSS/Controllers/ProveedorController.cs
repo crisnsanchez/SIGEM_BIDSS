@@ -10,10 +10,10 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class ProveedorController : Controller
+    public class ProveedorController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-
+        GeneralFunctions _function = new GeneralFunctions();
         // GET: Proveedor
         public ActionResult Index()
         {
@@ -51,14 +51,52 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "prov_Id,prov_Nombre,prov_NombreContacto,prov_Direccion,mun_codigo,prov_Email,prov_Telefono,prov_RTN,acte_Id,prov_UsuarioCrea,prov_FechaCrea,prov_UsuarioModifica,prov_FechaModifica")] tbProveedor tbProveedor)
         {
+           
             if (ModelState.IsValid)
-            {
-                db.tbProveedor.Add(tbProveedor);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Inv_tbProveedor_Insert(tbProveedor.prov_Id,
+                                                        tbProveedor.prov_Nombre,
+                                                        tbProveedor.prov_NombreContacto,
+                                                        tbProveedor.prov_Direccion,
+                                                        tbProveedor.mun_codigo,
+                                                        tbProveedor.prov_Email ,
+                                                        tbProveedor.prov_Telefono,
+                                                        tbProveedor.prov_RTN,
+                                                        tbProveedor.acte_Id,
+                                                        _function.GetUser(), _function.DatetimeNow());
+                    foreach (UDP_Inv_tbProveedor_Insert_Result Permiso in List)
+                        Msj = Permiso.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
 
-            ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
+                        return View();
+                    }
+                    if (Msj.StartsWith("-2"))
+                    {
+
+
+                        ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
+                        return View(tbProveedor);
+                    }
+                    else
+                    {
+                        TempData["swalfunction"] = "true";
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View();
+                }
+
+        
+
+        ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
             ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
             return View(tbProveedor);
         }
@@ -87,12 +125,43 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "prov_Id,prov_Nombre,prov_NombreContacto,prov_Direccion,mun_codigo,prov_Email,prov_Telefono,prov_RTN,acte_Id,prov_UsuarioCrea,prov_FechaCrea,prov_UsuarioModifica,prov_FechaModifica")] tbProveedor tbProveedor)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(tbProveedor).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                IEnumerable<Object> List = null;
+                string Msj = "";
+                List = db.UDP_Inv_tbProveedor_Update(tbProveedor.prov_Id,
+                                                    tbProveedor.prov_Nombre,
+                                                    tbProveedor.prov_NombreContacto,
+                                                    tbProveedor.prov_Direccion,
+                                                    tbProveedor.mun_codigo,
+                                                    tbProveedor.prov_Email,
+                                                    tbProveedor.prov_Telefono,
+                                                    tbProveedor.prov_RTN,
+                                                    tbProveedor.acte_Id,
+                                                    _function.GetUser(), _function.DatetimeNow());
+                foreach (UDP_Inv_tbProveedor_Update_Result Permiso in List)
+                    Msj = Permiso.MensajeError;
+                if (Msj.StartsWith("-1"))
+                {
+
+                    return View();
+                }
+         
+                else
+                {
+                    TempData["swalfunction"] = "true";
+                    return RedirectToAction("Index");
+                }
             }
+            catch (Exception Ex)
+            {
+
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
+
+
+
             ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
             ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
             return View(tbProveedor);
