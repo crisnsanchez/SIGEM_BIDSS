@@ -4,6 +4,9 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    tbMunicipio Municipio = new tbMunicipio();
+}
 <style>
     .validation-error {
         color: red;
@@ -22,9 +25,7 @@
     }
 </style>
 
-@{
-    tbMunicipio Municipio = new tbMunicipio();
-}
+
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
@@ -44,46 +45,49 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <div class="card-body">
+        <div class="form-horizontal">
+            <div class="card-body">
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.dep_Codigo)
-            <form>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label" })
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.dep_Codigo)
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(model => model.dep_Codigo, new { @class = "control-label" })
 
-                        @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
-                        <div id="ValidationDepCodigoCreate">
-                            @Html.ValidationMessageFor(model => model.dep_Codigo, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.dep_Codigo, new { @class = "form-control", @readonly = "readonly" })
+                            <div id="ValidationDepCodigoCreate">
+                                @Html.ValidationMessageFor(model => model.dep_Codigo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label , required" })
+                            @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @style = "text-transform:uppercase;", @onkeyup = "noespaciosincio(this)" } })
+                            <div id="ValidationDepNombreCreate">
+                                @Html.ValidationMessageFor(model => model.dep_Nombre, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-3">
-                        @Html.LabelFor(model => model.dep_Nombre, new { @class = "control-label , required" })
-                        @Html.EditorFor(model => model.dep_Nombre, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @style = "text-transform:uppercase;" , @onkeyup = "noespaciosincio(this)" } })
-                        <div id="ValidationDepNombreCreate">
-                            @Html.ValidationMessageFor(model => model.dep_Nombre, "", new { @class = "text-danger" })
-                        </div>
+                </form>
+
+                <div class="form-group">
+                    @Html.Partial("_CrearMunicipioModal", new tbMunicipio())
+                </div>
+                <div class="form-group">
+                    @Html.Partial("_LitsMunicipio", Model.tbMunicipio, new ViewDataDictionary { { "dep_Codigo", Model.dep_Codigo } })
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12 text-center">
+                        <input id="Valida" disabled type="submit" value="Guardar" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                     </div>
                 </div>
-            </form>
+            </div>
 
-            <div class="form-group">
-                @Html.Partial("_CrearMunicipioModal", Model.tbMunicipio)
-            </div>
-            <div class="form-group">
-                <div class="col-md-12 text-center">
-                    <input id="Valida" disabled type="submit" value="Guardar" class="btn btn-primary" />
-                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                </div>
-            </div>
         </div>
-       
-    </div>
-        
+
     }
- 
+
 
     <!-- Edit Municipio Modal-->
     <div class="modal fade" id="EditMunicipioModal">
@@ -106,7 +110,7 @@
                                     </div>
                                     <div class="col-auto">
                                         @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
-                                        <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; style="text-transform:uppercase;" maxlength="100" autocomplete="off"/>
+                                        <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; style="text-transform:uppercase;" maxlength="100" autocomplete="off" />
                                         @Html.ValidationMessageFor(m => Municipio.mun_nombre)
                                     </div>
 
