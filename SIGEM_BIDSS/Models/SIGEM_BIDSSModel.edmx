@@ -983,6 +983,32 @@
           <Parameter Name="uni_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="uni_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Inv_tbProveedor_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="prov_Id" Type="int" Mode="In" />
+          <Parameter Name="prov_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="prov_NombreContacto" Type="nvarchar" Mode="In" />
+          <Parameter Name="prov_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="mun_codigo" Type="char" Mode="In" />
+          <Parameter Name="prov_Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="prov_Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="prov_RTN" Type="varchar" Mode="In" />
+          <Parameter Name="acte_Id" Type="smallint" Mode="In" />
+          <Parameter Name="prov_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="prov_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Inv_tbProveedor_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="prov_Id" Type="int" Mode="In" />
+          <Parameter Name="prov_Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="prov_NombreContacto" Type="nvarchar" Mode="In" />
+          <Parameter Name="prov_Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="mun_codigo" Type="char" Mode="In" />
+          <Parameter Name="prov_Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="prov_Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="prov_RTN" Type="varchar" Mode="In" />
+          <Parameter Name="acte_Id" Type="smallint" Mode="In" />
+          <Parameter Name="prov_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="prov_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Plani_tbInstitucionFinanciera_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="insf_Id" Type="int" Mode="In" />
           <Parameter Name="insf_DescInstitucionFinanc" Type="varchar" Mode="In" />
@@ -1049,7 +1075,7 @@
         </Function>
         <Function Name="UDP_rrhh_tbSueldo_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="rrhh">
           <Parameter Name="sue_Id" Type="int" Mode="In" />
-          <Parameter Name="emp_Id" Type="smallint" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="sue_Cantidad" Type="decimal" Mode="In" />
           <Parameter Name="tmo_Id" Type="smallint" Mode="In" />
           <Parameter Name="sue_UsuarioModifica" Type="int" Mode="In" />
@@ -1877,11 +1903,37 @@
           </FunctionImport>
           <FunctionImport Name="UDP_rrhh_tbSueldo_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_rrhh_tbSueldo_Update_Result)">
             <Parameter Name="sue_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int16" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="sue_Cantidad" Mode="In" Type="Decimal" />
             <Parameter Name="tmo_Id" Mode="In" Type="Int16" />
             <Parameter Name="sue_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="sue_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Inv_tbProveedor_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProveedor_Update_Result)">
+            <Parameter Name="prov_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prov_Nombre" Mode="In" Type="String" />
+            <Parameter Name="prov_NombreContacto" Mode="In" Type="String" />
+            <Parameter Name="prov_Direccion" Mode="In" Type="String" />
+            <Parameter Name="mun_codigo" Mode="In" Type="String" />
+            <Parameter Name="prov_Email" Mode="In" Type="String" />
+            <Parameter Name="prov_Telefono" Mode="In" Type="String" />
+            <Parameter Name="prov_RTN" Mode="In" Type="String" />
+            <Parameter Name="acte_Id" Mode="In" Type="Int16" />
+            <Parameter Name="prov_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="prov_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Inv_tbProveedor_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProveedor_Insert_Result)">
+            <Parameter Name="prov_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prov_Nombre" Mode="In" Type="String" />
+            <Parameter Name="prov_NombreContacto" Mode="In" Type="String" />
+            <Parameter Name="prov_Direccion" Mode="In" Type="String" />
+            <Parameter Name="mun_codigo" Mode="In" Type="String" />
+            <Parameter Name="prov_Email" Mode="In" Type="String" />
+            <Parameter Name="prov_Telefono" Mode="In" Type="String" />
+            <Parameter Name="prov_RTN" Mode="In" Type="String" />
+            <Parameter Name="acte_Id" Mode="In" Type="Int16" />
+            <Parameter Name="prov_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="prov_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
@@ -2705,6 +2757,12 @@
         <ComplexType Name="UDP_rrhh_tbSueldo_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProveedor_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProveedor_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3417,6 +3475,20 @@
           <FunctionImportMapping FunctionImportName="UDP_rrhh_tbSueldo_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_rrhh_tbSueldo_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_rrhh_tbSueldo_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProveedor_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProveedor_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProveedor_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProveedor_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

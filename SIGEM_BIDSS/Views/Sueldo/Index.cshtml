@@ -15,7 +15,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-list mr-1"></i>
-            Listado Área
+            Listado Sueldos
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -52,7 +52,7 @@
                             @Html.DisplayFor(modelItem => item.sue_Id)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.emp_Id)
+                            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Apellidos)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.sue_Cantidad)

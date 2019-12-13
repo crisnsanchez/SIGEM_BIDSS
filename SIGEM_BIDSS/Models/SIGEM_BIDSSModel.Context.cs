@@ -2206,7 +2206,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbSueldo_Insert_Result>("UDP_rrhh_tbSueldo_Insert", emp_IdParameter, sue_CantidadParameter, tmo_IdParameter, suel_UsuarioCreaParameter, suel_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_rrhh_tbSueldo_Update_Result> UDP_rrhh_tbSueldo_Update(Nullable<int> sue_Id, Nullable<short> emp_Id, Nullable<decimal> sue_Cantidad, Nullable<short> tmo_Id, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
+        public virtual ObjectResult<UDP_rrhh_tbSueldo_Update_Result> UDP_rrhh_tbSueldo_Update(Nullable<int> sue_Id, Nullable<int> emp_Id, Nullable<decimal> sue_Cantidad, Nullable<short> tmo_Id, Nullable<int> sue_UsuarioModifica, Nullable<System.DateTime> sue_FechaModifica)
         {
             var sue_IdParameter = sue_Id.HasValue ?
                 new ObjectParameter("sue_Id", sue_Id) :
@@ -2214,7 +2214,7 @@ namespace SIGEM_BIDSS.Models
     
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(short));
+                new ObjectParameter("emp_Id", typeof(int));
     
             var sue_CantidadParameter = sue_Cantidad.HasValue ?
                 new ObjectParameter("sue_Cantidad", sue_Cantidad) :
@@ -2233,6 +2233,104 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("sue_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbSueldo_Update_Result>("UDP_rrhh_tbSueldo_Update", sue_IdParameter, emp_IdParameter, sue_CantidadParameter, tmo_IdParameter, sue_UsuarioModificaParameter, sue_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Inv_tbProveedor_Update_Result> UDP_Inv_tbProveedor_Update(Nullable<int> prov_Id, string prov_Nombre, string prov_NombreContacto, string prov_Direccion, string mun_codigo, string prov_Email, string prov_Telefono, string prov_RTN, Nullable<short> acte_Id, Nullable<int> prov_UsuarioModifica, Nullable<System.DateTime> prov_FechaModifica)
+        {
+            var prov_IdParameter = prov_Id.HasValue ?
+                new ObjectParameter("prov_Id", prov_Id) :
+                new ObjectParameter("prov_Id", typeof(int));
+    
+            var prov_NombreParameter = prov_Nombre != null ?
+                new ObjectParameter("prov_Nombre", prov_Nombre) :
+                new ObjectParameter("prov_Nombre", typeof(string));
+    
+            var prov_NombreContactoParameter = prov_NombreContacto != null ?
+                new ObjectParameter("prov_NombreContacto", prov_NombreContacto) :
+                new ObjectParameter("prov_NombreContacto", typeof(string));
+    
+            var prov_DireccionParameter = prov_Direccion != null ?
+                new ObjectParameter("prov_Direccion", prov_Direccion) :
+                new ObjectParameter("prov_Direccion", typeof(string));
+    
+            var mun_codigoParameter = mun_codigo != null ?
+                new ObjectParameter("mun_codigo", mun_codigo) :
+                new ObjectParameter("mun_codigo", typeof(string));
+    
+            var prov_EmailParameter = prov_Email != null ?
+                new ObjectParameter("prov_Email", prov_Email) :
+                new ObjectParameter("prov_Email", typeof(string));
+    
+            var prov_TelefonoParameter = prov_Telefono != null ?
+                new ObjectParameter("prov_Telefono", prov_Telefono) :
+                new ObjectParameter("prov_Telefono", typeof(string));
+    
+            var prov_RTNParameter = prov_RTN != null ?
+                new ObjectParameter("prov_RTN", prov_RTN) :
+                new ObjectParameter("prov_RTN", typeof(string));
+    
+            var acte_IdParameter = acte_Id.HasValue ?
+                new ObjectParameter("acte_Id", acte_Id) :
+                new ObjectParameter("acte_Id", typeof(short));
+    
+            var prov_UsuarioModificaParameter = prov_UsuarioModifica.HasValue ?
+                new ObjectParameter("prov_UsuarioModifica", prov_UsuarioModifica) :
+                new ObjectParameter("prov_UsuarioModifica", typeof(int));
+    
+            var prov_FechaModificaParameter = prov_FechaModifica.HasValue ?
+                new ObjectParameter("prov_FechaModifica", prov_FechaModifica) :
+                new ObjectParameter("prov_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProveedor_Update_Result>("UDP_Inv_tbProveedor_Update", prov_IdParameter, prov_NombreParameter, prov_NombreContactoParameter, prov_DireccionParameter, mun_codigoParameter, prov_EmailParameter, prov_TelefonoParameter, prov_RTNParameter, acte_IdParameter, prov_UsuarioModificaParameter, prov_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Inv_tbProveedor_Insert_Result> UDP_Inv_tbProveedor_Insert(Nullable<int> prov_Id, string prov_Nombre, string prov_NombreContacto, string prov_Direccion, string mun_codigo, string prov_Email, string prov_Telefono, string prov_RTN, Nullable<short> acte_Id, Nullable<int> prov_UsuarioCrea, Nullable<System.DateTime> prov_FechaCrea)
+        {
+            var prov_IdParameter = prov_Id.HasValue ?
+                new ObjectParameter("prov_Id", prov_Id) :
+                new ObjectParameter("prov_Id", typeof(int));
+    
+            var prov_NombreParameter = prov_Nombre != null ?
+                new ObjectParameter("prov_Nombre", prov_Nombre) :
+                new ObjectParameter("prov_Nombre", typeof(string));
+    
+            var prov_NombreContactoParameter = prov_NombreContacto != null ?
+                new ObjectParameter("prov_NombreContacto", prov_NombreContacto) :
+                new ObjectParameter("prov_NombreContacto", typeof(string));
+    
+            var prov_DireccionParameter = prov_Direccion != null ?
+                new ObjectParameter("prov_Direccion", prov_Direccion) :
+                new ObjectParameter("prov_Direccion", typeof(string));
+    
+            var mun_codigoParameter = mun_codigo != null ?
+                new ObjectParameter("mun_codigo", mun_codigo) :
+                new ObjectParameter("mun_codigo", typeof(string));
+    
+            var prov_EmailParameter = prov_Email != null ?
+                new ObjectParameter("prov_Email", prov_Email) :
+                new ObjectParameter("prov_Email", typeof(string));
+    
+            var prov_TelefonoParameter = prov_Telefono != null ?
+                new ObjectParameter("prov_Telefono", prov_Telefono) :
+                new ObjectParameter("prov_Telefono", typeof(string));
+    
+            var prov_RTNParameter = prov_RTN != null ?
+                new ObjectParameter("prov_RTN", prov_RTN) :
+                new ObjectParameter("prov_RTN", typeof(string));
+    
+            var acte_IdParameter = acte_Id.HasValue ?
+                new ObjectParameter("acte_Id", acte_Id) :
+                new ObjectParameter("acte_Id", typeof(short));
+    
+            var prov_UsuarioCreaParameter = prov_UsuarioCrea.HasValue ?
+                new ObjectParameter("prov_UsuarioCrea", prov_UsuarioCrea) :
+                new ObjectParameter("prov_UsuarioCrea", typeof(int));
+    
+            var prov_FechaCreaParameter = prov_FechaCrea.HasValue ?
+                new ObjectParameter("prov_FechaCrea", prov_FechaCrea) :
+                new ObjectParameter("prov_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProveedor_Insert_Result>("UDP_Inv_tbProveedor_Insert", prov_IdParameter, prov_NombreParameter, prov_NombreContactoParameter, prov_DireccionParameter, mun_codigoParameter, prov_EmailParameter, prov_TelefonoParameter, prov_RTNParameter, acte_IdParameter, prov_UsuarioCreaParameter, prov_FechaCreaParameter);
         }
     }
 }
