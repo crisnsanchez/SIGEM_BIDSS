@@ -8,8 +8,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-info  mr-1"></i>
-            Detalle Estado
-        </h3>
+            Detalle Transporte        </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
                 @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
@@ -20,14 +19,14 @@
         <div class="card-body">
             <dl class="dl-horizontal">
                 <dt>
-                    ID
+                    @Html.DisplayNameFor(model => model.tptran_Id)
                 </dt>
 
                 <dd>
                     @Html.DisplayFor(model => model.tptran_Id)
                 </dd>
                 <dt>
-                    Descripción
+                    @Html.DisplayNameFor(model => model.tptran_Descripcion)
                 </dt>
 
                 <dd>

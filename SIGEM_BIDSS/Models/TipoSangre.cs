@@ -21,7 +21,7 @@ namespace SIGEM_BIDSS.Models
         public int tps_Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Nombre")] 
+        [Display(Name = "Descripción")] 
         public string tps_Descripcion { get; set; }
 
         [Display(Name = "Usuario Crea")]
