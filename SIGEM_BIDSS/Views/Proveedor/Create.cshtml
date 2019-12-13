@@ -5,125 +5,150 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+<style>
+    .validation-error {
+        color: red;
+        font-size: small;
+    }
 
+    .validation-summary-errors {
+        color: red;
+        font-size: small;
+    }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>tbProveedor</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_Nombre, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    .required:after {
+        content: "*";
+        font-weight: bold;
+        color: red;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_NombreContacto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_NombreContacto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_NombreContacto, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    #insf_Contacto {
+        text-transform: uppercase;
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    #insf_Nombre {
+        text-transform: uppercase;
+    }
+</style>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.mun_codigo, "mun_codigo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("mun_codigo", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.mun_codigo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_Telefono, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_RTN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_RTN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_RTN, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.acte_Id, "acte_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("acte_Id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.acte_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_UsuarioCrea, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_UsuarioCrea, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_UsuarioCrea, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_FechaCrea, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_FechaCrea, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_FechaCrea, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_UsuarioModifica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_UsuarioModifica, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_UsuarioModifica, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.prov_FechaModifica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prov_FechaModifica, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prov_FechaModifica, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-upload mr-1"></i>
+            Insertar Institución Finaciera
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
     </div>
-}
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        <div class="form-horizontal">
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.prov_Nombre, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.prov_Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.prov_Nombre, "", new { @class = "text-danger" })</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.prov_NombreContacto, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.prov_NombreContacto, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", @onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.prov_NombreContacto, "", new { @class = "text-danger" })</p>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    @Html.LabelFor(model => model.prov_RTN, htmlAttributes: new { @class = "control-label col-md-8" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.prov_RTN, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
+                        @Html.ValidationMessageFor(model => model.prov_RTN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                <div class="form-group">
+                    @Html.LabelFor(model => model.prov_Email, htmlAttributes: new { @class = "control-label col-md-8" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.prov_Email, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.prov_Email, "", new { @class = "text-danger" })</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.prov_Telefono, htmlAttributes: new { @class = "control-label col-md-8" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.prov_Telefono, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.prov_Telefono, "", new { @class = "text-danger" })</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.prov_Direccion, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger" })</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.mun_codigo, "mun_codigo", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-sm-4">
+                        @Html.DropDownList("mun_codigo", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.mun_codigo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.acte_Id, "acte_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-sm-4">
+                        @Html.DropDownList("acte_Id", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.acte_Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-10">
+                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+
+
+
+
+                <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+                <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+
+
+
+                <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+                <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+                <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+                <script src="~/Scripts/app/General_PCAE.js"></script>
+                <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
+
+
+            </div>
+        </div>
+
+    }
+
+    <script type="text/javascript">
+        $('#insf_Telefono').inputmask('(999) 9999-9999')
+
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });
+
+
+
+    </script>
