@@ -36,11 +36,20 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbProveedor);
         }
 
+        [HttpPost]
+        public JsonResult GetMunicipios(string CodDepartamento)
+        {
+            var list = (from x in db.tbMunicipio where x.dep_codigo == CodDepartamento select new { mun_codigo = x.mun_codigo, mun_nombre = x.mun_nombre }).ToList();
+            /*db.tbMunicipio.Where(x=> x.dep_codigo==CodDepartamento).ToList();*/
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Proveedor/Create
         public ActionResult Create()
         {
             ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
-            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo");
+            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
             return View();
         }
 
@@ -94,10 +103,11 @@ namespace SIGEM_BIDSS.Controllers
                     return View();
                 }
 
-        
 
-        ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
-            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
+
+            ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
+            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
             return View(tbProveedor);
         }
 
@@ -113,8 +123,9 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
-            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
+            ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
+            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
             return View(tbProveedor);
         }
 
@@ -143,7 +154,9 @@ namespace SIGEM_BIDSS.Controllers
                     Msj = Permiso.MensajeError;
                 if (Msj.StartsWith("-1"))
                 {
-
+                    ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
+                    ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+                    ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
                     return View();
                 }
          
@@ -162,8 +175,6 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-            ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
-            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
             return View(tbProveedor);
         }
 
