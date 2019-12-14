@@ -1713,7 +1713,6 @@
           <EntitySet Name="tbBitacoraErrores" EntityType="SIGEM_BIDSSModel.tbBitacoraErrores" />
           <EntitySet Name="tbAnticipoSalario" EntityType="SIGEM_BIDSSModel.tbAnticipoSalario" />
           <EntitySet Name="tbAnticipoViatico" EntityType="SIGEM_BIDSSModel.tbAnticipoViatico" />
-          <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
           <EntitySet Name="sysdiagrams" EntityType="SIGEM_BIDSSModel.sysdiagrams" />
           <EntitySet Name="tbArea" EntityType="SIGEM_BIDSSModel.tbArea" />
           <EntitySet Name="tbDepartamento" EntityType="SIGEM_BIDSSModel.tbDepartamento" />
@@ -1940,6 +1939,7 @@
             <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
             <Parameter Name="par_PathLogo" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2136,21 +2136,6 @@
           <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id" FromRole="tbAnticipoViatico" ToRole="tbEstado" />
           <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbMunicipio_mun_Codigo" FromRole="tbAnticipoViatico" ToRole="tbMunicipio" />
           <NavigationProperty Name="tbTipoTransporte" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbTipoTranporte_tptran_Id" FromRole="tbAnticipoViatico" ToRole="tbTipoTransporte" />
-        </EntityType>
-        <EntityType Name="tbParametro">
-          <Key>
-            <PropertyRef Name="par_Id" />
-          </Key>
-          <Property Name="par_Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="par_NombreEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="par_TelefonoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_CorreoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_CorreoEmisor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="par_Servidor" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="par_Puerto" Type="Int32" Nullable="false" />
-          <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="par_CorreoRRHH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -2769,6 +2754,21 @@
         <ComplexType Name="UDP_Conf_tbParametro_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="tbParametro">
+          <Key>
+            <PropertyRef Name="par_Id" />
+          </Key>
+          <Property Name="par_Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="par_NombreEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="par_TelefonoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="par_CorreoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="par_CorreoEmisor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="par_CorreoRRHH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="par_Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="par_Servidor" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="par_Puerto" Type="Int32" Nullable="false" />
+          <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3093,22 +3093,6 @@
                 <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
                 <ScalarProperty Name="Anvi_Correlativo" ColumnName="Anvi_Correlativo" />
                 <ScalarProperty Name="Anvi_Id" ColumnName="Anvi_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbParametro">
-            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
-              <MappingFragment StoreEntitySet="tbParametro">
-                <ScalarProperty Name="par_CorreoRRHH" ColumnName="par_CorreoRRHH" />
-                <ScalarProperty Name="par_PathLogo" ColumnName="par_PathLogo" />
-                <ScalarProperty Name="par_Puerto" ColumnName="par_Puerto" />
-                <ScalarProperty Name="par_Servidor" ColumnName="par_Servidor" />
-                <ScalarProperty Name="par_Password" ColumnName="par_Password" />
-                <ScalarProperty Name="par_CorreoEmisor" ColumnName="par_CorreoEmisor" />
-                <ScalarProperty Name="par_CorreoEmpresa" ColumnName="par_CorreoEmpresa" />
-                <ScalarProperty Name="par_TelefonoEmpresa" ColumnName="par_TelefonoEmpresa" />
-                <ScalarProperty Name="par_NombreEmpresa" ColumnName="par_NombreEmpresa" />
-                <ScalarProperty Name="par_Id" ColumnName="par_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3500,6 +3484,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbParametro">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
+              <MappingFragment StoreEntitySet="tbParametro">
+                <ScalarProperty Name="par_PathLogo" ColumnName="par_PathLogo" />
+                <ScalarProperty Name="par_Puerto" ColumnName="par_Puerto" />
+                <ScalarProperty Name="par_Servidor" ColumnName="par_Servidor" />
+                <ScalarProperty Name="par_Password" ColumnName="par_Password" />
+                <ScalarProperty Name="par_CorreoRRHH" ColumnName="par_CorreoRRHH" />
+                <ScalarProperty Name="par_CorreoEmisor" ColumnName="par_CorreoEmisor" />
+                <ScalarProperty Name="par_CorreoEmpresa" ColumnName="par_CorreoEmpresa" />
+                <ScalarProperty Name="par_TelefonoEmpresa" ColumnName="par_TelefonoEmpresa" />
+                <ScalarProperty Name="par_NombreEmpresa" ColumnName="par_NombreEmpresa" />
+                <ScalarProperty Name="par_Id" ColumnName="par_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

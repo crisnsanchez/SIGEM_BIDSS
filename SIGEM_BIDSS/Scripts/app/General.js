@@ -30,6 +30,28 @@ $(function () {
         console.log("Falso")
     }
 
+    _Action = $('#Errror').val();
+    console.log(_Action)
+    if (_Action == "Delete") {
+        console.log("Verdadero")
+
+        Toast.fire({
+            type: 'danger',
+            title: 'El Municipio tiene dependencias.'
+        })
+    }
+    else if (_Action == "Edited") {
+        Toast.fire({
+            type: 'success',
+            title: 'Se ha actualizado con Exito.'
+        })
+    } else {
+        console.log("Falso")
+    }
+
+
+
+
 
     //Inicializacion de el Datatable
     $('#dataTable').DataTable(
