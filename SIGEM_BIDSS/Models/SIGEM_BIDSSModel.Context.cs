@@ -30,7 +30,6 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbBitacoraErrores> tbBitacoraErrores { get; set; }
         public virtual DbSet<tbAnticipoSalario> tbAnticipoSalario { get; set; }
         public virtual DbSet<tbAnticipoViatico> tbAnticipoViatico { get; set; }
-        public virtual DbSet<tbParametro> tbParametro { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tbArea> tbArea { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
@@ -53,6 +52,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbUnidadMedida> tbUnidadMedida { get; set; }
         public virtual DbSet<tbSueldo> tbSueldo { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
+        public virtual DbSet<tbParametro> tbParametro { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {

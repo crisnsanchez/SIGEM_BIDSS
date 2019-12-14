@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbBitacoraErrores" Width="1.5" PointX="5.75" PointY="0.875" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbAnticipoSalario" Width="1.5" PointX="3" PointY="9.25" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbAnticipoViatico" Width="1.5" PointX="8.25" PointY="8.625" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="13.75" PointY="4.875" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.875" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbArea" Width="1.5" PointX="1.5" PointY="15.75" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbDepartamento" Width="1.5" PointX="1.5" PointY="1" />
@@ -53,6 +52,7 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSangre" Width="1.5" PointX="16.375" PointY="6" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbTipoSangre_tps_Id" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="16.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

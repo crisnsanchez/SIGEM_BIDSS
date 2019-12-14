@@ -80,25 +80,28 @@
                         <div class="col-md-3 mb-4">
                             @Html.LabelFor(model => model.par_CorreoEmpresa, htmlAttributes: new { @class = "control-label col-md-10" })
                             @Html.EditorFor(model => model.par_CorreoEmpresa, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off" } })
-                            <p id="emailOK" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoEmpresa, "", new { @class = "text-danger" })</p>
+                            <p id="emailCorre" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoEmpresa, "", new { @class = "text-danger" })</p>
                         </div>
                         <div class="col-md-3 mb-4">
                             @Html.LabelFor(model => model.par_CorreoEmisor, htmlAttributes: new { @class = "control-label col-md-8" })
                             @Html.EditorFor(model => model.par_CorreoEmisor, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off" } })
-                            <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoEmisor, "", new { @class = "text-danger" })</p>
+                            <p id="emailEmi" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoEmisor, "", new { @class = "text-danger" })</p>
                         </div>
-                        <div class="col-md-3 mb-4">
-                            @Html.LabelFor(model => model.par_CorreoRRHH, htmlAttributes: new { @class = "control-label col-md-8" })
-                            @Html.EditorFor(model => model.par_CorreoRRHH, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off" } })
-                            <p id="emailEoKi" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoRRHH, "", new { @class = "text-danger" })</p>
-                        </div>
+                        
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.par_Password, htmlAttributes: new { @class = "control-label col-md-8" })
-                            @Html.EditorFor(model => model.par_Password, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", @autocomplete = "off", onkeypress = "return Passworddd(event)", @type = "password", @ID = "txtPassword" } })
+                            @Html.EditorFor(model => model.par_Password, new { htmlAttributes = new { @class = "form-control", @minlength = "8",@maxlength = "20", @autocomplete = "off", onkeypress = "return Passworddd(event)", @type = "password" } })
                             @Html.ValidationMessageFor(model => model.par_Password, null, new { style = "color:red", id = "errorpassword" })
                             @*<button id="show_password" class="btn btn-primary btn-xs" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>*@
+                            
+                        </div>
+
+                        <div class="form-group col-md-4">
+                                @Html.LabelFor(model => model.par_CorreoRRHH, htmlAttributes: new { @class = "control-label col-md-8" })
+                                @Html.EditorFor(model => model.par_CorreoRRHH, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off" } })
+                                <p id="emailRHHH" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoRRHH, "", new { @class = "text-danger" })</p>
                         </div>
 
 

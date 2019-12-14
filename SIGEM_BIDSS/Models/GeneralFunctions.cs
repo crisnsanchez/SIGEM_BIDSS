@@ -132,14 +132,6 @@ namespace SIGEM_BIDSS.Models
          
             lsSubject = "REF:(" + Reference + ")";
 
-            lsXMLDatos = @"<principal>
-                        <to>" + _empName + "</to>" +
-                          @"<nref>REF:(" + Reference + ")</nref>" +
-                          @"<EmployeeName>" + _Mail + "</EmployeeName>" +
-                          @"<msj>" + _msj + "</msj>" +
-                          @"<RazonRechazo>" + _RazonRechazo + "</RazonRechazo>" +
-                         "</principal>";
-
 
             bool State = false;
             int StateIn = 0;
@@ -151,15 +143,21 @@ namespace SIGEM_BIDSS.Models
 
             lsRutaPlantilla = System.AppContext.BaseDirectory + "Content\\Email\\Solicitud.xml";
 
+
             lsXMLDatos = @"<principal>
-                              <UserFullName>" + UserName + "</UserFullName>"
-                         + "</principal>";
+                        <to>" + _empName + "</to>" +
+                          @"<nref>REF:(" + Reference + ")</nref>" +
+                          @"<EmployeeName>" + _Mail + "</EmployeeName>" +
+                          @"<msj>" + _msj + "</msj>" +
+                          @"<RazonRechazo>" + _RazonRechazo + "</RazonRechazo>" +
+                         "</principal>";
+
             State = EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio, out pvMensajeError);
             if (State)
             {
                 //Si todo está bien procedo a enviar correo
                 var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                StateIn = enviarCorreo(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, EmailDesti, _Parameters.par_Servidor, _Parameters.par_Puerto.ToString(), out pvMensajeError);
+                StateIn = enviarCorreo(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, MailTo, _Parameters.par_Servidor, _Parameters.par_Puerto.ToString(), out pvMensajeError);
                 if (StateIn != 1)
                     return true;
                 else
