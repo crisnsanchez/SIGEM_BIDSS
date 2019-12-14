@@ -62,6 +62,8 @@
         <div class="form-horizontal">
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+           
+
                 <form>
 
                     <div class="form-group">
@@ -109,33 +111,36 @@
 
 
                                 <label class="control-label col-md-4">Actividad Economica</label>
-                                @Html.DropDownList("acte_Id", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("acte_Id", null,"Seleccione" ,htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.acte_Id, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-
-
-                                <label class="control-label col-md-6">Departamento@*<span style="color:red"> *</span>*@</label>
-                                @Html.DropDownList("dep_Codigo", null, "Seleccione Departamento", new { @class = "form-control" })
-                                <p id="Departamento">@Html.ValidationMessageFor(muni => test.dep_codigo)</p>
-                            </div>
-                            <div id="municipio" class="form-group col-md-6">
-                                @Html.LabelFor(model => model.mun_codigo, "Municipio", new { @class = "control-label col-md-5" })
-                                <select class="form-control" name="mun_codigo" id="mun_codigo">
-                                    <option>Seleccione</option>
-                                </select>
-                                <p id="Municipio" style="color:red">@Html.ValidationMessageFor(model => model.mun_codigo)</p>
-                                
-                            </div>
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
-
-
-                                    @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control", MaxLength = 200, @onKeyPress = "return soloLetras(event)", @onkeyup = "this.value=NumText1(this.value)", @autocomplete = "off" })
-                                    <p style="color:red">@Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger" })</p>
+                                <label class="control-label col-md-6">Departamento</label>
+                                <div class="col-md-11">
+                                    @Html.DropDownList("dep_codigo", null, "Seleccione", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.prov_UsuarioCrea, "", new { @class = "text-danger" })
                                 </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.mun_codigo, "Municipio", new { @class = "control-label col-md-6" })
+                                <div class="col-md-11">
+                                    <input type="hidden" id="munCodigo" name="munCodigo" value="@ViewBag.munCodigo" />
+                                    <select class="form-control" name="mun_codigo" id="mun_Codigo">
+                                        <option>Seleccione</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.mun_codigo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
+
+
+                                @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control", MaxLength = 200, @onKeyPress = "return soloLetras(event)", @onkeyup = "this.value=NumText1(this.value)", @autocomplete = "off" })
+                                <p style="color:red">@Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger" })</p>
+                            </div>
 
 
 
@@ -161,7 +166,7 @@
                 <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
                 <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
                 <script src="~/Scripts/app/General_PCAE.js"></script>
-                <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
+
                 <script src="~/Scripts/app/Proveedor.js"></script>
 
 

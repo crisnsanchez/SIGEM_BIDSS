@@ -58,9 +58,15 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "prov_Id,prov_Nombre,prov_NombreContacto,prov_Direccion,mun_codigo,prov_Email,prov_Telefono,prov_RTN,acte_Id,prov_UsuarioCrea,prov_FechaCrea,prov_UsuarioModifica,prov_FechaModifica")] tbProveedor tbProveedor)
+        public ActionResult Create([Bind(Include = "prov_Id,prov_Nombre,prov_NombreContacto,prov_Direccion,mun_codigo,prov_Email,prov_Telefono,prov_RTN,acte_Id,prov_UsuarioCrea,prov_FechaCrea,prov_UsuarioModifica,prov_FechaModifica")] tbProveedor tbProveedor, string dep_codigo)
         {
-           
+            if (tbProveedor.mun_codigo == "Seleccione")
+                ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
+            else
+                ViewBag.munCodigo = tbProveedor.mun_codigo;
+
+            if (String.IsNullOrEmpty(dep_codigo))
+                ModelState.AddModelError("prov_UsuarioCrea", "El campo Departamento es obligatorio.");
             if (ModelState.IsValid)
                 try
                 {
@@ -82,13 +88,17 @@ namespace SIGEM_BIDSS.Controllers
                         Msj = Permiso.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-
+                        ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", dep_codigo);
+                        ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
+                        ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
                         return View();
                     }
                     if (Msj.StartsWith("-2"))
                     {
 
-
+                        ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", dep_codigo);
+                        ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
+                        ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
                         ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
                         return View(tbProveedor);
                     }
@@ -104,13 +114,15 @@ namespace SIGEM_BIDSS.Controllers
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View();
                 }
-
-
-
+            ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", dep_codigo);
             ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
-            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
-            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
-            return View(tbProveedor);
+            ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
+        
+            if (dep_codigo != "ajax")
+                return View("Create");
+            else
+                return Json("Create");
+         
         }
 
         // GET: Proveedor/Edit/5

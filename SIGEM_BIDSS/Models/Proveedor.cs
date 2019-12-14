@@ -12,8 +12,8 @@ namespace SIGEM_BIDSS.Models
     {
         [NotMapped]
         public List<tbProveedor> ProveedorList { get; set; }
-  
-        
+
+   
     }
 
     public class ProveedorMetaData
