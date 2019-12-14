@@ -14,7 +14,7 @@ $(function () {
     if (_Action == "Revisada") {
         Toast.fire({
             type: 'success',
-            title: 'Se ha guardado con Exito.'
+            title: 'Se ha actualizado el estado con Exito.'
         })
     }
     else if (_Action == "Edited") {

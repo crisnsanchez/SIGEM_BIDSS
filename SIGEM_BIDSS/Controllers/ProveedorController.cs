@@ -64,6 +64,8 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
                 try
                 {
+                    ViewBag.selectedMun = tbProveedor.mun_codigo;
+                    ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
                     IEnumerable<Object> List = null;
                     string Msj = "";
                     List = db.UDP_Inv_tbProveedor_Insert(tbProveedor.prov_Id,
@@ -138,6 +140,10 @@ namespace SIGEM_BIDSS.Controllers
         {
             try
             {
+
+                ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
+                ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+                ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
                 IEnumerable<Object> List = null;
                 string Msj = "";
                 List = db.UDP_Inv_tbProveedor_Update(tbProveedor.prov_Id,

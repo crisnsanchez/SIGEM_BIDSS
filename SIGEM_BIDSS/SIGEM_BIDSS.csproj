@@ -216,6 +216,7 @@
     </Compile>
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\Unidadmedida.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
     <Compile Include="Models\Economica.cs" />
