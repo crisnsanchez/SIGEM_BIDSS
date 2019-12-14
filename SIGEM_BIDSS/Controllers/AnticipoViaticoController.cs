@@ -116,7 +116,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
+                        //Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
                         if (!Result)
                             Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
 

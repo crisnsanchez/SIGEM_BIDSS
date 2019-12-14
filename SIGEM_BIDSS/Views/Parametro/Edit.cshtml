@@ -30,7 +30,17 @@
                             <div class="form-group col-md-6">
                                 <div class="card-body box-profile">
                                     <div class="text-center">
-                                        <img src="~/Content/img/descarga.jpg" class="product-image" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
+                                        @{if (Model.par_PathLogo != null && Model.par_PathLogo != "")
+                                            {
+                                                <img src="@Url.Content(Model.par_PathLogo)" class="product-image" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
+
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/img/descarga.jpg" class="product-image img-circle" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
+
+                                            }
+                                        }
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -38,9 +48,10 @@
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input id="CargarFoto" value="Cargar Fotografía" name="FotoPath" type="file" class="custom-file-input">
-                                            <label id="lblCargarFoto" class="custom-file-label" for="CargarFoto"></label>
-                                        </div>
-                                        <div class="input-group-append">
+                                            <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto">
+                                                @if (Model.par_PathLogo != null && Model.par_PathLogo != "")
+                                                {@Url.Content(Model.par_PathLogo)}
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -75,6 +86,11 @@
                             @Html.LabelFor(model => model.par_CorreoEmisor, htmlAttributes: new { @class = "control-label col-md-8" })
                             @Html.EditorFor(model => model.par_CorreoEmisor, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off" } })
                             <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoEmisor, "", new { @class = "text-danger" })</p>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            @Html.LabelFor(model => model.par_CorreoRRHH, htmlAttributes: new { @class = "control-label col-md-8" })
+                            @Html.EditorFor(model => model.par_CorreoRRHH, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off" } })
+                            <p id="emailEoKi" style="color:red">@Html.ValidationMessageFor(model => model.par_CorreoRRHH, "", new { @class = "text-danger" })</p>
                         </div>
                     </div>
                     <div class="form-row">

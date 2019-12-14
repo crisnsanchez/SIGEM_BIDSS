@@ -23,5 +23,6 @@ namespace SIGEM_BIDSS.Models
         public string par_Servidor { get; set; }
         public int par_Puerto { get; set; }
         public string par_PathLogo { get; set; }
+        public string par_CorreoRRHH { get; set; }
     }
 }
