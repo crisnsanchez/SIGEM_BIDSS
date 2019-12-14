@@ -6,6 +6,20 @@
 }
 
 <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+@{
+    var test = new SIGEM_BIDSS.Models.tbMunicipio();
+    var test2 = new SIGEM_BIDSS.Models.tbDepartamento();
+    var test1 = new SIGEM_BIDSS.Models.tbActividadEconomica();
+    var ListadoActividad = new SIGEM_BIDSS.Models.tbActividadEconomica();
+    var ListadoDepartamento = new SIGEM_BIDSS.Models.tbDepartamento();
+
+}
+@*<link href="~/Content/template/plugins/datepicker/datepicker3.css" rel="stylesheet" />*@
+<link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+<input type="hidden" id="municipios" value="@ViewBag.muni" />
+<input type="hidden" id="selectedMun" value="@ViewBag.selectedMun" />
+<input type="hidden" id="act" value="@ViewBag.acte_Id" />
 <style>
     .validation-error {
         color: red;
@@ -48,108 +62,119 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <div class="card-body">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.prov_Id)
-                <div class="form-group">
-                    @Html.LabelFor(model => model.prov_Nombre, htmlAttributes: new { @class = "control-label col-sm-2" })
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.prov_Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.prov_Nombre, "", new { @class = "text-danger" })</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.prov_NombreContacto, htmlAttributes: new { @class = "control-label col-sm-2" })
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.prov_NombreContacto, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", @onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.prov_NombreContacto, "", new { @class = "text-danger" })</p>
-                    </div>
-                </div>
-                <div class="form-group ">
-                    @Html.LabelFor(model => model.prov_RTN, htmlAttributes: new { @class = "control-label col-md-8" })
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.prov_RTN, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
-                        @Html.ValidationMessageFor(model => model.prov_RTN, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+    <div class="form-horizontal">
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.prov_Id)
+            @Html.HiddenFor(model => model.tbActividadEconomica.acte_Id)
+            @Html.HiddenFor(model => model.tbMunicipio.mun_nombre)
+            @Html.HiddenFor(model => model.tbMunicipio.dep_codigo)
+            <form>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.prov_Email, htmlAttributes: new { @class = "control-label col-md-8" })
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.prov_Email, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.prov_Email, "", new { @class = "text-danger" })</p>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            @Html.LabelFor(model => model.prov_Nombre, htmlAttributes: new { @class = "control-label col-md-6" })
+                            @Html.EditorFor(model => model.prov_Nombre, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @OnKeyPress = "return soloLetras(event)" } })
+                            <p style="color:red">@Html.ValidationMessageFor(model => model.prov_Nombre, "", new { @class = "text-danger" })</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.prov_NombreContacto, htmlAttributes: new { @class = "control-label col-md-6" })
+                            @Html.EditorFor(model => model.prov_NombreContacto, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;" } })
+                            <p style="color:red">@Html.ValidationMessageFor(model => model.prov_NombreContacto, "", new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.prov_RTN, htmlAttributes: new { @class = "control-label col-md-6" })
+                            @Html.EditorFor(model => model.prov_RTN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            <p style="color:red" id="Rtn_Error">@Html.ValidationMessageFor(model => model.prov_RTN, "", new { @class = "text-danger" })</p>
+                            <div id="validationRTN">
+                                <p style="color:red"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.prov_Email, htmlAttributes: new { @class = "control-label col-md-8" })
+                            @Html.EditorFor(model => model.prov_Email, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                            <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.prov_Email, "", new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.prov_Telefono, htmlAttributes: new { @class = "control-label col-md-8" })
+                            @Html.EditorFor(model => model.prov_Telefono, new { htmlAttributes = new { @class = "form-control", maxlength = "25" } })
+                            <p style="color:red">@Html.ValidationMessageFor(model => model.prov_Telefono, "", new { @class = "text-danger" })</p>
+                        </div>
+
+                        <div class="form-group col-md-6">
+
+
+                            <label class="control-label col-md-4">Actividad Economica</label>
+                            @Html.DropDownList("acte_Id", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.acte_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                                <label class="control-label col-md-6">Departamento</label>
+                                @Html.DropDownList("dep_Codigo", null, "", new { @class = "form-control" })
+                                <p id="Departamento">@Html.ValidationMessageFor(muni => test.dep_codigo)</p>
+                            </div>
+                        <div id="municipio" class="form-group col-md-6">
+                            <label class="control-label col-md-6">Municipio</label>
+                            <select class="form-control" name="mun_codigo" id="mun_codigo">
+                                <option>Seleccione</option>
+                            </select>
+                            <p id="Municipio" style="color:red">@Html.ValidationMessageFor(model => model.mun_codigo)</p>
+
+                        </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
+
+
+                                @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control", MaxLength = 200, @onKeyPress = "return soloLetras(event)", @onkeyup = "this.value=NumText1(this.value)", @autocomplete = "off" })
+                                <p style="color:red">@Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger" })</p>
+                            </div>
+
+
+                        </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-10">
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.prov_Telefono, htmlAttributes: new { @class = "control-label col-md-8" })
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.prov_Telefono, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.prov_Telefono, "", new { @class = "text-danger" })</p>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.prov_Direccion, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger" })</p>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.mun_codigo, "mun_codigo", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-sm-4">
-                        @Html.DropDownList("mun_codigo", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.mun_codigo, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.acte_Id, "acte_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-sm-4">
-                        @Html.DropDownList("acte_Id", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.acte_Id, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-                <br />
-                <div class="form-group">
-                    <div class="col-md-offset-4 col-md-10">
-                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                    </div>
-                </div>
+            </form>
 
 
 
 
-                <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-                <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+            <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+            <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 
 
 
-                <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-                <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-                <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-                <script src="~/Scripts/app/General_PCAE.js"></script>
-                <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
+            <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+            <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+            <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+            <script src="~/Scripts/app/General_PCAE.js"></script>
+            <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
+            <script src="~/Scripts/app/Proveedor.js"></script>
 
 
-            </div>
         </div>
-
+    </div>
     }
 
-    <script type="text/javascript">
-        $('#insf_Telefono').inputmask('(999) 9999-9999')
-
-        $(document).ready(function () {
-            bsCustomFileInput.init();
-        });
-
-
-
-    </script>
+</div>

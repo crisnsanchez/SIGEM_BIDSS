@@ -67,7 +67,7 @@ namespace SIGEM_BIDSS.Controllers
                     if (Msj.StartsWith("-2"))
                     {
 
-                        ModelState.AddModelError("", "Ya existe una Unidad con el mismo nombre.");
+                        ModelState.AddModelError("", "Esta unidad de medida ya esta registrada");
                         return View(tbUnidadMedida);
                     }
                     else
@@ -115,7 +115,7 @@ namespace SIGEM_BIDSS.Controllers
             if (ModelState.IsValid)
                 if (db.tbUnidadMedida.Any(a => a.uni_Descripcion == tbUnidadMedida.uni_Descripcion && a.uni_Id != tbUnidadMedida.uni_Id))
                 {
-                    ModelState.AddModelError("", "Ya existe una Unidad con el mismo nombre.");
+                    ModelState.AddModelError("", "Esta unidad de medida ya esta registrada");
                     return View(tbUnidadMedida);
                 }
 

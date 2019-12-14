@@ -107,7 +107,7 @@ namespace SIGEM_BIDSS.Controllers
                     IEnumerable<object> List = null;
                     var MsjError = "";
                    
-                    List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo
+                    List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo
                         );
                     foreach (UDP_Conf_tbParametro_Insert_Result parametro in List)
                         MsjError = parametro.MensajeError;
@@ -212,7 +212,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<object> List = null;
                     var MsjError = "";
-                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo);
+                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH,tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo);
                     foreach (UDP_Conf_tbParametro_Update_Result parametro in List)
                         MsjError = parametro.MensajeError;
                     if (MsjError.StartsWith("-1"))

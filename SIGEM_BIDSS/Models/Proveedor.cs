@@ -12,6 +12,8 @@ namespace SIGEM_BIDSS.Models
     {
         [NotMapped]
         public List<tbProveedor> ProveedorList { get; set; }
+  
+        
     }
 
     public class ProveedorMetaData
@@ -41,8 +43,8 @@ namespace SIGEM_BIDSS.Models
         public string prov_RTN { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Actividad Economica")]
-        public short acte_Id { get; set; } 
-        
-               
+        public short acte_Id { get; set; }
+  
+
     }
 }

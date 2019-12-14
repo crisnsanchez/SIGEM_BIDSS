@@ -143,38 +143,65 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dep_Codigo,dep_Nombre,dep_UsuarioCrea,dep_FechaCrea,dep_UsuarioModifica,dep_FechaModifica")] tbDepartamento tbDepartamento)
+        public ActionResult Edit(int? id, [Bind(Include = "dep_Codigo,dep_Nombre,dep_UsuarioCrea,dep_FechaCrea,dep_UsuarioModifica,dep_FechaModifica")] tbDepartamento tbDepartamento)
         {
+            IEnumerable<object> depart = null;
+            IEnumerable<object> munici = null;
+            string MsjError = "";
+            string MensajeError = "";
+            var List = (List<tbMunicipio>)Session["tbMunicipio"];
             if (ModelState.IsValid)
             {
-                IEnumerable<object> list = null;
-                string MsjError = "";
-                string UserName = "";
-                
+                using (TransactionScope _Tran = new TransactionScope())
                 {
                     try
                     {
-                        int EmpleId = function.GetUser(out UserName);
-                        tbDepartamento.dep_UsuarioModifica = EmpleId;
-                        list = db.UDP_Gral_tbDepartamento_Update(tbDepartamento.dep_Codigo, tbDepartamento.dep_Nombre, EmpleId);
-                        foreach (UDP_Gral_tbDepartamento_Update_Result dep in list)
-                            MsjError = dep.MensajeError;
+                        depart = db.UDP_Gral_tbDepartamento_Update(tbDepartamento.dep_Codigo,
+                                                                    tbDepartamento.dep_Nombre,
+                                                                    1
+                            );
+                        foreach (UDP_Gral_tbDepartamento_Update_Result Departamentos in depart)
+                            MsjError = Departamentos.MensajeError;
+
                         if (MsjError.StartsWith("-1"))
                         {
-                            
-                            ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
+                           
+                            ModelState.AddModelError("", "1. No se pudo actualizar el registro, favor contacte al administrador.");
                             return View(tbDepartamento);
                         }
                         else
                         {
-                            return RedirectToAction("Index");
+                           
+                            if (List != null && List.Count > 0)
+                            {
+                                foreach (tbMunicipio municipio in List)
+                                {
+                                    munici = db.UDP_Gral_tbMunicipio_Insert(municipio.mun_codigo
+                                                                                , tbDepartamento.dep_Codigo,
+                                                                                municipio.mun_nombre,
+                                                                                1,
+                                                                                function.DatetimeNow()
+                                                                                );
+
+                                    foreach (UDP_Gral_tbMunicipio_Insert_Result mun in munici)
+                                        MensajeError = mun.MensajeError;
+                                    if (MensajeError.StartsWith("-1"))
+                                    {
+
+                                        ModelState.AddModelError("", "Ya existe un Municipio en este Departamento con ese nombre, agregue otro.");
+                                        return RedirectToAction("Edit/" + MsjError);
+                                    }
+                                }
+                            }
+                            _Tran.Complete();
+                            return RedirectToAction("Edit/" + MsjError);
                         }
                     }
-                    catch (Exception)
+                    catch (Exception Ex)
                     {
                         
-                        ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
-                        return View(tbDepartamento);
+                        ModelState.AddModelError("", "2. No se pudo actualizar el registro, favor contacte al administrador.");
+                        return RedirectToAction("Edit/" + MsjError);
                     }
                 }
             }

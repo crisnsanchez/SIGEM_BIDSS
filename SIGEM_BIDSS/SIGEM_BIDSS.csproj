@@ -216,6 +216,7 @@
     </Compile>
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\Unidadmedida.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
     <Compile Include="Models\Economica.cs" />
@@ -919,6 +920,7 @@
     <Content Include="Scripts\app\General_Details.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
+    <Content Include="Scripts\app\Proveedor.js" />
     <Content Include="Scripts\app\Solicitud.js" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
@@ -3338,6 +3340,7 @@
     <Content Include="Views\Sueldo\Edit.cshtml" />
     <Content Include="Views\Sueldo\Index.cshtml" />
     <Content Include="Views\Menu\Inventario.cshtml" />
+    <Content Include="Views\Departamento\_LitsMunicipio.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

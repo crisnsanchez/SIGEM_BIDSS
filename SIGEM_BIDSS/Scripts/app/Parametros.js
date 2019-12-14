@@ -42,6 +42,9 @@ $('#par_CorreoEmisor').change(function () {
     $('#erroremisor').hide();
 });
 
+$('#par_CorreoRRHH').change(function () {
+    $('#erroremisor').hide();
+});
 
 $('#par_Servidor').change(function () {
     $('#errorServidor').hide();
@@ -137,6 +140,21 @@ document.getElementById('par_CorreoEmisor').addEventListener('input', function (
         valido.innerText = "Correo Inválido";
         $('#par_CorreoEmisor').focus();
         $('#par_CorreoEmisor').addClass('is-invalid');
+    }
+});
+document.getElementById('par_CorreoRRHH').addEventListener('input', function () {
+    campo = event.target;
+    valido = document.getElementById('emailOKi');
+    //selector = document.getElementById('emp_CorreoElectronico')
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+    if (emailRegex.test(campo.value)) {
+        valido.innerText = "";
+        $('#par_CorreoRRHH').removeClass('is-invalid');
+    } else {
+        valido.innerText = "Correo Inválido";
+        $('#par_CorreoRRHH').focus();
+        $('#par_CorreoRRHH').addClass('is-invalid');
     }
 });
 

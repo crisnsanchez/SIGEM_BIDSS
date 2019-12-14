@@ -14,6 +14,7 @@ namespace SIGEM_BIDSS.Controllers
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         Models.Helpers Function = new Models.Helpers();
+        GeneralFunctions _function = new GeneralFunctions();
 
         // GET: Cargos
         public ActionResult Index()
@@ -76,12 +77,12 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "pto_Id,are_Id,pto_Descripcion,pto_UsuarioCrea,pto_FechaCrea,pto_UsuarioModifica,pto_FechaModifica")] tbPuesto tbPuesto)
         {
-            ViewBag.are_Id = new SelectList(db.tbPuesto, "are_Id", "are_Descripcion", tbPuesto.are_Id);
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
 
             if (ModelState.IsValid)
 
             {
-                ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
+                ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
                 try
                 {
                     IEnumerable<Object> List = null;
@@ -96,7 +97,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     if (Msj.StartsWith("-2"))
                     {
-                        ModelState.AddModelError("", "Ya existe un Cargo con el mismo nombre..");
+                        ModelState.AddModelError("", "Ya existe esta área con el mismo cargo.");
                         return View();
                     }
                     else
@@ -152,9 +153,9 @@ namespace SIGEM_BIDSS.Controllers
 
 
             if (ModelState.IsValid)
-                if (db.tbPuesto.Any(a => a.pto_Descripcion == tbPuesto.pto_Descripcion && a.are_Id == tbPuesto.are_Id))
+                if (isDuplicated(tbPuesto))
                 {
-                    ModelState.AddModelError("", "Ya existe un cargo con el mismo nombre.");
+                    ModelState.AddModelError("", "Este puesto ya esta existe para esta área.");
                     return View(tbPuesto);
                 }
 
@@ -168,10 +169,10 @@ namespace SIGEM_BIDSS.Controllers
                     if (Msj.StartsWith("-1"))
                     {
                        
-                        return View();
+                        return View(tbPuesto);
                     }
                     else
-                    {
+                    {    TempData["swalfunction"] = GeneralFunctions._isEdited;
                         return RedirectToAction("Index");
                     }
                 }
@@ -179,12 +180,12 @@ namespace SIGEM_BIDSS.Controllers
                 {
 
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
+                    return View(tbPuesto);
                 }
 
 
-            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
-            return View(tbPuesto);
+      
+   
         }
 
         // GET: Cargos/Delete/5
@@ -200,6 +201,24 @@ namespace SIGEM_BIDSS.Controllers
                 return HttpNotFound();
             }
             return View(tbPuesto);
+        }
+
+        public bool isDuplicated(tbPuesto tbPuesto)
+        {
+            bool _boolExist = false;
+            try
+            {
+                int _Exist = (from _tbM in db.tbPuesto where _tbM.pto_Descripcion == tbPuesto.pto_Descripcion && _tbM.pto_Id != tbPuesto.pto_Id &&  _tbM.are_Id==tbPuesto.are_Id   select _tbM).Count();
+                if (_Exist >= 1)
+                {
+                    return _boolExist = true;
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw;
+            }
+            return _boolExist;
         }
 
         // POST: Cargos/Delete/5

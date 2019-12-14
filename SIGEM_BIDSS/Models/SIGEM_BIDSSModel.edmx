@@ -70,6 +70,7 @@
           <Property Name="par_TelefonoEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="par_CorreoEmpresa" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="par_CorreoEmisor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="par_CorreoRRHH" Type="nvarchar" MaxLength="50" />
           <Property Name="par_Password" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="par_Servidor" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="par_Puerto" Type="int" Nullable="false" />
@@ -680,6 +681,7 @@
           <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
           <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
           <Parameter Name="par_CorreoEmisor" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_CorreoRRHH" Type="nvarchar" Mode="In" />
           <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
           <Parameter Name="par_Servidor" Type="nvarchar" Mode="In" />
           <Parameter Name="par_Puerto" Type="int" Mode="In" />
@@ -691,6 +693,7 @@
           <Parameter Name="par_TelefonoEmpresa" Type="nvarchar" Mode="In" />
           <Parameter Name="par_CorreoEmpresa" Type="nvarchar" Mode="In" />
           <Parameter Name="par_CorreoEmisor" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_CorreoRRHH" Type="nvarchar" Mode="In" />
           <Parameter Name="par_Password" Type="nvarchar" Mode="In" />
           <Parameter Name="par_Servidor" Type="nvarchar" Mode="In" />
           <Parameter Name="par_Puerto" Type="int" Mode="In" />
@@ -1585,27 +1588,6 @@
             <Parameter Name="tmo_Nombre" Mode="In" Type="String" />
             <Parameter Name="tmo_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Conf_tbParametro_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result)">
-            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
-            <Parameter Name="par_Password" Mode="In" Type="String" />
-            <Parameter Name="par_Servidor" Mode="In" Type="String" />
-            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
-            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Conf_tbParametro_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result)">
-            <Parameter Name="par_Id" Mode="In" Type="Byte" />
-            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
-            <Parameter Name="par_Password" Mode="In" Type="String" />
-            <Parameter Name="par_Servidor" Mode="In" Type="String" />
-            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
-            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Plani_tbInstitucionFinanciera_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Insert_Result)">
             <Parameter Name="insf_Id" Mode="In" Type="Int32" />
             <Parameter Name="insf_DescInstitucionFinanc" Mode="In" Type="String" />
@@ -1935,6 +1917,29 @@
             <Parameter Name="prov_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="prov_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Conf_tbParametro_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result)">
+            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoRRHH" Mode="In" Type="String" />
+            <Parameter Name="par_Password" Mode="In" Type="String" />
+            <Parameter Name="par_Servidor" Mode="In" Type="String" />
+            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
+            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Conf_tbParametro_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result)">
+            <Parameter Name="par_Id" Mode="In" Type="Byte" />
+            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoRRHH" Mode="In" Type="String" />
+            <Parameter Name="par_Password" Mode="In" Type="String" />
+            <Parameter Name="par_Servidor" Mode="In" Type="String" />
+            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
+            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2014,12 +2019,6 @@
           <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbMoneda_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Conf_tbParametro_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Conf_tbParametro_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Plani_tbInstitucionFinanciera_Insert_Result">
@@ -2151,6 +2150,7 @@
           <Property Name="par_Servidor" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="par_Puerto" Type="Int32" Nullable="false" />
           <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="par_CorreoRRHH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -2763,6 +2763,12 @@
         <ComplexType Name="UDP_Inv_tbProveedor_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Conf_tbParametro_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Conf_tbParametro_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2911,20 +2917,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbTipoMoneda_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbTipoMoneda_Update" />
-          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbInstitucionFinanciera_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbInstitucionFinanciera_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbInstitucionFinanciera_Insert_Result">
@@ -3107,6 +3099,7 @@
           <EntitySetMapping Name="tbParametro">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
               <MappingFragment StoreEntitySet="tbParametro">
+                <ScalarProperty Name="par_CorreoRRHH" ColumnName="par_CorreoRRHH" />
                 <ScalarProperty Name="par_PathLogo" ColumnName="par_PathLogo" />
                 <ScalarProperty Name="par_Puerto" ColumnName="par_Puerto" />
                 <ScalarProperty Name="par_Servidor" ColumnName="par_Servidor" />
@@ -3489,6 +3482,20 @@
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProveedor_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProveedor_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProveedor_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

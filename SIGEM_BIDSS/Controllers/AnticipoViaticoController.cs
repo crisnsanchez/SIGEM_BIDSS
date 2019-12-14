@@ -116,9 +116,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                        var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
+                        //Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
                         if (!Result)
                             Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
 
