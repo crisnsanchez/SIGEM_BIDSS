@@ -16,7 +16,7 @@ namespace SIGEM_BIDSS.Controllers
     public class AnticipoSalarioController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions Funtion = new GeneralFunctions();
+        GeneralFunctions Function = new GeneralFunctions();
 
 
         // GET: AnticipoSalario
@@ -76,13 +76,12 @@ namespace SIGEM_BIDSS.Controllers
         {
             string UserName = "",
                 ErrorEmail = "";
-
             try
             {
                 bool Result = false, ResultAdm = false;
-                int EmployeeID = Funtion.GetUser(out UserName);
+                int EmployeeID = Function.GetUser(out UserName);
                 tbAnticipoSalario.emp_Id = EmployeeID;
-                tbAnticipoSalario.Ansal_GralFechaSolicitud = Funtion.DatetimeNow();
+                tbAnticipoSalario.Ansal_GralFechaSolicitud = Function.DatetimeNow();
                 tbAnticipoSalario.est_Id = GeneralFunctions.Enviada;
 
                 if (ModelState.IsValid)
@@ -92,7 +91,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     Insert = db.UDP_Adm_tbAnticipoSalario_Insert(EmployeeID,
                         tbAnticipoSalario.Ansal_JefeInmediato,
-                        Funtion.DatetimeNow(),
+                        Function.DatetimeNow(),
                         tbAnticipoSalario.Ansal_MontoSolicitado,
                         tbAnticipoSalario.tpsal_id,
                         tbAnticipoSalario.Ansal_Justificacion,
@@ -100,12 +99,12 @@ namespace SIGEM_BIDSS.Controllers
                         tbAnticipoSalario.est_Id,
                         tbAnticipoSalario.Ansal_RazonRechazo,
                         EmployeeID,
-                        Funtion.DatetimeNow());
+                        Function.DatetimeNow());
                     foreach (UDP_Adm_tbAnticipoSalario_Insert_Result Res in Insert)
                         ErrorMessage = Res.MensajeError;
                     if (ErrorMessage.StartsWith("-1"))
                     {
-                        Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorMessage);
+                        Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
                     }
                     else
@@ -114,11 +113,11 @@ namespace SIGEM_BIDSS.Controllers
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
-                        ResultAdm = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
 
-                        if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
-                        if (!ResultAdm) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                        if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
 
                         TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
                         return RedirectToAction("Index");
@@ -128,7 +127,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch (Exception ex)
             {
-                Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
+                Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
             }
             IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
                                             where _tbEmp.emp_EsJefe == true
@@ -149,9 +148,9 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
                 bool Result = false;
-                int EmployeeID = Funtion.GetUser(out UserName);
+                int EmployeeID = Function.GetUser(out UserName);
                 tbAnticipoSalario.emp_Id = EmployeeID;
-                tbAnticipoSalario.Ansal_GralFechaSolicitud = Funtion.DatetimeNow();
+                tbAnticipoSalario.Ansal_GralFechaSolicitud = Function.DatetimeNow();
                 tbAnticipoSalario.est_Id = State;
                 tbAnticipoSalario.Ansal_RazonRechazo = Ansal_RazonRechazo;
 
@@ -161,7 +160,7 @@ namespace SIGEM_BIDSS.Controllers
                 Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
                                                             EmployeeID,
                                                             tbAnticipoSalario.Ansal_JefeInmediato,
-                                                            Funtion.DatetimeNow(),
+                                                            Function.DatetimeNow(),
                                                             tbAnticipoSalario.Ansal_MontoSolicitado,
                                                             tbAnticipoSalario.tpsal_id,
                                                             tbAnticipoSalario.Ansal_Justificacion,
@@ -169,12 +168,12 @@ namespace SIGEM_BIDSS.Controllers
                                                             tbAnticipoSalario.est_Id,
                                                             tbAnticipoSalario.Ansal_RazonRechazo,
                                                             EmployeeID,
-                                                            Funtion.DatetimeNow());
+                                                            Function.DatetimeNow());
                 foreach (UDP_Adm_tbAnticipoSalario_Update_Result Res in Update)
                     ErrorMessage = Res.MensajeError;
                 if (ErrorMessage.StartsWith("-1"))
                 {
-                    Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorMessage);
+                    Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorMessage);
                     ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
                     return false;
                 }
@@ -197,15 +196,15 @@ namespace SIGEM_BIDSS.Controllers
                             break;
                     }
                     if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
-                    Result = Funtion.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject+" "+ Ansal_RazonRechazo);
+                    Result = Function.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject+" "+ Ansal_RazonRechazo);
 
-                    if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                    if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
+                Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
                 return false;
             }
         }
