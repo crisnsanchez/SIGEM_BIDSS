@@ -919,6 +919,7 @@
     <Content Include="Scripts\app\General_Details.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
+    <Content Include="Scripts\app\Proveedor.js" />
     <Content Include="Scripts\app\Solicitud.js" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
