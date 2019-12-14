@@ -33,16 +33,17 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Municipio")]
         public string mun_codigo { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Correo Electronico")]
+
+        [Display(Name = "Correo Electrónico")]
         public string prov_Email { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Telefono")]
+        [Display(Name = "Teléfono")]
         public string prov_Telefono { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "RTN")]
         public string prov_RTN { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Actividad Economica")]
+        [Display(Name = "Actividad Económica")]
         public short acte_Id { get; set; }
   
 
