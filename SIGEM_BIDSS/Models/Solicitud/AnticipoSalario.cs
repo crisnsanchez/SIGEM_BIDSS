@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,9 @@ namespace SIGEM_BIDSS.Models
     [MetadataType(typeof(AnticipoSalarioMetadata))]
     public partial class tbAnticipoSalario
     {
-
+        [NotMapped]
+        public string nRazonRechazo { get; set; }
+        
 
     }
     public class AnticipoSalarioMetadata

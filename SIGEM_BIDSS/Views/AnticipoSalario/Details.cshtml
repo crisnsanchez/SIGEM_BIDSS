@@ -1,5 +1,5 @@
 ﻿@model SIGEM_BIDSS.Models.tbAnticipoSalario
-
+@using SIGEM_BIDSS.Models
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,7 +27,6 @@
                         @Html.HiddenFor(model => model.Ansal_Id)
                         @Html.DisplayNameFor(model => model.Ansal_Correlativo)
                     </dt>
-
                     <dd>
                         @Html.DisplayFor(model => model.Ansal_Correlativo)
                     </dd>
@@ -39,7 +38,13 @@
                     <dd>
                         @Html.DisplayFor(model => model.Ansal_GralFechaSolicitud)
                     </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbTipoSalario.tpsal_Descripcion)
+                    </dt>
 
+                    <dd>
+                        @Html.DisplayFor(model => model.tbTipoSalario.tpsal_Descripcion)
+                    </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.Ansal_MontoSolicitado)
                     </dt>
@@ -72,10 +77,33 @@
                         @Html.DisplayFor(model => model.Ansal_RazonRechazo)
                     </dd>
 
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+                    </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.Ansal_UsuarioCrea)
                     </dt>
-
                     <dd>
                         @Html.DisplayFor(model => model.Ansal_UsuarioCrea)
                     </dd>
@@ -104,42 +132,16 @@
                         @Html.DisplayFor(model => model.Ansal_FechaModifica)
                     </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbTipoSalario.tpsal_Descripcion)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbTipoSalario.tpsal_Descripcion)
-                    </dd>
                 </dl>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
-                        <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                        @{
+                            if (Model.est_Id == GeneralFunctions.Enviada || Model.est_Id == GeneralFunctions.Revisada  )
+                            {
+                                <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                                <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                            }
+                        }
                         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                     </div>
                 </div>
@@ -162,7 +164,7 @@
             <div class="modal-body">
                 <h5 class="control-label col-md-8 required"></h5>
                 <div class="form-group">
-                   
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -190,10 +192,11 @@
                     <p class="col-form-label" id="">
                         Razon de Rechazo
                     </p>
-                    <textarea id="RazonInactivacion" class="form-control normalize"></textarea>
+                    <textarea id="RazonRechazo" class="form-control normalize"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
+              
                 <button class="btn btn-danger" type="button" id="_ModalReject">Rechazar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             </div>
@@ -202,5 +205,7 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
     <script src="~/Scripts/app/General_Details.js"></script>
+    <script src="~/Scripts/app/Solicitud/AnticipoSalario/Details.js"></script>
 }

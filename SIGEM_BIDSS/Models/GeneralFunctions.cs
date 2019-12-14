@@ -64,15 +64,11 @@ namespace SIGEM_BIDSS.Models
         public const int Rechazada = 4;
 
 
-
-        public const string Pass = "QdZwAxesc12";
-
-
         public const int intDefault = 1;
         public const int tiposalario = 1;
         public const int tiposoli = 2;
 
-
+        //Defaults
         public const string stringDefault = "-----";
         public const string dateDefault = "01/01/1900";
         public const string date2 = "1900/01/01";

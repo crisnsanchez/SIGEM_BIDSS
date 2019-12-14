@@ -57,29 +57,6 @@ namespace SIGEM_BIDSS.Controllers
         }
 
 
-        // GET: AnticipoSalario/Details/5
-        public ActionResult Approve(int? id)
-        {
-            if (id == null)
-            {
-
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
-            if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
-            {
-                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Aprobada, GeneralFunctions.stringDefault))
-                {
-                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
-                }
-            }
-            if (tbAnticipoSalario == null)
-            {
-                return HttpNotFound();
-            }
-            return RedirectToAction("Index");
-        }
-
         // GET: AnticipoSalario/Create
         public ActionResult Create()
         {
@@ -162,45 +139,8 @@ namespace SIGEM_BIDSS.Controllers
 
         }
 
-        // GET: AnticipoSalario/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
-            if (tbAnticipoSalario == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoSalario.emp_Id);
-            ViewBag.Ansal_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoSalario.Ansal_JefeInmediato);
-            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbAnticipoSalario.est_Id);
-            ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion", tbAnticipoSalario.tpsal_id);
-            return View(tbAnticipoSalario);
-        }
 
-        // POST: AnticipoSalario/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Ansal_Id,Ansal_Correlativo,emp_Id,Ansal_JefeInmediato,Ansal_GralFechaSolicitud,Ansal_MontoSolicitado,tpsal_id,Ansal_Justificacion,Ansal_Comentario,est_Id,Ansal_RazonRechazo,Ansal_UsuarioCrea,Ansal_FechaCrea,Ansal_UsuarioModifica,Ansal_FechaModifica")] tbAnticipoSalario tbAnticipoSalario)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbAnticipoSalario).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoSalario.emp_Id);
-            ViewBag.Ansal_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoSalario.Ansal_JefeInmediato);
-            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbAnticipoSalario.est_Id);
-            ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion", tbAnticipoSalario.tpsal_id);
-            return View(tbAnticipoSalario);
-        }
-
+       
 
         public bool UpdateState(tbAnticipoSalario tbAnticipoSalario, int State, string Ansal_RazonRechazo)
         {
@@ -208,7 +148,6 @@ namespace SIGEM_BIDSS.Controllers
                 ErrorEmail = "";
             try
             {
-
                 bool Result = false;
                 int EmployeeID = Funtion.GetUser(out UserName);
                 tbAnticipoSalario.emp_Id = EmployeeID;
@@ -241,7 +180,6 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 else
                 {
-                    //var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                     var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                     string _msj = "";
                     var reject = "";
@@ -271,32 +209,31 @@ namespace SIGEM_BIDSS.Controllers
                 return false;
             }
         }
-        [HttpPost]
-        public JsonResult Approve(int id)
+
+        // GET: AnticipoSalario/Approve/5
+        public ActionResult Approve(int? id)
         {
-            var list = "";
             if (id == null)
             {
-                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
             {
-                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Rechazada, GeneralFunctions.stringDefault))
+                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Aprobada, GeneralFunctions.stringDefault))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
                 }
             }
             if (tbAnticipoSalario == null)
             {
-                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
-                //return HttpNotFound();
+                return HttpNotFound();
             }
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
+            return RedirectToAction("Index");
+        } // GET: AnticipoSalario/Approve/5
 
-
+      
         [HttpPost]
         public JsonResult Reject(int id, string Ansal_RazonRechazo)
         {
@@ -311,7 +248,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 if (UpdateState(tbAnticipoSalario, GeneralFunctions.Rechazada, Ansal_RazonRechazo))
                 {
-                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                 }
             }
             if (tbAnticipoSalario == null)
@@ -322,32 +259,6 @@ namespace SIGEM_BIDSS.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-
-        // GET: AnticipoSalario/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
-            if (tbAnticipoSalario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbAnticipoSalario);
-        }
-
-        // POST: AnticipoSalario/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
-            db.tbAnticipoSalario.Remove(tbAnticipoSalario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
