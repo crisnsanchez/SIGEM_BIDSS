@@ -71,3 +71,41 @@ function CorreoElectronico(string) {//Algunos caracteres especiales para el corr
 
     return out;
 }
+
+////OBTENER MUNICIPIO
+$(document).on("change", "#dep_Codigo", function () {
+    GetMunicipios();
+});
+
+function GetMunicipios() {
+    var CodDepartamento = $('#dep_Codigo').val(),
+        _selectedMun = $('#selectedMun').val();
+    console.log(CodDepartamento)
+    $.ajax({
+        url: "/Proveedor/GetMunicipios",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ CodDepartamento: CodDepartamento }),
+    })
+        .done(function (data) {
+            $('#municipio').show();
+            if (data.length > 0) {
+                $('#mun_codigo').empty();
+                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
+                $.each(data, function (key, val) {
+                    $('#mun_codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
+                });
+                console.log(data)
+                $('#mun_codigo').trigger("chosen:updated");
+                if (_selectedMun != null || _selectedMun != "") {
+                    $("#mun_codigo option[value='" + _selectedMun + "']").attr("selected", true);
+                } else { console.log("No es") }
+            }
+            else {
+                $('#mun_codigo').empty();
+                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
+            }
+        });
+
+}
