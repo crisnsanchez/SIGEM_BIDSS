@@ -26,49 +26,6 @@ $(function () {
     }
 })
 
-////Approve
-$(document).on("click", "#_ModalApprove", function () {
-    SendDataApprove();
-});
-
-
-function SendDataApprove() {
-    var Ansal_Id = $('#Ansal_Id').val()
-    $.ajax({
-        url: "/AnticipoSalario/Approve",
-        method: "POST",
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: Ansal_Id}),
-    })
-        .done(function (data) {
-            location.reload()
-        });
-
-}
-
-
-////Reject
-$(document).on("click", "#_ModalReject", function () {
-    SendData();
-});
-
-
-function SendData() {
-    var Ansal_Id = $('#Ansal_Id').val(),
-        RazonInactivacion = $('#RazonInactivacion').val();
-    $.ajax({
-        url: "/AnticipoSalario/Reject",
-        method: "POST",
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: Ansal_Id, Ansal_RazonRechazo: RazonInactivacion }),
-    })
-        .done(function (data) {
-            location.reload()
-        });
-
-}
 
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {

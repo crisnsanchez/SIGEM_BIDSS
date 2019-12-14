@@ -97,7 +97,7 @@ namespace SIGEM_BIDSS.Controllers
                                         if (MensajeError.StartsWith("-1"))
                                         {
                                            
-                                            ModelState.AddModelError("", "No se pudo insertar el registro detalle, favor contacte al administrador.");
+                                            ModelState.AddModelError("", "Ya existe un Departamento con ese Nombre, agregue otro.");
                                             return View(tbDepartamento);
                                         }
                                     }
@@ -385,7 +385,7 @@ namespace SIGEM_BIDSS.Controllers
                             TempData["smserror"] = "No se puede eliminar el registro porque posee dependencias, favor contacte al administrador.";
                             ViewBag.smserror = TempData["smserror"];
                             ModelState.AddModelError("", "No se puede borrar el registro");
-                            return RedirectToAction("Edit/" + dep_Codigo);
+                    return RedirectToAction("Edit/" + dep_Codigo);
                         }
                         else
                         {

@@ -26,9 +26,42 @@ $(function () {
             type: 'success',
             title: 'Se ha actualizado con Exito.'
         })
+    }
+    else if (_Action == "Aceptada") {
+        Toast.fire({
+            type: 'success',
+            title: 'Ha finalizado el estado con Exito.'
+        })
+    }
+    else if (_Action == "Rechazada") {
+        Toast.fire({
+            type: 'success',
+            title: 'Se ha rechazado con Exito.'
+        })
+    }
+
+
+    _Action = $('#Errror').val();
+    console.log(_Action)
+    if (_Action == "Delete") {
+        console.log("Verdadero")
+
+        Toast.fire({
+            type: 'danger',
+            title: 'El Municipio tiene dependencias.'
+        })
+    }
+    else if (_Action == "Edited") {
+        Toast.fire({
+            type: 'success',
+            title: 'Se ha actualizado con Exito.'
+        })
     } else {
         console.log("Falso")
     }
+
+
+
 
 
     //Inicializacion de el Datatable

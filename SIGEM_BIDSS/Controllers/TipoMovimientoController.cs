@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -14,7 +14,7 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoMovimientoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions _function = new GeneralFunctions();
+        GeneralFunctions Function = new GeneralFunctions();
         // GET: TipoMovimiento
         public ActionResult Index()
         {
@@ -45,7 +45,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 return View(tbTipoMovimiento);
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
                 return RedirectToAction("Error500", "Home");
             }
@@ -64,8 +64,11 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "tipmo_id,tipmo_Movimiento")] tbTipoMovimiento tbTipoMovimiento)
         {
-            if (ModelState.IsValid)
-                try
+            string UserName = "";
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
                     if (isDuplicated(tbTipoMovimiento))
                     {
@@ -75,11 +78,12 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, _function.GetUser(), _function.DatetimeNow());
+                    List = db.UDP_Gral_tbTipoMovimiento_Insert(tbTipoMovimiento.tipmo_Movimiento, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoMovimiento_Insert_Result tbMovimiento in List)
                         Msj = tbMovimiento.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
+                        Function.BitacoraErrores("TipoMovimiento", "CreatePost", UserName, Msj);
                         ModelState.AddModelError("Codigo Error" + Msj, "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
@@ -89,17 +93,14 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
-
-            return View(tbTipoMovimiento);
-
-
-
+                return View(tbTipoMovimiento);
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("TipoMovimiento", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
         }
 
         // GET: TipoMovimiento/Edit/5
@@ -132,8 +133,11 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tipmo_id,tipmo_Movimiento")] tbTipoMovimiento tbTipoMovimiento)
         {
-            if (ModelState.IsValid)
-                try
+            string UserName = "";
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
                     if (isDuplicated(tbTipoMovimiento))
                     {
@@ -143,12 +147,13 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, _function.GetUser(), _function.DatetimeNow());
+                    List = db.UDP_Gral_tbTipoMovimiento_Update(tbTipoMovimiento.tipmo_id, tbTipoMovimiento.tipmo_Movimiento, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoMovimiento_Update_Result Movimiento in List)
                         Msj = Movimiento.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-                        ModelState.AddModelError("Codigo Error" + Msj, "No se pudo insertar el registro, favor contacte al administrador.");
+                        Function.BitacoraErrores("TipoMovimiento", "EditPost", UserName, Msj);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
                     else
@@ -157,12 +162,13 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("TipoMovimiento", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
 
             return View(tbTipoMovimiento);
 
@@ -204,7 +210,7 @@ namespace SIGEM_BIDSS.Controllers
                 int _Exist = (from _tbM in db.tbTipoMovimiento where _tbM.tipmo_Movimiento == tbTipoMovimiento.tipmo_Movimiento && _tbM.tipmo_id != tbTipoMovimiento.tipmo_id select _tbM).Count();
                 if (_Exist >= 1)
                 {
-                   return _boolExist = true;
+                    return _boolExist = true;
                 }
             }
             catch (Exception Ex)

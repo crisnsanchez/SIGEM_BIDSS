@@ -35,15 +35,19 @@ $('#par_TelefonoEmpresa').change(function () {
 });
 
 $('#par_CorreoEmpresa').change(function () {
-    $('#errorcorreoempresa').hide();
+    $('#emailCorre').hide();
 });
 
 $('#par_CorreoEmisor').change(function () {
-    $('#erroremisor').hide();
+    $('#emailEmi').hide();
+});
+
+$('#par_Password').change(function () {
+    $('#errorpassword').hide();
 });
 
 $('#par_CorreoRRHH').change(function () {
-    $('#erroremisor').hide();
+    $('#emailRHHH').hide();
 });
 
 $('#par_Servidor').change(function () {
@@ -144,7 +148,7 @@ document.getElementById('par_CorreoEmisor').addEventListener('input', function (
 });
 document.getElementById('par_CorreoRRHH').addEventListener('input', function () {
     campo = event.target;
-    valido = document.getElementById('emailOKi');
+    valido = document.getElementById('emailRHHH');
     //selector = document.getElementById('emp_CorreoElectronico')
     emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono

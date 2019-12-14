@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,9 @@ namespace SIGEM_BIDSS.Models
     [MetadataType(typeof(AnticipoSalarioMetadata))]
     public partial class tbAnticipoSalario
     {
-
+        [NotMapped]
+        public string nRazonRechazo { get; set; }
+        
 
     }
     public class AnticipoSalarioMetadata
@@ -29,6 +32,7 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Fecha de Solicitud")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public System.DateTime Ansal_GralFechaSolicitud { get; set; }
 
         [Display(Name = "Monto a Solicitar")]
@@ -41,10 +45,12 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Justificacion")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
+        [MaxLength(250, ErrorMessage = "Máximo {1} caracteres")]
         public string Ansal_Justificacion { get; set; }
 
         [Display(Name = "Comentario")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")] 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
+        [MaxLength(250, ErrorMessage = "Máximo {1} caracteres")]
         public string Ansal_Comentario { get; set; }
 
         [Display(Name = "Estado")]
@@ -52,11 +58,21 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Razon de Rechazo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
+        [MaxLength(250, ErrorMessage = "Máximo {1} caracteres")]
         public string Ansal_RazonRechazo { get; set; }
 
+        [Display(Name = "Usuario Crea")]
         public int Ansal_UsuarioCrea { get; set; }
+
+        [Display(Name = "Fecha Crea")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public System.DateTime Ansal_FechaCrea { get; set; }
+
+        [Display(Name = "Usuario Modifica")] 
         public Nullable<int> Ansal_UsuarioModifica { get; set; }
+
+        [Display(Name = "Fecha Modifica")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Ansal_FechaModifica { get; set; }
     }
 

@@ -1,4 +1,6 @@
-﻿document.getElementById('prov_Email').addEventListener('input', function () {
+﻿
+
+document.getElementById('prov_Email').addEventListener('input', function () {
     campo = event.target;
     valido = document.getElementById('emailEoK');
     //selector = document.getElementById('emp_CorreoElectronico')
@@ -73,39 +75,104 @@ function CorreoElectronico(string) {//Algunos caracteres especiales para el corr
 }
 
 ////OBTENER MUNICIPIO
-$(document).on("change", "#dep_Codigo", function () {
+$(document).on("change", "#dep_codigo", function () {
     GetMunicipios();
 });
 
-function GetMunicipios() {
-    var CodDepartamento = $('#dep_Codigo').val(),
-        _selectedMun = $('#selectedMun').val();
-    console.log(CodDepartamento)
-    $.ajax({
-        url: "/Proveedor/GetMunicipios",
-        method: "POST",
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ CodDepartamento: CodDepartamento }),
-    })
-        .done(function (data) {
-            $('#municipio').show();
-            if (data.length > 0) {
-                $('#mun_codigo').empty();
-                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
-                $.each(data, function (key, val) {
-                    $('#mun_codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
-                });
-                console.log(data)
-                $('#mun_codigo').trigger("chosen:updated");
-                if (_selectedMun != null || _selectedMun != "") {
-                    $("#mun_codigo option[value='" + _selectedMun + "']").attr("selected", true);
-                } else { console.log("No es") }
-            }
-            else {
-                $('#mun_codigo').empty();
-                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
-            }
-        });
 
+
+
+$(document).ready(function () {
+
+    var CodDepartamento = $('#dep_codigo').val();
+    var muncod = $('#munCodigo').val();
+    console.log("muncod", muncod);
+    if (CodDepartamento !== "") {
+        $.ajax({
+            url: "/Proveedor/GetMunicipios",
+            method: "POST",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ CodDepartamento: CodDepartamento })
+        })
+            .done(function (data) {
+                if (data.length > 0) {
+                    $('#mun_Codigo').empty();
+                    $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+                    $.each(data, function (key, val) {
+                        if (muncod !== "") {
+                            if (val.mun_codigo === muncod) {
+                                $('#mun_Codigo').append("<option selected='selected' value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
+                            }
+                            else
+                                $('#mun_Codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
+                        }
+                        else
+                            $('#mun_Codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
+                    });
+                    $('#mun_Codigo').trigger("chosen:updated");
+                }
+                else {
+                    $('#mun_Codigo').empty();
+                    $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+                }
+            });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function GetMunicipios() {
+    var CodDepartamento = $('#dep_codigo').val();
+    if (CodDepartamento !== "") {
+        $.ajax({
+            url: "/Proveedor/GetMunicipios",
+            method: "POST",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ CodDepartamento: CodDepartamento })
+        })
+            .done(function (data) {
+                if (data.length > 0) {
+                    $('#mun_Codigo').empty();
+                    $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+                    $.each(data, function (key, val) {
+                        $('#mun_Codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
+                    });
+
+                    $('#mun_Codigo').trigger("chosen:updated");
+                }
+                else {
+                    $('#mun_Codigo').empty();
+                    $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+                }
+            });
+    }
+    else {
+        $('#mun_Codigo').empty();
+        $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+    }
 }
