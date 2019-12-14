@@ -13,8 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class CargosController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
-        GeneralFunctions _function = new GeneralFunctions();
+        GeneralFunctions Function = new GeneralFunctions();
 
         // GET: Cargos
         public ActionResult Index()
@@ -55,8 +54,8 @@ namespace SIGEM_BIDSS.Controllers
                 return RedirectToAction("Error500", "Home");
             }
         }
-            // GET: Cargos/Create
-            public ActionResult Create()
+        // GET: Cargos/Create
+        public ActionResult Create()
         {
             try
             {
@@ -77,26 +76,27 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "pto_Id,are_Id,pto_Descripcion,pto_UsuarioCrea,pto_FechaCrea,pto_UsuarioModifica,pto_FechaModifica")] tbPuesto tbPuesto)
         {
+            string UserName = "";
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
-
-            if (ModelState.IsValid)
-
+            try
             {
-                ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
-                try
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
                     IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbPuesto_Insert(tbPuesto.are_Id, tbPuesto.pto_Descripcion, 1, Function.DatetimeNow());
+                    string ErrorMessage = "";
+                    List = db.UDP_Gral_tbPuesto_Insert(tbPuesto.are_Id, tbPuesto.pto_Descripcion, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Gral_tbPuesto_Insert_Result Puesto in List)
-                        Msj = Puesto.MensajeError;
-                    if (Msj.StartsWith("-1"))
+                        ErrorMessage = Puesto.MensajeError;
+                    if (ErrorMessage.StartsWith("-1"))
                     {
+                        Function.BitacoraErrores("Cargos", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
-                    if (Msj.StartsWith("-2"))
+                    if (ErrorMessage.StartsWith("-2"))
                     {
+                    
                         ModelState.AddModelError("", "Ya existe esta área con el mismo cargo.");
                         return View();
                     }
@@ -106,13 +106,12 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
-
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Cargos", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
             }
 
             return View(tbPuesto);
@@ -152,40 +151,46 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", tbPuesto.are_Id);
 
 
-            if (ModelState.IsValid)
-                if (isDuplicated(tbPuesto))
-                {
-                    ModelState.AddModelError("", "Este puesto ya esta existe para esta área.");
-                    return View(tbPuesto);
-                }
-
+            string UserName = "";
             try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbPuesto_Update(tbPuesto.pto_Id, tbPuesto.are_Id, tbPuesto.pto_Descripcion, 1);
-                    foreach (UDP_Gral_tbPuesto_Update_Result TipoSangre in List)
-                        Msj = TipoSangre.MensajeError;
-                    if (Msj.StartsWith("-1"))
+                    if (isDuplicated(tbPuesto))
                     {
-                       
+                        ModelState.AddModelError("", "Este puesto ya esta existe para esta área.");
                         return View(tbPuesto);
                     }
-                    else
-                    {    TempData["swalfunction"] = GeneralFunctions._isEdited;
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch (Exception Ex)
+                IEnumerable<Object> List = null;
+                string ErrorMessage = "";
+                List = db.UDP_Gral_tbPuesto_Update(tbPuesto.pto_Id, tbPuesto.are_Id, tbPuesto.pto_Descripcion, EmployeeID);
+                foreach (UDP_Gral_tbPuesto_Update_Result TipoSangre in List)
+                    ErrorMessage = TipoSangre.MensajeError;
+                if (ErrorMessage.StartsWith("-1"))
                 {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbPuesto);
+                        Function.BitacoraErrores("Puesto", "EditPost", UserName, ErrorMessage);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbPuesto);
                 }
+                else
+                {
+                    TempData["swalfunction"] = GeneralFunctions._isEdited;
+                    return RedirectToAction("Index");
+                }
+            }
+                return View(tbPuesto);
+            }
+            catch (Exception Ex)
+            {
+
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbPuesto);
+            }
 
 
-      
-   
+
+
         }
 
         // GET: Cargos/Delete/5
@@ -208,7 +213,7 @@ namespace SIGEM_BIDSS.Controllers
             bool _boolExist = false;
             try
             {
-                int _Exist = (from _tbM in db.tbPuesto where _tbM.pto_Descripcion == tbPuesto.pto_Descripcion && _tbM.pto_Id != tbPuesto.pto_Id &&  _tbM.are_Id==tbPuesto.are_Id   select _tbM).Count();
+                int _Exist = (from _tbM in db.tbPuesto where _tbM.pto_Descripcion == tbPuesto.pto_Descripcion && _tbM.pto_Id != tbPuesto.pto_Id && _tbM.are_Id == tbPuesto.are_Id select _tbM).Count();
                 if (_Exist >= 1)
                 {
                     return _boolExist = true;

@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class ProveedorController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions _function = new GeneralFunctions();
+        GeneralFunctions Function = new GeneralFunctions();
         // GET: Proveedor
         public ActionResult Index()
         {
@@ -60,15 +60,19 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "prov_Id,prov_Nombre,prov_NombreContacto,prov_Direccion,mun_codigo,prov_Email,prov_Telefono,prov_RTN,acte_Id,prov_UsuarioCrea,prov_FechaCrea,prov_UsuarioModifica,prov_FechaModifica")] tbProveedor tbProveedor, string dep_codigo)
         {
-            if (tbProveedor.mun_codigo == "Seleccione")
-                ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
-            else
-                ViewBag.munCodigo = tbProveedor.mun_codigo;
 
-            if (String.IsNullOrEmpty(dep_codigo))
-                ModelState.AddModelError("prov_UsuarioCrea", "El campo Departamento es obligatorio.");
-            if (ModelState.IsValid)
-                try
+            string UserName = "";
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+                if (tbProveedor.mun_codigo == "Seleccione")
+                    ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
+                else
+                    ViewBag.munCodigo = tbProveedor.mun_codigo;
+
+                if (String.IsNullOrEmpty(dep_codigo))
+                    ModelState.AddModelError("prov_UsuarioCrea", "El campo Departamento es obligatorio.");
+                if (ModelState.IsValid)
                 {
                     ViewBag.selectedMun = tbProveedor.mun_codigo;
                     ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
@@ -79,15 +83,16 @@ namespace SIGEM_BIDSS.Controllers
                                                         tbProveedor.prov_NombreContacto,
                                                         tbProveedor.prov_Direccion,
                                                         tbProveedor.mun_codigo,
-                                                        tbProveedor.prov_Email ,
+                                                        tbProveedor.prov_Email,
                                                         tbProveedor.prov_Telefono,
                                                         tbProveedor.prov_RTN,
                                                         tbProveedor.acte_Id,
-                                                        _function.GetUser(), _function.DatetimeNow());
+                                                        EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Inv_tbProveedor_Insert_Result Permiso in List)
                         Msj = Permiso.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
+                        Function.BitacoraErrores("Proveedor", "CreatePost", UserName, Msj);
                         ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", dep_codigo);
                         ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
                         ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
@@ -108,21 +113,22 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Proveedor", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
             ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", dep_codigo);
             ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
-        
+
             if (dep_codigo != "ajax")
                 return View("Create");
             else
                 return Json("Create");
-         
+
         }
 
         // GET: Proveedor/Edit/5
@@ -148,10 +154,12 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "prov_Id,prov_Nombre,prov_NombreContacto,prov_Direccion,mun_codigo,prov_Email,prov_Telefono,prov_RTN,acte_Id,prov_UsuarioCrea,prov_FechaCrea,prov_UsuarioModifica,prov_FechaModifica")] tbProveedor tbProveedor)
+        public ActionResult Edit([Bind(Include = "prov_Id,prov_Nombre,prov_NombreContacto,prov_Direccion,mun_codigo,prov_Email,prov_Telefono,prov_RTN,acte_Id")] tbProveedor tbProveedor)
         {
+            string UserName = "";
             try
             {
+                int EmployeeID = Function.GetUser(out UserName);
 
                 ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
                 ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
@@ -167,17 +175,17 @@ namespace SIGEM_BIDSS.Controllers
                                                     tbProveedor.prov_Telefono,
                                                     tbProveedor.prov_RTN,
                                                     tbProveedor.acte_Id,
-                                                    _function.GetUser(), _function.DatetimeNow());
+                                                    EmployeeID, Function.DatetimeNow());
                 foreach (UDP_Inv_tbProveedor_Update_Result Permiso in List)
                     Msj = Permiso.MensajeError;
                 if (Msj.StartsWith("-1"))
                 {
+                    Function.BitacoraErrores("Proveedor", "EditPost", UserName, Msj);
                     ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
                     ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
                     ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
-                    return View();
+                    return View(tbProveedor);
                 }
-         
                 else
                 {
                     TempData["swalfunction"] = "true";
@@ -186,13 +194,10 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch (Exception Ex)
             {
-
+                Function.BitacoraErrores("Proveedor", "EditPost", UserName, Ex.Message.ToString());
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                return View();
+                return View(tbProveedor);
             }
-
-
-
             return View(tbProveedor);
         }
 

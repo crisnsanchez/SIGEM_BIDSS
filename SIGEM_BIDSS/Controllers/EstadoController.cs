@@ -14,7 +14,7 @@ namespace SIGEM_BIDSS.Controllers
     public class EstadoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
+        GeneralFunctions Function = new GeneralFunctions();
 
         // GET: Estado
         public ActionResult Index()
@@ -64,29 +64,28 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "est_Id,est_Descripcion,est_UsuarioCrea,est_FechaCrea,est_UsuarioModifica,est_FechaModifica")] tbEstado tbEstado)
+        public ActionResult Create([Bind(Include = "est_Id,est_Descripcion")] tbEstado tbEstado)
         {
-
-            if (ModelState.IsValid)
+            string UserName = "";
+            try
             {
-
-
-                try
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbEstado_Insert(tbEstado.est_Descripcion, 1, Function.DatetimeNow());
-                    foreach (UDP_Gral_tbEstado_Insert_Result estado in List)
-                        Msj = estado.MensajeError;
+                    List = db.UDP_Gral_tbEstado_Insert(tbEstado.est_Descripcion, EmployeeID, Function.DatetimeNow());
+                    foreach (UDP_Gral_tbEstado_Insert_Result Estado in List)
+                        Msj = Estado.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-                       
+                        Function.BitacoraErrores("Estado", "CreatePost", UserName, Msj);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
                     if (Msj.StartsWith("-2"))
                     {
-                        
+                        Function.BitacoraErrores("Estado", "CreatePost", UserName, Msj);
                         ModelState.AddModelError("", "Ya existe un estado con el mismo nombre.");
                         return View();
                     }
@@ -95,12 +94,12 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-                   
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Estado", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
             }
             return View();
 
@@ -137,40 +136,44 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "est_Id,est_Descripcion,est_UsuarioCrea,est_FechaCrea,est_UsuarioModifica,est_FechaModifica")] tbEstado tbEstado)
         {
-            if (ModelState.IsValid)
-
-                if (db.tbEstado.Any(a => a.est_Descripcion == tbEstado.est_Descripcion && a.est_Id != tbEstado.est_Id))
-                {
-                    ModelState.AddModelError("", "Ya existe una estado con el mismo nombre.");
-                    return View(tbEstado);
-                }
-
+            string UserName = "";
             try
             {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Gral_tbEstado_Update(tbEstado.est_Id, tbEstado.est_Descripcion, 1, Function.DatetimeNow());
-                    foreach (UDP_Gral_tbEstado_Update_Result estado in List)
-                        Msj = estado.MensajeError;
-                    if (Msj.StartsWith("-1"))
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
+
+                    if (db.tbEstado.Any(a => a.est_Descripcion == tbEstado.est_Descripcion && a.est_Id != tbEstado.est_Id))
                     {
-                       
-                        return View();
+                        string Error = "Ya existe una estado con el mismo nombre.";
+                        Function.BitacoraErrores("Estado", "EditPost", UserName, Error); 
+                        ModelState.AddModelError("", Error);
+                        return View(tbEstado);
                     }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch (Exception Ex)
+
+                IEnumerable<Object> List = null;
+                string Msj = "";
+                List = db.UDP_Gral_tbEstado_Update(tbEstado.est_Id, tbEstado.est_Descripcion, EmployeeID, Function.DatetimeNow());
+                foreach (UDP_Gral_tbEstado_Update_Result estado in List)
+                    Msj = estado.MensajeError;
+                if (Msj.StartsWith("-1"))
                 {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
+                    Function.BitacoraErrores("Estado", "EditPost", UserName, Msj);
+                    return View(tbEstado);
                 }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Estado", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbEstado);
+            }
 
 
-            
+
         }
 
 

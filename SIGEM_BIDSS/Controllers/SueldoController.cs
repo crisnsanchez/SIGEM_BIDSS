@@ -15,7 +15,7 @@ namespace SIGEM_BIDSS.Controllers
     {
 
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
+        GeneralFunctions Function = new GeneralFunctions();
         // GET: Sueldo
         public ActionResult Index()
         {
@@ -54,35 +54,42 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,sue_UsuarioCrea,sue_FechaCrea")] tbSueldo tbSueldo)
+        public ActionResult Create([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id")] tbSueldo tbSueldo)
         {
+            string UserName = "";
             try
             {
-                IEnumerable<object> _List = null;
-                string MsjError = "";
-                _List = db.UDP_rrhh_tbSueldo_Insert(tbSueldo.emp_Id,tbSueldo.sue_Cantidad,tbSueldo.tmo_Id, 1, Function.DatetimeNow());
-                foreach (UDP_rrhh_tbSueldo_Insert_Result Sueldo in _List)
-                    MsjError = Sueldo.MensajeError;
-                if (MsjError.StartsWith("-1"))
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbSueldo);
-                }
-                if (MsjError.StartsWith("-2"))
-                {
+                    IEnumerable<object> _List = null;
+                    string MsjError = "";
+                    _List = db.UDP_rrhh_tbSueldo_Insert(tbSueldo.emp_Id, tbSueldo.sue_Cantidad, tbSueldo.tmo_Id, EmployeeID, Function.DatetimeNow());
+                    foreach (UDP_rrhh_tbSueldo_Insert_Result Sueldo in _List)
+                        MsjError = Sueldo.MensajeError;
+                    if (MsjError.StartsWith("-1"))
+                    {
+                        Function.BitacoraErrores("Sueldo", "CreatePost", UserName, MsjError);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbSueldo);
+                    }
+                    if (MsjError.StartsWith("-2"))
+                    {
 
-                    ModelState.AddModelError("", "Ya existe un sueldo con el mismo nombre.");
-                    return View(tbSueldo);
+                        ModelState.AddModelError("", "Ya existe un sueldo con el mismo nombre.");
+                        return View(tbSueldo);
+                    }
+                    else
+                    {
+                        TempData["swalfunction"] = "true";
+                        return RedirectToAction("Index");
+                    }
                 }
-                else
-                {
-                    TempData["swalfunction"] = "true";
-
-                    return RedirectToAction("Index");
-                }
+                return View(tbSueldo);
             }
             catch (Exception Ex)
             {
+                Function.BitacoraErrores("Sueldo", "CreatePost", UserName, Ex.Message.ToString());
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
@@ -115,20 +122,23 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,sue_UsuarioModifica,sue_FechaModifica")] tbSueldo tbSueldo)
+        public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id")] tbSueldo tbSueldo)
         {
-            if (ModelState.IsValid)
+            string UserName = "";
+            try
             {
-               
-                try
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
                     IEnumerable<object> _List = null;
                     string MsjError = "";
-                    _List = db.UDP_rrhh_tbSueldo_Update(tbSueldo.sue_Id, tbSueldo.emp_Id, tbSueldo.sue_Cantidad, tbSueldo.tmo_Id, 1, Function.DatetimeNow());
+                    _List = db.UDP_rrhh_tbSueldo_Update(tbSueldo.sue_Id, tbSueldo.emp_Id, tbSueldo.sue_Cantidad, tbSueldo.tmo_Id, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_rrhh_tbSueldo_Update_Result _sueldo in _List)
                         MsjError = _sueldo.MensajeError;
                     if (MsjError.StartsWith("-1"))
                     {
+                        Function.BitacoraErrores("Sueldo", "EditPost", UserName, MsjError);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbSueldo);
                     }
                     if (MsjError.StartsWith("-2"))
@@ -142,11 +152,12 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbSueldo);
-                }
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Sueldo", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbSueldo);
             }
             ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);

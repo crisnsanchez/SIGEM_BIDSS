@@ -13,7 +13,8 @@ namespace SIGEM_BIDSS.Controllers
     public class tbTipoPermisoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
+        GeneralFunctions Function = new GeneralFunctions();
+     
 
         // GET: tbTipoPermiso
         public ActionResult Index()
@@ -68,9 +69,14 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "tperm_Id,tperm_Descripcion,tperm_UsuarioCrea,tperm_FechaCrea,tperm_UsuarioModifica,tperm_FechaModifica")] tbTipoPermiso tbTipoPermiso)
         {
-            if (ModelState.IsValid)
-                try
+            string UserName = "";       
+            try
                 {
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
+                {
+                 
+
                     IEnumerable<Object> List = null;
                     string Msj = "";
                     List = db.UDP_Gral_tbTipoPermiso_Insert(tbTipoPermiso.tperm_Descripcion, 1, Function.DatetimeNow());
@@ -78,13 +84,12 @@ namespace SIGEM_BIDSS.Controllers
                         Msj = Permiso.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-
+                        Function.BitacoraErrores("TipoPermiso", "CreatePost", UserName, Msj);
+                        ModelState.AddModelError("Codigo Error" + Msj, "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
-                    if(Msj.StartsWith("-2"))
+                    if (Msj.StartsWith("-2"))
                     {
-
-
                         ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
                         return View(tbTipoPermiso);
                     }
@@ -94,11 +99,12 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
+                }
                 catch (Exception Ex)
                 {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
+                Function.BitacoraErrores("Proveedor", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
                 }
 
             return View(tbTipoPermiso);
@@ -136,22 +142,24 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tperm_Id,tperm_Descripcion,tperm_UsuarioCrea,tperm_FechaCrea,tperm_UsuarioModifica,tperm_FechaModifica")] tbTipoPermiso tbTipoPermiso)
         {
-            if (db.tbTipoPermiso.Any(a => a.tperm_Descripcion == tbTipoPermiso.tperm_Descripcion && a.tperm_Id != tbTipoPermiso.tperm_Id))
-            {
-                ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
-                return View(tbTipoPermiso);
-            }
+
+            string UserName = "";
             try
             {
-
+                int EmployeeID = Function.GetUser(out UserName);
+                if (db.tbTipoPermiso.Any(a => a.tperm_Descripcion == tbTipoPermiso.tperm_Descripcion && a.tperm_Id != tbTipoPermiso.tperm_Id))
+                {
+                    ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
+                    return View(tbTipoPermiso);
+                }
                 IEnumerable<Object> List = null;
                 string Msj = "";
-                List = db.UDP_Gral_tbTipoPermiso_Update(tbTipoPermiso.tperm_Id,tbTipoPermiso.tperm_Descripcion, 1);
+                List = db.UDP_Gral_tbTipoPermiso_Update(tbTipoPermiso.tperm_Id,tbTipoPermiso.tperm_Descripcion, EmployeeID);
                 foreach (UDP_Gral_tbTipoPermiso_Update_Result Moneda in List)
                     Msj = Moneda.MensajeError;
                 if (Msj.StartsWith("-1"))
                 {
-
+                    Function.BitacoraErrores("TipoPermiso", "EditPost", UserName, Msj);
                     ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                     return View();
                 }
@@ -162,14 +170,10 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch (Exception Ex)
             {
-
+                Function.BitacoraErrores("TipoPermiso", "EditPost", UserName, Ex.Message.ToString());
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 return View();
             }
-
-            return View(tbTipoPermiso);
-
-
         }
 
 

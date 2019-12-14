@@ -15,7 +15,7 @@ namespace SIGEM_BIDSS.Controllers
     public class ParametroController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions functions = new GeneralFunctions();
+        GeneralFunctions Function = new GeneralFunctions();
         // GET: tbParametroes
         public ActionResult Index()
         {
@@ -37,7 +37,7 @@ namespace SIGEM_BIDSS.Controllers
                 return RedirectToAction("Create", "Parametro");
             }
         }
-    
+
 
         // GET: tbParametroes/Details/5
         public ActionResult Details(byte? id)
@@ -69,19 +69,23 @@ namespace SIGEM_BIDSS.Controllers
            HttpPostedFileBase FotoPath
            )
         {
-           
-            var path = "";
-            if (FotoPath == null)
-            {
-                TempData["smserror"] = "Imagen requerida.";
-                ViewBag.smserror = TempData["smserror"];
+            string UserName = "";
 
-                return View(tbParametro);
-            }
-            if (ModelState.IsValid)
-            {
 
-                try
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+                var path = "";
+                if (FotoPath == null)
+                {
+                    TempData["smserror"] = "Imagen requerida.";
+                    ViewBag.smserror = TempData["smserror"];
+
+                    return View(tbParametro);
+                }
+
+
+                if (ModelState.IsValid)
                 {
                     if (FotoPath != null)
                     {
@@ -106,7 +110,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<object> List = null;
                     var MsjError = "";
-                   
+
                     List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo
                         );
                     foreach (UDP_Conf_tbParametro_Insert_Result parametro in List)
@@ -114,7 +118,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     if (MsjError.StartsWith("-1"))
                     {
-
+                        Function.BitacoraErrores("Parametro", "CreatePost", UserName, MsjError);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbParametro);
                     }
@@ -124,35 +128,34 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
 
-
-                }
-                catch (DbEntityValidationException e)
-                {
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-
-                            ModelState.AddModelError("", ve.ErrorMessage.ToString() + " " + ve.PropertyName.ToString());
-                            return View("Index");
-                        }
-                    }
-                }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return RedirectToAction("Index");
                 }
                 {
                     var errors = ModelState.Values.SelectMany(v => v.Errors);
                 }
-            }
 
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Function.BitacoraErrores("Parametro", "CreatePost", UserName, ve.ErrorMessage.ToString() + " " + ve.PropertyName.ToString());
+                        ModelState.AddModelError("", ve.ErrorMessage.ToString() + " " + ve.PropertyName.ToString());
+                        return View("Index");
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Parametro", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return RedirectToAction("Index");
+            }
             return View(tbParametro);
         }
-            // GET: tbParametroes/Edit/5
-            public ActionResult Edit(byte? id)
+        // GET: tbParametroes/Edit/5
+        public ActionResult Edit(byte? id)
         {
             if (id == null)
             {
@@ -176,15 +179,19 @@ namespace SIGEM_BIDSS.Controllers
 
         {
             var path = "";
-            var UsFoto = db.tbParametro.Select(s => new { s.par_Id, s.par_PathLogo }).Where(x => x.par_Id == tbParametro.par_Id).ToList();
-            if (UsFoto.Count() != 0 && UsFoto != null)
+            string UserName = "";
+
+
+            try
             {
-                for (int i = 0; i < UsFoto.Count(); i++)
-                    path = Convert.ToString(UsFoto[i].par_PathLogo);
-            }
-            if (ModelState.IsValid)
-            {
-                try
+                int EmployeeID = Function.GetUser(out UserName);
+                var UsFoto = db.tbParametro.Select(s => new { s.par_Id, s.par_PathLogo }).Where(x => x.par_Id == tbParametro.par_Id).ToList();
+                if (UsFoto.Count() != 0 && UsFoto != null)
+                {
+                    for (int i = 0; i < UsFoto.Count(); i++)
+                        path = Convert.ToString(UsFoto[i].par_PathLogo);
+                }
+                if (ModelState.IsValid)
                 {
                     tbParametro.par_PathLogo = path;
                     if (FotoPath != null)
@@ -212,12 +219,12 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<object> List = null;
                     var MsjError = "";
-                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH,tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo);
+                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo);
                     foreach (UDP_Conf_tbParametro_Update_Result parametro in List)
                         MsjError = parametro.MensajeError;
                     if (MsjError.StartsWith("-1"))
                     {
-
+                        Function.BitacoraErrores("Parametro", "EditPost", UserName, MsjError);
                         ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
                         return RedirectToAction("Edit/" + MsjError);
                     }
@@ -226,18 +233,17 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
-                    return RedirectToAction("Index");
-                }
-               
+                if (path != null)
+                    tbParametro.par_PathLogo = path;
+                return View(tbParametro);
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Parametro", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
+                return RedirectToAction("Index");
             }
 
-            if (path != null)
-                tbParametro.par_PathLogo = path;
-            return View(tbParametro);
         }
 
         protected override void Dispose(bool disposing)

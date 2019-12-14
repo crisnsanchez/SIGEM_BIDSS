@@ -14,8 +14,8 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoSangreController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
 
+        GeneralFunctions Function = new GeneralFunctions();
         // GET: TipoSangre
         public ActionResult Index()
         {
@@ -65,16 +65,21 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "tps_Id,tps_Descripcion,tps_UsuarioCrea,tps_FechaCrea,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
         {
-            if (ModelState.IsValid)
-                try
+
+            string UserName = "";
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                  List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_Descripcion, 1, Function.DatetimeNow());
+                    List = db.UDP_Gral_tbTipoSangre_Insert(tbTipoSangre.tps_Descripcion, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoSangre_Insert_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
+                        Function.BitacoraErrores("TipoSangre", "CreatePost", UserName, Msj);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
@@ -85,16 +90,20 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+
                         TempData["swalfunction"] = "true";
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-                   
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
+                return View(tbTipoSangre);
+            }
+            catch (Exception Ex)
+            {
+
+                Function.BitacoraErrores("TipoSangre", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
 
 
 
@@ -131,37 +140,46 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "tps_Id,tps_Descripcion,tps_UsuarioModifica,tps_FechaModifica")] tbTipoSangre tbTipoSangre)
         {
 
-            if (db.tbTipoSangre.Any(a => a.tps_Descripcion == tbTipoSangre.tps_Descripcion && a.tps_Id != tbTipoSangre.tps_Id))
-            {
-                ModelState.AddModelError("", "Ya existe un Tipo de sangre con el mismo nombre.");
-                return View(tbTipoSangre);
-            }
+            string UserName = "";
             try
             {
-                IEnumerable<Object> List = null;
-                string Msj = "";
-                List = db.UDP_Gral_tbTipoSangre_Update(tbTipoSangre.tps_Id,tbTipoSangre.tps_Descripcion, 1, Function.DatetimeNow());
-                foreach (UDP_Gral_tbTipoSangre_Update_Result TipoSangre in List)
-                    Msj = TipoSangre.MensajeError;
-                if (Msj.StartsWith("-1"))
+                int EmployeeID = Function.GetUser(out UserName);
+
+                if (ModelState.IsValid)
                 {
-                   
-                    return View();
+                    if (db.tbTipoSangre.Any(a => a.tps_Descripcion == tbTipoSangre.tps_Descripcion && a.tps_Id != tbTipoSangre.tps_Id))
+                    {
+                        ModelState.AddModelError("", "Ya existe un Tipo de sangre con el mismo nombre.");
+                        return View(tbTipoSangre);
+                    }
+
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbTipoSangre_Update(tbTipoSangre.tps_Id, tbTipoSangre.tps_Descripcion, EmployeeID, Function.DatetimeNow());
+                    foreach (UDP_Gral_tbTipoSangre_Update_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        Function.BitacoraErrores("TipoSangre", "EditPost", UserName, Msj);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                  
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+                return View(tbTipoSangre);
             }
+
             catch (Exception Ex)
             {
-
+                Function.BitacoraErrores("TipoSangre", "EditPost", UserName, Ex.Message.ToString());
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 return View();
             }
-
-            return View(tbTipoSangre);
-
 
 
         }

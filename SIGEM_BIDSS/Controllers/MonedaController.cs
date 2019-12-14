@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class MonedaController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
+        GeneralFunctions Function = new GeneralFunctions();
 
         // GET: Moneda
         public ActionResult Index()
@@ -63,21 +63,22 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "tmo_Id,tmo_Abreviatura,tmo_Nombre,tmo_UsuarioCrea,tmo_FechaCrea,tmo_UsuarioModifica,tmo_FechaModifica")] tbMoneda tbMoneda)
+        public ActionResult Create([Bind(Include = "tmo_Id,tmo_Abreviatura,tmo_Nombre")] tbMoneda tbMoneda)
         {
-            if (ModelState.IsValid)
-          
-
+            string UserName = "";
             try
             {
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
+                {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbMoneda_Insert(tbMoneda.tmo_Id,tbMoneda.tmo_Abreviatura ,tbMoneda.tmo_Nombre, 1, Function.DatetimeNow());
+                    List = db.UDP_Gral_tbMoneda_Insert(tbMoneda.tmo_Id, tbMoneda.tmo_Abreviatura, tbMoneda.tmo_Nombre, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Gral_tbMoneda_Insert_Result Moneda in List)
                         Msj = Moneda.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-
+                        Function.BitacoraErrores("Moneda", "CreatePost", UserName, Msj);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbMoneda);
                     }
@@ -93,15 +94,14 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
-
-            return View(tbMoneda);
-
+                return View(tbMoneda);
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Moneda", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
 
         }
 
@@ -136,43 +136,43 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tmo_Id,tmo_Abreviatura,tmo_Nombre,tmo_UsuarioCrea,tmo_FechaCrea,tmo_UsuarioModifica,tmo_FechaModifica")] tbMoneda tbMoneda)
         {
-            if (ModelState.IsValid)
-                if (db.tbMoneda.Any(a => a.tmo_Nombre == tbMoneda.tmo_Nombre && a.tmo_Id != tbMoneda.tmo_Id))
-                {
-                    ModelState.AddModelError("", "Ya existe una Moneda con el mismo nombre.");
-                    return View(tbMoneda);
-                }
 
-
+            string UserName = "";
             try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
+                    if (db.tbMoneda.Any(a => a.tmo_Nombre == tbMoneda.tmo_Nombre && a.tmo_Id != tbMoneda.tmo_Id))
+                    {
+                        ModelState.AddModelError("", "Ya existe una Moneda con el mismo nombre.");
+                        return View(tbMoneda);
+                    }
+
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    List = db.UDP_Gral_tbMoneda_Update(tbMoneda.tmo_Id, tbMoneda.tmo_Abreviatura,tbMoneda.tmo_Nombre, 1, Function.DatetimeNow());
+                    List = db.UDP_Gral_tbMoneda_Update(tbMoneda.tmo_Id, tbMoneda.tmo_Abreviatura, tbMoneda.tmo_Nombre, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Gral_tbMoneda_Update_Result Moneda in List)
                         Msj = Moneda.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-
-                      
+                        Function.BitacoraErrores("Moneda", "EditPost", UserName, Msj);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbMoneda);
                     }
-             
                     else
                     {
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
-
-            return View(tbMoneda);
-
-
+                return View(tbMoneda);
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Moneda", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbMoneda);
+            }
         }
 
         // GET: Moneda/Delete/5
