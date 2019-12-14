@@ -26,9 +26,20 @@ $(function () {
             type: 'success',
             title: 'Se ha actualizado con Exito.'
         })
-    } else {
-        console.log("Falso")
     }
+    else if (_Action == "Aceptada") {
+        Toast.fire({
+            type: 'success',
+            title: 'Ha finalizado el estado con Exito.'
+        })
+    }
+    else if (_Action == "Rechazada") {
+        Toast.fire({
+            type: 'success',
+            title: 'Se ha rechazado con Exito.'
+        })
+    }
+
 
     _Action = $('#Errror').val();
     console.log(_Action)
