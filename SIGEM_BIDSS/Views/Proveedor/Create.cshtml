@@ -35,13 +35,14 @@
 @{
     var test = new SIGEM_BIDSS.Models.tbMunicipio();
     var test1 = new SIGEM_BIDSS.Models.tbActividadEconomica();
+ 
 }
 @*<link href="~/Content/template/plugins/datepicker/datepicker3.css" rel="stylesheet" />*@
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
 
 <input type="hidden" id="municipios" value="@ViewBag.muni" />
 <input type="hidden" id="selectedMun" value="@ViewBag.selectedMun" />
-
+<input type="hidden" id="act" value="@ViewBag.acte_Id" />
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -84,7 +85,7 @@
                             <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.prov_RTN, htmlAttributes: new { @class = "control-label col-md-6" })
                                 @Html.EditorFor(model => model.prov_RTN, new { htmlAttributes = new { @class = "form-control", @maxlength = "14", @autocomplete = "off" } })
-                                <p style="color:red" id="Rtn_Error">@Html.ValidationMessageFor(model => model.prov_RTN)</p>
+                                <p style="color:red" id="Rtn_Error">@Html.ValidationMessageFor(model => model.prov_RTN, "", new { @class = "text-danger" })</p>
                                 <div id="validationRTN">
                                     <p style="color:red"></p>
                                 </div>
@@ -105,22 +106,13 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                           
 
-                                    <label class="control-label col-md-4">Actividad Economica</label>
-                                    @Html.DropDownList("acte_Id", null, "Seleccione Departamento", new { @class = "form-control" })
-                                    <p style="color:red">@Html.ValidationMessageFor(model => model.acte_Id, "", new { @class = "text-danger" })</p>
+
+                                <label class="control-label col-md-4">Actividad Economica</label>
+                                @Html.DropDownList("acte_Id", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.acte_Id, "", new { @class = "text-danger" })
                             </div>
-                          
-
-
-
                         </div>
-
-
-
-
-
                         <div class="form-row">
                             <div class="form-group col-md-6">
 
@@ -128,14 +120,12 @@
                                 @Html.DropDownList("dep_Codigo", null, "Seleccione Departamento", new { @class = "form-control" })
                                 <p id="Departamento">@Html.ValidationMessageFor(muni => test.dep_codigo)</p>
                             </div>
-                            <div id="municipio" class="form-group col-md-6">
-                                @Html.LabelFor(model => model.mun_codigo, "Municipio", new { @class = "control-label col-md-5" })
-                                <select class="form-control" name="mun_codigo" id="mun_codigo">
-                                    <option>Seleccione</option>
-                                </select>
-                                <p id="Municipio" style="color:red">@Html.ValidationMessageFor(model => model.mun_codigo)</p>
-                            </div>
+                            <div class="form-group col-md-6">
 
+                                <label class="control-label col-md-6">Municipio</label>
+                                @Html.DropDownList("mun_Codigo", null, "Seleccione Municipio", new { @class = "form-control" })
+                                <p id="Departamento">@Html.ValidationMessageFor(muni => test.mun_codigo)</p>
+                            </div>
 
                             <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
@@ -144,7 +134,7 @@
                                 @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control", MaxLength = 200, @onKeyPress = "return soloLetras(event)", @onkeyup = "this.value=NumText1(this.value)", @autocomplete = "off" })
                                 <p style="color:red">@Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger" })</p>
                             </div>
-                
+
 
                         </div>
 
