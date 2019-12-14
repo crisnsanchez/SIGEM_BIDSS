@@ -1,5 +1,6 @@
 ﻿
 
+using SIGEM_BIDSS.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +8,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
@@ -77,7 +77,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tbAnticipoSalario);
+            return RedirectToAction("Index");
         }
 
         // GET: AnticipoSalario/Create
@@ -133,7 +133,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                       
+
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
@@ -202,18 +202,19 @@ namespace SIGEM_BIDSS.Controllers
         }
 
 
-        public bool UpdateState(tbAnticipoSalario tbAnticipoSalario, int State, string RazonInactivacion)
+        public bool UpdateState(tbAnticipoSalario tbAnticipoSalario, int State, string Ansal_RazonRechazo)
         {
             string UserName = "",
                 ErrorEmail = "";
             try
             {
+
                 bool Result = false;
                 int EmployeeID = Funtion.GetUser(out UserName);
                 tbAnticipoSalario.emp_Id = EmployeeID;
                 tbAnticipoSalario.Ansal_GralFechaSolicitud = Funtion.DatetimeNow();
                 tbAnticipoSalario.est_Id = State;
-                tbAnticipoSalario.Ansal_RazonRechazo = RazonInactivacion;
+                tbAnticipoSalario.Ansal_RazonRechazo = Ansal_RazonRechazo;
 
                 IEnumerable<object> Update = null;
                 string ErrorMessage = "";
@@ -257,7 +258,8 @@ namespace SIGEM_BIDSS.Controllers
                             reject = " Razon de Rechazo:";
                             break;
                     }
-                    Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
+                    if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
+                    Result = Funtion.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject+" "+ Ansal_RazonRechazo);
 
                     if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                     return true;
