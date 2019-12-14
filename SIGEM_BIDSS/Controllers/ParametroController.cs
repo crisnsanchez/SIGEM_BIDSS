@@ -65,7 +65,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor,par_Password,par_Servidor,par_Puerto,par_PathLogo")] tbParametro tbParametro,
+        public ActionResult Create([Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor,par_CorreoRRHH,par_Password,par_Servidor,par_Puerto,par_PathLogo")] tbParametro tbParametro,
            HttpPostedFileBase FotoPath
            )
         {
@@ -171,7 +171,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(byte? id, [Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor, par_Password ,par_Servidor,par_Puerto,par_PathLogo")] tbParametro tbParametro,
+        public ActionResult Edit(byte? id, [Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor, par_CorreoRRHH, par_Password ,par_Servidor,par_Puerto,par_PathLogo")] tbParametro tbParametro,
        HttpPostedFileBase FotoPath)
 
         {

@@ -29,6 +29,10 @@ namespace SIGEM_BIDSS.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string par_CorreoEmisor { get; set; }
 
+        [Display(Name = "Correo RRHH")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public string par_CorreoRRHH { get; set; }
+
 
         [Display(Name = "Password")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]

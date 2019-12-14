@@ -9,7 +9,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-info  mr-1"></i>
-            Detalle Moneda
+            Detalle Proveedor
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -53,7 +53,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.acte_Id)
+                    @Html.DisplayFor(model => model.tbActividadEconomica.acte_Descripcion)
                 </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.prov_Telefono)
@@ -63,12 +63,20 @@
                     @Html.DisplayFor(model => model.prov_Telefono)
                 </dd>
                 <dt>
+              Departamento
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tbMunicipio.tbDepartamento.dep_Nombre)
+                </dd>
+                <dt>
                     @Html.DisplayNameFor(model => model.mun_codigo)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.mun_codigo)
+                    @Html.DisplayFor(model => model.tbMunicipio.mun_nombre)
                 </dd>
+
             </dl>
 
         </div>

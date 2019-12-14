@@ -26,19 +26,32 @@ $(function () {
             type: 'success',
             title: 'Se ha actualizado con Exito.'
         })
-    } 
-    else if (_Action == "Aceptada") {
+    } else {
+        console.log("Falso")
+    }
+
+    _Action = $('#Errror').val();
+    console.log(_Action)
+    if (_Action == "Delete") {
+        console.log("Verdadero")
+
         Toast.fire({
-            type: 'success',
-            title: 'Ha finalizado el estado con Exito.'
+            type: 'danger',
+            title: 'El Municipio tiene dependencias.'
         })
     }
-    else if (_Action == "Rechazada") {
+    else if (_Action == "Edited") {
         Toast.fire({
             type: 'success',
-            title: 'Se ha rechazado con Exito.'
+            title: 'Se ha actualizado con Exito.'
         })
+    } else {
+        console.log("Falso")
     }
+
+
+
+
 
     //Inicializacion de el Datatable
     $('#dataTable').DataTable(
