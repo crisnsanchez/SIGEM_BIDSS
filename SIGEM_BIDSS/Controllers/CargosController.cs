@@ -102,7 +102,8 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        TempData["swalfunction"] = "true";
+                      
+                        TempData["swalfunction"] = GeneralFunctions._isCreated;
                         return RedirectToAction("Index");
                     }
                 }
@@ -164,9 +165,9 @@ namespace SIGEM_BIDSS.Controllers
                     }
                 IEnumerable<Object> List = null;
                 string ErrorMessage = "";
-                List = db.UDP_Gral_tbPuesto_Update(tbPuesto.pto_Id, tbPuesto.are_Id, tbPuesto.pto_Descripcion, EmployeeID);
-                foreach (UDP_Gral_tbPuesto_Update_Result TipoSangre in List)
-                    ErrorMessage = TipoSangre.MensajeError;
+                List = db.UDP_Gral_tbPuesto_Update(tbPuesto.pto_Id, tbPuesto.are_Id, tbPuesto.pto_Descripcion, EmployeeID, Function.DatetimeNow());
+                foreach (UDP_Gral_tbPuesto_Update_Result Cargo in List)
+                    ErrorMessage = Cargo.MensajeError;
                 if (ErrorMessage.StartsWith("-1"))
                 {
                         Function.BitacoraErrores("Puesto", "EditPost", UserName, ErrorMessage);
