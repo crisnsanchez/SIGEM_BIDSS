@@ -58,31 +58,31 @@ namespace SIGEM_BIDSS.Controllers
             IEnumerable<object> lista = null;
             string UserName = "";
             string MensajeError = "";
-            string ErrorMessage = "";
+            string MsjError = "";
             var listMunicipios = (List<tbMunicipio>)Session["tbMunicipio"];
 
-            try
-            {
-                int EmployeeID = Function.GetUser(out UserName);
-                if (db.tbDepartamento.Any(a => a.dep_Nombre == tbDepartamento.dep_Nombre))
-                {
-                    string Error = "Ya existe un Departamento con ese Nombre, agregue otro.";
-                    Function.BitacoraErrores("Departamento", "CreatePost", UserName, Error);
-                    ModelState.AddModelError("", Error);
-                }
-                if (ModelState.IsValid)
-                {
-                    using (TransactionScope _Tran = new TransactionScope())
-                    {
 
+
+            if (db.tbDepartamento.Any(a => a.dep_Nombre == tbDepartamento.dep_Nombre))
+            {
+                ModelState.AddModelError("", "Ya existe un Departamento con ese Nombre, agregue otro.");
+            }
+            if (ModelState.IsValid)
+            {
+                using (TransactionScope _Tran = new TransactionScope())
+                {
+                    try
+                    {
+                        int EmployeeID = Function.GetUser(out UserName);
                         tbDepartamento.dep_UsuarioCrea = EmployeeID;
+
 
                         list = db.UDP_Gral_tbDepartamento_Insert(tbDepartamento.dep_Codigo, tbDepartamento.dep_Nombre, EmployeeID, Function.DatetimeNow());
                         foreach (UDP_Gral_tbDepartamento_Insert_Result departamento in list)
-                            ErrorMessage = departamento.MensajeError;
-                        if (ErrorMessage.StartsWith("-1"))
+                            MsjError = departamento.MensajeError;
+                        if (MsjError.StartsWith("-1"))
                         {
-                            Function.BitacoraErrores("Departamento", "CreatePost", UserName, ErrorMessage);
+
                             ModelState.AddModelError("", "Ya existe un Departamento con ese Código, agregue otro.");
                             return View(tbDepartamento);
                         }
@@ -99,8 +99,8 @@ namespace SIGEM_BIDSS.Controllers
                                             MensajeError = municipios.MensajeError;
                                         if (MensajeError.StartsWith("-1"))
                                         {
-                                            Function.BitacoraErrores("Municipio", "CreatePost", UserName, MensajeError);
-                                            ModelState.AddModelError("", "Ya existe un Departamento con ese Nombre, agregue otro.");
+
+                                            ModelState.AddModelError("", "No se pudo insertar el registro detalle, favor contacte al administrador.");
                                             return View(tbDepartamento);
                                         }
                                     }
@@ -109,17 +109,16 @@ namespace SIGEM_BIDSS.Controllers
                             _Tran.Complete();
                         }
                     }
+                    catch (Exception)
+                    {
+
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbDepartamento);
+                    }
                 }
                 TempData["swalfunction"] = "true";
                 return RedirectToAction("Index");
             }
-            catch (Exception Ex)
-            {
-                Function.BitacoraErrores("Municipio", "CreatePost", UserName, Ex.Message.ToString());
-                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                return View(tbDepartamento);
-            }
-
             return View(tbDepartamento);
         }
 
@@ -153,15 +152,16 @@ namespace SIGEM_BIDSS.Controllers
             IEnumerable<object> munici = null;
             string MsjError = "";
             string MensajeError = "";
-            var List = (List<tbMunicipio>)Session["tbMunicipio"];
             string UserName = "";
-            try
+            var List = (List<tbMunicipio>)Session["tbMunicipio"];
+            if (ModelState.IsValid)
             {
-                int EmployeeID = Function.GetUser(out UserName);
-                if (ModelState.IsValid)
+                using (TransactionScope _Tran = new TransactionScope())
                 {
-                    using (TransactionScope _Tran = new TransactionScope())
+                    try
                     {
+                        int EmployeeID = Function.GetUser(out UserName);
+                        tbDepartamento.dep_UsuarioCrea = EmployeeID;
                         depart = db.UDP_Gral_tbDepartamento_Update(tbDepartamento.dep_Codigo,
                                                                     tbDepartamento.dep_Nombre,
                                                                     EmployeeID
@@ -171,7 +171,7 @@ namespace SIGEM_BIDSS.Controllers
 
                         if (MsjError.StartsWith("-1"))
                         {
-                            Function.BitacoraErrores("Departamento", "EditPost", UserName, MsjError);
+
                             ModelState.AddModelError("", "1. No se pudo actualizar el registro, favor contacte al administrador.");
                             return View(tbDepartamento);
                         }
@@ -185,15 +185,19 @@ namespace SIGEM_BIDSS.Controllers
                                     munici = db.UDP_Gral_tbMunicipio_Insert(municipio.mun_codigo
                                                                                 , tbDepartamento.dep_Codigo,
                                                                                 municipio.mun_nombre,
-                                                                                EmployeeID,
+                                                                                1,
                                                                                 Function.DatetimeNow()
                                                                                 );
+
+
 
                                     foreach (UDP_Gral_tbMunicipio_Insert_Result mun in munici)
                                         MensajeError = mun.MensajeError;
                                     if (MensajeError.StartsWith("-1"))
                                     {
-                                        Function.BitacoraErrores("Municipio", "EditPost", UserName, MensajeError);
+
+
+
                                         ModelState.AddModelError("", "Ya existe un Municipio en este Departamento con ese nombre, agregue otro.");
                                         return RedirectToAction("Edit/" + MsjError);
                                     }
@@ -203,15 +207,14 @@ namespace SIGEM_BIDSS.Controllers
                             return RedirectToAction("Edit/" + MsjError);
                         }
                     }
+                    catch (Exception Ex)
+                    {
+
+                        ModelState.AddModelError("", "2. No se pudo actualizar el registro, favor contacte al administrador.");
+                        return RedirectToAction("Edit/" + MsjError);
+                    }
                 }
             }
-            catch (Exception Ex)
-            {
-                Function.BitacoraErrores("Municipio", "EditPost", UserName, Ex.Message.ToString());
-                ModelState.AddModelError("", "2. No se pudo actualizar el registro, favor contacte al administrador.");
-                return RedirectToAction("Edit/" + MsjError);
-            }
-
             return View(tbDepartamento);
         }
 

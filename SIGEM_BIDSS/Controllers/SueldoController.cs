@@ -16,6 +16,7 @@ namespace SIGEM_BIDSS.Controllers
 
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         GeneralFunctions Function = new GeneralFunctions();
+
         // GET: Sueldo
         public ActionResult Index()
         {
@@ -81,7 +82,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        TempData["swalfunction"] = "true";
+                        TempData["swalfunction"] = GeneralFunctions._isCreated;
                         return RedirectToAction("Index");
                     }
                 }
@@ -149,6 +150,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+                        TempData["swalfunction"] = GeneralFunctions._isEdited;
                         return RedirectToAction("Index");
                     }
                 }

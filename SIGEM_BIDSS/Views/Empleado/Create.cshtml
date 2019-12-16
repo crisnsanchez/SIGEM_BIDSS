@@ -201,7 +201,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-10">
-                                    <input type="submit" value="Guardar" class="btn btn-primary"/>
+                                    <a  type="submit" value="Guardar"   href="@Url.Action("Create","Sueldo")" class="btn btn-primary">Guardar</a>
+                                    @*<input type="submit" value="Guardar" class="btn btn-primary" @Html.ActionLink("Create", "Sueldo", null, new { @class = "btn btn-primary" }) />*@
                                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                                 </div>
                             </div>
