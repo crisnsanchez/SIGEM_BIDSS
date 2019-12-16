@@ -198,6 +198,7 @@
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionFinancieraController.cs" />
+    <Compile Include="Controllers\LiquidacionAnticipoViaticoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
@@ -216,6 +217,9 @@
     </Compile>
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\tbLiquidacionAnticipoViatico.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Unidadmedida.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
@@ -3340,6 +3344,11 @@
     <Content Include="Views\Sueldo\Index.cshtml" />
     <Content Include="Views\Menu\Inventario.cshtml" />
     <Content Include="Views\Departamento\_LitsMunicipio.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Create.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Delete.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Details.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Edit.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
