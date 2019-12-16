@@ -104,7 +104,7 @@ namespace SIGEM_BIDSS.Controllers
                         ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", dep_codigo);
                         ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion", tbProveedor.acte_Id);
                         ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
-                        ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
+                        ModelState.AddModelError("", "Este RTN ya fue registrado.");
                         return View(tbProveedor);
                     }
                     else
@@ -159,6 +159,13 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "";
             try
             {
+                if (db.tbProveedor.Any(a => a.prov_RTN == tbProveedor.prov_RTN && a.prov_Id != tbProveedor.prov_Id))
+                {
+                    string Error = "Este RTN ya fue registrado.";
+                    Function.BitacoraErrores("Proveedor", "EditPost", UserName, Error);
+                    ModelState.AddModelError("", Error);
+                    return View(tbProveedor);
+                }
                 int EmployeeID = Function.GetUser(out UserName);
 
                 ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
