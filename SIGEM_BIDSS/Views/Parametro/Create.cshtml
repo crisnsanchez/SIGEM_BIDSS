@@ -30,7 +30,7 @@
                                 <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto"></label>
 
                             </div>
-                            @Html.ValidationMessageFor(model => model.par_PathLogo, null, new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.par_PathLogo, null, new { @class = "text-danger", @id = "errorlogo" })
                             <div class="input-group-append">
                             </div>
                         </div>
