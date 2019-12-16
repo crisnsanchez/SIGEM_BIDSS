@@ -1,5 +1,6 @@
 ﻿@model SIGEM_BIDSS.Models.tbMunicipio
 
+
 <div class="form-horizontal">
     <div class="card-body">
         <form>
@@ -20,10 +21,13 @@
                     <div id="ValidationMunNombreCreate">
                         @Html.ValidationMessageFor(model => model.mun_nombre)
                     </div>
-
+                 
                 </div>
-                <div class="form-group col-md-5">
-                    <button class="btn btn-primary" type="button" id="AgregarMunicipio">Añadir</button>
+                <br />
+                <div class="form-group col-md-4">
+                    <div class="form-group col-md-5">
+                        <button class="btn btn-primary" type="button" id="AgregarMunicipio">Añadir</button>
+                    </div>
                 </div>
             </div>
 
