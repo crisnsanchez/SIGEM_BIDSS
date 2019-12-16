@@ -5,111 +5,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>tbLiquidacionAnticipoViatico</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_Correlativo)
-        </dt>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-info  mr-1"></i>
+            Detalle Estado
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="form-horizontal">
+        <div class="card-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Lianvi_Id)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_Correlativo)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Lianvi_Id)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Lianvi_Correlativo)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_FechaLiquida)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lianvi_Correlativo)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Lianvi_Comentario)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_FechaLiquida)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Lianvi_Comentario)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Lianvi_FechaInicioViaje)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_FechaInicioViaje)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lianvi_FechaInicioViaje)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Lianvi_FechaFinViaje)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_FechaInicioViaje)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Lianvi_FechaFinViaje)
+                </dd>
+            </dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_FechaFinViaje)
-        </dt>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-10">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.Lianvi_Id }, new { @class = "btn btn-primary btn-sm" })
 
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_FechaFinViaje)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_Comentario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_Comentario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_RazonRechazo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_RazonRechazo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_UsuarioCrea)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_UsuarioCrea)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_FechaCrea)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_FechaCrea)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_UsuarioModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_UsuarioModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lianvi_FechaModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lianvi_FechaModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbAnticipoViatico.Anvi_Correlativo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbAnticipoViatico.Anvi_Correlativo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Lianvi_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
