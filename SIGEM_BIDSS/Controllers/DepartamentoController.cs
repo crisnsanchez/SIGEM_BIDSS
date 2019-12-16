@@ -152,6 +152,7 @@ namespace SIGEM_BIDSS.Controllers
             IEnumerable<object> munici = null;
             string MsjError = "";
             string MensajeError = "";
+            string UserName = "";
             var List = (List<tbMunicipio>)Session["tbMunicipio"];
             if (ModelState.IsValid)
             {
@@ -159,9 +160,11 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     try
                     {
+                        int EmployeeID = Function.GetUser(out UserName);
+                        tbDepartamento.dep_UsuarioCrea = EmployeeID;
                         depart = db.UDP_Gral_tbDepartamento_Update(tbDepartamento.dep_Codigo,
                                                                     tbDepartamento.dep_Nombre,
-                                                                    1
+                                                                    EmployeeID
                             );
                         foreach (UDP_Gral_tbDepartamento_Update_Result Departamentos in depart)
                             MsjError = Departamentos.MensajeError;
