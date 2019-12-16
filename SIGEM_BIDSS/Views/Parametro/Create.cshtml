@@ -4,6 +4,8 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -120,7 +122,7 @@
     <script src="~/Scripts/app/Parametros.js"></script>
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="~/Scripts/app/General_PCAE.js"></script>
+    <script src="~/Scripts/app/General.js"></script>
 
 
     <script type="text/javascript">

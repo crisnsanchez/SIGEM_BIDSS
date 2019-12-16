@@ -212,7 +212,7 @@ namespace SIGEM_BIDSS.Controllers
                     else
                     {
                         TempData["swalfunction"] = GeneralFunctions._isEdited;
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Details/" + MsjError);
                     }
                 }
                 tbParametro.par_PathLogo = vtbparametro.par_PathLogo;

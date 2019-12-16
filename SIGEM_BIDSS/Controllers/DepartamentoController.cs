@@ -116,7 +116,7 @@ namespace SIGEM_BIDSS.Controllers
                         return View(tbDepartamento);
                     }
                 }
-                TempData["swalfunction"] = "true";
+                TempData["swalfunction"] = GeneralFunctions._isCreated;
                 return RedirectToAction("Index");
             }
             return View(tbDepartamento);
@@ -204,6 +204,7 @@ namespace SIGEM_BIDSS.Controllers
                                 }
                             }
                             _Tran.Complete();
+                            TempData["swalfunction"] = GeneralFunctions._isEdited;
                             return RedirectToAction("Edit/" + MsjError);
                         }
                     }
@@ -393,12 +394,13 @@ namespace SIGEM_BIDSS.Controllers
                 if (MsjError.StartsWith("-1The DELETE statement conflicted with the REFERENCE constraint"))
                 {
                     TempData["smserror"] = "No se puede eliminar el registro porque posee dependencias, favor contacte al administrador.";
-                    ViewBag.smserror = TempData["smserror"];
+                    TempData["swalfunction"] = GeneralFunctions._isDependencia;
                     ModelState.AddModelError("", "No se puede borrar el registro");
                     return RedirectToAction("Edit/" + dep_Codigo);
                 }
                 else
                 {
+                    TempData["swalfunction"] = GeneralFunctions._isDelete;
                     return RedirectToAction("Edit/" + dep_Codigo);
                 }
             }
