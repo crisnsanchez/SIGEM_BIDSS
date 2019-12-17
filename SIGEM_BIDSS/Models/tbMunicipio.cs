@@ -18,8 +18,8 @@ namespace SIGEM_BIDSS.Models
         public tbMunicipio()
         {
             this.tbAnticipoViatico = new HashSet<tbAnticipoViatico>();
-            this.tbEmpleado = new HashSet<tbEmpleado>();
             this.tbProveedor = new HashSet<tbProveedor>();
+            this.tbEmpleado = new HashSet<tbEmpleado>();
         }
     
         public string mun_codigo { get; set; }
@@ -34,8 +34,8 @@ namespace SIGEM_BIDSS.Models
         public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico { get; set; }
         public virtual tbDepartamento tbDepartamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbProveedor> tbProveedor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
     }
 }
