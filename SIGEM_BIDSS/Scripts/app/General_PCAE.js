@@ -56,5 +56,33 @@ function noespaciosincio(e) {
     e.value = valor;
 }
 
+$('#are_Descripcion').change(function () {
+    $('#areId').hide();
+});
+$('#est_Descripcion').change(function () {
+    $('#estId').hide();
+});
+$('#tmo_Nombre').change(function () {
+    $('#NombreMonedaId').hide();
+});
 
+$('#tmo_Abreviatura').change(function () {
+    $('#abreviatura').hide();
+});
+$('#tpsal_Descripcion').change(function () {
+    $('#salario').hide();
+});
+$('#tptran_Descripcion').change(function () {
+    $('#Transporte').hide();
+});
+$('#uni_Abreviatura').change(function () {
+    $('#Unidad').hide();
+});
+$('#tptran_Descripcion').change(function () {
+    $('#Medida').hide();
+});
+
+$('#tpv_Descripcion').change(function () {
+    $('#Viatico').hide();
+});
 
