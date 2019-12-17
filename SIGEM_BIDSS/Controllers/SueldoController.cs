@@ -43,17 +43,17 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create()
         {
 
-            int id = Convert.ToInt32(Session["EmpID"]);
-            var _tbEmpleado = (from _tdemp in db.tbEmpleado 
-                               where _tdemp.emp_Id == id 
-                               select new {empId = _tdemp.emp_Id, Nombre = _tdemp.emp_Nombres + " " + _tdemp.emp_Apellidos }).FirstOrDefault();
-            tbSueldo tbSueldo = new tbSueldo
-            {
-                emp_Id = _tbEmpleado.empId,
-                NombreEmpleado = _tbEmpleado.Nombre
-            };
-            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
-            return View(tbSueldo);
+            //int id = Convert.ToInt32(Session["EmpID"]);
+            //var _tbEmpleado = (from _tdemp in db.tbEmpleado 
+            //                   where _tdemp.emp_Id == id 
+            //                   select new {empId = _tdemp.emp_Id, Nombre = _tdemp.emp_Nombres + " " + _tdemp.emp_Apellidos }).FirstOrDefault();
+            //tbSueldo tbSueldo = new tbSueldo
+            //{
+            //    emp_Id = _tbEmpleado.empId,
+            //    NombreEmpleado = _tbEmpleado.Nombre
+            //};
+            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
+            return View();
         }
 
         // POST: Sueldo/Create

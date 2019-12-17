@@ -102,8 +102,8 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+                        TempData["swalfunction"] = "true";
                       
-                        TempData["swalfunction"] = GeneralFunctions._isCreated;
                         return RedirectToAction("Index");
                     }
                 }
