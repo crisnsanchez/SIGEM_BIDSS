@@ -53,6 +53,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbSueldo> tbSueldo { get; set; }
         public virtual DbSet<tbTipoSangre> tbTipoSangre { get; set; }
         public virtual DbSet<tbParametro> tbParametro { get; set; }
+        public virtual DbSet<tbLiquidacionAnticipoViatico> tbLiquidacionAnticipoViatico { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -417,27 +418,6 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("mun_UsuarioModifica", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbMunicipio_Update_Result>("UDP_Gral_tbMunicipio_Update", mun_CodigoParameter, dep_CodigoParameter, mun_NombreParameter, mun_UsuarioModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Gral_tbPuesto_Update_Result> UDP_Gral_tbPuesto_Update(Nullable<int> pto_Id, Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioModifica)
-        {
-            var pto_IdParameter = pto_Id.HasValue ?
-                new ObjectParameter("pto_Id", pto_Id) :
-                new ObjectParameter("pto_Id", typeof(int));
-    
-            var are_IdParameter = are_Id.HasValue ?
-                new ObjectParameter("are_Id", are_Id) :
-                new ObjectParameter("are_Id", typeof(int));
-    
-            var pto_DescripcionParameter = pto_Descripcion != null ?
-                new ObjectParameter("pto_Descripcion", pto_Descripcion) :
-                new ObjectParameter("pto_Descripcion", typeof(string));
-    
-            var pto_UsuarioModificaParameter = pto_UsuarioModifica.HasValue ?
-                new ObjectParameter("pto_UsuarioModifica", pto_UsuarioModifica) :
-                new ObjectParameter("pto_UsuarioModifica", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Gral_tbTipoSangre_Insert_Result> UDP_Gral_tbTipoSangre_Insert(string tps_Descripcion, Nullable<int> tps_UsuarioCrea, Nullable<System.DateTime> tps_FechaCrea)
@@ -2339,6 +2319,31 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("par_PathLogo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Conf_tbParametro_Update_Result>("UDP_Conf_tbParametro_Update", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_CorreoEmisorParameter, par_CorreoRRHHParameter, par_PasswordParameter, par_ServidorParameter, par_PuertoParameter, par_PathLogoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Gral_tbPuesto_Update_Result> UDP_Gral_tbPuesto_Update(Nullable<int> pto_Id, Nullable<int> are_Id, string pto_Descripcion, Nullable<int> pto_UsuarioModifica, Nullable<System.DateTime> pto_FechaModifica)
+        {
+            var pto_IdParameter = pto_Id.HasValue ?
+                new ObjectParameter("pto_Id", pto_Id) :
+                new ObjectParameter("pto_Id", typeof(int));
+    
+            var are_IdParameter = are_Id.HasValue ?
+                new ObjectParameter("are_Id", are_Id) :
+                new ObjectParameter("are_Id", typeof(int));
+    
+            var pto_DescripcionParameter = pto_Descripcion != null ?
+                new ObjectParameter("pto_Descripcion", pto_Descripcion) :
+                new ObjectParameter("pto_Descripcion", typeof(string));
+    
+            var pto_UsuarioModificaParameter = pto_UsuarioModifica.HasValue ?
+                new ObjectParameter("pto_UsuarioModifica", pto_UsuarioModifica) :
+                new ObjectParameter("pto_UsuarioModifica", typeof(int));
+    
+            var pto_FechaModificaParameter = pto_FechaModifica.HasValue ?
+                new ObjectParameter("pto_FechaModifica", pto_FechaModifica) :
+                new ObjectParameter("pto_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter, pto_FechaModificaParameter);
         }
     }
 }

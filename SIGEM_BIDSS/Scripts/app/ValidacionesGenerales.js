@@ -25,7 +25,3 @@ function soloNumeros(e) {
     return /^[0-9]+$/.test(tecla);
 }
 
-///Validacion para no pegar caracteres
-function Caracteres(string) {
-    var out = '';
-}

@@ -198,6 +198,7 @@
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstitucionFinancieraController.cs" />
+    <Compile Include="Controllers\LiquidacionAnticipoViaticoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
@@ -216,6 +217,9 @@
     </Compile>
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\tbLiquidacionAnticipoViatico.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Unidadmedida.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
@@ -499,6 +503,8 @@
     <Content Include="Content\Email\Solicitud.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\img\1.jpg" />
+    <Content Include="Content\img\1.png" />
     <Content Include="Content\img\background.jpg" />
     <Content Include="Content\img\descarga.jpg" />
     <Content Include="Content\img\logo.png" />
@@ -921,6 +927,7 @@
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
     <Content Include="Scripts\app\Proveedor.js" />
+    <Content Include="Scripts\app\Solicitud.js" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
@@ -3167,11 +3174,12 @@
     <Content Include="Scripts\app\Departamento.js" />
     <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\app\Municipio.js" />
-    <Content Include="Scripts\app\Solicitud\AnticipoSalario\AnticipoSalario.js" />
-    <Content Include="Scripts\app\Solicitud\AnticipoSalario\Modals.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoSalario.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoSalario\Details.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
     <Content Include="Scripts\app\ValidacionesGenerales.js" />
+    <Content Include="Scripts\app\_AccionPersonal.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\template\plugins\.npmignore" />
@@ -3196,6 +3204,7 @@
     <Content Include="Content\template\plugins\datepicker\css\bootstrap-datepicker3.css.map" />
     <Content Include="Content\template\plugins\datepicker\css\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="PrivateSettings.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\SIGEM.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -3338,7 +3347,11 @@
     <Content Include="Views\Sueldo\Index.cshtml" />
     <Content Include="Views\Menu\Inventario.cshtml" />
     <Content Include="Views\Departamento\_LitsMunicipio.cshtml" />
-    <Content Include="Views\AnticipoSalario\_Modales.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Create.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Delete.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Details.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Edit.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -1,5 +1,24 @@
 ﻿var contador = 0;
 
+
+
+
+$('#dep_Codigo').change(function () {
+    $('#ValidationDepCodigoCreate').hide();
+});
+
+$('#dep_Nombre').change(function () {
+    $('#ValidationDepNombreCreate').hide();
+});
+
+
+$('#mun_codigo').change(function () {
+    $('#ValidationMunCodigoCreate').hide();
+});
+
+$('#mun_nombre').change(function () {
+    $('#ValidationMunNombreCreate').hide();
+});
 //-----------Bloquear el Drop de texto en rlos textbox
 $(window).ready(function () {
 

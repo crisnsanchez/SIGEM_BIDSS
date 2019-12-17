@@ -61,6 +61,24 @@
           <Property Name="Anvi_UsuarioModifica" Type="int" />
           <Property Name="Anvi_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbLiquidacionAnticipoViatico">
+          <Key>
+            <PropertyRef Name="Lianvi_Id" />
+          </Key>
+          <Property Name="Lianvi_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lianvi_Correlativo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Anvi_Id" Type="int" Nullable="false" />
+          <Property Name="Lianvi_FechaLiquida" Type="datetime" Nullable="false" />
+          <Property Name="Lianvi_FechaInicioViaje" Type="datetime" Nullable="false" />
+          <Property Name="Lianvi_FechaFinViaje" Type="datetime" Nullable="false" />
+          <Property Name="Lianvi_Comentario" Type="nvarchar" MaxLength="250" />
+          <Property Name="est_Id" Type="int" Nullable="false" />
+          <Property Name="Lianvi_RazonRechazo" Type="nvarchar" MaxLength="250" />
+          <Property Name="Lianvi_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="Lianvi_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="Lianvi_UsuarioModifica" Type="int" />
+          <Property Name="Lianvi_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbParametro">
           <Key>
             <PropertyRef Name="par_Id" />
@@ -463,6 +481,30 @@
             </Principal>
             <Dependent Role="tbAnticipoViatico">
               <PropertyRef Name="Anvi_tptran_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id">
+          <End Role="tbAnticipoViatico" Type="Self.tbAnticipoViatico" Multiplicity="1" />
+          <End Role="tbLiquidacionAnticipoViatico" Type="Self.tbLiquidacionAnticipoViatico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAnticipoViatico">
+              <PropertyRef Name="Anvi_Id" />
+            </Principal>
+            <Dependent Role="tbLiquidacionAnticipoViatico">
+              <PropertyRef Name="Anvi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id">
+          <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
+          <End Role="tbLiquidacionAnticipoViatico" Type="Self.tbLiquidacionAnticipoViatico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbLiquidacionAnticipoViatico">
+              <PropertyRef Name="est_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -894,6 +936,7 @@
           <Parameter Name="are_Id" Type="int" Mode="In" />
           <Parameter Name="pto_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="pto_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="pto_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Gral_tbTipoMoneda_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Gral">
           <Parameter Name="tmo_Abreviatura" Type="varchar" Mode="In" />
@@ -1088,6 +1131,7 @@
           <EntitySet Name="tbBitacoraErrores" EntityType="Self.tbBitacoraErrores" Schema="Acce" store:Type="Tables" />
           <EntitySet Name="tbAnticipoSalario" EntityType="Self.tbAnticipoSalario" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbAnticipoViatico" EntityType="Self.tbAnticipoViatico" Schema="Adm" store:Type="Tables" />
+          <EntitySet Name="tbLiquidacionAnticipoViatico" EntityType="Self.tbLiquidacionAnticipoViatico" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbParametro" EntityType="Self.tbParametro" Schema="Conf" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbActividadEconomica" EntityType="Self.tbActividadEconomica" Schema="Gral" store:Type="Tables" />
@@ -1146,6 +1190,14 @@
           <AssociationSet Name="FK_Adm_tbAnticipoViatico_tbTipoTranporte_tptran_Id" Association="Self.FK_Adm_tbAnticipoViatico_tbTipoTranporte_tptran_Id">
             <End Role="tbTipoTransporte" EntitySet="tbTipoTransporte" />
             <End Role="tbAnticipoViatico" EntitySet="tbAnticipoViatico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id" Association="Self.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id">
+            <End Role="tbAnticipoViatico" EntitySet="tbAnticipoViatico" />
+            <End Role="tbLiquidacionAnticipoViatico" EntitySet="tbLiquidacionAnticipoViatico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id" Association="Self.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbLiquidacionAnticipoViatico" EntitySet="tbLiquidacionAnticipoViatico" />
           </AssociationSet>
           <AssociationSet Name="FK_are_Id" Association="Self.FK_are_Id">
             <End Role="tbArea" EntitySet="tbArea" />
@@ -1302,12 +1354,6 @@
             <Parameter Name="dep_Codigo" Mode="In" Type="String" />
             <Parameter Name="mun_Nombre" Mode="In" Type="String" />
             <Parameter Name="mun_UsuarioModifica" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Gral_tbPuesto_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Update_Result)">
-            <Parameter Name="pto_Id" Mode="In" Type="Int32" />
-            <Parameter Name="are_Id" Mode="In" Type="Int32" />
-            <Parameter Name="pto_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="pto_UsuarioModifica" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbTipoSangre_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbTipoSangre_Insert_Result)">
             <Parameter Name="tps_Descripcion" Mode="In" Type="String" />
@@ -1940,6 +1986,22 @@
             <Parameter Name="par_PathLogo" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
+          <FunctionImport Name="UDP_Gral_tbPuesto_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Update_Result)">
+            <Parameter Name="pto_Id" Mode="In" Type="Int32" />
+            <Parameter Name="are_Id" Mode="In" Type="Int32" />
+            <Parameter Name="pto_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="pto_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="pto_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbLiquidacionAnticipoViatico" EntityType="SIGEM_BIDSSModel.tbLiquidacionAnticipoViatico" />
+          <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id">
+            <End Role="tbAnticipoViatico" EntitySet="tbAnticipoViatico" />
+            <End Role="tbLiquidacionAnticipoViatico" EntitySet="tbLiquidacionAnticipoViatico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbLiquidacionAnticipoViatico" EntitySet="tbLiquidacionAnticipoViatico" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -1960,9 +2022,6 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbMunicipio_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Gral_tbPuesto_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Gral_tbTipoSangre_Insert_Result">
@@ -2136,6 +2195,7 @@
           <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id" FromRole="tbAnticipoViatico" ToRole="tbEstado" />
           <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbMunicipio_mun_Codigo" FromRole="tbAnticipoViatico" ToRole="tbMunicipio" />
           <NavigationProperty Name="tbTipoTransporte" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbTipoTranporte_tptran_Id" FromRole="tbAnticipoViatico" ToRole="tbTipoTransporte" />
+          <NavigationProperty Name="tbLiquidacionAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id" FromRole="tbAnticipoViatico" ToRole="tbLiquidacionAnticipoViatico" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -2184,6 +2244,7 @@
           <NavigationProperty Name="tbAnticipoSalario" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoSalario_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbAnticipoSalario" />
           <NavigationProperty Name="tbAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbAnticipoViatico" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbEmpleado" />
+          <NavigationProperty Name="tbLiquidacionAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id" FromRole="tbEstado" ToRole="tbLiquidacionAnticipoViatico" />
         </EntityType>
         <EntityType Name="tbMoneda">
           <Key>
@@ -2769,6 +2830,53 @@
           <Property Name="par_Puerto" Type="Int32" Nullable="false" />
           <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="UDP_Gral_tbPuesto_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <EntityType Name="tbLiquidacionAnticipoViatico">
+          <Key>
+            <PropertyRef Name="Lianvi_Id" />
+          </Key>
+          <Property Name="Lianvi_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lianvi_Correlativo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Anvi_Id" Type="Int32" Nullable="false" />
+          <Property Name="Lianvi_FechaLiquida" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Lianvi_FechaInicioViaje" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Lianvi_FechaFinViaje" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Lianvi_Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="est_Id" Type="Int32" Nullable="false" />
+          <Property Name="Lianvi_RazonRechazo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Lianvi_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="Lianvi_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Lianvi_UsuarioModifica" Type="Int32" />
+          <Property Name="Lianvi_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id" FromRole="tbLiquidacionAnticipoViatico" ToRole="tbAnticipoViatico" />
+          <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id" FromRole="tbLiquidacionAnticipoViatico" ToRole="tbEstado" />
+        </EntityType>
+        <Association Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id">
+          <End Type="SIGEM_BIDSSModel.tbAnticipoViatico" Role="tbAnticipoViatico" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbLiquidacionAnticipoViatico" Role="tbLiquidacionAnticipoViatico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAnticipoViatico">
+              <PropertyRef Name="Anvi_Id" />
+            </Principal>
+            <Dependent Role="tbLiquidacionAnticipoViatico">
+              <PropertyRef Name="Anvi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id">
+          <End Type="SIGEM_BIDSSModel.tbEstado" Role="tbEstado" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbLiquidacionAnticipoViatico" Role="tbLiquidacionAnticipoViatico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbLiquidacionAnticipoViatico">
+              <PropertyRef Name="est_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2816,13 +2924,6 @@
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbMunicipio_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbMunicipio_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbMunicipio_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Gral_tbPuesto_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbPuesto_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -3497,6 +3598,32 @@
                 <ScalarProperty Name="par_TelefonoEmpresa" ColumnName="par_TelefonoEmpresa" />
                 <ScalarProperty Name="par_NombreEmpresa" ColumnName="par_NombreEmpresa" />
                 <ScalarProperty Name="par_Id" ColumnName="par_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Gral_tbPuesto_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbPuesto_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbLiquidacionAnticipoViatico">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbLiquidacionAnticipoViatico">
+              <MappingFragment StoreEntitySet="tbLiquidacionAnticipoViatico">
+                <ScalarProperty Name="Lianvi_FechaModifica" ColumnName="Lianvi_FechaModifica" />
+                <ScalarProperty Name="Lianvi_UsuarioModifica" ColumnName="Lianvi_UsuarioModifica" />
+                <ScalarProperty Name="Lianvi_FechaCrea" ColumnName="Lianvi_FechaCrea" />
+                <ScalarProperty Name="Lianvi_UsuarioCrea" ColumnName="Lianvi_UsuarioCrea" />
+                <ScalarProperty Name="Lianvi_RazonRechazo" ColumnName="Lianvi_RazonRechazo" />
+                <ScalarProperty Name="est_Id" ColumnName="est_Id" />
+                <ScalarProperty Name="Lianvi_Comentario" ColumnName="Lianvi_Comentario" />
+                <ScalarProperty Name="Lianvi_FechaFinViaje" ColumnName="Lianvi_FechaFinViaje" />
+                <ScalarProperty Name="Lianvi_FechaInicioViaje" ColumnName="Lianvi_FechaInicioViaje" />
+                <ScalarProperty Name="Lianvi_FechaLiquida" ColumnName="Lianvi_FechaLiquida" />
+                <ScalarProperty Name="Anvi_Id" ColumnName="Anvi_Id" />
+                <ScalarProperty Name="Lianvi_Correlativo" ColumnName="Lianvi_Correlativo" />
+                <ScalarProperty Name="Lianvi_Id" ColumnName="Lianvi_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

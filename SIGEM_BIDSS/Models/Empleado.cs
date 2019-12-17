@@ -122,8 +122,13 @@ namespace SIGEM_BIDSS.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public virtual tbMunicipio tbMunicipio { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public virtual tbPuesto tbPuesto { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public virtual tbTipoSangre tbTipoSangre { get; set; }
     }
 

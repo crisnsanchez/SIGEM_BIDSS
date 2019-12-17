@@ -51,16 +51,24 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "deif_IdDeduccionInstFinanciera,emp_Id,insf_IdInstitucionFinanciera,deif_Monto,deif_Comentarios,deif_UsuarioCrea,deif_FechaCrea,deif_UsuarioModifica,deif_FechaModifica,deif_Activo,deif_Pagado")] tbDeduccionInstitucionFinanciera tbDeduccionInstitucionFinanciera)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.tbDeduccionInstitucionFinanciera.Add(tbDeduccionInstitucionFinanciera);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.tbDeduccionInstitucionFinanciera.Add(tbDeduccionInstitucionFinanciera);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
-            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
-            return View(tbDeduccionInstitucionFinanciera);
+                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
+                ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_IdInstitucionFinanciera", "insf_DescInstitucionFinanc", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
+                return View(tbDeduccionInstitucionFinanciera);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // GET: DeduccionInstitucionFinancieras/Edit/5

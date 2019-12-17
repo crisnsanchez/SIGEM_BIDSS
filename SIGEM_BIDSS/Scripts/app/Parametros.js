@@ -4,10 +4,12 @@
 
         reader.onload = function (e) {
             $('#imgpreview').attr('src', e.target.result);
-        }
+        };
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+
 
 $("#CargarFoto").change(function () {
     readURL(this);
@@ -17,7 +19,7 @@ $("#CargarFoto").change(function () {
 //Solo numeros
 $('#par_TelefonoEmpresa').keypress(function (e) {
     tecla = (document.all) ? e.keyCode : e.which;
-    tecla = String.fromCharCode(tecla)
+    tecla = String.fromCharCode(tecla);
     return /^[0-9\-]+$/.test(tecla);
 
 });
@@ -31,7 +33,6 @@ $('#par_NombreEmpresa').change(function () {
 $('#par_TelefonoEmpresa').change(function () {
     $('#errortelefonoempresa').hide();
     $('#errorformatotelefono').hide();
-
 });
 
 $('#par_CorreoEmpresa').change(function () {
@@ -69,7 +70,7 @@ function validartel(e) {
     $(campo).on("input", function (event) {
         var Telefono = this.value.match(/[0-9\s]+/);
 
-        if (Telefono != null) {
+        if (Telefono !== null) {
             this.value = '+' + ((Telefono).toString().replace(/[^ 0-9a-záéíóúñ@._-\s]\d +/ig, ""));
         }
         else {
@@ -83,20 +84,20 @@ $('#par_NombreEmpresa').keypress(function (e) {
     tecla = (document.all) ? e.keyCode : e.which;
 
     //Tecla de retroceso para borrar, siempre la permite
-    if (tecla == 8) {
+    if (tecla === 8) {
         return true;
     }
     // Patron de entrada, en este caso solo acepta numeros y letras
     patron = /[A-Za-z0-9]/;
-    tecla_final = String.fromCharCode(tecla);
-    return patron.test(tecla_final);
-})
+    //tecla_final = String.fromCharCode(tecla);
+    //return patron.test(tecla_final);
+});
 
 
 //Correo electronico
 function Caracteres_Email(e) {
     tecla = (document.all) ? e.keyCode : e.which;
-    tecla = String.fromCharCode(tecla)
+    tecla = String.fromCharCode(tecla);
     return /^[a-zA-ZáéíóúñÁÉÍÓÚÑ1234567890@.-_]+$/.test(tecla);
 
 }
@@ -107,7 +108,7 @@ function CorreoElectronico(string) {//Algunos caracteres especiales para el corr
     var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890@ .-_';//Caracteres validos
 
     for (var i = 0; i < string.length; i++)
-        if (filtro.indexOf(string.charAt(i)) != -1)
+        if (filtro.indexOf(string.charAt(i)) !== -1)
             out += string.charAt(i);
 
     return out;
@@ -148,7 +149,7 @@ document.getElementById('par_CorreoEmisor').addEventListener('input', function (
 });
 document.getElementById('par_CorreoRRHH').addEventListener('input', function () {
     campo = event.target;
-    valido = document.getElementById('emailRHHH');
+    valido = document.getElementById('emailEoKi');
     //selector = document.getElementById('emp_CorreoElectronico')
     emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono
@@ -181,7 +182,7 @@ document.getElementById('par_Servidor').addEventListener('input', function () {
 
 function soloNumeros(e) {
     tecla = (document.all) ? e.keyCode : e.which;
-    tecla = String.fromCharCode(tecla)
+    tecla = String.fromCharCode(tecla);
     return /^[0-9]+$/.test(tecla);
 }
 
@@ -196,7 +197,7 @@ $(document).on('blur', '#par_Password', function () {
 
 function Passworddd(e) {
     tecla = (document.all) ? e.keyCode : e.which;
-    tecla = String.fromCharCode(tecla)
+    tecla = String.fromCharCode(tecla);
     return /^[0-9a-zA-Z-_.#*]+$/.test(tecla);
 }
 
@@ -204,7 +205,7 @@ function Passworddd(e) {
 
 function mostrarPassword() {
     var cambio = document.getElementById("txtPassword");
-    if (cambio.type == "password") {
+    if (cambio.type === "password") {
         cambio.type = "text";
         $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
     } else {
@@ -227,16 +228,34 @@ function soloLetras(e) {
     letras = " -+'/áéíóúabcdefghijklmnñopqrstuvwxyz";
     especiales = "8-37-39-46";
 
-    tecla_especial = false
+    tecla_especial = false;
     for (var i in especiales) {
-        if (key == especiales[i]) {
+        if (key === especiales[i]) {
             tecla_especial = true;
             break;
         }
     }
 
-    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+    if (letras.indexOf(tecla) === -1 && !tecla_especial) {
         return false;
     }
 }
 
+
+$("#frmEditParametro").submit(function (event) {
+    var CorreoEmpresa = $("#emailOK").text();
+    var CorreoEmisor = $("#emailEoK").text();
+    var CorreoRRHH = $("#emailEoKi").text();
+    if (CorreoEmpresa !== "" || CorreoEmisor !== "" || CorreoRRHH !== "") {
+        event.preventDefault();
+    }
+});
+
+$("#frmCreateParametro").submit(function (event) {
+    var CorreoEmpresa = $("#emailOK").text();
+    var CorreoEmisor = $("#emailEoK").text();
+    var CorreoRRHH = $("#emailEoKi").text();
+    if (CorreoEmpresa !== "" || CorreoEmisor !== "" || CorreoRRHH !== "") {
+        event.preventDefault();
+    }
+});

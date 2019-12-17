@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class InstitucionFinancieraController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        Models.Helpers Function = new Models.Helpers();
+        GeneralFunctions Function = new GeneralFunctions();
 
         // GET: InstitucionFinanciera
         public ActionResult Index()
@@ -39,7 +39,7 @@ namespace SIGEM_BIDSS.Controllers
 
         //INACTIVAR EMPLEADO
         [HttpPost]
-        public JsonResult InactivarInstitucionFinanciera(int  insf_Id)
+        public JsonResult InactivarInstitucionFinanciera(int insf_Id)
         {
             IEnumerable<Object> list = null;
             try
@@ -48,11 +48,11 @@ namespace SIGEM_BIDSS.Controllers
                 list = db.UDP_Plani_tbInstitucionFinanciera_Update(insf_Id, institucionfinanciera.insf_Nombre,
                                                                          institucionfinanciera.insf_Contacto,
                                                                          institucionfinanciera.insf_Telefono,
-                                                                         institucionfinanciera.insf_Correo,1 ,
+                                                                         institucionfinanciera.insf_Correo, 1,
                                                                             Function.DatetimeNow(),
                                                                          GeneralFunctions.instfinDenegar);
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
 
             }
@@ -89,43 +89,46 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica")] tbInstitucionFinanciera tbInstitucionFinanciera)
+        public ActionResult Create([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
+            string UserName = "";
             try
             {
-                IEnumerable<Object> List = null;
-                string Msj = "";
-                List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
-                                                                     tbInstitucionFinanciera.insf_Contacto,
-                                                                     tbInstitucionFinanciera.insf_Telefono,
-                                                                     tbInstitucionFinanciera.insf_Correo, 1,
-                                                                     Function.DatetimeNow(),
-                                                                true);
-                foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
-                    Msj = TipoSangre.MensajeError;
-                if (Msj.StartsWith("-1"))
-                { 
-                    return View(tbInstitucionFinanciera);
-                }
-                if (Msj.StartsWith("-2"))
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("", "Ya existe una Institución con el mismo nombre.");
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Index");
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
+                                                                         tbInstitucionFinanciera.insf_Contacto,
+                                                                         tbInstitucionFinanciera.insf_Telefono,
+                                                                         tbInstitucionFinanciera.insf_Correo, EmployeeID,
+                                                                         Function.DatetimeNow(),
+                                                                    true);
+                    foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
+                        Msj = TipoSangre.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        Function.BitacoraErrores("InstitucionFinanciera", "CreatePost", UserName, Msj);
+                        return View(tbInstitucionFinanciera);
+                    }
+                    if (Msj.StartsWith("-2"))
+                    {
+                        ModelState.AddModelError("", "Ya existe una Institución con el mismo nombre.");
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             catch (Exception Ex)
             {
-
+                Function.BitacoraErrores("InstitucionFinanciera", "CreatePost", UserName, Ex.Message.ToString());
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 return View();
             }
-
-
-
             return View();
         }
 
@@ -149,45 +152,46 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica")] tbInstitucionFinanciera tbInstitucionFinanciera)
+        public ActionResult Edit([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
-            if (ModelState.IsValid)
-                if (db.tbInstitucionFinanciera.Any(a => a.insf_Nombre == tbInstitucionFinanciera.insf_Nombre && a.insf_Id != tbInstitucionFinanciera.insf_Id))
-                {
-                    ModelState.AddModelError("", "Ya existe una Institución con el mismo nombre.");
-                    return View(tbInstitucionFinanciera);
-                }
 
+            string UserName = "";
             try
             {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
-                                                                         tbInstitucionFinanciera.insf_Contacto,
-                                                                         tbInstitucionFinanciera.insf_Telefono,
-                                                                         tbInstitucionFinanciera.insf_Correo, 1,
-                                                                            Function.DatetimeNow(),
-                                                                         tbInstitucionFinanciera.insf_Activo);
-                    foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result TipoSangre in List)
-                        Msj = TipoSangre.MensajeError;
-                    if (Msj.StartsWith("-1"))
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
+                    if (db.tbInstitucionFinanciera.Any(a => a.insf_Nombre == tbInstitucionFinanciera.insf_Nombre && a.insf_Id != tbInstitucionFinanciera.insf_Id))
                     {
-                       
+                        ModelState.AddModelError("", "Ya existe una Institución con el mismo nombre.");
                         return View(tbInstitucionFinanciera);
                     }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                catch (Exception Ex)
+
+                IEnumerable<Object> List = null;
+                string Msj = "";
+                List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
+                                                                     tbInstitucionFinanciera.insf_Contacto,
+                                                                     tbInstitucionFinanciera.insf_Telefono,
+                                                                     tbInstitucionFinanciera.insf_Correo, EmployeeID,
+                                                                        Function.DatetimeNow(),
+                                                                     tbInstitucionFinanciera.insf_Activo);
+                foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result TipoSangre in List)
+                    Msj = TipoSangre.MensajeError;
+                if (Msj.StartsWith("-1"))
                 {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
+                    Function.BitacoraErrores("InstitucionFinanciera", "EditPost", UserName, Msj);
+                    return View(tbInstitucionFinanciera);
                 }
-
-            
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("InstitucionFinanciera", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
         }
 
         // GET: InstitucionFinanciera/Delete/5

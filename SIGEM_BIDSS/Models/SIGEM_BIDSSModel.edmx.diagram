@@ -53,6 +53,9 @@
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbTipoSangre" Width="1.5" PointX="16.375" PointY="6" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbTipoSangre_tps_Id" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="16.375" PointY="9.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbLiquidacionAnticipoViatico" Width="1.5" PointX="17.5" PointY="13.625" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class ActividadEconomicaController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions function = new GeneralFunctions();
+        GeneralFunctions Function = new GeneralFunctions();
         // GET: ActividadEconomica
         public ActionResult Index()
         {
@@ -48,45 +48,43 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "acte_Id,acte_Descripcion,acte_UsuarioCrea,acte_FechaCrea,acte_UsuarioModifica,acte_FechaModifica")] tbActividadEconomica tbActividadEconomica)
         {
-            if (ModelState.IsValid)
+            string UserName = "";
+            try
             {
-                string UserName = "";
-
-                try
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
                     IEnumerable<Object> List = null;
-                    string Msj = "";
-                    int EmpleId = function.GetUser(out UserName);
-
-                    tbActividadEconomica.acte_UsuarioCrea = EmpleId;
-                    List = db.UDP_Gral_tbActividadEconomica_Insert(tbActividadEconomica.acte_Descripcion, EmpleId, function.DatetimeNow());
+                    string ErrorMessage = "";
+                    tbActividadEconomica.acte_UsuarioCrea = EmployeeID;
+                    List = db.UDP_Gral_tbActividadEconomica_Insert(tbActividadEconomica.acte_Descripcion, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Gral_tbActividadEconomica_Insert_Result acti in List)
-                        Msj = acti.MensajeError;
-                    if (Msj.StartsWith("-1"))
+                        ErrorMessage = acti.MensajeError;
+                    if (ErrorMessage.StartsWith("-1"))
                     {
-
+                        Function.BitacoraErrores("ActividadEconomica", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View();
+                        return View(tbActividadEconomica);
                     }
-                    if (Msj.StartsWith("-2"))
+                    if (ErrorMessage.StartsWith("-2"))
                     {
-
+                       
                         ModelState.AddModelError("", "Ya existe una Actividad Ecónomica con el mismo nombre.");
-                        return View();
+                        return View(tbActividadEconomica);
                     }
                     else
                     {
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
             }
-            return View();
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("ActividadEconomica", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbActividadEconomica);
+            }
+            return View(tbActividadEconomica);
         }
 
         // GET: ActividadEconomica/Edit/5
@@ -111,42 +109,41 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "acte_Id,acte_Descripcion,acte_UsuarioCrea,acte_FechaCrea,acte_UsuarioModifica,acte_FechaModifica")] tbActividadEconomica tbActividadEconomica)
         {
-            if (ModelState.IsValid)
-                if (db.tbActividadEconomica.Any(a => a.acte_Descripcion == tbActividadEconomica.acte_Descripcion && a.acte_Id != tbActividadEconomica.acte_Id))
+            string UserName = "";
+
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+
+                if (ModelState.IsValid)
+                    if (db.tbActividadEconomica.Any(a => a.acte_Descripcion == tbActividadEconomica.acte_Descripcion && a.acte_Id != tbActividadEconomica.acte_Id))
+                    {
+                        string Error = "Ya existe una Actividad Ecónomica con el mismo nombre.";
+                        Function.BitacoraErrores("ActividadEconomica", "EditPost", UserName, Error);
+                        ModelState.AddModelError("", Error);
+                        return View(tbActividadEconomica);
+                    }
+                IEnumerable<Object> List = null;
+                string ErrorMessage = "";
+                List = db.UDP_Gral_tbActividadEconomica_Update(tbActividadEconomica.acte_Id, tbActividadEconomica.acte_Descripcion, EmployeeID, Function.DatetimeNow());
+                foreach (UDP_Gral_tbActividadEconomica_Update_Result activ in List)
+                    ErrorMessage = activ.MensajeError;
+                if (ErrorMessage.StartsWith("-1"))
                 {
-                    ModelState.AddModelError("", "Ya existe una Actividad Ecónomica con el mismo nombre.");
+                    Function.BitacoraErrores("ActividadEconomica", "EditPost", UserName, ErrorMessage);
                     return View(tbActividadEconomica);
                 }
-            try
+                else
                 {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    string UserName = "";
-                    int UsId = function.GetUser(out UserName);
-
-                    tbActividadEconomica.acte_UsuarioModifica = UsId;
-                    List = db.UDP_Gral_tbActividadEconomica_Update(tbActividadEconomica.acte_Id, tbActividadEconomica.acte_Descripcion, UsId, function.DatetimeNow());
-                    foreach (UDP_Gral_tbActividadEconomica_Update_Result activ in List)
-                        Msj = activ.MensajeError;
-                    if (Msj.StartsWith("-1"))
-                    {
-
-                        return View();
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
+                    return RedirectToAction("Index");
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
-
-
-
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("ActividadEconomica", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbActividadEconomica);
+            }
             return View(tbActividadEconomica);
         }
 

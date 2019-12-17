@@ -15,29 +15,24 @@ namespace SIGEM_BIDSS.Controllers
     public class ParametroController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions functions = new GeneralFunctions();
+        GeneralFunctions Function = new GeneralFunctions();
         // GET: tbParametroes
         public ActionResult Index()
         {
-            var conteo = db.UDP_Conf_tbParametro_Count(1).ToList();
             var parametro = db.tbParametro.ToList();
-            int? par = 0;
-            byte? idparametro = 0;
-
-            foreach (UDP_Conf_tbParametro_Count_Result contarparametro in conteo)
-                par = contarparametro.Conteo;
-            foreach (tbParametro id in parametro)
-                idparametro = id.par_Id;
-            if (par > 0)
+            int count = db.tbParametro.Count();
+            int idPar = 0;
+            
+            if (count > 0)
             {
-                return RedirectToAction("Details/" + idparametro, "Parametro");
+                foreach (tbParametro id in parametro)
+                    idPar = id.par_Id;
+                return RedirectToAction("Details/" + idPar, "Parametro");
             }
             else
-            {
                 return RedirectToAction("Create", "Parametro");
-            }
         }
-    
+
 
         // GET: tbParametroes/Details/5
         public ActionResult Details(byte? id)
@@ -69,90 +64,87 @@ namespace SIGEM_BIDSS.Controllers
            HttpPostedFileBase FotoPath
            )
         {
-           
-            var path = "";
-            if (FotoPath == null)
-            {
-                TempData["smserror"] = "Imagen requerida.";
-                ViewBag.smserror = TempData["smserror"];
+            string UserName = "";
 
-                return View(tbParametro);
-            }
-            if (ModelState.IsValid)
-            {
 
-                try
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+                var path = "";
+                if (FotoPath == null)
+                    ModelState.AddModelError("par_PathLogo", "Imagen requerida.");
+
+                if (ModelState.IsValid)
                 {
                     if (FotoPath != null)
                     {
                         if (FotoPath.ContentLength > 0)
                         {
-                            if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
+                            if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png" || Path.GetExtension(FotoPath.FileName).ToLower() == ".jpeg")
                             {
                                 string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
-                                string Archivo = tbParametro.par_Id + Extension;
+                                string Archivo = "1" + Path.GetExtension(FotoPath.FileName).ToLower();
                                 path = Path.Combine(Server.MapPath("~/Content/img/"), Archivo);
                                 FotoPath.SaveAs(path);
                                 tbParametro.par_PathLogo = "~/Content/img/" + Archivo;
                             }
                             else
                             {
-                                ModelState.AddModelError("FotoPath", "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .jpg");
-
-                                return View("Index");
+                                ModelState.AddModelError("par_PathLogo", "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .jpg");
+                                return View(tbParametro);
                             }
                         }
                     }
 
                     IEnumerable<object> List = null;
                     var MsjError = "";
-                   
-                    List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo
+
+                    List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa.ToUpper(), tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo
                         );
                     foreach (UDP_Conf_tbParametro_Insert_Result parametro in List)
                         MsjError = parametro.MensajeError;
 
                     if (MsjError.StartsWith("-1"))
                     {
-
+                        Function.BitacoraErrores("Parametro", "CreatePost", UserName, MsjError);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbParametro);
                     }
                     else
                     {
-                        TempData["swalfunction"] = "true";
-                        return RedirectToAction("Index");
+                        TempData["swalfunction"] = GeneralFunctions._isCreated;
+                        return RedirectToAction("Details/"+ MsjError);
                     }
 
-
-                }
-                catch (DbEntityValidationException e)
-                {
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-
-                            ModelState.AddModelError("", ve.ErrorMessage.ToString() + " " + ve.PropertyName.ToString());
-                            return View("Index");
-                        }
-                    }
-                }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return RedirectToAction("Index");
                 }
                 {
+                    ModelState.AddModelError("par_PathLogo", "Imagen requerida.");
                     var errors = ModelState.Values.SelectMany(v => v.Errors);
                 }
-            }
 
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Function.BitacoraErrores("Parametro", "CreatePost", UserName, ve.ErrorMessage.ToString() + " " + ve.PropertyName.ToString());
+                        ModelState.AddModelError("", ve.ErrorMessage.ToString() + " " + ve.PropertyName.ToString());
+                        return View(tbParametro);
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Parametro", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbParametro);
+            }
             return View(tbParametro);
         }
-            // GET: tbParametroes/Edit/5
-            public ActionResult Edit(byte? id)
+        // GET: tbParametroes/Edit/5
+        public ActionResult Edit(byte? id)
         {
             if (id == null)
             {
@@ -176,68 +168,63 @@ namespace SIGEM_BIDSS.Controllers
 
         {
             var path = "";
-            var UsFoto = db.tbParametro.Select(s => new { s.par_Id, s.par_PathLogo }).Where(x => x.par_Id == tbParametro.par_Id).ToList();
-            if (UsFoto.Count() != 0 && UsFoto != null)
+            string UserName = "";
+            try
             {
-                for (int i = 0; i < UsFoto.Count(); i++)
-                    path = Convert.ToString(UsFoto[i].par_PathLogo);
-            }
-            if (ModelState.IsValid)
-            {
-                try
+                int EmployeeID = Function.GetUser(out UserName);
+                tbParametro vtbparametro = db.tbParametro.Find(id);
+                IEnumerable<object> List = null;
+                var MsjError = "";
+                if (ModelState.IsValid)
                 {
-                    tbParametro.par_PathLogo = path;
                     if (FotoPath != null)
                     {
                         if (FotoPath.ContentLength > 0)
                         {
-                            if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")
+                            if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png" || Path.GetExtension(FotoPath.FileName).ToLower() == ".jpeg")
                             {
                                 string Extension = Path.GetExtension(FotoPath.FileName).ToLower();
-                                string Archivo = tbParametro.par_Id + Extension;
+                                string Archivo = "1"+ Path.GetExtension(FotoPath.FileName).ToLower();
                                 path = Path.Combine(Server.MapPath("~/Content/img/"), Archivo);
                                 FotoPath.SaveAs(path);
                                 tbParametro.par_PathLogo = "~/Content/img/" + Archivo;
                             }
                             else
                             {
-                                if (path != null)
-                                    tbParametro.par_PathLogo = path;
-                                ModelState.AddModelError("FotoPath", "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .png ó .jpg");
+                                tbParametro.par_PathLogo = vtbparametro.par_PathLogo;
+                                ModelState.AddModelError("par_PathLogo", "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .png ó .jpg");
                                 return View(tbParametro);
                             }
                         }
                     }
-                    tbParametro vtbparametro = db.tbParametro.Find(id);
+                    
 
-                    IEnumerable<object> List = null;
-                    var MsjError = "";
-                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, tbParametro.par_NombreEmpresa, tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH,tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo);
+                    
+                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, tbParametro.par_NombreEmpresa.ToUpper(), tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo);
                     foreach (UDP_Conf_tbParametro_Update_Result parametro in List)
                         MsjError = parametro.MensajeError;
                     if (MsjError.StartsWith("-1"))
                     {
-
+                        Function.BitacoraErrores("Parametro", "EditPost", UserName, MsjError);
                         ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
                         return RedirectToAction("Edit/" + MsjError);
                     }
                     else
                     {
-                        return RedirectToAction("Index");
+                        TempData["swalfunction"] = GeneralFunctions._isEdited;
+                        return RedirectToAction("Details/" + MsjError);
                     }
                 }
-                catch (Exception Ex)
-                {
-
-                    ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
-                    return RedirectToAction("Index");
-                }
-               
+                tbParametro.par_PathLogo = vtbparametro.par_PathLogo;
+                return View(tbParametro);
+            }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("Parametro", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
+                return RedirectToAction("Index");
             }
 
-            if (path != null)
-                tbParametro.par_PathLogo = path;
-            return View(tbParametro);
         }
 
         protected override void Dispose(bool disposing)

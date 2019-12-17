@@ -38,6 +38,8 @@ namespace SIGEM_BIDSS.Models
         //Catalogos
         public const string _isCreated = "Created";
         public const string _isEdited = "Edited";
+        public const string _isDelete = "Delete";
+        public const string _isDependencia = "Dependencias";
 
 
 

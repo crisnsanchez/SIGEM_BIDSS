@@ -18,50 +18,35 @@ $(function () {
 
         Toast.fire({
             type: 'success',
-            title: 'Se ha guardado con Exito.'
+            title: 'Se ha guardado con Éxito.'
         })
     }
     else if (_Action == "Edited") {
         Toast.fire({
             type: 'success',
-            title: 'Se ha actualizado con Exito.'
+            title: 'Se ha actualizado con Éxito.'
         })
     }
-    else if (_Action == "Aceptada") {
+    else if (_Action == "Delete") {
         Toast.fire({
-            type: 'success',
-            title: 'Ha finalizado el estado con Exito.'
+            type: 'warning',
+            title: 'Se ha borrado con Éxito.'
+        })
+    }
+    else if (_Action == "Dependencias") {
+        Toast.fire({
+            type: 'warning',
+            title: 'Este municipio está siendo usado por otra tabla, no se puede Eliminar.'
         })
     }
     else if (_Action == "Rechazada") {
         Toast.fire({
             type: 'success',
-            title: 'Se ha rechazado con Exito.'
+            title: 'Se ha rechazado con Éxito.'
         })
     }
 
-
-    _Action = $('#Errror').val();
-    console.log(_Action)
-    if (_Action == "Delete") {
-        console.log("Verdadero")
-
-        Toast.fire({
-            type: 'danger',
-            title: 'El Municipio tiene dependencias.'
-        })
-    }
-    else if (_Action == "Edited") {
-        Toast.fire({
-            type: 'success',
-            title: 'Se ha actualizado con Exito.'
-        })
-    } else {
-        console.log("Falso")
-    }
-
-
-
+    
 
 
     //Inicializacion de el Datatable
