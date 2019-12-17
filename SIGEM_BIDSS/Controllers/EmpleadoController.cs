@@ -147,7 +147,7 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono," +
             "emp_CorreoElectronico, emp_EsJefe ,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,emp_Estado,emp_PathImage,mun_codigo,emp_UsuarioCrea,emp_FechaCrea," +
-            "emp_UsuarioModifica,emp_FechaModifica")] tbEmpleado tbEmpleado, HttpPostedFileBase FotoPath)
+            "emp_UsuarioModifica,emp_FechaModifica,est_Id")] tbEmpleado tbEmpleado, HttpPostedFileBase FotoPath)
         {
             ViewBag.muni = "true";
             tbEmpleado.emp_PathImage = "----";
@@ -166,17 +166,14 @@ namespace SIGEM_BIDSS.Controllers
                     TempData["smserror"] = "Imagen requerida.";
                     ViewBag.smserror = TempData["smserror"];
 
-
-                    ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                     ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                    ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                     ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                     ViewBag.emp_Sexo = new SelectList(Function.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
-
                     ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                     string _dep_Codigo = db.tbMunicipio.Where(x => x.mun_codigo == tbEmpleado.mun_codigo).Select(s => s.dep_codigo).FirstOrDefault();
                     ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", _dep_Codigo);
-                    Function.BitacoraErrores("Empleado", "CreatePost", UserName, TempData["smserror"].ToString());
                     return View(tbEmpleado);
 
                 }
@@ -199,13 +196,9 @@ namespace SIGEM_BIDSS.Controllers
                         else
                         {
                             string Error = "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .jpg";
-                            Function.BitacoraErrores("Empleado", "CreatePost", UserName, Error);
                             ModelState.AddModelError("FotoPath", Error);
                             return View("Index");
                         }
-
-
-
                     }
                 }
                 if (ModelState.IsValid)
@@ -222,39 +215,43 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         Function.BitacoraErrores("Empleado", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                         ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                        ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                         ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                         ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                         ViewBag.emp_Sexo = new SelectList(Function.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
-
                         ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                         string _dep_Codigo = db.tbMunicipio.Where(x => x.mun_codigo == tbEmpleado.mun_codigo).Select(s => s.dep_codigo).FirstOrDefault();
                         ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", _dep_Codigo);
-
                         return View(tbEmpleado);
                     }
                     else
                     {
+                        ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                        ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
+                        ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
+                        ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
+                        ViewBag.emp_Sexo = new SelectList(Function.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
+                        ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
+                        string _dep_Codigo = db.tbMunicipio.Where(x => x.mun_codigo == tbEmpleado.mun_codigo).Select(s => s.dep_codigo).FirstOrDefault();
+                        ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", _dep_Codigo);
                         TempData["swalfunction"] = "true";
-                        int id = tbEmpleado.emp_Id;
-                        //Session["Empleado"]=tbEmpleado.emp_Id;
-                        var result = new SueldoController().Create(id);
-                        return result;
+                        int id = Convert.ToInt32(ErrorMessage);
+                        Session["EmpID"] = ErrorMessage;
+                        return RedirectToAction("Create", "Sueldo");
                     }
                 }
                 else
                 {
-                
+
                     ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
+                    ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                     ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                     ViewBag.emp_Sexo = new SelectList(Function.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
-                    ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                     ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                     string _dep_Codigo = db.tbMunicipio.Where(x => x.mun_codigo == tbEmpleado.mun_codigo).Select(s => s.dep_codigo).FirstOrDefault();
                     ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", _dep_Codigo);
-
                     return View(tbEmpleado);
                 }
             }
@@ -267,7 +264,6 @@ namespace SIGEM_BIDSS.Controllers
                 ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                 ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);
                 ViewBag.emp_Sexo = new SelectList(Function.Sexo(), "ge_Id", "ge_Description", tbEmpleado.emp_Sexo);
-
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbEmpleado.est_Id);
                 string _dep_Codigo = db.tbMunicipio.Where(x => x.mun_codigo == tbEmpleado.mun_codigo).Select(s => s.dep_codigo).FirstOrDefault();
                 ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", _dep_Codigo);
@@ -372,7 +368,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 else
                 {
-                 
+
                     ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                     ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);
                     ViewBag.tps_Id = new SelectList(db.tbTipoSangre, "tps_Id", "tps_Descripcion", tbEmpleado.tps_Id);

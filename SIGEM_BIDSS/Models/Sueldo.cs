@@ -12,8 +12,6 @@ namespace SIGEM_BIDSS.Models
     public partial class tbSueldo
     {
      [NotMapped]
-
-
      public string NombreEmpleado { get; set; }
 
 

@@ -40,14 +40,20 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         // GET: Sueldo/Create
-        public ActionResult Create(int? id)
+        public ActionResult Create()
         {
-            tbEmpleado tbEmpleado = db.tbEmpleado.Find(id);
-            //tbSueldo.sue_Id = tbEmpleado.emp_Id;
-            //tbSueldo.NombreEmpleado = tbEmpleado.emp_Nombres +" "+ tbEmpleado.emp_Apellidos;
-            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
-            return View();
+
+            int id = Convert.ToInt32(Session["EmpID"]);
+            var _tbEmpleado = (from _tdemp in db.tbEmpleado 
+                               where _tdemp.emp_Id == id 
+                               select new {empId = _tdemp.emp_Id, Nombre = _tdemp.emp_Nombres + " " + _tdemp.emp_Apellidos }).FirstOrDefault();
+            tbSueldo tbSueldo = new tbSueldo
+            {
+                emp_Id = _tbEmpleado.empId,
+                NombreEmpleado = _tbEmpleado.Nombre
+            };
+            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
+            return View(tbSueldo);
         }
 
         // POST: Sueldo/Create
@@ -82,6 +88,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+                        Session["EmpID"] = null;
                         TempData["swalfunction"] = GeneralFunctions._isCreated;
                         return RedirectToAction("Index");
                     }
