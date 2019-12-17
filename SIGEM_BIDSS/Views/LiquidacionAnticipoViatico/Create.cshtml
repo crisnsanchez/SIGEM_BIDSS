@@ -31,7 +31,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Lianvi_FechaInicioViaje, "Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                          
+
                             @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger" })
                         </div>
@@ -64,16 +64,16 @@
                     </div>
                 </div>
 
-             
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                    </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
-    
+        </div>
+
     }
 
 
@@ -83,4 +83,5 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-<script src="~/Scripts/app/Solicitud/AnticipoViatico.js"></script>
+
+<script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>

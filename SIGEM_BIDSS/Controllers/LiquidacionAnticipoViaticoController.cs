@@ -13,6 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class LiquidacionAnticipoViaticoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
+        GeneralFunctions Function = new GeneralFunctions();
 
         // GET: LiquidacionAnticipoViatico
         public ActionResult Index()
@@ -53,18 +54,49 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.tbLiquidacionAnticipoViatico.Add(tbLiquidacionAnticipoViatico);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                string UserName = "";
+                try
+                {
+                    int EmployeeID = Function.GetUser(out UserName);
+                    IEnumerable<object> _List = null;
+                    string ErrorMessage = "";
+                    _List = db.UDP_Adm_tbLiquidacionAnticipoViatico_Insert(tbLiquidacionAnticipoViatico.Lianvi_Id, tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida, tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje, tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje, tbLiquidacionAnticipoViatico.Lianvi_Comentario, tbLiquidacionAnticipoViatico.est_Id, tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo, EmployeeID, Function.DatetimeNow());
+                    foreach (UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result Area in _List)
+                        ErrorMessage = Area.MensajeError;
+                    if (ErrorMessage.StartsWith("-1"))
+                    {
+                        Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorMessage);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View(tbLiquidacionAnticipoViatico);
+                    }
+                    if (ErrorMessage.StartsWith("-2"))
+                    {
 
-            ViewBag.Anvi_Id = new SelectList(db.tbAnticipoViatico, "Anvi_Id", "Anvi_Correlativo", tbLiquidacionAnticipoViatico.Anvi_Id);
-            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbLiquidacionAnticipoViatico.est_Id);
+                        ModelState.AddModelError("", "Ya existe un Área con el mismo nombre.");
+                        return View(tbLiquidacionAnticipoViatico);
+                    }
+                    else
+                    {
+
+                        TempData["swalfunction"] = "true";
+
+                        return RedirectToAction("Index");
+                    }
+
+                }
+
+
+                catch (Exception Ex)
+                {
+                    Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
+                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                    return View(tbLiquidacionAnticipoViatico);
+                }
+            }
             return View(tbLiquidacionAnticipoViatico);
         }
-
-        // GET: LiquidacionAnticipoViatico/Edit/5
-        public ActionResult Edit(int? id)
+// GET: LiquidacionAnticipoViatico/Edit/5
+public ActionResult Edit(int? id)
         {
             if (id == null)
             {
