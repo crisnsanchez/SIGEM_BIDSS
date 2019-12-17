@@ -227,6 +227,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+                        ViewBag.emp_Id = "True";
                         ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
                         ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
                         ViewBag.pto_Id = new SelectList(db.tbPuesto, "pto_Id", "pto_Descripcion", tbEmpleado.pto_Id);

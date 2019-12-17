@@ -86,3 +86,21 @@ $('#tpv_Descripcion').change(function () {
     $('#Viatico').hide();
 });
 
+//Mostrar Mensaje:Campo requerido en tiempo real
+$("#tps_Descripcion").change(function () {
+    var tps_Id= $("#tps_Descripcion").val();
+    if (tps_Id != '') {
+        $('#tps_IdRequered').text('');
+    }
+    else {
+        $('#tps_IdRequered').after('<p id="tps_IdRequered" style="color:red">Campo Descripción requerido</p>');
+    }
+});
+
+//borrar mensajes en tiempo real
+$("#tps_Descripcion").keyup(function () {
+    $('#tps_IdRequered').text('');
+    $('#tps_IdRequered').text('');
+    $('#tps_IdRequered').text('');
+    $('#tps_IdRequered  ').text('');
+});
