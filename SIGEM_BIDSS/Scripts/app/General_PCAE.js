@@ -1,5 +1,14 @@
-﻿//JS General para Pantallas Create y Edit
+﻿
 
+document.getElementById("Save").onclick = function () {
+    var txtObj = document.getElementById("");
+    txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
+    txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
+
+
+
+
+};
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
     $("input[type='text']", 'form').each(function () {
@@ -31,7 +40,6 @@ function soloLetras(e) {
     }
 }
 
-
 function soloLetrastIPOSANGRE(e) {
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toLowerCase();
@@ -56,33 +64,5 @@ function noespaciosincio(e) {
     e.value = valor;
 }
 
-$('#are_Descripcion').change(function () {
-    $('#areId').hide();
-});
-$('#est_Descripcion').change(function () {
-    $('#estId').hide();
-});
-$('#tmo_Nombre').change(function () {
-    $('#NombreMonedaId').hide();
-});
 
-$('#tmo_Abreviatura').change(function () {
-    $('#abreviatura').hide();
-});
-$('#tpsal_Descripcion').change(function () {
-    $('#salario').hide();
-});
-$('#tptran_Descripcion').change(function () {
-    $('#Transporte').hide();
-});
-$('#uni_Abreviatura').change(function () {
-    $('#Unidad').hide();
-});
-$('#tptran_Descripcion').change(function () {
-    $('#Medida').hide();
-});
-
-$('#tpv_Descripcion').change(function () {
-    $('#Viatico').hide();
-});
 

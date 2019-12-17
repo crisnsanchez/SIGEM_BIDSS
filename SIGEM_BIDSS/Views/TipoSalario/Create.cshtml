@@ -25,8 +25,6 @@
     #tpsal_Descripcion {
         text-transform: uppercase;
     }
-
-    
 </style>
 
 <div class="card card-primary card-outline">
@@ -53,7 +51,7 @@
                     @Html.LabelFor(model => model.tpsal_Descripcion, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.tpsal_Descripcion, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.tpsal_Descripcion, "", new { @class = "text-danger",@Id= "salario" })</p>
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.tpsal_Descripcion, "", new { @class = "text-danger", @Id = "salario" })</p>
                     </div>
                 </div>
                 <div class="form-group">
@@ -79,3 +77,10 @@
     <script src="~/Scripts/app/General_PCAE.js"></script>
 
 </div>
+
+<script>
+    $("#tpsal_Descripcion").keyup(function () {
+        $('#salario').hide();
+    });
+
+</script>
