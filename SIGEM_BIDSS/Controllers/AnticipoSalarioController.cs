@@ -57,6 +57,36 @@ namespace SIGEM_BIDSS.Controllers
         }
 
 
+        // GET: AnticipoSalario/Revisar
+        [HttpPost]
+        public JsonResult Revisar(int id, string Ansal_RazonRechazo)
+        {
+            var list = "";
+            string IsFor =  "false";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
+            if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Revisada, Ansal_RazonRechazo))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                    IsFor = "true";
+                }
+            }
+            if (tbAnticipoSalario == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(IsFor, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
         // GET: AnticipoSalario/Create
         public ActionResult Create()
         {
@@ -210,12 +240,13 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         // GET: AnticipoSalario/Approve/5
-        public ActionResult Approve(int? id)
+        [HttpPost]
+        public JsonResult Approve(int? id)
         {
+            var list = "";
             if (id == null)
             {
-
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
             }
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
@@ -227,12 +258,13 @@ namespace SIGEM_BIDSS.Controllers
             }
             if (tbAnticipoSalario == null)
             {
-                return HttpNotFound();
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("Index");
-        } // GET: AnticipoSalario/Approve/5
+            return Json(list, JsonRequestBehavior.AllowGet);
+        } 
+        
 
-      
+        // GET: AnticipoSalario/Approve/5   
         [HttpPost]
         public JsonResult Reject(int id, string Ansal_RazonRechazo)
         {

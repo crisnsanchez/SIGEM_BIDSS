@@ -921,7 +921,6 @@
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
     <Content Include="Scripts\app\Proveedor.js" />
-    <Content Include="Scripts\app\Solicitud.js" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
@@ -3168,12 +3167,11 @@
     <Content Include="Scripts\app\Departamento.js" />
     <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\app\Municipio.js" />
-    <Content Include="Scripts\app\Solicitud\AnticipoSalario.js" />
-    <Content Include="Scripts\app\Solicitud\AnticipoSalario\Details.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoSalario\AnticipoSalario.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoSalario\Modals.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
     <Content Include="Scripts\app\ValidacionesGenerales.js" />
-    <Content Include="Scripts\app\_AccionPersonal.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\template\plugins\.npmignore" />
@@ -3340,6 +3338,7 @@
     <Content Include="Views\Sueldo\Index.cshtml" />
     <Content Include="Views\Menu\Inventario.cshtml" />
     <Content Include="Views\Departamento\_LitsMunicipio.cshtml" />
+    <Content Include="Views\AnticipoSalario\_Modales.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

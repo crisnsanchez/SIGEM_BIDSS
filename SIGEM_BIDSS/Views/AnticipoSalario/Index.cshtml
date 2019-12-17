@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<SIGEM_BIDSS.Models.tbAnticipoSalario>
-
+@using SIGEM_BIDSS.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+
 <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -50,7 +52,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr data-id="@item.Ansal_Id">
                         <td>
                             @Html.DisplayFor(modelItem => item.Ansal_Correlativo)
                         </td>
@@ -73,6 +75,18 @@
                             @Html.DisplayFor(modelItem => item.tbTipoSalario.tpsal_Descripcion)
                         </td>
                         <td>
+                            @{
+                                if (item.est_Id == GeneralFunctions.Enviada || item.est_Id == GeneralFunctions.Revisada)
+                                {
+                                    <input type="button" id="Approve" class="btn btn-primary  btn-xs" value="Aprobar" />
+                                    <input type="button" id="Reject" class="btn btn-danger  btn-xs" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                                }
+                                else
+                                {
+                                    <input disabled type="button"class="btn btn-primary  btn-xs" value="Aprobar" />
+                                    <input disabled type="button" class="btn btn-danger  btn-xs" value="Rechazar" />
+                                }
+                            }
                             @Html.ActionLink("Detalles", "Details", new { id = item.Ansal_Id }, new { @class = "btn btn-default btn-xs" })
                         </td>
                     </tr>
@@ -83,6 +97,13 @@
     </div>
 </div>
 
+
+
+@Html.Partial("_Modales")
+
+
+
+
 @section Scripts {
 
 
@@ -92,9 +113,7 @@
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
-
     <script src="~/Scripts/app/DataTables.js"></script>
-
-
+    <script src="~/Scripts/app/Solicitud/AnticipoSalario/Modals.js"></script>
 
 }

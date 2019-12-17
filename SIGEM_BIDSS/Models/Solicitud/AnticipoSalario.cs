@@ -20,7 +20,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "ID")]
         public int Ansal_Id { get; set; }
 
-        [Display(Name = "Código")]
+        [Display(Name = "Correlativo")]
         public string Ansal_Correlativo { get; set; }
 
         [Display(Name = "Empleado")]

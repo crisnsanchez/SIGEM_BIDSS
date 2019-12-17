@@ -11,7 +11,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-upload mr-1"></i>
-            Crear Empleado
+           Solicitud Anticipo de Salario
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -31,6 +31,23 @@
                         @Html.DisplayFor(model => model.Ansal_Correlativo)
                     </dd>
 
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Apellidos)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
+                    </dd>
+
                     <dt>
                         @Html.DisplayNameFor(model => model.Ansal_GralFechaSolicitud)
                     </dt>
@@ -39,7 +56,7 @@
                         @Html.DisplayFor(model => model.Ansal_GralFechaSolicitud)
                     </dd>
                     <dt>
-                        @Html.DisplayNameFor(model => model.tbTipoSalario.tpsal_Descripcion)
+                        @Html.DisplayNameFor(model => model.tpsal_id)
                     </dt>
 
                     <dd>
@@ -70,42 +87,29 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_RazonRechazo)
-                    </dd>
-
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres)
-                    </dd>
-
-                    <dt>
                         @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
                     </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
                     </dd>
+                    @if (Model.est_Id == GeneralFunctions.Rechazada)
+                    {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Ansal_RazonRechazo)
+                        </dd>
+                    }
                     <dt>
                         @Html.DisplayNameFor(model => model.Ansal_UsuarioCrea)
                     </dt>
+
                     <dd>
-                        @Html.DisplayFor(model => model.Ansal_UsuarioCrea)
+                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
+
                     </dd>
 
                     <dt>
@@ -121,7 +125,7 @@
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.Ansal_UsuarioModifica)
+                        @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado1.emp_Apellidos)
                     </dd>
 
                     <dt>
@@ -135,12 +139,15 @@
                 </dl>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        @{
-                            if (Model.est_Id == GeneralFunctions.Enviada || Model.est_Id == GeneralFunctions.Revisada  )
-                            {
-                                <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
-                                <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
-                            }
+                        @if (Model.est_Id == GeneralFunctions.Enviada || Model.est_Id == GeneralFunctions.Revisada)
+                        {
+                            <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                            <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                        }
+                        else
+                        {
+                            <input disabled type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                            <input disabled type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
                         }
                         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                     </div>
@@ -150,62 +157,12 @@
     </div>
 </div>
 
+@Html.Partial("_Modales")
 
 
-<div class="modal fade" id="ModalApprove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">¿Está seguro que desea aprobar la solicitud?</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5 class="control-label col-md-8 required"></h5>
-                <div class="form-group">
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                @{
-                    @Html.ActionLink("Aprobar", "Approve", new { id = Model.Ansal_Id }, new { @class = "btn btn-primary" })
-                }
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="ModalReject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"> ¿Está seguro que desea rechazar la solicitud?</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5 class="control-label col-md-8 required"></h5>
-                <div class="form-group">
-                    <p class="col-form-label" id="">
-                        Razon de Rechazo
-                    </p>
-                    <textarea id="RazonRechazo" class="form-control normalize"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-              
-                <button class="btn btn-danger" type="button" id="_ModalReject">Rechazar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script src="~/Scripts/app/General_Details.js"></script>
-    <script src="~/Scripts/app/Solicitud/AnticipoSalario/Details.js"></script>
+    <script src="~/Scripts/app/Solicitud/AnticipoSalario/Modals.js"></script>
 }

@@ -14,7 +14,7 @@ $(function () {
     if (_Action == "Revisada") {
         Toast.fire({
             type: 'success',
-            title: 'Se ha actualizado el estado con Exito.'
+            title: 'Solicitud Revisada.'
         })
     }
     else if (_Action == "Edited") {

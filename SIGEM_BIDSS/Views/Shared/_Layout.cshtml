@@ -17,7 +17,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" onload="deshabilitaRetroceso()">
     <div class="wrapper">
         @Html.Partial("_TopNavbar")
 
@@ -49,6 +49,12 @@
 
     <!-- SweetAlert2 -->
     @Scripts.Render("~/Scripts/sweetalert2")
-
+    <script>
+        function deshabilitaRetroceso() {
+            window.location.hash = "no-back-button";
+            window.location.hash = "Again-No-back-button" //chrome
+            window.onhashchange = function () { window.location.hash = "no-back-button"; }
+        }
+    </script>
 </body>
 </html>
