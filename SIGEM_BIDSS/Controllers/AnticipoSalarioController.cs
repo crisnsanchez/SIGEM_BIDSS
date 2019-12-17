@@ -68,7 +68,7 @@ namespace SIGEM_BIDSS.Controllers
                 return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
             }
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
-            if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
+            if (tbAnticipoSalario.est_Id == GeneralFunctions.Enviada)
             {
                 if (UpdateState(tbAnticipoSalario, GeneralFunctions.Revisada, Ansal_RazonRechazo))
                 {
