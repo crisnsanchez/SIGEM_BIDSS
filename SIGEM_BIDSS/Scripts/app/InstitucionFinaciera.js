@@ -14,3 +14,16 @@ document.getElementById('insf_Correo').addEventListener('input', function () {
         $('#insf_Correo').addClass('is-invalid');
     }
 });
+
+
+
+$('#insf_Nombre').change(function () {
+    $('#Nombres').hide();
+});
+
+$('#insf_Contacto').change(function () {
+    $('#Contacto').hide();
+});
+$('#insf_Telefono').change(function () {
+    $('#Telefono').hide();
+});
