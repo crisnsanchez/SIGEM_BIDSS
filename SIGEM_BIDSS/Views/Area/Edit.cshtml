@@ -74,11 +74,19 @@
         </div>
     }
 </div>
-@section Scripts {
-    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-   
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 
-    <script src="~/Scripts/app/General_PCAE.js"></script>
 
-}
 
+<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+<script src="~/Scripts/app/General_PCAE.js"></script>
+
+<script>
+    $("#are_Descripcion").keyup(function () {
+        $('#areId').hide();
+    });
+
+</script>

@@ -1,6 +1,4 @@
-﻿
-
-/////DATE PICKER
+﻿/////DATE PICKER
 $('#emp_FechaNacimiento,#emp_FechaIngreso').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1990",
@@ -12,7 +10,7 @@ $('#emp_FechaNacimiento,#emp_FechaIngreso').datepicker({
 
 function soloLetras(e) {
     tecla = (document.all) ? e.keyCode : e.which;
-    tecla = String.fromCharCode(tecla)
+    tecla = String.fromCharCode(tecla);
     return /^[a-zA-ZáéíóúñÁÉÍÓÚÑ ]+$/.test(tecla);
 }
 
@@ -21,7 +19,7 @@ function soloLetras(e) {
 function soloNumeros(e) {
 
         tecla = (document.all) ? e.keyCode : e.which;
-        tecla = String.fromCharCode(tecla)
+    tecla = String.fromCharCode(tecla);
         return /^[0-9]+$/.test(tecla);
 }
 
@@ -42,9 +40,9 @@ $(document).ready(function () {
 
 
     var muni = $('#municipios').val();
-    if (muni == "true") { GetMunicipios() } else { console.log(muni); }
+    if (muni === "true") { GetMunicipios(); } else { console.log(muni); }
     var are = $('#municipios').val();
-    if (are == "true") { GetMunicipios() } else { console.log(are); }
+    if (are === "true") { GetMunicipios(); } else { console.log(are); }
 
 })
     
@@ -57,17 +55,17 @@ function readURL(input) {
 
         reader.onload = function (e) {
             const maxLength = 2000000
-            console.log(e.loaded + "" + e.total)
-            console.log(e)
+            console.log(e.loaded + "" + e.total);
+            console.log(e);
             if (e.loaded < maxLength) {
-                document.getElementById('ImageLength').innerText = ""
+                document.getElementById('ImageLength').innerText = "";
                 $('#imgpreview').attr('src', e.target.result);
             }
             else {
                 $('#imgpreview').attr('src',"../../Content/img/descarga.jpg");
-                document.getElementById('lblCargarFoto').innerText = ""
-                document.getElementById('CargarFoto').value = ""
-                document.getElementById('ImageLength').innerText = "Limite Excedido"
+                document.getElementById('lblCargarFoto').innerText = "";
+                document.getElementById('CargarFoto').value = "";
+                document.getElementById('ImageLength').innerText = "Limite Excedido";
             }
         }
         reader.readAsDataURL(input.files[0]);
@@ -88,7 +86,6 @@ $(document).on("change", "#dep_Codigo", function () {
 function GetMunicipios() {
     var CodDepartamento = $('#dep_Codigo').val(),
         _selectedMun = $('#selectedMun').val();
-    console.log(CodDepartamento)
     $.ajax({
         url: "/Empleado/GetMunicipios",
         method: "POST",
@@ -100,19 +97,18 @@ function GetMunicipios() {
             $('#municipio').show();
             if (data.length > 0) {
                 $('#mun_codigo').empty();
-                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
+                $('#mun_codigo').append("<option value=''>Seleccione</option>");
                 $.each(data, function (key, val) {
                     $('#mun_codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
                 });
-                console.log(data)
                 $('#mun_codigo').trigger("chosen:updated");
-                if (_selectedMun != null || _selectedMun != "") {
+                if (_selectedMun !== null || _selectedMun !== "") {
                     $("#mun_codigo option[value='" + _selectedMun + "']").attr("selected", true);
-                } else { console.log("No es") }
+                } else { console.log("No es"); }
             }
             else {
                 $('#mun_codigo').empty();
-                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
+                $('#mun_codigo').append("<option value=''>Seleccione</option>");
             }
         });
 
@@ -124,8 +120,7 @@ $(document).on("change", "#are_Id", function () {
 });
 
 function Getpuesto() {
-    var are_Id = $('#are_Id').val()
-    console.log(are_Id)
+    var are_Id = $('#are_Id').val();
     $.ajax({
         url: "/Empleado/Getpuesto",
         method: "POST",
@@ -137,17 +132,15 @@ function Getpuesto() {
            
             if (data.length > 0) {
                 $('#pto_Id').empty();
-                $('#pto_Id').append("<option value=''>Seleccione Puesto</option>");
+                $('#pto_Id').append("<option value=''>Seleccione</option>");
                 $.each(data, function (key, val) {
                     $('#pto_Id').append("<option value=" + val.pto_Id + ">" + val.pto_Descripcion + "</option>");
                 });
-                console.log(data)
                 $('#pto_Id').trigger("chosen:updated");
-          
             }
             else {
                 $('#pto_Id').empty();
-                $('#pto_Id').append("<option value=''>Seleccione Puesto</option>");
+                $('#pto_Id').append("<option value=''>Seleccione</option>");
             }
         });
 

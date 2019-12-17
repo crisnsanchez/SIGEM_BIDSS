@@ -715,6 +715,17 @@
           <Parameter Name="Anvi_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="Anvi_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="Anvi_Id" Type="int" Mode="In" />
+          <Parameter Name="Lianvi_FechaLiquida" Type="datetime" Mode="In" />
+          <Parameter Name="Lianvi_FechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="Lianvi_FechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="Lianvi_Comentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="Lianvi_RazonRechazo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lianvi_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="Lianvi_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Conf_tbParametro_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Conf">
           <Parameter Name="conteo" Type="int" Mode="In" />
         </Function>
@@ -2002,6 +2013,17 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result)">
+            <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_FechaLiquida" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Lianvi_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -2877,6 +2899,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3627,6 +3652,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
