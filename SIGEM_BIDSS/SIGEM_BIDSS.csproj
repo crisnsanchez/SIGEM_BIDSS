@@ -220,6 +220,9 @@
     <Compile Include="Models\tbLiquidacionAnticipoViatico.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Unidadmedida.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\DeduccionInstitucionFinanciera.cs" />
@@ -3177,6 +3180,7 @@
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\Modals.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
+    <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\ValidacionesGenerales.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
