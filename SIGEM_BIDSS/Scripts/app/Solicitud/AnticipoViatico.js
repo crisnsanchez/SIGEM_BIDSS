@@ -15,7 +15,6 @@ $(document).ready(function () {
     $('#Anvi_GralFechaSolicitud').val(GetTodayDate());
     var CodDepartamento = $('#dep_codigo').val();
     var muncod = $('#munCodigo').val();
-    console.log("muncod", muncod);
     if (CodDepartamento !== "") {
         $.ajax({
             url: "/AnticipoViatico/GetMunicipios",
@@ -48,6 +47,24 @@ $(document).ready(function () {
             });
     }
 });
+
+//Funcion no aceptar espacios en el textbox
+document.addEventListener("input", function () {
+    $("input[type='text']", 'form').each(function () {
+        _id = $(this).attr("id");
+        _value = document.getElementById(_id).value;
+        document.getElementById(_id).value = _value.trimStart();
+    });
+
+    $("textarea").each(function () {
+        _id = $(this).attr("id");
+        console.log("Hi:", _id);
+    });
+    
+});
+
+
+//
 
 $("#btnAutorizacion").click(function () {
     Formulario={
@@ -162,3 +179,45 @@ $("#frmAnticipoViatico").submit(function (event) {
         $("#AutorizacionModal").modal();
      }
 });
+
+//Quitar mensajes de error cuando el valor cambia
+//DropdownList
+$("#Anvi_JefeInmediato").change(function () {
+    var JefeInmediato = $("#Anvi_JefeInmediato").val();
+    if (JefeInmediato !== "") {
+        $("#JefeInmediato").text("");
+    }
+});
+
+$("#dep_codigo").change(function () {
+    var UsuarioCrea = $("#dep_codigo").val();
+    if (UsuarioCrea !== "") {
+        $("#UsuarioCrea").text("");
+    }
+});
+
+$("#mun_Codigo").change(function () {
+    var CodigoMun = $("#mun_Codigo").val();
+    if (CodigoMun !== "") {
+        $("#CodigoMun").text("");
+    }
+});
+
+$("#Anvi_tptran_Id").change(function () {
+    var tptran_Id = $("#Anvi_tptran_Id").val();
+    if (tptran_Id !== "") {
+        $("#tptran_Id").text("");
+    }
+});
+
+//Textbox
+$("#Anvi_Cliente").change(function () {
+    var Cliente = $("#Anvi_Cliente").val();
+    if (Cliente !== "") {
+        $("#Cliente").text("");
+    }
+});
+
+
+
+

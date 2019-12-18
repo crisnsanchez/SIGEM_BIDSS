@@ -147,27 +147,36 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
-                if (db.tbTipoPermiso.Any(a => a.tperm_Descripcion == tbTipoPermiso.tperm_Descripcion && a.tperm_Id != tbTipoPermiso.tperm_Id))
+
+                if (ModelState.IsValid)
                 {
-                    ModelState.AddModelError("", "Ya existe un Permiso con el mismo nombre.");
-                    return View(tbTipoPermiso);
+                    if (db.tbTipoPermiso.Any(a => a.tperm_Descripcion == tbTipoPermiso.tperm_Descripcion && a.tperm_Id != tbTipoPermiso.tperm_Id))
+                    {
+                        ModelState.AddModelError("", "Ya existe un Tipo de Permiso con el mismo nombre.");
+                        return View(tbTipoPermiso);
+                    }
+
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Gral_tbTipoPermiso_Update(tbTipoPermiso.tperm_Id, tbTipoPermiso.tperm_Descripcion, EmployeeID);
+                    foreach (UDP_Gral_tbTipoPermiso_Update_Result permis in List)
+                        Msj = permis.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        Function.BitacoraErrores("TipoPermiso", "EditPost", UserName, Msj);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        return View();
+                    }
+
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+
                 }
-                IEnumerable<Object> List = null;
-                string Msj = "";
-                List = db.UDP_Gral_tbTipoPermiso_Update(tbTipoPermiso.tperm_Id,tbTipoPermiso.tperm_Descripcion, EmployeeID);
-                foreach (UDP_Gral_tbTipoPermiso_Update_Result Moneda in List)
-                    Msj = Moneda.MensajeError;
-                if (Msj.StartsWith("-1"))
-                {
-                    Function.BitacoraErrores("TipoPermiso", "EditPost", UserName, Msj);
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+                return View(tbTipoPermiso);
             }
+
             catch (Exception Ex)
             {
                 Function.BitacoraErrores("TipoPermiso", "EditPost", UserName, Ex.Message.ToString());

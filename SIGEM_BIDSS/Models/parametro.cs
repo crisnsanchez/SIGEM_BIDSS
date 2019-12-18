@@ -17,7 +17,7 @@ namespace SIGEM_BIDSS.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string par_NombreEmpresa { get; set; }
 
-        [Display(Name = "Telefono de la Empresa")]
+        [Display(Name = "Teléfono de la Empresa")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string par_TelefonoEmpresa { get; set; }
 

@@ -144,7 +144,7 @@ namespace SIGEM_BIDSS.Controllers
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 return View(tbActividadEconomica);
             }
-            return View(tbActividadEconomica);
+           
         }
 
         // GET: ActividadEconomica/Delete/5
