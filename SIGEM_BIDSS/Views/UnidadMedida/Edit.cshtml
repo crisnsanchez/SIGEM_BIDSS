@@ -87,5 +87,14 @@
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
     <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
     <script src="~/Scripts/app/General_PCAE.js"></script>
+    <script>
+        $("#uni_Descripcion").keyup(function () {
+            $('#Medida').hide();
+        });
 
+        $("#uni_Abreviatura").keyup(function () {
+            $('#Unidad').hide();
+        });
+
+    </script>
 }
