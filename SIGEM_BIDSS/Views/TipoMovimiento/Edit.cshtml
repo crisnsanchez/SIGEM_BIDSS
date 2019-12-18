@@ -50,7 +50,7 @@
                                     @Html.LabelFor(model => model.tipmo_Movimiento, htmlAttributes: new { @class = "control-label col-md-6" })
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.tipmo_Movimiento, new { htmlAttributes = new { @class = "form-control", maxlength = "25", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                                        @Html.ValidationMessageFor(model => model.tipmo_Movimiento, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.tipmo_Movimiento, "", new { @class = "text-danger" , id = "descrip" })
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -71,7 +71,19 @@
     </div>
 
 }
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 
 
-@section Scripts {
-}
+
+<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+<script src="~/Scripts/app/General_PCAE.js"></script>
+<script>
+    $("#tipmo_Movimiento").keyup(function () {
+        $('#descrip').hide();
+    });
+
+</script>
+
