@@ -29,13 +29,13 @@
         <div class="form-horizontal">
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-             
+
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Lianvi_FechaLiquida, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Lianvi_FechaLiquida, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Lianvi_FechaLiquida, new { htmlAttributes = new { @class = "form-control" ,, @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaLiquida, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Lianvi_FechaFinViaje, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control",, @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         @Html.LabelFor(model => model.Lianvi_FechaInicioViaje, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
 
-                            @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Lianvi_Comentario, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Lianvi_Comentario, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Lianvi_Comentario, new { htmlAttributes = new { @class = "form-control", @maxlength = "250", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @style = "text-transform:uppercase;", @onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_Comentario, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -110,3 +110,11 @@
 <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
 
 <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
+
+
+<script>
+    $("#Lianvi_FechaLiquida").keyup(function () {
+        $('#estId').hide();
+    });
+
+</script>
