@@ -85,7 +85,7 @@ $(document).on("change", "#dep_codigo", function () {
 $(document).ready(function () {
 
     var CodDepartamento = $('#dep_codigo').val();
-    var muncod = $('#munCodigo').val();
+    var muncod = $('#munid').val();
     console.log("muncod", muncod);
     if (CodDepartamento !== "") {
         $.ajax({

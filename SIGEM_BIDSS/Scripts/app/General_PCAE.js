@@ -1,14 +1,9 @@
 ﻿
 
-document.getElementById("Save").onclick = function () {
-    var txtObj = document.getElementById("");
-    txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
-    txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 
 
 
 
-};
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
     $("input[type='text']", 'form').each(function () {

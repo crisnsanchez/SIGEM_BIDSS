@@ -143,9 +143,12 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
-            ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
-            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+
+
+            ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion",tbProveedor.acte_Id);
+            ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbProveedor.mun_codigo);
+            string depCod = (from _dep in db.tbMunicipio where _dep.mun_codigo == tbProveedor.mun_codigo select _dep.dep_codigo).FirstOrDefault();
+            ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", depCod);
             return View(tbProveedor);
         }
 
@@ -169,6 +172,7 @@ namespace SIGEM_BIDSS.Controllers
                 int EmployeeID = Function.GetUser(out UserName);
 
                 ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
+                ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
                 ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
                 ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
                 IEnumerable<Object> List = null;
@@ -191,6 +195,7 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
                     ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
                     ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+                    ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
                     return View(tbProveedor);
                 }
                 else
