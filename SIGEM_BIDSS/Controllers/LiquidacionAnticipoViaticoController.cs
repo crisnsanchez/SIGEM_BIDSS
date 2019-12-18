@@ -18,8 +18,8 @@ namespace SIGEM_BIDSS.Controllers
         // GET: LiquidacionAnticipoViatico
         public ActionResult Index()
         {
-            var tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Include(t => t.tbAnticipoViatico).Include(t => t.tbEstado);
-            return View(tbLiquidacionAnticipoViatico.ToList());
+            var tbAnticipoViatico = db.tbAnticipoViatico.Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMunicipio).Include(t => t.tbTipoTransporte);
+            return View(tbAnticipoViatico.ToList());
         }
 
         // GET: LiquidacionAnticipoViatico/Details/5
@@ -38,7 +38,7 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         // GET: LiquidacionAnticipoViatico/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
             ViewBag.Anvi_Id = new SelectList(db.tbAnticipoViatico, "Anvi_Id", "Anvi_Correlativo");
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
