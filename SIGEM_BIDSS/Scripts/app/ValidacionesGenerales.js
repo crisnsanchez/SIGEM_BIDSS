@@ -23,3 +23,5 @@ function soloNumeros(e) {
     return /^[0-9]+$/.test(tecla);
 }
 
+/// Valores monetarios
+
