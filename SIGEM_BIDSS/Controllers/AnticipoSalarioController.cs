@@ -102,7 +102,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Ansal_Id,Ansal_Correlativo,emp_Id,Ansal_JefeInmediato,Ansal_GralFechaSolicitud,Ansal_MontoSolicitado,tpsal_id,Ansal_Justificacion,Ansal_Comentario,est_Id,Ansal_RazonRechazo,Ansal_UsuarioCrea,Ansal_FechaCrea")] tbAnticipoSalario tbAnticipoSalario)
+        public ActionResult Create([Bind(Include = "Ansal_Id,Ansal_Correlativo,emp_Id,Ansal_JefeInmediato,Ansal_GralFechaSolicitud,Ansal_MontoSolicitado,tpsal_id,Ansal_Justificacion,Ansal_Comentario,est_Id,Ansal_RazonRechazo")] tbAnticipoSalario tbAnticipoSalario)
         {
             string UserName = "",
                 ErrorEmail = "";
@@ -180,7 +180,6 @@ namespace SIGEM_BIDSS.Controllers
                 bool Result = false;
                 int EmployeeID = Function.GetUser(out UserName);
                 tbAnticipoSalario.emp_Id = EmployeeID;
-                tbAnticipoSalario.Ansal_GralFechaSolicitud = Function.DatetimeNow();
                 tbAnticipoSalario.est_Id = State;
                 tbAnticipoSalario.Ansal_RazonRechazo = Ansal_RazonRechazo;
 
@@ -190,7 +189,7 @@ namespace SIGEM_BIDSS.Controllers
                 Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
                                                             EmployeeID,
                                                             tbAnticipoSalario.Ansal_JefeInmediato,
-                                                            Function.DatetimeNow(),
+                                                            tbAnticipoSalario.Ansal_GralFechaSolicitud,
                                                             tbAnticipoSalario.Ansal_MontoSolicitado,
                                                             tbAnticipoSalario.tpsal_id,
                                                             tbAnticipoSalario.Ansal_Justificacion,
@@ -228,13 +227,13 @@ namespace SIGEM_BIDSS.Controllers
                     if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
                     Result = Function.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject+" "+ Ansal_RazonRechazo);
 
-                    if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                    if (!Result) Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
+                Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
                 return false;
             }
         }

@@ -113,7 +113,10 @@
                                     <div class="col-auto">
                                         @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
                                         <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; style="text-transform:uppercase;" maxlength="100" autocomplete="off" />
-                                        @Html.ValidationMessageFor(m => Municipio.mun_nombre)
+                                        <div id="editerror">
+                                            @Html.ValidationMessageFor(m => Municipio.mun_nombre)
+                                        </div>
+                                       
                                     </div>
 
                                 </div>
@@ -134,13 +137,14 @@
     </div>
     @section Scripts {
         <!-- Bootstrap 4 -->
+           <script src="~/Scripts/jquery-3.3.1.min.js"></script>
         <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- DataTables -->
         <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
         <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
         <!-- AdminLTE App -->
         <script src="~/Content/template/dist/js/adminlte.min.js"></script>
-        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+     
         <script src="~/Scripts/app/General.js"></script>
         <script src="~/Scripts/app/Departamento.js"></script>
 

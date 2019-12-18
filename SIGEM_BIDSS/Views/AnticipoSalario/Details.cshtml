@@ -11,7 +11,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-upload mr-1"></i>
-           Solicitud Anticipo de Salario
+            Solicitud Anticipo de Salario
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -21,140 +21,112 @@
     </div>
     <div class="form-horizontal">
         <div class="card-body">
-            <div>
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.HiddenFor(model => model.Ansal_Id)
-                        @Html.DisplayNameFor(model => model.Ansal_Correlativo)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_Correlativo)
-                    </dd>
-
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Apellidos)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_GralFechaSolicitud)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_GralFechaSolicitud)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tpsal_id)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbTipoSalario.tpsal_Descripcion)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_MontoSolicitado)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_MontoSolicitado)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_Justificacion)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_Justificacion)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_Comentario)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_Comentario)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-                    </dd>
-                    @if (Model.est_Id == GeneralFunctions.Rechazada)
-                    {
+            @Html.HiddenFor(model => model.Ansal_Id)
+            <dl class="form-row">
+                    <div class="form-group col-md-3">
                         <dt>
-                            @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
+                            @Html.DisplayNameFor(model => model.Ansal_Correlativo)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ansal_Correlativo)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres) Y  @Html.DisplayNameFor(model => model.tbEmpleado.emp_Apellidos)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.Ansal_RazonRechazo)
+                            @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
                         </dd>
-                    }
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_UsuarioCrea)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
-
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_FechaCrea)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_FechaCrea)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_UsuarioModifica)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado1.emp_Apellidos)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_FechaModifica)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_FechaModifica)
-                    </dd>
-
-                </dl>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        @if (Model.est_Id == GeneralFunctions.Enviada || Model.est_Id == GeneralFunctions.Revisada)
-                        {
-                            <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
-                            <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
-                        }
-                        else
-                        {
-                            <input disabled type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
-                            <input disabled type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
-                        }
-                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ansal_GralFechaSolicitud)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ansal_GralFechaSolicitud)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.tpsal_id)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.tbTipoSalario.tpsal_Descripcion)
+                        </dd>
                     </div>
+                    <div class="form-group col-md-3">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ansal_MontoSolicitado)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ansal_MontoSolicitado)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ansal_Justificacion)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ansal_Justificacion)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ansal_Comentario)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ansal_Comentario)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.est_Id)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+                        </dd>
+                    </div>
+                    <div class="form-group col-md-3">
+                        @if (Model.est_Id == GeneralFunctions.Rechazada)
+                        {
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Ansal_RazonRechazo)
+                            </dd>
+                        }
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ansal_UsuarioCrea)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ansal_FechaCrea)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Ansal_FechaCrea)
+                        </dd>
+
+                    </div>
+            </dl>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @if (Model.est_Id == GeneralFunctions.Enviada || Model.est_Id == GeneralFunctions.Revisada)
+                    {
+                        <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                        <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                    }
+                    else
+                    {
+                        <input disabled type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                        <input disabled type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                    }
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
         </div>
+           
+          
+          
+        </div>
     </div>
+</div>
 </div>
 
 @Html.Partial("_Modales")

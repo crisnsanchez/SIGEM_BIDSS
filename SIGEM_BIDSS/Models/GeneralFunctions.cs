@@ -90,6 +90,9 @@ namespace SIGEM_BIDSS.Models
         public const bool instfinDenegar = false;
         public const bool instfinAceptar = true;
 
+        public const bool Activo = true;
+        public const bool Inactivo = false;
+
         public int GetUser(out string UserName)
         {
             string email = "";

@@ -3354,8 +3354,8 @@
     <Content Include="Views\LiquidacionAnticipoViatico\Delete.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViatico\Details.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViatico\Edit.cshtml" />
-    <Content Include="Views\LiquidacionAnticipoViatico\Index.cshtml" />
     <Content Include="Views\AnticipoSalario\_Modales.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

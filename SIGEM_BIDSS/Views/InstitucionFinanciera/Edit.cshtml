@@ -5,40 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-<style>
-    .validation-error {
-        color: red;
-        font-size: small;
-    }
-
-    .validation-summary-errors {
-        color: red;
-        font-size: small;
-    }
-
-    .required:after {
-        content: "*";
-        font-weight: bold;
-        color: red;
-    }
-
-    #insf_Contacto {
-        text-transform: uppercase;
-    }
-
-    #insf_Nombre {
-        text-transform: uppercase;
-    }
-</style>
-
-
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-refresh mr-1"></i>
-            Editar Institución Finaciera
+            Editar Institución Financiera
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -49,6 +20,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.insf_Id)
 
         <div class="form-horizontal">
             <div class="card-body">
@@ -60,14 +32,14 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.insf_Nombre, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.insf_Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.insf_Nombre, "", new { @class = "text-danger", @Id = "Nombres" })</p>
+                        @Html.EditorFor(model => model.insf_Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "100", autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
+                        <p style="color:red">@Html.ValidationMessageFor(model => model.insf_Nombre, "", new { @class = "text-danger", @Id = "nombre" })</p>
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", @onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                        @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                         <p style="color:red">@Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @Id = "Contacto" }) </p>
                     </div>
                 </div>
@@ -78,48 +50,60 @@
                         @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @Id = "Telefono" })
                     </div>
                 </div>
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", maxlength = "50" } })
-                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger" })</p>
+                        @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", id = "correo" })</p>
                     </div>
                 </div>
-
-
-
-
                 <div class="form-group">
-                    <div class="col-md-offset-4 col-md-10">
+                    <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
                         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                     </div>
                 </div>
             </div>
-            </div>
-
-
         </div>
     }
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 
 
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+<script src="~/Scripts/app/General_PCAE.js"></script>
+<script src="~/Scripts/app/InstitucionFinaciera.js"></script>
+
+<script>
+    $("#insf_Nombre").keyup(function () {
+        $('#nombre').hide();
+    });
+
+    $("#insf_Contacto").keyup(function () {
+        $('#Contacto').hide();
+    });
+
+    $("#insf_Telefono").keyup(function () {
+        $('#Telefono').hide();
+    });
+
+    $("#insf_Correo").keyup(function () {
+        $('#correo').hide();
+    });
+
+</script>
 
 
 
-    <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-    <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-    <script src="~/Scripts/app/General_PCAE.js"></script>
-    <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
+<script type="text/javascript">
+    $('#insf_Telefono').inputmask('(999) 9999-9999')
 
-
-    <script type="text/javascript">
-        $('#insf_Telefono').inputmask('(999) 9999-9999')
-
-        $(document).ready(function () {
-            bsCustomFileInput.init();
-        });
-    </script>
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>

@@ -474,58 +474,77 @@ $(document).ready(function () {
         });
 });
 
-$('#dep_Codigo').change(function () {
+$('#dep_Codigo').keyup(function () {
     $('#ValidationDepCodigoCreate').hide();
 });
 
-$('#dep_CodigoCodigoError').change(function () {
+$('#dep_CodigoCodigoError').keyup(function () {
     $('#ValidationDepCodigoCreate').hide();
 });
 
-$('#dep_CodigoLegthCodigoError').change(function () {
+$('#dep_CodigoLegthCodigoError').keyup(function () {
     $('#ValidationDepCodigoCreate').hide();
 });
 
-$('#dep_CodigoLegthLessCodigoError').change(function () {
+$('#dep_CodigoLegthLessCodigoError').keyup(function () {
     $('#ValidationDepCodigoCreate').hide();
 });
 
-$('#dep_Nombre').change(function () {
+$('#mun_CodigoEdit_').keyup(function () {
+    $('#MunCodigoCodigoError').hide();
+});
+
+
+
+
+
+$('#dep_Nombre').keyup(function () {
     $('#ValidationDepNombreCreate').hide();
     
-
 });
 
-$('#mun_codigo').change(function () {
+$('#mun_codigo').keyup(function () {
     $('#ValidationMunCodigoCreate').hide();
 });
 
-$('#mun_nombre').change(function () {
+$('#mun_nombre').keyup(function () {
     $('#ValidationMunNombreCreate').hide();
 });
 
-$('#mun_CodigoEdit_').change(function () {
+$('#mun_CodigoEdit_').keyup(function () {
     $('#mun_CodigoEdit_').hide();
 });
 
-$('#mun_nombre').change(function () {
+$('#mun_nombre').keyup(function () {
     $('#mun_NombreEdit_').hide();
 });
 
-$('#dep_Codigo').change(function () {
+$('#dep_Codigo').keyup(function () {
     $('#ValidationDepCodigoCreate').hide();
 });
 
-$('#dep_Nombre').change(function () {
+$('#dep_Nombre').keyup(function () {
     $('#ValidationDepNombreCreate').hide();
 });
 
 
-$('#mun_codigo').change(function () {
+$('#mun_codigo').keyup(function () {
     $('#ValidationMunCodigoCreate').hide();
 });
 
-$('#mun_nombre').change(function () {
+$('#mun_nombre').keyup(function () {
     $('#ValidationMunNombreCreate').hide();
 });
 
+
+$('#mun_NombreEdit_').keyup(function () {
+    $('#DescripcionErrorEdit').hide();
+});
+
+
+$('#mun_NombreEdit_').blur(function () {
+    if ($.trim($('#mun_NombreEdit_').val()) == 0) {
+        $('#DescripcionErrorEdit').text('');
+        $('#editerror').after('<ul id="DescripcionErrorEdit" class="validation-summary-errors text-danger">Campo Descripcion Requerido</ul>');
+    }
+});

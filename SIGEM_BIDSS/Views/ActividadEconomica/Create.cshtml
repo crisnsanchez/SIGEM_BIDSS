@@ -53,7 +53,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.acte_Descripcion, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.acte_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @style = "text-transform:uppercase;", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
+                        @Html.EditorFor(model => model.acte_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @style = "text-transform:uppercase;", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
                         <p style="color:red">@Html.ValidationMessageFor(model => model.acte_Descripcion, "", new { @class = "text-danger", id = "descrp" })</p>
                     </div>
                 </div>

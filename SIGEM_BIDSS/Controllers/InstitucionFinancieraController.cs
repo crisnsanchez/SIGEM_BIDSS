@@ -89,7 +89,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
+        public ActionResult Create([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo,insf_UsuarioCrea,insf_FechaCrea,insf_UsuarioModifica,insf_FechaModifica")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
             string UserName = "";
             try
@@ -102,9 +102,11 @@ namespace SIGEM_BIDSS.Controllers
                     List = db.UDP_Plani_tbInstitucionFinanciera_Insert(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
                                                                          tbInstitucionFinanciera.insf_Contacto,
                                                                          tbInstitucionFinanciera.insf_Telefono,
-                                                                         tbInstitucionFinanciera.insf_Correo, EmployeeID,
+                                                                         tbInstitucionFinanciera.insf_Correo, 
+                                                                         EmployeeID,
                                                                          Function.DatetimeNow(),
-                                                                    true);
+                                                                         GeneralFunctions.Activo
+                                                                    );
                     foreach (UDP_Plani_tbInstitucionFinanciera_Insert_Result TipoSangre in List)
                         Msj = TipoSangre.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -174,8 +176,8 @@ namespace SIGEM_BIDSS.Controllers
                                                                      tbInstitucionFinanciera.insf_Correo, EmployeeID,
                                                                         Function.DatetimeNow(),
                                                                      tbInstitucionFinanciera.insf_Activo);
-                foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result TipoSangre in List)
-                    Msj = TipoSangre.MensajeError;
+                foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result inst in List)
+                    Msj = inst.MensajeError;
                 if (Msj.StartsWith("-1"))
                 {
                     Function.BitacoraErrores("InstitucionFinanciera", "EditPost", UserName, Msj);
