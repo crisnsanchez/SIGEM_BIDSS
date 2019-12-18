@@ -217,6 +217,7 @@
     </Compile>
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\LiquidacionAnticipoViatico.cs" />
     <Compile Include="Models\tbLiquidacionAnticipoViatico.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
