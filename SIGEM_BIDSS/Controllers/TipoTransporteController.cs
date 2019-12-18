@@ -13,7 +13,7 @@ namespace SIGEM_BIDSS.Controllers
     public class TipoTransporteController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions function = new GeneralFunctions(); 
+        GeneralFunctions Function = new GeneralFunctions(); 
         // GET: TipoTransporte
         public ActionResult Index()
         {
@@ -56,10 +56,10 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    int EmpleId = function.GetUser(out UserName);
+                    int EmpleId = Function.GetUser(out UserName);
 
                     tbTipoTransporte.tptran_UsuarioCrea = EmpleId;
-                    List = db.UDP_Gral_tbTipoTransporte_Insert(tbTipoTransporte.tptran_Descripcion, EmpleId, function.DatetimeNow());
+                    List = db.UDP_Gral_tbTipoTransporte_Insert(tbTipoTransporte.tptran_Descripcion, EmpleId, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoTransporte_Insert_Result trans in List)
                         Msj = trans.MensajeError;
                     if (Msj.StartsWith("-1"))
@@ -111,43 +111,48 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "tptran_Id,tptran_Descripcion,tptran_UsuarioCrea,tptran_FechaCrea,tptran_UsuarioModifica,tptran_FechaModifica")] tbTipoTransporte tbTipoTransporte)
         {
-            if (ModelState.IsValid)
-                if (db.tbTipoTransporte.Any(a => a.tptran_Descripcion == tbTipoTransporte.tptran_Descripcion && a.tptran_Id != tbTipoTransporte.tptran_Id))
-                {
-                    ModelState.AddModelError("", "Ya existe un Tipo de Transporte con el mismo nombre.");
-                    return View(tbTipoTransporte);
-                }
+            string UserName = "";
             try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+
+                if (ModelState.IsValid)
                 {
+                    if (db.tbTipoTransporte.Any(a => a.tptran_Descripcion == tbTipoTransporte.tptran_Descripcion && a.tptran_Id != tbTipoTransporte.tptran_Id))
+                    {
+                        ModelState.AddModelError("", "Ya existe un Tipo de Transporte con el mismo nombre.");
+                        return View(tbTipoTransporte);
+                    }
+
                     IEnumerable<Object> List = null;
                     string Msj = "";
-                    string UserName = "";
-                    int UsId = function.GetUser(out UserName);
-
-                    tbTipoTransporte.tptran_UsuarioModifica = UsId;
-                    List = db.UDP_Gral_tbTipoTransporte_Update(tbTipoTransporte.tptran_Id, tbTipoTransporte.tptran_Descripcion, UsId, function.DatetimeNow());
+                    List = db.UDP_Gral_tbTipoTransporte_Update(tbTipoTransporte.tptran_Id, tbTipoTransporte.tptran_Descripcion, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Gral_tbTipoTransporte_Update_Result trans in List)
                         Msj = trans.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
-
+                        Function.BitacoraErrores("TipoTransporte", "EditPost", UserName, Msj);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View();
                     }
+
                     else
                     {
                         return RedirectToAction("Index");
                     }
+
                 }
-                catch (Exception Ex)
-                {
+                return View(tbTipoTransporte);
+            }
 
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View();
-                }
+            catch (Exception Ex)
+            {
+                Function.BitacoraErrores("TipoTransporte", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View();
+            }
 
 
-
-            return View(tbTipoTransporte);
         }
 
         // GET: TipoTransporte/Delete/5

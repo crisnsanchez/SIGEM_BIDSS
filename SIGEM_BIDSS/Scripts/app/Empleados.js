@@ -166,5 +166,60 @@ document.getElementById('emp_CorreoElectronico').addEventListener('input', funct
 });
 
 
+$('#emp_Nombres').keyup(function () {
+    $('#Nombres').hide();
+});
 
+$('#emp_Apellidos').keyup(function () {
+    $('#Apellidos').hide();
+});
+
+$('#emp_Sexo').keyup(function () {
+    $('#Sexo').hide();
+});
+
+$('#emp_FechaNacimiento').keyup(function () {
+    $('#FechaNacimiento').hide();
+});
+
+$('#tps_Id').keyup(function () {
+    $('#ti').hide();
+});
+
+$('#emp_Telefono').keyup(function () {
+    $('#Telefono').hide();
+});
+
+$('#emp_CorreoElectronico').keyup(function () {
+    $('#emailOK').hide();
+});
+
+$('#are_Id').keyup(function () {
+    $('#Area').hide();
+});
+
+
+$('#pto_Id').keyup(function () {
+    $('#Puesto').hide();
+});
+
+$('#emp_Direccion').keyup(function () {
+    $('#Direccion').hide();
+});
+
+$('#emp_EsJefe').keyup(function () {
+    $('#EsJefe').hide();
+});
+
+$('#dep_codigo').keyup(function () {
+    $('#Departamento').hide();
+});
+
+$('#mun_codigo').keyup(function () {
+    $('#Municipio').hide();
+});
+
+$('#emp_FechaIngreso').keyup(function () {
+    $('#FechaIngreso').hide();
+});
 
