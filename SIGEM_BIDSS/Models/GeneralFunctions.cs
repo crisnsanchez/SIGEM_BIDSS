@@ -112,8 +112,7 @@ namespace SIGEM_BIDSS.Models
 
             return _user;
         }
-
-
+      
         //Bitácora de Errores
         public void BitacoraErrores(string Controller, string Action, string User, string ErrorMessage)
         {
