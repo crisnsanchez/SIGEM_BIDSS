@@ -26,41 +26,51 @@ $('#par_TelefonoEmpresa').keypress(function (e) {
 
 
 //Validar que se borre mensaje mientras se escribe
-$('#par_NombreEmpresa').change(function () {
+
+
+
+
+
+
+$("#par_NombreEmpresa").keyup(function () {
     $('#errornombreempresa').hide();
 });
 
-$('#par_TelefonoEmpresa').change(function () {
+//$('#par_NombreEmpresa').change(function () {
+//    $('#errornombreempresa').hide();
+//});
+
+$('#par_TelefonoEmpresa').keyup(function () {
     $('#errortelefonoempresa').hide();
     $('#errorformatotelefono').hide();
 });
 
-$('#par_CorreoEmpresa').change(function () {
+$('#par_CorreoEmpresa').keyup(function () {
     $('#emailCorre').hide();
 });
 
-$('#par_CorreoEmisor').change(function () {
+$('#par_CorreoEmisor').keyup(function () {
     $('#emailEmi').hide();
 });
 
-$('#par_Password').change(function () {
+$('#par_Password').keyup(function () {
     $('#errorpassword').hide();
 });
 
-$('#par_CorreoRRHH').change(function () {
+$('#par_CorreoRRHH').keyup(function () {
     $('#emailRHHH').hide();
 });
 
-$('#par_Servidor').change(function () {
+$('#par_Servidor').keyup(function () {
     $('#errorServidor').hide();
 });
 
-$('#par_Puerto').change(function () {
+$('#par_Puerto').keyup(function () {
     $('#errorPuerto').hide();
 });
 
 
-$('#CargarFoto').change(function () {
+$('#CargarFoto').keyup(function () {
     $('#errorlogo').hide();
 });
 

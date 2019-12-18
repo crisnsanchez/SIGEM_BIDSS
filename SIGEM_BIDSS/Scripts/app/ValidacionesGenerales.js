@@ -1,10 +1,4 @@
-﻿//----------Datepicker
-$('#sol_PerFechaInicio,#sol_PerFechaRegreso,#sol_GralFechaSolicitud').datepicker({
-    format: "dd/mm/yyyy",
-    startDate: "01/01/1990",
-    language: "es",
-    daysOfWeekDisabled: "0"
-});
+﻿
 
 
 
@@ -14,6 +8,10 @@ function soloLetras(e) {
     tecla = String.fromCharCode(tecla)
     return /^[a-zA-ZáéíóúñÁÉÍÓÚÑ ]+$/.test(tecla);
 }
+
+$("#tpv_Descripcion").keyup(function () {
+    $('#errorviatico').hide();
+});
 
 
 
