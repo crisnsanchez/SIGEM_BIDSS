@@ -60,7 +60,7 @@ namespace SIGEM_BIDSS.Controllers
                     int EmployeeID = Function.GetUser(out UserName);
                     IEnumerable<object> _List = null;
                     string ErrorMessage = "";
-                    _List = db.UDP_Adm_tbLiquidacionAnticipoViatico_Insert(tbLiquidacionAnticipoViatico.Lianvi_Id, tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida, tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje, tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje, tbLiquidacionAnticipoViatico.Lianvi_Comentario, tbLiquidacionAnticipoViatico.est_Id, tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo, EmployeeID, Function.DatetimeNow());
+                    _List = db.UDP_Adm_tbLiquidacionAnticipoViatico_Insert(tbLiquidacionAnticipoViatico.Anvi_Id, tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida, tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje, tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje, tbLiquidacionAnticipoViatico.Lianvi_Comentario, tbLiquidacionAnticipoViatico.est_Id, tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result Area in _List)
                         ErrorMessage = Area.MensajeError;
                     if (ErrorMessage.StartsWith("-1"))
@@ -69,12 +69,7 @@ namespace SIGEM_BIDSS.Controllers
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbLiquidacionAnticipoViatico);
                     }
-                    if (ErrorMessage.StartsWith("-2"))
-                    {
-
-                        ModelState.AddModelError("", "Ya existe un Área con el mismo nombre.");
-                        return View(tbLiquidacionAnticipoViatico);
-                    }
+            
                     else
                     {
 

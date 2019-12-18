@@ -2900,7 +2900,7 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>

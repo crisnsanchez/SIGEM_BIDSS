@@ -44,7 +44,8 @@ namespace SIGEM_BIDSS.Controllers
         {
 
             int id = Convert.ToInt32(Session["EmpID"]);
-            ViewBag.emp_Id = id;
+            ViewBag.empIsNull = id;
+           
             var _tbEmpleado = (from _tdemp in db.tbEmpleado
                                where _tdemp.emp_Id == id
                                select new { empId = _tdemp.emp_Id, Nombre = _tdemp.emp_Nombres + " " + _tdemp.emp_Apellidos }).FirstOrDefault();
@@ -63,7 +64,6 @@ namespace SIGEM_BIDSS.Controllers
             }
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
-
             return View();
 
         }
