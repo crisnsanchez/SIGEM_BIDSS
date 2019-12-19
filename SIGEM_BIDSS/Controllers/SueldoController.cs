@@ -45,7 +45,7 @@ namespace SIGEM_BIDSS.Controllers
 
             int id = Convert.ToInt32(Session["EmpID"]);
             ViewBag.empIsNull = id;
-           
+
             var _tbEmpleado = (from _tdemp in db.tbEmpleado
                                where _tdemp.emp_Id == id
                                select new { empId = _tdemp.emp_Id, Nombre = _tdemp.emp_Nombres + " " + _tdemp.emp_Apellidos }).FirstOrDefault();
@@ -67,7 +67,7 @@ namespace SIGEM_BIDSS.Controllers
             return View();
 
         }
-   
+
 
         // POST: Sueldo/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
@@ -109,9 +109,18 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        Session["EmpID"] = null;
-                        TempData["swalfunction"] = GeneralFunctions._isCreated;
-                        return RedirectToAction("Index");
+                        if (Session["EmpID"] == null)
+                        {
+                            TempData["swalfunction"] = GeneralFunctions._isCreated;
+                            return RedirectToAction("Index");
+                        }
+
+                        else
+                        {
+                            Session["EmpID"] = null;
+                            TempData["swalfunction"] = GeneralFunctions._isCreated;
+                            return RedirectToAction("Index","Empleado");
+                        }
                     }
                 }
                 ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
@@ -124,7 +133,7 @@ namespace SIGEM_BIDSS.Controllers
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
-         
+
 
                 return View(tbSueldo);
             }
