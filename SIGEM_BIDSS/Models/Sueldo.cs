@@ -7,14 +7,17 @@ using System.Web;
 
 namespace SIGEM_BIDSS.Models
 {
-    
+
     [MetadataType(typeof(SueldoMetadata))]
     public partial class tbSueldo
     {
-     [NotMapped]
-     public string NombreEmpleado { get; set; }
+        [NotMapped]
+        public string NombreEmpleado { get; set; }
 
-
+        [NotMapped]
+        [Display(Name = "Cant Sueldo")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public string Cantidad { get; set; }
     }
     public class SueldoMetadata
     {
@@ -25,8 +28,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Cant Sueldo")]
+
         public Nullable<decimal> sue_Cantidad { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]

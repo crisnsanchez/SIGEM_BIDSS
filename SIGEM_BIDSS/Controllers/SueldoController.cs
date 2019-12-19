@@ -67,14 +67,17 @@ namespace SIGEM_BIDSS.Controllers
             return View();
 
         }
+   
 
         // POST: Sueldo/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id")] tbSueldo tbSueldo)
+        public ActionResult Create([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,Cantidad")] tbSueldo tbSueldo)
         {
+
+            //decimal Cantidad = Convert.ToDecimal(tbSueldo.sue_Cantidad.ToString().Replace(",", ""));
             string UserName = "";
             try
             {
@@ -83,6 +86,8 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<object> _List = null;
                     string MsjError = "";
+                    string _Cant = tbSueldo.Cantidad.Replace(",", "");
+                    tbSueldo.sue_Cantidad = Convert.ToDecimal(_Cant);
                     _List = db.UDP_rrhh_tbSueldo_Insert(tbSueldo.emp_Id, tbSueldo.sue_Cantidad, tbSueldo.tmo_Id, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_rrhh_tbSueldo_Insert_Result Sueldo in _List)
                         MsjError = Sueldo.MensajeError;
@@ -150,7 +155,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id")] tbSueldo tbSueldo)
+        public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,Cantidad")] tbSueldo tbSueldo)
         {
             string UserName = "";
             try
@@ -160,6 +165,8 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     IEnumerable<object> _List = null;
                     string MsjError = "";
+                    string _Cant = tbSueldo.Cantidad.Replace(",", "");
+                    tbSueldo.sue_Cantidad = Convert.ToDecimal(_Cant);
                     _List = db.UDP_rrhh_tbSueldo_Update(tbSueldo.sue_Id, tbSueldo.emp_Id, tbSueldo.sue_Cantidad, tbSueldo.tmo_Id, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_rrhh_tbSueldo_Update_Result _sueldo in _List)
                         MsjError = _sueldo.MensajeError;
