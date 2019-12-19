@@ -45,31 +45,35 @@ namespace SIGEM_BIDSS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
+            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = new tbLiquidacionAnticipoViatico();
+            tbLiquidacionAnticipoViatico.Anvi_Id = tbAnticipoViatico.Anvi_Id;
+
+
             if (tbAnticipoViatico == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoViatico.emp_Id);
-            ViewBag.Anvi_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoViatico.Anvi_JefeInmediato);
-            ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbAnticipoViatico.mun_Codigo);
-            ViewBag.Anvi_tptran_Id = new SelectList(db.tbTipoTransporte, "tptran_Id", "tptran_Descripcion", tbAnticipoViatico.Anvi_tptran_Id);
-            return View(tbAnticipoViatico);
+            return View(tbLiquidacionAnticipoViatico);
         }
 
-        // POST: LiquidacionAnticipoViatico/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+    
+
+    // POST: LiquidacionAnticipoViatico/Create
+    // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+    // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Lianvi_Id,Lianvi_Correlativo,Anvi_Id,Lianvi_FechaLiquida,Lianvi_FechaInicioViaje,Lianvi_FechaFinViaje,Lianvi_Comentario,est_Id,Lianvi_RazonRechazo,Lianvi_UsuarioCrea,Lianvi_FechaCrea,Lianvi_UsuarioModifica,Lianvi_FechaModifica")] tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico)
+        public ActionResult Create([Bind(Include = "Lianvi_Id,Lianvi_Correlativo,Anvi_Id,Lianvi_FechaLiquida,Lianvi_FechaInicioViaje,Lianvi_FechaFinViaje,Lianvi_Comentario,est_Id,Lianvi_RazonRechazo")] tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico)
         {
             if (ModelState.IsValid)
             {
-                string UserName = "";
+                string UserName = "",
+                ErrorEmail = "";
                 try
                 {
                     int EmployeeID = Function.GetUser(out UserName);
-                    tbLiquidacionAnticipoViatico.est_Id = GeneralFunctions.Enviada;
+                    bool Result = false, ResultAdm = false;
+                    
                     IEnumerable<object> _List = null;
                     string ErrorMessage = "";
                     _List = db.UDP_Adm_tbLiquidacionAnticipoViatico_Insert(tbLiquidacionAnticipoViatico.Anvi_Id, 
@@ -77,7 +81,7 @@ namespace SIGEM_BIDSS.Controllers
                                                                           tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje,
                                                                           tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje,
                                                                           tbLiquidacionAnticipoViatico.Lianvi_Comentario,
-                                                                               GeneralFunctions.Enviada, 
+                                                                           GeneralFunctions.Enviada, 
                                                                           tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo,
                                                                           EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result Area in _List)
@@ -91,7 +95,13 @@ namespace SIGEM_BIDSS.Controllers
             
                     else
                     {
+                        var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                        var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
 
+                        if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                         TempData["swalfunction"] = "true";
 
                         return RedirectToAction("Index");
