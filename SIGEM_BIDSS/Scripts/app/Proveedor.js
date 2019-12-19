@@ -121,13 +121,39 @@ $(document).ready(function () {
 });
 
 
+$("#prov_Nombre").keyup(function () {
+    $('#Nombre').hide();
+});
+
+$("#prov_NombreContacto").keyup(function () {
+    $('#NombreContacto').hide();
+});
 
 
+$("#prov_RTN").keyup(function () {
+    $('#Rtn_Error').hide();
+});
 
+$("#prov_Email").keyup(function () {
+    $('#emailEoK').hide();
+});
 
+$("#prov_Telefono").keyup(function () {
+    $('#Telefono').hide();
+});
 
-
-
+$("#acte_Id").keyup(function () {
+    $('#Actividad').hide();
+});
+$("#prov_UsuarioCrea").keyup(function () {
+    $('#Dep').hide();
+});
+$("#mun_codigo").keyup(function () {
+    $('#Mun').hide();
+});
+$("#prov_Direccion").keyup(function () {
+    $('#Direccion').hide();
+});
 
 
 

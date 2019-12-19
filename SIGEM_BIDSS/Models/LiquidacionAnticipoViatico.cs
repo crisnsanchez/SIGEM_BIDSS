@@ -34,7 +34,7 @@ namespace SIGEM_BIDSS.Models
         public System.DateTime Lianvi_FechaFinViaje { get; set; }
         [Display(Name = "Comentario")]
         public string Lianvi_Comentario { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+
         [Display(Name = "Estado")]
         public int est_Id { get; set; }
         [Display(Name = "Razón de rechazo")]
