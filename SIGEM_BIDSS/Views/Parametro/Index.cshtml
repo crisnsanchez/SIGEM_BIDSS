@@ -22,6 +22,12 @@
             @Html.DisplayNameFor(model => model.par_CorreoEmpresa)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.par_PorcentajeAdelantoSalario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.par_FrecuenciaAdelantoSalario)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.par_CorreoEmisor)
         </th>
         <th>
@@ -51,6 +57,12 @@
             @Html.DisplayFor(modelItem => item.par_CorreoEmpresa)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.par_PorcentajeAdelantoSalario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.par_FrecuenciaAdelantoSalario)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.par_CorreoEmisor)
         </td>
         <td>
@@ -66,9 +78,9 @@
             @Html.DisplayFor(modelItem => item.par_PathLogo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.par_Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.par_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.par_Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.par_Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.par_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.par_Id })
         </td>
     </tr>
 }

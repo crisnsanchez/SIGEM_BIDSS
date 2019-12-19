@@ -24,5 +24,7 @@ namespace SIGEM_BIDSS.Models
         public string par_Servidor { get; set; }
         public int par_Puerto { get; set; }
         public string par_PathLogo { get; set; }
+        public Nullable<decimal> par_PorcentajeAdelantoSalario { get; set; }
+        public Nullable<short> par_FrecuenciaAdelantoSalario { get; set; }
     }
 }
