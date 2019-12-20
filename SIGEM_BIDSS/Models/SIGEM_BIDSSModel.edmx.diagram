@@ -56,6 +56,9 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbParametro" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbLiquidacionAnticipoViaticoDetalle" Width="1.5" PointX="18" PointY="10.375" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

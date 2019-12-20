@@ -54,6 +54,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbSueldo> tbSueldo { get; set; }
         public virtual DbSet<tbParametro> tbParametro { get; set; }
+        public virtual DbSet<tbLiquidacionAnticipoViaticoDetalle> tbLiquidacionAnticipoViaticoDetalle { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -2401,6 +2402,47 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("par_FrecuenciaAdelantoSalario", typeof(short));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Conf_tbParametro_Update_Result>("UDP_Conf_tbParametro_Update", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_CorreoEmisorParameter, par_CorreoRRHHParameter, par_PasswordParameter, par_ServidorParameter, par_PuertoParameter, par_PathLogoParameter, par_PorcentajeAdelantoSalarioParameter, par_FrecuenciaAdelantoSalarioParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result> UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(Nullable<int> lianvide_Id, Nullable<int> lianvi_Id, Nullable<System.DateTime> lianvide_FechaGasto, Nullable<int> tpv_Id, Nullable<decimal> lianvide_MontoGasto, string lianvide_Concepto, string lianvide_Archivo, Nullable<int> lianvide_UsuarioCrea, Nullable<System.DateTime> lianvide_FechaCrea)
+        {
+            var lianvide_IdParameter = lianvide_Id.HasValue ?
+                new ObjectParameter("Lianvide_Id", lianvide_Id) :
+                new ObjectParameter("Lianvide_Id", typeof(int));
+    
+            var lianvi_IdParameter = lianvi_Id.HasValue ?
+                new ObjectParameter("Lianvi_Id", lianvi_Id) :
+                new ObjectParameter("Lianvi_Id", typeof(int));
+    
+            var lianvide_FechaGastoParameter = lianvide_FechaGasto.HasValue ?
+                new ObjectParameter("Lianvide_FechaGasto", lianvide_FechaGasto) :
+                new ObjectParameter("Lianvide_FechaGasto", typeof(System.DateTime));
+    
+            var tpv_IdParameter = tpv_Id.HasValue ?
+                new ObjectParameter("tpv_Id", tpv_Id) :
+                new ObjectParameter("tpv_Id", typeof(int));
+    
+            var lianvide_MontoGastoParameter = lianvide_MontoGasto.HasValue ?
+                new ObjectParameter("Lianvide_MontoGasto", lianvide_MontoGasto) :
+                new ObjectParameter("Lianvide_MontoGasto", typeof(decimal));
+    
+            var lianvide_ConceptoParameter = lianvide_Concepto != null ?
+                new ObjectParameter("Lianvide_Concepto", lianvide_Concepto) :
+                new ObjectParameter("Lianvide_Concepto", typeof(string));
+    
+            var lianvide_ArchivoParameter = lianvide_Archivo != null ?
+                new ObjectParameter("Lianvide_Archivo", lianvide_Archivo) :
+                new ObjectParameter("Lianvide_Archivo", typeof(string));
+    
+            var lianvide_UsuarioCreaParameter = lianvide_UsuarioCrea.HasValue ?
+                new ObjectParameter("Lianvide_UsuarioCrea", lianvide_UsuarioCrea) :
+                new ObjectParameter("Lianvide_UsuarioCrea", typeof(int));
+    
+            var lianvide_FechaCreaParameter = lianvide_FechaCrea.HasValue ?
+                new ObjectParameter("Lianvide_FechaCrea", lianvide_FechaCrea) :
+                new ObjectParameter("Lianvide_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result>("UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert", lianvide_IdParameter, lianvi_IdParameter, lianvide_FechaGastoParameter, tpv_IdParameter, lianvide_MontoGastoParameter, lianvide_ConceptoParameter, lianvide_ArchivoParameter, lianvide_UsuarioCreaParameter, lianvide_FechaCreaParameter);
         }
     }
 }

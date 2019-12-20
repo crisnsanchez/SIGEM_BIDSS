@@ -14,6 +14,12 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbLiquidacionAnticipoViatico
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbLiquidacionAnticipoViatico()
+        {
+            this.tbLiquidacionAnticipoViaticoDetalle = new HashSet<tbLiquidacionAnticipoViaticoDetalle>();
+        }
+    
         public int Lianvi_Id { get; set; }
         public string Lianvi_Correlativo { get; set; }
         public int Anvi_Id { get; set; }
@@ -30,5 +36,7 @@ namespace SIGEM_BIDSS.Models
     
         public virtual tbAnticipoViatico tbAnticipoViatico { get; set; }
         public virtual tbEstado tbEstado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbLiquidacionAnticipoViaticoDetalle> tbLiquidacionAnticipoViaticoDetalle { get; set; }
     }
 }

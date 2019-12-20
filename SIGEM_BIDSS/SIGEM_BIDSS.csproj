@@ -221,6 +221,12 @@
     <Compile Include="Models\tbLiquidacionAnticipoViatico.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbLiquidacionAnticipoViaticoDetalle.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
