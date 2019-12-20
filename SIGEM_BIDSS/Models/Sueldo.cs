@@ -15,7 +15,7 @@ namespace SIGEM_BIDSS.Models
         public string NombreEmpleado { get; set; }
 
         [NotMapped]
-        [Display(Name = "Cant Sueldo")]
+        [Display(Name = "Cantidad")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string Cantidad { get; set; }
     }

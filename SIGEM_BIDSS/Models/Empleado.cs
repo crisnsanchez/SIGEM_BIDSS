@@ -20,6 +20,11 @@ namespace SIGEM_BIDSS.Models
         public string ge_Description { get; set; }
 
         [NotMapped]
+        [Display(Name = "Área")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public int are_Id { get; set; }
+
+        [NotMapped]
         public List<tbEmpleado> Jefe { get; set; }
 
         [NotMapped]
@@ -28,8 +33,12 @@ namespace SIGEM_BIDSS.Models
         [NotMapped]
         public string condicion { get; set; }
 
+        [NotMapped]
+        [Display(Name = "Departamento")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public string dep_Codigo { get; set; }
       
-        
+
 
     }
 
