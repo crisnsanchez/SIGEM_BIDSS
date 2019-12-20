@@ -76,7 +76,7 @@
                     @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                       @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger" , id = "correo" })
+                        @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", id = "correo" })
                     </div>
                 </div>
 
@@ -90,50 +90,45 @@
                 </div>
 
 
-
-
-                <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-                <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
-
-
-
-                <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-                <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-                <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-                <script src="~/Scripts/app/General_PCAE.js"></script>
-                <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
-
-
-
             </div>
         </div>
 
     }
-    </div>
-    <script type="text/javascript">
-        $('#insf_Telefono').inputmask('(999) 9999-9999')
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 
-        $(document).ready(function () {
-            bsCustomFileInput.init();
-        });
+<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+<script src="~/Scripts/app/General_PCAE.js"></script>
 
-    </script>
-    <script>
-        $("#insf_Nombre").keyup(function () {
-            $('#Nombres').hide();
-        });
+<script src="~/Scripts/app/InstitucionFinaciera.js"></script>
 
-        $("#insf_Contacto").keyup(function () {
-            $('#Contacto').hide();
-        });
+<script type="text/javascript">
+    $('#insf_Telefono').inputmask('(999) 9999-9999')
 
-        $("#insf_Telefono").keyup(function () {
-            $('#Telefono').hide();
-        });
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
 
-        $("#insf_Correo").keyup(function () {
-            $('#correo').hide();
-        });
+</script>
+<script>
+    $("#insf_Nombre").keyup(function () {
+        $('#Nombres').hide();
+    });
+
+    $("#insf_Contacto").keyup(function () {
+        $('#Contacto').hide();
+    });
+
+    $("#insf_Telefono").keyup(function () {
+        $('#Telefono').hide();
+    });
+
+    $("#insf_Correo").keyup(function () {
+        $('#correo').hide();
+    });
 
 
-    </script>
+</script>
