@@ -60,7 +60,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor,par_CorreoRRHH,par_Password,par_Servidor,par_Puerto,par_PathLogo")] tbParametro tbParametro,
+        public ActionResult Create([Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor,par_CorreoRRHH,par_Password,par_Servidor,par_Puerto,par_PathLogo, par_PorcentajeAdelantoSalario,par_FrecuenciaAdelantoSalario")] tbParametro tbParametro,
            HttpPostedFileBase FotoPath
            )
         {
@@ -99,7 +99,18 @@ namespace SIGEM_BIDSS.Controllers
                     IEnumerable<object> List = null;
                     var MsjError = "";
 
-                    List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa.ToUpper(), tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo
+                    List = db.UDP_Conf_tbParametro_Insert(tbParametro.par_NombreEmpresa.ToUpper(), 
+                                                         tbParametro.par_TelefonoEmpresa, 
+                                                         tbParametro.par_CorreoEmpresa, 
+                                                         tbParametro.par_CorreoEmisor, 
+                                                         tbParametro.par_CorreoRRHH, 
+                                                         tbParametro.par_Password, 
+                                                         tbParametro.par_Servidor, 
+                                                         tbParametro.par_Puerto, 
+                                                         tbParametro.par_PathLogo,
+                                                         tbParametro.par_PorcentajeAdelantoSalario,
+                                                         tbParametro.par_FrecuenciaAdelantoSalario
+
                         );
                     foreach (UDP_Conf_tbParametro_Insert_Result parametro in List)
                         MsjError = parametro.MensajeError;
@@ -163,7 +174,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(byte? id, [Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor, par_CorreoRRHH, par_Password ,par_Servidor,par_Puerto,par_PathLogo")] tbParametro tbParametro,
+        public ActionResult Edit(byte? id, [Bind(Include = "par_Id,par_NombreEmpresa,par_TelefonoEmpresa,par_CorreoEmpresa,par_CorreoEmisor, par_CorreoRRHH, par_Password ,par_Servidor,par_Puerto,par_PathLogo, par_PorcentajeAdelantoSalario,par_FrecuenciaAdelantoSalario")] tbParametro tbParametro,
        HttpPostedFileBase FotoPath)
 
         {
@@ -200,7 +211,18 @@ namespace SIGEM_BIDSS.Controllers
                     
 
                     
-                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, tbParametro.par_NombreEmpresa.ToUpper(), tbParametro.par_TelefonoEmpresa, tbParametro.par_CorreoEmpresa, tbParametro.par_CorreoEmisor, tbParametro.par_CorreoRRHH, tbParametro.par_Password, tbParametro.par_Servidor, tbParametro.par_Puerto, tbParametro.par_PathLogo);
+                    List = db.UDP_Conf_tbParametro_Update(tbParametro.par_Id, 
+                                                            tbParametro.par_NombreEmpresa.ToUpper(),    
+                                                            tbParametro.par_TelefonoEmpresa, 
+                                                            tbParametro.par_CorreoEmpresa, 
+                                                            tbParametro.par_CorreoEmisor, 
+                                                            tbParametro.par_CorreoRRHH, 
+                                                            tbParametro.par_Password, 
+                                                            tbParametro.par_Servidor, 
+                                                            tbParametro.par_Puerto, 
+                                                            tbParametro.par_PathLogo,
+                                                            tbParametro.par_PorcentajeAdelantoSalario,
+                                                            tbParametro.par_FrecuenciaAdelantoSalario);
                     foreach (UDP_Conf_tbParametro_Update_Result parametro in List)
                         MsjError = parametro.MensajeError;
                     if (MsjError.StartsWith("-1"))

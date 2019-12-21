@@ -35,7 +35,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-upload mr-1"></i>
-            Insertar Institución Finaciera
+            Insertar Institución Financiera
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -54,20 +54,20 @@
                     @Html.LabelFor(model => model.insf_Nombre, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.insf_Nombre, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.insf_Nombre, "", new { @class = "text-danger", @Id = "Nombres" })</p>
+                        @Html.ValidationMessageFor(model => model.insf_Nombre, "", new { @class = "text-danger", @Id = "Nombres" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.insf_Contacto, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.insf_Contacto, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", @onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
-                        <p style="color:red">@Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @Id = "Contacto" }) </p>
+                        @Html.ValidationMessageFor(model => model.insf_Contacto, "", new { @class = "text-danger", @Id = "Contacto" })
                     </div>
                 </div>
                 <div class="form-group ">
                     @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
+                        @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return soloNumeros(event)" } })
                         @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @Id = "Telefono" })
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                     @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger" , id = "correo" })</p>
+                        @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", id = "correo" })
                     </div>
                 </div>
 
@@ -90,50 +90,45 @@
                 </div>
 
 
-
-
-                <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-                <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
-
-
-
-                <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-                <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-                <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-                <script src="~/Scripts/app/General_PCAE.js"></script>
-                <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
-
-
-
             </div>
         </div>
 
     }
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 
-    <script type="text/javascript">
-        $('#insf_Telefono').inputmask('(999) 9999-9999')
+<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+<script src="~/Scripts/app/General_PCAE.js"></script>
 
-        $(document).ready(function () {
-            bsCustomFileInput.init();
-        });
+<script src="~/Scripts/app/InstitucionFinaciera.js"></script>
 
-    </script>
-    <script>
-        $("#insf_Nombre").keyup(function () {
-            $('#Nombres').hide();
-        });
+<script type="text/javascript">
+    $('#insf_Telefono').inputmask('(999) 9999-9999')
 
-        $("#insf_Contacto").keyup(function () {
-            $('#Contacto').hide();
-        });
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
 
-        $("#insf_Telefono").keyup(function () {
-            $('#Telefono').hide();
-        });
+</script>
+<script>
+    $("#insf_Nombre").keyup(function () {
+        $('#Nombres').hide();
+    });
 
-        $("#insf_Correo").keyup(function () {
-            $('#correo').hide();
-        });
+    $("#insf_Contacto").keyup(function () {
+        $('#Contacto').hide();
+    });
+
+    $("#insf_Telefono").keyup(function () {
+        $('#Telefono').hide();
+    });
+
+    $("#insf_Correo").keyup(function () {
+        $('#correo').hide();
+    });
 
 
-    </script>
+</script>

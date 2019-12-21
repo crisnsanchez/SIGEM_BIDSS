@@ -40,27 +40,50 @@ namespace SIGEM_BIDSS.Controllers
         // GET: LiquidacionAnticipoViatico/Create
         public ActionResult Create(int? id)
         {
-            ViewBag.Anvi_Id = new SelectList(db.tbAnticipoViatico, "Anvi_Id", "Anvi_Correlativo");
-            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
+            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = new tbLiquidacionAnticipoViatico();
+            tbLiquidacionAnticipoViatico.Anvi_Id = tbAnticipoViatico.Anvi_Id;
+
+
+            if (tbAnticipoViatico == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbLiquidacionAnticipoViatico);
         }
 
-        // POST: LiquidacionAnticipoViatico/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+    
+
+    // POST: LiquidacionAnticipoViatico/Create
+    // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+    // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Lianvi_Id,Lianvi_Correlativo,Anvi_Id,Lianvi_FechaLiquida,Lianvi_FechaInicioViaje,Lianvi_FechaFinViaje,Lianvi_Comentario,est_Id,Lianvi_RazonRechazo,Lianvi_UsuarioCrea,Lianvi_FechaCrea,Lianvi_UsuarioModifica,Lianvi_FechaModifica")] tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico)
+        public ActionResult Create([Bind(Include = "Lianvi_Id,Lianvi_Correlativo,Anvi_Id,Lianvi_FechaLiquida,Lianvi_FechaInicioViaje,Lianvi_FechaFinViaje,Lianvi_Comentario,est_Id,Lianvi_RazonRechazo")] tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico)
         {
             if (ModelState.IsValid)
             {
-                string UserName = "";
+                string UserName = "",
+                ErrorEmail = "";
                 try
                 {
                     int EmployeeID = Function.GetUser(out UserName);
+                    bool Result = false, ResultAdm = false;
+                    
                     IEnumerable<object> _List = null;
                     string ErrorMessage = "";
-                    _List = db.UDP_Adm_tbLiquidacionAnticipoViatico_Insert(tbLiquidacionAnticipoViatico.Anvi_Id, tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida, tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje, tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje, tbLiquidacionAnticipoViatico.Lianvi_Comentario, tbLiquidacionAnticipoViatico.est_Id, tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo, EmployeeID, Function.DatetimeNow());
+                    _List = db.UDP_Adm_tbLiquidacionAnticipoViatico_Insert(tbLiquidacionAnticipoViatico.Anvi_Id, 
+                                                                          tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida,
+                                                                          tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje,
+                                                                          tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje,
+                                                                          tbLiquidacionAnticipoViatico.Lianvi_Comentario,
+                                                                           GeneralFunctions.Enviada, 
+                                                                          tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo,
+                                                                          EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result Area in _List)
                         ErrorMessage = Area.MensajeError;
                     if (ErrorMessage.StartsWith("-1"))
@@ -72,7 +95,13 @@ namespace SIGEM_BIDSS.Controllers
             
                     else
                     {
+                        var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                        var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
 
+                        if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                         TempData["swalfunction"] = "true";
 
                         return RedirectToAction("Index");

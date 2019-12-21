@@ -49,5 +49,18 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Logo")]
       
         public string par_PathLogo { get; set; }
+
+
+        [Display(Name = "Porcentaje Adelanto de Salario")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Range(0, 100, ErrorMessage = "El porcentaje de Adelanto de Salario no debe ser mayor al 100%")]
+        public decimal par_PorcentajeAdelantoSalario { get; set; }
+
+
+
+        [Display(Name = "Frecuencia de Adelanto de Salario")]
+        [Range(1, 14, ErrorMessage = "La frecuencia de Adelanto de Salario no debe ser mayor a 12")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public int par_FrecuenciaAdelantoSalario { get; set; }
     }
 }

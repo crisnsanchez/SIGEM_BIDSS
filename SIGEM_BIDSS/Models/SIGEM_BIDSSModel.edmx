@@ -79,6 +79,22 @@
           <Property Name="Lianvi_UsuarioModifica" Type="int" />
           <Property Name="Lianvi_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbLiquidacionAnticipoViaticoDetalle">
+          <Key>
+            <PropertyRef Name="Lianvide_Id" />
+          </Key>
+          <Property Name="Lianvide_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lianvi_Id" Type="int" Nullable="false" />
+          <Property Name="Lianvide_FechaGasto" Type="datetime" Nullable="false" />
+          <Property Name="tpv_Id" Type="int" Nullable="false" />
+          <Property Name="Lianvide_MontoGasto" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Lianvide_Concepto" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Lianvide_Archivo" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Lianvide_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="Lianvide_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="Lianvide_UsuarioModifica" Type="int" />
+          <Property Name="Lianvide_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbParametro">
           <Key>
             <PropertyRef Name="par_Id" />
@@ -93,6 +109,8 @@
           <Property Name="par_Servidor" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="par_Puerto" Type="int" Nullable="false" />
           <Property Name="par_PathLogo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="par_PorcentajeAdelantoSalario" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="par_FrecuenciaAdelantoSalario" Type="smallint" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -508,6 +526,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id">
+          <End Role="tbLiquidacionAnticipoViatico" Type="Self.tbLiquidacionAnticipoViatico" Multiplicity="1" />
+          <End Role="tbLiquidacionAnticipoViaticoDetalle" Type="Self.tbLiquidacionAnticipoViaticoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLiquidacionAnticipoViatico">
+              <PropertyRef Name="Lianvi_Id" />
+            </Principal>
+            <Dependent Role="tbLiquidacionAnticipoViaticoDetalle">
+              <PropertyRef Name="Lianvi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id">
+          <End Role="tbTipoViatico" Type="Self.tbTipoViatico" Multiplicity="1" />
+          <End Role="tbLiquidacionAnticipoViaticoDetalle" Type="Self.tbLiquidacionAnticipoViaticoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoViatico">
+              <PropertyRef Name="tpv_Id" />
+            </Principal>
+            <Dependent Role="tbLiquidacionAnticipoViaticoDetalle">
+              <PropertyRef Name="tpv_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_are_Id">
           <End Role="tbArea" Type="Self.tbArea" Multiplicity="1" />
           <End Role="tbPuesto" Type="Self.tbPuesto" Multiplicity="*" />
@@ -726,6 +768,17 @@
           <Parameter Name="Lianvi_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="Lianvi_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="Lianvide_Id" Type="int" Mode="In" />
+          <Parameter Name="Lianvi_Id" Type="int" Mode="In" />
+          <Parameter Name="Lianvide_FechaGasto" Type="datetime" Mode="In" />
+          <Parameter Name="tpv_Id" Type="int" Mode="In" />
+          <Parameter Name="Lianvide_MontoGasto" Type="decimal" Mode="In" />
+          <Parameter Name="Lianvide_Concepto" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lianvide_Archivo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lianvide_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="Lianvide_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Conf_tbParametro_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Conf">
           <Parameter Name="conteo" Type="int" Mode="In" />
         </Function>
@@ -739,6 +792,8 @@
           <Parameter Name="par_Servidor" Type="nvarchar" Mode="In" />
           <Parameter Name="par_Puerto" Type="int" Mode="In" />
           <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_PorcentajeAdelantoSalario" Type="decimal" Mode="In" />
+          <Parameter Name="par_FrecuenciaAdelantoSalario" Type="smallint" Mode="In" />
         </Function>
         <Function Name="UDP_Conf_tbParametro_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Conf">
           <Parameter Name="par_Id" Type="tinyint" Mode="In" />
@@ -751,6 +806,8 @@
           <Parameter Name="par_Servidor" Type="nvarchar" Mode="In" />
           <Parameter Name="par_Puerto" Type="int" Mode="In" />
           <Parameter Name="par_PathLogo" Type="nvarchar" Mode="In" />
+          <Parameter Name="par_PorcentajeAdelantoSalario" Type="decimal" Mode="In" />
+          <Parameter Name="par_FrecuenciaAdelantoSalario" Type="smallint" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1143,6 +1200,7 @@
           <EntitySet Name="tbAnticipoSalario" EntityType="Self.tbAnticipoSalario" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbAnticipoViatico" EntityType="Self.tbAnticipoViatico" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbLiquidacionAnticipoViatico" EntityType="Self.tbLiquidacionAnticipoViatico" Schema="Adm" store:Type="Tables" />
+          <EntitySet Name="tbLiquidacionAnticipoViaticoDetalle" EntityType="Self.tbLiquidacionAnticipoViaticoDetalle" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbParametro" EntityType="Self.tbParametro" Schema="Conf" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbActividadEconomica" EntityType="Self.tbActividadEconomica" Schema="Gral" store:Type="Tables" />
@@ -1209,6 +1267,14 @@
           <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id" Association="Self.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id">
             <End Role="tbEstado" EntitySet="tbEstado" />
             <End Role="tbLiquidacionAnticipoViatico" EntitySet="tbLiquidacionAnticipoViatico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id" Association="Self.FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id">
+            <End Role="tbLiquidacionAnticipoViatico" EntitySet="tbLiquidacionAnticipoViatico" />
+            <End Role="tbLiquidacionAnticipoViaticoDetalle" EntitySet="tbLiquidacionAnticipoViaticoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id" Association="Self.FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id">
+            <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
+            <End Role="tbLiquidacionAnticipoViaticoDetalle" EntitySet="tbLiquidacionAnticipoViaticoDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_are_Id" Association="Self.FK_are_Id">
             <End Role="tbArea" EntitySet="tbArea" />
@@ -1860,29 +1926,6 @@
             <Parameter Name="prov_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="prov_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Conf_tbParametro_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result)">
-            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoRRHH" Mode="In" Type="String" />
-            <Parameter Name="par_Password" Mode="In" Type="String" />
-            <Parameter Name="par_Servidor" Mode="In" Type="String" />
-            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
-            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Conf_tbParametro_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result)">
-            <Parameter Name="par_Id" Mode="In" Type="Byte" />
-            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
-            <Parameter Name="par_CorreoRRHH" Mode="In" Type="String" />
-            <Parameter Name="par_Password" Mode="In" Type="String" />
-            <Parameter Name="par_Servidor" Mode="In" Type="String" />
-            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
-            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Gral_tbPuesto_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Update_Result)">
             <Parameter Name="pto_Id" Mode="In" Type="Int32" />
             <Parameter Name="are_Id" Mode="In" Type="Int32" />
@@ -1894,7 +1937,6 @@
           <EntitySet Name="tbAnticipoSalario" EntityType="SIGEM_BIDSSModel.tbAnticipoSalario" />
           <EntitySet Name="tbAnticipoViatico" EntityType="SIGEM_BIDSSModel.tbAnticipoViatico" />
           <EntitySet Name="tbLiquidacionAnticipoViatico" EntityType="SIGEM_BIDSSModel.tbLiquidacionAnticipoViatico" />
-          <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
           <EntitySet Name="sysdiagrams" EntityType="SIGEM_BIDSSModel.sysdiagrams" />
           <EntitySet Name="tbActividadEconomica" EntityType="SIGEM_BIDSSModel.tbActividadEconomica" />
           <EntitySet Name="tbArea" EntityType="SIGEM_BIDSSModel.tbArea" />
@@ -2023,6 +2065,54 @@
             <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
             <Parameter Name="Lianvi_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="Lianvi_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
+          <FunctionImport Name="UDP_Conf_tbParametro_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result)">
+            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoRRHH" Mode="In" Type="String" />
+            <Parameter Name="par_Password" Mode="In" Type="String" />
+            <Parameter Name="par_Servidor" Mode="In" Type="String" />
+            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
+            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+            <Parameter Name="par_PorcentajeAdelantoSalario" Mode="In" Type="Decimal" />
+            <Parameter Name="par_FrecuenciaAdelantoSalario" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Conf_tbParametro_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result)">
+            <Parameter Name="par_Id" Mode="In" Type="Byte" />
+            <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_TelefonoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmpresa" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoEmisor" Mode="In" Type="String" />
+            <Parameter Name="par_CorreoRRHH" Mode="In" Type="String" />
+            <Parameter Name="par_Password" Mode="In" Type="String" />
+            <Parameter Name="par_Servidor" Mode="In" Type="String" />
+            <Parameter Name="par_Puerto" Mode="In" Type="Int32" />
+            <Parameter Name="par_PathLogo" Mode="In" Type="String" />
+            <Parameter Name="par_PorcentajeAdelantoSalario" Mode="In" Type="Decimal" />
+            <Parameter Name="par_FrecuenciaAdelantoSalario" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <EntitySet Name="tbLiquidacionAnticipoViaticoDetalle" EntityType="SIGEM_BIDSSModel.tbLiquidacionAnticipoViaticoDetalle" />
+          <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id">
+            <End Role="tbLiquidacionAnticipoViatico" EntitySet="tbLiquidacionAnticipoViatico" />
+            <End Role="tbLiquidacionAnticipoViaticoDetalle" EntitySet="tbLiquidacionAnticipoViaticoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id">
+            <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
+            <End Role="tbLiquidacionAnticipoViaticoDetalle" EntitySet="tbLiquidacionAnticipoViaticoDetalle" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result)">
+            <Parameter Name="Lianvide_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvide_FechaGasto" Mode="In" Type="DateTime" />
+            <Parameter Name="tpv_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvide_MontoGasto" Mode="In" Type="Decimal" />
+            <Parameter Name="Lianvide_Concepto" Mode="In" Type="String" />
+            <Parameter Name="Lianvide_Archivo" Mode="In" Type="String" />
+            <Parameter Name="Lianvide_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvide_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
@@ -2183,12 +2273,6 @@
         <ComplexType Name="UDP_Inv_tbProveedor_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <ComplexType Name="UDP_Conf_tbParametro_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Conf_tbParametro_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <ComplexType Name="UDP_Gral_tbPuesto_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
@@ -2277,21 +2361,7 @@
           <Property Name="Lianvi_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_Anvi_Id" FromRole="tbLiquidacionAnticipoViatico" ToRole="tbAnticipoViatico" />
           <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id" FromRole="tbLiquidacionAnticipoViatico" ToRole="tbEstado" />
-        </EntityType>
-        <EntityType Name="tbParametro">
-          <Key>
-            <PropertyRef Name="par_Id" />
-          </Key>
-          <Property Name="par_Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="par_NombreEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="par_TelefonoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_CorreoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_CorreoEmisor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_CorreoRRHH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="par_Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="par_Servidor" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="par_Puerto" Type="Int32" Nullable="false" />
-          <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbLiquidacionAnticipoViaticoDetalle" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id" FromRole="tbLiquidacionAnticipoViatico" ToRole="tbLiquidacionAnticipoViaticoDetalle" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -2465,6 +2535,7 @@
           <Property Name="tpv_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="tpv_UsuarioModifica" Type="Int32" />
           <Property Name="tpv_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbLiquidacionAnticipoViaticoDetalle" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id" FromRole="tbTipoViatico" ToRole="tbLiquidacionAnticipoViaticoDetalle" />
         </EntityType>
         <EntityType Name="tbUnidadMedida">
           <Key>
@@ -2902,6 +2973,74 @@
         <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="tbParametro">
+          <Key>
+            <PropertyRef Name="par_Id" />
+          </Key>
+          <Property Name="par_Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="par_NombreEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="par_TelefonoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="par_CorreoEmpresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="par_CorreoEmisor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="par_CorreoRRHH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="par_Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="par_Servidor" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="par_Puerto" Type="Int32" Nullable="false" />
+          <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="par_PorcentajeAdelantoSalario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="par_FrecuenciaAdelantoSalario" Type="Int16" />
+        </EntityType>
+        <ComplexType Name="UDP_Conf_tbParametro_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Conf_tbParametro_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <EntityType Name="tbLiquidacionAnticipoViaticoDetalle">
+          <Key>
+            <PropertyRef Name="Lianvide_Id" />
+          </Key>
+          <Property Name="Lianvide_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lianvi_Id" Type="Int32" Nullable="false" />
+          <Property Name="Lianvide_FechaGasto" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tpv_Id" Type="Int32" Nullable="false" />
+          <Property Name="Lianvide_MontoGasto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Lianvide_Concepto" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Lianvide_Archivo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Lianvide_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="Lianvide_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Lianvide_UsuarioModifica" Type="Int32" />
+          <Property Name="Lianvide_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbLiquidacionAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id" FromRole="tbLiquidacionAnticipoViaticoDetalle" ToRole="tbLiquidacionAnticipoViatico" />
+          <NavigationProperty Name="tbTipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id" FromRole="tbLiquidacionAnticipoViaticoDetalle" ToRole="tbTipoViatico" />
+        </EntityType>
+        <Association Name="FK_Adm_tbLiquidacionAnticipoViatico_tbLiquidacionAnticipoViaticoDetalle_Lianvi_Id">
+          <End Type="SIGEM_BIDSSModel.tbLiquidacionAnticipoViatico" Role="tbLiquidacionAnticipoViatico" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbLiquidacionAnticipoViaticoDetalle" Role="tbLiquidacionAnticipoViaticoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLiquidacionAnticipoViatico">
+              <PropertyRef Name="Lianvi_Id" />
+            </Principal>
+            <Dependent Role="tbLiquidacionAnticipoViaticoDetalle">
+              <PropertyRef Name="Lianvi_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id">
+          <End Type="SIGEM_BIDSSModel.tbTipoViatico" Role="tbTipoViatico" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbLiquidacionAnticipoViaticoDetalle" Role="tbLiquidacionAnticipoViaticoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTipoViatico">
+              <PropertyRef Name="tpv_Id" />
+            </Principal>
+            <Dependent Role="tbLiquidacionAnticipoViaticoDetalle">
+              <PropertyRef Name="tpv_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3233,20 +3372,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Gral_tbPuesto_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Gral_tbPuesto_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Gral_tbPuesto_Update_Result">
@@ -3329,22 +3454,6 @@
                 <ScalarProperty Name="Anvi_Id" ColumnName="Anvi_Id" />
                 <ScalarProperty Name="Lianvi_Correlativo" ColumnName="Lianvi_Correlativo" />
                 <ScalarProperty Name="Lianvi_Id" ColumnName="Lianvi_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbParametro">
-            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
-              <MappingFragment StoreEntitySet="tbParametro">
-                <ScalarProperty Name="par_PathLogo" ColumnName="par_PathLogo" />
-                <ScalarProperty Name="par_Puerto" ColumnName="par_Puerto" />
-                <ScalarProperty Name="par_Servidor" ColumnName="par_Servidor" />
-                <ScalarProperty Name="par_Password" ColumnName="par_Password" />
-                <ScalarProperty Name="par_CorreoRRHH" ColumnName="par_CorreoRRHH" />
-                <ScalarProperty Name="par_CorreoEmisor" ColumnName="par_CorreoEmisor" />
-                <ScalarProperty Name="par_CorreoEmpresa" ColumnName="par_CorreoEmpresa" />
-                <ScalarProperty Name="par_TelefonoEmpresa" ColumnName="par_TelefonoEmpresa" />
-                <ScalarProperty Name="par_NombreEmpresa" ColumnName="par_NombreEmpresa" />
-                <ScalarProperty Name="par_Id" ColumnName="par_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3655,6 +3764,62 @@
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbParametro">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
+              <MappingFragment StoreEntitySet="tbParametro">
+                <ScalarProperty Name="par_FrecuenciaAdelantoSalario" ColumnName="par_FrecuenciaAdelantoSalario" />
+                <ScalarProperty Name="par_PorcentajeAdelantoSalario" ColumnName="par_PorcentajeAdelantoSalario" />
+                <ScalarProperty Name="par_PathLogo" ColumnName="par_PathLogo" />
+                <ScalarProperty Name="par_Puerto" ColumnName="par_Puerto" />
+                <ScalarProperty Name="par_Servidor" ColumnName="par_Servidor" />
+                <ScalarProperty Name="par_Password" ColumnName="par_Password" />
+                <ScalarProperty Name="par_CorreoRRHH" ColumnName="par_CorreoRRHH" />
+                <ScalarProperty Name="par_CorreoEmisor" ColumnName="par_CorreoEmisor" />
+                <ScalarProperty Name="par_CorreoEmpresa" ColumnName="par_CorreoEmpresa" />
+                <ScalarProperty Name="par_TelefonoEmpresa" ColumnName="par_TelefonoEmpresa" />
+                <ScalarProperty Name="par_NombreEmpresa" ColumnName="par_NombreEmpresa" />
+                <ScalarProperty Name="par_Id" ColumnName="par_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Conf_tbParametro_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Conf_tbParametro_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Conf_tbParametro_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbLiquidacionAnticipoViaticoDetalle">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbLiquidacionAnticipoViaticoDetalle">
+              <MappingFragment StoreEntitySet="tbLiquidacionAnticipoViaticoDetalle">
+                <ScalarProperty Name="Lianvide_FechaModifica" ColumnName="Lianvide_FechaModifica" />
+                <ScalarProperty Name="Lianvide_UsuarioModifica" ColumnName="Lianvide_UsuarioModifica" />
+                <ScalarProperty Name="Lianvide_FechaCrea" ColumnName="Lianvide_FechaCrea" />
+                <ScalarProperty Name="Lianvide_UsuarioCrea" ColumnName="Lianvide_UsuarioCrea" />
+                <ScalarProperty Name="Lianvide_Archivo" ColumnName="Lianvide_Archivo" />
+                <ScalarProperty Name="Lianvide_Concepto" ColumnName="Lianvide_Concepto" />
+                <ScalarProperty Name="Lianvide_MontoGasto" ColumnName="Lianvide_MontoGasto" />
+                <ScalarProperty Name="tpv_Id" ColumnName="tpv_Id" />
+                <ScalarProperty Name="Lianvide_FechaGasto" ColumnName="Lianvide_FechaGasto" />
+                <ScalarProperty Name="Lianvi_Id" ColumnName="Lianvi_Id" />
+                <ScalarProperty Name="Lianvide_Id" ColumnName="Lianvide_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

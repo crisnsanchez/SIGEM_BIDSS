@@ -14,11 +14,20 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbTipoViatico
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbTipoViatico()
+        {
+            this.tbLiquidacionAnticipoViaticoDetalle = new HashSet<tbLiquidacionAnticipoViaticoDetalle>();
+        }
+    
         public int tpv_Id { get; set; }
         public string tpv_Descripcion { get; set; }
         public int tpv_UsuarioCrea { get; set; }
         public System.DateTime tpv_FechaCrea { get; set; }
         public Nullable<int> tpv_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> tpv_FechaModifica { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbLiquidacionAnticipoViaticoDetalle> tbLiquidacionAnticipoViaticoDetalle { get; set; }
     }
 }
