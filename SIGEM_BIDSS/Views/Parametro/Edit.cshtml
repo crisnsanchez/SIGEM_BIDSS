@@ -1,9 +1,11 @@
 ﻿@model SIGEM_BIDSS.Models.tbParametro
-
+@using SIGEM_BIDSS.Models
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -44,7 +46,7 @@
                             <input id="CargarFoto" value="Cargar Logo" name="FotoPath" type="file" class="custom-file-input col-md-6">
                             <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto">
                                 @if (Model.par_PathLogo != null && Model.par_PathLogo != "")
-                                {@Url.Content(Model.par_PathLogo)}
+                                {@Url.Content(Model.par_PathLogo).Substring(13,5)}
                             </label>
                         </div>
                         @Html.ValidationMessageFor(model => model.par_PathLogo, null, new { @class = "text-danger" , @id = "errorlogo" })
