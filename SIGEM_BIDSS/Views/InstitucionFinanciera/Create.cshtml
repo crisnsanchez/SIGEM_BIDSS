@@ -76,7 +76,7 @@
                     @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                        @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", id = "correo" })
+                        @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", id = "errorcorreo" })
                     </div>
                 </div>
 
@@ -113,22 +113,4 @@
     });
 
 </script>
-<script>
-    $("#insf_Nombre").keyup(function () {
-        $('#Nombres').hide();
-    });
 
-    $("#insf_Contacto").keyup(function () {
-        $('#Contacto').hide();
-    });
-
-    $("#insf_Telefono").keyup(function () {
-        $('#Telefono').hide();
-    });
-
-    $("#insf_Correo").keyup(function () {
-        $('#correo').hide();
-    });
-
-
-</script>

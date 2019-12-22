@@ -128,7 +128,7 @@ namespace SIGEM_BIDSS.Controllers
             catch (Exception Ex)
             {
                 Function.BitacoraErrores("InstitucionFinanciera", "CreatePost", UserName, Ex.Message.ToString());
-                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+               
                 return View();
             }
             return View();
