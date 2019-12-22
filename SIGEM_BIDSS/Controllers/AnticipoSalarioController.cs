@@ -32,7 +32,6 @@ namespace SIGEM_BIDSS.Controllers
                 throw;
             }
         }
-
         // GET: AnticipoSalario/Details/5
         public ActionResult Details(int? id)
         {
@@ -42,6 +41,13 @@ namespace SIGEM_BIDSS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
+            if (tbAnticipoSalario.est_Id == GeneralFunctions.Enviada)
+            {
+                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                }
+            }
             if (tbAnticipoSalario == null)
             {
                 return HttpNotFound();
