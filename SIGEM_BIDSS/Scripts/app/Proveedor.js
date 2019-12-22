@@ -2,7 +2,7 @@
 
 document.getElementById('prov_Email').addEventListener('input', function () {
     campo = event.target;
-    valido = document.getElementById('emailEoK');
+    valido = document.getElementById('emailEoKk');
     //selector = document.getElementById('emp_CorreoElectronico')
     emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono
@@ -134,21 +134,24 @@ $("#prov_RTN").keyup(function () {
     $('#Rtn_Error').hide();
 });
 
+
+
 $("#prov_Email").keyup(function () {
-    $('#emailEoK').hide();
+    $('#correo').hide();
 });
+
 
 $("#prov_Telefono").keyup(function () {
     $('#Telefono').hide();
 });
 
-$("#acte_Id").keyup(function () {
+$("#acte_Id").change(function () {
     $('#Actividad').hide();
 });
 $("#prov_UsuarioCrea").keyup(function () {
     $('#Dep').hide();
 });
-$("#mun_codigo").keyup(function () {
+$("#mun_codigo").change(function () {
     $('#Mun').hide();
 });
 $("#prov_Direccion").keyup(function () {
