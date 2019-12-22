@@ -39,7 +39,7 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Teléfono")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Phone( ErrorMessage = "El campo Teléfono debe tener minimo 11 caracteres")]
+        [Phone( ErrorMessage = "Por favor complete el campo teléfono")]
         //[MinLength(11, ErrorMessage = "El campo Teléfono debe tener minimo {1} caracteres")]
         public string prov_Telefono { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]

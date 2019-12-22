@@ -97,7 +97,7 @@ namespace SIGEM_BIDSS.Controllers
                     if (ErrorMessage.StartsWith("-2"))
                     {
                     
-                        ModelState.AddModelError("", "Este cargo ya esta existe para esta área.");
+                        ModelState.AddModelError("", "Este cargo ya éxiste para esta área.");
                         return View();
                     }
                     else
@@ -160,7 +160,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     if (isDuplicated(tbPuesto))
                     {
-                        ModelState.AddModelError("", "Este cargo ya esta existe para esta área.");
+                        ModelState.AddModelError("", "Este cargo ya  éxiste para esta área.");
                         return View(tbPuesto);
                     }
                 IEnumerable<Object> List = null;

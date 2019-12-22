@@ -10,7 +10,7 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class LiquidacionAnticipoViaticoDetalleController : Controller
+    public class LiquidacionAnticipoViaticoDetalleController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 
@@ -21,7 +21,7 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbLiquidacionAnticipoViaticoDetalle.ToList());
         }
 
-        // GET: LiquidacionAnticipoViaticoDetalle/Details/5
+        //GET: LiquidacionAnticipoViaticoDetalle/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +36,7 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbLiquidacionAnticipoViaticoDetalle);
         }
 
-        // GET: LiquidacionAnticipoViaticoDetalle/Create
+        //GET: LiquidacionAnticipoViaticoDetalle/Create
         public ActionResult Create()
         {
             ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
