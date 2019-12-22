@@ -1,9 +1,8 @@
 ﻿
 
-
 document.getElementById('insf_Correo').addEventListener('input', function () {
     campo = event.target;
-    valido = document.getElementById('correo');
+    valido = document.getElementById('errorcorreo');
     //selector = document.getElementById('emp_CorreoElectronico')
     emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono
@@ -17,8 +16,6 @@ document.getElementById('insf_Correo').addEventListener('input', function () {
     }
 });
 
-
-
 $('#insf_Nombre').change(function () {
     $('#Nombres').hide();
 });
@@ -28,4 +25,8 @@ $('#insf_Contacto').change(function () {
 });
 $('#insf_Telefono').change(function () {
     $('#Telefono').hide();
+});
+
+$("#insf_Correo").keyup(function () {
+    $('#correo').hide();
 });
