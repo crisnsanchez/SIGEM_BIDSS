@@ -109,9 +109,8 @@
 
                             <div class="form-group col-md-6">
 
-
-                                <label class="control-label col-md-4">Actividad Económica</label>
-                                @Html.DropDownList("acte_Id", null, "Seleccione Actividad", htmlAttributes: new { @class = "form-control" })
+                                <label class="control-label col-md-8">Actividad Económica</label>
+                                @Html.DropDownList("acte_Id", null, "Seleccione Actividad Ecónomica", htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.acte_Id, "", new { @class = "text-danger", @Id = "Actividad" })
                             </div>
                         </div>

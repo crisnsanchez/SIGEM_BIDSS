@@ -52,7 +52,7 @@
                     @if (ViewBag.empIsNull == 0 || ViewBag.empIsNull == null)
                     {
 
-                        @Html.DropDownList("emp_Id", null, "Seleccione", htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("emp_Id", null, "Seleccione Empleado", htmlAttributes: new { @class = "form-control" })
                     }
                     else
                     {
@@ -78,7 +78,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.tmo_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
-                        @Html.DropDownList("tmo_Id", null, "Seleccione", htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("tmo_Id", null, "Seleccione Moneda", htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.tmo_Id, "", new { @class = "text-danger", @id = "moneda" })
                     </div>
                 </div>
