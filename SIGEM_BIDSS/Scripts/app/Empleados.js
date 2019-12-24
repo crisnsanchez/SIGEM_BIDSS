@@ -97,7 +97,7 @@ function GetMunicipios() {
             $('#municipio').show();
             if (data.length > 0) {
                 $('#mun_codigo').empty();
-                $('#mun_codigo').append("<option value=''>Seleccione</option>");
+                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
                 $.each(data, function (key, val) {
                     $('#mun_codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
                 });
@@ -223,3 +223,14 @@ $('#emp_FechaIngreso').keyup(function () {
     $('#FechaIngreso').hide();
 });
 
+
+
+//Get Current Date
+function GetTodayDate() {
+    var tdate = new Date();
+    var dd = tdate.getDate(); //yields day
+    var MM = tdate.getMonth(); //yields month
+    var yyyy = tdate.getFullYear(); //yields year
+    var currentDate = dd + "/" + (MM + 1) + "/" + yyyy;
+    return currentDate;
+}
