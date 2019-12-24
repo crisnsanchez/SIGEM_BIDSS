@@ -114,7 +114,7 @@
                 <div class="form-group col-md-6">
                     @Html.LabelFor(model => model.emp_Sexo, htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
-                        @Html.DropDownList("emp_Sexo",null,  "Seleccione",htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("emp_Sexo",null,  "Seleccione Sexo",htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.emp_Sexo, "", new { @class = "text-danger", id = "Sexo" })
                     </div>
                 </div>
@@ -132,13 +132,13 @@
                     @Html.LabelFor(model => model.emp_Identificacion, htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
                         @Html.EditorFor(model => model.emp_Identificacion, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
-                        <p id="Identidad" style="color:red">@Html.ValidationMessageFor(model => model.emp_Identificacion, "", new { @class = "text-danger", id = "Identidad" })</p>
+                      @Html.ValidationMessageFor(model => model.emp_Identificacion, "", new { @class = "text-danger", id = "Identidad" })
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     @Html.LabelFor(model => model.tps_Id, htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
-                        @Html.DropDownList("tps_Id", null, "Seleccione", htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("tps_Id", null, "Seleccione Tipo Sangre", htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.tps_Id, "", new { @class = "text-danger", id = "ti" })
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                 <div class="form-group col-md-6">
                     <label class="control-label col-md-6">Área</label>
                     <div class="col-md-11">
-                        @Html.DropDownList("are_Id", null, "Seleccione", new { @class = "form-control" })
+                        @Html.DropDownList("are_Id", null, "Seleccione Área", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.emp_UsuarioCrea, "", new { @class = "text-danger", id = "emp_UsuarioCrea" })
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                     @Html.LabelFor(model => model.pto_Id, "Puesto", new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
                         <select class="form-control" name="pto_Id" id="pto_Id">
-                            <option>Seleccione</option>
+                            <option>Seleccione Puesto</option>
                         </select>
                         @Html.ValidationMessageFor(model => model.pto_Id, "", new { @class = "text-danger", id = "Puesto" })
                     </div>
@@ -199,7 +199,7 @@
                 <div class="form-group col-md-6">
                     <label class="control-label col-md-6">Departamento</label>
                     <div class="col-md-11">
-                        @Html.DropDownList("dep_Codigo", null, "Seleccione", new { @class = "form-control" })
+                        @Html.DropDownList("dep_Codigo", null, "Seleccione Departamento", new { @class = "form-control" })
                         @Html.ValidationMessageFor(muni => test.dep_codigo, "", new { @class = "text-danger", id = "Departamento" })
                     </div>
                 </div>
@@ -207,7 +207,7 @@
                     @Html.LabelFor(model => model.mun_codigo, "Municipio", new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
                         <select class="form-control" name="mun_codigo" id="mun_codigo">
-                            <option>Seleccione</option>
+                            <option>Seleccione Municipio</option>
                         </select>
                         @Html.ValidationMessageFor(model => model.mun_codigo, "", new { @class = "text-danger", id = "Municipio" })
                     </div>
@@ -237,10 +237,8 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
-
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-
     <script src="~/Scripts/app/Empleados.js"></script>
 
     <script type="text/javascript">
@@ -249,7 +247,51 @@
         $(document).ready(function () {
             bsCustomFileInput.init();
         });
+
+
+        $("#emp_FechaNacimiento").blur(function () {
+            valido = document.getElementById('FechaNacimiento');         
+            var FechaNacimiento = $('#emp_FechaNacimiento').val();
+            var FechaIngreso = $('#emp_FechaIngreso').val();
+ 
+            if (FechaNacimiento > GetTodayDate() || FechaIngreso > GetTodayDate() ){
+                $('#emp_FechaNacimiento').val("");
+                $('#emp_FechaNacimiento').focus();
+                $('#emp_FechaIngreso').val("");
+                $('#emp_FechaIngreso').focus();
+                valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+
+            }
+
+            else
+            {
+                valido.innerText = "";
+            }
+        });
+
+
+        $("#emp_FechaIngreso").blur(function () {
+            valido1 = document.getElementById('FechaIngreso');
+      
+            var FechaIngreso = $('#emp_FechaIngreso').val();
+
+            if (FechaIngreso > GetTodayDate()) {
+         
+                $('#emp_FechaIngreso').val("");
+                $('#emp_FechaIngreso').focus();
+                valido1.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+
+            }
+
+            else {
+                valido.innerText = "";
+            }
+        });
+
     </script>
+
+
+
 </div>
 
 

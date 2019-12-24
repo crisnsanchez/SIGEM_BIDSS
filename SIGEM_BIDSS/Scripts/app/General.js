@@ -39,6 +39,18 @@ $(function () {
             title: 'Este municipio está siendo usado por otra tabla, no se puede Eliminar.'
         })
     }
+    else if (_Action == "ExisteCo") {
+        Toast.fire({
+            type: 'warning',
+            title: 'Este nombre ya éxiste, por favor revise la tabla de Municipios.'
+        })
+    }
+    else if (_Action == "ExisteNom") {
+        Toast.fire({
+            type: 'warning',
+            title: 'Este nombre ya éxiste, por favor revise la tabla de Municipios.'
+        })
+    }
     else if (_Action == "Rechazada") {
         Toast.fire({
             type: 'success',

@@ -52,10 +52,24 @@ namespace SIGEM_BIDSS.Controllers
         {
 
             IEnumerable<Object> list = null;
+            var Msj = "";
+            var UserName = "";
+
+
             try
             {
+                
                 tbEmpleado empleado = db.tbEmpleado.Find(tbEmpleado.emp_Id);
                 list = db.UDP_rrhh_tbEmpleado_Update(tbEmpleado.emp_Id, empleado.emp_Nombres, empleado.emp_Apellidos, empleado.emp_Sexo, empleado.emp_FechaNacimiento, empleado.emp_Identificacion, empleado.emp_Telefono, empleado.emp_CorreoElectronico, empleado.emp_EsJefe, tbEmpleado.emp_RazonInactivacion, GeneralFunctions.empleadoinactivo, empleado.tps_Id, empleado.pto_Id, empleado.emp_FechaIngreso, empleado.emp_Direccion, empleado.emp_PathImage, empleado.mun_codigo, 1);
+                foreach (UDP_rrhh_tbEmpleado_Update_Result Empleado in list)
+                    Msj = Empleado.MensajeError;
+                if (Msj.StartsWith("-1"))
+                {
+                    Function.BitacoraErrores("Empleado", "Inactivar", UserName, Msj);
+            
+
+        
+                }
             }
             catch
                 (Exception Ex)
@@ -205,6 +219,12 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (tbEmpleado.are_Id == 0)
                     ModelState.AddModelError("emp_UsuarioCrea", "El campo Área es obligatorio.");
+                 
+                if (tbEmpleado.mun_codigo  == "")
+                  ModelState.AddModelError("dep_codigo", "El campo Municipio es obligatorio.");
+
+                if (tbEmpleado.dep_Codigo == "")
+                 ModelState.AddModelError("mun_codigo", "El campo Departamento es obligatorio.");
 
                 if (ModelState.IsValid)
                 {

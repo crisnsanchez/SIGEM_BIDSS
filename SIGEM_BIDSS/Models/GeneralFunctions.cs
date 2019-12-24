@@ -18,7 +18,7 @@ namespace SIGEM_BIDSS.Models
         public List<tbEmpleado> Sexo()
         {
             List<tbEmpleado> Hola = new List<tbEmpleado>();
-            Hola.Add(new tbEmpleado { ge_Id = "", ge_Description = "Seleccione Uno" });
+            //Hola.Add(new tbEmpleado { ge_Id = "", ge_Description = "Seleccione Uno" });
             Hola.Add(new tbEmpleado { ge_Id = "F", ge_Description = "Femenino" });
             Hola.Add(new tbEmpleado { ge_Id = "M", ge_Description = "Masculino" });
             return Hola;
@@ -40,7 +40,8 @@ namespace SIGEM_BIDSS.Models
         public const string _isEdited = "Edited";
         public const string _isDelete = "Delete";
         public const string _isDependencia = "Dependencias";
-
+        public const string _YaExiste = "ExisteCo";
+        public const string _Nombre ="ExisteNom";
 
 
         //Solicitudes
