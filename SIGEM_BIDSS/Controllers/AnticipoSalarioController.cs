@@ -225,8 +225,8 @@ namespace SIGEM_BIDSS.Controllers
                     ErrorMessage = Res.MensajeError;
                 if (ErrorMessage.StartsWith("-1"))
                 {
-                    Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorMessage);
-                    ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
+                    ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
                     return false;
                 }
                 else
