@@ -23,14 +23,19 @@ var monto = document.getElementById("Cantidad");
 monto.addEventListener("input", function () {
     empSueldo = parseFloat(document.getElementById("Sueldo").value);
     empMonto = parseFloat(document.getElementById("Cantidad").value);
-    console.log(empSueldo+"  |  "+empMonto);
+    empPorcetanje = parseFloat(document.getElementById("Porcentaje").value);
     if (empMonto > empSueldo) {
         spanCantidad = document.getElementById("spanCantidad").innerText = "Monto solicitado mayor que el Sueldo";
         console.log(spanCantidad);
     } else {
         spanCantidad = document.getElementById("spanCantidad").innerText = "";
     }
-
+    if (empMonto > empPorcetanje) {
+        spanCantidad = document.getElementById("spanCantidad").innerText = "El monto no puede ser mayor que el pocentaje permitido";
+        console.log(spanCantidad);
+    } else {
+        spanCantidad = document.getElementById("spanCantidad").innerText = "";
+    }
 });
 //document.getElementById("Ansal_MontoSolicitado").onblur = function () {
 //    //number-format the user input
@@ -62,7 +67,7 @@ $(document).ready(function () {
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
     $("input[type='text']", 'form').each(function (e) {
-        _id = $(this).attr("id");
+        var _id = $(this).attr("id");
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
 

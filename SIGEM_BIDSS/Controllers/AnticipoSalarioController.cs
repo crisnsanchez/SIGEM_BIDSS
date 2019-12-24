@@ -93,7 +93,8 @@ namespace SIGEM_BIDSS.Controllers
             int EmployeeID = Function.GetUser(out UserName);
             int fecha = Function.DatetimeNow().Year;
             int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
-            if (SolCount >= 3)
+            
+            if (SolCount >= 8)
             {
                 TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                 return RedirectToAction("Solicitud", "Menu");
@@ -101,12 +102,15 @@ namespace SIGEM_BIDSS.Controllers
 
 
             IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
-           
-            var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select  _tbSueldo.sue_Cantidad ).FirstOrDefault();
-            decimal dSueldo = Convert.ToDecimal(vSueldo);
+
+            var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+            var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
+            var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
+
             tbAnticipoSalario tbAnticipoSalario = new tbAnticipoSalario
             {
-                Sueldo = dSueldo
+                Sueldo = Convert.ToDecimal(vSueldo),
+                Porcentaje = Convert.ToDecimal(_percent)
             };
             ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
             ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
@@ -131,11 +135,19 @@ namespace SIGEM_BIDSS.Controllers
                 tbAnticipoSalario.Ansal_GralFechaSolicitud = Function.DatetimeNow();
                 tbAnticipoSalario.est_Id = GeneralFunctions.Enviada;
 
+                var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
+                var _percent = vSueldo * (Convert.ToDecimal( _Parameters.par_PorcentajeAdelantoSalario)/ 100);
+
                 if (String.IsNullOrEmpty(tbAnticipoSalario.Ansal_Comentario)) { tbAnticipoSalario.Ansal_Comentario = GeneralFunctions.stringDefault; }
                     tbAnticipoSalario.Ansal_MontoSolicitado = Convert.ToDecimal(tbAnticipoSalario.Cantidad.Replace(",", ""));
 
-                if (tbAnticipoSalario.Ansal_MontoSolicitado > tbAnticipoSalario.Sueldo)
+                if (vSueldo > tbAnticipoSalario.Sueldo)
                     ModelState.AddModelError("Cantidad", "El monto no puede ser mayor que el sueldo.");
+
+                if (_percent > tbAnticipoSalario.Sueldo)
+                    ModelState.AddModelError("Cantidad", "El monto no puede ser mayor que el pocentaje permitido.");
+
 
                 if (ModelState.IsValid)
                 {
@@ -165,7 +177,7 @@ namespace SIGEM_BIDSS.Controllers
 
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                        var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                       
                         Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
                         ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
 

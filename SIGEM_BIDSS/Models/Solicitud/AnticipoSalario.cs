@@ -21,6 +21,10 @@ namespace SIGEM_BIDSS.Models
         [NotMapped]
         [Display(Name = "Sueldo")]
         public decimal Sueldo { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Porcentaje")]
+        public decimal Porcentaje { get; set; }
     }
 
 

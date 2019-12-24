@@ -67,47 +67,38 @@
                         @Html.DisplayNameFor(model => model.Ansal_Comentario)
                     </dt>
                     <dd>
-                        @Html.DisplayFor(model => model.Ansal_Comentario)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.est_Id)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+                        @if (Model.Ansal_Comentario != GeneralFunctions.stringDefault)
+                        {@Html.DisplayFor(model => model.Ansal_Comentario)}
                     </dd>
                 </div>
                 <div class="form-group col-md-3">
                     @if (Model.est_Id == GeneralFunctions.Rechazada)
                     {
+
                         <dt>
-                            @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
+                            @Html.DisplayNameFor(model => model.est_Id)
                         </dt>
-
                         <dd>
-                            @Html.DisplayFor(model => model.Ansal_RazonRechazo)
+                            @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
                         </dd>
+                        if (Model.Ansal_RazonRechazo != GeneralFunctions.stringDefault)
+                        {
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Ansal_RazonRechazo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Ansal_RazonRechazo)
+                            </dd>
+                        }
                     }
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_UsuarioCrea)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Ansal_FechaCrea)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ansal_FechaCrea)
-                    </dd>
 
                 </div>
             </dl>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    @if (Model.est_Id == GeneralFunctions.Enviada || Model.est_Id == GeneralFunctions.Revisada)
+                    @if (Model.est_Id == GeneralFunctions.Revisada)
                     {
                         <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
                         <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />

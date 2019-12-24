@@ -7,7 +7,7 @@
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
     $("input[type='text']", 'form').each(function () {
-        _id = $(this).attr("id");
+        var _id = $(this).attr("id");
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
        

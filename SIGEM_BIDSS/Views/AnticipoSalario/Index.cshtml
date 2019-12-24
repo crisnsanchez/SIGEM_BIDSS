@@ -77,7 +77,7 @@
                     </td>
                     <td>
                         @{
-                            if (item.est_Id == GeneralFunctions.Enviada || item.est_Id == GeneralFunctions.Revisada)
+                            if (item.est_Id == GeneralFunctions.Enviada)
                             {
                                 <input type="button" id="Approve" class="btn btn-primary  btn-xs" style="width: 57px;" value="Aprobar" />
                                 <input type="button" id="Reject" class="btn btn-danger  btn-xs" style="width: 57px;" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />

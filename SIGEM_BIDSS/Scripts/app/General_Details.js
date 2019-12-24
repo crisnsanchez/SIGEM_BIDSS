@@ -11,18 +11,23 @@ $(function () {
 
     //Mensaje que mostrar segun funcion
     _Action = $('#vSwal').val();
+    console.log(_Action)
     if (_Action == "Revisada") {
         Toast.fire({
             type: 'success',
             title: 'Solicitud Revisada.'
         })
     }
-    else if (_Action == "Edited") {
+    else if (_Action == "Aceptada") {
         Toast.fire({
             type: 'success',
-            title: 'Se ha actualizado con Exito.'
+            title: 'Se ha aprobado la solicitud.'
         })
-    } else {
+    } else if (_Action == "Rechazada") {
+        Toast.fire({
+            type: 'error',
+            title: 'Se ha rechazado la solicitud.'
+        })
     }
 })
 
@@ -30,9 +35,9 @@ $(function () {
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
     $("textarea", 'body').each(function (e) {
-        _id = $(this).attr("id");
+        var _id = $(this).attr("id");
         _value = document.getElementById(_id).value;
-        document.getElementById(_id).value = _value.trimStart();
+        _value = _value.trimStart();
 
     });
     $(".normalize", 'body').each(function (e) {
@@ -40,4 +45,6 @@ document.addEventListener("input", function () {
             this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
         }
     });
+
+
 });
