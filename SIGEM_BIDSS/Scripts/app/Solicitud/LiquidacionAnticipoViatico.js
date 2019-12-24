@@ -5,14 +5,20 @@ $('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida').datepic
     language: "es",
     daysOfWeekDisabled: "0"
 });
-
+$("#CargarArchivo").change(function () {
+    readURL(this);
+});
 
 //--------Obtiene los valores de los textbox y los agrega a la tabla(con Datatables)
 function AgregarMunicipiosDT() {
-    var Lianvide_MontoGasto = $('#Lianvide_MontoGasto').val();
+    var Lianvide_Archivo = $('#Lianvide_Archivo').val();
     var tpv_Id = $('#tpv_Id').val();
-    var MunCodigo = $('#mun_codigo').val();
-    var MunNombre = $('#mun_nombre').val();
+    var Lianvide_FechaGasto = $('#Lianvide_FechaGasto').val();
+    var Lianvide_MontoGasto = $('#Lianvide_MontoGasto').val();
+    var LianvideArchivo = $('#Lianvide_Archivo').val();
+    var tpvId = $('#tpv_Id').val();
+    var LianvideFechaGasto = $('#Lianvide_FechaGasto').val();
+    var LianvideMontoGasto = $('#Lianvide_MontoGasto').val();
     var table = $('#tblMunicipio').DataTable();
     _depCodigo = true;
     _depLength = true;
@@ -28,6 +34,21 @@ function AgregarMunicipiosDT() {
     //---------------------------------------------------------------------------------------
     //------------------------------Validaciones Codigo Departamento------------------------------
 
+    if (Lianvide_Archivo == '') {
+        $('#dep_CodigoCodigoError').text('');
+        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
+        _depCodigo = false;
+    }
+    if (tpv_Id == '') {
+        $('#dep_CodigoCodigoError').text('');
+        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
+        _depCodigo = false;
+    }
+    if (Lianvide_FechaGasto == '') {
+        $('#dep_CodigoCodigoError').text('');
+        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
+        _depCodigo = false;
+    }
     if (Lianvide_MontoGasto == '') {
         $('#dep_CodigoCodigoError').text('');
         $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
