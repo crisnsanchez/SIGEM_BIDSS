@@ -148,6 +148,7 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int? id, [Bind(Include = "dep_Codigo,dep_Nombre,dep_UsuarioCrea,dep_FechaCrea,dep_UsuarioModifica,dep_FechaModifica")] tbDepartamento tbDepartamento)
         {
+            
             IEnumerable<object> depart = null;
             IEnumerable<object> munici = null;
             string MsjError = "";
@@ -177,9 +178,11 @@ namespace SIGEM_BIDSS.Controllers
                         }
                         else
                         {
+                           
 
                             if (List != null && List.Count > 0)
                             {
+                               
                                 foreach (tbMunicipio municipio in List)
                                 {
                                     munici = db.UDP_Gral_tbMunicipio_Insert(municipio.mun_codigo
@@ -197,8 +200,8 @@ namespace SIGEM_BIDSS.Controllers
                                     {
 
 
-
-                                        ModelState.AddModelError("", "Ya existe un Municipio en este Departamento con ese nombre, agregue otro.");
+                                        TempData["swalfunction"] = GeneralFunctions._YaExiste;
+                                       
                                         return RedirectToAction("Edit/" + MsjError);
                                     }
                                 }
