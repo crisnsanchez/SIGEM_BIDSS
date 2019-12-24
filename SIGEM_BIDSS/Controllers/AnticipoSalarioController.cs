@@ -93,8 +93,9 @@ namespace SIGEM_BIDSS.Controllers
             int EmployeeID = Function.GetUser(out UserName);
             int fecha = Function.DatetimeNow().Year;
             int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
-            
-            if (SolCount >= 8)
+            var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+
+            if (SolCount >= _Parameters.par_FrecuenciaAdelantoSalario)
             {
                 TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                 return RedirectToAction("Solicitud", "Menu");
@@ -103,7 +104,6 @@ namespace SIGEM_BIDSS.Controllers
 
             IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
 
-            var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
             var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
             var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
 

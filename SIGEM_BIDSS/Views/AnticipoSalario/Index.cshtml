@@ -46,7 +46,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.est_Id)
                     </th>
-                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -75,21 +74,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
                     </td>
-                    <td>
-                        @{
-                            if (item.est_Id == GeneralFunctions.Enviada)
-                            {
-                                <input type="button" id="Approve" class="btn btn-primary  btn-xs" style="width: 57px;" value="Aprobar" />
-                                <input type="button" id="Reject" class="btn btn-danger  btn-xs" style="width: 57px;" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
-                            }
-                            else
-                            {
-                                <input disabled type="button" class="btn btn-primary  btn-xs" style="width: 57px;" value="Aprobar" />
-                                <input disabled type="button" class="btn btn-danger  btn-xs" style="width: 57px;" value="Rechazar" />
-                            }
-                        }
-                        @Html.ActionLink("Detalles", "Details", new { id = item.Ansal_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
-                    </td>
+                  
                 </tr>
                 }
             </tbody>
@@ -100,14 +85,8 @@
 
 
 
-@Html.Partial("_Modales")
-
-
-
 
 @section Scripts {
-
-
 
     <!-- DataTables -->
     <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
@@ -115,6 +94,5 @@
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
     <script src="~/Scripts/app/DataTables.js"></script>
-    <script src="~/Scripts/app/Solicitud/AnticipoSalario/Modals.js"></script>
 
 }
