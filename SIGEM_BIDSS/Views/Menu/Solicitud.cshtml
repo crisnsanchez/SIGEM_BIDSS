@@ -6,6 +6,7 @@
 
 @using SIGEM_BIDSS.Models
 
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 @if (ViewBag.smserror != "" && ViewBag.smserror != null)
 {
     <div class="col-md-12" id="mensaje">
@@ -92,16 +93,35 @@
     </div>
 </div>
 <!-- /.card -->
+@section scripts{
 
 
+    <script>
+
+        
+        $(function () {
+            //Inicializacion de la funcion
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
 
 
+            //Mensaje que mostrar segun funcion
+            _Action = $('#vSwal').val();
+            console.log(_Action)
+            if (_Action == "Rechazada") {
+                console.log("Verdadero")
 
+                Toast.fire({
+                    type: 'error',
+                    title: 'Ha alcanzado el limite de solicitudes.'
+                })
+            }
+        })
+    </script>
 
-
-
-
-
-
-
-
+    
+}

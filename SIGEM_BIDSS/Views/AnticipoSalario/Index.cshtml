@@ -69,7 +69,8 @@
                         @Html.DisplayFor(modelItem => item.Ansal_Justificacion)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Ansal_Comentario)
+                        @if (item.Ansal_Comentario != GeneralFunctions.stringDefault)
+                        {@Html.DisplayFor(modelItem => item.Ansal_Comentario)}
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)

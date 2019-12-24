@@ -5,6 +5,44 @@ $("#frmsubmit").click(function () {
     $("form").submit()
 })
 
+//$("#Cantidad").on({
+//    "focus": function (event) {
+//        $(event.target).select();
+//    },
+//    "keyup": function (event) {
+//        $(event.target).val(function (index, value) {
+//            return value.replace(/\D/g, "")
+//                .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+//                .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+//        });
+//    }
+//});
+
+var monto = document.getElementById("Cantidad");
+
+monto.addEventListener("input", function () {
+    empSueldo = parseFloat(document.getElementById("Sueldo").value);
+    empMonto = parseFloat(document.getElementById("Cantidad").value);
+    console.log(empSueldo+"  |  "+empMonto);
+    if (empMonto > empSueldo) {
+        spanCantidad = document.getElementById("spanCantidad").innerText = "Monto solicitado mayor que el Sueldo";
+        console.log(spanCantidad);
+    } else {
+        spanCantidad = document.getElementById("spanCantidad").innerText = "";
+    }
+
+});
+//document.getElementById("Ansal_MontoSolicitado").onblur = function () {
+//    //number-format the user input
+//    this.value = parseFloat(this.value.replace(/,/g, ""))
+//        .toFixed(2)
+//        .toString()
+//        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+//    //set the numeric value to a number input
+//    document.getElementById("number").value = this.value.replace(/,/g, "")
+
+//}
 
 //--Date Picker--//
 $('#Ansal_GralFechaSolicitud').datepicker({

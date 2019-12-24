@@ -12,9 +12,18 @@ namespace SIGEM_BIDSS.Models
     {
         [NotMapped]
         public string nRazonRechazo { get; set; }
-        
 
+        [NotMapped]
+        [Display(Name = "Monto a Solicitar")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
+        public string Cantidad { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Sueldo")]
+        public decimal Sueldo { get; set; }
     }
+
+
     public class AnticipoSalarioMetadata
     {
         [Display(Name = "ID")]
@@ -49,7 +58,6 @@ namespace SIGEM_BIDSS.Models
         public string Ansal_Justificacion { get; set; }
 
         [Display(Name = "Comentario")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
         [MaxLength(250, ErrorMessage = "Máximo {1} caracteres")]
         public string Ansal_Comentario { get; set; }
 

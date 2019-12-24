@@ -10,9 +10,13 @@ document.addEventListener("input", function () {
         _id = $(this).attr("id");
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
+       
     });
-
-
+    $(".normalize", 'form').each(function (e) {
+        if (!/^[ A-Záéíóúüñ]*$/i.test(this.value)) {
+            this.value = this.value.replace(/[^ .,A-Záéíóúüñ]+/ig, "");
+        }
+    });
 })
 
 //Funcion de Solo letras en el textbox
