@@ -219,6 +219,12 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (tbEmpleado.are_Id == 0)
                     ModelState.AddModelError("emp_UsuarioCrea", "El campo Área es obligatorio.");
+                 
+                if (tbEmpleado.mun_codigo  == "")
+                  ModelState.AddModelError("dep_codigo", "El campo Municipio es obligatorio.");
+
+                if (tbEmpleado.dep_Codigo == "")
+                 ModelState.AddModelError("mun_codigo", "El campo Departamento es obligatorio.");
 
                 if (ModelState.IsValid)
                 {

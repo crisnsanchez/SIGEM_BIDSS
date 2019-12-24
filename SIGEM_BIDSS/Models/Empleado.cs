@@ -37,7 +37,8 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Departamento")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string dep_Codigo { get; set; }
-      
+
+    
 
 
     }

@@ -132,7 +132,7 @@
                     @Html.LabelFor(model => model.emp_Identificacion, htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
                         @Html.EditorFor(model => model.emp_Identificacion, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
-                        <p id="Identidad" style="color:red">@Html.ValidationMessageFor(model => model.emp_Identificacion, "", new { @class = "text-danger", id = "Identidad" })</p>
+                      @Html.ValidationMessageFor(model => model.emp_Identificacion, "", new { @class = "text-danger", id = "Identidad" })
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -250,19 +250,42 @@
 
 
         $("#emp_FechaNacimiento").blur(function () {
-            valido1 = document.getElementById('FechaNacimiento');         
+            valido = document.getElementById('FechaNacimiento');         
             var FechaNacimiento = $('#emp_FechaNacimiento').val();
-            if (parseDate(FechaNacimiento) < GetTodayDate()) {
-                valido1.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+            var FechaIngreso = $('#emp_FechaIngreso').val();
+ 
+            if (FechaNacimiento > GetTodayDate() || FechaIngreso > GetTodayDate() ){
                 $('#emp_FechaNacimiento').val("");
                 $('#emp_FechaNacimiento').focus();
+                $('#emp_FechaIngreso').val("");
+                $('#emp_FechaIngreso').focus();
+                valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+
             }
+
+            else
+            {
+                valido.innerText = "";
+            }
+        });
+
+
+        $("#emp_FechaIngreso").blur(function () {
+            valido1 = document.getElementById('FechaIngreso');
+      
+            var FechaIngreso = $('#emp_FechaIngreso').val();
+
+            if (FechaIngreso > GetTodayDate()) {
+         
+                $('#emp_FechaIngreso').val("");
+                $('#emp_FechaIngreso').focus();
+                valido1.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+
+            }
+
             else {
-
-                valido1.innerText = "";
+                valido.innerText = "";
             }
-
-
         });
 
     </script>
