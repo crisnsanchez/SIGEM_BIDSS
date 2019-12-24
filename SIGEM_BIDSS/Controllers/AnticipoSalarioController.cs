@@ -61,7 +61,7 @@ namespace SIGEM_BIDSS.Controllers
         public JsonResult Revisar(int id, string Ansal_RazonRechazo)
         {
             var list = "";
-            string IsFor =  "false";
+            string IsFor = "false";
             if (id == null)
             {
                 return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
@@ -89,11 +89,28 @@ namespace SIGEM_BIDSS.Controllers
         // GET: AnticipoSalario/Create
         public ActionResult Create()
         {
-            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+            string UserName = "";
+            int EmployeeID = Function.GetUser(out UserName);
+            int fecha = Function.DatetimeNow().Year;
+            int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
+            if (SolCount >= 3)
+            {
+                TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
+                return RedirectToAction("Solicitud", "Menu");
+            }
 
+
+            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+           
+            var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select  _tbSueldo.sue_Cantidad ).FirstOrDefault();
+            decimal dSueldo = Convert.ToDecimal(vSueldo);
+            tbAnticipoSalario tbAnticipoSalario = new tbAnticipoSalario
+            {
+                Sueldo = dSueldo
+            };
             ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
             ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
-            return View();
+            return View(tbAnticipoSalario);
         }
 
         // POST: AnticipoSalario/Create
@@ -101,10 +118,11 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Ansal_Id,Ansal_Correlativo,emp_Id,Ansal_JefeInmediato,Ansal_GralFechaSolicitud,Ansal_MontoSolicitado,tpsal_id,Ansal_Justificacion,Ansal_Comentario,est_Id,Ansal_RazonRechazo")] tbAnticipoSalario tbAnticipoSalario)
+        public ActionResult Create([Bind(Include = "Ansal_Id,Ansal_Correlativo,emp_Id,Ansal_JefeInmediato,Ansal_GralFechaSolicitud,Ansal_MontoSolicitado,tpsal_id,Ansal_Justificacion,Ansal_Comentario,est_Id,Ansal_RazonRechazo,Cantidad,Sueldo")] tbAnticipoSalario tbAnticipoSalario)
         {
             string UserName = "",
                 ErrorEmail = "";
+
             try
             {
                 bool Result = false, ResultAdm = false;
@@ -113,22 +131,28 @@ namespace SIGEM_BIDSS.Controllers
                 tbAnticipoSalario.Ansal_GralFechaSolicitud = Function.DatetimeNow();
                 tbAnticipoSalario.est_Id = GeneralFunctions.Enviada;
 
+                if (String.IsNullOrEmpty(tbAnticipoSalario.Ansal_Comentario)) { tbAnticipoSalario.Ansal_Comentario = GeneralFunctions.stringDefault; }
+                    tbAnticipoSalario.Ansal_MontoSolicitado = Convert.ToDecimal(tbAnticipoSalario.Cantidad.Replace(",", ""));
+
+                if (tbAnticipoSalario.Ansal_MontoSolicitado > tbAnticipoSalario.Sueldo)
+                    ModelState.AddModelError("Cantidad", "El monto no puede ser mayor que el sueldo.");
+
                 if (ModelState.IsValid)
                 {
                     IEnumerable<object> Insert = null;
                     string ErrorMessage = "";
 
                     Insert = db.UDP_Adm_tbAnticipoSalario_Insert(EmployeeID,
-                        tbAnticipoSalario.Ansal_JefeInmediato,
-                        Function.DatetimeNow(),
-                        tbAnticipoSalario.Ansal_MontoSolicitado,
-                        tbAnticipoSalario.tpsal_id,
-                        tbAnticipoSalario.Ansal_Justificacion,
-                        tbAnticipoSalario.Ansal_Comentario,
-                        tbAnticipoSalario.est_Id,
-                        tbAnticipoSalario.Ansal_RazonRechazo,
-                        EmployeeID,
-                        Function.DatetimeNow());
+                                                                tbAnticipoSalario.Ansal_JefeInmediato,
+                                                                Function.DatetimeNow(),
+                                                                tbAnticipoSalario.Ansal_MontoSolicitado,
+                                                                tbAnticipoSalario.tpsal_id,
+                                                                tbAnticipoSalario.Ansal_Justificacion,
+                                                                tbAnticipoSalario.Ansal_Comentario,
+                                                                tbAnticipoSalario.est_Id,
+                                                                tbAnticipoSalario.Ansal_RazonRechazo,
+                                                                EmployeeID,
+                                                                Function.DatetimeNow());
                     foreach (UDP_Adm_tbAnticipoSalario_Insert_Result Res in Insert)
                         ErrorMessage = Res.MensajeError;
                     if (ErrorMessage.StartsWith("-1"))
@@ -168,7 +192,7 @@ namespace SIGEM_BIDSS.Controllers
         }
 
 
-       
+
 
         public bool UpdateState(tbAnticipoSalario tbAnticipoSalario, int State, string Ansal_RazonRechazo)
         {
@@ -201,8 +225,8 @@ namespace SIGEM_BIDSS.Controllers
                     ErrorMessage = Res.MensajeError;
                 if (ErrorMessage.StartsWith("-1"))
                 {
-                    Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorMessage);
-                    ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
+                    ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
                     return false;
                 }
                 else
@@ -224,7 +248,7 @@ namespace SIGEM_BIDSS.Controllers
                             break;
                     }
                     if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
-                    Result = Function.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject+" "+ Ansal_RazonRechazo);
+                    Result = Function.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject + " " + Ansal_RazonRechazo);
 
                     if (!Result) Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
                     return true;
@@ -259,8 +283,8 @@ namespace SIGEM_BIDSS.Controllers
                 return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
             }
             return Json(list, JsonRequestBehavior.AllowGet);
-        } 
-        
+        }
+
 
         // GET: AnticipoSalario/Approve/5   
         [HttpPost]
