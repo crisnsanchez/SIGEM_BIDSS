@@ -102,7 +102,7 @@ namespace SIGEM_BIDSS.Models
 
 
         [Display(Name = "Razón Inactivación")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
+      
         public string emp_RazonInactivacion { get; set; }
 
 

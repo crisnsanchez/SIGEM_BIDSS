@@ -35,10 +35,13 @@ $(document).ready(function () {
     $("#emp_CorreoElectronico")[0].maxLength = 100;
    
     $("#emp_Correo").attr("autocomplete", "randomString");
-    $("#ban_NombreContacto").attr("autocomplete", "randomString");
 
 
 
+    var selectedPuesto = $('#selectedPuesto').val();
+    if (selectedPuesto !== "" || selectedPuesto !== null)  { Getpuesto(); } else { console.log(selectedPuesto);  }
+
+    console.log(selectedPuesto);
     var muni = $('#municipios').val();
     if (muni === "true") { GetMunicipios(); } else { console.log(muni); }
     var are = $('#municipios').val();
@@ -121,6 +124,8 @@ $(document).on("change", "#are_Id", function () {
 
 function Getpuesto() {
     var are_Id = $('#are_Id').val();
+    var selectedPuesto = $('#selectedPuesto').val();
+    console.log(selectedPuesto);
     $.ajax({
         url: "/Empleado/Getpuesto",
         method: "POST",
@@ -132,12 +137,16 @@ function Getpuesto() {
            
             if (data.length > 0) {
                 $('#pto_Id').empty();
-                $('#pto_Id').append("<option value=''>Seleccione</option>");
+                $('#pto_Id').append("<option value=''>Seleccione Área</option>");
                 $.each(data, function (key, val) {
                     $('#pto_Id').append("<option value=" + val.pto_Id + ">" + val.pto_Descripcion + "</option>");
                 });
                 $('#pto_Id').trigger("chosen:updated");
+                if (selectedPuesto !== null || selectedPuesto !== "") {
+                    $("#pto_Id option[value='" + selectedPuesto + "']").attr("selected", true);
+                } else { console.log("No es"); }
             }
+
             else {
                 $('#pto_Id').empty();
                 $('#pto_Id').append("<option value=''>Seleccione</option>");
