@@ -515,8 +515,6 @@
     <Content Include="Content\Email\Solicitud.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\img\1.jpg" />
-    <Content Include="Content\img\1.png" />
     <Content Include="Content\img\background.jpg" />
     <Content Include="Content\img\descarga.jpg" />
     <Content Include="Content\img\logo.png" />
