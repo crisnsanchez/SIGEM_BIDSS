@@ -79,7 +79,7 @@ namespace SIGEM_BIDSS.Controllers
 
             }
 
-            return Json(list, JsonRequestBehavior.AllowGet);
+            return Json(Msj, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -166,6 +166,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.muni = "true";
             tbEmpleado.emp_PathImage = "----";
             ViewBag.selectedMun = tbEmpleado.mun_codigo;
+            ViewBag.selectedPuesto = tbEmpleado.pto_Id;
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             string ErrorMessage = "";
             string UserName = "";
@@ -226,9 +227,16 @@ namespace SIGEM_BIDSS.Controllers
                 if (tbEmpleado.dep_Codigo == "")
                  ModelState.AddModelError("mun_codigo", "El campo Departamento es obligatorio.");
 
+
+                int Existe = (from based in db.tbEmpleado where based.emp_Identificacion == tbEmpleado.emp_Identificacion select based).Count();
+
+                if (Existe > 0)
+                {
+                    ModelState.AddModelError("", "Esta identificación ya existe para un empleado.");
+                }
                 if (ModelState.IsValid)
                 {
-
+        
                     IEnumerable<Object> List = null;
                     List = db.UDP_rrhh_tbEmpleado_Insert(tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos,
                         tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion,
