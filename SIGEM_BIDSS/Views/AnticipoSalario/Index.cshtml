@@ -46,6 +46,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.est_Id)
                     </th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -74,7 +75,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
                     </td>
-                  
+                    <td>
+                        @Html.ActionLink("Detalles", "Details", new { id = item.Ansal_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
+                    </td>
                 </tr>
                 }
             </tbody>
@@ -86,7 +89,12 @@
 
 
 
+
+
+
 @section Scripts {
+
+
 
     <!-- DataTables -->
     <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>

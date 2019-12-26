@@ -89,31 +89,39 @@ namespace SIGEM_BIDSS.Controllers
         // GET: AnticipoSalario/Create
         public ActionResult Create()
         {
-            string UserName = "";
-            int EmployeeID = Function.GetUser(out UserName);
-            int fecha = Function.DatetimeNow().Year;
-            int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
-            var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-
-            if (SolCount >= _Parameters.par_FrecuenciaAdelantoSalario)
+            tbAnticipoSalario tbAnticipoSalario = new tbAnticipoSalario();
+            string ErrorMessage = "";
+            try
             {
-                TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
-                return RedirectToAction("Solicitud", "Menu");
+                string UserName = "";
+                int EmployeeID = Function.GetUser(out UserName);
+                int fecha = Function.DatetimeNow().Year;
+                int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
+                var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+
+                if (SolCount >= _Parameters.par_FrecuenciaAdelantoSalario)
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
+                    return RedirectToAction("Solicitud", "Menu");
+                }
+
+
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
+                var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
+                var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
+
+                tbAnticipoSalario.Sueldo = Convert.ToDecimal(vSueldo);
+                tbAnticipoSalario.Porcentaje = decimal.Round(Convert.ToDecimal(_percent),2);
+
+                ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
+                ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
             }
-
-
-            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
-
-            var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
-            var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
-
-            tbAnticipoSalario tbAnticipoSalario = new tbAnticipoSalario
+            catch (Exception Ex)
             {
-                Sueldo = Convert.ToDecimal(vSueldo),
-                Porcentaje = Convert.ToDecimal(_percent)
-            };
-            ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
-            ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
+                ErrorMessage = Ex.Message.ToString();
+                throw;
+            }
             return View(tbAnticipoSalario);
         }
 
@@ -137,15 +145,15 @@ namespace SIGEM_BIDSS.Controllers
 
                 var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
                 var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
-                var _percent = vSueldo * (Convert.ToDecimal( _Parameters.par_PorcentajeAdelantoSalario)/ 100);
+                var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
 
                 if (String.IsNullOrEmpty(tbAnticipoSalario.Ansal_Comentario)) { tbAnticipoSalario.Ansal_Comentario = GeneralFunctions.stringDefault; }
-                    tbAnticipoSalario.Ansal_MontoSolicitado = Convert.ToDecimal(tbAnticipoSalario.Cantidad.Replace(",", ""));
+                tbAnticipoSalario.Ansal_MontoSolicitado = Convert.ToDecimal(tbAnticipoSalario.Cantidad.Replace(",", ""));
 
-                if (vSueldo > tbAnticipoSalario.Sueldo)
+                if (tbAnticipoSalario.Ansal_MontoSolicitado > vSueldo)
                     ModelState.AddModelError("Cantidad", "El monto no puede ser mayor que el sueldo.");
 
-                if (_percent > tbAnticipoSalario.Sueldo)
+                if (tbAnticipoSalario.Ansal_MontoSolicitado > _percent)
                     ModelState.AddModelError("Cantidad", "El monto no puede ser mayor que el pocentaje permitido.");
 
 
@@ -177,7 +185,7 @@ namespace SIGEM_BIDSS.Controllers
 
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                       
+
                         Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
                         ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
 

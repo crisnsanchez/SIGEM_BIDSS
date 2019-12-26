@@ -17,9 +17,8 @@ $("#tpv_Descripcion").keyup(function () {
 
 ////SOLO NUMEROS 
 function soloNumeros(e) {
-
     tecla = (document.all) ? e.keyCode : e.which;
     tecla = String.fromCharCode(tecla)
-    return /^[0-9]+$/.test(tecla);
+    return /^[.0-9]+$/.test(tecla);
 }
 

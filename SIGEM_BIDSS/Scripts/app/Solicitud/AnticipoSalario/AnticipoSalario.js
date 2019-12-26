@@ -1,5 +1,8 @@
 ﻿
-
+const formatter = new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+});
 
 $("#frmsubmit").click(function () {
     $("form").submit()
@@ -9,34 +12,28 @@ $("#frmsubmit").click(function () {
 //    "focus": function (event) {
 //        $(event.target).select();
 //    },
-//    "keyup": function (event) {
+//    "blur": function (event) {
 //        $(event.target).val(function (index, value) {
-//            return value.replace(/\D/g, "")
-//                .replace(/([0-9])([0-9]{2})$/, '$1.$2')
-//                .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+//            this.value = parseFloat(this.value.replace(/,/g, ""))
+//                                    .toFixed(2)
+//                                    .toString()
+//                                    .replace(/\B(?=(\d{3})+(?!\d))/g,",");
 //        });
-//    }
+//    },
 //});
 
-var monto = document.getElementById("Cantidad");
+document.getElementById("Cantidad").onblur = function () {
+    //number-format the user input
+    this.value = parseFloat(this.value.replace(/,/g, ""))
+        .toFixed(2)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-monto.addEventListener("input", function () {
-    empSueldo = parseFloat(document.getElementById("Sueldo").value);
-    empMonto = parseFloat(document.getElementById("Cantidad").value);
-    empPorcetanje = parseFloat(document.getElementById("Porcentaje").value);
-    if (empMonto > empSueldo) {
-        spanCantidad = document.getElementById("spanCantidad").innerText = "Monto solicitado mayor que el Sueldo";
-        console.log(spanCantidad);
-    } else {
-        spanCantidad = document.getElementById("spanCantidad").innerText = "";
-    }
-    if (empMonto > empPorcetanje) {
-        spanCantidad = document.getElementById("spanCantidad").innerText = "El monto no puede ser mayor que el pocentaje permitido";
-        console.log(spanCantidad);
-    } else {
-        spanCantidad = document.getElementById("spanCantidad").innerText = "";
-    }
-});
+    //set the numeric value to a number input
+    document.getElementById("number").value = this.value.replace(/,/g, "")
+
+}
+
 //document.getElementById("Ansal_MontoSolicitado").onblur = function () {
 //    //number-format the user input
 //    this.value = parseFloat(this.value.replace(/,/g, ""))
@@ -48,6 +45,41 @@ monto.addEventListener("input", function () {
 //    document.getElementById("number").value = this.value.replace(/,/g, "")
 
 //}
+
+var monto = document.getElementById("Cantidad");
+
+monto.addEventListener("input", function () {
+
+    document.getElementById("number").value = this.value.replace(/,/g, "")
+
+    empSueldo =  parseInt(document.getElementById("Sueldo").value);
+
+    empPorcetanje = parseInt(document.getElementById("Porcentaje").value);
+
+    empMonto = parseInt(document.getElementById("number").value);
+ 
+    if (this.value != "") {
+
+        console.log("Porcentaje: " + empPorcetanje + " - Monto " + empMonto + " - Sueldo " + empSueldo);
+
+        if (empMonto > empSueldo) {
+            spanCantidad = document.getElementById("spanCantidad").innerText = "Monto solicitado mayor que el Sueldo";
+        } else {
+            spanCantidad = document.getElementById("spanCantidad").innerText = "";
+        }
+        if (empMonto > empPorcetanje) {
+            spanCantidad = document.getElementById("spanCantidad").innerText = "El monto no puede ser mayor que el pocentaje permitido";
+            
+        } else {
+            spanCantidad = document.getElementById("spanCantidad").innerText = "";
+        }
+    }
+    else {
+        console.log("false");
+    }
+  
+});
+
 
 //--Date Picker--//
 $('#Ansal_GralFechaSolicitud').datepicker({
