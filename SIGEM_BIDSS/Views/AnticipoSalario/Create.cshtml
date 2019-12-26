@@ -29,6 +29,8 @@
         @Html.HiddenFor(model => model.Sueldo)
         @Html.HiddenFor(model => model.Porcentaje)
 
+        <input id="number" type="hidden" />
+
         <div class="form-horizontal">
             <div class="card-body">
                 <div class="form-row">
@@ -51,7 +53,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control normalize", @OnKeyPress = "return soloNumeros(event)", @autocomplete = "true" } })
+                            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control normalize", @OnKeyPress = "return soloNumeros(event)", @autocomplete="off" } })
                             @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger", id = "spanCantidad" })
                         </div>
                     </div>

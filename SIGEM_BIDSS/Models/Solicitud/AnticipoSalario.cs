@@ -23,6 +23,7 @@ namespace SIGEM_BIDSS.Models
         public decimal Sueldo { get; set; }
 
         [NotMapped]
+        [Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Porcentaje")]
         public decimal Porcentaje { get; set; }
     }
