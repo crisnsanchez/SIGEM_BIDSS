@@ -175,6 +175,11 @@ document.getElementById('emp_CorreoElectronico').addEventListener('input', funct
 });
 
 
+$('#CargarFoto').keyup(function () {
+    $('#errorlogo').hide();
+});
+
+
 $('#emp_Nombres').keyup(function () {
     $('#Nombres').hide();
 });
@@ -182,6 +187,12 @@ $('#emp_Nombres').keyup(function () {
 $('#emp_Apellidos').keyup(function () {
     $('#Apellidos').hide();
 });
+
+
+$('#emp_Identificacion').keyup(function () {
+    $('#Identidad').hide();
+});
+
 
 $('#emp_Sexo').keyup(function () {
     $('#Sexo').hide();
