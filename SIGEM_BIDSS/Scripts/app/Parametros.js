@@ -24,6 +24,61 @@ $('#par_TelefonoEmpresa').keypress(function (e) {
 
 });
 
+////////////////rango de porcentaje
+document.getElementById("porcentaje").onkeyup = function () {
+
+    valido = document.getElementById('errorPorcentaje');
+    var input = parseInt(this.value);
+    if (input < 0 || input > 100)
+    {
+        valido.innerText = "El Campo Porcentaje de Salario no debe ser mayor al 100%"
+        $('#porcentaje').focus();
+        $('#porcentaje').addClass('is-invalid');
+    } else {
+        valido.innerText = "";
+        $('#porcentaje').removeClass('is-invalid');
+       
+       
+    } 
+}
+/////////////rango de numero
+
+document.getElementById("frecuencia").onkeyup = function () {
+
+    valido = document.getElementById('errorfrecuencia');
+    var input = parseInt(this.value);
+    if (input < 0 || input > 14) {
+        valido.innerText = "El Campo Frecuencia de Salario no debe ser mayor a 14"
+        $('#frecuencia').focus();
+        $('#frecuencia').addClass('is-invalid');
+    } else {
+        valido.innerText = "";
+        $('#frecuencia').removeClass('is-invalid');
+
+
+    }
+}
+
+document.addEventListener("input", function () {
+    $("input[type='text']", 'form').each(function () {
+        var _id = $(this).attr("id");
+        _value = document.getElementById(_id).value;
+        document.getElementById(_id).value = _value.trimStart();
+       
+    });
+    $(".normalize", 'form').each(function (e) {
+        if (!/^[ A-Záéíóúüñ]*$/i.test(this.value)) {
+            this.value = this.value.replace(/[^ .,A-Záéíóúüñ]+/ig, "");
+        }
+    });
+})
+
+
+
+
+
+
+
 
 //Validar que se borre mensaje mientras se escribe
 
