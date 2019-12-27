@@ -146,19 +146,16 @@ namespace SIGEM_BIDSS.Models
                     lsXMLEnvio = "";
 
          
-            lsSubject = "REF:(" + Reference + ")";
 
 
             bool State = false;
             int StateIn = 0;
 
-            EmailDesti = ClaimsPrincipal.Current.FindFirst("preferred_username").Value;
-
             GetUser(out UserName);
-            lsSubject = Reference;
+           
+            lsSubject = "REF:(" + Reference + ")";
 
             lsRutaPlantilla = System.AppContext.BaseDirectory + "Content\\Email\\Solicitud.xml";
-
 
             lsXMLDatos = @"<principal>
                         <to>" + _empName + "</to>" +
