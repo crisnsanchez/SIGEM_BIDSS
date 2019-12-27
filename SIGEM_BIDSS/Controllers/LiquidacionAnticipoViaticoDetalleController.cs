@@ -17,6 +17,8 @@ namespace SIGEM_BIDSS.Controllers
         // GET: LiquidacionAnticipoViaticoDetalle
         public ActionResult Index()
         {
+            ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
             var tbLiquidacionAnticipoViaticoDetalle = db.tbLiquidacionAnticipoViaticoDetalle.Include(t => t.tbLiquidacionAnticipoViatico).Include(t => t.tbTipoViatico);
             return View(tbLiquidacionAnticipoViaticoDetalle.ToList());
         }
@@ -47,6 +49,31 @@ namespace SIGEM_BIDSS.Controllers
         // POST: LiquidacionAnticipoViaticoDetalle/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [HttpPost]
+        public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle LIQUIDACIONDETALLE)
+        {
+            List<tbLiquidacionAnticipoViaticoDetalle> sessionLiquidaciondetalle = new List<tbLiquidacionAnticipoViaticoDetalle>();
+            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbBodegaDetalle"];
+            if (list == null)
+            {
+                ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+                ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+                sessionLiquidaciondetalle.Add(LIQUIDACIONDETALLE);
+                Session["tbLiquidacionAnticipoViaticoDetalle"] = sessionLiquidaciondetalle;
+            }
+            else
+            {
+                ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+                ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+                list.Add(LIQUIDACIONDETALLE);
+                Session["tbLiquidacionAnticipoViaticoDetalle"] = list;
+            }
+            return Json("Exito", JsonRequestBehavior.AllowGet);
+        }
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Lianvide_Id,Lianvi_Id,Lianvide_FechaGasto,tpv_Id,Lianvide_MontoGasto,Lianvide_Concepto,Lianvide_Archivo,Lianvide_UsuarioCrea,Lianvide_FechaCrea,Lianvide_UsuarioModifica,Lianvide_FechaModifica")] tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle)
@@ -132,5 +159,20 @@ namespace SIGEM_BIDSS.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        public JsonResult RemoveDetalle(tbLiquidacionAnticipoViaticoDetalle LiquidacionAnticipoViaticoDetalle)
+        {
+            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbLiquidacionAnticipoViaticoDetalle"];
+
+            if (list != null)
+            {
+                var itemToRemove = list.Single(r => r.tpv_Id == LiquidacionAnticipoViaticoDetalle.tpv_Id);
+                list.Remove(itemToRemove);
+                Session["tbLiquidacionAnticipoViaticoDetalle"] = list;
+            }
+            return Json("Exito", JsonRequestBehavior.AllowGet);
+        }
     }
+
+
 }

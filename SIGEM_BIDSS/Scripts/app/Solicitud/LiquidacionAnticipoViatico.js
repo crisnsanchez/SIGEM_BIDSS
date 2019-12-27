@@ -1,5 +1,5 @@
 ﻿/////DATE PICKER
-$('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida').datepicker({
+$('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida,#Lianvide_FechaGasto').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1990",
     language: "es",
@@ -9,183 +9,149 @@ $("#CargarArchivo").change(function () {
     readURL(this);
 });
 
-//--------Obtiene los valores de los textbox y los agrega a la tabla(con Datatables)
-function AgregarMunicipiosDT() {
-    var Lianvide_Archivo = $('#Lianvide_Archivo').val();
+
+
+$('#AgregarDetalle').click(function () {
+    console.log('boton');
+    var table = $('#dataTable').DataTable();
+    var LianvideArchivo = $('#Lianvide_Archivo').val();
     var tpv_Id = $('#tpv_Id').val();
     var Lianvide_FechaGasto = $('#Lianvide_FechaGasto').val();
     var Lianvide_MontoGasto = $('#Lianvide_MontoGasto').val();
-    var LianvideArchivo = $('#Lianvide_Archivo').val();
-    var tpvId = $('#tpv_Id').val();
-    var LianvideFechaGasto = $('#Lianvide_FechaGasto').val();
-    var LianvideMontoGasto = $('#Lianvide_MontoGasto').val();
-    var table = $('#tblMunicipio').DataTable();
-    _depCodigo = true;
-    _depLength = true;
-    _MunCodigo = true;
-    _munLength = true;
-    _munNombreLength = true;
-    _MunNombre = true;
-    _MunNombreSP = true;
-    _DepNombre = true;
+   
+    var Lianvide_Concepto = $('#Lianvide_Concepto').val();
 
 
-    //------------------------------Validaciones Departamento------------------------------
-    //---------------------------------------------------------------------------------------
-    //------------------------------Validaciones Codigo Departamento------------------------------
-
-    if (Lianvide_Archivo == '') {
-        $('#dep_CodigoCodigoError').text('');
-        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
-        _depCodigo = false;
-    }
-    if (tpv_Id == '') {
-        $('#dep_CodigoCodigoError').text('');
-        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
-        _depCodigo = false;
-    }
     if (Lianvide_FechaGasto == '') {
-        $('#dep_CodigoCodigoError').text('');
-        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
-        _depCodigo = false;
-    }
-    if (Lianvide_MontoGasto == '') {
-        $('#dep_CodigoCodigoError').text('');
-        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
-        _depCodigo = false;
-    }
-    else {
-        $('#dep_CodigoCodigoError').text('');
-    }
-
-    if (dep_Codigo.length > 2) {
-        $('#dep_CodigoLegthCodigoError').text('');
-        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoLegthCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> No se aceptan mas de 2 números.</ul>');
-        _depLength = false;
-    } else {
-        $('#dep_CodigoLegthCodigoError').text('');
-    }
-    if (_depCodigo && dep_Codigo.length < 2) {
-        $('#dep_CodigoLegthLessCodigoError').text('');
-        $('#ValidationDepCodigoCreate').after('<ul id="dep_CodigoLegthLessCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> No se aceptan menos de 2 números.</ul>');
-        _depLength = false;
-    } else {
-        $('#dep_CodigoLegthLessCodigoError').text('');
-    }
-    //------------------------------Fin Validaciones Codigo Departamento------------------------------
-
-    if (dep_Nombre == '') {
-        $('#DepNombreNombreError').text('');
-        $('#ValidationDepNombreCreate').after('<ul id="DepNombreNombreError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Departamento Requerido</ul>');
-        _DepNombre = false;
-    } else {
-        $('#DepNombreNombreError').text('');
+        $('#MessageError').text('');
+        $('#Error_Producto').text('');
+        $('#Error_PuntoReorden').text('');
+        $('#Error_CantidadMinima').text('');
+        $('#Error_CantidadMaxima').text('');
+        $('#Error_Costo').text('');
+        $('#Error_CostoPromedioo').text('');
+        $('#ErrorProducto_Create').after('<ul id="Error_Producto" class="validation-summary-errors text-danger">*Codigo De Barra Requerido</ul>');
 
     }
-    //------------------------------Fin Validaciones Departamento------------------------------
+    else if (tpv_Id == '') {
 
-    //------------------------------Validaciones Municipio------------------------------
-    //---------------------------------------------------------------------------------------
-    //------------------------------Validaciones Codigo Municipio------------------------------
+        $('#MessageError').text('');
+        $('#Error_Producto').text('');
+        $('#Error_PuntoReorden').text('');
+        $('#Error_CantidadMinima').text('');
+        $('#Error_CantidadMaxima').text('');
+        $('#Error_Costo').text('');
+        $('#Error_CostoPromedioo').text('');
+        $('#Error_Barras').text('');
+        $('#ErrorBarras_Create').after('<ul id="Error_Barras" class="validation-summary-errors text-danger">*Codigo De Barras Requerido</ul>');
+    }
+    else if (Lianvide_Concepto == '') {
 
-    if (MunCodigo == '') {
-        $('#MunCodigoCodigoError').text('');
-
-        $('#ValidationMunCodigoCreate').after('<ul id="MunCodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Municipio Requerido</ul>');
-        _MunCodigo = false;
-    } else {
-        $('#MunCodigoCodigoError').text('');
+        $('#MessageError').text('');
+        $('#Error_Producto').text('');
+        $('#Error_PuntoReorden').text('');
+        $('#Error_CantidadMinima').text('');
+        $('#Error_CantidadMaxima').text('');
+        $('#Error_Costo').text('');
+        $('#Error_CostoPromedioo').text('');
+        $('#ErrorCantidadMinima_Create').after('<ul id="Error_CantidadMinima" class="validation-summary-errors text-danger">*Cantidad Miníma Requerido</ul>');
     }
 
-    if (MunCodigo.length > 2) {
-        $('#MunCodigoLegthMaxCodigoError').text('');
-        $('#ValidationMunCodigoCreate').after('<ul id="MunCodigoLegthMaxCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> No se aceptan mas de 2 números.</ul>');
-        _munLength = false;
-    } else {
-        $('#MunCodigoLegthCodigoError').text('');
-
+    else if (LianvideArchivo == '') {
+        $('#MessageError').text('');
+        $('#Error_Producto').text('');
+        $('#Error_PuntoReorden').text('');
+        $('#Error_CantidadMinima').text('');
+        $('#Error_CantidadMaxima').text('');
+        $('#Error_Costo').text('');
+        $('#Error_CostoPromedioo').text('');
+        $('#ErrorPuntoReorden_Create').after('<ul id="Error_PuntoReorden" class="validation-summary-errors text-danger">*Campo Punto Reorden Requerido</ul>');
     }
-    if (_MunCodigo && MunCodigo.length < 2) {
-        $('#MunCodigoLegthLessCodigoError').text('');
-        $('#ValidationMunCodigoCreate').after('<ul id="MunCodigoLegthLessCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> No se aceptan menos de 2 números.</ul>');
-        _munLength = false;
-    } else {
-        $('#MunCodigoLegthLessCodigoError').text('');
-
-    }
-    //------------------------------Fin Validaciones Codigo Municipio------------------------------
-
-
-    if (MunNombre == '') {
-        $('#MunNombreNombreError').text('');
-        $('#ValidationMunNombreCreate').after('<ul id="MunNombreNombreError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Municipio Requerido</ul>');
-        _MunNombre = false;
-    } else {
-        $('#MunNombreNombreError').text('');
-
+    else if (Lianvide_MontoGasto == '') {
+        $('#MessageError').text('');
+        $('#Error_Producto').text('');
+        $('#Error_PuntoReorden').text('');
+        $('#Error_CantidadMinima').text('');
+        $('#Error_CantidadMaxima').text('');
+        $('#Error_Costo').text('');
+        $('#Error_CostoPromedioo').text('');
+        $('#ErrorPuntoReorden_Create').after('<ul id="Error_PuntoReorden" class="validation-summary-errors text-danger">*Campo Punto Reorden Requerido</ul>');
     }
 
-    if (MunNombre.substring(0, 1) == " ") {
-        $('#MunNombreSNNombreError').text('');
-        $('#ValidationMunNombreCreate').after('<ul id="MunNombreSNNombreError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> No se Aceptan Espacios en blanco.</ul>');
-        _munNombreLength = false;
-    } else {
-        $('#MunNombreSNNombreError').text('');
-    }
-    //------------------------------Fin Validaciones Municipio------------------------------
-
-
-
-    //-----------------------------Validaciones de Municipio Existente------------------------------
-    if ($('#tblMunicipio >tbody >tr').length > 0) {
-        $('#tblMunicipio >tbody >tr').each(function () {
-            _stringCodigoTable = $(this).find("td:eq(0)").text()
-
-            _MunCodigoTabla = _stringCodigoTable.substring(2, 4)
-
-            if (_MunCodigo && MunCodigo == _MunCodigoTabla) {
-                $('#MunCodigoExistCodigoError').text('');
-                $('#ValidationMunCodigoCreate').after('<ul id="MunCodigoExistCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Ya existe el código de municipio</ul>');
-                _MunCodigo = false;
-            } else if (_MunCodigo) {
-                $('#MunCodigoExistCodigoError').text('');
-            }
-
-            _MunNombreTabla = $(this).find("td:eq(1)").text()
-            if (_MunNombre && MunNombre == _MunNombreTabla) {
-                $('#MunNombreExistCodigoError').text('');
-                $('#ValidationMunNombreCreate').after('<ul id="MunNombreExistCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Ya existe el nombre del municipio</ul>');
-                _MunNombre = false;
-            } else if (_MunNombre) {
-                $('#MunNombreExistCodigoError').text('');
-            }
-        })
-    }
-
-
-
-
-    if (!_depCodigo || !_depLength || !_DepNombre || !_MunCodigo || !_munLength || !_munNombreLength || !_MunNombre || !_MunNombreSP) {
-        return false
-    }
     else {
 
-        $('#dep_Codigo').prop('readonly', true);
-        $('#dep_Nombre').prop('readonly', true);
-        $('#Valida').prop('disabled', false);
+        var tbLiquidacionAnticipoViaticoDetalle = GetLiquidacionViatico();
+        $.ajax({
+            url: "/LiquidacionAnticipoViaticoDetalle/SaveLiquidacionAnticipoDetalle",
+            method: "POST",
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ LIQUIDACIONDETALLE: tbLiquidacionAnticipoViaticoDetalle }),
+        }).done(function (data) {
+     
+            if (data == tpv_Id) {
+                $("#tbLiquidacionViatico td").each(function () {
+                    var prueba = $(this).text()
+                    if (prueba == tpv_Id) {
+                        
+                        table.row($(this).parents('tr')).remove().draw();
+                
+                        table.row.add([
+                            $('#Lianvide_FechaGasto').val(),
+                            $('#tpv_Id').val(),
+                            $('#Lianvide_Concepto').val(),
+                            $('#Archivo_Name').text(),
+                            $('#Lianvide_MontoGasto').val(),
 
-        var tbMunicipio = GetMunicipio();
+                            '<button id = "RemoveDetalle" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>',
+                     
+  
+                        ]).draw(false);
+                    }
+                });
 
-        contador = contador + 1;
-        table.row.add([
-            tbMunicipio.mun_Codigo,
-            tbMunicipio.mun_Nombre.toUpperCase().trim(),
-            '<button id = "removeMunicipios" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>',
-        ]).draw(false);
+            }
+            else {
+                table.row.add([
+                    $('#Lianvide_FechaGasto').val(),
+                    $('#tpv_Id').val(),
+                    $('#Lianvide_Concepto').val(),
+                    $('#Archivo_Name').text(),
+                    $('#Lianvide_MontoGasto').val(),
+                    '<button id = "RemoveDetalle" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>',
 
-        _ValuesTrue = { _Bool: true, _tbMunicipio: tbMunicipio }
+                ]).draw(false);
+            }
 
-        return _ValuesTrue
+        }).done(function (data) {
+               $('#Lianvide_FechaGasto').val(''),
+                $('#tpv_Id').val(''),
+                   $('#Lianvide_Concepto').val(''),
+                   $('#Archivo_Name').text(''),
+                $('#Lianvide_MontoGasto').val(''),
+
+            $('#MessageError').text('');
+            $('#Error_Producto').text('');
+            $('#Error_Barras').text('');
+            $('#Error_PuntoReorden').text('');
+            $('#Error_CantidadMinima').text('');
+            $('#Error_CantidadMaxima').text('');
+            $('#Error_Costo').text('');
+            $('#Error_CostoPromedioo').text('');
+        });
     }
+});
+function GetLiquidacionViatico() {
+    var LIQUIDACIONDETALLE = {
+      
+
+
+    
+        tpv_Id: $('#tpv_Id').val(),
+        Lianvide_FechaGasto: $('#Lianvide_FechaGasto').val(),
+        Lianvide_MontoGasto: $('#bodd_CantidadMaxima').val(),
+        LianvideArchivo: $('#Lianvide_Archivo').val(),
+        //Fecha: $('#fechaCreate').val(),
+    };
+    return LIQUIDACIONDETALLE;
 }
-S

@@ -3402,6 +3402,7 @@
     <Content Include="Views\ProductoCategoria\Index.cshtml" />
     <Content Include="Views\ProductoCategoria\_CreateSubCategoria.cshtml" />
     <Content Include="Views\ProductoCategoria\_ListSubCategoria.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\_CreateDetalle.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
