@@ -23,6 +23,7 @@ $("#frmsubmit").click(function () {
 //});
 
 document.getElementById("Cantidad").onblur = function () {
+    if (!isNaN(this.value || this.value != "")) {
     //number-format the user input
     this.value = parseFloat(this.value.replace(/,/g, ""))
         .toFixed(2)
@@ -31,7 +32,7 @@ document.getElementById("Cantidad").onblur = function () {
 
     //set the numeric value to a number input
     document.getElementById("number").value = this.value.replace(/,/g, "")
-
+    }
 }
 
 //document.getElementById("Ansal_MontoSolicitado").onblur = function () {

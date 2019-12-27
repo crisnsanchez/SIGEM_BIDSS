@@ -218,11 +218,10 @@ namespace SIGEM_BIDSS.Controllers
         {
             string UserName = "",
                 ErrorEmail = "";
+            bool Result = false;
             try
             {
-                bool Result = false;
                 int EmployeeID = Function.GetUser(out UserName);
-                tbAnticipoSalario.emp_Id = EmployeeID;
                 tbAnticipoSalario.est_Id = State;
                 tbAnticipoSalario.Ansal_RazonRechazo = Ansal_RazonRechazo;
 
@@ -230,7 +229,7 @@ namespace SIGEM_BIDSS.Controllers
                 string ErrorMessage = "";
 
                 Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
-                                                            EmployeeID,
+                                                            tbAnticipoSalario.emp_Id,
                                                             tbAnticipoSalario.Ansal_JefeInmediato,
                                                             tbAnticipoSalario.Ansal_GralFechaSolicitud,
                                                             tbAnticipoSalario.Ansal_MontoSolicitado,
@@ -251,7 +250,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 else
                 {
-                    var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                    var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.emp_Id).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                     string _msj = "";
                     var reject = "";
                     switch (State)
