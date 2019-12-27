@@ -139,7 +139,6 @@ namespace SIGEM_BIDSS.Models
         {
             pvMensajeError = "";
             string UserName = "",
-                    EmailDesti = "",
                     lsSubject = "",
                     lsRutaPlantilla = "",
                     lsXMLDatos = "",
@@ -170,7 +169,7 @@ namespace SIGEM_BIDSS.Models
             {
                 //Si todo está bien procedo a enviar correo
                 var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                StateIn = enviarCorreo(_Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, MailTo, _Parameters.par_Servidor, _Parameters.par_Puerto.ToString(), out pvMensajeError);
+                StateIn = enviarCorreo(out pvMensajeError, _Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, MailTo, _Parameters.par_Servidor, _Parameters.par_Puerto.ToString());
                 if (StateIn != 1)
                     return true;
                 else
@@ -220,7 +219,7 @@ namespace SIGEM_BIDSS.Models
             }
         }
 
-        public int enviarCorreo(string psEmisor, string psPassword, string psMensaje, string psAsunto, string psDestinatario, string psServidor, string psPuerto, out string ErrorMessage)
+        public int enviarCorreo(out string ErrorMessage, string psEmisor, string psPassword, string psMensaje, string psAsunto, string psDestinatario, string psServidor, string psPuerto)
         {
             //      0 = Ok      //
             //      1 = Error   //
@@ -250,7 +249,7 @@ namespace SIGEM_BIDSS.Models
             }
             catch (Exception ex)
             {
-                ErrorMessage = ex.Message;
+                ErrorMessage = ex.Message.ToString()+" "+ex.InnerException.Message.ToString();
                 return 1;
             }
         }

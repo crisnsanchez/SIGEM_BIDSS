@@ -61,13 +61,8 @@ namespace SIGEM_BIDSS.Controllers
         [HttpPost]
         public JsonResult Revisar(int id, string Ansal_RazonRechazo)
         {
-            var list = "";
             string vReturn = "";
             string IsFor = "false";
-            if (id == null)
-            {
-                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
-            }
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Enviada)
             {
