@@ -40,6 +40,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: ProductoCategoria/Create
         public ActionResult Create()
         {
+            Session["tbProductoSubcategoria"] = null;
             return View();
         }
 
@@ -106,10 +107,12 @@ namespace SIGEM_BIDSS.Controllers
                         return View(tbProductoCategoria);
                     }
                 }
+                TempData["swalfunction"] = GeneralFunctions._isCreated;
                 return RedirectToAction("Index");
             }
             return View(tbProductoCategoria);
         }
+
 
         // GET: ProductoCategoria/Edit/5
         public ActionResult Edit(int? id)
@@ -123,6 +126,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
+            Session["tbProductoSubcategoria"] = null;
             return View(tbProductoCategoria);
         }
         [HttpPost]
@@ -143,9 +147,21 @@ namespace SIGEM_BIDSS.Controllers
             }
             return Json("Exito", JsonRequestBehavior.AllowGet);
         }
-
-     
-
+        [HttpPost]
+        public JsonResult GetSubCate(int pscat_Id)
+        {
+            IEnumerable<object> list = null;
+            try
+            {
+                list = db.SDP_tbProductoSubcategoria_Select(pscat_Id).ToList();
+            }
+            catch (Exception Ex)
+            {
+                Ex.Message.ToString();
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+         
+        }
         [HttpPost]
         public JsonResult UpdateSubCategoria(tbProductoSubcategoria EditarSubCategoria)
         {
@@ -158,24 +174,16 @@ namespace SIGEM_BIDSS.Controllers
                 list = db.UDP_Inv_tbProductoSubcategoria_Update(
                                                         EditarSubCategoria.pscat_Id,
                                                         EditarSubCategoria.pscat_Descripcion,
-                                                       EditarSubCategoria.pcat_Id,
-                                                       EditarSubCategoria.pscat_UsuarioCrea,
-                                                       subcater.pscat_FechaCrea,
+                                                       subcater.pcat_Id,
                                                       Function.GetUser(), Function.DatetimeNow()
                     );
                 foreach (UDP_Inv_tbProductoSubcategoria_Update_Result subcate in list)
                     Msj = subcate.MensajeError;
-
-                if (Msj.StartsWith("-1"))
-                {
-                    Msj = "-1";
-                }
             }
             catch (Exception Ex)
             {
                 Ex.Message.ToString();
-                ModelState.AddModelError("", "No se Guardo el registro");
-                Msj = "-1";
+                ModelState.AddModelError("", "No se Actualizo el registro");
             }
             return Json(Msj, JsonRequestBehavior.AllowGet);
 
@@ -200,9 +208,7 @@ namespace SIGEM_BIDSS.Controllers
                     try
                     {
                         cate = db.UDP_Inv_tbProductoCategoria_Update(tbProductoCategoria.pcat_Id,
-                                              tbProductoCategoria.pcat_Descripcion,
-                                              tbProductoCategoria.pcat_UsuarioCrea,
-                                              tbProductoCategoria.pcat_FechaCrea
+                                              tbProductoCategoria.pcat_Descripcion
                                               , Function.GetUser(),
                                               Function.DatetimeNow());
                         foreach (UDP_Inv_tbProductoCategoria_Update_Result ProductoCategoria in cate)
@@ -237,6 +243,7 @@ namespace SIGEM_BIDSS.Controllers
                                 }
                             }
                             _Tran.Complete();
+                            TempData["swalfunction"] = GeneralFunctions._isEdited;
                             return RedirectToAction("Edit/" + MsjError);
                         }
                     }
@@ -303,14 +310,14 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     TempData["smserror"] = "No se puede Eliminar el dato porque está en uso.";
                     ViewBag.smserror = TempData["smserror"];
-
+                    TempData["swalfunction"] = GeneralFunctions._isDependencias;
                     ModelState.AddModelError("", "No se puede borrar el registro");
                     return RedirectToAction("Edit/" + id);
                 }
 
                 else
                 {
-
+                    TempData["swalfunction"] = GeneralFunctions._isDelete;
                     return RedirectToAction("Index");
                 }
             }
@@ -342,14 +349,14 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     TempData["smserror"] = " No se puede Eliminar del dato porque está en uso.";
                     ViewBag.smserror = TempData["smserror"];
-
+                    TempData["swalfunction"] = GeneralFunctions._isDependenciasS;
                     ModelState.AddModelError("", "No se puede borrar el registro");
                     return RedirectToAction("Index");
                 }
 
                 else
                 {
-
+                    TempData["swalfunction"] = GeneralFunctions._isDelete;
                     return RedirectToAction("Index");
                 }
             }
@@ -497,5 +504,23 @@ namespace SIGEM_BIDSS.Controllers
                 return RedirectToAction("Edit/" + id);
             }
         }
+
+        [HttpPost]
+        public JsonResult removeSubCategoria(tbProductoSubcategoria borrado)
+        {
+            var list = (List<tbProductoSubcategoria>)Session["tbProductoSubCategoria"];
+
+            if (list != null)
+            {
+                var itemToRemove = list.Single(r => r.pscat_Id == borrado.pscat_Id);
+                list.Remove(itemToRemove);
+                Session["tbProductoSubCategoria"] = list;
+            }
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+
+        }
+
+
     }
 }

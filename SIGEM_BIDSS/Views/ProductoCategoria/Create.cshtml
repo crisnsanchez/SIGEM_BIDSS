@@ -1,9 +1,14 @@
 ﻿@model SIGEM_BIDSS.Models.tbProductoCategoria
-
+@using SIGEM_BIDSS.Models
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+
+<link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
@@ -21,47 +26,57 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <div class="card-body">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.pcat_Descripcion, htmlAttributes: new { @class = "control-label col-sm-2" })
-                    <div class="col-sm-4">
-                        @Html.EditorFor(model => model.pcat_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()", @style = "text-transform:uppercase;" } })
-                        @Html.ValidationMessageFor(model => model.pcat_Descripcion, "", new { @class = "text-danger", @Id = "categoria" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-4 col-md-10">
-                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                    </div>
+    <div class="form-horizontal">
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.pcat_Descripcion, htmlAttributes: new { @class = "control-label col-sm-2" })
+                <div class="col-sm-4">
+                    @Html.EditorFor(model => model.pcat_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()", @style = "text-transform:uppercase;" } })
+                    @Html.ValidationMessageFor(model => model.pcat_Descripcion, "", new { @class = "text-danger", @Id = "categoria" })
                 </div>
             </div>
 
-
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
         </div>
+        <div class="ibox float-e-margins">
+
+            <div class="ibox-content">
+                <div class="form-horizontal">
+                    @Html.Partial("_CrearSubCategoria", new tbProductoSubcategoria())
+                </div>
+            </div>
+        </div>
+
+    </div>
     }
 
 </div>
 
-
-
-
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+<script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+<!-- AdminLTE App -->
+<script src="~/Content/template/dist/js/adminlte.min.js"></script>
+
+<script src="~/Scripts/app/General.js"></script>
+
+<script src="~/Scripts/app/Categoria.js"></script>
 
 
 
-<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-<script src="~/Scripts/app/General_PCAE.js"></script>
 
 <script>
-    $("#are_Descripcion").keyup(function () {
-        $('#areId').hide();
+    $("#pcat_Descripcion").keyup(function () {
+        $('#categoria').hide();
     });
 
 </script>

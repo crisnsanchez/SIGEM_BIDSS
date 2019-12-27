@@ -4,7 +4,7 @@
 
 <div class="form-horizontal">
     <div class="form-group">
-        @Html.LabelFor(model => model.pscat_Descripcion, new { @class = "control-label col-md-6  , required" })
+        @Html.LabelFor(model => model.pscat_Descripcion, new { @class = "control-label col-md-6" })
         <div class="col-md-11">
             <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
             <div id="DescripcionError">
