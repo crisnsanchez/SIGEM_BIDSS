@@ -66,8 +66,6 @@ namespace SIGEM_BIDSS.Controllers
                 if (Msj.StartsWith("-1"))
                 {
                     Function.BitacoraErrores("Empleado", "Inactivar", UserName, Msj);
-            
-
         
                 }
             }
