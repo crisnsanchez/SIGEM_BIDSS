@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
 
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
@@ -39,7 +41,7 @@
                     @Html.LabelFor(model => model.Lianvide_Archivo, htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
                         <input type="file" class="custom-file-input" id="LianvideArchivo">
-                        <label class="custom-file-label" for="customFile"></label>
+                        <label class="custom-file-label" for="LianvideArchivo" id="Archivo_Name"></label>
 
                         @Html.ValidationMessageFor(model => model.Lianvide_Archivo, "", new { @class = "text-danger" })
                     </div>
@@ -47,10 +49,10 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.Lianvide_Concepto, htmlAttributes: new { @class = "control-label col-md-6" })
+                        @Html.LabelFor(model => model.Lianvide_FechaGasto, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Lianvide_Concepto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
-                            @Html.ValidationMessageFor(model => model.Lianvide_Concepto, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Lianvide_FechaGasto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.Lianvide_FechaGasto, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -65,74 +67,89 @@
                 </div>
 
                 <div class="form-row">
+
                     <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-6" })
+                        @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.tpv_Id, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                            @Html.DropDownListFor(model => model.tpv_Id, (SelectList)ViewBag.tpv_Id, "Seleccione Tipo Gasto", new { @class = "form-control" })
+
                             @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.Lianvide_FechaGasto, htmlAttributes: new { @class = "control-label col-md-6" })
+                        @Html.LabelFor(model => model.Lianvide_Concepto, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Lianvide_FechaGasto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
-                            @Html.ValidationMessageFor(model => model.Lianvide_FechaGasto, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Lianvide_Concepto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.Lianvide_Concepto, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
 
                 </div>
+
+                <br />
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                    <div class="col-md-offset-4">
+                        <input type="button" value="Agregar" id="AgregarDetalle" class="btn btn-primary btn-sm" />
                     </div>
                 </div>
 
-
-                <div class="form-group col-md-4">
-                    <div class="form-group col-md-5">
-                        <button class="btn btn-primary" type="button" id="AgregarMunicipio">Añadir</button>
-                    </div>
-                </div>
-
-
-                <table id="tblviatico" class="table table-bordered table-hover" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Tipo Viatico</th>
-                            <th>Monto Gastos</th>
-                            <th>Total Gastos</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
             </div>
+            <table class="table table-bordered table-hover" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvide_FechaGasto)
+                        </th>
+                        <th>
+                            Tipo Gasto
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvide_Concepto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvide_Archivo)
+                        </th>
+                        <th>
+                            Monto de Gastos
+                        </th>
 
-
-
-
-
-
+                        <th>
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
         </div>
+        <br/>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+
+    }
+
+</div>
+
+    @section Scripts {
 
 
-
-        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
         <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
         <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
 
         <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-        <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+        <!-- DataTables -->
+        <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+        <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+        <script src="~/Scripts/app/General.js"></script>
 
         <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
-        <script src = "~/Scripts/app/DataTables.js" ></script>
-    
-
-
+        <script src="~/Scripts/app/DataTables.js"></script>
         <script>
             $("#Lianvi_FechaLiquida").keyup(function () {
                 $('#estId').hide();
