@@ -1122,4 +1122,3 @@ C:\GitHub2\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInput
 C:\GitHub2\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CopyComplete
 C:\GitHub2\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.dll
 C:\GitHub2\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb
-C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInputs.cache

@@ -35,6 +35,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: AnticipoSalario/Details/5
         public ActionResult Details(int? id)
         {
+            string vReturn = "";
             if (id == null)
             {
 
@@ -43,7 +44,7 @@ namespace SIGEM_BIDSS.Controllers
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Enviada)
             {
-                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                if (UpdateState(out vReturn,tbAnticipoSalario, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
                 }
@@ -60,16 +61,12 @@ namespace SIGEM_BIDSS.Controllers
         [HttpPost]
         public JsonResult Revisar(int id, string Ansal_RazonRechazo)
         {
-            var list = "";
+            string vReturn = "";
             string IsFor = "false";
-            if (id == null)
-            {
-                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
-            }
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Enviada)
             {
-                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Revisada, Ansal_RazonRechazo))
+                if (UpdateState(out vReturn, tbAnticipoSalario, GeneralFunctions.Revisada, Ansal_RazonRechazo))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
                     IsFor = "true";
@@ -214,15 +211,14 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-        public bool UpdateState(tbAnticipoSalario tbAnticipoSalario, int State, string Ansal_RazonRechazo)
+        public bool UpdateState(out string pvReturn, tbAnticipoSalario tbAnticipoSalario, int State, string Ansal_RazonRechazo)
         {
             string UserName = "",
                 ErrorEmail = "";
+            bool Result = false;
             try
             {
-                bool Result = false;
                 int EmployeeID = Function.GetUser(out UserName);
-                tbAnticipoSalario.emp_Id = EmployeeID;
                 tbAnticipoSalario.est_Id = State;
                 tbAnticipoSalario.Ansal_RazonRechazo = Ansal_RazonRechazo;
 
@@ -230,7 +226,7 @@ namespace SIGEM_BIDSS.Controllers
                 string ErrorMessage = "";
 
                 Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
-                                                            EmployeeID,
+                                                            tbAnticipoSalario.emp_Id,
                                                             tbAnticipoSalario.Ansal_JefeInmediato,
                                                             tbAnticipoSalario.Ansal_GralFechaSolicitud,
                                                             tbAnticipoSalario.Ansal_MontoSolicitado,
@@ -243,6 +239,7 @@ namespace SIGEM_BIDSS.Controllers
                                                             Function.DatetimeNow());
                 foreach (UDP_Adm_tbAnticipoSalario_Update_Result Res in Update)
                     ErrorMessage = Res.MensajeError;
+                    pvReturn = ErrorMessage;
                 if (ErrorMessage.StartsWith("-1"))
                 {
                     Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
@@ -251,7 +248,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 else
                 {
-                    var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                    var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.emp_Id).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                     string _msj = "";
                     var reject = "";
                     switch (State)
@@ -276,7 +273,8 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch (Exception ex)
             {
-                Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
+                pvReturn = ex.Message.ToString();
+               Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
                 return false;
             }
         }
@@ -286,6 +284,7 @@ namespace SIGEM_BIDSS.Controllers
         public JsonResult Approve(int? id)
         {
             var list = "";
+            string vReturn = "";
             if (id == null)
             {
                 return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
@@ -293,9 +292,10 @@ namespace SIGEM_BIDSS.Controllers
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
             {
-                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Aprobada, GeneralFunctions.stringDefault))
+                if (UpdateState(out vReturn, tbAnticipoSalario, GeneralFunctions.Aprobada, GeneralFunctions.stringDefault))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
                 }
             }
             if (tbAnticipoSalario == null)
@@ -311,6 +311,7 @@ namespace SIGEM_BIDSS.Controllers
         public JsonResult Reject(int id, string Ansal_RazonRechazo)
         {
             var list = "";
+            string vReturn = "";
             if (id == null)
             {
                 return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
@@ -319,7 +320,7 @@ namespace SIGEM_BIDSS.Controllers
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
             {
-                if (UpdateState(tbAnticipoSalario, GeneralFunctions.Rechazada, Ansal_RazonRechazo))
+                if (UpdateState(out vReturn, tbAnticipoSalario, GeneralFunctions.Rechazada, Ansal_RazonRechazo))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                 }

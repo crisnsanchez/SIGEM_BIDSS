@@ -8,21 +8,10 @@ $("#frmsubmit").click(function () {
     $("form").submit()
 })
 
-//$("#Cantidad").on({
-//    "focus": function (event) {
-//        $(event.target).select();
-//    },
-//    "blur": function (event) {
-//        $(event.target).val(function (index, value) {
-//            this.value = parseFloat(this.value.replace(/,/g, ""))
-//                                    .toFixed(2)
-//                                    .toString()
-//                                    .replace(/\B(?=(\d{3})+(?!\d))/g,",");
-//        });
-//    },
-//});
+
 
 document.getElementById("Cantidad").onblur = function () {
+    if (!isNaN(this.value || this.value != "")) {
     //number-format the user input
     this.value = parseFloat(this.value.replace(/,/g, ""))
         .toFixed(2)
@@ -31,20 +20,9 @@ document.getElementById("Cantidad").onblur = function () {
 
     //set the numeric value to a number input
     document.getElementById("number").value = this.value.replace(/,/g, "")
-
+    }
 }
 
-//document.getElementById("Ansal_MontoSolicitado").onblur = function () {
-//    //number-format the user input
-//    this.value = parseFloat(this.value.replace(/,/g, ""))
-//        .toFixed(2)
-//        .toString()
-//        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-//    //set the numeric value to a number input
-//    document.getElementById("number").value = this.value.replace(/,/g, "")
-
-//}
 
 var monto = document.getElementById("Cantidad");
 
