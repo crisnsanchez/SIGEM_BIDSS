@@ -1,7 +1,7 @@
 ﻿/////DATE PICKER
 $('#emp_FechaNacimiento,#emp_FechaIngreso').datepicker({
     format: "dd/mm/yyyy",
-    startDate: "01/01/1990",
+    startDate: "01/01/1900",
     language: "es",
     daysOfWeekDisabled: "0"
 });
@@ -111,7 +111,7 @@ function GetMunicipios() {
             }
             else {
                 $('#mun_codigo').empty();
-                $('#mun_codigo').append("<option value=''>Seleccione</option>");
+                $('#mun_codigo').append("<option value=''>Seleccione Municipio</option>");
             }
         });
 
@@ -134,10 +134,10 @@ function Getpuesto() {
         data: JSON.stringify({ are_Id: are_Id }),
     })
         .done(function (data) {
-           
+            $('#pto_Id').show();
             if (data.length > 0) {
                 $('#pto_Id').empty();
-                $('#pto_Id').append("<option value=''>Seleccione Área</option>");
+                $('#pto_Id').append("<option value=''>Seleccione Puesto</option>");
                 $.each(data, function (key, val) {
                     $('#pto_Id').append("<option value=" + val.pto_Id + ">" + val.pto_Descripcion + "</option>");
                 });
@@ -149,7 +149,7 @@ function Getpuesto() {
 
             else {
                 $('#pto_Id').empty();
-                $('#pto_Id').append("<option value=''>Seleccione</option>");
+                $('#pto_Id').append("<option value=''>Seleccione Puesto</option>");
             }
         });
 
@@ -175,7 +175,7 @@ document.getElementById('emp_CorreoElectronico').addEventListener('input', funct
 });
 
 
-$('#CargarFoto').keyup(function () {
+$('#CargarFoto').change(function () {
     $('#errorlogo').hide();
 });
 
@@ -239,9 +239,9 @@ $('#mun_codigo').change(function () {
     $('#Municipio').hide();
 });
 
-$('#emp_FechaIngreso').keyup(function () {
-    $('#FechaIngreso').hide();
-});
+//$('#emp_FechaIngreso').change(function () {
+//    $('#FechaIngreso').hide();
+//});
 
 
 
