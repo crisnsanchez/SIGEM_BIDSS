@@ -94,6 +94,21 @@ namespace SIGEM_BIDSS.Models
         public const bool Activo = true;
         public const bool Inactivo = false;
 
+
+
+
+        //Estado Categoria
+        public const bool CategoriaActivo = true;
+
+        public const bool CategoriaInactivo = false;
+
+        //Estado Subcategoria
+        public const bool SubcategoriaActivo = true;
+
+        public const bool SubcategoriaInactivo = false;
+
+
+
         public int GetUser(out string UserName)
         {
             string email = "";
