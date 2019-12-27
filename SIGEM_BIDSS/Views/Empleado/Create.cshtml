@@ -57,7 +57,7 @@
                         <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.emp_PathImage, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="custom-file col-md-11">
-                                <input id=" " value="Cargar Fotografía" max-size=32154 name="FotoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
+                                <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="FotoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
                                 <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto"></label>
 
                             </div>
@@ -155,13 +155,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.emp_Direccion, htmlAttributes: new { @class = "control-label col-md-6" })
-                        <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger", id = "Direccion" })
-                        </div>
-                    </div>
+
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_EsJefe, "¿Es Jefe?", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
@@ -169,6 +163,14 @@
                             @Html.ValidationMessageFor(model => model.emp_EsJefe, "", new { @class = "text-danger", id = "EsJefe" })
                         </div>
                     </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.emp_Direccion, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-11">
+                            @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger", id = "Direccion" })
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="form-row">
@@ -195,7 +197,7 @@
                         @Html.LabelFor(model => model.emp_FechaIngreso, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
                             @Html.EditorFor(model => model.emp_FechaIngreso, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.emp_FechaIngreso, "", new { @class = "text-danger", id = "FechaIngreso    " })
+                            @Html.ValidationMessageFor(model => model.emp_FechaIngreso, "", new { @class = "text-danger", id = "FechaIngreso" })
                         </div>
                     </div>
                 </div>
@@ -254,12 +256,12 @@
 
                 $('#emp_FechaIngreso').val("");
                 $('#emp_FechaIngreso').focus();
-                valido1.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+                valido1.innerText = "La fecha de Ingresó debe ser menor a la fecha actual.";
 
             }
 
             else {
-                valido.innerText = "";
+                valido1.innerText = "";
             }
         });
 

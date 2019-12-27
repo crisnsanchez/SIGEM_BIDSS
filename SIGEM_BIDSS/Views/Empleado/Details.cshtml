@@ -9,8 +9,13 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-info  mr-1"></i>
-            Detalle Parámetros
+            Detalle Empleado
         </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
     </div>
     <div class="form-horizontal">
         <div class="card-body">
@@ -91,11 +96,32 @@
 
                 </dd>
                 <dt>
+                   ¿Es jefe?
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.emp_EsJefe)
+                </dd>
+                <dt>
                     @Html.DisplayNameFor(model => model.emp_Direccion)
                 </dt>
 
                 <dd>
                     @Html.DisplayFor(model => model.emp_Direccion)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tbMunicipio.dep_codigo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tbMunicipio.tbDepartamento.dep_Nombre)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tbMunicipio.mun_codigo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tbMunicipio.mun_nombre)
                 </dd>
 
                 <dt>
@@ -113,19 +139,20 @@
                     @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.tbMunicipio.dep_codigo)
+                    @Html.DisplayNameFor(model => model.are_Id)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.tbMunicipio.tbDepartamento.dep_Nombre)
+                    @Html.DisplayFor(model => model.tbPuesto.tbArea.are_Descripcion)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.tbMunicipio.mun_codigo)
+                    Puesto
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.tbMunicipio.mun_nombre)
+                    @Html.DisplayFor(model => model.tbPuesto.pto_Descripcion)
                 </dd>
+                <br />
             </dl>
         </div>
     </div>

@@ -344,7 +344,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono,emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,est_Id,emp_PathImage,mun_codigo,emp_UsuarioModifica,emp_FechaModifica,emp_EsJefe,are_Id,emp_FechaCrea ")] tbEmpleado tbEmpleado, HttpPostedFileBase FotoPath)
+        public ActionResult Edit([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono,emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,est_Id,emp_PathImage,mun_codigo,emp_UsuarioModifica,emp_FechaModifica,emp_EsJefe,are_Id,emp_FechaCrea,dep_Codigo ")] tbEmpleado tbEmpleado, HttpPostedFileBase FotoPath)
         {
             ViewBag.muni = "true";
 
