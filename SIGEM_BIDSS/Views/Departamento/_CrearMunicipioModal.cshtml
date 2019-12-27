@@ -9,7 +9,6 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.mun_codigo, htmlAttributes: new { @class = "control-label col-sm-8 , required" })
-
             <input type="text" id="mun_codigo" name="mun_codigo" placeholder="" onkeypress="return soloNumeros(event)" class="form-control" min="1" maxlength="2" autocomplete="off" />
             <div id="ValidationMunCodigoCreate">
                 @Html.ValidationMessageFor(model => model.mun_codigo)

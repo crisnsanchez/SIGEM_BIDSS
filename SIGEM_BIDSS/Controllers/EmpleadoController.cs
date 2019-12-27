@@ -178,7 +178,8 @@ namespace SIGEM_BIDSS.Controllers
                 var path = "";
                 if (FotoPath == null)
                 {
-                    TempData["smserror"] = "Imagen requerida.";
+   
+                    ModelState.AddModelError("emp_PathImage", "Imagen requerida."); 
                     ViewBag.smserror = TempData["smserror"];
 
                     ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbEmpleado.mun_codigo);
@@ -212,8 +213,11 @@ namespace SIGEM_BIDSS.Controllers
                         {
                             string Error = "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .jpg";
                             ModelState.AddModelError("FotoPath", Error);
+                          
                             return View("Index");
                         }
+
+
                     }
                 }
 
@@ -288,7 +292,10 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", _dep_Codigo);
                     return View(tbEmpleado);
                 }
+
             }
+
+
             catch (Exception Ex)
             {
                 Function.BitacoraErrores("Empleado", "CreatePost", UserName, Ex.Message.ToString());
@@ -337,7 +344,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono,emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,est_Id,emp_PathImage,mun_codigo,emp_UsuarioModifica,emp_FechaModifica,emp_EsJefe,are_Id")] tbEmpleado tbEmpleado, HttpPostedFileBase FotoPath)
+        public ActionResult Edit([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono,emp_CorreoElectronico,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,est_Id,emp_PathImage,mun_codigo,emp_UsuarioModifica,emp_FechaModifica,emp_EsJefe,are_Id,emp_FechaCrea ")] tbEmpleado tbEmpleado, HttpPostedFileBase FotoPath)
         {
             ViewBag.muni = "true";
 
@@ -352,6 +359,7 @@ namespace SIGEM_BIDSS.Controllers
                     var path = "";
                     if (FotoPath != null)
                     {
+                        ModelState.AddModelError("emp_PathImage", "Imagen requerida.");
                         if (FotoPath.ContentLength > 0)
                         {
                             if (Path.GetExtension(FotoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(FotoPath.FileName).ToLower() == ".png")

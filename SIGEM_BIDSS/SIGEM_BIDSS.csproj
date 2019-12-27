@@ -204,6 +204,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
+    <Compile Include="Controllers\ProductoCategoriaController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\SueldoController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
@@ -218,8 +219,10 @@
     </Compile>
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\Categorias.cs" />
     <Compile Include="Models\LiquidacionAnticipoViaticodetalle.cs" />
     <Compile Include="Models\LiquidacionAnticipoViatico.cs" />
+    <Compile Include="Models\SubCategorias.cs" />
     <Compile Include="Models\tbLiquidacionAnticipoViatico.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -230,6 +233,30 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProductoCategoria_Delete_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProductoCategoria_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProductoCategoria_Update_Estado_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProductoCategoria_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProductoSubCategoria_Delete_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProductoSubcategoria_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProductoSubCategoria_Update_Estado_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProductoSubcategoria_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Unidadmedida.cs" />
@@ -515,8 +542,6 @@
     <Content Include="Content\Email\Solicitud.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Content\img\1.jpg" />
-    <Content Include="Content\img\1.png" />
     <Content Include="Content\img\background.jpg" />
     <Content Include="Content\img\descarga.jpg" />
     <Content Include="Content\img\logo.png" />
@@ -933,6 +958,7 @@
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Scripts\app\Categoria.js" />
     <Content Include="Scripts\app\DataTables.js" />
     <Content Include="Scripts\app\General.js" />
     <Content Include="Scripts\app\General_Details.js" />
@@ -3369,6 +3395,13 @@
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Details.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Edit.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Index.cshtml" />
+    <Content Include="Views\ProductoCategoria\Create.cshtml" />
+    <Content Include="Views\ProductoCategoria\Delete.cshtml" />
+    <Content Include="Views\ProductoCategoria\Details.cshtml" />
+    <Content Include="Views\ProductoCategoria\Edit.cshtml" />
+    <Content Include="Views\ProductoCategoria\Index.cshtml" />
+    <Content Include="Views\ProductoCategoria\_CreateSubCategoria.cshtml" />
+    <Content Include="Views\ProductoCategoria\_ListSubCategoria.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

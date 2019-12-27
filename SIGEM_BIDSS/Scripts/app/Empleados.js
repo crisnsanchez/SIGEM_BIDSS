@@ -175,6 +175,11 @@ document.getElementById('emp_CorreoElectronico').addEventListener('input', funct
 });
 
 
+$('#CargarFoto').keyup(function () {
+    $('#errorlogo').hide();
+});
+
+
 $('#emp_Nombres').keyup(function () {
     $('#Nombres').hide();
 });
@@ -183,7 +188,13 @@ $('#emp_Apellidos').keyup(function () {
     $('#Apellidos').hide();
 });
 
-$('#emp_Sexo').keyup(function () {
+
+$('#emp_Identificacion').keyup(function () {
+    $('#Identidad').hide();
+});
+
+
+$('#emp_Sexo').change(function () {
     $('#Sexo').hide();
 });
 
@@ -191,7 +202,7 @@ $('#emp_FechaNacimiento').keyup(function () {
     $('#FechaNacimiento').hide();
 });
 
-$('#tps_Id').keyup(function () {
+$('#tps_Id').change(function () {
     $('#ti').hide();
 });
 
@@ -203,12 +214,12 @@ $('#emp_CorreoElectronico').keyup(function () {
     $('#emailOK').hide();
 });
 
-$('#are_Id').keyup(function () {
+$('#are_Id').change(function () {
     $('#Area').hide();
 });
 
 
-$('#pto_Id').keyup(function () {
+$('#pto_Id').change(function () {
     $('#Puesto').hide();
 });
 
@@ -220,11 +231,11 @@ $('#emp_EsJefe').keyup(function () {
     $('#EsJefe').hide();
 });
 
-$('#dep_codigo').keyup(function () {
+$('#dep_codigo').change(function () {
     $('#Departamento').hide();
 });
 
-$('#mun_codigo').keyup(function () {
+$('#mun_codigo').change(function () {
     $('#Municipio').hide();
 });
 
