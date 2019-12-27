@@ -17,6 +17,8 @@ namespace SIGEM_BIDSS.Controllers
         // GET: LiquidacionAnticipoViaticoDetalle
         public ActionResult Index()
         {
+            ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
             var tbLiquidacionAnticipoViaticoDetalle = db.tbLiquidacionAnticipoViaticoDetalle.Include(t => t.tbLiquidacionAnticipoViatico).Include(t => t.tbTipoViatico);
             return View(tbLiquidacionAnticipoViaticoDetalle.ToList());
         }
@@ -55,11 +57,15 @@ namespace SIGEM_BIDSS.Controllers
             var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbBodegaDetalle"];
             if (list == null)
             {
+                ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+                ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                 sessionLiquidaciondetalle.Add(LIQUIDACIONDETALLE);
                 Session["tbLiquidacionAnticipoViaticoDetalle"] = sessionLiquidaciondetalle;
             }
             else
             {
+                ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+                ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                 list.Add(LIQUIDACIONDETALLE);
                 Session["tbLiquidacionAnticipoViaticoDetalle"] = list;
             }

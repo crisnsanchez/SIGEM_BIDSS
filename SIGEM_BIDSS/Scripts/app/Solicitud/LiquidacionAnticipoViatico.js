@@ -1,5 +1,5 @@
 ﻿/////DATE PICKER
-$('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida').datepicker({
+$('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida,#Lianvide_FechaGasto').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1990",
     language: "es",
