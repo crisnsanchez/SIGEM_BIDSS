@@ -40,7 +40,7 @@
         <div class="card-header d-flex p-0 ui-sortable-handle">
             <h3 class="card-title p-3">
                 <i class="fa fa-refresh  mr-1"></i>
-                Editar Tipo Sueldo
+                Editar Sueldo
             </h3>
             <ul class="nav nav-pills ml-auto p-2">
                 <li class="nav-item">
@@ -66,10 +66,11 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.sue_Cantidad,"Sueldo", htmlAttributes: new { @class = "control-label col-md-4" })
+                                @Html.LabelFor(model => model.Cantidad, "Sueldo", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.sue_Cantidad, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)",@onChange = "MASK(this,this.value,'-###,###,###,##0.00',1)"  } })
-                                    @Html.ValidationMessageFor(model => model.sue_Cantidad, "", new { @class = "text-danger" })
+
+                                    @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control", @onChange = "MASK(this,this.value,'-###,###,###,##0.00',1)" } })
+                                    @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger", @id = "cant" })
                                 </div>
                             </div>
 
@@ -97,6 +98,8 @@
     </div>
 
 }
+
+@section Scripts{
 <script src="~/Scripts/app/General_PCAE.js"></script>
 <script src="~/Scripts/app/General.js"></script>
 <script src="~/Scripts/app/Empleados.js"></script>
@@ -176,6 +179,14 @@
         }
     }
 
+    const cantidad = document.getElementById('Cantidad')
+    document.addEventListener('DOMContentLoaded', (event) => {
+        console.log('Metido');
+        cantidad.value = parseFloat(cantidad.value.replace(/,/g, ""))
+            .toFixed(2)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    });
 
-
-</script>   
+</script>
+}

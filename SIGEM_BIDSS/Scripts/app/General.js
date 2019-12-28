@@ -39,6 +39,18 @@ $(function () {
             title: 'Este municipio está siendo usado por otra tabla, no se puede Eliminar.'
         })
     }
+    else if (_Action == "Dependencia") {
+        Toast.fire({
+            type: 'warning',
+            title: 'Esta Categoria está siendo usado por otra tabla, no se puede Eliminar.'
+        })
+    }
+    else if (_Action == "DependenciaSub") {
+        Toast.fire({
+            type: 'warning',
+            title: 'Esta SubCategoria está siendo usado por otra tabla, no se puede Eliminar.'
+        })
+    }
     else if (_Action == "ExisteCo") {
         Toast.fire({
             type: 'warning',

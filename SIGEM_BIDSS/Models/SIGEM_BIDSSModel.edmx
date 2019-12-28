@@ -1096,6 +1096,12 @@
           <Parameter Name="uni_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="uni_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="SDP_tbProductoSubcategoria_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="pscat_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="pcat_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="UDP_Inv_tbProductoCategoria_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="pcat_Id" Type="int" Mode="In" />
         </Function>
@@ -1107,8 +1113,6 @@
         <Function Name="UDP_Inv_tbProductoCategoria_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="pcat_Id" Type="int" Mode="In" />
           <Parameter Name="pcat_Descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="pcat_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="pcat_FechaCrea" Type="datetime" Mode="In" />
           <Parameter Name="pcat_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="pcat_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -1116,7 +1120,7 @@
           <Parameter Name="pcat_Id" Type="int" Mode="In" />
           <Parameter Name="pcat_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="pcat_FechaModifica" Type="datetime" Mode="In" />
-          <Parameter Name="ESTADO" Type="bit" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
         </Function>
         <Function Name="UDP_Inv_tbProductoSubCategoria_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="pscat_Id" Type="int" Mode="In" />
@@ -1131,8 +1135,6 @@
           <Parameter Name="pscat_Id" Type="int" Mode="In" />
           <Parameter Name="pscat_Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="pcat_Id" Type="int" Mode="In" />
-          <Parameter Name="pscat_UsuarioCrea" Type="int" Mode="In" />
-          <Parameter Name="pscat_FechaCrea" Type="datetime" Mode="In" />
           <Parameter Name="pscat_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="pscat_FechaModifica" Type="datetime" Mode="In" />
         </Function>
@@ -2164,8 +2166,6 @@
           <FunctionImport Name="UDP_Inv_tbProductoCategoria_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Update_Result)">
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pcat_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="pcat_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="pcat_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="pcat_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="pcat_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2173,7 +2173,7 @@
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pcat_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="pcat_FechaModifica" Mode="In" Type="DateTime" />
-            <Parameter Name="ESTADO" Mode="In" Type="Boolean" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProductoSubCategoria_Delete" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProductoSubCategoria_Delete_Result)">
           <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
@@ -2188,8 +2188,6 @@
             <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pscat_Descripcion" Mode="In" Type="String" />
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
-            <Parameter Name="pscat_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="pscat_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="pscat_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="pscat_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
@@ -2205,6 +2203,12 @@
             <End Role="tbProductoCategoria" EntitySet="tbProductoCategoria" />
             <End Role="tbProductoSubcategoria" EntitySet="tbProductoSubcategoria" />
           </AssociationSet>
+          <FunctionImport Name="spGetCategoria" ReturnType="Collection(SIGEM_BIDSSModel.spGetCategoria_Result)">
+          <Parameter Name="pcat_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SDP_tbProductoSubcategoria_Select" ReturnType="Collection(SIGEM_BIDSSModel.SDP_tbProductoSubcategoria_Select_Result)">
+          <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -3155,6 +3159,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spGetCategoria_Result">
+          <Property Type="Int32" Name="pscat_Id" Nullable="false" />
+          <Property Type="String" Name="pscat_Descripcion" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="SDP_tbProductoSubcategoria_Select_Result">
+          <Property Type="Int32" Name="pscat_Id" Nullable="false" />
+          <Property Type="String" Name="pscat_Descripcion" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="pcat_Id" Nullable="false" />
+          <Property Type="Boolean" Name="pscat_EsActiva" Nullable="false" />
+          <Property Type="Int32" Name="pscat_UsuarioCrea" Nullable="false" />
+          <Property Type="DateTime" Name="pscat_FechaCrea" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="pscat_UsuarioModifica" Nullable="true" />
+          <Property Type="DateTime" Name="pscat_FechaModifica" Nullable="true" Precision="23" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3993,6 +4011,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetCategoria" FunctionName="SIGEM_BIDSSModel.Store.spGetCategoria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.spGetCategoria_Result">
+                <ScalarProperty Name="pscat_Id" ColumnName="pscat_Id" />
+                <ScalarProperty Name="pscat_Descripcion" ColumnName="pscat_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SDP_tbProductoSubcategoria_Select" FunctionName="SIGEM_BIDSSModel.Store.SDP_tbProductoSubcategoria_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.SDP_tbProductoSubcategoria_Select_Result">
+                <ScalarProperty Name="pscat_Id" ColumnName="pscat_Id" />
+                <ScalarProperty Name="pscat_Descripcion" ColumnName="pscat_Descripcion" />
+                <ScalarProperty Name="pcat_Id" ColumnName="pcat_Id" />
+                <ScalarProperty Name="pscat_EsActiva" ColumnName="pscat_EsActiva" />
+                <ScalarProperty Name="pscat_UsuarioCrea" ColumnName="pscat_UsuarioCrea" />
+                <ScalarProperty Name="pscat_FechaCrea" ColumnName="pscat_FechaCrea" />
+                <ScalarProperty Name="pscat_UsuarioModifica" ColumnName="pscat_UsuarioModifica" />
+                <ScalarProperty Name="pscat_FechaModifica" ColumnName="pscat_FechaModifica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

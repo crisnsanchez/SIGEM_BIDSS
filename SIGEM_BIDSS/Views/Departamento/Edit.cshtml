@@ -96,45 +96,52 @@
     <div class="modal fade" id="EditMunicipioModal">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-body">
-                    <form id="form">
-                        <fieldset id="SubmitForm">
-                            <div class="form-horizontal">
-                                <label id="MsjError">
-                                </label>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Editar Municipio</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    
+                    <div class="modal-body">
+                        <form id="form">
+                            <fieldset id="SubmitForm">
+                                <div class="form-horizontal">
+                                    <label id="MsjError">
+                                    </label>
 
-                                <div class="form-row">
-                                    <div class="col-auto">
-                                        @Html.LabelFor(m => Municipio.mun_codigo, new { @class = "control-label", @readonly = "readonly" })
+                                    <div class="form-row">
+                                        <div class="col-auto">
+                                            @Html.LabelFor(m => Municipio.mun_codigo, new { @class = "control-label", @readonly = "readonly" })
 
-                                        <input type="text" id="mun_CodigoEdit_" name="mun_Codigo" class="form-control" readonly="readonly" ; minLength="4" onkeypress="return soloNumeros(event)" />
-                                        @Html.ValidationMessageFor(m => Municipio.mun_codigo)
+                                            <input type="text" id="mun_CodigoEdit_" name="mun_Codigo" class="form-control" readonly="readonly" ; minLength="4" onkeypress="return soloNumeros(event)" />
+                                            @Html.ValidationMessageFor(m => Municipio.mun_codigo)
 
-                                    </div>
-                                    <div class="col-auto">
-                                        @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
-                                        <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; style="text-transform:uppercase;" maxlength="100" autocomplete="off" />
-                                        <div id="editerror">
-                                            @Html.ValidationMessageFor(m => Municipio.mun_nombre)
                                         </div>
-                                       
+                                        <div class="col-auto">
+                                            @Html.LabelFor(m => Municipio.mun_nombre, new { @class = "control-label , required" })
+                                            <input type="text" id="mun_NombreEdit_" name="mun_Nombre" class="form-control" readonly; style="text-transform:uppercase;" maxlength="100" autocomplete="off" />
+                                            <div id="editerror">
+                                                @Html.ValidationMessageFor(m => Municipio.mun_nombre)
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
                                 </div>
-
-                            </div>
-                            <br />
-                            <div class="center">
-                                <div class="col-md-offset-4 col-md-10">
-                                    <button class="btn btn-primary" type="button" id="BtnsubmitMunicipio" tabindex="10"> Guardar </button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                                <br />
+                                <div class="center">
+                                    <div class="col-md-offset-4 col-md-10">
+                                        <button class="btn btn-primary" type="button" id="BtnsubmitMunicipio" tabindex="10"> Guardar </button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
     @section Scripts {
         <!-- Bootstrap 4 -->

@@ -61,7 +61,7 @@ function readURL(input) {
             console.log(e.loaded + "" + e.total);
             console.log(e);
             if (e.loaded < maxLength) {
-                document.getElementById('ImageLength').innerText = "";
+                //document.getElementById('ImageLength').innerText = "";
                 $('#imgpreview').attr('src', e.target.result);
             }
             else {
@@ -126,6 +126,12 @@ function Getpuesto() {
     var are_Id = $('#are_Id').val();
     var selectedPuesto = $('#selectedPuesto').val();
     console.log(selectedPuesto);
+
+    if (are_Id == "" || are_Id == null)
+    {
+        $('#pto_Id').empty();
+        $('#pto_Id').append("<option value=''>Seleccione Puesto</option>");
+    }
     $.ajax({
         url: "/Empleado/Getpuesto",
         method: "POST",
@@ -133,6 +139,8 @@ function Getpuesto() {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ are_Id: are_Id }),
     })
+
+
         .done(function (data) {
             $('#pto_Id').show();
             if (data.length > 0) {
@@ -145,6 +153,9 @@ function Getpuesto() {
                 if (selectedPuesto !== null || selectedPuesto !== "") {
                     $("#pto_Id option[value='" + selectedPuesto + "']").attr("selected", true);
                 } else { console.log("No es"); }
+
+
+
             }
 
             else {

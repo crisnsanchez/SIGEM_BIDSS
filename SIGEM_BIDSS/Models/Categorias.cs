@@ -23,5 +23,11 @@ namespace SIGEM_BIDSS.Models
         [MinLength(5, ErrorMessage = "Máximo {1} caracteres")]
         public string pcat_Descripcion { get; set; }
 
+
+        [Display(Name = "Estado")]
+        
+        public string pcat_EsActivo { get; set; }
+        
+       
     }
 }

@@ -2471,7 +2471,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoCategoria_Insert_Result>("UDP_Inv_tbProductoCategoria_Insert", pcat_DescripcionParameter, pcat_UsuarioCreaParameter, pcat_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Inv_tbProductoCategoria_Update_Result> UDP_Inv_tbProductoCategoria_Update(Nullable<int> pcat_Id, string pcat_Descripcion, Nullable<int> pcat_UsuarioCrea, Nullable<System.DateTime> pcat_FechaCrea, Nullable<int> pcat_UsuarioModifica, Nullable<System.DateTime> pcat_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbProductoCategoria_Update_Result> UDP_Inv_tbProductoCategoria_Update(Nullable<int> pcat_Id, string pcat_Descripcion, Nullable<int> pcat_UsuarioModifica, Nullable<System.DateTime> pcat_FechaModifica)
         {
             var pcat_IdParameter = pcat_Id.HasValue ?
                 new ObjectParameter("pcat_Id", pcat_Id) :
@@ -2481,14 +2481,6 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pcat_Descripcion", pcat_Descripcion) :
                 new ObjectParameter("pcat_Descripcion", typeof(string));
     
-            var pcat_UsuarioCreaParameter = pcat_UsuarioCrea.HasValue ?
-                new ObjectParameter("pcat_UsuarioCrea", pcat_UsuarioCrea) :
-                new ObjectParameter("pcat_UsuarioCrea", typeof(int));
-    
-            var pcat_FechaCreaParameter = pcat_FechaCrea.HasValue ?
-                new ObjectParameter("pcat_FechaCrea", pcat_FechaCrea) :
-                new ObjectParameter("pcat_FechaCrea", typeof(System.DateTime));
-    
             var pcat_UsuarioModificaParameter = pcat_UsuarioModifica.HasValue ?
                 new ObjectParameter("pcat_UsuarioModifica", pcat_UsuarioModifica) :
                 new ObjectParameter("pcat_UsuarioModifica", typeof(int));
@@ -2497,10 +2489,10 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pcat_FechaModifica", pcat_FechaModifica) :
                 new ObjectParameter("pcat_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoCategoria_Update_Result>("UDP_Inv_tbProductoCategoria_Update", pcat_IdParameter, pcat_DescripcionParameter, pcat_UsuarioCreaParameter, pcat_FechaCreaParameter, pcat_UsuarioModificaParameter, pcat_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoCategoria_Update_Result>("UDP_Inv_tbProductoCategoria_Update", pcat_IdParameter, pcat_DescripcionParameter, pcat_UsuarioModificaParameter, pcat_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Inv_tbProductoCategoria_Update_Estado_Result> UDP_Inv_tbProductoCategoria_Update_Estado(Nullable<int> pcat_Id, Nullable<int> pcat_UsuarioModifica, Nullable<System.DateTime> pcat_FechaModifica, Nullable<bool> eSTADO)
+        public virtual ObjectResult<UDP_Inv_tbProductoCategoria_Update_Estado_Result> UDP_Inv_tbProductoCategoria_Update_Estado(Nullable<int> pcat_Id, Nullable<int> pcat_UsuarioModifica, Nullable<System.DateTime> pcat_FechaModifica, Nullable<bool> estado)
         {
             var pcat_IdParameter = pcat_Id.HasValue ?
                 new ObjectParameter("pcat_Id", pcat_Id) :
@@ -2514,11 +2506,11 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pcat_FechaModifica", pcat_FechaModifica) :
                 new ObjectParameter("pcat_FechaModifica", typeof(System.DateTime));
     
-            var eSTADOParameter = eSTADO.HasValue ?
-                new ObjectParameter("ESTADO", eSTADO) :
-                new ObjectParameter("ESTADO", typeof(bool));
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoCategoria_Update_Estado_Result>("UDP_Inv_tbProductoCategoria_Update_Estado", pcat_IdParameter, pcat_UsuarioModificaParameter, pcat_FechaModificaParameter, eSTADOParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoCategoria_Update_Estado_Result>("UDP_Inv_tbProductoCategoria_Update_Estado", pcat_IdParameter, pcat_UsuarioModificaParameter, pcat_FechaModificaParameter, estadoParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbProductoSubCategoria_Delete_Result> UDP_Inv_tbProductoSubCategoria_Delete(Nullable<int> pscat_Id)
@@ -2551,7 +2543,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoSubcategoria_Insert_Result>("UDP_Inv_tbProductoSubcategoria_Insert", pscat_DescripcionParameter, pcat_IdParameter, pscat_UsuarioCreaParameter, pscat_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Inv_tbProductoSubcategoria_Update_Result> UDP_Inv_tbProductoSubcategoria_Update(Nullable<int> pscat_Id, string pscat_Descripcion, Nullable<int> pcat_Id, Nullable<int> pscat_UsuarioCrea, Nullable<System.DateTime> pscat_FechaCrea, Nullable<int> pscat_UsuarioModifica, Nullable<System.DateTime> pscat_FechaModifica)
+        public virtual ObjectResult<UDP_Inv_tbProductoSubcategoria_Update_Result> UDP_Inv_tbProductoSubcategoria_Update(Nullable<int> pscat_Id, string pscat_Descripcion, Nullable<int> pcat_Id, Nullable<int> pscat_UsuarioModifica, Nullable<System.DateTime> pscat_FechaModifica)
         {
             var pscat_IdParameter = pscat_Id.HasValue ?
                 new ObjectParameter("pscat_Id", pscat_Id) :
@@ -2565,14 +2557,6 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pcat_Id", pcat_Id) :
                 new ObjectParameter("pcat_Id", typeof(int));
     
-            var pscat_UsuarioCreaParameter = pscat_UsuarioCrea.HasValue ?
-                new ObjectParameter("pscat_UsuarioCrea", pscat_UsuarioCrea) :
-                new ObjectParameter("pscat_UsuarioCrea", typeof(int));
-    
-            var pscat_FechaCreaParameter = pscat_FechaCrea.HasValue ?
-                new ObjectParameter("pscat_FechaCrea", pscat_FechaCrea) :
-                new ObjectParameter("pscat_FechaCrea", typeof(System.DateTime));
-    
             var pscat_UsuarioModificaParameter = pscat_UsuarioModifica.HasValue ?
                 new ObjectParameter("pscat_UsuarioModifica", pscat_UsuarioModifica) :
                 new ObjectParameter("pscat_UsuarioModifica", typeof(int));
@@ -2581,7 +2565,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pscat_FechaModifica", pscat_FechaModifica) :
                 new ObjectParameter("pscat_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoSubcategoria_Update_Result>("UDP_Inv_tbProductoSubcategoria_Update", pscat_IdParameter, pscat_DescripcionParameter, pcat_IdParameter, pscat_UsuarioCreaParameter, pscat_FechaCreaParameter, pscat_UsuarioModificaParameter, pscat_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoSubcategoria_Update_Result>("UDP_Inv_tbProductoSubcategoria_Update", pscat_IdParameter, pscat_DescripcionParameter, pcat_IdParameter, pscat_UsuarioModificaParameter, pscat_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbProductoSubCategoria_Update_Estado_Result> UDP_Inv_tbProductoSubCategoria_Update_Estado(Nullable<int> pscat_Id, Nullable<bool> pscat_EsActiva, Nullable<int> pscat_UsuarioModifica, Nullable<System.DateTime> pscat_FechaModifica)
@@ -2603,6 +2587,24 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pscat_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoSubCategoria_Update_Estado_Result>("UDP_Inv_tbProductoSubCategoria_Update_Estado", pscat_IdParameter, pscat_EsActivaParameter, pscat_UsuarioModificaParameter, pscat_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<spGetCategoria_Result> spGetCategoria(Nullable<int> pcat_id)
+        {
+            var pcat_idParameter = pcat_id.HasValue ?
+                new ObjectParameter("pcat_id", pcat_id) :
+                new ObjectParameter("pcat_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetCategoria_Result>("spGetCategoria", pcat_idParameter);
+        }
+    
+        public virtual ObjectResult<SDP_tbProductoSubcategoria_Select_Result> SDP_tbProductoSubcategoria_Select(Nullable<int> pscat_Id)
+        {
+            var pscat_IdParameter = pscat_Id.HasValue ?
+                new ObjectParameter("pscat_Id", pscat_Id) :
+                new ObjectParameter("pscat_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SDP_tbProductoSubcategoria_Select_Result>("SDP_tbProductoSubcategoria_Select", pscat_IdParameter);
         }
     }
 }
