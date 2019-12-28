@@ -21,6 +21,7 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Index()
         {
             var tbSueldo = db.tbSueldo.Include(t => t.tbMoneda).Include(t => t.tbEmpleado);
+      
             return View(tbSueldo.ToList());
         }
 
@@ -59,11 +60,11 @@ namespace SIGEM_BIDSS.Controllers
                 };
 
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
-                ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
+                ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre");
                 return View(tbSueldo);
             }
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
-            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura");
+            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre");
             return View();
 
         }
@@ -82,6 +83,13 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
+
+                int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select based).Count();
+
+                if (Existe > 0)
+                {
+                    ModelState.AddModelError("", "Esta empleado ya tiene sueldo.");
+                }
                 if (ModelState.IsValid)
                 {
                     IEnumerable<object> _List = null;
@@ -94,7 +102,7 @@ namespace SIGEM_BIDSS.Controllers
                     if (MsjError.StartsWith("-1"))
                     {
                         Function.BitacoraErrores("Sueldo", "CreatePost", UserName, MsjError);
-                        ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
+                        ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
                         ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbSueldo);
@@ -103,7 +111,7 @@ namespace SIGEM_BIDSS.Controllers
                     {
 
                         ModelState.AddModelError("", "Ya existe un sueldo con el mismo nombre.");
-                        ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
+                        ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
                         ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                         return View(tbSueldo);
                     }
@@ -123,7 +131,7 @@ namespace SIGEM_BIDSS.Controllers
                         }
                     }
                 }
-                ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
+                ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                 return View(tbSueldo);
             }
@@ -131,7 +139,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 Function.BitacoraErrores("Sueldo", "CreatePost", UserName, Ex.Message.ToString());
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
+                ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
 
 
@@ -150,13 +158,17 @@ namespace SIGEM_BIDSS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbSueldo tbSueldo = db.tbSueldo.Find(id);
+            tbSueldo.Cantidad = Convert.ToString(tbSueldo.sue_Cantidad);
             if (tbSueldo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
+            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
             return View(tbSueldo);
+
+
+
         }
 
         // POST: Sueldo/Edit/5
@@ -167,6 +179,7 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,Cantidad")] tbSueldo tbSueldo)
         {
             string UserName = "";
+
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
@@ -204,7 +217,7 @@ namespace SIGEM_BIDSS.Controllers
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 return View(tbSueldo);
             }
-            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Abreviatura", tbSueldo.tmo_Id);
+            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
             return View(tbSueldo);
         }

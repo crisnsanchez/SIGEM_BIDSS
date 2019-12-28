@@ -222,6 +222,12 @@
     <Compile Include="Models\Categorias.cs" />
     <Compile Include="Models\LiquidacionAnticipoViaticodetalle.cs" />
     <Compile Include="Models\LiquidacionAnticipoViatico.cs" />
+    <Compile Include="Models\SDP_tbProductoSubcategoria_Select_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spGetCategoria_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SubCategorias.cs" />
     <Compile Include="Models\tbLiquidacionAnticipoViatico.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
@@ -3402,7 +3408,8 @@
     <Content Include="Views\ProductoCategoria\Index.cshtml" />
     <Content Include="Views\ProductoCategoria\_CreateSubCategoria.cshtml" />
     <Content Include="Views\ProductoCategoria\_ListSubCategoria.cshtml" />
-    <Content Include="Views\LiquidacionAnticipoViatico\_CreateDetalle.cshtml" />
+    <Content Include="Views\ProductoCategoria\_CrearSubCategoria.cshtml" />
+    <Content Include="Views\ProductoCategoria\_DetalleSubCategoria.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -9,15 +9,12 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
-</head>
 <!-- Font Awesome -->
-<link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+@Styles.Render("~/Content/font-awesome")
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- icheck bootstrap -->
-<script src="~/Content/template/plugins/iCheck/icheck.min.js"></script>
-<!-- Theme style -->
-<link href="~/Content/template/dist/css/adminlte.min.css" rel="stylesheet" />
+<!-- Theme style -->    
+@Styles.Render("~/Content/adminlte")
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -51,7 +48,63 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <rect x="150" y="129" width="122" height="122" fill="#F35325" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -59,11 +112,95 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <rect x="150" y="263" width="122" height="122" fill="#05A6F0" />
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <rect x="284" y="263" width="122" height="122" fill="#FFBA08" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -79,12 +216,10 @@
     </div>
     <!-- /.login-box -->
     <!-- jQuery -->
-    <script src="~/Content/template/plugins/jquery/jquery.min.js"></script>
+    @Scripts.Render("~/Scripts/jquery")
     <!-- Bootstrap 4 -->
-    <script src="~/Content/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @Scripts.Render("~/Scripts/bootstrap")
     <!-- AdminLTE App -->
-    <link href="~/Content/template/dist/css/adminlte.min.css" rel="stylesheet" />
-
-
+    @Scripts.Render("~/Scripts/adminlte")
 </body>
 </html>
