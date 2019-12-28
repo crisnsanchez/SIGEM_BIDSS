@@ -235,6 +235,12 @@
     <Compile Include="Models\tbLiquidacionAnticipoViaticoDetalle.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbProducto.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbVacacionesPermisosEspeciales.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -263,6 +269,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_tbProductoSubcategoria_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_rrhh_tbEmpleado_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Unidadmedida.cs" />
@@ -526,9 +535,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Plani_tbInstitucionFinanciera_Update_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_rrhh_tbEmpleado_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_rrhh_tbEmpleado_Update_Result.cs">

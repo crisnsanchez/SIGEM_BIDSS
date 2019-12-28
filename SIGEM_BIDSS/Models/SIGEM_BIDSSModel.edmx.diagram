@@ -59,6 +59,15 @@
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbProductoCategoria" Width="1.5" PointX="16.375" PointY="15" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbProductoSubcategoria" Width="1.5" PointX="18.625" PointY="15" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProductoSubcategoria_tbProductoCategoria_pcat_Id" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbVacacionesPermisosEspeciales" Width="1.5" PointX="13.25" PointY="19" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbProducto" Width="1.5" PointX="20.875" PointY="7.875" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id_JefeInmediato" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEstado_est_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbTipoPermiso_tperm_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_Gral_tbUnidadMedida_uni_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_tbProductoSubcategoria_pscat_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_tbProveedor_prov_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

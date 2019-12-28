@@ -14,6 +14,12 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbProveedor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbProveedor()
+        {
+            this.tbProducto = new HashSet<tbProducto>();
+        }
+    
         public int prov_Id { get; set; }
         public string prov_Nombre { get; set; }
         public string prov_NombreContacto { get; set; }
@@ -30,5 +36,7 @@ namespace SIGEM_BIDSS.Models
     
         public virtual tbActividadEconomica tbActividadEconomica { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbProducto> tbProducto { get; set; }
     }
 }
