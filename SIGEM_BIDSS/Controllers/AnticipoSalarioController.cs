@@ -44,7 +44,7 @@ namespace SIGEM_BIDSS.Controllers
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Enviada)
             {
-                if (UpdateState(out vReturn,tbAnticipoSalario, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                if (UpdateState(out vReturn, tbAnticipoSalario, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
                 }
@@ -109,7 +109,7 @@ namespace SIGEM_BIDSS.Controllers
                 var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
 
                 tbAnticipoSalario.Sueldo = Convert.ToDecimal(vSueldo);
-                tbAnticipoSalario.Porcentaje = decimal.Round(Convert.ToDecimal(_percent),2);
+                tbAnticipoSalario.Porcentaje = decimal.Round(Convert.ToDecimal(_percent), 2);
 
                 ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
                 ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
@@ -179,7 +179,6 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
 
@@ -216,65 +215,71 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "",
                 ErrorEmail = "";
             bool Result = false;
+            pvReturn = "";
+            IEnumerable<object> Update = null;
+            string ErrorMessage = "";
+            string _msj = "";
+            var reject = "";
+
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
                 tbAnticipoSalario.est_Id = State;
                 tbAnticipoSalario.Ansal_RazonRechazo = Ansal_RazonRechazo;
+                var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.emp_Id).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
 
-                IEnumerable<object> Update = null;
-                string ErrorMessage = "";
-
-                Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
-                                                            tbAnticipoSalario.emp_Id,
-                                                            tbAnticipoSalario.Ansal_JefeInmediato,
-                                                            tbAnticipoSalario.Ansal_GralFechaSolicitud,
-                                                            tbAnticipoSalario.Ansal_MontoSolicitado,
-                                                            tbAnticipoSalario.tpsal_id,
-                                                            tbAnticipoSalario.Ansal_Justificacion,
-                                                            tbAnticipoSalario.Ansal_Comentario,
-                                                            tbAnticipoSalario.est_Id,
-                                                            tbAnticipoSalario.Ansal_RazonRechazo,
-                                                            EmployeeID,
-                                                            Function.DatetimeNow());
-                foreach (UDP_Adm_tbAnticipoSalario_Update_Result Res in Update)
-                    ErrorMessage = Res.MensajeError;
-                    pvReturn = ErrorMessage;
-                if (ErrorMessage.StartsWith("-1"))
+                switch (State)
                 {
-                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
-                    ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                    case GeneralFunctions.Revisada:
+                        _msj = GeneralFunctions.msj_Revisada;
+                        break;
+                    case GeneralFunctions.Aprobada:
+                        _msj = GeneralFunctions.msj_Aprobada;
+                        break;
+                    case GeneralFunctions.Rechazada:
+                        _msj = GeneralFunctions.msj_Rechazada;
+                        reject = " Razon de Rechazo:";
+                        break;
+                }
+                if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
+                Result = Function.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject + " " + Ansal_RazonRechazo);
+
+                if (!Result)
+                {
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
                     return false;
                 }
                 else
                 {
-                    var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.emp_Id).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                    string _msj = "";
-                    var reject = "";
-                    switch (State)
+                    Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
+                                                                tbAnticipoSalario.emp_Id,
+                                                                tbAnticipoSalario.Ansal_JefeInmediato,
+                                                                tbAnticipoSalario.Ansal_GralFechaSolicitud,
+                                                                tbAnticipoSalario.Ansal_MontoSolicitado,
+                                                                tbAnticipoSalario.tpsal_id,
+                                                                tbAnticipoSalario.Ansal_Justificacion,
+                                                                tbAnticipoSalario.Ansal_Comentario,
+                                                                tbAnticipoSalario.est_Id,
+                                                                tbAnticipoSalario.Ansal_RazonRechazo,
+                                                                EmployeeID,
+                                                                Function.DatetimeNow());
+                    foreach (UDP_Adm_tbAnticipoSalario_Update_Result Res in Update)
+                        ErrorMessage = Res.MensajeError;
+                    pvReturn = ErrorMessage;
+                    if (ErrorMessage.StartsWith("-1"))
                     {
-                        case GeneralFunctions.Revisada:
-                            _msj = GeneralFunctions.msj_Revisada;
-                            break;
-                        case GeneralFunctions.Aprobada:
-                            _msj = GeneralFunctions.msj_Aprobada;
-                            break;
-                        case GeneralFunctions.Rechazada:
-                            _msj = GeneralFunctions.msj_Rechazada;
-                            reject = " Razon de Rechazo:";
-                            break;
-                    }
-                    if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
-                    Result = Function.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject + " " + Ansal_RazonRechazo);
 
-                    if (!Result) Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
+                        Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
+                        ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                        return false;
+                    }
                     return true;
                 }
             }
             catch (Exception ex)
             {
                 pvReturn = ex.Message.ToString();
-               Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
+                Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
                 return false;
             }
         }
