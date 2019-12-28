@@ -5,12 +5,14 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 $("#frmsubmit").click(function () {
+    document.getElementById('spinnerForm').classList.add("overlay");
+    document.getElementById('spinnerDiv').removeAttribute("hidden");
     $("form").submit()
 })
 
 
 
-document.getElementById("Cantidad").onblur = function () {
+document.getElementById("Cantidad").DOMContentLoaded = function () {
     if (!isNaN(this.value || this.value != "")) {
     //number-format the user input
     this.value = parseFloat(this.value.replace(/,/g, ""))

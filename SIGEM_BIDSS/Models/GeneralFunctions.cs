@@ -143,10 +143,7 @@ namespace SIGEM_BIDSS.Models
                     lsRutaPlantilla = "",
                     lsXMLDatos = "",
                     lsXMLEnvio = "";
-
-         
-
-
+                       
             bool State = false;
             int StateIn = 0;
 
