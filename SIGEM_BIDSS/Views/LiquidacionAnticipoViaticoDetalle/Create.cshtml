@@ -71,8 +71,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-11">
-                            @Html.DropDownListFor(model => model.tpv_Id, (SelectList)ViewBag.tpv_Id, "Seleccione Tipo Gasto", new { @class = "form-control" })
-
+                            @Html.EditorFor(model => model.tpv_Id, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })
                         </div>
                     </div>
