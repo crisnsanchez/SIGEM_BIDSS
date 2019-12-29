@@ -30,6 +30,10 @@ namespace SIGEM_BIDSS.Models
 
 
         public Nullable<decimal> sue_Cantidad { get; set; }
+        decimal value;
+      
+
+
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Moneda")]

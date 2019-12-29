@@ -14,6 +14,12 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbUnidadMedida
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbUnidadMedida()
+        {
+            this.tbProducto = new HashSet<tbProducto>();
+        }
+    
         public int uni_Id { get; set; }
         public string uni_Descripcion { get; set; }
         public string uni_Abreviatura { get; set; }
@@ -21,5 +27,8 @@ namespace SIGEM_BIDSS.Models
         public System.DateTime uni_FechaCrea { get; set; }
         public Nullable<int> uni_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> uni_FechaModifica { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbProducto> tbProducto { get; set; }
     }
 }

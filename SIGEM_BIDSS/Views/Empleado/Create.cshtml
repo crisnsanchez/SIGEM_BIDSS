@@ -36,7 +36,7 @@
     @using (Html.BeginForm("Create", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.HiddenFor(model => model.emp_UsuarioCrea, new { Value = "1" })
-        @Html.HiddenFor(model => model.est_Id, new { Value = "1" })
+        @Html.HiddenFor(model => model.est_Id, new { Value = "5" })
         @Html.HiddenFor(model => model.emp_FechaCrea, new { Value = "2019-11-11" })
         @Html.HiddenFor(model => model.emp_UsuarioModifica, new { Value = "1" })
         @Html.HiddenFor(model => model.emp_FechaModifica, new { Value = "2019-12-12" })

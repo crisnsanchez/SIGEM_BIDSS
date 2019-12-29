@@ -89,14 +89,13 @@ namespace SIGEM_BIDSS.Models
         public const int LiquidacionAnticipoSalario = 5;
         public const int RequisicionCompra = 6;
         public const int RembolsoGastos = 7;
-        public const int empleadoinactivo = 2;
-        public const int empleadoactivo = 1;
+        public const int empleadoinactivo = 6;
+        public const int empleadoactivo = 5;
         public const bool instfinDenegar = false;
         public const bool instfinAceptar = true;
 
         public const bool Activo = true;
         public const bool Inactivo = false;
-
 
 
 

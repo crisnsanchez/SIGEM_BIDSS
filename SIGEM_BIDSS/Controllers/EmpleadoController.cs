@@ -243,7 +243,7 @@ namespace SIGEM_BIDSS.Controllers
                     List = db.UDP_rrhh_tbEmpleado_Insert(tbEmpleado.emp_Nombres, tbEmpleado.emp_Apellidos,
                         tbEmpleado.emp_Sexo, tbEmpleado.emp_FechaNacimiento, tbEmpleado.emp_Identificacion,
                         tbEmpleado.emp_Telefono, tbEmpleado.emp_CorreoElectronico, tbEmpleado.emp_EsJefe,
-                        tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_codigo, EmployeeID);
+                        tbEmpleado.tps_Id, tbEmpleado.pto_Id, tbEmpleado.emp_FechaIngreso, tbEmpleado.emp_Direccion, tbEmpleado.emp_PathImage, tbEmpleado.mun_codigo, EmployeeID,tbEmpleado.est_Id);
                     foreach (UDP_rrhh_tbEmpleado_Insert_Result Empleado in List)
                         ErrorMessage = Empleado.MensajeError;
                     if (ErrorMessage.StartsWith("-1"))

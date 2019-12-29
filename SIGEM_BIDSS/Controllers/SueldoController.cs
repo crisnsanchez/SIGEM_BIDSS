@@ -25,8 +25,25 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbSueldo.ToList());
         }
 
-        // GET: Sueldo/Details/5
-        public ActionResult Details(int? id)
+        // GET Existencia del empleado y levantar modal
+        [HttpPost]
+        public JsonResult GetExistencia(int Sueldo)
+        {
+
+            var Existe = (from based in db.tbSueldo where based.emp_Id == Sueldo select new { empID = based.emp_Id }).FirstOrDefault(x => x.empID == 0);
+            int Emplead_id = 0;
+            if (Existe != null)
+            {
+                Emplead_id = Existe.empID;
+
+            }
+            return Json(Emplead_id, JsonRequestBehavior.AllowGet);
+        }
+
+
+        
+    // GET: Sueldo/Details/5
+    public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -47,6 +64,10 @@ namespace SIGEM_BIDSS.Controllers
             int id = Convert.ToInt32(Session["EmpID"]);
             ViewBag.empIsNull = id;
 
+            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
+
+
             var _tbEmpleado = (from _tdemp in db.tbEmpleado
                                where _tdemp.emp_Id == id
                                select new { empId = _tdemp.emp_Id, Nombre = _tdemp.emp_Nombres + " " + _tdemp.emp_Apellidos }).FirstOrDefault();
@@ -59,11 +80,11 @@ namespace SIGEM_BIDSS.Controllers
                     NombreEmpleado = _tbEmpleado.Nombre
                 };
 
-                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+                ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                 ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre");
                 return View(tbSueldo);
             }
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
+            ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres");
             ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre");
             return View();
 
@@ -75,21 +96,17 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,Cantidad")] tbSueldo tbSueldo)
+        public ActionResult Create([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,Cantidad,Employee")] tbSueldo tbSueldo)
         {
 
             //decimal Cantidad = Convert.ToDecimal(tbSueldo.sue_Cantidad.ToString().Replace(",", ""));
             string UserName = "";
             try
             {
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
                 int EmployeeID = Function.GetUser(out UserName);
 
-                int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select based).Count();
-
-                if (Existe > 0)
-                {
-                    ModelState.AddModelError("", "Esta empleado ya tiene sueldo.");
-                }
                 if (ModelState.IsValid)
                 {
                     IEnumerable<object> _List = null;
@@ -103,7 +120,7 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         Function.BitacoraErrores("Sueldo", "CreatePost", UserName, MsjError);
                         ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
-                        ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+                        ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbSueldo);
                     }
@@ -112,7 +129,7 @@ namespace SIGEM_BIDSS.Controllers
 
                         ModelState.AddModelError("", "Ya existe un sueldo con el mismo nombre.");
                         ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
-                        ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+                        ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                         return View(tbSueldo);
                     }
                     else
@@ -132,7 +149,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                 }
                 ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
-                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+                ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                 return View(tbSueldo);
             }
             catch (Exception Ex)
@@ -163,8 +180,10 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return HttpNotFound();
             }
+            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
             ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+            ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
             return View(tbSueldo);
 
 
@@ -176,13 +195,21 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,Cantidad")] tbSueldo tbSueldo)
+        public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,Cantidad,Employee")] tbSueldo tbSueldo)
         {
             string UserName = "";
+            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
 
             try
             {
+
                 int EmployeeID = Function.GetUser(out UserName);
+                int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select based).Count();
+
+                if (Existe > 0)
+                {
+                    ModelState.AddModelError("", "Este empleado ya posee un sueldo.");
+                }
                 if (ModelState.IsValid)
                 {
                     IEnumerable<object> _List = null;
@@ -218,7 +245,7 @@ namespace SIGEM_BIDSS.Controllers
                 return View(tbSueldo);
             }
             ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+            ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
             return View(tbSueldo);
         }
 
