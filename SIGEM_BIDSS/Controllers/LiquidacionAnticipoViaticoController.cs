@@ -100,8 +100,8 @@ namespace SIGEM_BIDSS.Controllers
                         Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
                         ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
 
-                        if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
-                        if (!ResultAdm) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                        if (!Result) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
                         TempData["swalfunction"] = "true";
 
                         return RedirectToAction("Index");

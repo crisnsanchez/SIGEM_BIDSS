@@ -1,5 +1,13 @@
 ﻿/////DATE PICKER
+
+
 $('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida,#Lianvide_FechaGasto').datepicker({
+    format: "dd/mm/yyyy",
+    startDate: "01/01/1990",
+    language: "es",
+    daysOfWeekDisabled: "0"
+});
+$('#Lianvi_FechaFinViaje').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1990",
     language: "es",
