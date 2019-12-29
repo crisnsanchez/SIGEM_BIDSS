@@ -22,6 +22,7 @@ namespace SIGEM_BIDSS.Models
             this.tbLiquidacionAnticipoViatico = new HashSet<tbLiquidacionAnticipoViatico>();
             this.tbEmpleado = new HashSet<tbEmpleado>();
             this.tbVacacionesPermisosEspeciales = new HashSet<tbVacacionesPermisosEspeciales>();
+            this.tbSolicitudReembolsoGastos = new HashSet<tbSolicitudReembolsoGastos>();
         }
     
         public int est_Id { get; set; }
@@ -41,5 +42,7 @@ namespace SIGEM_BIDSS.Models
         public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
     }
 }

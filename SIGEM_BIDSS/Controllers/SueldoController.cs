@@ -26,19 +26,19 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         // GET Existencia del empleado y levantar modal
-        [HttpPost]
-        public JsonResult GetExistencia(int Sueldo)
-        {
+        //[HttpPost]
+        //public JsonResult GetExistencia(int Sueldo)
+        //{
 
-            var Existe = (from based in db.tbSueldo where based.emp_Id == Sueldo select new { empID = based.emp_Id }).FirstOrDefault(x => x.empID == 0);
-            int Emplead_id = 0;
-            if (Existe != null)
-            {
-                Emplead_id = Existe.empID;
+        //    var Existe = (from based in db.tbSueldo where based.emp_Id == Sueldo select new { empID = based.emp_Id }).FirstOrDefault(x => x.empID == 0);
+        //    int Emplead_id = 0;
+        //    if (Existe != null)
+        //    {
+        //        Emplead_id = Existe.empID;
 
-            }
-            return Json(Emplead_id, JsonRequestBehavior.AllowGet);
-        }
+        //    }
+        //    return Json(Emplead_id, JsonRequestBehavior.AllowGet);
+        //}
 
 
         
@@ -103,6 +103,13 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "";
             try
             {
+
+                int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select based).Count();
+
+                if (Existe > 0)
+                {
+                    ModelState.AddModelError("", "Esta empleado ya tiene sueldo.");
+                }
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
 
                 int EmployeeID = Function.GetUser(out UserName);

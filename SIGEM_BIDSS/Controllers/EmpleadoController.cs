@@ -168,7 +168,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             string ErrorMessage = "";
             string UserName = "";
-            if (tbEmpleado.mun_codigo == "Seleccione")
+            if (tbEmpleado.mun_codigo == "Seleccione Municipio")
                 ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
             else
                 ViewBag.munCodigo = tbEmpleado.mun_codigo;
