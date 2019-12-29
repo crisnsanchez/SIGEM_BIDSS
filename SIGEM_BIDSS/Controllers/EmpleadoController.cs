@@ -159,7 +159,7 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "emp_Id,emp_Nombres,emp_Apellidos,emp_Sexo,emp_FechaNacimiento,emp_Identificacion,emp_Telefono," +
             "emp_CorreoElectronico, emp_EsJefe ,tps_Id,pto_Id,emp_FechaIngreso,emp_Direccion,emp_RazonInactivacion,emp_Estado,emp_PathImage,mun_codigo,emp_UsuarioCrea,emp_FechaCrea," +
-            "emp_UsuarioModifica,emp_FechaModifica,est_Id,are_Id, dep_Codigo")] tbEmpleado tbEmpleado ,HttpPostedFileBase FotoPath)
+            "emp_UsuarioModifica,emp_FechaModifica,est_Id,are_Id, dep_Codigo")] tbEmpleado tbEmpleado ,HttpPostedFileBase FotoPath, string dep_codigo)
         {
             ViewBag.muni = "true";
             tbEmpleado.emp_PathImage = "----";
@@ -168,6 +168,14 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
             string ErrorMessage = "";
             string UserName = "";
+            if (tbEmpleado.mun_codigo == "Seleccione")
+                ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
+            else
+                ViewBag.munCodigo = tbEmpleado.mun_codigo;
+
+            if (String.IsNullOrEmpty(dep_codigo))
+                ModelState.AddModelError("emp_UsuarioCrea", "El campo Departamento es obligatorio.");
+
 
             try
             {
@@ -219,15 +227,6 @@ namespace SIGEM_BIDSS.Controllers
                     }
                 }
 
-
-                if (tbEmpleado.are_Id == 0)
-                    ModelState.AddModelError("emp_UsuarioCrea", "El campo Área es obligatorio.");
-                 
-                if (tbEmpleado.mun_codigo  == "")
-                  ModelState.AddModelError("dep_codigo", "El campo Municipio es obligatorio.");
-
-                if (tbEmpleado.dep_Codigo == "")
-                 ModelState.AddModelError("mun_codigo", "El campo Departamento es obligatorio.");
 
 
                 int Existe = (from based in db.tbEmpleado where based.emp_Identificacion == tbEmpleado.emp_Identificacion select based).Count();
