@@ -246,6 +246,9 @@
     <Compile Include="Models\tbVacacionesPermisosEspeciales.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Adm_tbAnticipoViatico_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -3426,6 +3429,7 @@
     <Content Include="Views\SolicitudReembolsoGastos\Details.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Edit.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Index.cshtml" />
+    <Content Include="Views\AnticipoViatico\_Modales.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

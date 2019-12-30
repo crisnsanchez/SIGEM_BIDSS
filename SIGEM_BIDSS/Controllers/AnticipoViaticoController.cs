@@ -21,8 +21,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: AnticipoViatico
         public ActionResult Index()
         {
-            var tbAnticipoViatico = db.tbAnticipoViatico.Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMunicipio).Include(t => t.tbTipoTransporte);
-            return View(tbAnticipoViatico.ToList());
+            try
+            {
+                var tbAnticipoViatico = db.tbAnticipoViatico.Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMunicipio).Include(t => t.tbTipoTransporte);
+                return View(tbAnticipoViatico.ToList());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         // GET: AnticipoViatico/Details/5
@@ -43,19 +51,34 @@ namespace SIGEM_BIDSS.Controllers
         // GET: AnticipoViatico/Create
         public ActionResult Create()
         {
-            var JefeInmediato = db.tbEmpleado.Select(s => new
+            tbAnticipoViatico tbAnticipoViatico = new tbAnticipoViatico();
+            string ErrorMessage = "";
+            try
             {
-                emp_Id = s.emp_Id,
-                emp_Nombres = s.emp_Nombres,
-                emp_EsJefe = s.emp_EsJefe
-            }).Where(x => x.emp_EsJefe == true).ToList();
+                string UserName = "";
+                int EmployeeID = Funtion.GetUser(out UserName);
+                int fecha = Funtion.DatetimeNow().Year;
+                int SolCount = (from _tbSol in db.tbAnticipoViatico where _tbSol.Anvi_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
 
 
-            ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
-            ViewBag.Anvi_JefeInmediato = new SelectList(JefeInmediato, "emp_Id", "emp_Nombres");
-            ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
-            ViewBag.Anvi_tptran_Id = new SelectList(db.tbTipoTransporte, "tptran_Id", "tptran_Descripcion");
-            return View();
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
+
+
+                ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+                ViewBag.Anvi_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
+                ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+                ViewBag.Anvi_tptran_Id = new SelectList(db.tbTipoTransporte, "tptran_Id", "tptran_Descripcion");
+
+
+
+            }
+            catch (Exception Ex)
+            {
+                ErrorMessage = Ex.Message.ToString();
+                throw;
+            }
+            return View(tbAnticipoViatico);
         }
 
         // POST: AnticipoViatico/Create
@@ -70,12 +93,13 @@ namespace SIGEM_BIDSS.Controllers
 
             try
             {
-                bool Result = false;
-                int EmployeeID = 0;
-                EmployeeID = Funtion.GetUser(out UserName);
+                bool Result = false, ResultAdm = false;
+                int EmployeeID = Funtion.GetUser(out UserName);
                 tbAnticipoViatico.emp_Id = EmployeeID;
                 tbAnticipoViatico.Anvi_GralFechaSolicitud = Funtion.DatetimeNow();
                 tbAnticipoViatico.est_Id = GeneralFunctions.Enviada;
+
+                var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
 
                 if (tbAnticipoViatico.mun_Codigo == "Seleccione")
                     ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
@@ -116,11 +140,17 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        //Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage);
-                        if (!Result)
-                            Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
+                        var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoViatico.Anvi_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                        var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
 
-                        return Json("Index");
+                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
+                        ResultAdm = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
+
+                        if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
+
+                        TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
+                        return RedirectToAction("Index");
                     }
 
                 }
@@ -133,7 +163,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.Anvi_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoViatico.Anvi_JefeInmediato);
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbAnticipoViatico.mun_Codigo);
             ViewBag.Anvi_tptran_Id = new SelectList(db.tbTipoTransporte, "tptran_Id", "tptran_Descripcion", tbAnticipoViatico.Anvi_tptran_Id);
-            if(dep_codigo != "ajax")
+            if (dep_codigo != "ajax")
                 return View("Create");
             else
                 return Json("Create");
@@ -193,6 +223,164 @@ namespace SIGEM_BIDSS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        /////////////////////////////////////////////////////////       
+
+
+        [HttpPost]
+        public JsonResult Revisar(int id, string Anvi_RazonRechazo)
+        {
+            string vReturn = "";
+            string IsFor = "false";
+            tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
+            if (tbAnticipoViatico.est_Id == GeneralFunctions.Enviada)
+            {
+                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Revisada, Anvi_RazonRechazo))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                    IsFor = "true";
+                }
+            }
+            if (tbAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(IsFor, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult Approve(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
+            if (tbAnticipoViatico.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Aprobada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // GET: AnticipoSalario/Approve/5   
+        [HttpPost]
+        public JsonResult Reject(int id, string Ansal_RazonRechazo)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
+            if (tbAnticipoViatico.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Rechazada, Ansal_RazonRechazo))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
+                }
+            }
+            if (tbAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+                //return HttpNotFound();
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public bool UpdateState(out string pvReturn, tbAnticipoViatico tbAnticipoViatico, int State, string Anvi_RazonRechazo)
+        {
+            string UserName = "",
+                ErrorEmail = "";
+            bool Result = false;
+            pvReturn = "";
+            IEnumerable<object> Update = null;
+            string ErrorMessage = "";
+            string _msj = "";
+            var reject = "";
+
+            try
+            {
+                int EmployeeID = Funtion.GetUser(out UserName);
+                tbAnticipoViatico.est_Id = State;
+                tbAnticipoViatico.Anvi_RazonRechazo = Anvi_RazonRechazo;
+                var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoViatico.emp_Id).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+
+                switch (State)
+                {
+                    case GeneralFunctions.Revisada:
+                        _msj = GeneralFunctions.msj_Revisada;
+                        break;
+                    case GeneralFunctions.Aprobada:
+                        _msj = GeneralFunctions.msj_Aprobada;
+                        break;
+                    case GeneralFunctions.Rechazada:
+                        _msj = GeneralFunctions.msj_Rechazada;
+                        reject = " Razon de Rechazo:";
+                        break;
+                }
+                if (Anvi_RazonRechazo == GeneralFunctions.stringDefault) { Anvi_RazonRechazo = null; };
+                Result = Funtion.LeerDatos(out ErrorEmail, tbAnticipoViatico.Anvi_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject + " " + Anvi_RazonRechazo);
+
+                if (!Result)
+                {
+                    Funtion.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
+                    return false;
+                }
+                else
+                {
+                    Update = db.UDP_Adm_tbAnticipoViatico_Update(tbAnticipoViatico.Anvi_Id,
+                                                                    tbAnticipoViatico.emp_Id,
+                                                                    tbAnticipoViatico.Anvi_JefeInmediato,
+                                                                   tbAnticipoViatico.Anvi_GralFechaSolicitud,
+                                                                   tbAnticipoViatico.Anvi_FechaViaje,
+                                                                   tbAnticipoViatico.Anvi_Cliente,
+                                                                   tbAnticipoViatico.mun_Codigo,
+                                                                   tbAnticipoViatico.Anvi_PropositoVisita,
+                                                                   tbAnticipoViatico.Anvi_DiasVisita,
+                                                                   tbAnticipoViatico.Anvi_Hospedaje,
+                                                                   tbAnticipoViatico.Anvi_tptran_Id,
+                                                                   tbAnticipoViatico.Anvi_Autorizacion,
+                                                                   tbAnticipoViatico.Anvi_Comentario,
+                                                                   tbAnticipoViatico.est_Id,
+                                                                   tbAnticipoViatico.Anvi_RazonRechazo,     
+                                                               EmployeeID,
+                                                                Funtion.DatetimeNow());
+                    foreach (UDP_Adm_tbAnticipoViatico_Update_Result Res in Update)
+                        ErrorMessage = Res.MensajeError;
+                    pvReturn = ErrorMessage;
+                    if (ErrorMessage.StartsWith("-1"))
+                    {
+
+                        Funtion.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ErrorMessage);
+                        ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                pvReturn = ex.Message.ToString();
+                Funtion.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
+                return false;
+            }
         }
     }
 }
