@@ -89,5 +89,15 @@ namespace SIGEM_BIDSS.Models
         public Nullable<System.DateTime> Ansal_FechaModifica { get; set; }
     }
 
-    
+    public class cCalDecimales
+    {
+        public decimal empMonto { get; set; }
+
+        public decimal empSueldo { get; set; }
+
+        public decimal empPorcetanje { get; set; }
+
+        //Asignamos el nombre a la propiedad privada
+        
+    }
 }

@@ -14,7 +14,6 @@ namespace SIGEM_BIDSS.Controllers
 {
     public abstract class BaseController : Controller
     {
-
         protected void Flash(string message, string debug = null)
         {
             var alerts = TempData.ContainsKey(Alert.AlertKey) ?
@@ -26,7 +25,6 @@ namespace SIGEM_BIDSS.Controllers
                 Message = message,
                 Debug = debug
             });
-
             TempData[Alert.AlertKey] = alerts;
         }
 
@@ -52,7 +50,6 @@ namespace SIGEM_BIDSS.Controllers
                     filterContext.Result = RedirectToAction("Index", "Login");
                 }
             }
-
             base.OnActionExecuting(filterContext);
         }
     }

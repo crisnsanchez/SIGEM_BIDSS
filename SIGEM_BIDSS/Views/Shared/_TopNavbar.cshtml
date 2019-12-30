@@ -136,16 +136,6 @@
                     </a>
                 </div>
             }
-            @foreach (var alert in alerts)
-            {
-                <div class="alert alert-danger" role="alert">
-                    <p class="mb-3">@alert.Message</p>
-                    @if (!string.IsNullOrEmpty(alert.Debug))
-                    {
-                        <pre class="alert-pre border bg-light p-2"><code>@alert.Debug</code></pre>
-                    }
-                </div>
-            }
         </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
