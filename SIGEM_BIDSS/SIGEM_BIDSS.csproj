@@ -206,6 +206,7 @@
     <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ProductoCategoriaController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\SolicitudReembolsoGastosController.cs" />
     <Compile Include="Controllers\SueldoController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Models\SDP_tbProductoSubcategoria_Select_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Solicitud\ReembolsoGastos.cs" />
     <Compile Include="Models\spGetCategoria_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -236,6 +238,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbProducto.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbSolicitudReembolsoGastos.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbVacacionesPermisosEspeciales.cs">
@@ -3416,6 +3421,11 @@
     <Content Include="Views\ProductoCategoria\_ListSubCategoria.cshtml" />
     <Content Include="Views\ProductoCategoria\_CrearSubCategoria.cshtml" />
     <Content Include="Views\ProductoCategoria\_DetalleSubCategoria.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastos\Create.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastos\Delete.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastos\Details.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastos\Edit.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastos\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
