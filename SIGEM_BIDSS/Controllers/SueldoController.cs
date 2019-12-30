@@ -25,25 +25,30 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbSueldo.ToList());
         }
 
-        // GET Existencia del empleado y levantar modal
-        //[HttpPost]
-        //public JsonResult GetExistencia(int Sueldo)
-        //{
-
-        //    var Existe = (from based in db.tbSueldo where based.emp_Id == Sueldo select new { empID = based.emp_Id }).FirstOrDefault(x => x.empID == 0);
-        //    int Emplead_id = 0;
-        //    if (Existe != null)
-        //    {
-        //        Emplead_id = Existe.empID;
-
-        //    }
-        //    return Json(Emplead_id, JsonRequestBehavior.AllowGet);
-        //}
-
-
+        //GET Existencia del empleado y levantar modal
+       [HttpPost]
+        public JsonResult GetExistencia(int Sueldo)
+        { 
+            bool ver = false;
+            int emp_Id = 0;
+            var Existe = (from based in db.tbSueldo where based.emp_Id == Sueldo select new { sue_Id = based.sue_Id  }).FirstOrDefault();
         
-    // GET: Sueldo/Details/5
-    public ActionResult Details(int? id)
+
+            if (Existe  != null)
+            {
+                ver = true;
+                emp_Id = Existe.sue_Id;
+                ViewBag.Existencia = Existe;
+                ModelState.AddModelError("", "Esta empleado ya tiene sueldo.");
+            }
+            object Confirmar = new { ver, emp_Id };
+            return Json(Confirmar, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        // GET: Sueldo/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -104,10 +109,11 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
 
-                int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select based).Count();
+                var Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select new { emp_Id = based.emp_Id }).SingleOrDefault();
 
-                if (Existe > 0)
+                if (Existe == null)
                 {
+                    ViewBag.Existencia = Existe;
                     ModelState.AddModelError("", "Esta empleado ya tiene sueldo.");
                 }
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
@@ -211,7 +217,9 @@ namespace SIGEM_BIDSS.Controllers
             {
 
                 int EmployeeID = Function.GetUser(out UserName);
-                int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select based).Count();
+                //int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select based).Count();
+                int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id && based.sue_Id != tbSueldo.sue_Id select based).Count();
+
 
                 if (Existe > 0)
                 {
