@@ -27,6 +27,7 @@ namespace SIGEM_BIDSS
         private static string redirectUri = ConfigurationManager.AppSettings["ida:RedirectUri"];
         private static string graphScopes = ConfigurationManager.AppSettings["ida:AppScopes"];
         private static string tenant = ConfigurationManager.AppSettings["ida:Tenant"];
+
         string authority = String.Format(System.Globalization.CultureInfo.InvariantCulture, ConfigurationManager.AppSettings["ida:Authority"], tenant);
 
 
@@ -71,8 +72,7 @@ namespace SIGEM_BIDSS
             );
         }
 
-        private static Task OnAuthenticationFailedAsync(AuthenticationFailedNotification<OpenIdConnectMessage,
-          OpenIdConnectAuthenticationOptions> notification)
+        private static Task OnAuthenticationFailedAsync(AuthenticationFailedNotification<OpenIdConnectMessage,OpenIdConnectAuthenticationOptions> notification)
         {
             notification.HandleResponse();
             string redirect = $"/Home/Error?message={notification.Exception.Message}";

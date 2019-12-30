@@ -14,50 +14,43 @@ $("#frmsubmit").click(function () {
 
 document.getElementById("Cantidad").DOMContentLoaded = function () {
     if (!isNaN(this.value || this.value != "")) {
-    //number-format the user input
-    this.value = parseFloat(this.value.replace(/,/g, ""))
-        .toFixed(2)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        //number-format the user input
+        this.value = parseFloat(this.value.replace(/,/g, ""))
+            .toFixed(2)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-    //set the numeric value to a number input
-    document.getElementById("number").value = this.value.replace(/,/g, "")
+        //set the numeric value to a number input
+        document.getElementById("number").value = this.value.replace(/,/g, "")
     }
 }
 
+function GetDecimales() {
+    var Decimales = {
+        empSueldo: parseInt(document.getElementById("Sueldo").value).toFixed(2),
+        empPorcetanje: parseInt(document.getElementById("Porcentaje").value).toFixed(2),
+        empMonto: parseInt(document.getElementById("number").value).toFixed(2)
+    };
+    return Decimales;
+}
 
 var monto = document.getElementById("Cantidad");
 
 monto.addEventListener("input", function () {
-
     document.getElementById("number").value = this.value.replace(/,/g, "")
-
-    empSueldo =  parseInt(document.getElementById("Sueldo").value);
-
-    empPorcetanje = parseInt(document.getElementById("Porcentaje").value);
-
-    empMonto = parseInt(document.getElementById("number").value);
- 
-    if (this.value != "") {
-
-        console.log("Porcentaje: " + empPorcetanje + " - Monto " + empMonto + " - Sueldo " + empSueldo);
-
-        if (empMonto > empSueldo) {
-            spanCantidad = document.getElementById("spanCantidad").innerText = "Monto solicitado mayor que el Sueldo";
-        } else {
-            spanCantidad = document.getElementById("spanCantidad").innerText = "";
-        }
-        if (empMonto > empPorcetanje) {
-            spanCantidad = document.getElementById("spanCantidad").innerText = "El monto no puede ser mayor que el pocentaje permitido";
-            
-        } else {
-            spanCantidad = document.getElementById("spanCantidad").innerText = "";
-        }
-    }
-    else {
-        console.log("false");
-    }
-  
+    vDecimales = GetDecimales()
+    console.log("JS: " + vDecimales);
+    $.ajax({
+        url: "/AnticipoSalario/Calcular",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ cCalDecimal: vDecimales}),
+    })
+        .done(function (data) {
+            console.log(data);
+            document.getElementById("spanCantidad").innerText = data.spanCantidad
+        });
 });
 
 
@@ -113,3 +106,22 @@ function soloLetras(e) {
     }
 }
 
+  //if (this.value != "") {
+
+    //    console.log("Porcentaje: " + empPorcetanje + " - Monto " + empMonto + " - Sueldo " + empSueldo);
+
+    //    if (empMonto > empSueldo) {
+    //        spanCantidad = document.getElementById("spanCantidad").innerText = "Monto solicitado mayor que el Sueldo";
+    //    } else {
+    //        spanCantidad = document.getElementById("spanCantidad").innerText = "";
+    //    }
+    //    if (empMonto > empPorcetanje) {
+    //        spanCantidad = document.getElementById("spanCantidad").innerText = "El monto no puede ser mayor que el pocentaje permitido";
+
+    //    } else {
+    //        spanCantidad = document.getElementById("spanCantidad").innerText = "";
+    //    }
+    //}
+    //else {
+    //    console.log("false");
+    //}

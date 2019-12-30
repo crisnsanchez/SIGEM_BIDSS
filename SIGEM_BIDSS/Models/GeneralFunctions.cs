@@ -44,7 +44,7 @@ namespace SIGEM_BIDSS.Models
         public const string _isDependenciasS = "DependenciaSub";
 
         public const string _YaExiste = "ExisteCo";
-        public const string _Nombre ="ExisteNom";
+        public const string _Nombre = "ExisteNom";
 
 
         //Solicitudes
@@ -52,7 +52,7 @@ namespace SIGEM_BIDSS.Models
 
 
         public const string sol_Enviada = "Enviada";
-        public const string msj_Enviada = "Su solicituda a sido ingresada con exito"; 
+        public const string msj_Enviada = "Su solicituda a sido ingresada con exito";
 
         public const string sol_Revisada = "Revisada";
         public const string msj_Revisada = "Su solicituda a sido revisada";
@@ -130,7 +130,7 @@ namespace SIGEM_BIDSS.Models
 
             return _user;
         }
-      
+
         //Bitácora de Errores
         public void BitacoraErrores(string Controller, string Action, string User, string ErrorMessage)
         {
@@ -145,12 +145,12 @@ namespace SIGEM_BIDSS.Models
                     lsRutaPlantilla = "",
                     lsXMLDatos = "",
                     lsXMLEnvio = "";
-                       
+
             bool State = false;
             int StateIn = 0;
 
             GetUser(out UserName);
-           
+
             lsSubject = "REF:(" + Reference + ")";
 
             lsRutaPlantilla = System.AppContext.BaseDirectory + "Content\\Email\\Solicitud.xml";
@@ -248,11 +248,10 @@ namespace SIGEM_BIDSS.Models
             }
             catch (Exception ex)
             {
-                ErrorMessage = ex.Message.ToString()+" "+ex.InnerException.Message.ToString();
+                ErrorMessage = ex.Message.ToString() + " " + ex.InnerException.Message.ToString();
                 return 1;
             }
         }
     }
-
-
+    
 }

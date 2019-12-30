@@ -37,13 +37,11 @@ namespace SIGEM_BIDSS.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                var tokenStore = new SessionTokenStore(null,
-                    System.Web.HttpContext.Current, ClaimsPrincipal.Current);
-
+                var tokenStore = new SessionTokenStore(null,  System.Web.HttpContext.Current, ClaimsPrincipal.Current);
                 tokenStore.Clear();
-
                 Request.GetOwinContext().Authentication.SignOut(
                     CookieAuthenticationDefaults.AuthenticationType);
+
             }
 
             return View("Index");

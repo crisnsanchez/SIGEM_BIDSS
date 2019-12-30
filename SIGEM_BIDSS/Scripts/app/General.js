@@ -14,8 +14,6 @@ $(function () {
     _Action = $('#vSwal').val();
     console.log(_Action)
     if (_Action == "Created") {
-        console.log("Verdadero")
-
         Toast.fire({
             type: 'success',
             title: 'Se ha guardado con Éxito.'
