@@ -17,7 +17,6 @@ namespace SIGEM_BIDSS.Models
         public int Reemga_Id { get; set; }
         public string Reemga_Correlativo { get; set; }
         public int emp_Id { get; set; }
-        public bool emp_EsJefe { get; set; }
         public System.DateTime Reemga_GralFechaSolicitud { get; set; }
         public System.DateTime Reemga_FechaViaje { get; set; }
         public string Reemga_Cliente { get; set; }
@@ -34,5 +33,6 @@ namespace SIGEM_BIDSS.Models
     
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbEstado tbEstado { get; set; }
+        public virtual tbMunicipio tbMunicipio { get; set; }
     }
 }

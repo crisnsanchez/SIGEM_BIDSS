@@ -23,121 +23,95 @@
         </ul>
     </div>
     <div class="card-body">
-        <table class="table">
+    <table class="table table-bordered table-hover table-responsive" id="">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Reemga_Correlativo)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Reemga_GralFechaSolicitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reemga_FechaViaje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reemga_Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mun_codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reemga_PropositoVisita)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reemga_DiasVisita)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reemga_Comentario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reemga_RazonRechazo)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+            </th>
+            <th>Acciones</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_Correlativo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.emp_EsJefe)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_GralFechaSolicitud)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_FechaViaje)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_Cliente)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.mun_codigo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_PropositoVisita)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_DiasVisita)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_Comentario)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_RazonRechazo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_UsuarioCrea)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_FechaCrea)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_UsuarioModifica)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Reemga_FechaModifica)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-                </th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reemga_Correlativo)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reemga_GralFechaSolicitud)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reemga_FechaViaje)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reemga_Cliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mun_codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reemga_PropositoVisita)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reemga_DiasVisita)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reemga_Comentario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reemga_RazonRechazo)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Details", "Details", new { id = item.Reemga_Id })
+
+                </td>
             </tr>
+        }
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_Correlativo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.emp_EsJefe)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_GralFechaSolicitud)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_FechaViaje)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_Cliente)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.mun_codigo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_PropositoVisita)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_DiasVisita)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_Comentario)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_RazonRechazo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_UsuarioCrea)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_FechaCrea)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_UsuarioModifica)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reemga_FechaModifica)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
-                    </td>
-                    <td>
-                   
-                        @Html.ActionLink("Details", "Details", new { id = item.Reemga_Id }) 
-        
-                    </td>
-                </tr>
-            }
+    </table>
 
-        </table>
-
-    </div>
+</div>
 </div>
 
 
