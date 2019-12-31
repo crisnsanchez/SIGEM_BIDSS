@@ -43,23 +43,11 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create(int? id)
         {
 
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbSolicitudReembolsoGastos tbSolicitudReembolso = db.tbSolicitudReembolsoGastos.Find(id);
-            tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = new tbSolicitudReembolsoGastos();
-            tbSolicitudReembolsoGastos.Reemga_Id = tbSolicitudReembolso.Reemga_Id;
-
-
-            if (tbSolicitudReembolso == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbSolicitudReembolsoGastos);
-            //ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
-            //ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
-            //return View();
+            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
+            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
+          
+            return View();
+      
         }
 
         // POST: SolicitudReembolsoGastos/Create
@@ -71,21 +59,31 @@ namespace SIGEM_BIDSS.Controllers
             "Reemga_FechaViaje,Reemga_Cliente,mun_codigo,Reemga_PropositoVisita,Reemga_DiasVisita,Reemga_Comentario,est_Id," +
             "Reemga_RazonRechazo,Reemga_UsuarioCrea,Reemga_FechaCrea")] tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos)
         {
+
+
+            tbSolicitudReembolsoGastos.Reemga_RazonRechazo = GeneralFunctions.stringDefault;
+            string UserName = "",
+               ErrorEmail = "";
+            bool Result = false, ResultAdm = false;
+            int EmployeeID = Function.GetUser(out UserName);
+            tbSolicitudReembolsoGastos.emp_Id = EmployeeID;
+            tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud = Function.DatetimeNow();
+            tbSolicitudReembolsoGastos.est_Id = GeneralFunctions.Enviada;
+
+
             if (ModelState.IsValid)
             {
-                string UserName = "",
-               ErrorEmail = "";
+
                 try
                 {
-                    int EmployeeID = Function.GetUser(out UserName);
-                    bool Result = false, ResultAdm = false;
+
 
                     IEnumerable<object> _List = null;
                     string ErrorMessage = "";
-                    _List = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.Reemga_Correlativo,tbSolicitudReembolsoGastos.emp_Id,
-                        tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud,tbSolicitudReembolsoGastos.Reemga_FechaViaje,tbSolicitudReembolsoGastos.Reemga_Cliente,
-                        tbSolicitudReembolsoGastos.mun_codigo,tbSolicitudReembolsoGastos.Reemga_PropositoVisita,tbSolicitudReembolsoGastos.Reemga_DiasVisita,
-                        tbSolicitudReembolsoGastos.Reemga_Comentario,tbSolicitudReembolsoGastos.est_Id,tbSolicitudReembolsoGastos.Reemga_RazonRechazo, EmployeeID, Function.DatetimeNow());
+                    _List = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.Reemga_Correlativo, tbSolicitudReembolsoGastos.emp_Id,
+                        tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud, tbSolicitudReembolsoGastos.Reemga_FechaViaje, tbSolicitudReembolsoGastos.Reemga_Cliente,
+                        tbSolicitudReembolsoGastos.mun_codigo, tbSolicitudReembolsoGastos.Reemga_PropositoVisita, tbSolicitudReembolsoGastos.Reemga_DiasVisita,
+                        tbSolicitudReembolsoGastos.Reemga_Comentario, tbSolicitudReembolsoGastos.est_Id, tbSolicitudReembolsoGastos.Reemga_RazonRechazo, EmployeeID, Function.DatetimeNow());
                     foreach (UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result Reembolso in _List)
                         ErrorMessage = Reembolso.MensajeError;
                     if (ErrorMessage.StartsWith("-1"))
@@ -122,7 +120,7 @@ namespace SIGEM_BIDSS.Controllers
                 //db.SaveChanges();
                 //return RedirectToAction("Index");
             }
-
+            else { var errors = ModelState.Values.SelectMany(v => v.Errors); }
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSolicitudReembolsoGastos.emp_Id);
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbSolicitudReembolsoGastos.est_Id);
             return View(tbSolicitudReembolsoGastos);

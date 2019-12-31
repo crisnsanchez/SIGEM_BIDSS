@@ -17,11 +17,10 @@ namespace SIGEM_BIDSS.Models
     {
 
         [Display(Name = "ID")]   
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+   
         public int Reemga_Id { get; set; }
 
         [Display(Name = "Correlativo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string Reemga_Correlativo { get; set; }
 
         [Display(Name = "Empleado")]
@@ -53,16 +52,13 @@ namespace SIGEM_BIDSS.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int Reemga_DiasVisita { get; set; }
 
-        [Display(Name = "ID")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Comentario")]     
         public string Reemga_Comentario { get; set; }
 
-        [Display(Name = "Estado")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "EstadossssssssssssssssSSSSSS")]      
         public int est_Id { get; set; }
 
         [Display(Name = "Razón Rechazo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string Reemga_RazonRechazo { get; set; }
 
         [Display(Name = "Usuario Crea")]
