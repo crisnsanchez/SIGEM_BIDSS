@@ -57,7 +57,7 @@ namespace SIGEM_BIDSS.Controllers
         public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle LIQUIDACIONDETALLE)
         {
             List<tbLiquidacionAnticipoViaticoDetalle> sessionLiquidaciondetalle = new List<tbLiquidacionAnticipoViaticoDetalle>();
-            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbBodegaDetalle"];
+            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbLiquidacionAnticipoViaticoDetalle"];
             if (list == null)
             {
                 ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
@@ -87,6 +87,7 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "";
             string MensajeError = "";
             string MsjError = "";
+            var listaLiquidacion = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbLiquidacionAnticipoViaticoDetalle"];
             if (ModelState.IsValid)
             {
                 using (TransactionScope _Tran = new TransactionScope())
@@ -204,7 +205,7 @@ namespace SIGEM_BIDSS.Controllers
 
             if (list != null)
             {
-                var itemToRemove = list.Single(r => r.tpv_Id == LiquidacionAnticipoViaticoDetalle.tpv_Id);
+                var itemToRemove = list.Single(r => r.Lianvide_Id == LiquidacionAnticipoViaticoDetalle.Lianvide_Id);
                 list.Remove(itemToRemove);
                 Session["tbLiquidacionAnticipoViaticoDetalle"] = list;
             }

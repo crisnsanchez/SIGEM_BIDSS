@@ -1,5 +1,5 @@
 ﻿/////DATE PICKER
-
+var contador = 0;
 
 $('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida,#Lianvide_FechaGasto').datepicker({
     format: "dd/mm/yyyy",
@@ -20,73 +20,58 @@ $("#CargarArchivo").change(function () {
 
 
 $('#AgregarDetalle').click(function () {
-    console.log('boton');
+
     var table = $('#dataTable').DataTable();
     var LianvideArchivo = $('#Lianvide_Archivo').val();
-    var tpv_Id = $('#tpv_Id').val();
+    var TipoGasto = $('#tpv_Id').val();
     var Lianvide_FechaGasto = $('#Lianvide_FechaGasto').val();
-    var Lianvide_MontoGasto = $('#Lianvide_MontoGasto').val();
+    var MontoGastos = $('#Lianvide_MontoGasto').val();
    
-    var Lianvide_Concepto = $('#Lianvide_Concepto').val();
+    var Concepto = $('#Lianvide_Concepto').val();
 
 
     if (Lianvide_FechaGasto == '') {
         $('#MessageError').text('');
-        $('#Error_Producto').text('');
-        $('#Error_PuntoReorden').text('');
-        $('#Error_CantidadMinima').text('');
-        $('#Error_CantidadMaxima').text('');
-        $('#Error_Costo').text('');
-        $('#Error_CostoPromedioo').text('');
-        $('#ErrorProducto_Create').after('<ul id="Error_Producto" class="validation-summary-errors text-danger">*Codigo De Barra Requerido</ul>');
+      
 
     }
-    else if (tpv_Id == '') {
+    else if (TipoGasto == '') {
 
         $('#MessageError').text('');
-        $('#Error_Producto').text('');
-        $('#Error_PuntoReorden').text('');
-        $('#Error_CantidadMinima').text('');
-        $('#Error_CantidadMaxima').text('');
-        $('#Error_Costo').text('');
-        $('#Error_CostoPromedioo').text('');
-        $('#Error_Barras').text('');
-        $('#ErrorBarras_Create').after('<ul id="Error_Barras" class="validation-summary-errors text-danger">*Codigo De Barras Requerido</ul>');
+      
     }
-    else if (Lianvide_Concepto == '') {
+    else if (Concepto == '') {
 
         $('#MessageError').text('');
-        $('#Error_Producto').text('');
-        $('#Error_PuntoReorden').text('');
-        $('#Error_CantidadMinima').text('');
-        $('#Error_CantidadMaxima').text('');
-        $('#Error_Costo').text('');
-        $('#Error_CostoPromedioo').text('');
-        $('#ErrorCantidadMinima_Create').after('<ul id="Error_CantidadMinima" class="validation-summary-errors text-danger">*Cantidad Miníma Requerido</ul>');
     }
 
     else if (LianvideArchivo == '') {
         $('#MessageError').text('');
-        $('#Error_Producto').text('');
-        $('#Error_PuntoReorden').text('');
-        $('#Error_CantidadMinima').text('');
-        $('#Error_CantidadMaxima').text('');
-        $('#Error_Costo').text('');
-        $('#Error_CostoPromedioo').text('');
         $('#ErrorPuntoReorden_Create').after('<ul id="Error_PuntoReorden" class="validation-summary-errors text-danger">*Campo Punto Reorden Requerido</ul>');
     }
-    else if (Lianvide_MontoGasto == '') {
+    else if (MontoGastos == '') {
         $('#MessageError').text('');
-        $('#Error_Producto').text('');
-        $('#Error_PuntoReorden').text('');
-        $('#Error_CantidadMinima').text('');
-        $('#Error_CantidadMaxima').text('');
-        $('#Error_Costo').text('');
-        $('#Error_CostoPromedioo').text('');
         $('#ErrorPuntoReorden_Create').after('<ul id="Error_PuntoReorden" class="validation-summary-errors text-danger">*Campo Punto Reorden Requerido</ul>');
     }
 
     else {
+        contador = contador + 1;
+        copiar = "<tr data-id=" + contador + ">";
+        copiar += "<td id = ''></td>";
+        copiar += "<td id = 'Lianvide_FechaGasto'>" + $('#Lianvide_FechaGasto').val() + "</td>";
+        copiar += "<td id = ''></td>";
+        copiar += "<td id = 'TipoGasto'>" + $('#tpv_Id').val() + "</td>";
+        copiar += "<td id = ''></td>";
+        copiar += "<td id = 'Concepto'>" + $('#Lianvide_Concepto').val() + "</td>";
+        copiar += "<td id = ''></td>";
+        copiar += "<td id = 'LianvideArchivo'>" + $('#Lianvide_Archivo').val() + "</td>";
+        copiar += "<td id = ''></td>";
+        copiar += "<td id = 'MontoGasto'>" + $('#Lianvide_MontoGasto').val() + "</td>";
+        copiar += "<td id = ''></td>";
+        copiar += "<td>" + '<button id="removerSubCategoria" class="btn btn-danger btn-xs eliminar" type="button">Quitar</button>' + "</td>";
+        copiar += "</tr>";
+        $('#dataTable').append(copiar);
+
 
         var tbLiquidacionAnticipoViaticoDetalle = GetLiquidacionViatico();
         $.ajax({
@@ -160,6 +145,24 @@ function GetLiquidacionViatico() {
         Lianvide_MontoGasto: $('#bodd_CantidadMaxima').val(),
         LianvideArchivo: $('#Lianvide_Archivo').val(),
         //Fecha: $('#fechaCreate').val(),
+        Lianvide_UsuarioCrea: contador,
+        Lianvide_Id: contador,
     };
     return LIQUIDACIONDETALLE;
 }
+
+///REMOVER EL DETALLE
+$(document).on("click", "#dataTable tbody tr td button#RemoveDetalle", function () {
+    $(this).closest('tr').remove();
+    idItem = $(this).closest('tr').data('id');
+    var borrar = {
+        pscat_Id: idItem,
+    };
+    $.ajax({
+        url: "/LiquidacionAnticipoViaticoDetalle/RemoveDetalle",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ borrado: borrar }),
+    });
+})
