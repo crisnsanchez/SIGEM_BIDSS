@@ -1338,6 +1338,38 @@
         <Function Name="spGetCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="pcat_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="UDP_Inv_tbProducto_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="prod_Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="prod_CodigoBarras" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="prod_Marca" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Modelo" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Talla" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Color" Type="varchar" Mode="In" />
+          <Parameter Name="pscat_Id" Type="int" Mode="In" />
+          <Parameter Name="uni_Id" Type="int" Mode="In" />
+          <Parameter Name="prov_Id" Type="int" Mode="In" />
+          <Parameter Name="prod_EsActivo" Type="bit" Mode="In" />
+          <Parameter Name="prod_RazonInactivacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="prod_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="prod_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Inv_tbProducto_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="prod_Id" Type="int" Mode="In" />
+          <Parameter Name="prod_CodigoBarras" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="prod_Marca" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Modelo" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Talla" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Color" Type="varchar" Mode="In" />
+          <Parameter Name="pscat_Id" Type="int" Mode="In" />
+          <Parameter Name="uni_Id" Type="int" Mode="In" />
+          <Parameter Name="prov_Id" Type="int" Mode="In" />
+          <Parameter Name="prod_EsActivo" Type="bit" Mode="In" />
+          <Parameter Name="prod_RazonInactivacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="prod_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="prod_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Inv_tbProductoCategoria_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="pcat_Id" Type="int" Mode="In" />
         </Function>
@@ -2421,11 +2453,6 @@
           <FunctionImport Name="UDP_Inv_tbProductoCategoria_Delete" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Delete_Result)">
           <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Insert_Result)">
-            <Parameter Name="pcat_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="pcat_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="pcat_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Inv_tbProductoCategoria_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Update_Result)">
             <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
             <Parameter Name="pcat_Descripcion" Mode="In" Type="String" />
@@ -2565,6 +2592,43 @@
             <Parameter Name="Reemga_RazonRechazo" Mode="In" Type="String" />
             <Parameter Name="Reemga_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="Reemga_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Inv_tbProducto_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProducto_Update_Result)">
+            <Parameter Name="prod_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
+            <Parameter Name="prod_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="prod_Marca" Mode="In" Type="String" />
+            <Parameter Name="prod_Modelo" Mode="In" Type="String" />
+            <Parameter Name="prod_Talla" Mode="In" Type="String" />
+            <Parameter Name="prod_Color" Mode="In" Type="String" />
+            <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
+            <Parameter Name="uni_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prov_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prod_EsActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="prod_RazonInactivacion" Mode="In" Type="String" />
+            <Parameter Name="prod_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="prod_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Inv_tbProductoCategoria_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Insert_Result)">
+            <Parameter Name="pcat_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="pcat_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="pcat_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Inv_tbProducto_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProducto_Insert_Result)">
+            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
+            <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
+            <Parameter Name="prod_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="prod_Marca" Mode="In" Type="String" />
+            <Parameter Name="prod_Modelo" Mode="In" Type="String" />
+            <Parameter Name="prod_Talla" Mode="In" Type="String" />
+            <Parameter Name="prod_Color" Mode="In" Type="String" />
+            <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
+            <Parameter Name="uni_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prov_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prod_EsActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="prod_RazonInactivacion" Mode="In" Type="String" />
+            <Parameter Name="prod_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="prod_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="UDP_Adm_tbVacacionesPermisosEspeciales_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -3477,9 +3541,6 @@
         <ComplexType Name="UDP_Inv_tbProductoCategoria_Delete_Result">
           <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="69" />
         </ComplexType>
-        <ComplexType Name="UDP_Inv_tbProductoCategoria_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <ComplexType Name="UDP_Inv_tbProductoCategoria_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
@@ -3754,6 +3815,15 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProductoCategoria_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result">
@@ -4514,13 +4584,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProductoCategoria_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProductoCategoria_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Update_Result">
@@ -4697,6 +4760,27 @@
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbSolicitudReembolsoGastos_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbSolicitudReembolsoGastos_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProductoCategoria_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

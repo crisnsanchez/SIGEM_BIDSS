@@ -2392,23 +2392,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoCategoria_Delete_Result>("UDP_Inv_tbProductoCategoria_Delete", pcat_IdParameter);
         }
     
-        public virtual ObjectResult<UDP_Inv_tbProductoCategoria_Insert_Result> UDP_Inv_tbProductoCategoria_Insert(string pcat_Descripcion, Nullable<int> pcat_UsuarioCrea, Nullable<System.DateTime> pcat_FechaCrea)
-        {
-            var pcat_DescripcionParameter = pcat_Descripcion != null ?
-                new ObjectParameter("pcat_Descripcion", pcat_Descripcion) :
-                new ObjectParameter("pcat_Descripcion", typeof(string));
-    
-            var pcat_UsuarioCreaParameter = pcat_UsuarioCrea.HasValue ?
-                new ObjectParameter("pcat_UsuarioCrea", pcat_UsuarioCrea) :
-                new ObjectParameter("pcat_UsuarioCrea", typeof(int));
-    
-            var pcat_FechaCreaParameter = pcat_FechaCrea.HasValue ?
-                new ObjectParameter("pcat_FechaCrea", pcat_FechaCrea) :
-                new ObjectParameter("pcat_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoCategoria_Insert_Result>("UDP_Inv_tbProductoCategoria_Insert", pcat_DescripcionParameter, pcat_UsuarioCreaParameter, pcat_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Inv_tbProductoCategoria_Update_Result> UDP_Inv_tbProductoCategoria_Update(Nullable<int> pcat_Id, string pcat_Descripcion, Nullable<int> pcat_UsuarioModifica, Nullable<System.DateTime> pcat_FechaModifica)
         {
             var pcat_IdParameter = pcat_Id.HasValue ?
@@ -2738,6 +2721,145 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Reemga_FechaCrea", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastos_Insert", emp_IdParameter, reemga_GralFechaSolicitudParameter, reemga_FechaViajeParameter, reemga_ClienteParameter, mun_codigoParameter, reemga_PropositoVisitaParameter, reemga_DiasVisitaParameter, reemga_ComentarioParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioCreaParameter, reemga_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Inv_tbProducto_Update_Result> UDP_Inv_tbProducto_Update(Nullable<int> prod_Id, string prod_CodigoBarras, string prod_Descripcion, string prod_Marca, string prod_Modelo, string prod_Talla, string prod_Color, Nullable<int> pscat_Id, Nullable<int> uni_Id, Nullable<int> prov_Id, Nullable<bool> prod_EsActivo, string prod_RazonInactivacion, Nullable<int> prod_UsuarioModifica, Nullable<System.DateTime> prod_FechaModifica)
+        {
+            var prod_IdParameter = prod_Id.HasValue ?
+                new ObjectParameter("prod_Id", prod_Id) :
+                new ObjectParameter("prod_Id", typeof(int));
+    
+            var prod_CodigoBarrasParameter = prod_CodigoBarras != null ?
+                new ObjectParameter("prod_CodigoBarras", prod_CodigoBarras) :
+                new ObjectParameter("prod_CodigoBarras", typeof(string));
+    
+            var prod_DescripcionParameter = prod_Descripcion != null ?
+                new ObjectParameter("prod_Descripcion", prod_Descripcion) :
+                new ObjectParameter("prod_Descripcion", typeof(string));
+    
+            var prod_MarcaParameter = prod_Marca != null ?
+                new ObjectParameter("prod_Marca", prod_Marca) :
+                new ObjectParameter("prod_Marca", typeof(string));
+    
+            var prod_ModeloParameter = prod_Modelo != null ?
+                new ObjectParameter("prod_Modelo", prod_Modelo) :
+                new ObjectParameter("prod_Modelo", typeof(string));
+    
+            var prod_TallaParameter = prod_Talla != null ?
+                new ObjectParameter("prod_Talla", prod_Talla) :
+                new ObjectParameter("prod_Talla", typeof(string));
+    
+            var prod_ColorParameter = prod_Color != null ?
+                new ObjectParameter("prod_Color", prod_Color) :
+                new ObjectParameter("prod_Color", typeof(string));
+    
+            var pscat_IdParameter = pscat_Id.HasValue ?
+                new ObjectParameter("pscat_Id", pscat_Id) :
+                new ObjectParameter("pscat_Id", typeof(int));
+    
+            var uni_IdParameter = uni_Id.HasValue ?
+                new ObjectParameter("uni_Id", uni_Id) :
+                new ObjectParameter("uni_Id", typeof(int));
+    
+            var prov_IdParameter = prov_Id.HasValue ?
+                new ObjectParameter("prov_Id", prov_Id) :
+                new ObjectParameter("prov_Id", typeof(int));
+    
+            var prod_EsActivoParameter = prod_EsActivo.HasValue ?
+                new ObjectParameter("prod_EsActivo", prod_EsActivo) :
+                new ObjectParameter("prod_EsActivo", typeof(bool));
+    
+            var prod_RazonInactivacionParameter = prod_RazonInactivacion != null ?
+                new ObjectParameter("prod_RazonInactivacion", prod_RazonInactivacion) :
+                new ObjectParameter("prod_RazonInactivacion", typeof(string));
+    
+            var prod_UsuarioModificaParameter = prod_UsuarioModifica.HasValue ?
+                new ObjectParameter("prod_UsuarioModifica", prod_UsuarioModifica) :
+                new ObjectParameter("prod_UsuarioModifica", typeof(int));
+    
+            var prod_FechaModificaParameter = prod_FechaModifica.HasValue ?
+                new ObjectParameter("prod_FechaModifica", prod_FechaModifica) :
+                new ObjectParameter("prod_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_Update_Result>("UDP_Inv_tbProducto_Update", prod_IdParameter, prod_CodigoBarrasParameter, prod_DescripcionParameter, prod_MarcaParameter, prod_ModeloParameter, prod_TallaParameter, prod_ColorParameter, pscat_IdParameter, uni_IdParameter, prov_IdParameter, prod_EsActivoParameter, prod_RazonInactivacionParameter, prod_UsuarioModificaParameter, prod_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Inv_tbProductoCategoria_Insert_Result> UDP_Inv_tbProductoCategoria_Insert(string pcat_Descripcion, Nullable<int> pcat_UsuarioCrea, Nullable<System.DateTime> pcat_FechaCrea)
+        {
+            var pcat_DescripcionParameter = pcat_Descripcion != null ?
+                new ObjectParameter("pcat_Descripcion", pcat_Descripcion) :
+                new ObjectParameter("pcat_Descripcion", typeof(string));
+    
+            var pcat_UsuarioCreaParameter = pcat_UsuarioCrea.HasValue ?
+                new ObjectParameter("pcat_UsuarioCrea", pcat_UsuarioCrea) :
+                new ObjectParameter("pcat_UsuarioCrea", typeof(int));
+    
+            var pcat_FechaCreaParameter = pcat_FechaCrea.HasValue ?
+                new ObjectParameter("pcat_FechaCrea", pcat_FechaCrea) :
+                new ObjectParameter("pcat_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProductoCategoria_Insert_Result>("UDP_Inv_tbProductoCategoria_Insert", pcat_DescripcionParameter, pcat_UsuarioCreaParameter, pcat_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Inv_tbProducto_Insert_Result> UDP_Inv_tbProducto_Insert(string prod_Codigo, string prod_CodigoBarras, string prod_Descripcion, string prod_Marca, string prod_Modelo, string prod_Talla, string prod_Color, Nullable<int> pscat_Id, Nullable<int> uni_Id, Nullable<int> prov_Id, Nullable<bool> prod_EsActivo, string prod_RazonInactivacion, Nullable<int> prod_UsuarioCrea, Nullable<System.DateTime> prod_FechaCrea)
+        {
+            var prod_CodigoParameter = prod_Codigo != null ?
+                new ObjectParameter("prod_Codigo", prod_Codigo) :
+                new ObjectParameter("prod_Codigo", typeof(string));
+    
+            var prod_CodigoBarrasParameter = prod_CodigoBarras != null ?
+                new ObjectParameter("prod_CodigoBarras", prod_CodigoBarras) :
+                new ObjectParameter("prod_CodigoBarras", typeof(string));
+    
+            var prod_DescripcionParameter = prod_Descripcion != null ?
+                new ObjectParameter("prod_Descripcion", prod_Descripcion) :
+                new ObjectParameter("prod_Descripcion", typeof(string));
+    
+            var prod_MarcaParameter = prod_Marca != null ?
+                new ObjectParameter("prod_Marca", prod_Marca) :
+                new ObjectParameter("prod_Marca", typeof(string));
+    
+            var prod_ModeloParameter = prod_Modelo != null ?
+                new ObjectParameter("prod_Modelo", prod_Modelo) :
+                new ObjectParameter("prod_Modelo", typeof(string));
+    
+            var prod_TallaParameter = prod_Talla != null ?
+                new ObjectParameter("prod_Talla", prod_Talla) :
+                new ObjectParameter("prod_Talla", typeof(string));
+    
+            var prod_ColorParameter = prod_Color != null ?
+                new ObjectParameter("prod_Color", prod_Color) :
+                new ObjectParameter("prod_Color", typeof(string));
+    
+            var pscat_IdParameter = pscat_Id.HasValue ?
+                new ObjectParameter("pscat_Id", pscat_Id) :
+                new ObjectParameter("pscat_Id", typeof(int));
+    
+            var uni_IdParameter = uni_Id.HasValue ?
+                new ObjectParameter("uni_Id", uni_Id) :
+                new ObjectParameter("uni_Id", typeof(int));
+    
+            var prov_IdParameter = prov_Id.HasValue ?
+                new ObjectParameter("prov_Id", prov_Id) :
+                new ObjectParameter("prov_Id", typeof(int));
+    
+            var prod_EsActivoParameter = prod_EsActivo.HasValue ?
+                new ObjectParameter("prod_EsActivo", prod_EsActivo) :
+                new ObjectParameter("prod_EsActivo", typeof(bool));
+    
+            var prod_RazonInactivacionParameter = prod_RazonInactivacion != null ?
+                new ObjectParameter("prod_RazonInactivacion", prod_RazonInactivacion) :
+                new ObjectParameter("prod_RazonInactivacion", typeof(string));
+    
+            var prod_UsuarioCreaParameter = prod_UsuarioCrea.HasValue ?
+                new ObjectParameter("prod_UsuarioCrea", prod_UsuarioCrea) :
+                new ObjectParameter("prod_UsuarioCrea", typeof(int));
+    
+            var prod_FechaCreaParameter = prod_FechaCrea.HasValue ?
+                new ObjectParameter("prod_FechaCrea", prod_FechaCrea) :
+                new ObjectParameter("prod_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_Insert_Result>("UDP_Inv_tbProducto_Insert", prod_CodigoParameter, prod_CodigoBarrasParameter, prod_DescripcionParameter, prod_MarcaParameter, prod_ModeloParameter, prod_TallaParameter, prod_ColorParameter, pscat_IdParameter, uni_IdParameter, prov_IdParameter, prod_EsActivoParameter, prod_RazonInactivacionParameter, prod_UsuarioCreaParameter, prod_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result> UDP_Adm_tbVacacionesPermisosEspeciales_Insert(Nullable<int> emp_Id, Nullable<int> vPE_JefeInmediato, Nullable<int> tperm_Id, Nullable<int> est_Id, Nullable<System.DateTime> vPE_GralFechaSolicitud, Nullable<System.DateTime> vPE_FechaInicio, Nullable<System.DateTime> vPE_FechaFin, Nullable<int> vPE_CantidadDias, Nullable<decimal> vPE_MontoSolicitado, string vPE_Comentario, string vPE_RazonRechazo, Nullable<int> vPE_UsuarioCrea, Nullable<System.DateTime> vPE_FechaCrea)
