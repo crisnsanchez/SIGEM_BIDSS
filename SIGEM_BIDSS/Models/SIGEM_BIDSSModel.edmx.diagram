@@ -68,7 +68,7 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_Gral_tbUnidadMedida_uni_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_tbProductoSubcategoria_pscat_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_tbProveedor_prov_Id" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Width="1.5" PointX="16.25" PointY="19" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Width="1.5" PointX="11.25" PointY="0.75" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_est_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_mun_codigo" />

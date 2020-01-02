@@ -4,29 +4,29 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace SIGEM_BIDSS.Models.Solicitud
+namespace SIGEM_BIDSS.Models
 {
 
     [MetadataType(typeof(ReembolsoGastosMetaData))]
+    public partial class tbSolicitudReembolsoGastos
+    {
 
+
+    }
     public class ReembolsoGastosMetaData
     {
 
         [Display(Name = "ID")]   
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+   
         public int Reemga_Id { get; set; }
 
         [Display(Name = "Correlativo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string Reemga_Correlativo { get; set; }
 
         [Display(Name = "Empleado")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int emp_Id { get; set; }
 
-        [Display(Name = "Jefe Inmediato")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        public bool emp_EsJefe { get; set; }
 
         [Display(Name = "Fecha Solicitud")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
@@ -52,16 +52,13 @@ namespace SIGEM_BIDSS.Models.Solicitud
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int Reemga_DiasVisita { get; set; }
 
-        [Display(Name = "ID")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "Comentario")]     
         public string Reemga_Comentario { get; set; }
 
-        [Display(Name = "Estado")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [Display(Name = "EstadossssssssssssssssSSSSSS")]      
         public int est_Id { get; set; }
 
         [Display(Name = "Razón Rechazo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string Reemga_RazonRechazo { get; set; }
 
         [Display(Name = "Usuario Crea")]
@@ -78,10 +75,6 @@ namespace SIGEM_BIDSS.Models.Solicitud
 
     }
 
-    public partial class tbSolicitudReembolsoGastos
-    {
-       
-       
-    }
+  
    
 }

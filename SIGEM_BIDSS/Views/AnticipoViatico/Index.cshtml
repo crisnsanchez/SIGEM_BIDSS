@@ -65,9 +65,7 @@
                                 @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
                             </td>
                             <td>
-                                @Html.ActionLink("Revisar", "Details", new { id = item.Anvi_Id }, new { @class = "btn btn-default btn-xs", @style= "width: 57px;" })
-                                @Html.ActionLink("Aprobar", "Details", new { id = item.Anvi_Id }, new { @class = "btn btn-primary btn-xs", @style = "width: 57px;" })
-                                @Html.ActionLink("Rechazar", "Details", new { id = item.Anvi_Id }, new { @class = "btn btn-danger btn-xs", @style = "width: 57px;" })
+                                @Html.ActionLink("Detalles", "Details", new { id = item.Anvi_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
                             </td>
                         </tr>
                     }

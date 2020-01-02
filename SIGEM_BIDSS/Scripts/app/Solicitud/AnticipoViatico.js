@@ -219,5 +219,107 @@ $("#Anvi_Cliente").change(function () {
 });
 
 
+//////////////////////////////////////
+$(function () {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false
+    });
+})
 
+
+$(document).on("click", "#Approve", function () {
+    idItem = $('#Anvi_Id').val();
+});
+$(document).on("click", "#Reject", function () {
+    idItem = $('#Anvi_Id').val();
+});
+
+
+
+
+//---------------------Rechazar-----------------------------------------
+$(document).on("click", "#_ModalReject", function () {
+    var _spanRR = document.getElementById("RazonRechazo")
+    console.log(_spanRR.value)
+
+    //    
+    if (_spanRR.value == "" || _spanRR.value == null) {
+        document.getElementById("spanRazonRechazo").innerText = "Razon de Rechazo Requerida";
+    }
+    else {
+        document.getElementById("spanRazonRechazo").innerText = "";
+        SendData();
+    }
+});
+
+
+function SendData() {
+    var Anvi_Id = $('#Anvi_Id').val(),
+        RazonInactivacion = $('#RazonRechazo').val();
+    document.getElementById('spinner-body-reject').classList.add("overlay");
+    document.getElementById('spinnerd-reject').removeAttribute("hidden");
+    //document.getElementById("divArea").style.display = "block";
+    $.ajax({
+        url: "/AnticipoSalario/Reject",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: Anvi_Id, Anvi_RazonRechazo: RazonInactivacion }),
+    }).done(function (data) {
+        var str = data.toString();
+        if (!str.startsWith("-1")) {
+            console.log(str + " || " + data);
+            location.reload();
+        }
+        else {
+            console.log("false || " + str);
+        }
+    });
+}
+//<---------------------/Rechazar/----------------------------------------->//
+
+
+
+
+
+
+//---------------------Approve-----------------------------------------
+
+$(document).on("click", "#_ModalApprove", function () {
+    Approve();
+});
+
+
+function Approve() {
+    var Ansal_Id = $('#Ansal_Id').val();
+    document.getElementById('spinner-body').classList.add("overlay");
+    document.getElementById('spinnerd').removeAttribute("hidden");
+    $.ajax({
+        url: "/AnticipoViatico/Approve",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ id: Ansal_Id }),
+    }).done(function (data) {
+        var str = data.toString();
+        if (!str.startsWith("-1")) {
+            console.log(str + " || " + data);
+            location.reload();
+        }
+        else {
+            console.log("false || " + str);
+        }
+    });
+}
+
+const _id = document.getElementById('RazonRechazo');
+_id.addEventListener("input", function () {
+    _id.value.trimStart();
+    if (!/^[ a-z0-9áéíóúüñ]*$/i.test(_id.value)) {
+        this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
+    }
+})
+//<---------------------/Approve/----------------------------------------->//
 
