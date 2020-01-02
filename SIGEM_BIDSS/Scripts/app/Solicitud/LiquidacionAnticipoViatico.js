@@ -1,12 +1,6 @@
 ﻿
 var contador = 0;
 
-var table = $('#dataTable').DataTable();
-var LianvideArchivo = $('#Lianvide_Archivo').val();
-var TipoGasto = document.getElementById("tpv_Id");
-var FechaGasto = $('#Lianvide_FechaGasto').val();
-var MontoGastos = $('#Lianvide_MontoGasto').val();
-var Concepto = $('#Lianvide_Concepto').val();
 
 
 
@@ -25,19 +19,21 @@ $("#CargarArchivo").change(function () {
 ////////////////////////////AGREGAR DETALLE//////////////////////////////////
 $('#AgregarDetalle').click(function () {
 
- /////////////VALIDACION VACIO////////////////////////////////////
-    if (Lianvide_FechaGasto == '') {
-        $('#MessageError').text('');
-      
+    var table = $('#dataTable').DataTable();
+    var LianvideArchivo = $('#Lianvide_Archivo').val();
+    var TipoGasto = $('#tpv_Id').val();
+    var FechaGasto = $('#Lianvide_FechaGasto').val();
+    var MontoGastos = $('#Lianvide_MontoGasto').val();
+    var Concepto = $('#Lianvide_Concepto').val();
 
+ /////////////VALIDACION VACIO////////////////////////////////////
+    if (FechaGasto == '') {
+        $('#MessageError').text('');
     }
     else if (TipoGasto == '') {
-
         $('#MessageError').text('');
-      
     }
     else if (Concepto == '') {
-
         $('#MessageError').text('');
     }
 

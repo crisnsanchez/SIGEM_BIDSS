@@ -25,6 +25,8 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbAnticipoViatico.ToList());
         }
 
+
+
         // GET: LiquidacionAnticipoViatico/Details/5
         public ActionResult Details(int? id)
         {
