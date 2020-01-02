@@ -999,6 +999,21 @@
           <Parameter Name="Reemga_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="Reemga_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Adm_tbVacacionesPermisosEspeciales_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="VPE_JefeInmediato" Type="int" Mode="In" />
+          <Parameter Name="tperm_Id" Type="int" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="VPE_GralFechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="VPE_FechaInicio" Type="datetime" Mode="In" />
+          <Parameter Name="VPE_FechaFin" Type="datetime" Mode="In" />
+          <Parameter Name="VPE_CantidadDias" Type="int" Mode="In" />
+          <Parameter Name="VPE_MontoSolicitado" Type="decimal" Mode="In" />
+          <Parameter Name="VPE_Comentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="VPE_RazonRechazo" Type="nvarchar" Mode="In" />
+          <Parameter Name="VPE_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="VPE_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Conf_tbParametro_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Conf">
           <Parameter Name="conteo" Type="int" Mode="In" />
         </Function>
@@ -2615,6 +2630,21 @@
             <Parameter Name="prod_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="prod_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbVacacionesPermisosEspeciales_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="VPE_JefeInmediato" Mode="In" Type="Int32" />
+            <Parameter Name="tperm_Id" Mode="In" Type="Int32" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="VPE_GralFechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="VPE_FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="VPE_FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="VPE_CantidadDias" Mode="In" Type="Int32" />
+            <Parameter Name="VPE_MontoSolicitado" Mode="In" Type="Decimal" />
+            <Parameter Name="VPE_Comentario" Mode="In" Type="String" />
+            <Parameter Name="VPE_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="VPE_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="VPE_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -3796,6 +3826,9 @@
         <ComplexType Name="UDP_Inv_tbProducto_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4748,6 +4781,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbVacacionesPermisosEspeciales_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbVacacionesPermisosEspeciales_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
