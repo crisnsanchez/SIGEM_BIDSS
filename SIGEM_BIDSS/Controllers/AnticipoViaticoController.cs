@@ -36,11 +36,20 @@ namespace SIGEM_BIDSS.Controllers
         // GET: AnticipoViatico/Details/5
         public ActionResult Details(int? id)
         {
+            string vReturn = "";
             if (id == null)
             {
+
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
+            if (tbAnticipoViatico.est_Id == GeneralFunctions.Enviada)
+            {
+                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                }
+            }
             if (tbAnticipoViatico == null)
             {
                 return HttpNotFound();
@@ -86,7 +95,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Anvi_Id,emp_Id,Anvi_JefeInmediato,Anvi_GralFechaSolicitud,Anvi_FechaViaje,Anvi_Cliente,mun_Codigo,Anvi_PropositoVisita,Anvi_DiasVisita,Anvi_Hospedaje,Anvi_tptran_Id,Anvi_Autorizacion,Anvi_Comentario,Anvi_UsuarioCrea,Anvi_FechaCrea,Anvi_UsuarioModifica,Anvi_FechaModifica")] tbAnticipoViatico tbAnticipoViatico, string dep_codigo)
+        public ActionResult Create([Bind(Include = "Anvi_Id,Anvi_Correlativo,emp_Id,Anvi_JefeInmediato,Anvi_GralFechaSolicitud,Anvi_FechaViaje,Anvi_Cliente,mun_Codigo,Anvi_PropositoVisita,Anvi_DiasVisita,Anvi_Hospedaje,Anvi_tptran_Id,Anvi_Autorizacion,Anvi_Comentario,est_Id,Anvi_RazonRechazo,Anvi_UsuarioCrea,Anvi_FechaCrea,Anvi_UsuarioModifica,Anvi_FechaModifica")] tbAnticipoViatico tbAnticipoViatico, string dep_codigo)
         {
             string UserName = "",
                    ErrorEmail = "";
@@ -159,6 +168,9 @@ namespace SIGEM_BIDSS.Controllers
             {
                 Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
             }
+            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
+                                            where _tbEmp.emp_EsJefe == true
+                                            select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
             ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre", dep_codigo);
             ViewBag.Anvi_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoViatico.Anvi_JefeInmediato);
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbAnticipoViatico.mun_Codigo);
@@ -275,7 +287,7 @@ namespace SIGEM_BIDSS.Controllers
 
         // GET: AnticipoSalario/Approve/5   
         [HttpPost]
-        public JsonResult Rejects(int id, string Ansal_RazonRechazo)
+        public JsonResult Rejects(int id, string Anvi_RazonRechazo)
         {
             var list = "";
             string vReturn = "";
@@ -287,7 +299,7 @@ namespace SIGEM_BIDSS.Controllers
             tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
             if (tbAnticipoViatico.est_Id == GeneralFunctions.Revisada)
             {
-                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Rechazada, Ansal_RazonRechazo))
+                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Rechazada, Anvi_RazonRechazo))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                 }

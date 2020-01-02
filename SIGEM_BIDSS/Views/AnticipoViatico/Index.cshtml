@@ -38,6 +38,12 @@
                             @Html.DisplayNameFor(model => model.Anvi_Cliente)
                         </th>
                         <th>
+                            @Html.DisplayNameFor(model => model.Anvi_Hospedaje)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Anvi_Comentario)
+                        </th>
+                        <th>
                             Estado
                         </th>
                         <th>Acciones</th>
@@ -46,28 +52,42 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Anvi_Correlativo)
-                            </td>
-                            <td>
-                                @{string Empleado = item.tbEmpleado.emp_Nombres + " " + item.tbEmpleado.emp_Apellidos;}
-                                @Empleado
-                            </td>
-                            <td>
-                                @{ string Anvi_GralFechaSolicitud = item.Anvi_GralFechaSolicitud.ToString("dd/MM/yyyy");}
-                                @Anvi_GralFechaSolicitud
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Anvi_Cliente)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Detalles", "Details", new { id = item.Anvi_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Anvi_Correlativo)
+                        </td>
+                        <td>
+                            @{string Empleado = item.tbEmpleado.emp_Nombres + " " + item.tbEmpleado.emp_Apellidos;}
+                            @Empleado
+                        </td>
+                        <td>
+                            @{ string Anvi_GralFechaSolicitud = item.Anvi_GralFechaSolicitud.ToString("dd/MM/yyyy");}
+                            @Anvi_GralFechaSolicitud
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Anvi_Cliente)
+                        </td>
+                        <td>
+                            @if (item.Anvi_Hospedaje == true)
+                            {
+                                <p> SI</p>
+                            }
+                            else
+                            {
+                                <p>NO</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Anvi_Comentario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Anvi_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

@@ -10,6 +10,17 @@ var Anvi_PropositoVisita;
 var Anvi_DiasVisita;
 var Anvi_tptran_Id;
 
+
+
+
+$(document).ready(function () {
+   
+    $("#Anvi_Comentario")[0].maxLength = 250;
+});
+
+
+
+
 $(document).ready(function () {
     $("#Anvi_Cliente")[0].maxLength = 100;
     $('#Anvi_GralFechaSolicitud').val(GetTodayDate());
@@ -75,7 +86,10 @@ $("#btnAutorizacion").click(function () {
         mun_Codigo: mun_Codigo,
         Anvi_PropositoVisita: Anvi_PropositoVisita,
         Anvi_DiasVisita: Anvi_DiasVisita,
-        Anvi_tptran_Id: Anvi_tptran_Id
+        Anvi_tptran_Id: Anvi_tptran_Id,
+        Anvi_Hospedaje: Anvi_Hospedaje,
+        Anvi_Comentario: Anvi_Comentario
+
     };
 
     $.ajax({
@@ -172,8 +186,10 @@ $("#frmAnticipoViatico").submit(function (event) {
     Anvi_PropositoVisita = $("#Anvi_PropositoVisita").val();
     Anvi_DiasVisita = $("#Anvi_DiasVisita").val();
     Anvi_tptran_Id = $("#Anvi_tptran_Id").val();
+    Anvi_Hospedaje = $("#Anvi_Hospedaje").val();
+    Anvi_Comentario = $("#Anvi_Comentario").val();
 
-    if (Anvi_JefeInmediato !== "" && Anvi_GralFechaSolicitud !== "" && Anvi_Cliente !== "" && Anvi_FechaViaje !== "" && dep_codigo !== "" && mun_Codigo !== "" && Anvi_PropositoVisita !== "" && Anvi_DiasVisita !== "" && Anvi_tptran_Id !== "") {
+    if (Anvi_JefeInmediato !== "" && Anvi_GralFechaSolicitud !== "" && Anvi_Cliente !== "" && Anvi_FechaViaje !== "" && dep_codigo !== "" && mun_Codigo !== "" && Anvi_PropositoVisita !== "" && Anvi_DiasVisita !== "" && Anvi_tptran_Id !== "" && Anvi_Hospedaje !== "" && Anvi_Comentario !== "") {
         event.preventDefault();
         dep_codigo = "ajax";
         $("#AutorizacionModal").modal();
@@ -236,17 +252,6 @@ $(document).on("click", "#Reject", function () {
     idItem = $('#Anvi_Id').val();
 });
 
-$(document).ready(function () {
-    $('#dataTable').DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-        }
-    });
-});
-
-
 
 //---------------------Rechazar-----------------------------------------
 $(document).on("click", "#_ModalReject", function () {
@@ -302,7 +307,7 @@ $(document).on("click", "#_ModalApprove", function () {
 
 
 function Approve() {
-    var Ansal_Id = $('#Ansal_Id').val();
+    var Ansal_Id = $('#Anvi_Id').val();
     document.getElementById('spinner-body').classList.add("overlay");
     document.getElementById('spinnerd').removeAttribute("hidden");
     $.ajax({
@@ -323,13 +328,6 @@ function Approve() {
     });
 }
 
-const _id = document.getElementById('RazonRechazo');
-_id.addEventListener("input", function () {
-    _id.value.trimStart();
-    if (!/^[ a-z0-9áéíóúüñ]*$/i.test(_id.value)) {
-        this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
-    }
-})
 //<---------------------/Approve/----------------------------------------->//
 
 $('#Anvi_JefeInmediato').change(function () {

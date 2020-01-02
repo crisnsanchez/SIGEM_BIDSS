@@ -11,6 +11,7 @@ namespace SIGEM_BIDSS.Models
     {
     }
 
+
     public class AnticipoViaticoMetadata
     {
         [Display(Name ="ID")]
@@ -62,6 +63,7 @@ namespace SIGEM_BIDSS.Models
 
 
         [Display(Name = "Comentario")]
+        [MaxLength(250, ErrorMessage = "Máximo {1} caracteres")]
         public string Anvi_Comentario { get; set; }
 
 
@@ -73,8 +75,6 @@ namespace SIGEM_BIDSS.Models
         public int est_Id { get; set; }
 
         [Display(Name = "Razon de Rechazo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
-        [MaxLength(250, ErrorMessage = "Máximo {1} caracteres")]
         public string Anvi_RazonRechazo { get; set; }
 
         [Display(Name = "Usuario Crea")]
