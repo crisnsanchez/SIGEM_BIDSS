@@ -1,35 +1,31 @@
-﻿/////DATE PICKER
+﻿
 var contador = 0;
 
+var table = $('#dataTable').DataTable();
+var LianvideArchivo = $('#Lianvide_Archivo').val();
+var TipoGasto = document.getElementById("tpv_Id");
+var FechaGasto = $('#Lianvide_FechaGasto').val();
+var MontoGastos = $('#Lianvide_MontoGasto').val();
+var Concepto = $('#Lianvide_Concepto').val();
+
+
+
+/////DATE PICKER//////////////////////
 $('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida,#Lianvide_FechaGasto').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1990",
     language: "es",
     daysOfWeekDisabled: "0"
 });
-$('#Lianvi_FechaFinViaje').datepicker({
-    format: "dd/mm/yyyy",
-    startDate: "01/01/1990",
-    language: "es",
-    daysOfWeekDisabled: "0"
-});
+////////////////////////////ARCHIVO///////////////////////////////////////////
 $("#CargarArchivo").change(function () {
     readURL(this);
 });
 
-
-
+////////////////////////////AGREGAR DETALLE//////////////////////////////////
 $('#AgregarDetalle').click(function () {
 
-    var table = $('#dataTable').DataTable();
-    var LianvideArchivo = $('#Lianvide_Archivo').val();
-    var TipoGasto = $('#tpv_Id').val();
-    var Lianvide_FechaGasto = $('#Lianvide_FechaGasto').val();
-    var MontoGastos = $('#Lianvide_MontoGasto').val();
-   
-    var Concepto = $('#Lianvide_Concepto').val();
-
-
+ /////////////VALIDACION VACIO////////////////////////////////////
     if (Lianvide_FechaGasto == '') {
         $('#MessageError').text('');
       
@@ -91,7 +87,7 @@ $('#AgregarDetalle').click(function () {
                 
                         table.row.add([
                             $('#Lianvide_FechaGasto').val(),
-                            $('#tpv_Id').val(),
+                            $('#TipoGastoText').text(),
                             $('#Lianvide_Concepto').val(),
                             $('#Archivo_Name').text(),
                             $('#Lianvide_MontoGasto').val(),
@@ -118,7 +114,7 @@ $('#AgregarDetalle').click(function () {
 
         }).done(function (data) {
                $('#Lianvide_FechaGasto').val(''),
-                $('#tpv_Id').val(''),
+                   $('#tpv_Id').text(''),
                    $('#Lianvide_Concepto').val(''),
                    $('#Archivo_Name').text(''),
                 $('#Lianvide_MontoGasto').val(''),
@@ -166,3 +162,25 @@ $(document).on("click", "#dataTable tbody tr td button#RemoveDetalle", function 
         data: JSON.stringify({ borrado: borrar }),
     });
 })
+
+
+
+
+$('#prov_RTN').change(function (e) {
+    var RTN = $.trim(this.value);
+    if (RTN != '') {
+        $('#RTN').text('');
+        $('#errorRTN').text('');
+    }
+    $('#errorRTN').text('');
+    var RTN = $("#prov_RTN").val();
+    $("#errorRTN").remove();
+    var length = $("#prov_RTN").val().length;
+    if (length < 14) {
+        $('#errorRTN').text('');
+        $('#validationRTN').after('<ul id="errorRTN" class="validation-summary-errors text-danger">RTN debe tener 14 dígitos</ul>');
+        $("#prov_RTN").focus();
+    }
+    else
+        $('#errorRTN').text('');
+});

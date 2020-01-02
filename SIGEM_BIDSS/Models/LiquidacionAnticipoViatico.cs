@@ -25,12 +25,15 @@ namespace SIGEM_BIDSS.Models
         public int Anvi_Id { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Fecha Liquidación")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy }", ApplyFormatInEditMode = true)]
         public System.DateTime Lianvi_FechaLiquida { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Fecha Inicio De Viaje")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy }", ApplyFormatInEditMode = true)]
         public System.DateTime Lianvi_FechaInicioViaje { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Fecha Regreso Viaje")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy }", ApplyFormatInEditMode = true)]
         public System.DateTime Lianvi_FechaFinViaje { get; set; }
         [Display(Name = "Comentario")]
         public string Lianvi_Comentario { get; set; }
