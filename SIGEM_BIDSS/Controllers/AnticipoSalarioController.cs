@@ -336,11 +336,6 @@ namespace SIGEM_BIDSS.Controllers
         {
             var list = "";
             string vReturn = "";
-            if (id == null)
-            {
-                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
             {

@@ -45,18 +45,19 @@
                         @Html.LabelFor(model => model.Lianvi_FechaInicioViaje, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
 
-                            @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control", @style = "background-color:white" } })
+                            @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" , @style = "background-color:white" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                  
+
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Lianvi_FechaFinViaje, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control", @style = "background-color:white" } })
+
+                            @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control" , @autocomplete = "off", @style = "background-color:white" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -90,19 +91,35 @@
 
 
 </div>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
 
 <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-
+<script src="~/Scripts/app/General.js"></script>
+<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
 <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
 
-
 <script>
-    $("#Lianvi_FechaLiquida").keyup(function () {
-        $('#estId').hide();
+
+
+
+    ///////VALIDACION DE RTN
+    $('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje').change(function (e) {
+        var FechaInicioViaje = $('Lianvi_FechaInicioViaje').val();
+        var FechaFinViaje = $('Lianvi_FechaFinViaje').val();
+        console.log("hola");
+        if (FechaFinViaje < FechaInicioViaje) {
+
+            alert("Hello! I am an alert box!!");
+        }
+        else {
+
+            alert("Hello!!");
+        }
+   
     });
+
 
 </script>
