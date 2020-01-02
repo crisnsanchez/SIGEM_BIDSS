@@ -41,6 +41,7 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
+            ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria.Where(x => x.pcat_EsActivo == true), "pcat_Id", "pcat_Nombre");
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion");
             ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion");
             ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre");
@@ -112,7 +113,7 @@ namespace SIGEM_BIDSS.Controllers
                     return View(tbProducto);
                 }
             }
-
+            ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Nombre");
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
             ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
             ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
@@ -142,14 +143,63 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "prod_Id,prod_Codigo,prod_CodigoBarras,prod_Descripcion,prod_Marca,prod_Modelo,prod_Talla,prod_Color,pscat_Id,uni_Id,prov_Id,prod_EsActivo,prod_RazonInactivacion,prod_UsuarioCrea,prod_FechaCrea,prod_UsuarioModifica,prod_FechaModifica")] tbProducto tbProducto)
+        public ActionResult Edit(string id ,[Bind(Include = "prod_Id,prod_Codigo,prod_CodigoBarras,prod_Descripcion,prod_Marca,prod_Modelo,prod_Talla,prod_Color,pscat_Id,uni_Id,prov_Id,prod_EsActivo,prod_RazonInactivacion,prod_UsuarioCrea,prod_FechaCrea,prod_UsuarioModifica,prod_FechaModifica")] tbProducto tbProducto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tbProducto).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    tbProducto vtbProducto = db.tbProducto.Find(id);
+                    IEnumerable<object> List = null;
+                    string MsjError = "";
+                    List = db.UDP_Inv_tbProducto_Update(tbProducto.prod_Id,
+                                                        tbProducto.prod_CodigoBarras,
+                                                        tbProducto.prod_Descripcion,
+                                                        tbProducto.prod_Marca,
+                                                        tbProducto.prod_Modelo,
+                                                        tbProducto.prod_Talla,
+                                                        tbProducto.prod_Color,
+                                                        tbProducto.pscat_Id,
+                                                        tbProducto.uni_Id,
+                                                        tbProducto.prov_Id,
+                                                        tbProducto.prod_EsActivo,
+                                                        tbProducto.prod_RazonInactivacion,
+                                                        Function.GetUser(),
+                                                        Function.DatetimeNow()
+                                                        );
+                    foreach (UDP_Inv_tbProducto_Update_Result producto in List)
+                        MsjError = producto.MensajeError;
+
+                    if (MsjError.StartsWith("-1"))
+                    {
+                        ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
+                        ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion ", tbProducto.pscat_Id);
+                        ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
+                      
+                        ModelState.AddModelError("", "No se Pudo Actualizar el registro, Favor Contacte al Administrador.");
+                        return View(tbProducto);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
+                    ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
+                    ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
+                   
+                    ModelState.AddModelError("", "No se Pudo Actualizar el registro, Favor Contacte al Administrador.");
+                    return View(tbProducto);
+                }
             }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+            }
+
+            ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Nombre");
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
             ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
             ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
