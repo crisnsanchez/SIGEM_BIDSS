@@ -111,6 +111,11 @@ namespace SIGEM_BIDSS.Models
 
 
 
+        //Estado Producto
+
+        public const int ProductoActivo = 1;
+        public const int ProductoInactivo = 2;
+
         public int GetUser(out string UserName)
         {
             string email = "";

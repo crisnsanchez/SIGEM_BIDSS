@@ -205,6 +205,7 @@
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
     <Compile Include="Controllers\ProductoCategoriaController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosController.cs" />
     <Compile Include="Controllers\SueldoController.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Models\Categorias.cs" />
     <Compile Include="Models\LiquidacionAnticipoViaticodetalle.cs" />
     <Compile Include="Models\LiquidacionAnticipoViatico.cs" />
+    <Compile Include="Models\Productos.cs" />
     <Compile Include="Models\SDP_tbProductoSubcategoria_Select_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -280,6 +282,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_tbProductoSubcategoria_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProducto_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProducto_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_rrhh_tbEmpleado_Insert_Result.cs">
@@ -987,6 +995,7 @@
     <Content Include="Scripts\app\General_Details.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\Parametros.js" />
+    <Content Include="Scripts\app\Producto.js" />
     <Content Include="Scripts\app\Proveedor.js" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Content\template\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css.map" />
@@ -3433,6 +3442,11 @@
     <Content Include="Views\SolicitudReembolsoGastos\Edit.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Index.cshtml" />
     <Content Include="Views\AnticipoViatico\_Modales.cshtml" />
+    <Content Include="Views\Producto\Create.cshtml" />
+    <Content Include="Views\Producto\Delete.cshtml" />
+    <Content Include="Views\Producto\Details.cshtml" />
+    <Content Include="Views\Producto\Edit.cshtml" />
+    <Content Include="Views\Producto\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
