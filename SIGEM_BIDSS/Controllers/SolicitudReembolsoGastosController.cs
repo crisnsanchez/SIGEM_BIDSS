@@ -24,6 +24,13 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbSolicitudReembolsoGastos.ToList());
         }
 
+        // GET: Municipio
+        [HttpPost]
+        public JsonResult GetMunicipios(string CodDepartamento)
+        {
+            var list = (from x in db.tbMunicipio where x.dep_codigo == CodDepartamento select new { mun_codigo = x.mun_codigo, mun_nombre = x.mun_nombre }).ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
         // GET: SolicitudReembolsoGastos/Details/5
         public ActionResult Details(int? id)
         {
@@ -40,12 +47,16 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         // GET: SolicitudReembolsoGastos/Create
-        public ActionResult Create(int? id)
+        public ActionResult Create()
         {
 
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
-          
+
+            ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+            ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+
+
             return View();
       
         }
@@ -55,12 +66,15 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Reemga_Id,Reemga_Correlativo,emp_Id,emp_EsJefe,Reemga_GralFechaSolicitud," +
-            "Reemga_FechaViaje,Reemga_Cliente,mun_codigo,Reemga_PropositoVisita,Reemga_DiasVisita,Reemga_Comentario,est_Id," +
-            "Reemga_RazonRechazo,Reemga_UsuarioCrea,Reemga_FechaCrea")] tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos)
+        public ActionResult Create([Bind(Include = "emp_Id,emp_EsJefe,Reemga_GralFechaSolicitud," +
+            "Reemga_FechaViaje,Reemga_Cliente,mun_codigo,Reemga_PropositoVisita,Reemga_DiasVisita,Reemga_Comentario,est_Id")] tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos, string dep_codigo)
         {
 
+            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
+            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
 
+            ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+            ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
             tbSolicitudReembolsoGastos.Reemga_RazonRechazo = GeneralFunctions.stringDefault;
             string UserName = "",
                ErrorEmail = "";
@@ -69,6 +83,21 @@ namespace SIGEM_BIDSS.Controllers
             tbSolicitudReembolsoGastos.emp_Id = EmployeeID;
             tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud = Function.DatetimeNow();
             tbSolicitudReembolsoGastos.est_Id = GeneralFunctions.Enviada;
+
+      
+    
+
+                if (tbSolicitudReembolsoGastos.mun_codigo == "Seleccione")
+                    ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
+                else
+                    ViewBag.muncodigo = tbSolicitudReembolsoGastos.mun_codigo;
+
+
+                if (String.IsNullOrEmpty(dep_codigo))
+                    ModelState.AddModelError("Reemga_UsuarioCrea", "El campo Departamento es obligatorio.");
+ 
+
+
 
 
             if (ModelState.IsValid)
@@ -80,7 +109,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     IEnumerable<object> _List = null;
                     string ErrorMessage = "";
-                    _List = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.Reemga_Correlativo, tbSolicitudReembolsoGastos.emp_Id,
+                    _List = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert( tbSolicitudReembolsoGastos.emp_Id,
                         tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud, tbSolicitudReembolsoGastos.Reemga_FechaViaje, tbSolicitudReembolsoGastos.Reemga_Cliente,
                         tbSolicitudReembolsoGastos.mun_codigo, tbSolicitudReembolsoGastos.Reemga_PropositoVisita, tbSolicitudReembolsoGastos.Reemga_DiasVisita,
                         tbSolicitudReembolsoGastos.Reemga_Comentario, tbSolicitudReembolsoGastos.est_Id, tbSolicitudReembolsoGastos.Reemga_RazonRechazo, EmployeeID, Function.DatetimeNow());
@@ -90,6 +119,7 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+
                         return View(tbSolicitudReembolsoGastos);
                     }
 

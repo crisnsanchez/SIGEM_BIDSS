@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace SIGEM_BIDSS.Models
 {
 
-    [MetadataType(typeof(ReembolsoGastosMetaData))]
+    [MetadataType(typeof(SolicitudReembolsoGastos))]
     public partial class tbSolicitudReembolsoGastos
     {
 
+        [NotMapped]
 
+        public string dep_codigo { get; set; }
     }
-    public class ReembolsoGastosMetaData
+
+    public class SolicitudReembolsoGastos
     {
 
         [Display(Name = "ID")]   
-   
         public int Reemga_Id { get; set; }
 
         [Display(Name = "Correlativo")]

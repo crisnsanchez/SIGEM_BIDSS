@@ -2614,63 +2614,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbEmpleado_Insert_Result>("UDP_rrhh_tbEmpleado_Insert", emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoElectronicoParameter, emp_EsJefeParameter, tps_IdParameter, pto_IdParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_PathImageParameter, mun_IdParameter, emp_UsuarioCreaParameter, est_IdParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastos_Insert(string reemga_Correlativo, Nullable<int> emp_Id, Nullable<System.DateTime> reemga_GralFechaSolicitud, Nullable<System.DateTime> reemga_FechaViaje, string reemga_Cliente, string mun_codigo, string reemga_PropositoVisita, Nullable<int> reemga_DiasVisita, string reemga_Comentario, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioCrea, Nullable<System.DateTime> reemga_FechaCrea)
-        {
-            var reemga_CorrelativoParameter = reemga_Correlativo != null ?
-                new ObjectParameter("Reemga_Correlativo", reemga_Correlativo) :
-                new ObjectParameter("Reemga_Correlativo", typeof(string));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var reemga_GralFechaSolicitudParameter = reemga_GralFechaSolicitud.HasValue ?
-                new ObjectParameter("Reemga_GralFechaSolicitud", reemga_GralFechaSolicitud) :
-                new ObjectParameter("Reemga_GralFechaSolicitud", typeof(System.DateTime));
-    
-            var reemga_FechaViajeParameter = reemga_FechaViaje.HasValue ?
-                new ObjectParameter("Reemga_FechaViaje", reemga_FechaViaje) :
-                new ObjectParameter("Reemga_FechaViaje", typeof(System.DateTime));
-    
-            var reemga_ClienteParameter = reemga_Cliente != null ?
-                new ObjectParameter("Reemga_Cliente", reemga_Cliente) :
-                new ObjectParameter("Reemga_Cliente", typeof(string));
-    
-            var mun_codigoParameter = mun_codigo != null ?
-                new ObjectParameter("mun_codigo", mun_codigo) :
-                new ObjectParameter("mun_codigo", typeof(string));
-    
-            var reemga_PropositoVisitaParameter = reemga_PropositoVisita != null ?
-                new ObjectParameter("Reemga_PropositoVisita", reemga_PropositoVisita) :
-                new ObjectParameter("Reemga_PropositoVisita", typeof(string));
-    
-            var reemga_DiasVisitaParameter = reemga_DiasVisita.HasValue ?
-                new ObjectParameter("Reemga_DiasVisita", reemga_DiasVisita) :
-                new ObjectParameter("Reemga_DiasVisita", typeof(int));
-    
-            var reemga_ComentarioParameter = reemga_Comentario != null ?
-                new ObjectParameter("Reemga_Comentario", reemga_Comentario) :
-                new ObjectParameter("Reemga_Comentario", typeof(string));
-    
-            var est_IdParameter = est_Id.HasValue ?
-                new ObjectParameter("est_Id", est_Id) :
-                new ObjectParameter("est_Id", typeof(int));
-    
-            var reemga_RazonRechazoParameter = reemga_RazonRechazo != null ?
-                new ObjectParameter("Reemga_RazonRechazo", reemga_RazonRechazo) :
-                new ObjectParameter("Reemga_RazonRechazo", typeof(string));
-    
-            var reemga_UsuarioCreaParameter = reemga_UsuarioCrea.HasValue ?
-                new ObjectParameter("Reemga_UsuarioCrea", reemga_UsuarioCrea) :
-                new ObjectParameter("Reemga_UsuarioCrea", typeof(int));
-    
-            var reemga_FechaCreaParameter = reemga_FechaCrea.HasValue ?
-                new ObjectParameter("Reemga_FechaCrea", reemga_FechaCrea) :
-                new ObjectParameter("Reemga_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastos_Insert", reemga_CorrelativoParameter, emp_IdParameter, reemga_GralFechaSolicitudParameter, reemga_FechaViajeParameter, reemga_ClienteParameter, mun_codigoParameter, reemga_PropositoVisitaParameter, reemga_DiasVisitaParameter, reemga_ComentarioParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioCreaParameter, reemga_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Adm_tbAnticipoViatico_Update_Result> UDP_Adm_tbAnticipoViatico_Update(Nullable<int> anvi_Id, Nullable<int> emp_Id, Nullable<int> anvi_JefeInmediato, Nullable<System.DateTime> anvi_GralFechaSolicitud, Nullable<System.DateTime> anvi_FechaViaje, string anvi_Cliente, string mun_Codigo, string anvi_PropositoVisita, Nullable<int> anvi_DiasVisita, Nullable<bool> anvi_Hospedaje, Nullable<int> anvi_tptran_Id, Nullable<bool> anvi_Autorizacion, string anvi_Comentario, Nullable<int> est_Id, string anvi_RazonRechazo, Nullable<int> anvi_UsuarioModifica, Nullable<System.DateTime> anvi_FechaModifica)
         {
             var anvi_IdParameter = anvi_Id.HasValue ?
@@ -2742,6 +2685,59 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Anvi_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoViatico_Update_Result>("UDP_Adm_tbAnticipoViatico_Update", anvi_IdParameter, emp_IdParameter, anvi_JefeInmediatoParameter, anvi_GralFechaSolicitudParameter, anvi_FechaViajeParameter, anvi_ClienteParameter, mun_CodigoParameter, anvi_PropositoVisitaParameter, anvi_DiasVisitaParameter, anvi_HospedajeParameter, anvi_tptran_IdParameter, anvi_AutorizacionParameter, anvi_ComentarioParameter, est_IdParameter, anvi_RazonRechazoParameter, anvi_UsuarioModificaParameter, anvi_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastos_Insert(Nullable<int> emp_Id, Nullable<System.DateTime> reemga_GralFechaSolicitud, Nullable<System.DateTime> reemga_FechaViaje, string reemga_Cliente, string mun_codigo, string reemga_PropositoVisita, Nullable<int> reemga_DiasVisita, string reemga_Comentario, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioCrea, Nullable<System.DateTime> reemga_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var reemga_GralFechaSolicitudParameter = reemga_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("Reemga_GralFechaSolicitud", reemga_GralFechaSolicitud) :
+                new ObjectParameter("Reemga_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var reemga_FechaViajeParameter = reemga_FechaViaje.HasValue ?
+                new ObjectParameter("Reemga_FechaViaje", reemga_FechaViaje) :
+                new ObjectParameter("Reemga_FechaViaje", typeof(System.DateTime));
+    
+            var reemga_ClienteParameter = reemga_Cliente != null ?
+                new ObjectParameter("Reemga_Cliente", reemga_Cliente) :
+                new ObjectParameter("Reemga_Cliente", typeof(string));
+    
+            var mun_codigoParameter = mun_codigo != null ?
+                new ObjectParameter("mun_codigo", mun_codigo) :
+                new ObjectParameter("mun_codigo", typeof(string));
+    
+            var reemga_PropositoVisitaParameter = reemga_PropositoVisita != null ?
+                new ObjectParameter("Reemga_PropositoVisita", reemga_PropositoVisita) :
+                new ObjectParameter("Reemga_PropositoVisita", typeof(string));
+    
+            var reemga_DiasVisitaParameter = reemga_DiasVisita.HasValue ?
+                new ObjectParameter("Reemga_DiasVisita", reemga_DiasVisita) :
+                new ObjectParameter("Reemga_DiasVisita", typeof(int));
+    
+            var reemga_ComentarioParameter = reemga_Comentario != null ?
+                new ObjectParameter("Reemga_Comentario", reemga_Comentario) :
+                new ObjectParameter("Reemga_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var reemga_RazonRechazoParameter = reemga_RazonRechazo != null ?
+                new ObjectParameter("Reemga_RazonRechazo", reemga_RazonRechazo) :
+                new ObjectParameter("Reemga_RazonRechazo", typeof(string));
+    
+            var reemga_UsuarioCreaParameter = reemga_UsuarioCrea.HasValue ?
+                new ObjectParameter("Reemga_UsuarioCrea", reemga_UsuarioCrea) :
+                new ObjectParameter("Reemga_UsuarioCrea", typeof(int));
+    
+            var reemga_FechaCreaParameter = reemga_FechaCrea.HasValue ?
+                new ObjectParameter("Reemga_FechaCrea", reemga_FechaCrea) :
+                new ObjectParameter("Reemga_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastos_Insert", emp_IdParameter, reemga_GralFechaSolicitudParameter, reemga_FechaViajeParameter, reemga_ClienteParameter, mun_codigoParameter, reemga_PropositoVisitaParameter, reemga_DiasVisitaParameter, reemga_ComentarioParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioCreaParameter, reemga_FechaCreaParameter);
         }
     }
 }

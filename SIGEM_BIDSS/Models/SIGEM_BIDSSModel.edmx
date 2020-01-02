@@ -113,8 +113,8 @@
           <Property Name="Reemga_RazonRechazo" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Reemga_UsuarioCrea" Type="int" Nullable="false" />
           <Property Name="Reemga_FechaCrea" Type="datetime" Nullable="false" />
-          <Property Name="Reemga_UsuarioModifica" Type="int" Nullable="false" />
-          <Property Name="Reemga_FechaModifica" Type="datetime" Nullable="false" />
+          <Property Name="Reemga_UsuarioModifica" Type="int" />
+          <Property Name="Reemga_FechaModifica" Type="datetime" />
         </EntityType>
         <EntityType Name="tbVacacionesPermisosEspeciales">
           <Key>
@@ -986,7 +986,6 @@
           <Parameter Name="Lianvide_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
-          <Parameter Name="Reemga_Correlativo" Type="varchar" Mode="In" />
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="Reemga_GralFechaSolicitud" Type="datetime" Mode="In" />
           <Parameter Name="Reemga_FechaViaje" Type="datetime" Mode="In" />
@@ -2506,34 +2505,6 @@
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="est_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result)">
-            <Parameter Name="Reemga_Correlativo" Mode="In" Type="String" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Reemga_GralFechaSolicitud" Mode="In" Type="DateTime" />
-            <Parameter Name="Reemga_FechaViaje" Mode="In" Type="DateTime" />
-            <Parameter Name="Reemga_Cliente" Mode="In" Type="String" />
-            <Parameter Name="mun_codigo" Mode="In" Type="String" />
-            <Parameter Name="Reemga_PropositoVisita" Mode="In" Type="String" />
-            <Parameter Name="Reemga_DiasVisita" Mode="In" Type="Int32" />
-            <Parameter Name="Reemga_Comentario" Mode="In" Type="String" />
-            <Parameter Name="est_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Reemga_RazonRechazo" Mode="In" Type="String" />
-            <Parameter Name="Reemga_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="Reemga_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <EntitySet Name="tbSolicitudReembolsoGastos" EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" />
-          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_emp_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_emp_Id">
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_est_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_est_Id">
-            <End Role="tbEstado" EntitySet="tbEstado" />
-            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_mun_codigo" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_mun_codigo">
-            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
-            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
-          </AssociationSet>
           <FunctionImport Name="UDP_Adm_tbAnticipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Update_Result)">
             <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -2552,6 +2523,33 @@
             <Parameter Name="Anvi_RazonRechazo" Mode="In" Type="String" />
             <Parameter Name="Anvi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="Anvi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbSolicitudReembolsoGastos" EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" />
+          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_emp_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_emp_Id">
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_est_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_mun_codigo" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_mun_codigo">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Reemga_GralFechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="Reemga_FechaViaje" Mode="In" Type="DateTime" />
+            <Parameter Name="Reemga_Cliente" Mode="In" Type="String" />
+            <Parameter Name="mun_codigo" Mode="In" Type="String" />
+            <Parameter Name="Reemga_PropositoVisita" Mode="In" Type="String" />
+            <Parameter Name="Reemga_DiasVisita" Mode="In" Type="Int32" />
+            <Parameter Name="Reemga_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Reemga_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Reemga_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Reemga_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
@@ -3662,6 +3660,9 @@
         <ComplexType Name="UDP_rrhh_tbEmpleado_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Adm_tbAnticipoViatico_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         <EntityType Name="tbSolicitudReembolsoGastos">
           <Key>
             <PropertyRef Name="Reemga_Id" />
@@ -3680,8 +3681,8 @@
           <Property Name="Reemga_RazonRechazo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Reemga_UsuarioCrea" Type="Int32" Nullable="false" />
           <Property Name="Reemga_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reemga_UsuarioModifica" Type="Int32" Nullable="false" />
-          <Property Name="Reemga_FechaModifica" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reemga_UsuarioModifica" Type="Int32" />
+          <Property Name="Reemga_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_emp_Id" FromRole="tbSolicitudReembolsoGastos" ToRole="tbEmpleado" />
           <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_est_Id" FromRole="tbSolicitudReembolsoGastos" ToRole="tbEstado" />
           <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_mun_codigo" FromRole="tbSolicitudReembolsoGastos" ToRole="tbMunicipio" />
@@ -3723,9 +3724,6 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Adm_tbAnticipoViatico_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         </Schema>
@@ -4634,9 +4632,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbSolicitudReembolsoGastos_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbSolicitudReembolsoGastos_Insert" >
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAnticipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAnticipoViatico_Update" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -4663,9 +4661,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAnticipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAnticipoViatico_Update" >
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbSolicitudReembolsoGastos_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbSolicitudReembolsoGastos_Insert" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Update_Result">
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

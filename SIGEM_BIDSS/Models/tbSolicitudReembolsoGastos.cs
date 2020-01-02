@@ -28,8 +28,8 @@ namespace SIGEM_BIDSS.Models
         public string Reemga_RazonRechazo { get; set; }
         public int Reemga_UsuarioCrea { get; set; }
         public System.DateTime Reemga_FechaCrea { get; set; }
-        public int Reemga_UsuarioModifica { get; set; }
-        public System.DateTime Reemga_FechaModifica { get; set; }
+        public Nullable<int> Reemga_UsuarioModifica { get; set; }
+        public Nullable<System.DateTime> Reemga_FechaModifica { get; set; }
     
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbEstado tbEstado { get; set; }
