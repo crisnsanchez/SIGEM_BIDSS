@@ -255,6 +255,9 @@
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Inv_tbProductoCategoria_Delete_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
