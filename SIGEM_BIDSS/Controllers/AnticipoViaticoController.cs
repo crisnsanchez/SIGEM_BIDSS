@@ -86,7 +86,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Anvi_Id,emp_Id,Anvi_JefeInmediato,Anvi_Comentario,Anvi_GralFechaSolicitud,Anvi_FechaViaje,Anvi_Cliente,mun_Codigo,Anvi_PropositoVisita,Anvi_DiasVisita,Anvi_Hospedaje,Anvi_tptran_Id,Anvi_Autorizacion,Anvi_UsuarioCrea,Anvi_FechaCrea,Anvi_UsuarioModifica,Anvi_FechaModifica")] tbAnticipoViatico tbAnticipoViatico, string dep_codigo)
+        public ActionResult Create([Bind(Include = "Anvi_Id,emp_Id,Anvi_JefeInmediato,Anvi_GralFechaSolicitud,Anvi_FechaViaje,Anvi_Cliente,mun_Codigo,Anvi_PropositoVisita,Anvi_DiasVisita,Anvi_Hospedaje,Anvi_tptran_Id,Anvi_Autorizacion,Anvi_Comentario,Anvi_UsuarioCrea,Anvi_FechaCrea,Anvi_UsuarioModifica,Anvi_FechaModifica")] tbAnticipoViatico tbAnticipoViatico, string dep_codigo)
         {
             string UserName = "",
                    ErrorEmail = "";
@@ -163,10 +163,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.Anvi_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbAnticipoViatico.Anvi_JefeInmediato);
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbAnticipoViatico.mun_Codigo);
             ViewBag.Anvi_tptran_Id = new SelectList(db.tbTipoTransporte, "tptran_Id", "tptran_Descripcion", tbAnticipoViatico.Anvi_tptran_Id);
-            if (dep_codigo != "ajax")
-                return View("Create");
-            else
-                return Json("Create");
+            return View(tbAnticipoViatico);
         }
 
         // GET: AnticipoViatico/Edit/5
@@ -278,7 +275,7 @@ namespace SIGEM_BIDSS.Controllers
 
         // GET: AnticipoSalario/Approve/5   
         [HttpPost]
-        public JsonResult Reject(int id, string Ansal_RazonRechazo)
+        public JsonResult Rejects(int id, string Ansal_RazonRechazo)
         {
             var list = "";
             string vReturn = "";

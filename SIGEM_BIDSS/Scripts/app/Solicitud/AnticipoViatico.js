@@ -236,6 +236,15 @@ $(document).on("click", "#Reject", function () {
     idItem = $('#Anvi_Id').val();
 });
 
+$(document).ready(function () {
+    $('#dataTable').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
+    });
+});
 
 
 
@@ -262,7 +271,7 @@ function SendData() {
     document.getElementById('spinnerd-reject').removeAttribute("hidden");
     //document.getElementById("divArea").style.display = "block";
     $.ajax({
-        url: "/AnticipoSalario/Reject",
+        url: "/AnticipoViatico/Rejects",
         method: "POST",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
@@ -322,4 +331,50 @@ _id.addEventListener("input", function () {
     }
 })
 //<---------------------/Approve/----------------------------------------->//
+
+$('#Anvi_JefeInmediato').change(function () {
+    $('#JefeInmediato').hide();
+});
+
+$('#Anvi_GralFechaSolicitud').keyup(function () {
+    $('#GralFechaSolicitud').hide();
+});
+
+$('#Anvi_Cliente').keyup(function () {
+    $('#Cliente').hide();
+});
+
+
+$('#Anvi_FechaViaje').keyup(function () {
+    $('#FechaViaje').hide();
+});
+
+
+$('#Anvi_UsuarioCrea').change(function () {
+    $('#UsuarioCrea').hide();
+});
+
+$('#mun_Codigo').change(function () {
+    $('#CodigoMun').hide();
+});
+
+$('#Anvi_PropositoVisita').keyup(function () {
+    $('#PropositoVisita').hide();
+});
+
+$('#Anvi_DiasVisita').keyup(function () {
+    $('#DiasVisita').hide();
+});
+
+$('#Anvi_tptran_Id').change(function () {
+    $('#tptran_Id').hide();
+});
+
+$('#Anvi_Hospedaje').keyup(function () {
+    $('#Hospedaje').hide();
+});
+
+$('#Anvi_Comentario').keyup(function () {
+    $('#Comentario').hide();
+});
 
