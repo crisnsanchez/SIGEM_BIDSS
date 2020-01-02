@@ -2613,5 +2613,66 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbEmpleado_Insert_Result>("UDP_rrhh_tbEmpleado_Insert", emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoElectronicoParameter, emp_EsJefeParameter, tps_IdParameter, pto_IdParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_PathImageParameter, mun_IdParameter, emp_UsuarioCreaParameter, est_IdParameter);
         }
+    
+        public virtual ObjectResult<string> UDP_Adm_tbVacacionesPermisosEspeciales_Insert(Nullable<int> emp_Id, Nullable<int> vPE_JefeInmediato, Nullable<int> tperm_Id, Nullable<System.DateTime> vPE_GralFechaSolicitud, Nullable<System.DateTime> vPE_FechaInicio, Nullable<System.DateTime> vPE_FechaFin, Nullable<int> vPE_CantidadDias, Nullable<decimal> vPE_MontoSolicitado, string vPE_Justificacion, string vPE_Comentario, Nullable<int> est_Id, string vPE_RazonRechazo, Nullable<int> vPE_UsuarioCrea, Nullable<System.DateTime> vPE_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var vPE_JefeInmediatoParameter = vPE_JefeInmediato.HasValue ?
+                new ObjectParameter("VPE_JefeInmediato", vPE_JefeInmediato) :
+                new ObjectParameter("VPE_JefeInmediato", typeof(int));
+    
+            var tperm_IdParameter = tperm_Id.HasValue ?
+                new ObjectParameter("tperm_Id", tperm_Id) :
+                new ObjectParameter("tperm_Id", typeof(int));
+    
+            var vPE_GralFechaSolicitudParameter = vPE_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("VPE_GralFechaSolicitud", vPE_GralFechaSolicitud) :
+                new ObjectParameter("VPE_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var vPE_FechaInicioParameter = vPE_FechaInicio.HasValue ?
+                new ObjectParameter("VPE_FechaInicio", vPE_FechaInicio) :
+                new ObjectParameter("VPE_FechaInicio", typeof(System.DateTime));
+    
+            var vPE_FechaFinParameter = vPE_FechaFin.HasValue ?
+                new ObjectParameter("VPE_FechaFin", vPE_FechaFin) :
+                new ObjectParameter("VPE_FechaFin", typeof(System.DateTime));
+    
+            var vPE_CantidadDiasParameter = vPE_CantidadDias.HasValue ?
+                new ObjectParameter("VPE_CantidadDias", vPE_CantidadDias) :
+                new ObjectParameter("VPE_CantidadDias", typeof(int));
+    
+            var vPE_MontoSolicitadoParameter = vPE_MontoSolicitado.HasValue ?
+                new ObjectParameter("VPE_MontoSolicitado", vPE_MontoSolicitado) :
+                new ObjectParameter("VPE_MontoSolicitado", typeof(decimal));
+    
+            var vPE_JustificacionParameter = vPE_Justificacion != null ?
+                new ObjectParameter("VPE_Justificacion", vPE_Justificacion) :
+                new ObjectParameter("VPE_Justificacion", typeof(string));
+    
+            var vPE_ComentarioParameter = vPE_Comentario != null ?
+                new ObjectParameter("VPE_Comentario", vPE_Comentario) :
+                new ObjectParameter("VPE_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var vPE_RazonRechazoParameter = vPE_RazonRechazo != null ?
+                new ObjectParameter("VPE_RazonRechazo", vPE_RazonRechazo) :
+                new ObjectParameter("VPE_RazonRechazo", typeof(string));
+    
+            var vPE_UsuarioCreaParameter = vPE_UsuarioCrea.HasValue ?
+                new ObjectParameter("VPE_UsuarioCrea", vPE_UsuarioCrea) :
+                new ObjectParameter("VPE_UsuarioCrea", typeof(int));
+    
+            var vPE_FechaCreaParameter = vPE_FechaCrea.HasValue ?
+                new ObjectParameter("VPE_FechaCrea", vPE_FechaCrea) :
+                new ObjectParameter("VPE_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Adm_tbVacacionesPermisosEspeciales_Insert", emp_IdParameter, vPE_JefeInmediatoParameter, tperm_IdParameter, vPE_GralFechaSolicitudParameter, vPE_FechaInicioParameter, vPE_FechaFinParameter, vPE_CantidadDiasParameter, vPE_MontoSolicitadoParameter, vPE_JustificacionParameter, vPE_ComentarioParameter, est_IdParameter, vPE_RazonRechazoParameter, vPE_UsuarioCreaParameter, vPE_FechaCreaParameter);
+        }
     }
 }

@@ -215,6 +215,7 @@
     <Compile Include="Controllers\TipoTransporteController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
+    <Compile Include="Controllers\VacacionesPermisosEspecialesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3426,6 +3427,9 @@
     <Content Include="Views\SolicitudReembolsoGastos\Details.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Edit.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Index.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Create.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Details.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
