@@ -215,6 +215,7 @@
     <Compile Include="Controllers\TipoTransporteController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
+    <Compile Include="Controllers\VacacionesPermisosEspecialesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,6 +228,7 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Solicitud\ReembolsoGastos.cs" />
+    <Compile Include="Models\Solicitud\VacacionesPermisosEspeciales.cs" />
     <Compile Include="Models\spGetCategoria_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -256,6 +258,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_tbProductoCategoria_Delete_Result.cs">
@@ -3433,6 +3438,9 @@
     <Content Include="Views\SolicitudReembolsoGastos\Edit.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Index.cshtml" />
     <Content Include="Views\AnticipoViatico\_Modales.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Create.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Details.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
