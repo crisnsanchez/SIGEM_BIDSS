@@ -8,19 +8,22 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+<link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>tbVacacionesPermisosEspeciales</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-     
+
         <div class="form-group">
             @Html.LabelFor(model => model.VPE_JefeInmediato, "VPE_JefeInmediato", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("VPE_JefeInmediato", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("VPE_JefeInmediato", null, "Seleccione Jefe inmediato", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VPE_JefeInmediato, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.tperm_Id, "tperm_Id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("tperm_Id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("tperm_Id", null, "Seleccione el tipo de permiso", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.tperm_Id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -94,6 +97,12 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+
+
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+    <script src="~/Scripts/app/Solicitud/VacacionesPermisosEspeciales/Vacaciones.js"></script>
+
 }
