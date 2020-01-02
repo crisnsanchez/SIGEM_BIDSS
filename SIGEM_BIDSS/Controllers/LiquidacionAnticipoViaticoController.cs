@@ -9,7 +9,10 @@ using System.Web.Mvc;
 using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
+
 {
+    [Authorize]
+    [SessionManager]
     public class LiquidacionAnticipoViaticoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
@@ -65,55 +68,57 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Lianvi_Id,Lianvi_Correlativo,Anvi_Id,Lianvi_FechaLiquida,Lianvi_FechaInicioViaje,Lianvi_FechaFinViaje,Lianvi_Comentario,est_Id,Lianvi_RazonRechazo")] tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico)
         {
-            if (ModelState.IsValid)
+           
             {
                 string UserName = "",
                 ErrorEmail = "";
                 try
                 {
-                    int EmployeeID = Function.GetUser(out UserName);
-                    bool Result = false, ResultAdm = false;
-                    
-                    IEnumerable<object> _List = null;
-                    string ErrorMessage = "";
-                    _List = db.UDP_Adm_tbLiquidacionAnticipoViatico_Insert(tbLiquidacionAnticipoViatico.Anvi_Id, 
-                                                                          tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida,
-                                                                          tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje,
-                                                                          tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje,
-                                                                          tbLiquidacionAnticipoViatico.Lianvi_Comentario,
-                                                                           GeneralFunctions.Enviada, 
-                                                                          tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo,
-                                                                          EmployeeID, Function.DatetimeNow());
-                    foreach (UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result Area in _List)
-                        ErrorMessage = Area.MensajeError;
-                    if (ErrorMessage.StartsWith("-1"))
+                    if (ModelState.IsValid)
                     {
-                        Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorMessage);
-                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                        return View(tbLiquidacionAnticipoViatico);
+                        int EmployeeID = Function.GetUser(out UserName);
+                        bool Result = false, ResultAdm = false;
+
+                        IEnumerable<object> _List = null;
+                        string ErrorMessage = "";
+                        _List = db.UDP_Adm_tbLiquidacionAnticipoViatico_Insert(tbLiquidacionAnticipoViatico.Anvi_Id,
+                                                                              tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida,
+                                                                              tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje,
+                                                                              tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje,
+                                                                              tbLiquidacionAnticipoViatico.Lianvi_Comentario,
+                                                                               GeneralFunctions.Enviada,
+                                                                              tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo,
+                                                                              EmployeeID, Function.DatetimeNow());
+                        foreach (UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result Area in _List)
+                            ErrorMessage = Area.MensajeError;
+                        if (ErrorMessage.StartsWith("-1"))
+                        {
+                            Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorMessage);
+                            ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                            return View(tbLiquidacionAnticipoViatico);
+                        }
+
+                        else
+                        {
+                            var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                            var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                            Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
+                            ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
+
+                            if (!Result) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
+                            if (!ResultAdm) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
+                            TempData["swalfunction"] = "true";
+
+                            return RedirectToAction("Index");
+                        }
+
                     }
-            
-                    else
-                    {
-                        var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                        var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
-
-                        if (!Result) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
-                        if (!ResultAdm) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
-                        TempData["swalfunction"] = "true";
-
-                        return RedirectToAction("Index");
-                    }
-
                 }
-
 
                 catch (Exception Ex)
                 {
                     Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+
                     return View(tbLiquidacionAnticipoViatico);
                 }
             }
