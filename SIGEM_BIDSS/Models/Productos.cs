@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,25 @@ namespace SIGEM_BIDSS.Models
     [MetadataType(typeof(ProductoMetadata))]
     public partial class tbProducto
     {
+        [NotMapped]
+        [Display(Name = "Categoría")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public int pcat_Id { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Unidad Medida")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public int uni_Descripcion { get; set; }
+
+        [NotMapped]
+        [Display(Name = "SubCategoria")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public int pscat_Descripcion { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Proveedor")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public int pro_Nombre { get; set; }
 
     }
     public class ProductoMetadata
