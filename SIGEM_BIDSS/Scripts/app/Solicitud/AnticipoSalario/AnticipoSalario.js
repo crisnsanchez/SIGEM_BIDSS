@@ -12,7 +12,7 @@ $("#frmsubmit").click(function () {
 
 
 
-document.getElementById("Cantidad").DOMContentLoaded = function () {
+document.getElementById("Cantidad").onblur = function () {
     if (!isNaN(this.value || this.value != "")) {
         //number-format the user input
         this.value = parseFloat(this.value.replace(/,/g, ""))
