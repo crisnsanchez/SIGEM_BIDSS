@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="09235ff55351436aa410b8d87afbc04c" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="09235ff55351436aa410b8d87afbc04c" Name="Diagram1" ZoomLevel="53">
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbBitacoraErrores" Width="1.5" PointX="8.75" PointY="2.25" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbAnticipoSalario" Width="1.5" PointX="3" PointY="10.625" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbAnticipoViatico" Width="1.5" PointX="8.25" PointY="10" />

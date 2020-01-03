@@ -38,6 +38,30 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbVacacionesPermisosEspeciales);
         }
 
+
+        [HttpPost]
+        public JsonResult CalcularFecha(cCalFechas cCalFechas)
+        {
+
+            string MASspan = "", MASspanFecha = "";
+            if (cCalFechas.FechaInicio > cCalFechas.FechaFin)
+            {
+                MASspanFecha = "1";
+                MASspan = "La Fecha de inicio no puede ser mayor que la final";
+            }
+            if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
+            {
+                MASspanFecha = "2";
+                MASspan = "La Fecha de finalizacion no puede ser mayor que la inicio";
+            }
+                object vCalcular = new { MASspan, MASspanFecha };
+            return Json(vCalcular, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
         // GET: VacacionesPermisosEspeciales/Create
         public ActionResult Create()
         {
@@ -76,15 +100,7 @@ namespace SIGEM_BIDSS.Controllers
                 var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
 
                 if (String.IsNullOrEmpty(tbVacacionesPermisosEspeciales.VPE_Comentario)) { tbVacacionesPermisosEspeciales.VPE_Comentario = GeneralFunctions.stringDefault; }
-                tbVacacionesPermisosEspeciales.VPE_MontoSolicitado = Convert.ToDecimal(tbVacacionesPermisosEspeciales.Cantidad.Replace(",", ""));
-
-                if (tbVacacionesPermisosEspeciales.VPE_MontoSolicitado > vSueldo)
-                    ModelState.AddModelError("Cantidad", "El monto no puede ser mayor que el sueldo.");
-
-                if (tbVacacionesPermisosEspeciales.VPE_MontoSolicitado > _percent)
-                    ModelState.AddModelError("Cantidad", "El monto no puede ser mayor que el pocentaje permitido.");
-
-
+           
                 if (ModelState.IsValid)
                 {
                     IEnumerable<object> Insert = null;
@@ -98,7 +114,6 @@ namespace SIGEM_BIDSS.Controllers
                         tbVacacionesPermisosEspeciales.VPE_FechaInicio,
                         tbVacacionesPermisosEspeciales.VPE_FechaFin,
                         tbVacacionesPermisosEspeciales.VPE_CantidadDias,
-                        tbVacacionesPermisosEspeciales.VPE_MontoSolicitado,
                         tbVacacionesPermisosEspeciales.VPE_Comentario,
                         tbVacacionesPermisosEspeciales.VPE_RazonRechazo,
                         EmployeeID,

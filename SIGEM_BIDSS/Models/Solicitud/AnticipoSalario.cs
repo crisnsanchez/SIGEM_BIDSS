@@ -100,4 +100,13 @@ namespace SIGEM_BIDSS.Models
         //Asignamos el nombre a la propiedad privada
         
     }
+
+    public class cCalFechas
+    {
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public System.DateTime FechaInicio { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public System.DateTime FechaFin { get; set; }
+
+    }
 }
