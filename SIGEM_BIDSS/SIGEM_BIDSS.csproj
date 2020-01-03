@@ -216,6 +216,7 @@
     <Compile Include="Controllers\TipoTransporteController.cs" />
     <Compile Include="Controllers\TipoViaticoController.cs" />
     <Compile Include="Controllers\UnidadMedidaController.cs" />
+    <Compile Include="Controllers\VacacionesPermisosEspecialesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +230,7 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Solicitud\ReembolsoGastos.cs" />
+    <Compile Include="Models\Solicitud\VacacionesPermisosEspeciales.cs" />
     <Compile Include="Models\spGetCategoria_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -258,6 +260,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbVacacionesPermisosEspeciales_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Inv_tbProductoCategoria_Delete_Result.cs">
@@ -307,7 +315,6 @@
     <Compile Include="Models\SDP_tbMunicipio_Select_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Models\Solicitud\AnticipoSalario.cs" />
     <Compile Include="Models\Solicitud\AnticipoViatico.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -3448,6 +3455,9 @@
     <Content Include="Views\Producto\Details.cshtml" />
     <Content Include="Views\Producto\Edit.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Create.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Details.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

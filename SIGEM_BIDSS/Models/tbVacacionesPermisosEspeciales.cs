@@ -18,14 +18,13 @@ namespace SIGEM_BIDSS.Models
         public string VPE_Correlativo { get; set; }
         public int emp_Id { get; set; }
         public int VPE_JefeInmediato { get; set; }
-        public int tperm_Id { get; set; }
-        public int est_Id { get; set; }
         public System.DateTime VPE_GralFechaSolicitud { get; set; }
         public System.DateTime VPE_FechaInicio { get; set; }
         public System.DateTime VPE_FechaFin { get; set; }
         public int VPE_CantidadDias { get; set; }
-        public decimal VPE_MontoSolicitado { get; set; }
+        public int tperm_Id { get; set; }
         public string VPE_Comentario { get; set; }
+        public int est_Id { get; set; }
         public string VPE_RazonRechazo { get; set; }
         public int VPE_UsuarioCrea { get; set; }
         public System.DateTime VPE_FechaCrea { get; set; }

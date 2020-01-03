@@ -11,8 +11,7 @@ namespace SIGEM_BIDSS.Models
     [MetadataType(typeof(VacacionesPermisosEspecialesMetadata))]
     public partial class tbVacacionesPermisosEspeciales
     {
-       [NotMapped]
-        public string Cantidad { get; set; }
+
     }
 
     public class VacacionesPermisosEspecialesMetadata
@@ -52,10 +51,6 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Cantidad de Dias")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
         public int VPE_CantidadDias { get; set; }
-
-        [Display(Name = "Monto solicitado")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
-        public decimal VPE_MontoSolicitado { get; set; }
 
         [Display(Name = "Comentario")]
         public string VPE_Comentario { get; set; }

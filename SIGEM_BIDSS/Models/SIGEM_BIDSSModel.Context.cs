@@ -55,9 +55,9 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbLiquidacionAnticipoViaticoDetalle> tbLiquidacionAnticipoViaticoDetalle { get; set; }
         public virtual DbSet<tbProductoCategoria> tbProductoCategoria { get; set; }
         public virtual DbSet<tbProductoSubcategoria> tbProductoSubcategoria { get; set; }
-        public virtual DbSet<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
         public virtual DbSet<tbProducto> tbProducto { get; set; }
         public virtual DbSet<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
+        public virtual DbSet<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -2862,7 +2862,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_Insert_Result>("UDP_Inv_tbProducto_Insert", prod_CodigoParameter, prod_CodigoBarrasParameter, prod_DescripcionParameter, prod_MarcaParameter, prod_ModeloParameter, prod_TallaParameter, prod_ColorParameter, pscat_IdParameter, uni_IdParameter, prov_IdParameter, prod_EsActivoParameter, prod_RazonInactivacionParameter, prod_UsuarioCreaParameter, prod_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result> UDP_Adm_tbVacacionesPermisosEspeciales_Insert(Nullable<int> emp_Id, Nullable<int> vPE_JefeInmediato, Nullable<int> tperm_Id, Nullable<int> est_Id, Nullable<System.DateTime> vPE_GralFechaSolicitud, Nullable<System.DateTime> vPE_FechaInicio, Nullable<System.DateTime> vPE_FechaFin, Nullable<int> vPE_CantidadDias, Nullable<decimal> vPE_MontoSolicitado, string vPE_Comentario, string vPE_RazonRechazo, Nullable<int> vPE_UsuarioCrea, Nullable<System.DateTime> vPE_FechaCrea)
+        public virtual ObjectResult<UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result> UDP_Adm_tbVacacionesPermisosEspeciales_Insert(Nullable<int> emp_Id, Nullable<int> vPE_JefeInmediato, Nullable<int> tperm_Id, Nullable<int> est_Id, Nullable<System.DateTime> vPE_GralFechaSolicitud, Nullable<System.DateTime> vPE_FechaInicio, Nullable<System.DateTime> vPE_FechaFin, Nullable<int> vPE_CantidadDias, string vPE_Comentario, string vPE_RazonRechazo, Nullable<int> vPE_UsuarioCrea, Nullable<System.DateTime> vPE_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -2896,10 +2896,6 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("VPE_CantidadDias", vPE_CantidadDias) :
                 new ObjectParameter("VPE_CantidadDias", typeof(int));
     
-            var vPE_MontoSolicitadoParameter = vPE_MontoSolicitado.HasValue ?
-                new ObjectParameter("VPE_MontoSolicitado", vPE_MontoSolicitado) :
-                new ObjectParameter("VPE_MontoSolicitado", typeof(decimal));
-    
             var vPE_ComentarioParameter = vPE_Comentario != null ?
                 new ObjectParameter("VPE_Comentario", vPE_Comentario) :
                 new ObjectParameter("VPE_Comentario", typeof(string));
@@ -2916,7 +2912,32 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("VPE_FechaCrea", vPE_FechaCrea) :
                 new ObjectParameter("VPE_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result>("UDP_Adm_tbVacacionesPermisosEspeciales_Insert", emp_IdParameter, vPE_JefeInmediatoParameter, tperm_IdParameter, est_IdParameter, vPE_GralFechaSolicitudParameter, vPE_FechaInicioParameter, vPE_FechaFinParameter, vPE_CantidadDiasParameter, vPE_MontoSolicitadoParameter, vPE_ComentarioParameter, vPE_RazonRechazoParameter, vPE_UsuarioCreaParameter, vPE_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result>("UDP_Adm_tbVacacionesPermisosEspeciales_Insert", emp_IdParameter, vPE_JefeInmediatoParameter, tperm_IdParameter, est_IdParameter, vPE_GralFechaSolicitudParameter, vPE_FechaInicioParameter, vPE_FechaFinParameter, vPE_CantidadDiasParameter, vPE_ComentarioParameter, vPE_RazonRechazoParameter, vPE_UsuarioCreaParameter, vPE_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbVacacionesPermisosEspeciales_Update_Result> UDP_Adm_tbVacacionesPermisosEspeciales_Update(Nullable<int> vPE_Id, Nullable<int> est_Id, string vPE_RazonRechazo, Nullable<int> vPE_UsuarioModifica, Nullable<System.DateTime> vPE_FechaModifica)
+        {
+            var vPE_IdParameter = vPE_Id.HasValue ?
+                new ObjectParameter("VPE_Id", vPE_Id) :
+                new ObjectParameter("VPE_Id", typeof(int));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var vPE_RazonRechazoParameter = vPE_RazonRechazo != null ?
+                new ObjectParameter("VPE_RazonRechazo", vPE_RazonRechazo) :
+                new ObjectParameter("VPE_RazonRechazo", typeof(string));
+    
+            var vPE_UsuarioModificaParameter = vPE_UsuarioModifica.HasValue ?
+                new ObjectParameter("VPE_UsuarioModifica", vPE_UsuarioModifica) :
+                new ObjectParameter("VPE_UsuarioModifica", typeof(int));
+    
+            var vPE_FechaModificaParameter = vPE_FechaModifica.HasValue ?
+                new ObjectParameter("VPE_FechaModifica", vPE_FechaModifica) :
+                new ObjectParameter("VPE_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbVacacionesPermisosEspeciales_Update_Result>("UDP_Adm_tbVacacionesPermisosEspeciales_Update", vPE_IdParameter, est_IdParameter, vPE_RazonRechazoParameter, vPE_UsuarioModificaParameter, vPE_FechaModificaParameter);
         }
     }
 }

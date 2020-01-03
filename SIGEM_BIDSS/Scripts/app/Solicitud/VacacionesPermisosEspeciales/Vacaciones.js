@@ -1,5 +1,9 @@
 ﻿//--------------------------------------------------------------------------------//
-
+$("#frmsubmit").click(function () {
+    document.getElementById('spinnerForm').classList.add("overlay");
+    document.getElementById('spinnerDiv').removeAttribute("hidden");
+    $("form").submit()
+})
 
 //--Date Picker--//
 $('#VPE_GralFechaSolicitud,#VPE_FechaInicio').datepicker({
@@ -14,12 +18,11 @@ $('#VPE_FechaFin').datepicker({
     startDate: "01/01/1990",
     language: "es",
     daysOfWeekDisabled: "0",
-}).datepicker("setDate", new Date() + 1d);
+}).datepicker("setDate", new Date());
 
 
 $(document).ready(function () {
-    $("#Ansal_Justificacion")[0].maxLength = 250;
-    $("#Ansal_Comentario")[0].maxLength = 250;
+    $("#VPE_Comentario")[0].maxLength = 250;
 });
 
 
@@ -60,56 +63,51 @@ function soloLetras(e) {
 }
 
 
-
-
-
-document.getElementById("Cantidad").onblur = function () {
-    if (!isNaN(this.value || this.value != "")) {
-        //number-format the user input
-        this.value = parseFloat(this.value.replace(/,/g, ""))
-            .toFixed(2)
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-        //set the numeric value to a number input
-        document.getElementById("number").value = this.value.replace(/,/g, "")
-    }
-}
-
-function GetDecimales() {
-    var Decimales = {
-        empSueldo: parseInt(document.getElementById("Sueldo").value).toFixed(2),
-        empPorcetanje: parseInt(document.getElementById("Porcentaje").value).toFixed(2),
-        empMonto: parseInt(document.getElementById("number").value).toFixed(2)
+function GetFechas() {
+    var Fechas = {
+        FechaInicio: document.getElementById("VPE_FechaInicio").value,
+        FechaFin: document.getElementById("VPE_FechaFin").value
     };
-    return Decimales;
+    return Fechas;
 }
 
-var monto = document.getElementById("Cantidad");
 
-monto.addEventListener("input", function () {
-    document.getElementById("number").value = this.value.replace(/,/g, "")
-    vDecimales = GetDecimales()
-    console.log("JS: " + vDecimales);
+document.getElementById("VPE_FechaInicio").addEventListener("blur", function () {
+    CalcularFechas()
+
+});
+
+document.getElementById("VPE_FechaFin").addEventListener("blur", function () {
+    CalcularFechas()
+});
+function CalcularFechas() {
+    vFechas = GetFechas()
+    console.log("JS: " + vFechas);
+
     $.ajax({
-        url: "/AnticipoSalario/Calcular",
+        url: "/VacacionesPermisosEspeciales/CalcularFecha",
         method: "POST",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ cCalDecimal: vDecimales }),
+        data: JSON.stringify({ cCalFechas: vFechas }),
     })
         .done(function (data) {
             console.log(data);
-            document.getElementById("spanCantidad").innerText = data.spanCantidad
+            if (data.MASspanFecha == "1") {
+                document.getElementById("spanFechaInicio").innerText = data.MASspan
+            }
+            else {
+                document.getElementById("spanFechaFin").innerText = data.MASspan
+            }
         });
-});
+}
 
-
-
-
-
-
-
+////SOLO NUMEROS 
+function soloNumeros(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    tecla = String.fromCharCode(tecla)
+    return /^[0-9]+$/.test(tecla);
+}
 
 
 
