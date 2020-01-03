@@ -42,6 +42,36 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbLiquidacionAnticipoViatico);
         }
 
+
+        
+        [HttpPost]
+        public JsonResult CalcularFecha(cCalFechas cCalFechas)
+        {
+
+            string MASspan = "", MASspanFecha = "";
+            if (cCalFechas.FechaInicio > cCalFechas.FechaFin)
+            {
+               
+                MASspan = "La Fecha de inicio no puede ser mayor que la final";
+            }
+            if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
+            {
+               
+                MASspanFecha = "La Fecha de finalizacion no puede ser mayor que la inicio";
+            }
+            object vCalcular = new { MASspan, MASspanFecha };
+            return Json(vCalcular, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
+
+
         // GET: LiquidacionAnticipoViatico/Create
         public ActionResult Create(int? id)
         {
