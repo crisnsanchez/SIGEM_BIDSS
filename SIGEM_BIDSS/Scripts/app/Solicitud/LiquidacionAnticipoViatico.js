@@ -200,29 +200,11 @@ function CalcularFechas() {
                 document.getElementById("spanFechaInicio").innerText = data.MASspan
             
        
-                document.getElementById("spanFechaFin").innerText = data.MASspan
+            document.getElementById("spanFechaFin").innerText = data.MASspan1
             
         });
 }
-$("#Lianvi_FechaLiquida").blur(function () {
-    valido = document.getElementById('FechaNacimiento');
-    var FechaNacimiento = $('#Lianvi_FechaLiquida').val();
-   
 
 
 
-    if (FechaNacimiento < GetTodayDate() ) {
-        $('#Lianvi_FechaLiquida').val("");
-        $('#Lianvi_FechaLiquida').focus();
-        $('#Lianvi_FechaLiquida').val("");
-        $('#Lianvi_FechaLiquida').focus();
-        valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
 
-
-
-    }
-
-    else {
-        valido.innerText = "";
-    }
-});

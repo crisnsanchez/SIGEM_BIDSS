@@ -48,18 +48,19 @@ namespace SIGEM_BIDSS.Controllers
         public JsonResult CalcularFecha(cCalFechas cCalFechas)
         {
 
-            string MASspan = "", MASspanFecha = "";
+            string MASspan = "",  MASspan1 = "", MASspanFecha = "";
             if (cCalFechas.FechaInicio > cCalFechas.FechaFin)
             {
                 MASspanFecha = "1";
-                MASspan = "La Fecha de inicio no puede ser mayor que la final";
+                MASspan1 = "La Fecha de regreso no puede ser menor que la inicio";
             }
-            if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
+          else  if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
             {
-                MASspanFecha = "2";
-                MASspan = "La Fecha de finalizacion no puede ser mayor que la inicio";
+                MASspan1 = "";
+                   MASspanFecha = "2";
+                MASspan = "La Fecha de inicio no puede ser mayor que la  fecha de regreso";
             }
-            object vCalcular = new { MASspan, MASspanFecha };
+            object vCalcular = new { MASspan, MASspan1, MASspanFecha };
             return Json(vCalcular, JsonRequestBehavior.AllowGet);
         }
 
