@@ -1343,6 +1343,13 @@
         <Function Name="spGetCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="pcat_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="UDP_Inv_tbProducto_Estado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="prod_id" Type="int" Mode="In" />
+          <Parameter Name="prod_EsActivo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="UDP_Inv_tbProducto_GetCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="codsubcategoria" Type="int" Mode="In" />
+        </Function>
         <Function Name="UDP_Inv_tbProducto_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="prod_Codigo" Type="varchar" Mode="In" />
           <Parameter Name="prod_CodigoBarras" Type="varchar" Mode="In" />
@@ -1374,6 +1381,20 @@
           <Parameter Name="prod_RazonInactivacion" Type="nvarchar" Mode="In" />
           <Parameter Name="prod_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="prod_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Inv_tbProducto_Update_RazonInactivacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="prod_Id" Type="int" Mode="In" />
+          <Parameter Name="prod_EsActivo" Type="bit" Mode="In" />
+          <Parameter Name="prod_RazonInactivacion" Type="varchar" Mode="In" />
+          <Parameter Name="prod_Usuario_Crea" Type="int" Mode="In" />
+          <Parameter Name="prod_Fecha_Crea" Type="datetime" Mode="In" />
+          <Parameter Name="prod_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="prod_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Inv_tbProducto_ValorCodigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
+          <Parameter Name="pcat_Id" Type="int" Mode="In" />
+          <Parameter Name="pscat_Id" Type="int" Mode="In" />
+          <Parameter Name="prod_Codigo" Type="nvarchar" Mode="InOut" />
         </Function>
         <Function Name="UDP_Inv_tbProductoCategoria_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
           <Parameter Name="pcat_Id" Type="int" Mode="In" />
@@ -2656,6 +2677,27 @@
             <End Role="tbTipoPermiso" EntitySet="tbTipoPermiso" />
             <End Role="tbVacacionesPermisosEspeciales" EntitySet="tbVacacionesPermisosEspeciales" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Inv_tbProducto_Estado" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProducto_Estado_Result)">
+            <Parameter Name="prod_id" Mode="In" Type="Int32" />
+            <Parameter Name="prod_EsActivo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Inv_tbProducto_GetCategoria" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProducto_GetCategoria_Result)">
+          <Parameter Name="codsubcategoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Inv_tbProducto_Update_RazonInactivacion" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProducto_Update_RazonInactivacion_Result)">
+            <Parameter Name="prod_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prod_EsActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="prod_RazonInactivacion" Mode="In" Type="String" />
+            <Parameter Name="prod_Usuario_Crea" Mode="In" Type="Int32" />
+            <Parameter Name="prod_Fecha_Crea" Mode="In" Type="DateTime" />
+            <Parameter Name="prod_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="prod_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Inv_tbProducto_ValorCodigo" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProducto_ValorCodigo_Result)">
+            <Parameter Name="pcat_Id" Mode="In" Type="Int32" />
+            <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prod_Codigo" Mode="InOut" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -3842,6 +3884,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Inv_tbProducto_GetCategoria_Result">
+          <Property Type="Int32" Name="pcat_Id" Nullable="false" />
+          <Property Type="String" Name="pcat_Descripcion" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_Estado_Result">
+          <Property Type="String" Name="MensajeError" Nullable="false" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_Update_RazonInactivacion_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Inv_tbProducto_ValorCodigo_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4811,6 +4866,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Estado" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_Estado" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_Estado_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_GetCategoria" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_GetCategoria">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_GetCategoria_Result">
+                <ScalarProperty Name="pcat_Id" ColumnName="pcat_Id" />
+                <ScalarProperty Name="pcat_Descripcion" ColumnName="pcat_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Update_RazonInactivacion" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_Update_RazonInactivacion" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_Update_RazonInactivacion_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_ValorCodigo" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_ValorCodigo" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_ValorCodigo_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
