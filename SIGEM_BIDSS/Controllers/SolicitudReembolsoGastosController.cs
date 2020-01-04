@@ -49,6 +49,16 @@ namespace SIGEM_BIDSS.Controllers
         // GET: SolicitudReembolsoGastos/Create
         public ActionResult Create()
         {
+            //string lvMensajeError = "";
+
+            //var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
+
+            //string fullName = userClaims?.FindFirst("name")?.Value;
+            //string[] names = fullName.Split(' ');
+            //ViewBag.firstName = names.First();
+            //ViewBag.lastName = names.Last();
+            //ViewBag.Email = userClaims?.FindFirst("preferred_username")?.Value;
+
 
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");

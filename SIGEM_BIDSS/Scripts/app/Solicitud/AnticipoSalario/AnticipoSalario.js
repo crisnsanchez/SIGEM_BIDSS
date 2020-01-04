@@ -57,7 +57,7 @@ monto.addEventListener("input", function () {
 //--Date Picker--//
 $('#Ansal_GralFechaSolicitud').datepicker({
     format: "dd/mm/yyyy",
-    startDate: "01/01/1990",
+    startDate: "01/01/1900",
     language: "es",
     daysOfWeekDisabled: "0",
 }).datepicker("setDate", new Date());;

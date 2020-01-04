@@ -74,9 +74,9 @@ namespace SIGEM_BIDSS.Controllers
             tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
             tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = new tbLiquidacionAnticipoViatico();
             tbLiquidacionAnticipoViatico.Anvi_Id = tbAnticipoViatico.Anvi_Id;
-            tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida = Function.DatetimeNow();
-            tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje = Function.DatetimeNow();
-            tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje = Function.DatetimeNow();
+            //tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida = Function.DatetimeNow();
+            //tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje = Function.DatetimeNow();
+            //tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje = Function.DatetimeNow();
 
             if (tbAnticipoViatico == null)
             {
