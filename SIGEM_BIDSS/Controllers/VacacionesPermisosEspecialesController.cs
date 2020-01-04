@@ -54,7 +54,7 @@ namespace SIGEM_BIDSS.Controllers
                 MASspanFecha = "2";
                 MASspan = "La Fecha de finalizacion no puede ser mayor que la inicio";
             }
-                object vCalcular = new { MASspan, MASspanFecha };
+            object vCalcular = new { MASspan, MASspanFecha };
             return Json(vCalcular, JsonRequestBehavior.AllowGet);
         }
 
@@ -84,55 +84,61 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "VPE_JefeInmediato,tperm_Id,VPE_GralFechaSolicitud,VPE_FechaInicio,VPE_FechaFin,VPE_CantidadDias,VPE_MontoSolicitado,VPE_Comentario")] tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales)
         {
-            string UserName = "",
-              ErrorEmail = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "";
+            bool Result = false, ResultAdm = false;
+            IEnumerable<object> Insert = null;
 
             try
             {
-                bool Result = false, ResultAdm = false;
                 int EmployeeID = Function.GetUser(out UserName);
+
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
+                                                where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
+                                                select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
+                ViewBag.VPE_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres", tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
+                ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbVacacionesPermisosEspeciales.est_Id);
+                ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion", tbVacacionesPermisosEspeciales.tperm_Id);
+
                 tbVacacionesPermisosEspeciales.emp_Id = EmployeeID;
                 tbVacacionesPermisosEspeciales.VPE_GralFechaSolicitud = Function.DatetimeNow();
                 tbVacacionesPermisosEspeciales.est_Id = GeneralFunctions.Enviada;
 
-                var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
-                var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
+
 
                 if (String.IsNullOrEmpty(tbVacacionesPermisosEspeciales.VPE_Comentario)) { tbVacacionesPermisosEspeciales.VPE_Comentario = GeneralFunctions.stringDefault; }
-           
+
                 if (ModelState.IsValid)
                 {
-                    IEnumerable<object> Insert = null;
-                    string ErrorMessage = "";
-
                     Insert = db.UDP_Adm_tbVacacionesPermisosEspeciales_Insert(EmployeeID,
-                        tbVacacionesPermisosEspeciales.VPE_JefeInmediato,
-                        tbVacacionesPermisosEspeciales.tperm_Id,
-                        tbVacacionesPermisosEspeciales.est_Id,
-                        Function.DatetimeNow(),
-                        tbVacacionesPermisosEspeciales.VPE_FechaInicio,
-                        tbVacacionesPermisosEspeciales.VPE_FechaFin,
-                        tbVacacionesPermisosEspeciales.VPE_CantidadDias,
-                        tbVacacionesPermisosEspeciales.VPE_Comentario,
-                        tbVacacionesPermisosEspeciales.VPE_RazonRechazo,
-                        EmployeeID,
-                        Function.DatetimeNow());
+                                                                              tbVacacionesPermisosEspeciales.VPE_JefeInmediato,
+                                                                              tbVacacionesPermisosEspeciales.tperm_Id,
+                                                                              tbVacacionesPermisosEspeciales.est_Id,
+                                                                              Function.DatetimeNow(),
+                                                                              tbVacacionesPermisosEspeciales.VPE_FechaInicio,
+                                                                              tbVacacionesPermisosEspeciales.VPE_FechaFin,
+                                                                              tbVacacionesPermisosEspeciales.VPE_CantidadDias,
+                                                                              tbVacacionesPermisosEspeciales.VPE_Comentario,
+                                                                              tbVacacionesPermisosEspeciales.VPE_RazonRechazo,
+                                                                              EmployeeID,
+                                                                              Function.DatetimeNow());
 
                     foreach (UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result Res in Insert)
                         ErrorMessage = Res.MensajeError;
+
                     if (ErrorMessage.StartsWith("-1"))
                     {
-                        Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorMessage);
+                        Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
                     }
                     else
                     {
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbVacacionesPermisosEspeciales.VPE_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
 
                         Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, EmpJefe.emp_CorreoElectronico, GeneralFunctions.msj_ToAdmin, "");
 
                         if (!Result) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
@@ -147,15 +153,132 @@ namespace SIGEM_BIDSS.Controllers
             {
                 Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ex.Message.ToString());
             }
-            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
-                                            where _tbEmp.emp_EsJefe == true
-                                            select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbVacacionesPermisosEspeciales.emp_Id);
-            ViewBag.VPE_JefeInmediato = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
-            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbVacacionesPermisosEspeciales.est_Id);
-            ViewBag.tperm_Id = new SelectList(db.tbTipoPermiso, "tperm_Id", "tperm_Descripcion", tbVacacionesPermisosEspeciales.tperm_Id);
+
             return View(tbVacacionesPermisosEspeciales);
         }
+
+
+
+
+
+
+        public bool UpdateState(out string pvReturn, tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales, int State, string Ansal_RazonRechazo)
+        {
+            pvReturn = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "", _msj = "";
+            bool Result = false;
+            IEnumerable<object> Update = null;
+            var reject = "";
+
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+
+                tbVacacionesPermisosEspeciales.est_Id = State;
+
+                tbVacacionesPermisosEspeciales.VPE_RazonRechazo = Ansal_RazonRechazo;
+
+                var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == tbVacacionesPermisosEspeciales.emp_Id).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+
+                switch (State)
+                {
+                    case GeneralFunctions.Revisada:
+                        _msj = GeneralFunctions.msj_Revisada;
+                        break;
+                    case GeneralFunctions.Aprobada:
+                        _msj = GeneralFunctions.msj_Aprobada;
+                        break;
+                    case GeneralFunctions.Rechazada:
+                        _msj = GeneralFunctions.msj_Rechazada;
+                        reject = " Razon de Rechazo:";
+                        break;
+                }
+                if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
+
+                Result = Function.LeerDatos(out ErrorEmail, tbVacacionesPermisosEspeciales.VPE_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject + " " + Ansal_RazonRechazo);
+
+                if (!Result)
+                {
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
+                    return false;
+                }
+                else
+                {
+                    Update = db.UDP_Adm_tbVacacionesPermisosEspeciales_Update(tbVacacionesPermisosEspeciales.VPE_Id,
+                                                                              tbVacacionesPermisosEspeciales.est_Id,
+                                                                              tbVacacionesPermisosEspeciales.VPE_RazonRechazo,
+                                                                              EmployeeID,
+                                                                              Function.DatetimeNow());
+                    foreach (UDP_Adm_tbVacacionesPermisosEspeciales_Update_Result Res in Update)
+                        ErrorMessage = Res.MensajeError;
+                        pvReturn = ErrorMessage;
+                    if (ErrorMessage.StartsWith("-1"))
+                    {
+
+                        Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
+                        ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                pvReturn = ex.Message.ToString();
+                Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
+                return false;
+            }
+        }
+
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult Approve(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales = db.tbVacacionesPermisosEspeciales.Find(id);
+            if (tbVacacionesPermisosEspeciales.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.Aprobada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbVacacionesPermisosEspeciales == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // GET: AnticipoSalario/Approve/5   
+        [HttpPost]
+        public JsonResult Reject(int id, string Ansal_RazonRechazo)
+        {
+            var list = "";
+            string vReturn = "";
+            tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales = db.tbVacacionesPermisosEspeciales.Find(id);
+            if (tbVacacionesPermisosEspeciales.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.Rechazada, Ansal_RazonRechazo))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
+                }
+            }
+            if (tbVacacionesPermisosEspeciales == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+                //return HttpNotFound();
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
