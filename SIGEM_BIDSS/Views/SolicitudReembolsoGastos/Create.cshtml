@@ -39,68 +39,62 @@
                 <div class="form-row">
 
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.emp_Id, "emp_Id", htmlAttributes: new { @class = "control-label   col-md-8" })
+                    @*<div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.jefe, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
-                            @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                            @Html.DropDownList("Ansal_JefeInmediato", null, "Seleccione Jefe Inmediato", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Ansal_JefeInmediato, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
+                    </div>*@
+                    <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Reemga_GralFechaSolicitud, htmlAttributes: new { @class = "control-label   col-md-8" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Reemga_GralFechaSolicitud, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Reemga_GralFechaSolicitud, "", new { @class = "text-danger" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Reemga_GralFechaSolicitud, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Reemga_GralFechaSolicitud, "", new { @class = "text-danger", id = "GralFechaSolicitud" })
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Reemga_FechaViaje, htmlAttributes: new { @class = "control-label   col-md-8" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Reemga_FechaViaje, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Reemga_FechaViaje, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
                 </div>
 
                 <div class="form-row">
 
-                    <div class="form-group">
+
+                    <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Reemga_Cliente, htmlAttributes: new { @class = "control-label   col-md-8" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Reemga_Cliente, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Reemga_Cliente, new { htmlAttributes = new { @class = "form-control" , @style = "text-transform:uppercase;"} })
                             @Html.ValidationMessageFor(model => model.Reemga_Cliente, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    @*<div class="form-group">
-                            @Html.LabelFor(model => model.mun_codigo, htmlAttributes: new { @class = "control-label   col-md-8" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.mun_codigo, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.mun_codigo, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Reemga_PropositoVisita, htmlAttributes: new { @class = "control-label   col-md-8" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Reemga_PropositoVisita, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Reemga_PropositoVisita, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
+
+                </div>
+
+           
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="control-label col-md-6">Departamento</label>
-                            <div class="col-md-11">
-                                @Html.DropDownList("dep_codigo", null, "Seleccione", new { @class = "form-control" })
+                            <label class="control-label   col-md-10">Departamento</label>
+                            @*<div class="col-md-12">*@
+                                @Html.DropDownList("dep_codigo", null, "Seleccione Departamento", new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Reemga_UsuarioCrea, "", new { @class = "text-danger", id = "UsuarioCrea" })
-                            </div>
+                            @*</div>*@
                         </div>
 
                         <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.mun_codigo, "Municipio", new { @class = "control-label col-md-6" })
-                            <div class="col-md-11">
+                            @Html.LabelFor(model => model.mun_codigo, "Municipio", new { @class = "control-label col-md-10" })
+                            <div class="col-md-12">
                                 <input type="hidden" id="munCodigo" name="munCodigo" value="@ViewBag.munCodigo" />
                                 <select class="form-control" name="mun_codigo" id="mun_codigo">
-                                    <option>Seleccione</option>
+                                    <option>Seleccione Municipio</option>
                                 </select>
                                 @Html.ValidationMessageFor(model => model.mun_codigo, "", new { @class = "text-danger", id = "CodigoMun" })
                             </div>
@@ -109,31 +103,32 @@
 
 
 
-                </div>
+
 
                 <div class="form-row">
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Reemga_PropositoVisita, htmlAttributes: new { @class = "control-label   col-md-8" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Reemga_PropositoVisita, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Reemga_PropositoVisita, "", new { @class = "text-danger" })
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Reemga_FechaViaje, htmlAttributes: new { @class = "control-label   col-md-8" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Reemga_FechaViaje, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Reemga_FechaViaje, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="form-group">
+
+              
+                    <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Reemga_DiasVisita, htmlAttributes: new { @class = "control-label   col-md-8" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Reemga_DiasVisita, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Reemga_DiasVisita, new { htmlAttributes = new { @class = "form-control" , @OnKeyPress = "return soloNumeros(event)" } })
                             @Html.ValidationMessageFor(model => model.Reemga_DiasVisita, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
                 <div class="form-row">
 
-                    <div class="form-group">
+                       <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Reemga_Comentario, htmlAttributes: new { @class = "control-label   col-md-8" })
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             @Html.EditorFor(model => model.Reemga_Comentario, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Reemga_Comentario, "", new { @class = "text-danger" })
                         </div>
@@ -148,8 +143,8 @@
 
 
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+               <div class="form-group col-md-6">
+                <div class="col-md-offset-2 col-md-12">
                     <input type="submit" value="Guardar" class="btn btn-primary" />
                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                 </div>
@@ -171,88 +166,7 @@
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
 
-
-    <script>
-        $(document).ready(function () {
-          
-           
-            var CodDepartamento = $('#dep_codigo').val();
-            var muncod = $('#munCodigo').val();
-            if (CodDepartamento !== "")
-            {
-                $.ajax({
-                    url: "/SolicitudReembolsoGastos/GetMunicipios",
-                    method: "POST",
-                    dataType: 'json',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ CodDepartamento: CodDepartamento })
-                })
-                    .done(function (data) {
-                        if (data.length > 0) {
-                            $('#mun_codigo').empty();
-                            $('#mun_codigo').append("<option value=''>Seleccione</option>");
-                            $.each(data, function (key, val) {
-                                if (muncod !== "") {
-                                    if (val.mun_codigo === muncod) {
-                                        $('#mun_codigo').append("<option selected='selected' value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
-                                    }
-                                    else
-                                        $('#mun_codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
-                                }
-                                else
-                                    $('#mun_codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
-                            });
-                            $('#mun_codigo').trigger("chosen:updated");
-                        }
-                        else {
-                            $('#mun_codigo').empty();
-                            $('#mun_codigo').append("<option value=''>Seleccione</option>");
-                        }
-                    });
-            }
-        });
-
-
-        $(document).on("change", "#dep_codigo", function () {
-            GetMunicipios();
-        });
-
-
-
-        function GetMunicipios() {
-            var CodDepartamento = $('#dep_codigo').val();
-            if (CodDepartamento !== "") {
-                $.ajax({
-                    url: "/SolicitudReembolsoGastos/GetMunicipios",
-                    method: "POST",
-                    dataType: 'json',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ CodDepartamento: CodDepartamento })
-                })
-                    .done(function (data) {
-                        if (data.length > 0) {
-                            $('#mun_codigo').empty();
-                            $('#mun_codigo').append("<option value=''>Seleccione</option>");
-                            $.each(data, function (key, val) {
-                                $('#mun_codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
-                            });
-
-
-
-                            $('#mun_codigo').trigger("chosen:updated");
-                        }
-                        else {
-                            $('#mun_codigo').empty();
-                            $('#mun_codigo').append("<option value=''>Seleccione</option>");
-                        }
-                    });
-            }
-            else {
-                $('#mun_codigo').empty();
-                $('#mun_codigo').append("<option value=''>Seleccione</option>");
-            }
-        }
-
-    </script>
+    <script src="~/Scripts/app/Solicitud/SolicitudReembolsoGastos.js"></script>
+ 
 
     }
