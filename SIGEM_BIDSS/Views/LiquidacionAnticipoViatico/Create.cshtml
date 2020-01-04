@@ -46,7 +46,7 @@
                         <div class="col-md-11">
 
                             @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" , @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger",   id = "FechaInicio" })
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger", id = "spanFechaInicio" })
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
                         <div class="col-md-11">
 
                             @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control" , @autocomplete = "off", @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "FechaFinal" })
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "spanFechaFin" })
                         </div>
                     </div>
 
@@ -100,53 +100,3 @@
 <script src="~/Scripts/app/General.js"></script>
 <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
 <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
-
-<script>
-    $("#Lianvi_FechaInicioViaje").blur(function () {
-        valido = document.getElementById('FechaInicio');
-        valido1 = document.getElementById('FechaFinal');
-        var FechaInicio = $('#Lianvi_FechaInicioViaje').val();
-        var FechaFinal = $('#Lianvi_FechaFinViaje').val();
-
-
-
-
-        if (FechaInicio >= FechaFinal) {
-            $('#Lianvi_FechaInicioViaje').val("");
-            $('#Lianvi_FechaInicioViaje').focus();
-
-
-
-            valido.innerText = "La fecha de inicio viaje debe ser menor a la de hoy.";
-
-
-        }
-        else {
-            valido.innerText = "";
-        }
-    });
-
-
- 
-</script>
-@*<script>  
-    $("#Lianvi_FechaLiquida").blur(function () {
-        valido = document.getElementById('FechaLiquidacion');
-        var FechaLiquidacion = $("#Lianvi_FechaLiquida").val();
-      
-
-        if (FechaLiquidacion <= GetTodayDate()) {
-            $("#Lianvi_FechaLiquida").val("");
-            $("#Lianvi_FechaLiquida").focus();
-
-            valido.innerText = "La fecha liquidación debe ser mayor a la de hoy.";
-           
-        }
-
-        else {
-            console.log('hola');
-            valido.innerText = "";
-        }
-    });
-
-</script>*@

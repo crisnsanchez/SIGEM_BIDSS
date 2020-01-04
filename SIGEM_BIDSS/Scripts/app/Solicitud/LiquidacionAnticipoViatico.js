@@ -10,7 +10,10 @@ $('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida,#Lianvide
     startDate: "01/01/1990",
     language: "es",
     daysOfWeekDisabled: "0"
+
+
 });
+
 ////////////////////////////ARCHIVO///////////////////////////////////////////
 $("#CargarArchivo").change(function () {
     readURL(this);
@@ -144,6 +147,7 @@ function GetLiquidacionViatico() {
 }
 ///REMOVER EL DETALLE
 $(document).on("click", "#dataTable tbody tr td button#RemoveDetalle", function () {
+   
     $(this).closest('tr').remove();
     idItem = $(this).closest('tr').data('id');
     var borrar = {
@@ -188,7 +192,7 @@ function CalcularFechas() {
         method: "POST",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ cCalFechas: vFechas }),y
+        data: JSON.stringify({ cCalFechas: vFechas }),
     })
         .done(function (data) {
             console.log(data);
@@ -203,7 +207,7 @@ function CalcularFechas() {
 $("#Lianvi_FechaLiquida").blur(function () {
     valido = document.getElementById('FechaNacimiento');
     var FechaNacimiento = $('#Lianvi_FechaLiquida').val();
-    //var FechaIngreso = $('#Lianvi_FechaLiquida').val();
+   
 
 
 
