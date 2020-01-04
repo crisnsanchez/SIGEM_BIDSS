@@ -247,6 +247,9 @@
     <Compile Include="Models\tbSolicitudReembolsoGastos.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbSolicitudReembolsoGastosDetalle.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbVacacionesPermisosEspeciales.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -257,6 +260,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result.cs">
@@ -292,10 +298,22 @@
     <Compile Include="Models\UDP_Inv_tbProductoSubcategoria_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Inv_tbProducto_Estado_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProducto_GetCategoria_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Inv_tbProducto_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Inv_tbProducto_Update_RazonInactivacion_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Inv_tbProducto_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Inv_tbProducto_ValorCodigo_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_rrhh_tbEmpleado_Insert_Result.cs">
@@ -1001,6 +1019,7 @@
     <Content Include="Scripts\app\General.js" />
     <Content Include="Scripts\app\General_Details.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
+    <Content Include="Scripts\app\InactivarProducto.js" />
     <Content Include="Scripts\app\Parametros.js" />
     <Content Include="Scripts\app\Producto.js" />
     <Content Include="Scripts\app\Proveedor.js" />
@@ -3257,6 +3276,8 @@
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastos.js" />
     <Content Include="Scripts\app\Solicitud\VacacionesPermisosEspeciales\Vacaciones.js" />
+    <Content Include="Scripts\app\SubCategoriaProducto.js" />
+    <Content Include="Scripts\app\SubCategoriaProductoEdit.js" />
     <Content Include="Scripts\app\ValidacionesGenerales.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

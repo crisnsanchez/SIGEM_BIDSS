@@ -72,6 +72,11 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id_JefeInmediato" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEstado_est_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbTipoPermiso_tperm_Id" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastosDetalle" Width="1.5" PointX="18" PointY="4.75" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbTipoViatico_tpv_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

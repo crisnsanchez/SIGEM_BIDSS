@@ -58,6 +58,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbProducto> tbProducto { get; set; }
         public virtual DbSet<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
         public virtual DbSet<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
+        public virtual DbSet<tbSolicitudReembolsoGastosDetalle> tbSolicitudReembolsoGastosDetalle { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -1969,39 +1970,11 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbUnidadMedida_Update_Result>("UDP_Gral_tbUnidadMedida_Update", uni_IdParameter, uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioModificaParameter, uni_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbAnticipoSalario_Update_Result> UDP_Adm_tbAnticipoSalario_Update(Nullable<int> ansal_Id, Nullable<int> emp_Id, Nullable<int> ansal_JefeInmediato, Nullable<System.DateTime> ansal_GralFechaSolicitud, Nullable<decimal> ansal_MontoSolicitado, Nullable<int> tpsal_id, string ansal_Justificacion, string ansal_Comentario, Nullable<int> est_Id, string ansal_RazonRechazo, Nullable<int> ansal_UsuarioModifica, Nullable<System.DateTime> ansal_FechaModifica)
+        public virtual ObjectResult<UDP_Adm_tbAnticipoSalario_Update_Result> UDP_Adm_tbAnticipoSalario_Update(Nullable<int> ansal_Id, Nullable<int> est_Id, string ansal_RazonRechazo, Nullable<int> ansal_UsuarioModifica, Nullable<System.DateTime> ansal_FechaModifica)
         {
             var ansal_IdParameter = ansal_Id.HasValue ?
                 new ObjectParameter("Ansal_Id", ansal_Id) :
                 new ObjectParameter("Ansal_Id", typeof(int));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var ansal_JefeInmediatoParameter = ansal_JefeInmediato.HasValue ?
-                new ObjectParameter("Ansal_JefeInmediato", ansal_JefeInmediato) :
-                new ObjectParameter("Ansal_JefeInmediato", typeof(int));
-    
-            var ansal_GralFechaSolicitudParameter = ansal_GralFechaSolicitud.HasValue ?
-                new ObjectParameter("Ansal_GralFechaSolicitud", ansal_GralFechaSolicitud) :
-                new ObjectParameter("Ansal_GralFechaSolicitud", typeof(System.DateTime));
-    
-            var ansal_MontoSolicitadoParameter = ansal_MontoSolicitado.HasValue ?
-                new ObjectParameter("Ansal_MontoSolicitado", ansal_MontoSolicitado) :
-                new ObjectParameter("Ansal_MontoSolicitado", typeof(decimal));
-    
-            var tpsal_idParameter = tpsal_id.HasValue ?
-                new ObjectParameter("tpsal_id", tpsal_id) :
-                new ObjectParameter("tpsal_id", typeof(int));
-    
-            var ansal_JustificacionParameter = ansal_Justificacion != null ?
-                new ObjectParameter("Ansal_Justificacion", ansal_Justificacion) :
-                new ObjectParameter("Ansal_Justificacion", typeof(string));
-    
-            var ansal_ComentarioParameter = ansal_Comentario != null ?
-                new ObjectParameter("Ansal_Comentario", ansal_Comentario) :
-                new ObjectParameter("Ansal_Comentario", typeof(string));
     
             var est_IdParameter = est_Id.HasValue ?
                 new ObjectParameter("est_Id", est_Id) :
@@ -2019,7 +1992,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Ansal_FechaModifica", ansal_FechaModifica) :
                 new ObjectParameter("Ansal_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoSalario_Update_Result>("UDP_Adm_tbAnticipoSalario_Update", ansal_IdParameter, emp_IdParameter, ansal_JefeInmediatoParameter, ansal_GralFechaSolicitudParameter, ansal_MontoSolicitadoParameter, tpsal_idParameter, ansal_JustificacionParameter, ansal_ComentarioParameter, est_IdParameter, ansal_RazonRechazoParameter, ansal_UsuarioModificaParameter, ansal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoSalario_Update_Result>("UDP_Adm_tbAnticipoSalario_Update", ansal_IdParameter, est_IdParameter, ansal_RazonRechazoParameter, ansal_UsuarioModificaParameter, ansal_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_rrhh_tbSueldo_Insert_Result> UDP_rrhh_tbSueldo_Insert(Nullable<int> emp_Id, Nullable<decimal> sue_Cantidad, Nullable<short> tmo_Id, Nullable<int> suel_UsuarioCrea, Nullable<System.DateTime> suel_FechaCrea)
@@ -3006,6 +2979,39 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pscat_Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_ValorCodigo_Result>("UDP_Inv_tbProducto_ValorCodigo", pcat_IdParameter, pscat_IdParameter, prod_Codigo);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(Nullable<int> reemga_Id, Nullable<System.DateTime> reemgaDet_FechaGasto, Nullable<int> tpv_Id, Nullable<decimal> reemgaDet_MontoGasto, string reemgaDet_Concepto, string reemgaDet_Archivo, Nullable<decimal> reemgaDet_TotalGastos)
+        {
+            var reemga_IdParameter = reemga_Id.HasValue ?
+                new ObjectParameter("Reemga_Id", reemga_Id) :
+                new ObjectParameter("Reemga_Id", typeof(int));
+    
+            var reemgaDet_FechaGastoParameter = reemgaDet_FechaGasto.HasValue ?
+                new ObjectParameter("ReemgaDet_FechaGasto", reemgaDet_FechaGasto) :
+                new ObjectParameter("ReemgaDet_FechaGasto", typeof(System.DateTime));
+    
+            var tpv_IdParameter = tpv_Id.HasValue ?
+                new ObjectParameter("tpv_Id", tpv_Id) :
+                new ObjectParameter("tpv_Id", typeof(int));
+    
+            var reemgaDet_MontoGastoParameter = reemgaDet_MontoGasto.HasValue ?
+                new ObjectParameter("ReemgaDet_MontoGasto", reemgaDet_MontoGasto) :
+                new ObjectParameter("ReemgaDet_MontoGasto", typeof(decimal));
+    
+            var reemgaDet_ConceptoParameter = reemgaDet_Concepto != null ?
+                new ObjectParameter("ReemgaDet_Concepto", reemgaDet_Concepto) :
+                new ObjectParameter("ReemgaDet_Concepto", typeof(string));
+    
+            var reemgaDet_ArchivoParameter = reemgaDet_Archivo != null ?
+                new ObjectParameter("ReemgaDet_Archivo", reemgaDet_Archivo) :
+                new ObjectParameter("ReemgaDet_Archivo", typeof(string));
+    
+            var reemgaDet_TotalGastosParameter = reemgaDet_TotalGastos.HasValue ?
+                new ObjectParameter("ReemgaDet_TotalGastos", reemgaDet_TotalGastos) :
+                new ObjectParameter("ReemgaDet_TotalGastos", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert", reemga_IdParameter, reemgaDet_FechaGastoParameter, tpv_IdParameter, reemgaDet_MontoGastoParameter, reemgaDet_ConceptoParameter, reemgaDet_ArchivoParameter, reemgaDet_TotalGastosParameter);
         }
     }
 }
