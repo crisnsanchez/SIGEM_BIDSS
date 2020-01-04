@@ -83,18 +83,18 @@ namespace SIGEM_BIDSS.Controllers
         [HttpPost]
         public JsonResult Calcular(cCalDecimales cCalDecimal)
         {
-            
-            string spanCantidad = "", MASspanCantidad="";
+
+            string spanCantidad = "", MASspanCantidad = "";
             if (cCalDecimal.empMonto > cCalDecimal.empSueldo)
             {
                 MASspanCantidad = "Monto solicitado mayor que el Sueldo";
             }
-           
+
             if (cCalDecimal.empMonto > cCalDecimal.empPorcetanje)
             {
                 spanCantidad = "El monto no puede ser mayor que el pocentaje permitido";
             }
-          
+
             object vCalcular = new { spanCantidad, MASspanCantidad };
             return Json(vCalcular, JsonRequestBehavior.AllowGet);
         }
@@ -106,11 +106,11 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create()
         {
             tbAnticipoSalario tbAnticipoSalario = new tbAnticipoSalario();
-            string ErrorMessage = "";
+            string ErrorMessage = "", UserName = ""; ;
             try
             {
-                string UserName = "";
                 int EmployeeID = Function.GetUser(out UserName);
+
                 int fecha = Function.DatetimeNow().Year;
                 int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
                 var _Parameters = db.tbParametro.FirstOrDefault();
@@ -123,14 +123,15 @@ namespace SIGEM_BIDSS.Controllers
                     TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                     return RedirectToAction("Solicitud", "Menu");
                 }
-                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID 
+                                                select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
                 var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
                 var _percent = vSueldo * (Convert.ToDecimal(_Parameters.par_PorcentajeAdelantoSalario) / 100);
 
                 tbAnticipoSalario.Sueldo = Convert.ToDecimal(vSueldo);
                 tbAnticipoSalario.Porcentaje = decimal.Round(Convert.ToDecimal(_percent), 2);
 
-                ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
                 ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
             }
             catch (Exception Ex)
@@ -148,13 +149,22 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Ansal_Id,Ansal_Correlativo,emp_Id,Ansal_JefeInmediato,Ansal_GralFechaSolicitud,Ansal_MontoSolicitado,tpsal_id,Ansal_Justificacion,Ansal_Comentario,est_Id,Ansal_RazonRechazo,Cantidad,Sueldo")] tbAnticipoSalario tbAnticipoSalario)
         {
-            string UserName = "",
-                ErrorEmail = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "";
+            bool Result = false, ResultAdm = false;
+            IEnumerable<object> Insert = null;
 
             try
             {
-                bool Result = false, ResultAdm = false;
+
                 int EmployeeID = Function.GetUser(out UserName);
+
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
+                                                where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
+                                                select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
+                ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres", tbAnticipoSalario.Ansal_JefeInmediato);
+                ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion", tbAnticipoSalario.tpsal_id);
+
                 tbAnticipoSalario.emp_Id = EmployeeID;
                 tbAnticipoSalario.Ansal_GralFechaSolicitud = Function.DatetimeNow();
                 tbAnticipoSalario.est_Id = GeneralFunctions.Enviada;
@@ -175,9 +185,7 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    IEnumerable<object> Insert = null;
-                    string ErrorMessage = "";
-
+                    
                     Insert = db.UDP_Adm_tbAnticipoSalario_Insert(EmployeeID,
                                                                 tbAnticipoSalario.Ansal_JefeInmediato,
                                                                 Function.DatetimeNow(),
@@ -217,11 +225,6 @@ namespace SIGEM_BIDSS.Controllers
             {
                 Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
             }
-            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
-                                            where _tbEmp.emp_EsJefe == true
-                                            select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
-            ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres", tbAnticipoSalario.Ansal_JefeInmediato);
-            ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion", tbAnticipoSalario.tpsal_id);
             return View(tbAnticipoSalario);
 
         }

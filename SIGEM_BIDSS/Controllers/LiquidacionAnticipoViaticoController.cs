@@ -42,6 +42,27 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbLiquidacionAnticipoViatico);
         }
 
+
+
+        [HttpPost]
+        public JsonResult CalcularFecha(cCalFechas cCalFechas)
+        {
+
+            string MASspan = "", MASspanFecha = "";
+            if (cCalFechas.FechaInicio > cCalFechas.FechaFin)
+            {
+                MASspanFecha = "1";
+                MASspan = "La Fecha de inicio no puede ser mayor que la final";
+            }
+            if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
+            {
+                MASspanFecha = "2";
+                MASspan = "La Fecha de finalizacion no puede ser mayor que la inicio";
+            }
+            object vCalcular = new { MASspan, MASspanFecha };
+            return Json(vCalcular, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: LiquidacionAnticipoViatico/Create
         public ActionResult Create(int? id)
         {
@@ -113,7 +134,7 @@ namespace SIGEM_BIDSS.Controllers
                             if (!ResultAdm) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
                             TempData["swalfunction"] = "true";
 
-                            return RedirectToAction("Index");
+                            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
                         }
 
                     }
@@ -123,10 +144,10 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
 
-                    return View(tbLiquidacionAnticipoViatico);
+                    return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
                 }
             }
-            return View(tbLiquidacionAnticipoViatico);
+            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
         }
 // GET: LiquidacionAnticipoViatico/Edit/5
 public ActionResult Edit(int? id)

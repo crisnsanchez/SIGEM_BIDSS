@@ -10,7 +10,10 @@ $('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida,#Lianvide
     startDate: "01/01/1990",
     language: "es",
     daysOfWeekDisabled: "0"
+
+
 });
+
 ////////////////////////////ARCHIVO///////////////////////////////////////////
 $("#CargarArchivo").change(function () {
     readURL(this);
@@ -142,9 +145,9 @@ function GetLiquidacionViatico() {
     };
     return LIQUIDACIONDETALLE;
 }
-
 ///REMOVER EL DETALLE
 $(document).on("click", "#dataTable tbody tr td button#RemoveDetalle", function () {
+   
     $(this).closest('tr').remove();
     idItem = $(this).closest('tr').data('id');
     var borrar = {
@@ -162,21 +165,64 @@ $(document).on("click", "#dataTable tbody tr td button#RemoveDetalle", function 
 
 
 
-$('#prov_RTN').change(function (e) {
-    var RTN = $.trim(this.value);
-    if (RTN != '') {
-        $('#RTN').text('');
-        $('#errorRTN').text('');
+
+function GetFechas() {
+    var Fechas = {
+        FechaInicio: document.getElementById("Lianvi_FechaInicioViaje").value,
+        FechaFin: document.getElementById("Lianvi_FechaFinViaje").value
+    };
+    return Fechas;
+}
+
+
+document.getElementById("Lianvi_FechaInicioViaje").addEventListener("blur", function () {
+    CalcularFechas()
+
+});
+
+document.getElementById("Lianvi_FechaFinViaje").addEventListener("blur", function () {
+    CalcularFechas()
+});
+function CalcularFechas() {
+    vFechas = GetFechas()
+    console.log("JS: " + vFechas);
+
+    $.ajax({
+        url: "/LiquidacionAnticipoViatico/CalcularFecha",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ cCalFechas: vFechas }),
+    })
+        .done(function (data) {
+            console.log(data);
+         
+                document.getElementById("spanFechaInicio").innerText = data.MASspan
+            
+       
+                document.getElementById("spanFechaFin").innerText = data.MASspan
+            
+        });
+}
+$("#Lianvi_FechaLiquida").blur(function () {
+    valido = document.getElementById('FechaNacimiento');
+    var FechaNacimiento = $('#Lianvi_FechaLiquida').val();
+   
+
+
+
+    if (FechaNacimiento < GetTodayDate() ) {
+        $('#Lianvi_FechaLiquida').val("");
+        $('#Lianvi_FechaLiquida').focus();
+        $('#Lianvi_FechaLiquida').val("");
+        $('#Lianvi_FechaLiquida').focus();
+        valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+
+
+
     }
-    $('#errorRTN').text('');
-    var RTN = $("#prov_RTN").val();
-    $("#errorRTN").remove();
-    var length = $("#prov_RTN").val().length;
-    if (length < 14) {
-        $('#errorRTN').text('');
-        $('#validationRTN').after('<ul id="errorRTN" class="validation-summary-errors text-danger">RTN debe tener 14 dígitos</ul>');
-        $("#prov_RTN").focus();
+
+    else {
+        valido.innerText = "";
     }
-    else
-        $('#errorRTN').text('');
 });

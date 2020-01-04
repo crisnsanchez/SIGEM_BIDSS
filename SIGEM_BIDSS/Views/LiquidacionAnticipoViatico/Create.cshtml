@@ -38,7 +38,7 @@
                         @Html.LabelFor(model => model.Lianvi_FechaLiquida, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
                             @Html.EditorFor(model => model.Lianvi_FechaLiquida, new { htmlAttributes = new { @class = "form-control", @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaLiquida, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaLiquida, "", new { @class = "text-danger" , id="FechaLiquidacion"})
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -46,7 +46,7 @@
                         <div class="col-md-11">
 
                             @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" , @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger", id = "spanFechaInicio" })
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
                         <div class="col-md-11">
 
                             @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control" , @autocomplete = "off", @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "spanFechaFin" })
                         </div>
                     </div>
 
@@ -100,11 +100,3 @@
 <script src="~/Scripts/app/General.js"></script>
 <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
 <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
-
-<script>
-
-
-
-
-
-</script>
