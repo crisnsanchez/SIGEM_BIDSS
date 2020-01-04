@@ -113,8 +113,8 @@ namespace SIGEM_BIDSS.Models
 
         //Estado Producto
 
-        public const int ProductoActivo = 1;
-        public const int ProductoInactivo = 2;
+        public const bool ProductoActivo = true;
+        public const bool ProductoInactivo = false;
 
         public int GetUser(out string UserName)
         {

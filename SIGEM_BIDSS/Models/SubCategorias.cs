@@ -17,7 +17,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "ID")]
         public int pscat_Id { get; set; }
 
-        [Display(Name = "Descripción")]
+        [Display(Name = "Subcategoría")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [MinLength(5, ErrorMessage = "Máximo {1} caracteres")]
 

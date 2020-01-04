@@ -2939,5 +2939,73 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbVacacionesPermisosEspeciales_Update_Result>("UDP_Adm_tbVacacionesPermisosEspeciales_Update", vPE_IdParameter, est_IdParameter, vPE_RazonRechazoParameter, vPE_UsuarioModificaParameter, vPE_FechaModificaParameter);
         }
+    
+        public virtual ObjectResult<UDP_Inv_tbProducto_Estado_Result> UDP_Inv_tbProducto_Estado(Nullable<int> prod_id, Nullable<bool> prod_EsActivo)
+        {
+            var prod_idParameter = prod_id.HasValue ?
+                new ObjectParameter("prod_id", prod_id) :
+                new ObjectParameter("prod_id", typeof(int));
+    
+            var prod_EsActivoParameter = prod_EsActivo.HasValue ?
+                new ObjectParameter("prod_EsActivo", prod_EsActivo) :
+                new ObjectParameter("prod_EsActivo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_Estado_Result>("UDP_Inv_tbProducto_Estado", prod_idParameter, prod_EsActivoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Inv_tbProducto_GetCategoria_Result> UDP_Inv_tbProducto_GetCategoria(Nullable<int> codsubcategoria)
+        {
+            var codsubcategoriaParameter = codsubcategoria.HasValue ?
+                new ObjectParameter("codsubcategoria", codsubcategoria) :
+                new ObjectParameter("codsubcategoria", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_GetCategoria_Result>("UDP_Inv_tbProducto_GetCategoria", codsubcategoriaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Inv_tbProducto_Update_RazonInactivacion_Result> UDP_Inv_tbProducto_Update_RazonInactivacion(Nullable<int> prod_Id, Nullable<bool> prod_EsActivo, string prod_RazonInactivacion, Nullable<int> prod_Usuario_Crea, Nullable<System.DateTime> prod_Fecha_Crea, Nullable<int> prod_UsuarioModifica, Nullable<System.DateTime> prod_FechaModifica)
+        {
+            var prod_IdParameter = prod_Id.HasValue ?
+                new ObjectParameter("prod_Id", prod_Id) :
+                new ObjectParameter("prod_Id", typeof(int));
+    
+            var prod_EsActivoParameter = prod_EsActivo.HasValue ?
+                new ObjectParameter("prod_EsActivo", prod_EsActivo) :
+                new ObjectParameter("prod_EsActivo", typeof(bool));
+    
+            var prod_RazonInactivacionParameter = prod_RazonInactivacion != null ?
+                new ObjectParameter("prod_RazonInactivacion", prod_RazonInactivacion) :
+                new ObjectParameter("prod_RazonInactivacion", typeof(string));
+    
+            var prod_Usuario_CreaParameter = prod_Usuario_Crea.HasValue ?
+                new ObjectParameter("prod_Usuario_Crea", prod_Usuario_Crea) :
+                new ObjectParameter("prod_Usuario_Crea", typeof(int));
+    
+            var prod_Fecha_CreaParameter = prod_Fecha_Crea.HasValue ?
+                new ObjectParameter("prod_Fecha_Crea", prod_Fecha_Crea) :
+                new ObjectParameter("prod_Fecha_Crea", typeof(System.DateTime));
+    
+            var prod_UsuarioModificaParameter = prod_UsuarioModifica.HasValue ?
+                new ObjectParameter("prod_UsuarioModifica", prod_UsuarioModifica) :
+                new ObjectParameter("prod_UsuarioModifica", typeof(int));
+    
+            var prod_FechaModificaParameter = prod_FechaModifica.HasValue ?
+                new ObjectParameter("prod_FechaModifica", prod_FechaModifica) :
+                new ObjectParameter("prod_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_Update_RazonInactivacion_Result>("UDP_Inv_tbProducto_Update_RazonInactivacion", prod_IdParameter, prod_EsActivoParameter, prod_RazonInactivacionParameter, prod_Usuario_CreaParameter, prod_Fecha_CreaParameter, prod_UsuarioModificaParameter, prod_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Inv_tbProducto_ValorCodigo_Result> UDP_Inv_tbProducto_ValorCodigo(Nullable<int> pcat_Id, Nullable<int> pscat_Id, ObjectParameter prod_Codigo)
+        {
+            var pcat_IdParameter = pcat_Id.HasValue ?
+                new ObjectParameter("pcat_Id", pcat_Id) :
+                new ObjectParameter("pcat_Id", typeof(int));
+    
+            var pscat_IdParameter = pscat_Id.HasValue ?
+                new ObjectParameter("pscat_Id", pscat_Id) :
+                new ObjectParameter("pscat_Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_ValorCodigo_Result>("UDP_Inv_tbProducto_ValorCodigo", pcat_IdParameter, pscat_IdParameter, prod_Codigo);
+        }
     }
 }
