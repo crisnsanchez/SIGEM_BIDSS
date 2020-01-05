@@ -208,7 +208,6 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosController.cs" />
-    <Compile Include="Controllers\SolicitudReembolsoGastosDetalleController.cs" />
     <Compile Include="Controllers\SueldoController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
