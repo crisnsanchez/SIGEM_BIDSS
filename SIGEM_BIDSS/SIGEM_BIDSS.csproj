@@ -3481,11 +3481,6 @@
     <Content Include="Views\VacacionesPermisosEspeciales\Details.cshtml" />
     <Content Include="Views\VacacionesPermisosEspeciales\Index.cshtml" />
     <Content Include="Views\VacacionesPermisosEspeciales\_Modales.cshtml" />
-    <Content Include="Views\SolicitudReembolsoGastosDetalle\Create.cshtml" />
-    <Content Include="Views\SolicitudReembolsoGastosDetalle\Delete.cshtml" />
-    <Content Include="Views\SolicitudReembolsoGastosDetalle\Details.cshtml" />
-    <Content Include="Views\SolicitudReembolsoGastosDetalle\Edit.cshtml" />
-    <Content Include="Views\SolicitudReembolsoGastosDetalle\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
