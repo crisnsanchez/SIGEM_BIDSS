@@ -57,7 +57,7 @@ namespace SIGEM_BIDSS.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")] 
         public int tpsal_id { get; set; }
 
-        [Display(Name = "Justificacion")]
+        [Display(Name = "Justificación")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
         [MaxLength(250, ErrorMessage = "Máximo {1} caracteres")]
         public string Ansal_Justificacion { get; set; }

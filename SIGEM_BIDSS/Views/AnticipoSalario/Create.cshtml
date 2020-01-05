@@ -40,7 +40,7 @@
                         @Html.LabelFor(model => model.Ansal_JefeInmediato, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
                             @Html.DropDownList("Ansal_JefeInmediato", null, "Seleccione Jefe Inmediato", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Ansal_JefeInmediato, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Ansal_JefeInmediato, "", new { @class = "text-danger", id = "JefeInmediato" })
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@
                         @Html.LabelFor(model => model.tpsal_id, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
                             @Html.DropDownList("tpsal_id", null, "Seleccione un tipo de Salario", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.tpsal_id, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.tpsal_id, "", new { @class = "text-danger",id = "spantpsal_id" })
                         </div>
                     </div>
                 </div>
@@ -74,16 +74,16 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Ansal_Justificacion, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.Ansal_Justificacion, new { htmlAttributes = new { @class = "form-control normalize" } })
-                            @Html.ValidationMessageFor(model => model.Ansal_Justificacion, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Ansal_Justificacion, new { htmlAttributes = new { @class = "form-control normalize nospace" } })
+                            @Html.ValidationMessageFor(model => model.Ansal_Justificacion, "", new { @class = "text-danger",id ="spanJustificacion" })
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Ansal_Comentario, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
-                            @Html.TextAreaFor(model => model.Ansal_Comentario, new { @class = "form-control normalize" })
-                            @Html.ValidationMessageFor(model => model.Ansal_Comentario, "", new { @class = "text-danger" })
+                            @Html.TextAreaFor(model => model.Ansal_Comentario, new { @class = "form-control normalize nospace" })
+                            @Html.ValidationMessageFor(model => model.Ansal_Comentario, "", new { @class = "text-danger" ,id ="spanComentario"})
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                 <h5 class="control-label col-md-8 "></h5>
                 <div class="form-group">
                     <p style="color:red" id="">
-                        ¿Autoriza  a BI- DSS Technology para que debite de su sueldo el anticipo que no hubiere liquidado, dentro del plazo de 30 días contados a partir de su regreso del viaje?
+                        ¿Autoriza  a BI- DSS Technology para que debite de su sueldo el anticipo solicitado?
                     </p>
                 </div>
             </div>
