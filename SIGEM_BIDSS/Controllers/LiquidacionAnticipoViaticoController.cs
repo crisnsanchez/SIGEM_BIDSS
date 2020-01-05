@@ -43,34 +43,26 @@ namespace SIGEM_BIDSS.Controllers
         }
 
 
-        
+
         [HttpPost]
         public JsonResult CalcularFecha(cCalFechas cCalFechas)
         {
 
-            string MASspan = "", MASspanFecha = "";
+            string MASspan = "",  MASspan1 = "", MASspanFecha = "";
             if (cCalFechas.FechaInicio > cCalFechas.FechaFin)
             {
-               
-                MASspan = "La Fecha de inicio no puede ser mayor que la final";
+                MASspanFecha = "1";
+                MASspan1 = "La Fecha de regreso no puede ser menor que la inicio";
             }
-            if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
+          else  if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
             {
-               
-                MASspanFecha = "La Fecha de finalizacion no puede ser mayor que la inicio";
+                MASspan1 = "";
+                   MASspanFecha = "2";
+                MASspan = "La Fecha de inicio no puede ser mayor que la  fecha de regreso";
             }
-            object vCalcular = new { MASspan, MASspanFecha };
+            object vCalcular = new { MASspan, MASspan1, MASspanFecha };
             return Json(vCalcular, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
-
-
-
 
         // GET: LiquidacionAnticipoViatico/Create
         public ActionResult Create(int? id)
@@ -83,8 +75,8 @@ namespace SIGEM_BIDSS.Controllers
             tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = new tbLiquidacionAnticipoViatico();
             tbLiquidacionAnticipoViatico.Anvi_Id = tbAnticipoViatico.Anvi_Id;
             tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida = Function.DatetimeNow();
-            tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje = Function.DatetimeNow();
-            tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje = Function.DatetimeNow();
+            //tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje = Function.DatetimeNow();
+            //tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje = Function.DatetimeNow();
 
             if (tbAnticipoViatico == null)
             {
@@ -143,7 +135,7 @@ namespace SIGEM_BIDSS.Controllers
                             if (!ResultAdm) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
                             TempData["swalfunction"] = "true";
 
-                            return RedirectToAction("Index");
+                            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
                         }
 
                     }
@@ -153,10 +145,10 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
 
-                    return View(tbLiquidacionAnticipoViatico);
+                    return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
                 }
             }
-            return View(tbLiquidacionAnticipoViatico);
+            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
         }
 // GET: LiquidacionAnticipoViatico/Edit/5
 public ActionResult Edit(int? id)

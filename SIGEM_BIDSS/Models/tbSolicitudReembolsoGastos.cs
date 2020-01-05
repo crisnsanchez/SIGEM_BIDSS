@@ -14,6 +14,12 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbSolicitudReembolsoGastos
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbSolicitudReembolsoGastos()
+        {
+            this.tbSolicitudReembolsoGastosDetalle = new HashSet<tbSolicitudReembolsoGastosDetalle>();
+        }
+    
         public int Reemga_Id { get; set; }
         public string Reemga_Correlativo { get; set; }
         public int emp_Id { get; set; }
@@ -38,5 +44,7 @@ namespace SIGEM_BIDSS.Models
         public virtual tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos1 { get; set; }
         public virtual tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos2 { get; set; }
         public virtual tbEmpleado tbEmpleado1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitudReembolsoGastosDetalle> tbSolicitudReembolsoGastosDetalle { get; set; }
     }
 }

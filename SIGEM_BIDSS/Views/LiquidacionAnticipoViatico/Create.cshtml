@@ -38,15 +38,15 @@
                         @Html.LabelFor(model => model.Lianvi_FechaLiquida, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
                             @Html.EditorFor(model => model.Lianvi_FechaLiquida, new { htmlAttributes = new { @class = "form-control", @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaLiquida, "", new { @class = "text-danger" , id="FechaLiquidacion"})
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaLiquida, "", new { @class = "text-danger", id = "FechaLiquidacion" })
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Lianvi_FechaInicioViaje, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
 
-                            @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" , @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger",   id = "FechaInicio" })
+                            @Html.EditorFor(model => model.Lianvi_FechaInicioViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @style = "background-color:white" } })
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaInicioViaje, "", new { @class = "text-danger", id = "spanFechaInicio" })
                         </div>
                     </div>
 
@@ -57,8 +57,8 @@
                         @Html.LabelFor(model => model.Lianvi_FechaFinViaje, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
 
-                            @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control" , @autocomplete = "off", @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "FechaFinal" })
+                            @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @style = "background-color:white" } })
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "spanFechaFin" })
                         </div>
                     </div>
 
@@ -91,62 +91,41 @@
 
 
 </div>
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
 
-<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="~/Scripts/app/General.js"></script>
-<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-<script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
+@section Scripts {
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
 
-<script>
-    $("#Lianvi_FechaInicioViaje").blur(function () {
-        valido = document.getElementById('FechaInicio');
-        valido1 = document.getElementById('FechaFinal');
-        var FechaInicio = $('#Lianvi_FechaInicioViaje').val();
-        var FechaFinal = $('#Lianvi_FechaFinViaje').val();
+    <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/app/General.js"></script>
+    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+    <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
 
+    <script>
 
+        //$("#Lianvi_FechaFinViaje").blur(function () {
+        //    FechaLiquidacion = document.getElementById('FechaLiquidacion');
+        //    spanFechaFin = document.getElementById('spanFechaFin');
 
+        //    var FechaLiquidacion = $('#Lianvi_FechaLiquida').val();
+        //    var spanFechaFin = $('#Lianvi_FechaFinViaje').val();
 
-        if (FechaInicio >= FechaFinal) {
-            $('#Lianvi_FechaInicioViaje').val("");
-            $('#Lianvi_FechaInicioViaje').focus();
+        //    FechaLiquidacion.setDate(spanFechaFin.getDate() + 30);
+        //});
 
-
-
-            valido.innerText = "La fecha de inicio viaje debe ser menor a la de hoy.";
+        //$("#Lianvi_FechaFinViaje").blur(function addDays(spanFechaFin, days) {
 
 
-        }
-        else {
-            valido.innerText = "";
-        }
-    });
+        //    //function addDays(spanFechaFin, days) {
+        //    const FechaLiquidacion = new Date(Number(spanFechaFin))
+        //    FechaLiquidacion.setDate(spanFechaFin.getDate() + days)
+        //    return FechaLiquidacion
 
+        //});
+        //const spanFechaFin = new Date();
+        //const newDate = addDays(spanFechaFin, 10);
 
- 
-</script>
-@*<script>  
-    $("#Lianvi_FechaLiquida").blur(function () {
-        valido = document.getElementById('FechaLiquidacion');
-        var FechaLiquidacion = $("#Lianvi_FechaLiquida").val();
-      
-
-        if (FechaLiquidacion <= GetTodayDate()) {
-            $("#Lianvi_FechaLiquida").val("");
-            $("#Lianvi_FechaLiquida").focus();
-
-            valido.innerText = "La fecha liquidación debe ser mayor a la de hoy.";
-           
-        }
-
-        else {
-            console.log('hola');
-            valido.innerText = "";
-        }
-    });
-
-</script>*@
+    </script>
+}
