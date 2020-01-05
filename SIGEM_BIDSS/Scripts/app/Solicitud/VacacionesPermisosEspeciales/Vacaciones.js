@@ -80,6 +80,7 @@ document.getElementById("VPE_FechaInicio").addEventListener("blur", function () 
 document.getElementById("VPE_FechaFin").addEventListener("blur", function () {
     CalcularFechas()
 });
+
 function CalcularFechas() {
     vFechas = GetFechas()
     console.log("JS: " + vFechas);

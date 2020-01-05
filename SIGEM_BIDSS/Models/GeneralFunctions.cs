@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -59,6 +60,7 @@ namespace SIGEM_BIDSS.Models
 
         public const string sol_Aprobada = "Aceptada";
         public const string msj_Aprobada = "Su solicituda a sido aprobada";
+        public const string msj_RevisadaPorJefe = "Su solicituda a sido aprobada por su Jefe Inmediato";
 
         public const string sol_Rechazada = "Rechazada";
         public const string msj_Rechazada = "Su solicituda a sido rechazada";
@@ -68,6 +70,9 @@ namespace SIGEM_BIDSS.Models
         public const int Revisada = 2;
         public const int Aprobada = 3;
         public const int Rechazada = 4;
+        public const int AprobadaPorJefe = 5;
+        public const int AprobadaPorRRHH = 5;
+
 
 
         public const int intDefault = 1;
@@ -75,6 +80,7 @@ namespace SIGEM_BIDSS.Models
         public const int tiposoli = 2;
 
         //Defaults
+        public const string stringEmpty = "";
         public const string stringDefault = "-----";
         public const string dateDefault = "01/01/1900";
         public const string date2 = "1900/01/01";
@@ -116,6 +122,29 @@ namespace SIGEM_BIDSS.Models
         public const bool ProductoActivo = true;
         public const bool ProductoInactivo = false;
 
+
+        //-----------------------------
+        public cGetUserInfo GetUserInfo(int EmployeeID)
+        {
+            object GetEmployee = null;
+            cGetUserInfo cGetUserInfo = new cGetUserInfo();
+            tbEmpleado tbEmpleado = new tbEmpleado();
+            try
+            {
+                tbEmpleado = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).FirstOrDefault();
+                cGetUserInfo.strFor =  " Por: "; cGetUserInfo.emp_Nombres = tbEmpleado.emp_Nombres + " " + tbEmpleado.emp_Apellidos; cGetUserInfo.emp_CorreoElectronico = tbEmpleado.emp_CorreoElectronico;
+            }
+            catch (Exception Ex)
+            {
+                cGetUserInfo.strFor = Ex.Message.ToString() +" "+ Ex.InnerException.Message.ToString();
+            }
+            return cGetUserInfo;
+        }
+
+
+
+
+
         public int GetUser(out string UserName)
         {
             string email = "";
@@ -142,7 +171,7 @@ namespace SIGEM_BIDSS.Models
             db.UDP_Acce_tbBitacoraErrores_Insert(Controller, Action, User, DatetimeNow(), ErrorMessage);
         }
 
-        public bool LeerDatos(out string pvMensajeError, string Reference, string _empName, string _Mail, string MailTo, string _msj, string _RazonRechazo)
+        public bool LeerDatos(out string pvMensajeError, string Reference, string _empName, string Approver, string _Mail, string MailTo, string _msj, string _RazonRechazo)
         {
             pvMensajeError = "";
             string UserName = "",
@@ -165,6 +194,7 @@ namespace SIGEM_BIDSS.Models
                           @"<nref>REF:(" + Reference + ")</nref>" +
                           @"<EmployeeName>" + _Mail + "</EmployeeName>" +
                           @"<msj>" + _msj + "</msj>" +
+                           @"<approver>" + Approver + "</approver>" +
                           @"<RazonRechazo>" + _RazonRechazo + "</RazonRechazo>" +
                          "</principal>";
 
@@ -258,5 +288,35 @@ namespace SIGEM_BIDSS.Models
             }
         }
     }
-    
+
+
+
+
+    public class cGetUserInfo
+    {
+        public string strFor { get; set; }
+        public string emp_Nombres { get; set; }
+        public string emp_CorreoElectronico { get; set; }
+    }
+
+    public class cCalDecimales
+    {
+        public decimal empMonto { get; set; }
+
+        public decimal empSueldo { get; set; }
+
+        public decimal empPorcetanje { get; set; }
+
+        //Asignamos el nombre a la propiedad privada
+
+    }
+
+    public class cCalFechas
+    {
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public System.DateTime FechaInicio { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public System.DateTime FechaFin { get; set; }
+
+    }
 }

@@ -250,6 +250,9 @@
     <Compile Include="Models\tbVacacionesPermisosEspeciales.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Adm_tbAnticipoSalario_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Adm_tbAnticipoViatico_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -441,9 +444,6 @@
     <Compile Include="Models\TipoViatico.cs" />
     <Compile Include="Models\Transporte.cs" />
     <Compile Include="Models\UDP_Adm_tbAnticipoSalario_Insert_Result.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UDP_Adm_tbAnticipoSalario_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbAnticipoViatico_Insert_Result.cs">
@@ -1014,6 +1014,7 @@
     <Content Include="Scripts\app\General_Details.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
     <Content Include="Scripts\app\InactivarProducto.js" />
+    <Content Include="Scripts\app\Solicitud\VacacionesPermisosEspeciales\Modals.js" />
     <Content Include="Scripts\app\SubCategoriaProductoEdit.js" />
     <Content Include="Scripts\app\Parametros.js" />
     <Content Include="Scripts\app\Producto.js" />
@@ -3472,6 +3473,7 @@
     <Content Include="Views\VacacionesPermisosEspeciales\Create.cshtml" />
     <Content Include="Views\VacacionesPermisosEspeciales\Details.cshtml" />
     <Content Include="Views\VacacionesPermisosEspeciales\Index.cshtml" />
+    <Content Include="Views\VacacionesPermisosEspeciales\_Modales.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

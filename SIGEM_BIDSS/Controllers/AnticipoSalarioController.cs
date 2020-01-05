@@ -59,14 +59,14 @@ namespace SIGEM_BIDSS.Controllers
 
         // GET: AnticipoSalario/Revisar
         [HttpPost]
-        public JsonResult Revisar(int id, string Ansal_RazonRechazo)
+        public JsonResult Revisar(int id, string RazonRechazo)
         {
             string vReturn = "";
             string IsFor = "false";
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Enviada)
             {
-                if (UpdateState(out vReturn, tbAnticipoSalario, GeneralFunctions.Revisada, Ansal_RazonRechazo))
+                if (UpdateState(out vReturn, tbAnticipoSalario, GeneralFunctions.Revisada, RazonRechazo))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
                     IsFor = "true";
@@ -123,7 +123,8 @@ namespace SIGEM_BIDSS.Controllers
                     TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                     return RedirectToAction("Solicitud", "Menu");
                 }
-                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID 
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
+                                                where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
                                                 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
 
                 var vSueldo = (from _tbSueldo in db.tbSueldo where _tbSueldo.emp_Id == EmployeeID select _tbSueldo.sue_Cantidad).FirstOrDefault();
@@ -131,7 +132,7 @@ namespace SIGEM_BIDSS.Controllers
 
                 tbAnticipoSalario.Sueldo = Convert.ToDecimal(vSueldo);
                 tbAnticipoSalario.Porcentaje = decimal.Round(Convert.ToDecimal(_percent), 2);
-
+                ViewBag.Ansal_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres", tbAnticipoSalario.Ansal_JefeInmediato);
                 ViewBag.tpsal_id = new SelectList(db.tbTipoSalario, "tpsal_id", "tpsal_Descripcion");
             }
             catch (Exception Ex)
@@ -185,7 +186,7 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    
+
                     Insert = db.UDP_Adm_tbAnticipoSalario_Insert(EmployeeID,
                                                                 tbAnticipoSalario.Ansal_JefeInmediato,
                                                                 Function.DatetimeNow(),
@@ -206,11 +207,10 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.Ansal_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                        var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                        var GetEmployee = Function.GetUserInfo(EmployeeID);
 
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
 
                         if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
@@ -232,7 +232,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-        public bool UpdateState(out string pvReturn, tbAnticipoSalario tbAnticipoSalario, int State, string Ansal_RazonRechazo)
+        public bool UpdateState(out string pvReturn, tbAnticipoSalario tbAnticipoSalario, int State, string RazonRechazo)
         {
             string UserName = "",
                 ErrorEmail = "";
@@ -247,9 +247,8 @@ namespace SIGEM_BIDSS.Controllers
             {
                 int EmployeeID = Function.GetUser(out UserName);
                 tbAnticipoSalario.est_Id = State;
-                tbAnticipoSalario.Ansal_RazonRechazo = Ansal_RazonRechazo;
-                var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoSalario.emp_Id).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-
+                tbAnticipoSalario.Ansal_RazonRechazo = RazonRechazo;
+            
                 switch (State)
                 {
                     case GeneralFunctions.Revisada:
@@ -263,8 +262,16 @@ namespace SIGEM_BIDSS.Controllers
                         reject = " Razon de Rechazo:";
                         break;
                 }
-                if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
-                Result = Function.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject + " " + Ansal_RazonRechazo);
+                if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
+               
+                var GetEmployee = Function.GetUserInfo(tbAnticipoSalario.emp_Id);
+                var Approver = Function.GetUserInfo(EmployeeID);
+                if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
+
+                Result = Function.LeerDatos(out ErrorEmail, 
+                                            tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, 
+                                            Approver.strFor + Approver.emp_Nombres, GeneralFunctions.stringEmpty, 
+                                            GetEmployee.emp_CorreoElectronico, _msj, reject + " " + RazonRechazo);
 
                 if (!Result)
                 {
@@ -274,13 +281,6 @@ namespace SIGEM_BIDSS.Controllers
                 else
                 {
                     Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
-                                                                tbAnticipoSalario.emp_Id,
-                                                                tbAnticipoSalario.Ansal_JefeInmediato,
-                                                                tbAnticipoSalario.Ansal_GralFechaSolicitud,
-                                                                tbAnticipoSalario.Ansal_MontoSolicitado,
-                                                                tbAnticipoSalario.tpsal_id,
-                                                                tbAnticipoSalario.Ansal_Justificacion,
-                                                                tbAnticipoSalario.Ansal_Comentario,
                                                                 tbAnticipoSalario.est_Id,
                                                                 tbAnticipoSalario.Ansal_RazonRechazo,
                                                                 EmployeeID,
@@ -333,16 +333,15 @@ namespace SIGEM_BIDSS.Controllers
         }
 
 
-        // GET: AnticipoSalario/Approve/5   
         [HttpPost]
-        public JsonResult Reject(int id, string Ansal_RazonRechazo)
+        public JsonResult Reject(int id, string RazonRechazo)
         {
             var list = "";
             string vReturn = "";
             tbAnticipoSalario tbAnticipoSalario = db.tbAnticipoSalario.Find(id);
             if (tbAnticipoSalario.est_Id == GeneralFunctions.Revisada)
             {
-                if (UpdateState(out vReturn, tbAnticipoSalario, GeneralFunctions.Rechazada, Ansal_RazonRechazo))
+                if (UpdateState(out vReturn, tbAnticipoSalario, GeneralFunctions.Rechazada, RazonRechazo))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                 }

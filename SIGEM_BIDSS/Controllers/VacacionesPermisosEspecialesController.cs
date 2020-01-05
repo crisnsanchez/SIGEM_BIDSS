@@ -133,12 +133,11 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbVacacionesPermisosEspeciales.VPE_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                        var GetEmployee = Function.GetUserInfo(EmployeeID);
+                        var EmpJefe = Function.GetUserInfo(tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
 
-                        var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, EmpJefe.emp_CorreoElectronico, GeneralFunctions.msj_ToAdmin, "");
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, EmpJefe.strFor + EmpJefe.emp_Nombres, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
 
                         if (!Result) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
@@ -146,7 +145,6 @@ namespace SIGEM_BIDSS.Controllers
                         TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
                         return RedirectToAction("Index");
                     }
-
                 }
             }
             catch (Exception ex)
@@ -162,7 +160,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-        public bool UpdateState(out string pvReturn, tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales, int State, string Ansal_RazonRechazo)
+        public bool UpdateState(out string pvReturn, tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales, int State, string RazonRechazo)
         {
             pvReturn = "";
             string UserName = "", ErrorEmail = "", ErrorMessage = "", _msj = "";
@@ -176,14 +174,17 @@ namespace SIGEM_BIDSS.Controllers
 
                 tbVacacionesPermisosEspeciales.est_Id = State;
 
-                tbVacacionesPermisosEspeciales.VPE_RazonRechazo = Ansal_RazonRechazo;
+                tbVacacionesPermisosEspeciales.VPE_RazonRechazo = RazonRechazo;
 
-                var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == tbVacacionesPermisosEspeciales.emp_Id).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+               
 
                 switch (State)
                 {
                     case GeneralFunctions.Revisada:
                         _msj = GeneralFunctions.msj_Revisada;
+                        break;
+                    case GeneralFunctions.AprobadaPorJefe:
+                        _msj = GeneralFunctions.msj_RevisadaPorJefe;
                         break;
                     case GeneralFunctions.Aprobada:
                         _msj = GeneralFunctions.msj_Aprobada;
@@ -193,9 +194,12 @@ namespace SIGEM_BIDSS.Controllers
                         reject = " Razon de Rechazo:";
                         break;
                 }
-                if (Ansal_RazonRechazo == GeneralFunctions.stringDefault) { Ansal_RazonRechazo = null; };
+                var GetEmployee = Function.GetUserInfo(EmployeeID);
+                var Approver = Function.GetUserInfo(tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
+                if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
 
-                Result = Function.LeerDatos(out ErrorEmail, tbVacacionesPermisosEspeciales.VPE_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject + " " + Ansal_RazonRechazo);
+                Result = Function.LeerDatos(out ErrorEmail, tbVacacionesPermisosEspeciales.VPE_Correlativo, GetEmployee.emp_Nombres, Approver.strFor + Approver.emp_Nombres, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, _msj, reject + " " + RazonRechazo);
+                Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
 
                 if (!Result)
                 {
@@ -256,17 +260,67 @@ namespace SIGEM_BIDSS.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult ApprovePorJefe(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales = db.tbVacacionesPermisosEspeciales.Find(id);
+            if (tbVacacionesPermisosEspeciales.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.AprobadaPorJefe, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbVacacionesPermisosEspeciales == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult ApprovePorRRHH(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales = db.tbVacacionesPermisosEspeciales.Find(id);
+            if (tbVacacionesPermisosEspeciales.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.AprobadaPorRRHH, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbVacacionesPermisosEspeciales == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: AnticipoSalario/Approve/5   
         [HttpPost]
-        public JsonResult Reject(int id, string Ansal_RazonRechazo)
+        public JsonResult Reject(int id, string RazonRechazo)
         {
             var list = "";
             string vReturn = "";
             tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales = db.tbVacacionesPermisosEspeciales.Find(id);
             if (tbVacacionesPermisosEspeciales.est_Id == GeneralFunctions.Revisada)
             {
-                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.Rechazada, Ansal_RazonRechazo))
+                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.Rechazada, RazonRechazo))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                 }

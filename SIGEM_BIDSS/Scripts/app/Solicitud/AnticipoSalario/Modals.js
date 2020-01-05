@@ -30,23 +30,30 @@ $(document).on("click", "#_ModalReject", function () {
     }
     else {
         document.getElementById("spanRazonRechazo").innerText = "";
-        SendData();
+        SendData(_idPrimary = "Ansal_Id", _controller = "AnticipoSalario", _action = "Reject", _spinnerbody = "spinner-body-reject", _spinner = "spinnerd-reject");
     }
 });
 
+$(document).on("click", "#_ModalApprove", function () {
+    SendData(_idPrimary = "Ansal_Id", _controller = "AnticipoSalario", _action = "Approve", _spinnerbody = "spinner-body", _spinner = "spinnerd");
+});
 
-function SendData() {
-    var Ansal_Id = $('#Ansal_Id').val(),
+
+function SendData(_idPrimary, _controller, _action, _spinnerbody, _spinner) {
+    var _Id = $("#" + _idPrimary + "").val(),
         RazonInactivacion = $('#RazonRechazo').val();
-    document.getElementById('spinner-body-reject').classList.add("overlay");
-    document.getElementById('spinnerd-reject').removeAttribute("hidden");
-    //document.getElementById("divArea").style.display = "block";
+    var _url = "/" + _controller + "/" + _action;
+    console.log(" || _idPrimary: " + _idPrimary + " || _controller: " + _controller + " || _Id: " + _Id + " || _action: " + _action + " || _url: " + _url + " || _spinnerbody: " + _spinnerbody + " || _spinner: " + _spinner);
+
+    document.getElementById("" + _spinnerbody + "").classList.add("overlay");
+    document.getElementById("" + _spinner + "").removeAttribute("hidden");
+
     $.ajax({
-        url: "/AnticipoSalario/Reject",
+        url: _url,
         method: "POST",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: Ansal_Id, Ansal_RazonRechazo: RazonInactivacion }),
+        data: JSON.stringify({ id: _Id, RazonRechazo: RazonInactivacion }),
     }).done(function (data) {
         var str = data.toString();
         if (!str.startsWith("-1")) {
@@ -56,8 +63,17 @@ function SendData() {
         else {
             console.log("false || " + str);
         }
-    });
-}
+    }).fail(function (xhr, a, error) {
+        console.log("error", error);
+        Toast.fire({
+            type: 'error',
+            title: 'Error al actualizar el estado.'
+        });
+    }
+
+
+
+
 //<---------------------/Rechazar/----------------------------------------->//
 
 
@@ -67,40 +83,36 @@ function SendData() {
 
 //---------------------Approve-----------------------------------------
 
-$(document).on("click", "#_ModalApprove", function () {
-    Approve();
-});
-
 
 function Approve() {
-    var Ansal_Id = $('#Ansal_Id').val();
-    document.getElementById('spinner-body').classList.add("overlay");
-    document.getElementById('spinnerd').removeAttribute("hidden");
-    $.ajax({
-        url: "/AnticipoSalario/Approve",
-        method: "POST",
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ id: Ansal_Id }),
-    }).done(function (data) {
-        var str = data.toString();
-        if (!str.startsWith("-1")) {
-            console.log(str + " || " + data);
-            location.reload();
+            var Ansal_Id = $('#Ansal_Id').val();
+            document.getElementById('spinner-body').classList.add("overlay");
+            document.getElementById('spinnerd').removeAttribute("hidden");
+            $.ajax({
+                url: "/AnticipoSalario/Approve",
+                method: "POST",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ id: Ansal_Id }),
+            }).done(function (data) {
+                var str = data.toString();
+                if (!str.startsWith("-1")) {
+                    console.log(str + " || " + data);
+                    location.reload();
+                }
+                else {
+                    console.log("false || " + str);
+                }
+            });
         }
-        else {
-            console.log("false || " + str);
-        }
-    });
-}
 
 const _id = document.getElementById('RazonRechazo');
-_id.addEventListener("input", function () {
-    _id.value.trimStart();
-    if (!/^[ a-z0-9áéíóúüñ]*$/i.test(_id.value)) {
-        this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
-    }
-})
+    _id.addEventListener("input", function () {
+        _id.value.trimStart();
+        if (!/^[ a-z0-9áéíóúüñ]*$/i.test(_id.value)) {
+            this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
+        }
+    })
 //<---------------------/Approve/----------------------------------------->//
 
 

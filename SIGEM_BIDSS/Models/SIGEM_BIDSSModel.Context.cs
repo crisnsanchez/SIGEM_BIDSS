@@ -1969,39 +1969,11 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbUnidadMedida_Update_Result>("UDP_Gral_tbUnidadMedida_Update", uni_IdParameter, uni_DescripcionParameter, uni_AbreviaturaParameter, uni_UsuarioModificaParameter, uni_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbAnticipoSalario_Update_Result> UDP_Adm_tbAnticipoSalario_Update(Nullable<int> ansal_Id, Nullable<int> emp_Id, Nullable<int> ansal_JefeInmediato, Nullable<System.DateTime> ansal_GralFechaSolicitud, Nullable<decimal> ansal_MontoSolicitado, Nullable<int> tpsal_id, string ansal_Justificacion, string ansal_Comentario, Nullable<int> est_Id, string ansal_RazonRechazo, Nullable<int> ansal_UsuarioModifica, Nullable<System.DateTime> ansal_FechaModifica)
+        public virtual ObjectResult<UDP_Adm_tbAnticipoSalario_Update_Result> UDP_Adm_tbAnticipoSalario_Update(Nullable<int> ansal_Id, Nullable<int> est_Id, string ansal_RazonRechazo, Nullable<int> ansal_UsuarioModifica, Nullable<System.DateTime> ansal_FechaModifica)
         {
             var ansal_IdParameter = ansal_Id.HasValue ?
                 new ObjectParameter("Ansal_Id", ansal_Id) :
                 new ObjectParameter("Ansal_Id", typeof(int));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var ansal_JefeInmediatoParameter = ansal_JefeInmediato.HasValue ?
-                new ObjectParameter("Ansal_JefeInmediato", ansal_JefeInmediato) :
-                new ObjectParameter("Ansal_JefeInmediato", typeof(int));
-    
-            var ansal_GralFechaSolicitudParameter = ansal_GralFechaSolicitud.HasValue ?
-                new ObjectParameter("Ansal_GralFechaSolicitud", ansal_GralFechaSolicitud) :
-                new ObjectParameter("Ansal_GralFechaSolicitud", typeof(System.DateTime));
-    
-            var ansal_MontoSolicitadoParameter = ansal_MontoSolicitado.HasValue ?
-                new ObjectParameter("Ansal_MontoSolicitado", ansal_MontoSolicitado) :
-                new ObjectParameter("Ansal_MontoSolicitado", typeof(decimal));
-    
-            var tpsal_idParameter = tpsal_id.HasValue ?
-                new ObjectParameter("tpsal_id", tpsal_id) :
-                new ObjectParameter("tpsal_id", typeof(int));
-    
-            var ansal_JustificacionParameter = ansal_Justificacion != null ?
-                new ObjectParameter("Ansal_Justificacion", ansal_Justificacion) :
-                new ObjectParameter("Ansal_Justificacion", typeof(string));
-    
-            var ansal_ComentarioParameter = ansal_Comentario != null ?
-                new ObjectParameter("Ansal_Comentario", ansal_Comentario) :
-                new ObjectParameter("Ansal_Comentario", typeof(string));
     
             var est_IdParameter = est_Id.HasValue ?
                 new ObjectParameter("est_Id", est_Id) :
@@ -2019,7 +1991,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Ansal_FechaModifica", ansal_FechaModifica) :
                 new ObjectParameter("Ansal_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoSalario_Update_Result>("UDP_Adm_tbAnticipoSalario_Update", ansal_IdParameter, emp_IdParameter, ansal_JefeInmediatoParameter, ansal_GralFechaSolicitudParameter, ansal_MontoSolicitadoParameter, tpsal_idParameter, ansal_JustificacionParameter, ansal_ComentarioParameter, est_IdParameter, ansal_RazonRechazoParameter, ansal_UsuarioModificaParameter, ansal_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoSalario_Update_Result>("UDP_Adm_tbAnticipoSalario_Update", ansal_IdParameter, est_IdParameter, ansal_RazonRechazoParameter, ansal_UsuarioModificaParameter, ansal_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_rrhh_tbSueldo_Insert_Result> UDP_rrhh_tbSueldo_Insert(Nullable<int> emp_Id, Nullable<decimal> sue_Cantidad, Nullable<short> tmo_Id, Nullable<int> suel_UsuarioCrea, Nullable<System.DateTime> suel_FechaCrea)
@@ -2597,79 +2569,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbEmpleado_Insert_Result>("UDP_rrhh_tbEmpleado_Insert", emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoElectronicoParameter, emp_EsJefeParameter, tps_IdParameter, pto_IdParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_PathImageParameter, mun_IdParameter, emp_UsuarioCreaParameter, est_IdParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbAnticipoViatico_Update_Result> UDP_Adm_tbAnticipoViatico_Update(Nullable<int> anvi_Id, Nullable<int> emp_Id, Nullable<int> anvi_JefeInmediato, Nullable<System.DateTime> anvi_GralFechaSolicitud, Nullable<System.DateTime> anvi_FechaViaje, string anvi_Cliente, string mun_Codigo, string anvi_PropositoVisita, Nullable<int> anvi_DiasVisita, Nullable<bool> anvi_Hospedaje, Nullable<int> anvi_tptran_Id, Nullable<bool> anvi_Autorizacion, string anvi_Comentario, Nullable<int> est_Id, string anvi_RazonRechazo, Nullable<int> anvi_UsuarioModifica, Nullable<System.DateTime> anvi_FechaModifica)
-        {
-            var anvi_IdParameter = anvi_Id.HasValue ?
-                new ObjectParameter("Anvi_Id", anvi_Id) :
-                new ObjectParameter("Anvi_Id", typeof(int));
-    
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var anvi_JefeInmediatoParameter = anvi_JefeInmediato.HasValue ?
-                new ObjectParameter("Anvi_JefeInmediato", anvi_JefeInmediato) :
-                new ObjectParameter("Anvi_JefeInmediato", typeof(int));
-    
-            var anvi_GralFechaSolicitudParameter = anvi_GralFechaSolicitud.HasValue ?
-                new ObjectParameter("Anvi_GralFechaSolicitud", anvi_GralFechaSolicitud) :
-                new ObjectParameter("Anvi_GralFechaSolicitud", typeof(System.DateTime));
-    
-            var anvi_FechaViajeParameter = anvi_FechaViaje.HasValue ?
-                new ObjectParameter("Anvi_FechaViaje", anvi_FechaViaje) :
-                new ObjectParameter("Anvi_FechaViaje", typeof(System.DateTime));
-    
-            var anvi_ClienteParameter = anvi_Cliente != null ?
-                new ObjectParameter("Anvi_Cliente", anvi_Cliente) :
-                new ObjectParameter("Anvi_Cliente", typeof(string));
-    
-            var mun_CodigoParameter = mun_Codigo != null ?
-                new ObjectParameter("mun_Codigo", mun_Codigo) :
-                new ObjectParameter("mun_Codigo", typeof(string));
-    
-            var anvi_PropositoVisitaParameter = anvi_PropositoVisita != null ?
-                new ObjectParameter("Anvi_PropositoVisita", anvi_PropositoVisita) :
-                new ObjectParameter("Anvi_PropositoVisita", typeof(string));
-    
-            var anvi_DiasVisitaParameter = anvi_DiasVisita.HasValue ?
-                new ObjectParameter("Anvi_DiasVisita", anvi_DiasVisita) :
-                new ObjectParameter("Anvi_DiasVisita", typeof(int));
-    
-            var anvi_HospedajeParameter = anvi_Hospedaje.HasValue ?
-                new ObjectParameter("Anvi_Hospedaje", anvi_Hospedaje) :
-                new ObjectParameter("Anvi_Hospedaje", typeof(bool));
-    
-            var anvi_tptran_IdParameter = anvi_tptran_Id.HasValue ?
-                new ObjectParameter("Anvi_tptran_Id", anvi_tptran_Id) :
-                new ObjectParameter("Anvi_tptran_Id", typeof(int));
-    
-            var anvi_AutorizacionParameter = anvi_Autorizacion.HasValue ?
-                new ObjectParameter("Anvi_Autorizacion", anvi_Autorizacion) :
-                new ObjectParameter("Anvi_Autorizacion", typeof(bool));
-    
-            var anvi_ComentarioParameter = anvi_Comentario != null ?
-                new ObjectParameter("Anvi_Comentario", anvi_Comentario) :
-                new ObjectParameter("Anvi_Comentario", typeof(string));
-    
-            var est_IdParameter = est_Id.HasValue ?
-                new ObjectParameter("est_Id", est_Id) :
-                new ObjectParameter("est_Id", typeof(int));
-    
-            var anvi_RazonRechazoParameter = anvi_RazonRechazo != null ?
-                new ObjectParameter("Anvi_RazonRechazo", anvi_RazonRechazo) :
-                new ObjectParameter("Anvi_RazonRechazo", typeof(string));
-    
-            var anvi_UsuarioModificaParameter = anvi_UsuarioModifica.HasValue ?
-                new ObjectParameter("Anvi_UsuarioModifica", anvi_UsuarioModifica) :
-                new ObjectParameter("Anvi_UsuarioModifica", typeof(int));
-    
-            var anvi_FechaModificaParameter = anvi_FechaModifica.HasValue ?
-                new ObjectParameter("Anvi_FechaModifica", anvi_FechaModifica) :
-                new ObjectParameter("Anvi_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoViatico_Update_Result>("UDP_Adm_tbAnticipoViatico_Update", anvi_IdParameter, emp_IdParameter, anvi_JefeInmediatoParameter, anvi_GralFechaSolicitudParameter, anvi_FechaViajeParameter, anvi_ClienteParameter, mun_CodigoParameter, anvi_PropositoVisitaParameter, anvi_DiasVisitaParameter, anvi_HospedajeParameter, anvi_tptran_IdParameter, anvi_AutorizacionParameter, anvi_ComentarioParameter, est_IdParameter, anvi_RazonRechazoParameter, anvi_UsuarioModificaParameter, anvi_FechaModificaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastos_Insert(Nullable<int> emp_Id, Nullable<System.DateTime> reemga_GralFechaSolicitud, Nullable<System.DateTime> reemga_FechaViaje, string reemga_Cliente, string mun_codigo, string reemga_PropositoVisita, Nullable<int> reemga_DiasVisita, string reemga_Comentario, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioCrea, Nullable<System.DateTime> reemga_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
@@ -3006,6 +2905,79 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("pscat_Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_ValorCodigo_Result>("UDP_Inv_tbProducto_ValorCodigo", pcat_IdParameter, pscat_IdParameter, prod_Codigo);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbAnticipoViatico_Update_Result> UDP_Adm_tbAnticipoViatico_Update(Nullable<int> anvi_Id, Nullable<int> emp_Id, Nullable<int> anvi_JefeInmediato, Nullable<System.DateTime> anvi_GralFechaSolicitud, Nullable<System.DateTime> anvi_FechaViaje, string anvi_Cliente, string mun_Codigo, string anvi_PropositoVisita, Nullable<int> anvi_DiasVisita, Nullable<bool> anvi_Hospedaje, Nullable<int> anvi_tptran_Id, Nullable<bool> anvi_Autorizacion, string anvi_Comentario, Nullable<int> est_Id, string anvi_RazonRechazo, Nullable<int> anvi_UsuarioModifica, Nullable<System.DateTime> anvi_FechaModifica)
+        {
+            var anvi_IdParameter = anvi_Id.HasValue ?
+                new ObjectParameter("Anvi_Id", anvi_Id) :
+                new ObjectParameter("Anvi_Id", typeof(int));
+    
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var anvi_JefeInmediatoParameter = anvi_JefeInmediato.HasValue ?
+                new ObjectParameter("Anvi_JefeInmediato", anvi_JefeInmediato) :
+                new ObjectParameter("Anvi_JefeInmediato", typeof(int));
+    
+            var anvi_GralFechaSolicitudParameter = anvi_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("Anvi_GralFechaSolicitud", anvi_GralFechaSolicitud) :
+                new ObjectParameter("Anvi_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var anvi_FechaViajeParameter = anvi_FechaViaje.HasValue ?
+                new ObjectParameter("Anvi_FechaViaje", anvi_FechaViaje) :
+                new ObjectParameter("Anvi_FechaViaje", typeof(System.DateTime));
+    
+            var anvi_ClienteParameter = anvi_Cliente != null ?
+                new ObjectParameter("Anvi_Cliente", anvi_Cliente) :
+                new ObjectParameter("Anvi_Cliente", typeof(string));
+    
+            var mun_CodigoParameter = mun_Codigo != null ?
+                new ObjectParameter("mun_Codigo", mun_Codigo) :
+                new ObjectParameter("mun_Codigo", typeof(string));
+    
+            var anvi_PropositoVisitaParameter = anvi_PropositoVisita != null ?
+                new ObjectParameter("Anvi_PropositoVisita", anvi_PropositoVisita) :
+                new ObjectParameter("Anvi_PropositoVisita", typeof(string));
+    
+            var anvi_DiasVisitaParameter = anvi_DiasVisita.HasValue ?
+                new ObjectParameter("Anvi_DiasVisita", anvi_DiasVisita) :
+                new ObjectParameter("Anvi_DiasVisita", typeof(int));
+    
+            var anvi_HospedajeParameter = anvi_Hospedaje.HasValue ?
+                new ObjectParameter("Anvi_Hospedaje", anvi_Hospedaje) :
+                new ObjectParameter("Anvi_Hospedaje", typeof(bool));
+    
+            var anvi_tptran_IdParameter = anvi_tptran_Id.HasValue ?
+                new ObjectParameter("Anvi_tptran_Id", anvi_tptran_Id) :
+                new ObjectParameter("Anvi_tptran_Id", typeof(int));
+    
+            var anvi_AutorizacionParameter = anvi_Autorizacion.HasValue ?
+                new ObjectParameter("Anvi_Autorizacion", anvi_Autorizacion) :
+                new ObjectParameter("Anvi_Autorizacion", typeof(bool));
+    
+            var anvi_ComentarioParameter = anvi_Comentario != null ?
+                new ObjectParameter("Anvi_Comentario", anvi_Comentario) :
+                new ObjectParameter("Anvi_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var anvi_RazonRechazoParameter = anvi_RazonRechazo != null ?
+                new ObjectParameter("Anvi_RazonRechazo", anvi_RazonRechazo) :
+                new ObjectParameter("Anvi_RazonRechazo", typeof(string));
+    
+            var anvi_UsuarioModificaParameter = anvi_UsuarioModifica.HasValue ?
+                new ObjectParameter("Anvi_UsuarioModifica", anvi_UsuarioModifica) :
+                new ObjectParameter("Anvi_UsuarioModifica", typeof(int));
+    
+            var anvi_FechaModificaParameter = anvi_FechaModifica.HasValue ?
+                new ObjectParameter("Anvi_FechaModifica", anvi_FechaModifica) :
+                new ObjectParameter("Anvi_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoViatico_Update_Result>("UDP_Adm_tbAnticipoViatico_Update", anvi_IdParameter, emp_IdParameter, anvi_JefeInmediatoParameter, anvi_GralFechaSolicitudParameter, anvi_FechaViajeParameter, anvi_ClienteParameter, mun_CodigoParameter, anvi_PropositoVisitaParameter, anvi_DiasVisitaParameter, anvi_HospedajeParameter, anvi_tptran_IdParameter, anvi_AutorizacionParameter, anvi_ComentarioParameter, est_IdParameter, anvi_RazonRechazoParameter, anvi_UsuarioModificaParameter, anvi_FechaModificaParameter);
         }
     }
 }

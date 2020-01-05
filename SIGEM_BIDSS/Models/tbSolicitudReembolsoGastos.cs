@@ -30,9 +30,13 @@ namespace SIGEM_BIDSS.Models
         public System.DateTime Reemga_FechaCrea { get; set; }
         public Nullable<int> Reemga_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> Reemga_FechaModifica { get; set; }
+        public Nullable<int> Reemga_JefeInmediato { get; set; }
     
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbEstado tbEstado { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
+        public virtual tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos1 { get; set; }
+        public virtual tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos2 { get; set; }
+        public virtual tbEmpleado tbEmpleado1 { get; set; }
     }
 }

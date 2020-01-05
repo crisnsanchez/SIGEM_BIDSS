@@ -1,147 +1,159 @@
 ﻿@model SIGEM_BIDSS.Models.tbVacacionesPermisosEspeciales
+@using SIGEM_BIDSS.Models
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 
-<div>
-    <h4>tbVacacionesPermisosEspeciales</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_Correlativo)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_Correlativo)
-        </dd>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-upload mr-1"></i>
+            Solicitud Anticipo de Salario
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="form-horizontal">
+        <div class="card-body">
+            <div class="form-group col-md-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.VPE_Correlativo)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_GralFechaSolicitud)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.VPE_Correlativo)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_GralFechaSolicitud)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.VPE_GralFechaSolicitud)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_FechaInicio)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.VPE_GralFechaSolicitud)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_FechaInicio)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.VPE_FechaInicio)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_FechaFin)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.VPE_FechaInicio)
+                </dd>
+            </div>
+            <div class="form-group col-md-3">
+                <dt>
+                    @Html.DisplayNameFor(model => model.VPE_FechaFin)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_FechaFin)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.VPE_FechaFin)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_CantidadDias)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.VPE_CantidadDias)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_CantidadDias)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.VPE_CantidadDias)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.VPE_Comentario)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_MontoSolicitado)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.VPE_Comentario)
+                </dd>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_MontoSolicitado)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_Comentario)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_Comentario)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_RazonRechazo)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_RazonRechazo)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_UsuarioCrea)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_UsuarioCrea)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.tbTipoPermiso.tperm_Descripcion)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_FechaCrea)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tbTipoPermiso.tperm_Descripcion)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_FechaCrea)
-        </dd>
+            <div class="form-group col-md-3">
+                @if (Model.est_Id == GeneralFunctions.Rechazada)
+                {
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_UsuarioModifica)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.est_Id)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+                    </dd>
+                    if (Model.VPE_RazonRechazo != GeneralFunctions.stringDefault)
+                    {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.VPE_RazonRechazo)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.VPE_UsuarioModifica)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.VPE_RazonRechazo)
+                        </dd>
+                    }
+                }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VPE_FechaModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VPE_FechaModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbTipoPermiso.tperm_Descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbTipoPermiso.tperm_Descripcion)
-        </dd>
-
-    </dl>
+            </div>
+            </dl>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @if (Model.est_Id == GeneralFunctions.Revisada)
+                    {
+                        <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                        <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                    }
+                    else
+                    {
+                        <input disabled type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                        <input disabled type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                    }
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VPE_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@Html.Partial("_Modales")
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/app/General_Details.js"></script>
+    <script src="~/Scripts/app/Solicitud/VacacionesPermisosEspeciales/Modals.js"></script>
+}

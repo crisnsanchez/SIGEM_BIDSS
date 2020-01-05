@@ -72,6 +72,8 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id_JefeInmediato" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEstado_est_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbTipoPermiso_tperm_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

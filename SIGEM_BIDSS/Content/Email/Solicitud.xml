@@ -34,8 +34,11 @@
                         </p>
                         <p style="color: rgba(0, 0, 0, .4);">
                           <h2 style="padding-bottom: 0;color: rgba(0, 0, 0, .4);font-size: 26px;margin-top: 0;line-height: 1.4;">
-                            <xsl:value-of select="msj"/>
+                            <xsl:value-of select="msj"/>.
                           </h2>
+                          <span class="subheading" style="margin-bottom: 24px !important;display: inline-block;font-size: 18px;text-transform: uppercase;letter-spacing: 2px;color: rgba(0, 0, 0, .4);position: relative;">
+                            <xsl:value-of select="approver"/>
+                          </span>
                         </p>
                         <p style="color: rgba(0, 0, 0, .4);">
                           <h2 style="padding-bottom: 0;color: rgba(0, 0, 0, .4);font-size: 32px;margin-top: 0;line-height: 1.4;">
