@@ -999,3 +999,5 @@ C:\GitHub2\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.dll
 C:\GitHub2\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb
 C:\GitHub2\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.cache
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.cache
+C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.dll
+C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb

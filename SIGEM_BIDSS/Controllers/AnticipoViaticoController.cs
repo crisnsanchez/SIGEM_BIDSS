@@ -152,8 +152,9 @@ namespace SIGEM_BIDSS.Controllers
                         var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAnticipoViatico.Anvi_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
                         var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
 
-                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, "");
-                        ResultAdm = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, "");
+                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
+                        ResultAdm = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+
 
                         if (!Result) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Funtion.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
@@ -340,7 +341,9 @@ namespace SIGEM_BIDSS.Controllers
                         break;
                 }
                 if (Anvi_RazonRechazo == GeneralFunctions.stringDefault) { Anvi_RazonRechazo = null; };
-                Result = Funtion.LeerDatos(out ErrorEmail, tbAnticipoViatico.Anvi_Correlativo, GetEmployee.emp_Nombres, "", GetEmployee.emp_CorreoElectronico, _msj, reject + " " + Anvi_RazonRechazo);
+
+                Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
+
 
                 if (!Result)
                 {
