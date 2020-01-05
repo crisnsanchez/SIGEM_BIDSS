@@ -26,6 +26,7 @@
     @using (Html.BeginForm(null, null, FormMethod.Post, FormMethod.Post, new { id = "frmAnticipoViatico" }))
     {
         @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Lianvi_Id)
         @*@Html.HiddenFor(model => model.Anvi_Id)
             @Html.HiddenFor(model => model.est_Id)*@
 
@@ -71,7 +72,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-11">
-                            @Html.DropDownList("tpv_Id", null, "Seleccione Tipo Gasto", new { @class = "form-control" })
+                            @Html.EditorFor(model => model.tpv_Id, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })
                         </div>
                     </div>

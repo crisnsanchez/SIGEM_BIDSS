@@ -215,7 +215,8 @@ $("#dep_codigo").change(function () {
 $("#mun_Codigo").change(function () {
     var CodigoMun = $("#mun_Codigo").val();
     if (CodigoMun !== "") {
-        $("#CodigoMun").text("");
+        $("#CodigoMun").text(""
+        );
     }
 });
 

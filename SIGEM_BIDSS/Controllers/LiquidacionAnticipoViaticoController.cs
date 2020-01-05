@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
@@ -75,8 +76,8 @@ namespace SIGEM_BIDSS.Controllers
             tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = new tbLiquidacionAnticipoViatico();
             tbLiquidacionAnticipoViatico.Anvi_Id = tbAnticipoViatico.Anvi_Id;
             tbLiquidacionAnticipoViatico.Lianvi_FechaLiquida = Function.DatetimeNow();
-            //tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje = Function.DatetimeNow();
-            //tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje = Function.DatetimeNow();
+            tbLiquidacionAnticipoViatico.Lianvi_FechaInicioViaje = Function.DatetimeNow();
+            tbLiquidacionAnticipoViatico.Lianvi_FechaFinViaje = Function.DatetimeNow();
 
             if (tbAnticipoViatico == null)
             {
@@ -85,14 +86,19 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbLiquidacionAnticipoViatico);
         }
 
-    
 
-    // POST: LiquidacionAnticipoViatico/Create
-    // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-    // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+        public ActionResult IdCreate(int? Id)
+        {
+        //    ViewBag.Mensaje = mensaje;
+
+            return View();
+        }
+        // POST: LiquidacionAnticipoViatico/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Lianvi_Id,Lianvi_Correlativo,Anvi_Id,Lianvi_FechaLiquida,Lianvi_FechaInicioViaje,Lianvi_FechaFinViaje,Lianvi_Comentario,est_Id,Lianvi_RazonRechazo")] tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico)
+        public ActionResult Create([Bind(Include = "Lianvi_Id,Lianvi_Correlativo,Anvi_Id,Lianvi_FechaLiquida,Lianvi_FechaInicioViaje,Lianvi_FechaFinViaje,Lianvi_Comentario,est_Id,Lianvi_RazonRechazo")] tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico,int? Id)
         {
            
             {
@@ -134,8 +140,13 @@ namespace SIGEM_BIDSS.Controllers
                             if (!Result) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
                             if (!ResultAdm) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
                             TempData["swalfunction"] = "true";
+                            //return RedirectToAction("Create", "tbLiquidacionAnticipoViatico.Lianvi_Id", "LiquidacionAnticipoViaticoDetalle");
+                        
+                            //return RedirectToAction("Create", new RouteValueDictionary(new { controller = LiquidacionAnticipoViaticoDetalle, action = "Main", Id = Id }));
+                            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle", new { LianviId = Id });
 
-                            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
+
+
                         }
 
                     }
@@ -145,10 +156,10 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
 
-                    return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
+                    return RedirectToAction("Create", "tbLiquidacionAnticipoViatico.Lianvi_Id", "LiquidacionAnticipoViaticoDetalle");
                 }
             }
-            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
+            return RedirectToAction("Create", "tbLiquidacionAnticipoViatico.Lianvi_Id" , "LiquidacionAnticipoViaticoDetalle");
         }
 // GET: LiquidacionAnticipoViatico/Edit/5
 public ActionResult Edit(int? id)
