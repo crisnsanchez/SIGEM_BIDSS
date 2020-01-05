@@ -59,6 +59,9 @@ namespace SIGEM_BIDSS.Controllers
             //ViewBag.lastName = names.Last();
             //ViewBag.Email = userClaims?.FindFirst("preferred_username")?.Value;
 
+            tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = new tbSolicitudReembolsoGastos();
+            tbSolicitudReembolsoGastos.Reemga_Id = tbSolicitudReembolsoGastos.Reemga_Id;
+
 
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");

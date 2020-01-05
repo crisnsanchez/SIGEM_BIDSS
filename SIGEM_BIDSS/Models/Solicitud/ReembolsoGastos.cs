@@ -58,7 +58,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Comentario")]     
         public string Reemga_Comentario { get; set; }
 
-        [Display(Name = "EstadossssssssssssssssSSSSSS")]      
+        [Display(Name = "Estado")]      
         public int est_Id { get; set; }
 
         [Display(Name = "Razón Rechazo")]
