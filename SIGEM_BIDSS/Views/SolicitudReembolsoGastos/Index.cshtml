@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastos>
+@using SIGEM_BIDSS.Models
 
 @{
     ViewBag.Title = "Index";
@@ -23,96 +24,85 @@
         </ul>
     </div>
     <div class="card-body">
-    <table class="table table-bordered table-hover table-responsive" id="">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Reemga_Correlativo)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Reemga_GralFechaSolicitud)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reemga_FechaViaje)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reemga_Cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.mun_codigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reemga_PropositoVisita)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reemga_DiasVisita)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reemga_Comentario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reemga_RazonRechazo)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-            </th>
-            <th>Acciones</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <table class="table table-bordered table-hover table-responsive" id="">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reemga_Correlativo)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reemga_Correlativo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reemga_GralFechaSolicitud)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reemga_FechaViaje)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reemga_Cliente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.mun_codigo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reemga_PropositoVisita)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reemga_DiasVisita)
+                </th>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reemga_GralFechaSolicitud)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reemga_FechaViaje)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reemga_Cliente)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.mun_codigo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reemga_PropositoVisita)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reemga_DiasVisita)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reemga_Comentario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reemga_RazonRechazo)
-                </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
-                </td>
-                <td>
 
-                    @Html.ActionLink("Details", "Details", new { id = item.Reemga_Id })
-
-                </td>
+                <th>Acciones</th>
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reemga_Correlativo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)    @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reemga_GralFechaSolicitud)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reemga_FechaViaje)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reemga_Cliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mun_codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reemga_PropositoVisita)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reemga_DiasVisita)
+                    </td>
 
+
+
+                    <td>
+                        @Html.ActionLink("Detalles", "Details", new { id = item.Reemga_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
 </div>
-</div>
+
 
 
 
@@ -122,8 +112,6 @@
 
 @section Scripts {
 
-
-
     <!-- DataTables -->
     <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
@@ -132,6 +120,7 @@
     <script src="~/Scripts/app/DataTables.js"></script>
 
 }
+
 
 
 
