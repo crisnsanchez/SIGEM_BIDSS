@@ -13,7 +13,7 @@ $("#frmsubmit").click(function () {
 
 
 document.getElementById("Cantidad").onblur = function () {
-    if (!isNaN(this.value || this.value != "")) {
+    if (this.value != "") {
         //number-format the user input
         this.value = parseFloat(this.value.replace(/,/g, ""))
             .toFixed(2)
@@ -68,14 +68,13 @@ $(document).ready(function () {
     $("#Ansal_Comentario")[0].maxLength = 250;
 });
 
-
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
-    $("input[type='text']", 'form').each(function (e) {
+    $(".nospace", 'form').each(function (e) {
         var _id = $(this).attr("id");
+        var el = document.getElementById('' + _id + '')
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
-
     });
     $(".normalize", 'form').each(function (e) {
         if (!/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)) {
@@ -83,7 +82,6 @@ document.addEventListener("input", function () {
         }
     });
 });
-
 
 
 //Funcion de Solo letras en el textbox
@@ -106,22 +104,40 @@ function soloLetras(e) {
     }
 }
 
-  //if (this.value != "") {
+//Quitar mensajes de error cuando el valor cambia
+//DropdownList
+$("#Ansal_JefeInmediato").change(function () {
+    var JefeInmediato = $("#Ansal_JefeInmediato").val();
+    if (JefeInmediato !== "") {
+        $("#JefeInmediato").text("");
+    }
+});
 
-    //    console.log("Porcentaje: " + empPorcetanje + " - Monto " + empMonto + " - Sueldo " + empSueldo);
+$("#tpsal_id").change(function () {
+    var tpsal_id = $("#tpsal_id").val();
+    if (tpsal_id !== "") {
+        $("#spantpsal_id").text("");
+    }
+});
 
-    //    if (empMonto > empSueldo) {
-    //        spanCantidad = document.getElementById("spanCantidad").innerText = "Monto solicitado mayor que el Sueldo";
-    //    } else {
-    //        spanCantidad = document.getElementById("spanCantidad").innerText = "";
-    //    }
-    //    if (empMonto > empPorcetanje) {
-    //        spanCantidad = document.getElementById("spanCantidad").innerText = "El monto no puede ser mayor que el pocentaje permitido";
+//TextBox
+$("#Cantidad").change(function () {
+    var Cantidad = $("#Cantidad").val();
+    if (Cantidad !== "") {
+        $("#spanCantidad").text("");
+    }
+});
 
-    //    } else {
-    //        spanCantidad = document.getElementById("spanCantidad").innerText = "";
-    //    }
-    //}
-    //else {
-    //    console.log("false");
-    //}
+$("#Ansal_Justificacion").change(function () {
+    var Justificacion = $("#Ansal_Justificacion").val();
+    if (Justificacion !== "") {
+        $("#spanJustificacion").text("");
+    }
+});
+
+$("#Ansal_Comentario").change(function () {
+    var Comentario = $("#Ansal_Comentario").val();
+    if (Comentario !== "") {
+        $("#spanComentario").text("");
+    }
+});
