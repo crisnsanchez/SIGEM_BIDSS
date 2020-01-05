@@ -3459,7 +3459,6 @@
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Edit.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Index.cshtml" />
     <Content Include="Views\ProductoCategoria\Create.cshtml" />
-    <Content Include="Views\ProductoCategoria\Delete.cshtml" />
     <Content Include="Views\ProductoCategoria\Details.cshtml" />
     <Content Include="Views\ProductoCategoria\Edit.cshtml" />
     <Content Include="Views\ProductoCategoria\Index.cshtml" />
