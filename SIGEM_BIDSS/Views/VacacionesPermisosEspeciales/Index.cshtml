@@ -1,118 +1,103 @@
 ﻿@model IEnumerable<SIGEM_BIDSS.Models.tbVacacionesPermisosEspeciales>
+@using SIGEM_BIDSS.Models
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 
-<h2>Index</h2>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-list mr-1"></i>
+            Listado de Solicitudes de Vacaciones
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink(" Nuevo", "Create", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover table-responsive" id="dataTable">
+            <thead>
+                <tr>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VPE_Correlativo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VPE_GralFechaSolicitud)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VPE_FechaInicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VPE_FechaFin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VPE_CantidadDias)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VPE_Comentario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbTipoPermiso.tperm_Descripcion)
+                    </th>
+                    <th></th>
+                </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_Correlativo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_GralFechaSolicitud)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_FechaInicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_FechaFin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_CantidadDias)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_Comentario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_RazonRechazo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_UsuarioCrea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_FechaCrea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_UsuarioModifica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VPE_FechaModifica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbTipoPermiso.tperm_Descripcion)
-        </th>
-        <th></th>
-    </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VPE_Correlativo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VPE_GralFechaSolicitud)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VPE_FechaInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VPE_FechaFin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VPE_CantidadDias)
+                        </td>
+                        <td>
+                            @if (item.VPE_Comentario != GeneralFunctions.stringDefault)
+                            {@Html.DisplayFor(modelItem => item.VPE_Comentario)}
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbEmpleado1.emp_Nombres)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbTipoPermiso.tperm_Descripcion)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Detalles", "Details", new { id = item.VPE_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
+                        </td>
+                    </tr>
+                }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_Correlativo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_GralFechaSolicitud)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_FechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_FechaFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_CantidadDias)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_Comentario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_RazonRechazo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_UsuarioCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_FechaCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_UsuarioModifica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VPE_FechaModifica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbEmpleado1.emp_Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbTipoPermiso.tperm_Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VPE_Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.VPE_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.VPE_Id })
-        </td>
-    </tr>
-}
+        </table>
 
-</table>
+    </div>
+</div>

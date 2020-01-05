@@ -52,7 +52,7 @@ namespace SIGEM_BIDSS.Controllers
             if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
             {
                 MASspanFecha = "2";
-                MASspan = "La Fecha de finalizacion no puede ser mayor que la inicio";
+                MASspan = "La Fecha de finalizacion no puede ser menor que la inicio";
             }
             object vCalcular = new { MASspan, MASspanFecha };
             return Json(vCalcular, JsonRequestBehavior.AllowGet);
@@ -82,7 +82,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VPE_JefeInmediato,tperm_Id,VPE_GralFechaSolicitud,VPE_FechaInicio,VPE_FechaFin,VPE_CantidadDias,VPE_MontoSolicitado,VPE_Comentario")] tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales)
+        public ActionResult Create([Bind(Include = "VPE_JefeInmediato,tperm_Id,VPE_GralFechaSolicitud,VPE_FechaInicio,VPE_FechaFin,VPE_CantidadDias,VPE_MontoSolicitado,VPE_Comentario,VPE_RazonRechazo")] tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales)
         {
             string UserName = "", ErrorEmail = "", ErrorMessage = "";
             bool Result = false, ResultAdm = false;
@@ -175,8 +175,6 @@ namespace SIGEM_BIDSS.Controllers
                 tbVacacionesPermisosEspeciales.est_Id = State;
 
                 tbVacacionesPermisosEspeciales.VPE_RazonRechazo = RazonRechazo;
-
-               
 
                 switch (State)
                 {
@@ -310,7 +308,30 @@ namespace SIGEM_BIDSS.Controllers
             }
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-
+        [HttpPost]
+        public JsonResult ApprovePorAdmin(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales = db.tbVacacionesPermisosEspeciales.Find(id);
+            if (tbVacacionesPermisosEspeciales.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.AprobadaPorJefe, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbVacacionesPermisosEspeciales == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
         // GET: AnticipoSalario/Approve/5   
         [HttpPost]
         public JsonResult Reject(int id, string RazonRechazo)

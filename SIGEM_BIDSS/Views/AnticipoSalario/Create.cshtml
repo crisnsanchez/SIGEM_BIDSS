@@ -7,6 +7,7 @@
 }
 
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
@@ -23,17 +24,16 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
       
         <div class="form-horizontal">
             <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(model => model.Ansal_RazonRechazo, new { Value = GeneralFunctions.stringDefault })
+                @Html.HiddenFor(model => model.Sueldo)
+                @Html.HiddenFor(model => model.Porcentaje)
                 <div class="form-row">
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                    @Html.HiddenFor( model => model.Ansal_RazonRechazo, new { Value = GeneralFunctions.stringDefault })
-                    @Html.HiddenFor(model => model.Sueldo)
-                    @Html.HiddenFor(model => model.Porcentaje)
 
 
                     <div class="form-group col-md-6">
@@ -43,6 +43,7 @@
                             @Html.ValidationMessageFor(model => model.Ansal_JefeInmediato, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Ansal_GralFechaSolicitud, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">

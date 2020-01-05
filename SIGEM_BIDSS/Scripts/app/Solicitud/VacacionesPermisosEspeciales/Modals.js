@@ -8,12 +8,17 @@
 
 
 $(document).on("click", "#_ModalApprove", function () {
-    SendData(_idPrimary = "Ansal_Id", _controller = "AnticipoSalario", _action = "Approve", _spinnerbody = "spinner-body", _spinner = "spinnerd");
+    SendData(_idPrimary = "VPE_Id", _controller = "VacacionesPermisosEspeciales", _action = "ApprovePorJefe", _spinnerbody = "spinner-body", _spinner = "spinnerd");
+});
+
+$(document).on("click", "#_ModalApproveRRHH", function () {
+    SendData(_idPrimary = "VPE_Id", _controller = "VacacionesPermisosEspeciales", _action = "ApprovePorRRHH", _spinnerbody = "spinner-body", _spinner = "spinnerd");
 });
 
 
-
-
+$(document).on("click", "#_ModalApproveAdmin", function () {
+    SendData(_idPrimary = "VPE_Id", _controller = "VacacionesPermisosEspeciales", _action = "ApprovePorAdmin", _spinnerbody = "spinner-body", _spinner = "spinnerd");
+});
 
 
 
@@ -24,14 +29,13 @@ $(document).on("click", "#_ModalApprove", function () {
 $(document).on("click", "#_ModalReject", function () {
     var _spanRR = document.getElementById("RazonRechazo")
     console.log(_spanRR.value)
-
     //    
     if (_spanRR.value == "" || _spanRR.value == null) {
         document.getElementById("spanRazonRechazo").innerText = "Razon de Rechazo Requerida";
     }
     else {
         document.getElementById("spanRazonRechazo").innerText = "";
-        SendData(_idPrimary = "Ansal_Id", _controller = "AnticipoSalario", _action = "Reject", _spinnerbody = "spinner-body-reject", _spinner = "spinnerd-reject");
+        SendData(_idPrimary = "VPE_Id", _controller = "VacacionesPermisosEspeciales", _action = "Reject", _spinnerbody = "spinner-body-reject", _spinner = "spinnerd-reject");
     }
 });
 
