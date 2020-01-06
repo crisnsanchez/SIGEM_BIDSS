@@ -148,7 +148,9 @@ namespace SIGEM_BIDSS.Controllers
                         if (!ResultAdm) Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorEmail);
                         TempData["swalfunction"] = "true";
 
-                        return RedirectToAction("Index");
+                        Session["Reemga_Id"] = ErrorMessage;
+                        return RedirectToAction("Create", "SolicitudReembolsoGastosDetalles");
+                        //return RedirectToAction("Index");
                     }
 
                 }
