@@ -76,21 +76,17 @@ namespace SIGEM_BIDSS.Controllers
         [HttpPost]
         public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle LIQUIDACIONDETALLE )
         {
-            List<tbLiquidacionAnticipoViaticoDetalle> sessionLiquidaciondetalle = new List<tbLiquidacionAnticipoViaticoDetalle>();
-            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbLiquidacionAnticipoViaticoDetalle"];
+            List<tbLiquidacionAnticipoViaticoDetalle> sessionLiquidacion = new List<tbLiquidacionAnticipoViaticoDetalle>();
+            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["LiquidacionAnticipoViaticoDetalle"];
             if (list == null)
             {
-                ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
-                ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
-                sessionLiquidaciondetalle.Add(LIQUIDACIONDETALLE);
-                Session["tbLiquidacionAnticipoViaticoDetalle"] = sessionLiquidaciondetalle;
+                sessionLiquidacion.Add(LIQUIDACIONDETALLE);
+                Session["LiquidacionAnticipoViaticoDetalle"] = sessionLiquidacion;
             }
             else
             {
-                ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
-                ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                 list.Add(LIQUIDACIONDETALLE);
-                Session["tbLiquidacionAnticipoViaticoDetalle"] = list;
+                Session["LiquidacionAnticipoViaticoDetalle"] = list;
             }
             return Json("Exito", JsonRequestBehavior.AllowGet);
         }
@@ -234,14 +230,14 @@ namespace SIGEM_BIDSS.Controllers
         [HttpPost]
         public JsonResult RemoveDetalle(tbLiquidacionAnticipoViaticoDetalle LiquidacionDetalle)
         {
-            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbLiquidacionAnticipoViaticoDetalle"];
+            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["LiquidacionAnticipoViaticoDetalle"];
 
             if (list != null)
             {
                 var itemToRemove = list.Single(r => r.Lianvide_Id == LiquidacionDetalle.Lianvide_Id);
                 list.Remove(itemToRemove);
      
-                Session["tbLiquidacionAnticipoViaticoDetalle"] = list;
+                Session["LiquidacionAnticipoViaticoDetalle"] = list;
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }
