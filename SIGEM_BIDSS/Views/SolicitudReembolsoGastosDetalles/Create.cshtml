@@ -36,12 +36,15 @@
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+                @Html.HiddenFor(model => model.Reemga_Id)
 
-                <div class="form-group  col-md-6">
-                    @Html.LabelFor(model => model.Reemga_Id, htmlAttributes: new { @class = "control-label col-md-8" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("Reemga_Id", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Reemga_Id, "", new { @class = "text-danger" })
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.ReemgaDet_Archivo, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-11">
+                        <input type="file" class="custom-file-input" id="LianvideArchivo">
+                        <label class="custom-file-label" for="LianvideArchivo" id="Archivo_Name"></label>
+
+                        @Html.ValidationMessageFor(model => model.ReemgaDet_Archivo, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-row">
@@ -54,10 +57,18 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-8" })
-                        <div class="col-md-10">
-                            @Html.DropDownList("tpv_Id", null, htmlAttributes: new { @class = "form-control" })
+                    @*<div class="form-group">
+            @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-8" })
+            <div class="col-md-10">
+                @Html.DropDownList("tpv_Id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-11">
+                            @Html.DropDownListFor(model => model.tpv_Id, (SelectList)ViewBag.tpv_Id, "Seleccione Tipo Gasto", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -85,14 +96,7 @@
 
                 <div class="form-row">
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ReemgaDet_Archivo, htmlAttributes: new { @class = "control-label col-md-8" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.ReemgaDet_Archivo, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ReemgaDet_Archivo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
+               
                     <div class="form-group">
                         @Html.LabelFor(model => model.ReemgaDet_TotalGastos, htmlAttributes: new { @class = "control-label col-md-8" })
                         <div class="col-md-10">
@@ -103,7 +107,7 @@
 
                 </div>
 
-        
+
 
 
                 <br />

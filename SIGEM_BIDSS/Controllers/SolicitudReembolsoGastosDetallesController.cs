@@ -41,15 +41,20 @@ namespace SIGEM_BIDSS.Controllers
         // GET: SolicitudReembolsoGastosDetalles/Create
         public ActionResult Create()
         {
+            int Id =Convert.ToInt32( Session["Reemga_Id"]) ;
+
+            tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle = new tbSolicitudReembolsoGastosDetalle();
+            tbSolicitudReembolsoGastosDetalle.Reemga_Id = Id;
+
 
             ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Id");
        
 
-
-
+            
             ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
-            return View();
+
+            return View(tbSolicitudReembolsoGastosDetalle);
         }
 
         // POST: SolicitudReembolsoGastosDetalles/Create
@@ -82,6 +87,14 @@ namespace SIGEM_BIDSS.Controllers
                         {
                             ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo", tbSolicitudReembolsoGastosDetalle.Reemga_Id);
                             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion", tbSolicitudReembolsoGastosDetalle.tpv_Id);
+
+
+                            ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Id");
+
+
+
+                            //ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo");
+                            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                             ModelState.AddModelError("", "Ya existe un detalle de esta solicitud.");
                             return View(tbSolicitudReembolsoGastosDetalle);
                         }
@@ -98,6 +111,13 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         TempData["swalfunction"] = GeneralFunctions._isCreated;
 
+
+                        ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Id");
+
+
+
+                        ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo");
+                        ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbSolicitudReembolsoGastosDetalle);
                     }
