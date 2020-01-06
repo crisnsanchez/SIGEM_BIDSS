@@ -33,21 +33,7 @@ $(window).ready(function () {
 
 
 //-----------Bloquear Ctrl + C y Ctrl + V
-//$('#dep_Codigo, #dep_Nombre, #mun_codigo, #mun_nombre').bind('keydown', function (event) {
-//    if (event.ctrlKey || event.metaKey) {
-//        switch (String.fromCharCode(event.which).toLowerCase()) {
-//            case 'c':
-//                event.preventDefault();
-//                console.log("Ctrl + C")
-//                break;
-//            case 'v':
-//                console.log("Ctrl + V")
 
-//                event.preventDefault();
-//                break;
-//        }
-//    }
-//})
 
 
 //-----------Aceptar solo numeros en los textbox
