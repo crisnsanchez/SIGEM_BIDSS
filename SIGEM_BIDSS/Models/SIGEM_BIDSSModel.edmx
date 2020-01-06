@@ -2491,17 +2491,6 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result)">
-            <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Lianvi_FechaLiquida" Mode="In" Type="DateTime" />
-            <Parameter Name="Lianvi_FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="Lianvi_FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="Lianvi_Comentario" Mode="In" Type="String" />
-            <Parameter Name="est_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
-            <Parameter Name="Lianvi_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="Lianvi_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
           <FunctionImport Name="UDP_Conf_tbParametro_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result)">
             <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
@@ -2798,6 +2787,17 @@
             <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
             <End Role="tbSolicitudReembolsoGastosDetalle" EntitySet="tbSolicitudReembolsoGastosDetalle" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" ReturnType="Collection(String)">
+            <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_FechaLiquida" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Lianvi_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -3622,9 +3622,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <EntityType Name="tbParametro">
           <Key>
             <PropertyRef Name="par_Id" />
@@ -4755,13 +4752,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="tbParametro">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
               <MappingFragment StoreEntitySet="tbParametro">
@@ -5090,6 +5080,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Insert" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
