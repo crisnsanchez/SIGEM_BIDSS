@@ -1,5 +1,5 @@
 ﻿$('#Inactivar').click(function () {
-    var prod_Codigo = $('#prod_Codigo').val();
+    var prod_Id = $('#prod_Id').val();
     var Activo = 0
     var Razon_Inactivacion = $('#razonInac').val();
     console.log(prod_Codigo)
@@ -15,13 +15,13 @@
             method: "POST",
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ prod_Codigo: prod_Codigo, Activo: Activo, Razon_Inactivacion: Razon_Inactivacion }),
+            data: JSON.stringify({ prod_Id: prod_Id, Activo: Activo, Razon_Inactivacion: Razon_Inactivacion }),
 
         })
             .done(function (data) {
                 if (data.length > 0) {
                     var url = $("#RedirectTo").val();
-                    location.href = url;
+                    location.reload();
                 }
                 else {
                     alert("Registro No Actualizado");
