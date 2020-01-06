@@ -2787,7 +2787,7 @@
             <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
             <End Role="tbSolicitudReembolsoGastosDetalle" EntitySet="tbSolicitudReembolsoGastosDetalle" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result)">
             <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
             <Parameter Name="Lianvi_FechaLiquida" Mode="In" Type="DateTime" />
             <Parameter Name="Lianvi_FechaInicio" Mode="In" Type="DateTime" />
@@ -4067,6 +4067,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5080,7 +5083,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Insert" />
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

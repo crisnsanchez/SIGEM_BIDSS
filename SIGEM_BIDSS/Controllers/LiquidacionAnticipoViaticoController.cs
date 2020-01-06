@@ -79,6 +79,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.uni_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
             tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
             tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = new tbLiquidacionAnticipoViatico();
             tbLiquidacionAnticipoViatico.Anvi_Id = tbAnticipoViatico.Anvi_Id;

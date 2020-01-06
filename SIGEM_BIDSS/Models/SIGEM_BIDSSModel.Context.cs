@@ -2973,7 +2973,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert", reemga_IdParameter, reemgaDet_FechaGastoParameter, tpv_IdParameter, reemgaDet_MontoGastoParameter, reemgaDet_ConceptoParameter, reemgaDet_ArchivoParameter, reemgaDet_TotalGastosParameter);
         }
     
-        public virtual ObjectResult<string> UDP_Adm_tbLiquidacionAnticipoViatico_Insert(Nullable<int> anvi_Id, Nullable<System.DateTime> lianvi_FechaLiquida, Nullable<System.DateTime> lianvi_FechaInicio, Nullable<System.DateTime> lianvi_FechaFin, string lianvi_Comentario, Nullable<int> est_Id, string lianvi_RazonRechazo, Nullable<int> lianvi_UsuarioCrea, Nullable<System.DateTime> lianvi_FechaCrea)
+        public virtual ObjectResult<UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result> UDP_Adm_tbLiquidacionAnticipoViatico_Insert(Nullable<int> anvi_Id, Nullable<System.DateTime> lianvi_FechaLiquida, Nullable<System.DateTime> lianvi_FechaInicio, Nullable<System.DateTime> lianvi_FechaFin, string lianvi_Comentario, Nullable<int> est_Id, string lianvi_RazonRechazo, Nullable<int> lianvi_UsuarioCrea, Nullable<System.DateTime> lianvi_FechaCrea)
         {
             var anvi_IdParameter = anvi_Id.HasValue ?
                 new ObjectParameter("Anvi_Id", anvi_Id) :
@@ -3011,7 +3011,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Lianvi_FechaCrea", lianvi_FechaCrea) :
                 new ObjectParameter("Lianvi_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Adm_tbLiquidacionAnticipoViatico_Insert", anvi_IdParameter, lianvi_FechaLiquidaParameter, lianvi_FechaInicioParameter, lianvi_FechaFinParameter, lianvi_ComentarioParameter, est_IdParameter, lianvi_RazonRechazoParameter, lianvi_UsuarioCreaParameter, lianvi_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result>("UDP_Adm_tbLiquidacionAnticipoViatico_Insert", anvi_IdParameter, lianvi_FechaLiquidaParameter, lianvi_FechaInicioParameter, lianvi_FechaFinParameter, lianvi_ComentarioParameter, est_IdParameter, lianvi_RazonRechazoParameter, lianvi_UsuarioCreaParameter, lianvi_FechaCreaParameter);
         }
     }
 }
