@@ -1,4 +1,19 @@
-﻿
+﻿document.addEventListener("input", function () {
+    $("input[type='text']", 'form').each(function () {
+        var _id = $(this).attr("id");
+        _value = document.getElementById(_id).value;
+        document.getElementById(_id).value = _value.trimStart();
+
+    });
+    $(".normalize", 'form').each(function (e) {
+        if (!/^[ A-Záéíóúüñ]*$/i.test(this.value)) {
+            this.value = this.value.replace(/[^ .,A-Záéíóúüñ]+/ig, "");
+        }
+    });
+})
+
+
+
 
 document.getElementById('prov_Email').addEventListener('input', function () {
     campo = event.target;
@@ -78,6 +93,25 @@ function CorreoElectronico(string) {//Algunos caracteres especiales para el corr
 $(document).on("change", "#dep_codigo", function () {
     GetMunicipios();
 });
+
+function soloLetrasDire(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz1234567890'#";
+    especiales = "8-37-39-46";
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
 
 
 

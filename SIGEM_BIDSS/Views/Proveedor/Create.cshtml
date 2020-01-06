@@ -137,9 +137,7 @@
 
                             <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
-
-
-                                @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control", MaxLength = 150, @onKeyPress = "return soloLetras(event)", @onkeyup = "this.value=NumText1(this.value)", @autocomplete = "off" })
+                                @Html.EditorFor(model => model.prov_Direccion, new { htmlAttributes = new { @class = "form-control", maxlength = "150" , @autocomplete = "off", @OnKeyPress = "return soloLetrasDire(event)" } })
                                 @Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger", @Id = "Direccion" })
                             </div>
                         </div>

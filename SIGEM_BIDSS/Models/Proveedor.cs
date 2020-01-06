@@ -43,10 +43,14 @@ namespace SIGEM_BIDSS.Models
         //[MinLength(11, ErrorMessage = "El campo Teléfono debe tener minimo {1} caracteres")]
         public string prov_Telefono { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+
         [Display(Name = "RTN")]
         public string prov_RTN { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+
         [Display(Name = "Actividad Económica")]
+
+
         public short acte_Id { get; set; }
   
 
