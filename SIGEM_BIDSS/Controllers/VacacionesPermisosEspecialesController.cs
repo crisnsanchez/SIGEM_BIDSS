@@ -136,8 +136,8 @@ namespace SIGEM_BIDSS.Controllers
                         var GetEmployee = Function.GetUserInfo(EmployeeID);
                         var EmpJefe = Function.GetUserInfo(tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
 
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, EmpJefe.strFor + EmpJefe.emp_Nombres, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, EmpJefe.emp_CorreoElectronico, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
 
                         if (!Result) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
@@ -163,8 +163,8 @@ namespace SIGEM_BIDSS.Controllers
         public bool UpdateState(out string pvReturn, tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales, int State, string RazonRechazo)
         {
             pvReturn = "";
-            string UserName = "", ErrorEmail = "", ErrorMessage = "", _msj = "";
-            bool Result = false;
+            string UserName = "", ErrorEmail = "", ErrorMessage = "", _msj = "", _msjFor = "";
+            bool Result = false, ResultFor = false;
             IEnumerable<object> Update = null;
             var reject = "";
 
@@ -175,54 +175,67 @@ namespace SIGEM_BIDSS.Controllers
                 tbVacacionesPermisosEspeciales.est_Id = State;
 
                 tbVacacionesPermisosEspeciales.VPE_RazonRechazo = RazonRechazo;
-
-                switch (State)
-                {
-                    case GeneralFunctions.Revisada:
-                        _msj = GeneralFunctions.msj_Revisada;
-                        break;
-                    case GeneralFunctions.AprobadaPorJefe:
-                        _msj = GeneralFunctions.msj_RevisadaPorJefe;
-                        break;
-                    case GeneralFunctions.Aprobada:
-                        _msj = GeneralFunctions.msj_Aprobada;
-                        break;
-                    case GeneralFunctions.Rechazada:
-                        _msj = GeneralFunctions.msj_Rechazada;
-                        reject = " Razon de Rechazo:";
-                        break;
-                }
-                var GetEmployee = Function.GetUserInfo(EmployeeID);
-                var Approver = Function.GetUserInfo(tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
-                if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
-
-                Result = Function.LeerDatos(out ErrorEmail, tbVacacionesPermisosEspeciales.VPE_Correlativo, GetEmployee.emp_Nombres, Approver.strFor + Approver.emp_Nombres, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, _msj, reject + " " + RazonRechazo);
-                Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
-
-                if (!Result)
-                {
-                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
-                    return false;
-                }
-                else
-                {
-                    Update = db.UDP_Adm_tbVacacionesPermisosEspeciales_Update(tbVacacionesPermisosEspeciales.VPE_Id,
+                Update = db.UDP_Adm_tbVacacionesPermisosEspeciales_Update(tbVacacionesPermisosEspeciales.VPE_Id,
                                                                               tbVacacionesPermisosEspeciales.est_Id,
                                                                               tbVacacionesPermisosEspeciales.VPE_RazonRechazo,
                                                                               EmployeeID,
                                                                               Function.DatetimeNow());
-                    foreach (UDP_Adm_tbVacacionesPermisosEspeciales_Update_Result Res in Update)
-                        ErrorMessage = Res.MensajeError;
-                        pvReturn = ErrorMessage;
-                    if (ErrorMessage.StartsWith("-1"))
-                    {
+                foreach (UDP_Adm_tbVacacionesPermisosEspeciales_Update_Result Res in Update)
+                    ErrorMessage = Res.MensajeError;
+                pvReturn = ErrorMessage;
+                if (ErrorMessage.StartsWith("-1"))
+                {
 
-                        Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
-                        ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
-                        return false;
-                    }
-                    return true;
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
+                    ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                    return false;
                 }
+                else
+                {
+                    var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                    var GetEmployee = Function.GetUserInfo(tbVacacionesPermisosEspeciales.emp_Id);
+                    var Approver = Function.GetUserInfo(EmployeeID);
+                    string Correlativo = tbVacacionesPermisosEspeciales.VPE_Correlativo;
+                    string Nombres = GetEmployee.emp_Nombres;
+                    string CorreoElectronico = GetEmployee.emp_CorreoElectronico;
+                    string sApprover = Approver.strFor + Approver.emp_Nombres;
+                    if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
+                    _msjFor = GeneralFunctions.msj_ToAdmin;
+                    switch (State)
+                    {
+                        case GeneralFunctions.Revisada:
+                            _msj = GeneralFunctions.msj_Revisada;
+                            break;
+                        case GeneralFunctions.AprobadaPorJefe:
+                            _msj = GeneralFunctions.msj_RevisadaPorJefe;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, sApprover, GeneralFunctions.stringEmpty, _Parameters.par_CorreoRRHH, _msjFor, GeneralFunctions.stringEmpty);
+                            break;
+                        case GeneralFunctions.AprobadaPorRRHH:
+                            _msj = GeneralFunctions.msj_RevisadaPorRRHH;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, sApprover, GeneralFunctions.stringEmpty, _Parameters.par_CorreoEmpresa, _msjFor, GeneralFunctions.stringEmpty);
+                            break;
+                        case GeneralFunctions.AprobadaPorAdmin:
+                            _msj = GeneralFunctions.msj_RevisadaPorAdmin;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, sApprover, GeneralFunctions.stringEmpty, CorreoElectronico, _msjFor, GeneralFunctions.stringEmpty);
+                            break;
+                        case GeneralFunctions.Aprobada:
+                            _msj = GeneralFunctions.msj_Aprobada;
+                            break;
+                        case GeneralFunctions.Rechazada:
+                            _msj = GeneralFunctions.msj_Rechazada;
+                            reject = " Razon de Rechazo:";
+                            break;
+                    }
+                    Result = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, sApprover, GeneralFunctions.stringEmpty, CorreoElectronico, _msj, reject + " " + RazonRechazo);
+
+
+
+                    if (!Result) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+                    if (!ResultFor) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+
+                }
+                return true;
+
             }
             catch (Exception ex)
             {
@@ -320,7 +333,7 @@ namespace SIGEM_BIDSS.Controllers
             tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales = db.tbVacacionesPermisosEspeciales.Find(id);
             if (tbVacacionesPermisosEspeciales.est_Id == GeneralFunctions.Revisada)
             {
-                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.AprobadaPorJefe, GeneralFunctions.stringDefault))
+                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.AprobadaPorAdmin, GeneralFunctions.stringDefault))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
                     list = vReturn;

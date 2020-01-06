@@ -69,7 +69,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Estado")]
         public int est_Id { get; set; }
 
-        [Display(Name = "Razon de Rechazo")]
+        [Display(Name = "Razón de Rechazo")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
         [MaxLength(250, ErrorMessage = "Máximo {1} caracteres")]
         public string Ansal_RazonRechazo { get; set; }
