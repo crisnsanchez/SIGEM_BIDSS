@@ -111,8 +111,12 @@ namespace SIGEM_BIDSS.Controllers
             {
                 int EmployeeID = Function.GetUser(out UserName);
 
-                int fecha = Function.DatetimeNow().Year;
-                int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
+                int Year = Function.DatetimeNow().Year;
+                int Month = Function.DatetimeNow().Month;
+
+                int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == Year && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
+                int SolCountMonth = (from _tbSol in db.tbAnticipoSalario where _tbSol.emp_Id == EmployeeID &&  _tbSol.Ansal_FechaCrea.Month == Month && _tbSol.Ansal_FechaCrea.Year == Year  select _tbSol).Count();
+
                 var _Parameters = db.tbParametro.FirstOrDefault();
                 if (_Parameters == null)
                 {
@@ -120,7 +124,12 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 if (SolCount >= _Parameters.par_FrecuenciaAdelantoSalario)
                 {
-                    TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
+                    TempData["swalfunction"] = GeneralFunctions.YearLimit;
+                    return RedirectToAction("Solicitud", "Menu");
+                }
+                if (SolCount >= 6)
+                {
+                    TempData["swalfunction"] = GeneralFunctions.MonthLimit;
                     return RedirectToAction("Solicitud", "Menu");
                 }
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
@@ -153,7 +162,7 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "", ErrorEmail = "", ErrorMessage = "";
             bool Result = false, ResultAdm = false;
             IEnumerable<object> Insert = null;
-
+            cGetUserInfo GetEmployee = null;
             try
             {
 
@@ -207,10 +216,10 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        var GetEmployee = Function.GetUserInfo(EmployeeID);
+                        GetEmployee = Function.GetUserInfo(EmployeeID);
 
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, _Parameters.par_NombreEmpresa, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, _Parameters.par_CorreoEmpresa);
 
                         if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
@@ -234,15 +243,15 @@ namespace SIGEM_BIDSS.Controllers
 
         public bool UpdateState(out string pvReturn, tbAnticipoSalario tbAnticipoSalario, int State, string RazonRechazo)
         {
-            string UserName = "",
-                ErrorEmail = "";
-            bool Result = false;
             pvReturn = "";
+            string UserName = "",
+                ErrorEmail = "",
+                ErrorMessage = "", 
+                _msj = "", 
+                reject = "";
+            bool Result = false;
             IEnumerable<object> Update = null;
-            string ErrorMessage = "";
-            string _msj = "";
-            var reject = "";
-
+            cGetUserInfo GetEmployee = null, Approver = null;
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
@@ -279,14 +288,11 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
 
-                    var GetEmployee = Function.GetUserInfo(tbAnticipoSalario.emp_Id);
-                    var Approver = Function.GetUserInfo(EmployeeID);
+                    GetEmployee = Function.GetUserInfo(tbAnticipoSalario.emp_Id);
+                    Approver = Function.GetUserInfo(EmployeeID);
                     if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
 
-                    Result = Function.LeerDatos(out ErrorEmail,
-                                                tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres,
-                                                Approver.strFor + Approver.emp_Nombres, GeneralFunctions.stringEmpty,
-                                                GetEmployee.emp_CorreoElectronico, _msj, reject + " " + RazonRechazo);
+                    Result = Function.LeerDatos(out ErrorEmail, tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + RazonRechazo, Approver.strFor + Approver.emp_Nombres, GetEmployee.emp_CorreoElectronico);
 
                     if (!Result)
                     {

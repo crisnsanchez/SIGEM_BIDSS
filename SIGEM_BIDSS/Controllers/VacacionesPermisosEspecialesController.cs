@@ -208,15 +208,15 @@ namespace SIGEM_BIDSS.Controllers
                             break;
                         case GeneralFunctions.AprobadaPorJefe:
                             _msj = GeneralFunctions.msj_RevisadaPorJefe;
-                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, sApprover, GeneralFunctions.stringEmpty, _Parameters.par_CorreoRRHH, _msjFor, GeneralFunctions.stringEmpty);
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
                             break;
                         case GeneralFunctions.AprobadaPorRRHH:
                             _msj = GeneralFunctions.msj_RevisadaPorRRHH;
-                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, sApprover, GeneralFunctions.stringEmpty, _Parameters.par_CorreoEmpresa, _msjFor, GeneralFunctions.stringEmpty);
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
                             break;
                         case GeneralFunctions.AprobadaPorAdmin:
                             _msj = GeneralFunctions.msj_RevisadaPorAdmin;
-                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, sApprover, GeneralFunctions.stringEmpty, CorreoElectronico, _msjFor, GeneralFunctions.stringEmpty);
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
                             break;
                         case GeneralFunctions.Aprobada:
                             _msj = GeneralFunctions.msj_Aprobada;
@@ -226,8 +226,7 @@ namespace SIGEM_BIDSS.Controllers
                             reject = " Razon de Rechazo:";
                             break;
                     }
-                    Result = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, sApprover, GeneralFunctions.stringEmpty, CorreoElectronico, _msj, reject + " " + RazonRechazo);
-
+                    Result = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + RazonRechazo, sApprover, CorreoElectronico);
 
 
                     if (!Result) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
