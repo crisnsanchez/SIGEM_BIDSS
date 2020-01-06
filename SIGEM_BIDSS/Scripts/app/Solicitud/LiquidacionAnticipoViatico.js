@@ -131,7 +131,7 @@ $('#AgregarDetalle').click(function() {
 
             }).done(function(data) {
                 $('#Lianvide_FechaGasto').val(''),
-                    $('#tpv_Id').text(''),
+                    $('#tpv_Id').text(),
                     $('#Lianvide_Concepto').val(''),
                     $('#Archivo_Name').text(''),
                     $('#Lianvide_MontoGasto').val(''),
