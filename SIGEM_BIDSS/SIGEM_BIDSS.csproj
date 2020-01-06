@@ -208,6 +208,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosController.cs" />
+    <Compile Include="Controllers\SolicitudReembolsoGastosDetallesController.cs" />
     <Compile Include="Controllers\SueldoController.cs" />
     <Compile Include="Controllers\TipoPermisoController.cs" />
     <Compile Include="Controllers\TipoMovimientoController.cs" />
@@ -230,6 +231,7 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Solicitud\ReembolsoGastos.cs" />
+    <Compile Include="Models\Solicitud\ReembolsoGastosDetalle.cs" />
     <Compile Include="Models\Solicitud\VacacionesPermisosEspeciales.cs" />
     <Compile Include="Models\spGetCategoria_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
@@ -3481,6 +3483,11 @@
     <Content Include="Views\VacacionesPermisosEspeciales\Details.cshtml" />
     <Content Include="Views\VacacionesPermisosEspeciales\Index.cshtml" />
     <Content Include="Views\VacacionesPermisosEspeciales\_Modales.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalles\Create.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalles\Delete.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalles\Details.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalles\Edit.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalles\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

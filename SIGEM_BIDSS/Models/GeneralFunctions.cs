@@ -69,6 +69,10 @@ namespace SIGEM_BIDSS.Models
         public const string sol_Rechazada = "Rechazada";
         public const string msj_Rechazada = "Su solicituda a sido rechazada";
 
+        public const string MonthLimit = "MonthLimit";
+        public const string YearLimit = "YearLimit";
+
+
         //Estados Solicitud
         public const int Enviada = 1;
         public const int Revisada = 2;
@@ -176,7 +180,7 @@ namespace SIGEM_BIDSS.Models
             db.UDP_Acce_tbBitacoraErrores_Insert(Controller, Action, User, DatetimeNow(), ErrorMessage);
         }
 
-        public bool LeerDatos(out string pvMensajeError, string Reference, string _empName, string Approver, string WelcomeName, string MailTo, string _msj, string _RazonRechazo)
+        public bool LeerDatos(out string pvMensajeError, string Reference, string WelcomeName, string Empleado, string _msj, string _RazonRechazo, string Approver, string CorreoDestinatario)
         {
             pvMensajeError = "";
             string UserName = "",
@@ -195,12 +199,12 @@ namespace SIGEM_BIDSS.Models
             lsRutaPlantilla = System.AppContext.BaseDirectory + "Content\\Email\\Solicitud.xml";
 
             lsXMLDatos = @"<principal>
-                        <to>" + _empName + "</to>" +
+                        <welcome>" + WelcomeName+ "</welcome>" +
                           @"<nref>REF:(" + Reference + ")</nref>" +
-                          @"<EmployeeName>" + WelcomeName + "</EmployeeName>" +
+                          @"<EmployeeName>" + Empleado + "</EmployeeName>" +
                           @"<msj>" + _msj + "</msj>" +
-                           @"<approver>" + Approver + "</approver>" +
                           @"<RazonRechazo>" + _RazonRechazo + "</RazonRechazo>" +
+                           @"<approver>" + Approver + "</approver>" +
                          "</principal>";
 
             State = EmailGenerar_Body(lsRutaPlantilla, lsXMLDatos, out lsXMLEnvio, out pvMensajeError);
@@ -208,7 +212,7 @@ namespace SIGEM_BIDSS.Models
             {
                 //Si todo está bien procedo a enviar correo
                 var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                StateIn = enviarCorreo(out pvMensajeError, _Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, MailTo, _Parameters.par_Servidor, _Parameters.par_Puerto.ToString());
+                StateIn = enviarCorreo(out pvMensajeError, _Parameters.par_CorreoEmisor, _Parameters.par_Password, lsXMLEnvio, lsSubject, CorreoDestinatario, _Parameters.par_Servidor, _Parameters.par_Puerto.ToString());
                 if (StateIn != 1)
                     return true;
                 else

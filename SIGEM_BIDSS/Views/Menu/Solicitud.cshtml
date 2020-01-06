@@ -139,12 +139,16 @@
             //Mensaje que mostrar segun funcion
             _Action = $('#vSwal').val();
             console.log(_Action)
-            if (_Action == "Rechazada") {
-                console.log("Verdadero")
-
+            if (_Action == "YearLimit") {
                 Toast.fire({
                     type: 'error',
                     title: 'Ha alcanzado el limite de solicitudes.'
+                })
+            }
+            else if (_Action == "MonthLimit") {
+                Toast.fire({
+                    type: 'error',
+                    title: 'Ha alcanzado el limite mensual de solicitudes.'
                 })
             }
         })
