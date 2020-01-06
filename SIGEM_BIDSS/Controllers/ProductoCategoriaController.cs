@@ -68,7 +68,7 @@ namespace SIGEM_BIDSS.Controllers
                         if (MsjError.StartsWith("-1"))
                         {
                            
-                            ModelState.AddModelError("", "1. No se pudo insertar el registro, favor contacte al administrador." + MsjError);
+                            ModelState.AddModelError("", "Ya existe una Categoría con ese nombre, agregue otra.");
                             return View(tbProductoCategoria);
                         }
                         else
