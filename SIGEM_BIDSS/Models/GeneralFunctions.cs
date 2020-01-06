@@ -61,6 +61,10 @@ namespace SIGEM_BIDSS.Models
         public const string sol_Aprobada = "Aceptada";
         public const string msj_Aprobada = "Su solicituda a sido aprobada";
         public const string msj_RevisadaPorJefe = "Su solicituda a sido aprobada por su Jefe Inmediato";
+        public const string msj_RevisadaPorRRHH = "Su solicituda a sido aprobada por Recursos Humanos";
+        public const string msj_RevisadaPorAdmin = "Su solicituda a sido aprobada por la Administracion";
+
+
 
         public const string sol_Rechazada = "Rechazada";
         public const string msj_Rechazada = "Su solicituda a sido rechazada";
@@ -71,7 +75,8 @@ namespace SIGEM_BIDSS.Models
         public const int Aprobada = 3;
         public const int Rechazada = 4;
         public const int AprobadaPorJefe = 5;
-        public const int AprobadaPorRRHH = 5;
+        public const int AprobadaPorRRHH = 6;
+        public const int AprobadaPorAdmin = 7;
 
 
 
@@ -171,7 +176,7 @@ namespace SIGEM_BIDSS.Models
             db.UDP_Acce_tbBitacoraErrores_Insert(Controller, Action, User, DatetimeNow(), ErrorMessage);
         }
 
-        public bool LeerDatos(out string pvMensajeError, string Reference, string _empName, string Approver, string _Mail, string MailTo, string _msj, string _RazonRechazo)
+        public bool LeerDatos(out string pvMensajeError, string Reference, string _empName, string Approver, string WelcomeName, string MailTo, string _msj, string _RazonRechazo)
         {
             pvMensajeError = "";
             string UserName = "",
@@ -192,7 +197,7 @@ namespace SIGEM_BIDSS.Models
             lsXMLDatos = @"<principal>
                         <to>" + _empName + "</to>" +
                           @"<nref>REF:(" + Reference + ")</nref>" +
-                          @"<EmployeeName>" + _Mail + "</EmployeeName>" +
+                          @"<EmployeeName>" + WelcomeName + "</EmployeeName>" +
                           @"<msj>" + _msj + "</msj>" +
                            @"<approver>" + Approver + "</approver>" +
                           @"<RazonRechazo>" + _RazonRechazo + "</RazonRechazo>" +

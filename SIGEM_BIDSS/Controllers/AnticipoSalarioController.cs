@@ -210,7 +210,7 @@ namespace SIGEM_BIDSS.Controllers
                         var GetEmployee = Function.GetUserInfo(EmployeeID);
 
                         Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, _Parameters.par_NombreEmpresa, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
 
                         if (!Result) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("AnticipoSalario", "CreatePost", UserName, ErrorEmail);
@@ -248,55 +248,53 @@ namespace SIGEM_BIDSS.Controllers
                 int EmployeeID = Function.GetUser(out UserName);
                 tbAnticipoSalario.est_Id = State;
                 tbAnticipoSalario.Ansal_RazonRechazo = RazonRechazo;
-            
-                switch (State)
-                {
-                    case GeneralFunctions.Revisada:
-                        _msj = GeneralFunctions.msj_Revisada;
-                        break;
-                    case GeneralFunctions.Aprobada:
-                        _msj = GeneralFunctions.msj_Aprobada;
-                        break;
-                    case GeneralFunctions.Rechazada:
-                        _msj = GeneralFunctions.msj_Rechazada;
-                        reject = " Razon de Rechazo:";
-                        break;
-                }
-                if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
-               
-                var GetEmployee = Function.GetUserInfo(tbAnticipoSalario.emp_Id);
-                var Approver = Function.GetUserInfo(EmployeeID);
-                if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
-
-                Result = Function.LeerDatos(out ErrorEmail, 
-                                            tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres, 
-                                            Approver.strFor + Approver.emp_Nombres, GeneralFunctions.stringEmpty, 
-                                            GetEmployee.emp_CorreoElectronico, _msj, reject + " " + RazonRechazo);
-
-                if (!Result)
-                {
-                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
-                    return false;
-                }
-                else
-                {
-                    Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
+                Update = db.UDP_Adm_tbAnticipoSalario_Update(tbAnticipoSalario.Ansal_Id,
                                                                 tbAnticipoSalario.est_Id,
                                                                 tbAnticipoSalario.Ansal_RazonRechazo,
                                                                 EmployeeID,
                                                                 Function.DatetimeNow());
-                    foreach (UDP_Adm_tbAnticipoSalario_Update_Result Res in Update)
-                        ErrorMessage = Res.MensajeError;
-                    pvReturn = ErrorMessage;
-                    if (ErrorMessage.StartsWith("-1"))
+                foreach (UDP_Adm_tbAnticipoSalario_Update_Result Res in Update)
+                    ErrorMessage = Res.MensajeError;
+                pvReturn = ErrorMessage;
+                if (ErrorMessage.StartsWith("-1"))
+                {
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
+                    ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                    return false;
+                }
+                else
+                {
+                    switch (State)
                     {
+                        case GeneralFunctions.Revisada:
+                            _msj = GeneralFunctions.msj_Revisada;
+                            break;
+                        case GeneralFunctions.Aprobada:
+                            _msj = GeneralFunctions.msj_Aprobada;
+                            break;
+                        case GeneralFunctions.Rechazada:
+                            _msj = GeneralFunctions.msj_Rechazada;
+                            reject = " Razon de Rechazo:";
+                            break;
+                    }
+                    if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
 
-                        Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
-                        ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                    var GetEmployee = Function.GetUserInfo(tbAnticipoSalario.emp_Id);
+                    var Approver = Function.GetUserInfo(EmployeeID);
+                    if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
+
+                    Result = Function.LeerDatos(out ErrorEmail,
+                                                tbAnticipoSalario.Ansal_Correlativo, GetEmployee.emp_Nombres,
+                                                Approver.strFor + Approver.emp_Nombres, GeneralFunctions.stringEmpty,
+                                                GetEmployee.emp_CorreoElectronico, _msj, reject + " " + RazonRechazo);
+
+                    if (!Result)
+                    {
+                        Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail);
                         return false;
                     }
-                    return true;
                 }
+                return true;
             }
             catch (Exception ex)
             {
