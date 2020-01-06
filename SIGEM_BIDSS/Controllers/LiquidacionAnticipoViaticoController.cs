@@ -22,7 +22,8 @@ namespace SIGEM_BIDSS.Controllers
         // GET: LiquidacionAnticipoViatico
         public ActionResult Index()
         {
-            var tbAnticipoViatico = db.tbAnticipoViatico.Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMunicipio).Include(t => t.tbTipoTransporte);
+            
+            var tbAnticipoViatico = db.tbAnticipoViatico.Where(t=>t.est_Id==GeneralFunctions.Aprobada).Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMunicipio).Include(t => t.tbTipoTransporte);
             return View(tbAnticipoViatico.ToList());
         }
 
@@ -50,15 +51,21 @@ namespace SIGEM_BIDSS.Controllers
         {
 
             string MASspan = "",  MASspan1 = "", MASspanFecha = "";
-            if (cCalFechas.FechaInicio > cCalFechas.FechaFin)
+            if (cCalFechas.FechaInicio >= cCalFechas.FechaFin)
             {
                 MASspanFecha = "1";
                 MASspan1 = "La Fecha de regreso no puede ser menor que la inicio";
             }
-          else  if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
+           if (cCalFechas.FechaFin >= Function.DatetimeNow())
             {
                 MASspan1 = "";
                    MASspanFecha = "2";
+                MASspan = "La Fecha de regreso no puede ser mayor a la fecha actual";
+            }
+            if (cCalFechas.FechaInicio >= Function.DatetimeNow())
+            {
+                MASspan1 = "";
+                MASspanFecha = "2";
                 MASspan = "La Fecha de inicio no puede ser mayor que la  fecha de regreso";
             }
             object vCalcular = new { MASspan, MASspan1, MASspanFecha };
@@ -106,6 +113,7 @@ namespace SIGEM_BIDSS.Controllers
                 ErrorEmail = "";
                 try
                 {
+                    cGetUserInfo GetEmployee = null;
                     if (ModelState.IsValid)
                     {
                         int EmployeeID = Function.GetUser(out UserName);
@@ -132,19 +140,22 @@ namespace SIGEM_BIDSS.Controllers
 
                         else
                         {
-                            var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                          
                             var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                            Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
-                            ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+                            GetEmployee = Function.GetUserInfo(EmployeeID);
+
+                            Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
+                            ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, _Parameters.par_CorreoEmpresa);
 
                             if (!Result) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
                             if (!ResultAdm) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
                             TempData["swalfunction"] = "true";
-                            //return RedirectToAction("Create", "tbLiquidacionAnticipoViatico.Lianvi_Id", "LiquidacionAnticipoViaticoDetalle");
-                        
-                            //return RedirectToAction("Create", new RouteValueDictionary(new { controller = LiquidacionAnticipoViaticoDetalle, action = "Main", Id = Id }));
-                            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle", new { LianviId = Id });
 
+                            
+                            Session["NombreLiquidacion"] = ErrorMessage;
+
+
+                            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
 
 
                         }
