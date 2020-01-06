@@ -59,7 +59,7 @@
 
                             @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @style = "background-color:white" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "spanFechaFin" })
-                            @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "MASspanFecha" })
+                          
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
                         @Html.LabelFor(model => model.Lianvi_Comentario, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
                             <div class="col-md-13">
-                                <textarea class="form-control" name="Lianvi_Comentario"></textarea>
+                                <textarea class="form-control" name="Lianvi_Comentario" maxlength="250"></textarea>
                                 @Html.ValidationMessageFor(model => model.Lianvi_Comentario, "", new { @class = "text-danger" })
                             </div>
 

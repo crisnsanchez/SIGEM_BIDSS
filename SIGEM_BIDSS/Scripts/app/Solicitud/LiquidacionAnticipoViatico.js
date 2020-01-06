@@ -1,9 +1,6 @@
 ﻿
 var contador = 0;
-
-
-
-
+ 
 /////DATE PICKER//////////////////////
 $('#Lianvi_FechaInicioViaje,#Lianvi_FechaFinViaje,#Lianvi_FechaLiquida,#Lianvide_FechaGasto').datepicker({
     format: "dd/mm/yyyy",
