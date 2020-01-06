@@ -33,7 +33,7 @@ namespace SIGEM_BIDSS.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Display(Name = "Concepto")]
         public string Lianvide_Concepto { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+      
         [Display(Name = "Archivo")]
         public string Lianvide_Archivo { get; set; }
    

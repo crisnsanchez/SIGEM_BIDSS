@@ -131,11 +131,8 @@ $('#AgregarDetalle').click(function () {
 });
 function GetLiquidacionViatico() {
     var LIQUIDACIONDETALLE = {
-      
-
-
-    
         tpv_Id: $('#tpv_Id').val(),
+        Lianvi_Id: $('#Lianvi_Id').val(),
         Lianvide_FechaGasto: $('#Lianvide_FechaGasto').val(),
         Lianvide_MontoGasto: $('#bodd_CantidadMaxima').val(),
         LianvideArchivo: $('#Lianvide_Archivo').val(),
@@ -145,13 +142,54 @@ function GetLiquidacionViatico() {
     };
     return LIQUIDACIONDETALLE;
 }
+
+
+$(document).on("click", "#dataTable tbody tr td button#RemoveDetalle", function() {
+    idItem = $(this).closest('tr').data('id');
+    var vIdDetalle = $(this).closest("tr").find("td:eq(0)").text();
+    var tbLquidacionDetalle = {
+        Lianvi_Id: vIdDetalle,
+        Lianvide_UsuarioCrea: vIdDetalle
+    };
+    var table = $('#dataTable').DataTable();
+    table
+        .row($(this).parents('tr'))
+        .remove()
+        .draw();
+
+    $.ajax({
+        url: "/LiquidacionAnticipoViaticoDetalle/RemoveDetalle",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ LiquidacionDetalle: tbLquidacionDetalle }),
+        success: function(data) {
+            contador = contador - 1
+            console.log("Contador: " + contador)
+            RejectUnload()
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///REMOVER EL DETALLE
 $(document).on("click", "#dataTable tbody tr td button#RemoveDetalle", function () {
    
     $(this).closest('tr').remove();
     idItem = $(this).closest('tr').data('id');
     var borrar = {
-        pscat_Id: idItem,
+        Lianvide_Id: idItem,
     };
     $.ajax({
         url: "/LiquidacionAnticipoViaticoDetalle/RemoveDetalle",

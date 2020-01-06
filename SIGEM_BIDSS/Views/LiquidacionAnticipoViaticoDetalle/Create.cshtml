@@ -26,7 +26,6 @@
     @using (Html.BeginForm(null, null, FormMethod.Post, FormMethod.Post, new { id = "frmAnticipoViatico" }))
     {
         @Html.AntiForgeryToken()
-                @Html.HiddenFor(model => model.Lianvi_Id)
         @*@Html.HiddenFor(model => model.Anvi_Id)
             @Html.HiddenFor(model => model.est_Id)*@
 

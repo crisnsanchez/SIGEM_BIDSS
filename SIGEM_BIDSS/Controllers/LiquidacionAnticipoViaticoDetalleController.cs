@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Transactions;
@@ -44,7 +45,7 @@ namespace SIGEM_BIDSS.Controllers
         //GET: LiquidacionAnticipoViaticoDetalle/Create
         public ActionResult Create( int? id)
         {
-
+            Session["tbLiquidacionAnticipoViaticoDetalle"] = null;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -60,6 +61,7 @@ namespace SIGEM_BIDSS.Controllers
                 return HttpNotFound();
             }
             return View();
+         
 
         }
 
@@ -97,15 +99,18 @@ namespace SIGEM_BIDSS.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Lianvide_Id,Lianvi_Id,Lianvide_FechaGasto,tpv_Id,Lianvide_MontoGasto,Lianvide_Concepto,Lianvide_Archivo,Lianvide_UsuarioCrea,Lianvide_FechaCrea,Lianvide_UsuarioModifica,Lianvide_FechaModifica")] tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle)
+        public ActionResult Create([Bind(Include = "Lianvide_Id,Lianvi_Id,Lianvide_FechaGasto,tpv_Id,Lianvide_MontoGasto,Lianvide_Concepto,Lianvide_UsuarioCrea,Lianvide_FechaCrea,Lianvide_UsuarioModifica,Lianvide_FechaModifica")] tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle, HttpPostedFileBase ArchivoPath)
         {
 
 
             {
                 string UserName = "";
-              
+               
+
                 try
                 {
+
+
                     if (ModelState.IsValid)
                     {
                         int EmployeeID = Function.GetUser(out UserName);
@@ -114,7 +119,7 @@ namespace SIGEM_BIDSS.Controllers
                         IEnumerable<object> _List = null;
                         string ErrorMessage = "";
                         _List = db.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id,
-                                                                              tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id,
+                                                                              1,
                                                                               tbLiquidacionAnticipoViaticoDetalle.Lianvide_FechaGasto,
                                                                               tbLiquidacionAnticipoViaticoDetalle.tpv_Id,
                                                                               tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto,
@@ -225,18 +230,20 @@ namespace SIGEM_BIDSS.Controllers
             }
             base.Dispose(disposing);
         }
+
         [HttpPost]
-        public JsonResult RemoveDetalle(tbLiquidacionAnticipoViaticoDetalle LiquidacionAnticipoViaticoDetalle)
+        public JsonResult RemoveDetalle(tbLiquidacionAnticipoViaticoDetalle LiquidacionDetalle)
         {
             var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["tbLiquidacionAnticipoViaticoDetalle"];
 
             if (list != null)
             {
-                var itemToRemove = list.Single(r => r.Lianvide_Id == LiquidacionAnticipoViaticoDetalle.Lianvide_Id);
+                var itemToRemove = list.Single(r => r.Lianvide_Id == LiquidacionDetalle.Lianvide_Id);
                 list.Remove(itemToRemove);
+     
                 Session["tbLiquidacionAnticipoViaticoDetalle"] = list;
             }
-            return Json("Exito", JsonRequestBehavior.AllowGet);
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 
