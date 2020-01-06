@@ -59,6 +59,7 @@
 
                             @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @style = "background-color:white" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "spanFechaFin" })
+                            @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "MASspanFecha" })
                         </div>
                     </div>
 
@@ -105,27 +106,9 @@
 
     <script>
 
-        //$("#Lianvi_FechaFinViaje").blur(function () {
-        //    FechaLiquidacion = document.getElementById('FechaLiquidacion');
-        //    spanFechaFin = document.getElementById('spanFechaFin');
-
-        //    var FechaLiquidacion = $('#Lianvi_FechaLiquida').val();
-        //    var spanFechaFin = $('#Lianvi_FechaFinViaje').val();
-
-        //    FechaLiquidacion.setDate(spanFechaFin.getDate() + 30);
-        //});
-
-        //$("#Lianvi_FechaFinViaje").blur(function addDays(spanFechaFin, days) {
-
-
-        //    //function addDays(spanFechaFin, days) {
-        //    const FechaLiquidacion = new Date(Number(spanFechaFin))
-        //    FechaLiquidacion.setDate(spanFechaFin.getDate() + days)
-        //    return FechaLiquidacion
-
-        //});
-        //const spanFechaFin = new Date();
-        //const newDate = addDays(spanFechaFin, 10);
+        $("#Lianvi_FechaFinViaje").keyup(function () {
+            $('#spanFechaFin').hide();
+        });
 
     </script>
 }
