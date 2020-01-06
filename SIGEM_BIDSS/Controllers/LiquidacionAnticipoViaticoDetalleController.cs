@@ -43,24 +43,21 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         //GET: LiquidacionAnticipoViaticoDetalle/Create
-        public ActionResult Create( int? id)
+        public ActionResult Create( )
         {
-            Session["tbLiquidacionAnticipoViaticoDetalle"] = null;
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+            
+
+         int Id =  Convert.ToInt32(Session["NombreLiquidacion"]);
+
             tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle = new tbLiquidacionAnticipoViaticoDetalle();
-            tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id = tbLiquidacionAnticipoViatico.Lianvi_Id;
-      
+            tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id = Id;
             ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
-            if (tbLiquidacionAnticipoViatico == null)
+            if (tbLiquidacionAnticipoViaticoDetalle == null)
             {
                 return HttpNotFound();
             }
-            return View();
+            return View(tbLiquidacionAnticipoViaticoDetalle);
          
 
         }
@@ -151,7 +148,6 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
 
-                    return RedirectToAction("Create", "tbLiquidacionAnticipoViatico.Lianvi_Id", "LiquidacionAnticipoViaticoDetalle");
                 }
             }
             return View(tbLiquidacionAnticipoViaticoDetalle);
