@@ -223,8 +223,8 @@
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\Categorias.cs" />
-    <Compile Include="Models\LiquidacionAnticipoViaticodetalle.cs" />
-    <Compile Include="Models\LiquidacionAnticipoViatico.cs" />
+    <Compile Include="Models\Solicitud\LiquidacionAnticipoViaticodetalle.cs" />
+    <Compile Include="Models\Solicitud\LiquidacionAnticipoViatico.cs" />
     <Compile Include="Models\Productos.cs" />
     <Compile Include="Models\SDP_tbProductoSubcategoria_Select_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
