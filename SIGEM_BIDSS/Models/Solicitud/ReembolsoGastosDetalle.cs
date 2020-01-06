@@ -7,6 +7,10 @@ using System.Web;
 namespace SIGEM_BIDSS.Models.Solicitud
 {
     [MetadataType(typeof(ReembolsoGastosDetalleMetaData))]
+    public partial class tbSolicitudReembolsoGastosDetalle
+    {
+       
+    }
     public class ReembolsoGastosDetalleMetaData
     {
 
@@ -24,7 +28,7 @@ namespace SIGEM_BIDSS.Models.Solicitud
         public System.DateTime ReemgaDet_FechaGasto { get; set; }
 
 
-        [Display(Name = "Tipo Viático")]
+        [Display(Name = "Gasto")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int tpv_Id { get; set; }
 
@@ -38,9 +42,7 @@ namespace SIGEM_BIDSS.Models.Solicitud
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string ReemgaDet_Concepto { get; set; }
 
-
         [Display(Name = "Archivo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string ReemgaDet_Archivo { get; set; }
 
 
@@ -50,10 +52,5 @@ namespace SIGEM_BIDSS.Models.Solicitud
 
         public virtual tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos { get; set; }
         public virtual tbTipoViatico tbTipoViatico { get; set; }
-    }
-
-    public partial class tbSolicitudReembolsoGastosDetalle
-    {
-  
     }
 }
