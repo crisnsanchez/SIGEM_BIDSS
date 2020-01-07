@@ -3501,9 +3501,7 @@
     <Content Include="Views\ProductoCategoria\_CrearSubCategoria.cshtml" />
     <Content Include="Views\ProductoCategoria\_DetalleSubCategoria.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Create.cshtml" />
-    <Content Include="Views\SolicitudReembolsoGastos\Delete.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Details.cshtml" />
-    <Content Include="Views\SolicitudReembolsoGastos\Edit.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\Index.cshtml" />
     <Content Include="Views\AnticipoViatico\_Modales.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
