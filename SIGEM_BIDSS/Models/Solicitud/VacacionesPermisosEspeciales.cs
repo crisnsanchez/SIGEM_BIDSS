@@ -38,14 +38,17 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Fecha de Solicitud")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public System.DateTime VPE_GralFechaSolicitud { get; set; }
 
         [Display(Name = "Fecha de Inicio")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public System.DateTime VPE_FechaInicio { get; set; }
 
         [Display(Name = "Fecha de Finalizacion")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public System.DateTime VPE_FechaFin { get; set; }
 
         [Display(Name = "Cantidad de Dias")]
