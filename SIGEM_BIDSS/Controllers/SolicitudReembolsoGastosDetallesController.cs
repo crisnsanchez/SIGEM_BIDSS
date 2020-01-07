@@ -23,6 +23,20 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbSolicitudReembolsoGastosDetalle.ToList());
         }
 
+
+        [HttpPost]
+        public JsonResult RemoveReembolso(tbSolicitudReembolsoGastosDetalle ReembolsoD)
+        {
+            var list = (List<tbSolicitudReembolsoGastosDetalle>)Session["ReemGa"];
+
+            if (list != null)
+            {
+                var itemToRemove = list.Single(r => r.tpv_Id == ReembolsoD.tpv_Id);
+                list.Remove(itemToRemove);
+                Session["ReemGa"] = list;
+            }
+            return Json("Exito", JsonRequestBehavior.AllowGet);
+        }
         // GET: SolicitudReembolsoGastosDetalles/Details/5
         public ActionResult Details(int? id)
         {
@@ -49,7 +63,7 @@ namespace SIGEM_BIDSS.Controllers
             decimal ReemgaDet_MontoGasto = tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto;
             List<tbSolicitudReembolsoGastosDetalle> sessionSolicitudReembolsoDetalle = new List<tbSolicitudReembolsoGastosDetalle>();
             var list = (List<tbSolicitudReembolsoGastosDetalle>)Session["ReembolsoDetalle"];
-            int ReturnId = tbSolicitudReembolsoGastosDetalle.ReemgaDet_Id;
+            
             if (list == null)
             {
                 sessionSolicitudReembolsoDetalle.Add(tbSolicitudReembolsoGastosDetalle);
@@ -66,13 +80,13 @@ namespace SIGEM_BIDSS.Controllers
                                 CantidadVieja = viejo.ReemgaDet_MontoGasto;
                         CantidadNueva = CantidadVieja + tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto;
                         ReembolsoDetalles.ReemgaDet_MontoGasto = CantidadNueva;
-                        return Json(ReturnId, JsonRequestBehavior.AllowGet);
+                        return Json(datos, JsonRequestBehavior.AllowGet);
                     }
                 list.Add(tbSolicitudReembolsoGastosDetalle);
                 Session["ReembolsoDetalle"] = list;
-                return Json(ReturnId, JsonRequestBehavior.AllowGet);
+                return Json(datos, JsonRequestBehavior.AllowGet);
             }
-            return Json(ReturnId, JsonRequestBehavior.AllowGet);
+            return Json(datos, JsonRequestBehavior.AllowGet);
         }
 
 
