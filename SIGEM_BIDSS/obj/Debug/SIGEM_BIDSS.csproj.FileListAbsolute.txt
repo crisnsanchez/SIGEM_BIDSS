@@ -1065,14 +1065,11 @@ C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Owin.Security.Cookies.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Owin.Security.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Owin.Security.OpenIdConnect.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Web.Infrastructure.dll
-C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Mvc.JQuery.DataTables.Common.dll
-C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Mvc.JQuery.DataTables.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Newtonsoft.Json.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Owin.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\QRCoder.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Drawing.Common.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.IdentityModel.Tokens.Jwt.dll
-C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Linq.Dynamic.Core.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.ValueTuple.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Web.Helpers.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Web.Mvc.dll
@@ -1105,7 +1102,6 @@ C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Owin.Security.Cookies.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Microsoft.Owin.Security.OpenIdConnect.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.IdentityModel.Tokens.Jwt.pdb
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.IdentityModel.Tokens.Jwt.xml
-C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Linq.Dynamic.Core.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Web.Helpers.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Web.Mvc.xml
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Web.Optimization.xml
@@ -1126,3 +1122,4 @@ C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csprojAssemblyReference.
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CopyComplete
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb
+C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInputs.cache

@@ -20,7 +20,7 @@
         </ul>
     </div>
     <div class="card-body">
-        <table class="table-responsive table-bordered table-hover" id="dataTable" >
+        <table class="table table-bordered table-hover" id="dataTable" >
             <thead>
                 <tr>
                     <th>
@@ -30,10 +30,9 @@
                         @Html.DisplayNameFor(model => model.prod_CodigoBarras)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.prod_Descripcion) -
-                        @Html.DisplayNameFor(model => model.prod_Marca) -
-                        @Html.DisplayNameFor(model => model.prod_Modelo)
+                        Producto
                     </th>
+
                     <th>
                         @Html.DisplayNameFor(model => model.prod_Talla)
                     </th>
@@ -41,15 +40,7 @@
                         @Html.DisplayNameFor(model => model.prod_Color)
                     </th>
                     <th>
-                        Categoria -
-                        @Html.DisplayNameFor(model => model.pscat_Id)
-
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.tbUnidadMedida.uni_Descripcion)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.tbProveedor.prov_Nombre)
+                        Subcategoría
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.prod_EsActivo)
@@ -60,48 +51,41 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.prod_Codigo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.prod_CodigoBarras)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.prod_Descripcion) -
-                            @Html.DisplayFor(modelItem => item.prod_Marca) -
-                            @Html.DisplayFor(modelItem => item.prod_Modelo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.prod_Talla)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.prod_Color)
-                        </td>
-                        <td>
-                            @Html.DisplayNameFor(model => model.tbProductoSubcategoria.tbProductoCategoria.pcat_Descripcion)
-                        </td>
-                        <td>
-                            @Html.DisplayNameFor(model => model.tbUnidadMedida.uni_Descripcion)
-                        </td>
-                        <td>
-                            @Html.DisplayNameFor(model => model.tbProveedor.prov_Nombre)
-                        </td>
-                        <td>
-                            @if (item.prod_EsActivo == true)
-                            {
-                                <p> Activo</p>
-                            }
-                            else
-                            {
-                                <p>Inactivo</p>
-                            }
-                        </td>
-                        <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.prod_Id }, new { @class = "btn btn-primary btn-xs" })
-                            @Html.ActionLink("Detalles", "Details", new { id = item.prod_Id }, new { @class = "btn btn-default btn-xs" })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prod_Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prod_CodigoBarras)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prod_Descripcion)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prod_Talla)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prod_Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbProductoSubcategoria.tbProductoCategoria.pcat_Descripcion)
+                    </td>
+                    <td>
+                        @if (item.prod_EsActivo == true)
+                        {
+                            <p> Activo</p>
+                        }
+                        else
+                        {
+                            <p>Inactivo</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.prod_Id }, new { @class = "btn btn-primary btn-xs" })
+                        @Html.ActionLink("Detalles", "Details", new { id = item.prod_Id }, new { @class = "btn btn-default btn-xs" })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
