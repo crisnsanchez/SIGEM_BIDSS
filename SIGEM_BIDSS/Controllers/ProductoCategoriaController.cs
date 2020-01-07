@@ -308,9 +308,8 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (MsjError.StartsWith("-2"))
                 {
-                    TempData["smserror"] = "No se puede Eliminar el dato porque está en uso.";
-                    ViewBag.smserror = TempData["smserror"];
-                    TempData["swalfunction"] = GeneralFunctions._isDependencias;
+                   
+                    TempData["swalfunction"] = GeneralFunctions._isDependenciaCate;
                     ModelState.AddModelError("", "No se puede borrar el registro");
                     return RedirectToAction("Edit/" + id);
                 }
@@ -347,9 +346,8 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (MsjError.StartsWith("-2"))
                 {
-                    TempData["smserror"] = " No se puede Eliminar del dato porque está en uso.";
-                    ViewBag.smserror = TempData["smserror"];
-                    TempData["swalfunction"] = GeneralFunctions._isDependenciasS;
+                 
+                    TempData["swalfunction"] = GeneralFunctions._isDependenciasSubCate;
                     ModelState.AddModelError("", "No se puede borrar el registro");
                     return RedirectToAction("Index");
                 }
@@ -383,7 +381,7 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (MsjError.StartsWith("-2"))
                 {
-                    TempData["smserror"] = "No se puede cambiar el estado del dato porque está en uso.";
+                    
                     ViewBag.smserror = TempData["smserror"];
 
                     ModelState.AddModelError("", "No se Actualizo el registro");
@@ -391,6 +389,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 else
                 {
+                    TempData["swalfunction"] = GeneralFunctions._isActiva;
                     return RedirectToAction("Edit/" + id);
                 }
             }
@@ -410,7 +409,7 @@ namespace SIGEM_BIDSS.Controllers
 
             try
             {
-                tbProductoCategoria objeto = db.tbProductoCategoria.Find(id);
+                tbProductoSubcategoria objeto = db.tbProductoSubcategoria.Find(id);
                 var idcate = objeto.pcat_Id;
                 tbProductoSubcategoria obj = db.tbProductoSubcategoria.Find(id);
                 IEnumerable<object> list = null;
@@ -426,6 +425,7 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 else
                 {
+                    TempData["swalfunction"] = GeneralFunctions._isActiva;
                     return RedirectToAction("Edit/" + idcate);
                 }
             }
@@ -442,7 +442,7 @@ namespace SIGEM_BIDSS.Controllers
 
             try
             {
-                tbProductoCategoria objeto = db.tbProductoCategoria.Find(id);
+                tbProductoSubcategoria objeto = db.tbProductoSubcategoria.Find(id);
                 var idcate = objeto.pcat_Id;
                 tbProductoSubcategoria obj = db.tbProductoSubcategoria.Find(id);
                 IEnumerable<object> list = null;
@@ -453,13 +453,13 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (MsjError.StartsWith("-2"))
                 {
-                    TempData["smserror"] = "No se puede cambiar el estado del dato porque está en uso.";
-                    ViewBag.smserror = TempData["smserror"];
+                    TempData["swalfunction"] = GeneralFunctions._isDependenciasSubCateIn;
                     ModelState.AddModelError("", "No se Actualizo el registro");
                     return RedirectToAction("Edit/" + idcate);
                 }
                 else
                 {
+                    TempData["swalfunction"] = GeneralFunctions._isInactiva;
                     return RedirectToAction("Edit/" + idcate);
                 }
             }
@@ -486,14 +486,15 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (MsjError.StartsWith("-2"))
                 {
-                    TempData["smserror"] = "No se puede cambiar el estado del dato porque está en uso.";
-                    ViewBag.smserror = TempData["smserror"];
 
+                    TempData["swalfunction"] = GeneralFunctions._isDependenciaCateIn;
+                  
                     ModelState.AddModelError("", "No se Actualizo el registro");
                     return RedirectToAction("Edit/" + id);
                 }
                 else
                 {
+                    TempData["swalfunction"] = GeneralFunctions._isInactiva;
                     return RedirectToAction("Edit/" + id);
                 }
             }

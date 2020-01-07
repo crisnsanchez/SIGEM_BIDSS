@@ -31,22 +31,50 @@ $(function () {
             title: 'Se ha borrado con Éxito.'
         })
     }
+    else if (_Action == "Inactiva") {
+        Toast.fire({
+            type: 'warning',
+            title: 'Se ha Inactivado con Éxito.'
+        })
+    }
+    else if (_Action == "Activa") {
+        Toast.fire({
+            type: 'success',
+            title: 'Se ha Activado con Éxito.'
+        })
+    }
+
+
+
+
     else if (_Action == "Dependencias") {
         Toast.fire({
             type: 'warning',
             title: 'Este municipio está siendo usado por otra tabla, no se puede Eliminar.'
         })
     }
-    else if (_Action == "Dependencia") {
+    else if (_Action == "DependenciaCate") {
         Toast.fire({
             type: 'warning',
             title: 'Esta Categoria está siendo usado por otra tabla, no se puede Eliminar.'
         })
     }
-    else if (_Action == "DependenciaSub") {
+    else if (_Action == "DependenciaSubCate") {
         Toast.fire({
             type: 'warning',
             title: 'Esta SubCategoria está siendo usado por otra tabla, no se puede Eliminar.'
+        })
+    }
+    else if (_Action == "DependenciaCateIn") {
+        Toast.fire({
+            type: 'warning',
+            title: 'Esta Categoria está siendo usado por otra tabla, no se puede Inactivar.'
+        })
+    }
+    else if (_Action == "DependenciaSubCateIn") {
+        Toast.fire({
+            type: 'warning',
+            title: 'Esta SubCategoria está siendo usado por otra tabla, no se puede Inactivar.'
         })
     }
     else if (_Action == "ExisteCo") {
