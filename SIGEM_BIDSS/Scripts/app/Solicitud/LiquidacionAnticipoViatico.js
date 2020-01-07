@@ -18,38 +18,65 @@ $("#CargarArchivo").change(function () {
 
 $('#AgregarDetalle').click(function() {
     var table = $('#dataTable').DataTable();
-    //var Archivo = $('#Lianvide_Archivo').val();
-    //var TipoGasto = $('#tpv_Id').val();
-    //var FechaGasto = $('#Lianvide_FechaGasto').val();
-    //var MontoGastos = $('#Lianvide_MontoGasto').val();
-    //var Concepto = $('#Lianvide_Concepto').val();
+
     var LiquidacionAnticipoViatico = GetLiquidacionViatico();
     console.log(LiquidacionAnticipoViatico);
 
-    table.row.add([
-
-        LiquidacionAnticipoViatico.Lianvide_FechaGasto,
-        LiquidacionAnticipoViatico.tpv_Id,
-        LiquidacionAnticipoViatico.Lianvide_Concepto,
-        LiquidacionAnticipoViatico.Lianvide_MontoGasto,
-    
-     '<button id = "removeMunicipios" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
-
-
-
-
-    ]).draw(false)
+   
     $.ajax({
         url: "/LiquidacionAnticipoViaticoDetalle/SaveLiquidacionAnticipoDetalle",
         method: "POST",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ tbLiquidacionAnticipoViatico: LiquidacionAnticipoViatico }),
+        data: JSON.stringify({ tbLiquidacionAnticipoViaticoDetalle: LiquidacionAnticipoViatico }),
     })
 
         .done(function (data) {
-            console.log(data);
+            console.log(contador + 'hid');
 
+            if (LiquidacionAnticipoViatico.tpv_Id == data) {
+                $('#dataTable td').each(function () {
+                    var constId = $(this).text();
+
+                    if (LiquidacionAnticipoViatico.tpv_IdText == constId) {
+                        var q = table.row($(this).parents('tr')).remove().draw()
+                        var t = $(this).closest('tr').find('td:eq(3)').text()
+                        var suma = parseInt(LiquidacionAnticipoViatico.Lianvide_MontoGasto) + parseInt(t);
+                        table.row.add([
+                            LiquidacionAnticipoViatico.Lianvide_FechaGasto,
+                            LiquidacionAnticipoViatico.tpv_IdText,
+                            LiquidacionAnticipoViatico.Lianvide_Concepto,
+                            suma,
+
+
+
+                            '<button id = "RemoveDetalle" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
+
+
+
+                        ]).draw(false)
+                    }
+                });
+            }
+
+            else {
+
+
+                contador = contador + 1;
+                console.log(data);
+                table.row.add([
+
+                    LiquidacionAnticipoViatico.Lianvide_FechaGasto,
+                    LiquidacionAnticipoViatico.tpv_IdText,
+                    LiquidacionAnticipoViatico.Lianvide_Concepto,
+                    LiquidacionAnticipoViatico.Lianvide_MontoGasto,
+
+                    '<button id = "RemoveDetalle" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
+
+
+                ]).draw(false)
+
+            }
         });
 
     });
@@ -65,15 +92,12 @@ function GetLiquidacionViatico() {
     var LIQUIDACIONDETALLE = {
 
 
+        Lianvide_Id: contador,
         tpv_Id: $('#tpv_Id').val(),
         tpv_IdText: R.options[R.selectedIndex].text,
-        tpv_IdText: document.getElementById('tpv_Id').options[this.selectedIndex],
         Lianvide_FechaGasto: $('#Lianvide_FechaGasto').val(),
         Lianvide_MontoGasto: $('#Lianvide_MontoGasto').val(),
         Lianvide_Concepto: $('#Lianvide_Concepto').val(),
-     
-        //Lianvide_Id: contador,
-        //Lianvide_UsuarioCrea: contador,
      
     };
     return LIQUIDACIONDETALLE;

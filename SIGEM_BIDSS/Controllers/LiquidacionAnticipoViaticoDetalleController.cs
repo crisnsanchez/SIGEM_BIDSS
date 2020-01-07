@@ -47,7 +47,7 @@ namespace SIGEM_BIDSS.Controllers
         {
             
 
-         int Id =  Convert.ToInt32(Session["NombreLiquidacion"]);
+         int Id =  Convert.ToInt32(Session["NombreLiquidacione"]);
 
             tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle = new tbLiquidacionAnticipoViaticoDetalle();
             tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id = Id;
@@ -71,26 +71,42 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
 
         [HttpPost]
-        public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle LIQUIDACIONDETALLE )
+        public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle)
         {
-            List<tbLiquidacionAnticipoViaticoDetalle> sessionLiquidacion = new List<tbLiquidacionAnticipoViaticoDetalle>();
-            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["LiquidacionAnticipoViaticoDetalle"];
+
+            int datos = 0;
+            decimal CantidadVieja = 0;
+            decimal CantidadNueva = 0;
+            //data_producto = SalidaDetalle.prod_Codigo;
+            decimal Lianvide_MontoGasto = tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto;
+            List<tbLiquidacionAnticipoViaticoDetalle> sessionSolicitudReembolsoDetalle = new List<tbLiquidacionAnticipoViaticoDetalle>();
+            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["NombreLiquidaciondetalle"];
+
             if (list == null)
             {
-                sessionLiquidacion.Add(LIQUIDACIONDETALLE);
-                Session["LiquidacionAnticipoViaticoDetalle"] = sessionLiquidacion;
+                sessionSolicitudReembolsoDetalle.Add(tbLiquidacionAnticipoViaticoDetalle);
+                Session["NombreLiquidaciondetalle"] = sessionSolicitudReembolsoDetalle;
             }
             else
             {
-                list.Add(LIQUIDACIONDETALLE);
-                Session["LiquidacionAnticipoViaticoDetalle"] = list;
+                foreach (var LiquidacionDetalles in list)
+                    if (LiquidacionDetalles.tpv_Id == tbLiquidacionAnticipoViaticoDetalle.tpv_Id)
+                    {
+                        datos = tbLiquidacionAnticipoViaticoDetalle.tpv_Id;
+                        foreach (var viejo in list)
+                            if (viejo.tpv_Id == datos)
+                                CantidadVieja = viejo.Lianvide_MontoGasto;
+                        CantidadNueva = CantidadVieja + tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto;
+                        LiquidacionDetalles.Lianvide_MontoGasto = CantidadNueva;
+                        return Json(datos, JsonRequestBehavior.AllowGet);
+                    }
+                list.Add(tbLiquidacionAnticipoViaticoDetalle);
+                Session["NombreLiquidaciondetalle"] = list;
+                return Json(datos, JsonRequestBehavior.AllowGet);
             }
-            return Json("Exito", JsonRequestBehavior.AllowGet);
+            return Json(datos, JsonRequestBehavior.AllowGet);
         }
-
-
-
-        [HttpPost]
+           [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Lianvide_Id,Lianvi_Id,Lianvide_FechaGasto,tpv_Id,Lianvide_MontoGasto,Lianvide_Concepto,Lianvide_UsuarioCrea,Lianvide_FechaCrea,Lianvide_UsuarioModifica,Lianvide_FechaModifica")] tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle, HttpPostedFileBase ArchivoPath)
         {
