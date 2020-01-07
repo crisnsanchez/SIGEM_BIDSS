@@ -120,7 +120,7 @@ namespace SIGEM_BIDSS.Controllers
                 var _Parameters = db.tbParametro.FirstOrDefault();
                 if (_Parameters == null)
                 {
-                    return HttpNotFound();
+                    return RedirectToAction("Create", "Parametro");
                 }
                 if (SolCount >= _Parameters.par_FrecuenciaAdelantoSalario)
                 {
