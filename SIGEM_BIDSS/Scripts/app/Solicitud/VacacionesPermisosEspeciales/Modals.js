@@ -24,7 +24,6 @@ $(document).on("click", "#_ModalApproveAdmin", function () {
 
 
 
-
 //---------------------Rechazar-----------------------------------------
 $(document).on("click", "#_ModalReject", function () {
     var _spanRR = document.getElementById("RazonRechazo")
@@ -79,5 +78,5 @@ function SendData(_idPrimary, _controller, _action, _spinnerbody, _spinner) {
             type: 'error',
             title: 'Error al actualizar el estado.'
         });
-    }
-
+    })
+}
