@@ -91,6 +91,20 @@
                     }
                 </dd>
                 <dt>
+                    @Html.DisplayNameFor(model => model.prod_RazonInactivacion)
+                </dt>
+                <dd>
+                    @if (Model.prod_EsActivo == true)
+                    {
+                        <p>No aplica</p>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.prod_RazonInactivacion)
+
+                    }
+                </dd>
+                <dt>
                     @Html.DisplayNameFor(model => model.tbUnidadMedida.uni_Descripcion)
                 </dt>
 
@@ -103,13 +117,6 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.tbProductoSubcategoria.tbProductoCategoria.pcat_Descripcion)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.tbProductoSubcategoria.pscat_Descripcion)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.tbProductoSubcategoria.pscat_Descripcion)
                 </dd>
 
                 <dt>

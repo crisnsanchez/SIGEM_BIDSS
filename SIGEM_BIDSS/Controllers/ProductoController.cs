@@ -97,11 +97,11 @@ namespace SIGEM_BIDSS.Controllers
                     List = db.UDP_Inv_tbProducto_Insert(
                                                         tbProducto.prod_Codigo,
                                                         tbProducto.prod_CodigoBarras,
-                                                        tbProducto.prod_Descripcion,
-                                                        tbProducto.prod_Marca,
-                                                        tbProducto.prod_Modelo,
-                                                        tbProducto.prod_Talla,
-                                                        tbProducto.prod_Color,
+                                                        tbProducto.prod_Descripcion.ToUpper(),
+                                                        tbProducto.prod_Marca.ToUpper(),
+                                                        tbProducto.prod_Modelo.ToUpper(),
+                                                        tbProducto.prod_Talla.ToUpper(),
+                                                        tbProducto.prod_Color.ToUpper(),
                                                         tbProducto.pscat_Id,
                                                         tbProducto.uni_Id,
                                                         tbProducto.prov_Id,
@@ -176,38 +176,41 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(string id ,[Bind(Include = "prod_Id,prod_Codigo,prod_CodigoBarras,prod_Descripcion,prod_Marca,prod_Modelo,prod_Talla,prod_Color,pscat_Id,uni_Id,prov_Id,prod_EsActivo,prod_RazonInactivacion,prod_UsuarioCrea,prod_FechaCrea,prod_UsuarioModifica,prod_FechaModifica, pcat_Id")] tbProducto tbProducto, int pcat_Id)
         {
-            if (ModelState.IsValid)
+            string UserName = "";
+            try
             {
-                try
+                int EmployeeID = Function.GetUser(out UserName);
+                if (ModelState.IsValid)
                 {
-                    tbProducto vtbProducto = db.tbProducto.Find(id);
-                    IEnumerable<object> List = null;
-                    string MsjError = "";
+                    if (db.tbProducto.Any(a => a.prod_Descripcion == tbProducto.prod_Descripcion && a.prod_Id != tbProducto.prod_Id))
+                    {
+                        ModelState.AddModelError("", "Ya existe un producto con el mismo nombre.");
+                        return View(tbProducto);
+                    }
+
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
                     List = db.UDP_Inv_tbProducto_Update(tbProducto.prod_Id,
                                                         tbProducto.prod_CodigoBarras,
-                                                        tbProducto.prod_Descripcion,
-                                                        tbProducto.prod_Marca,
-                                                        tbProducto.prod_Modelo,
-                                                        tbProducto.prod_Talla,
-                                                        tbProducto.prod_Color,
+                                                         tbProducto.prod_Descripcion.ToUpper(),
+                                                        tbProducto.prod_Marca.ToUpper(),
+                                                        tbProducto.prod_Modelo.ToUpper(),
+                                                        tbProducto.prod_Talla.ToUpper(),
+                                                        tbProducto.prod_Color.ToUpper(),
                                                         tbProducto.pscat_Id,
                                                         tbProducto.uni_Id,
                                                         tbProducto.prov_Id,
-                                                        tbProducto.prod_EsActivo,
+                                                        GeneralFunctions.Activo,
                                                         tbProducto.prod_RazonInactivacion,
-                                                        Function.GetUser(),
+                                                       EmployeeID,
                                                         Function.DatetimeNow()
                                                         );
                     foreach (UDP_Inv_tbProducto_Update_Result producto in List)
-                        MsjError = producto.MensajeError;
-
-                    if (MsjError.StartsWith("-1"))
+                    Msj = producto.MensajeError;
+                    if (Msj.StartsWith("-1"))
                     {
-                        ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
-                        ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion ", tbProducto.pscat_Id);
-                        ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
-                        ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion");
-                        ModelState.AddModelError("", "No se Pudo Actualizar el registro, Favor Contacte al Administrador.");
+                        Function.BitacoraErrores("Producto", "EditPost", UserName, Msj);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbProducto);
                     }
                     else
@@ -215,27 +218,15 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-                    ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
-                    ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
-                    ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
-                    ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion");
-                    ModelState.AddModelError("", "No se Pudo Actualizar el registro, Favor Contacte al Administrador.");
-                    return View(tbProducto);
-                }
+                return View(tbProducto);
             }
-            else
+            catch (Exception Ex)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                Function.BitacoraErrores("Producto", "EditPost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbProducto);
             }
-
-           
-            ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
-            ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
-            ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
-            ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion");
-            return View(tbProducto);
+            
         }
         [HttpPost]
         public JsonResult GetCategoriaProducto(int codsubcategoria)

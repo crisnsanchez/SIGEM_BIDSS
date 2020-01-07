@@ -30,3 +30,11 @@
     }
 
 })
+
+const _id = document.getElementById('razonInac');
+_id.addEventListener("input", function () {
+    this.value = this.value.trimStart()
+    if (!/^[ a-z0-9áéíóúüñ]*$/i.test(_id.value)) {
+        this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
+    }
+})

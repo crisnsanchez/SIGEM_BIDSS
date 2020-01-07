@@ -126,3 +126,5 @@ function GetSubCategoriaProducto() {
 $("#pcat_Descripcion").keyup(function () {
     $('#categoria').hide();
 });
+///////////////////////////////////////////////////////////////////
+

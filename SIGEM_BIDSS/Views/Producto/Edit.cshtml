@@ -56,14 +56,14 @@
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.prod_Codigo, htmlAttributes: new { @class = "control-label col-sm-8" })
 
-                            @Html.EditorFor(model => model.prod_Codigo, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", @onkeypress = "return soloNumeros(event)", @readonly = "readonly" } })
+                            @Html.EditorFor(model => model.prod_Codigo, new { htmlAttributes = new { @class = "form-control", @maxlength = "15", @onkeypress = "return soloNumeros(event)", @readonly = "readonly" } })
                             @Html.ValidationMessageFor(model => model.prod_Codigo, "", new { @class = "text-danger", @Id = "codigo" })
 
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.prod_CodigoBarras, htmlAttributes: new { @class = "control-label col-sm-6" })
 
-                            @Html.EditorFor(model => model.prod_CodigoBarras, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
+                            @Html.EditorFor(model => model.prod_CodigoBarras, new { htmlAttributes = new { @class = "form-control", @maxlength = "15", @autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.prod_CodigoBarras, "", new { @class = "text-danger", @Id = "barras" })
 
                         </div>
@@ -73,14 +73,14 @@
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.prod_Descripcion, htmlAttributes: new { @class = "control-label col-sm-8" })
 
-                            @Html.EditorFor(model => model.prod_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", @onkeypress = "return soloNumeros(event)" } })
+                            @Html.EditorFor(model => model.prod_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "150", @autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.prod_Descripcion, "", new { @class = "text-danger", @Id = "descripcion" })
 
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.prod_Marca, htmlAttributes: new { @class = "control-label col-sm-6" })
 
-                            @Html.EditorFor(model => model.prod_Marca, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
+                            @Html.EditorFor(model => model.prod_Marca, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.prod_Marca, "", new { @class = "text-danger", @Id = "marca" })
 
                         </div>
@@ -90,14 +90,14 @@
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.prod_Modelo, htmlAttributes: new { @class = "control-label col-sm-8" })
 
-                            @Html.EditorFor(model => model.prod_Modelo, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", @onkeypress = "return soloNumeros(event)" } })
+                            @Html.EditorFor(model => model.prod_Modelo, new { htmlAttributes = new { @class = "form-control", @maxlength = "25", @onkeypress = "return soloNumeros(event)" } })
                             @Html.ValidationMessageFor(model => model.prod_Modelo, "", new { @class = "text-danger", @Id = "modelo" })
 
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.prod_Talla, htmlAttributes: new { @class = "control-label col-sm-6" })
 
-                            @Html.EditorFor(model => model.prod_Talla, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
+                            @Html.EditorFor(model => model.prod_Talla, new { htmlAttributes = new { @class = "form-control", @maxlength = "15", @autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.prod_Talla, "", new { @class = "text-danger", @Id = "talla" })
 
                         </div>
@@ -108,7 +108,7 @@
                         <div class="form-group col-md-4">
                             @Html.LabelFor(model => model.prod_Color, htmlAttributes: new { @class = "control-label col-sm-8" })
 
-                            @Html.EditorFor(model => model.prod_Color, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", @onkeypress = "return soloNumeros(event)" } })
+                            @Html.EditorFor(model => model.prod_Color, new { htmlAttributes = new { @class = "form-control", @maxlength = "20", @autocomplete = "off", @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", @onkeyup = "noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.prod_Color, "", new { @class = "text-danger", @Id = "color" })
 
                         </div>
@@ -137,24 +137,11 @@
                             }
                             else
                             {
+                                
                                 <input type="text" placeholder="INACTIVA" name="Inactiva" readonly class="form-control">
                             }
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            @Html.LabelFor(model => model.prod_RazonInactivacion, new { @class = "control-label col-md-6" })
-                           
-                          
-
-                                @Html.EditorFor(model => model.prod_RazonInactivacion, new { htmlAttributes = new { @class = "form-control", @maxlength = "2", @onkeypress = "return soloNumeros(event)", @readonly = "readonly" } })
-                            
-
-                        </div>
-                    </div>
-
-
-
                 </div>
 
             </div>
@@ -162,9 +149,10 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Guardar" class="btn btn-primary" id="btnGuardar" />
+
                     @if (Model.prod_EsActivo == GeneralFunctions.ProductoActivo)
                     {
+                        <input type="submit" value="Guardar" class="btn btn-primary" id="btnGuardar" />
                         <button type="button" id="inactivar" name="inactivar" class="btn btn-danger" data-toggle="modal" data-target="#ModalAnular">
                             Inactivar
                         </button>
@@ -197,6 +185,7 @@
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
 
+    
     <script src="~/Scripts/app/General.js"></script>
     <script src="~/Scripts/app/InActivarProducto.js"></script>
     <script src="~/Scripts/app/SubCategoriaProductoEdit.js"></script>
@@ -215,13 +204,13 @@
                 </div>
                 <div class="modal-body">
                     <p>Ingrese Razón Inactivación</p>
-                    <textarea rows="4" cols="70" id="razonInac" class="form-control normalize " name="razonInac" style="text-transform:uppercase;" onkeypress="return soloLetras(event)" maxlength="150"></textarea>
+                    <textarea id="razonInac" class="form-control normalize"></textarea>
                     <p id="Mensaje" style="color:red"></p>
                 </div>
 
                 <div class="modal-footer">
                     <button class="btn btn-primary btn-sm" type="button" id="Inactivar">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Salir</button>
                 </div>
             </div>
         </div>
