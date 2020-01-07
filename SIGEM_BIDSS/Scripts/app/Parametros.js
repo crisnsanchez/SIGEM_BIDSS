@@ -108,9 +108,6 @@ $('#par_CorreoRRHH').keyup(function () {
     $('#emailRHHH').hide();
 });
 
-$('#par_Servidor').keyup(function () {
-    $('#errorServidor').hide();
-});
 
 $('#par_Puerto').keyup(function () {
     $('#errorPuerto').hide();
@@ -231,11 +228,12 @@ document.getElementById('par_CorreoRRHH').addEventListener('input', function () 
     }
 });
 
+
 document.getElementById('par_Servidor').addEventListener('input', function () {
     campo = event.target;
-    valido = document.getElementById('errorServidor');
+    valido = document.getElementById('emailSer');
     //selector = document.getElementById('emp_CorreoElectronico')
-    emailRegex = /^[-\w.%+]{1,64}(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     //Se muestra un texto a modo de ejemplo, luego va a ser un icono
     if (emailRegex.test(campo.value)) {
         valido.innerText = "";
@@ -320,7 +318,8 @@ $("#frmEditParametro").submit(function (event) {
     var CorreoEmpresa = $("#emailOK").text();
     var CorreoEmisor = $("#emailEoK").text();
     var CorreoRRHH = $("#emailEoKi").text();
-    if (CorreoEmpresa !== "" || CorreoEmisor !== "" || CorreoRRHH !== "") {
+    var Servidor = $("#emailSer").text();
+    if (CorreoEmpresa !== "" || CorreoEmisor !== "" || CorreoRRHH !== "" || Servidor !== "") {
         event.preventDefault();
     }
 });
@@ -329,7 +328,8 @@ $("#frmCreateParametro").submit(function (event) {
     var CorreoEmpresa = $("#emailOK").text();
     var CorreoEmisor = $("#emailEoK").text();
     var CorreoRRHH = $("#emailEoKi").text();
-    if (CorreoEmpresa !== "" || CorreoEmisor !== "" || CorreoRRHH !== "") {
+    var Servidor = $("#emailSer").text();
+    if (CorreoEmpresa !== "" || CorreoEmisor !== "" || CorreoRRHH !== "" || Servidor !== "") {
         event.preventDefault();
     }
 });
