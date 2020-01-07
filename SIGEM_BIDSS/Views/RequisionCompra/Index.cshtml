@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbRequisionCompra>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Reqco_Correlativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reqco_GralFechaSolicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reqco_Comentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reqco_RazonRechazo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reqco_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reqco_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reqco_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reqco_FechaModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbArea.are_Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reqco_Correlativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reqco_GralFechaSolicitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reqco_Comentario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reqco_RazonRechazo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reqco_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reqco_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reqco_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reqco_FechaModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbArea.are_Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Reqco_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Reqco_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Reqco_Id })
+        </td>
+    </tr>
+}
+
+</table>

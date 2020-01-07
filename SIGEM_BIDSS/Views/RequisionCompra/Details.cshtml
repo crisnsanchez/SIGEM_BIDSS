@@ -1,0 +1,107 @@
+﻿@model SIGEM_BIDSS.Models.tbRequisionCompra
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbRequisionCompra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Reqco_Correlativo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reqco_Correlativo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reqco_GralFechaSolicitud)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reqco_GralFechaSolicitud)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reqco_Comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reqco_Comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reqco_RazonRechazo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reqco_RazonRechazo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reqco_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reqco_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reqco_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reqco_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reqco_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reqco_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reqco_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reqco_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbArea.are_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbArea.are_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Reqco_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
