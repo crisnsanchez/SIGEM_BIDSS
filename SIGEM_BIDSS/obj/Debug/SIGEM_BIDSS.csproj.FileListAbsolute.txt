@@ -1126,3 +1126,4 @@ C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Mvc.JQuery.DataTables.Common.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\Mvc.JQuery.DataTables.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Linq.Dynamic.Core.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\System.Linq.Dynamic.Core.xml
+C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInputs.cache
