@@ -29,8 +29,8 @@ function soloNumeros(e) {
 ////MAX LENGTH DE LOS CAMPOS
 
 $(document).ready(function () {
-    $("#emp_Nombres")[0].maxLength = 50;
-    $("#emp_Apellidos")[0].maxLength = 50;
+    $("#emp_Nombres")[0].maxLength = 100;
+    $("#emp_Apellidos")[0].maxLength = 100;
     $("#emp_Identificacion")[0].maxLength = 25;
     $("#emp_CorreoElectronico")[0].maxLength = 100;
    
@@ -253,8 +253,6 @@ $('#mun_codigo').change(function () {
 //$('#emp_FechaIngreso').change(function () {
 //    $('#FechaIngreso').hide();
 //});
-
-
 
 //Get Current Date
 function GetTodayDate() {

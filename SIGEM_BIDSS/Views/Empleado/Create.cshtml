@@ -230,13 +230,12 @@
         $("#emp_FechaNacimiento").blur(function () {
             valido = document.getElementById('FechaNacimiento');
             var FechaNacimiento = $('#emp_FechaNacimiento').val();
-            var FechaIngreso = $('#emp_FechaIngreso').val();
+        
 
-            if (FechaNacimiento > GetTodayDate() || FechaIngreso > GetTodayDate()) {
+            if (FechaNacimiento > GetTodayDate()) {
                 $('#emp_FechaNacimiento').val("");
                 $('#emp_FechaNacimiento').focus();
-                $('#emp_FechaIngreso').val("");
-                $('#emp_FechaIngreso').focus();
+            
                 valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
 
             }

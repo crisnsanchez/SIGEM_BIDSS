@@ -54,11 +54,10 @@ namespace SIGEM_BIDSS.Controllers
 
         //GetDetalle
         [HttpPost]
-        public JsonResult SaveReembolsoDetalle(tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle)
+        public JsonResult SaveReembolsoDetalle(tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle, HttpPostedFileBase Archivo) 
         {
             int datos = 0;
-            decimal CantidadVieja = 0;
-            decimal CantidadNueva = 0;
+       
             //data_producto = SalidaDetalle.prod_Codigo;
             decimal ReemgaDet_MontoGasto = tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto;
             List<tbSolicitudReembolsoGastosDetalle> sessionSolicitudReembolsoDetalle = new List<tbSolicitudReembolsoGastosDetalle>();
@@ -71,20 +70,10 @@ namespace SIGEM_BIDSS.Controllers
             }
             else
             {
-                foreach (var ReembolsoDetalles in list)
-                    if (ReembolsoDetalles.tpv_Id == tbSolicitudReembolsoGastosDetalle.tpv_Id)
-                    {
-                        datos = tbSolicitudReembolsoGastosDetalle.tpv_Id;
-                        foreach (var viejo in list)
-                            if (viejo.tpv_Id == datos)
-                                CantidadVieja = viejo.ReemgaDet_MontoGasto;
-                        CantidadNueva = CantidadVieja + tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto;
-                        ReembolsoDetalles.ReemgaDet_MontoGasto = CantidadNueva;
-                        return Json(datos, JsonRequestBehavior.AllowGet);
-                    }
+           
                 list.Add(tbSolicitudReembolsoGastosDetalle);
                 Session["ReembolsoDetalle"] = list;
-                return Json(datos, JsonRequestBehavior.AllowGet);
+                return Json(tbSolicitudReembolsoGastosDetalle, JsonRequestBehavior.AllowGet);
             }
             return Json(datos, JsonRequestBehavior.AllowGet);
         }

@@ -11,65 +11,36 @@ $('#ReemgaDet_FechaGasto').datepicker({
 
 //Agregar Detalle
 
-
-
-
-
 $('#AgregarDetalle').click(function () {
     var table = $('#dataTable').DataTable();
     var SolicitudReembolsoGastosDetalle = GetDetalle();
-    $.ajax({
-        url: "/SolicitudReembolsoGastosDetalles/SaveReembolsoDetalle",
-        method: "POST",
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ tbSolicitudReembolsoGastosDetalle: SolicitudReembolsoGastosDetalle }),
-    })
-        .done(function (data) {
-           
-            if (SolicitudReembolsoGastosDetalle.tpv_Id == data)
-            {
 
-                $('#dataTable td').each(function () {
-                    var constId = $(this).text();
+    var reader = new FileReader();
+    var Documento = document.getElementById('CargarFoto').reader;
+    console.log(Documento)
 
-                    if (SolicitudReembolsoGastosDetalle.tpv_IdText == constId) {
-                        var q = table.row($(this).parents('tr')).remove().draw()
-                        var t = $(this).closest('tr').find('td:eq(2)').text()
-                        var suma = parseInt(SolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto) + parseInt(t);
-                        table.row.add([
-                            SolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,
-                            SolicitudReembolsoGastosDetalle.tpv_IdText,
-                            suma,
-                            SolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,
+    //$.ajax({
+    //    url: "/SolicitudReembolsoGastosDetalles/SaveReembolsoDetalle",
+    //    method: "POST",
+    //    dataType: 'json',
+    //    contentType: "application/json; charset=utf-8",
+    //    data: JSON.stringify({ tbSolicitudReembolsoGastosDetalle: SolicitudReembolsoGastosDetalle }),
+    //})
+    //    .done(function (data) {
+        
+    //            contador = contador + 1
 
-                            '<button id = "removeMunicipios" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
+    //            table.row.add([
+    //                SolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,
+    //                SolicitudReembolsoGastosDetalle.tpv_IdText,
+    //                SolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,
+    //                SolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,
 
-                        ]).draw(false)
-                    }
-                });
-            }
-            else
-            {
-                console.log(contador + 'hola');
-                console.log(data + ' ' + 'siS');
+    //                '<button id = "RemoveReembolso" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
 
-                contador = contador + 1
-
-
-                table.row.add([
-                    SolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,
-                    SolicitudReembolsoGastosDetalle.tpv_IdText,
-                    SolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,
-                    SolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,
-
-                    '<button id = "RemoveReembolso" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
-
-                ]).draw(false)
-            }
-
-        });
-
+    //            ]).draw(false)
+  
+    //    });
 
 });
 
@@ -85,10 +56,36 @@ function GetDetalle() {
         tpv_IdText: R.options[R.selectedIndex].text,
         ReemgaDet_MontoGasto: $('#ReemgaDet_MontoGasto').val(),
         ReemgaDet_Concepto: $('#ReemgaDet_Concepto').val(),
-
-
-
-
     }
     return ReembolsoDetalle;
 };
+
+
+
+////IMAGEN REFRES E INSERT
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            const maxLength = 2000000
+            console.log(e.loaded + "" + e.total);
+            console.log(e);
+            if (e.loaded < maxLength) {
+                //document.getElementById('ImageLength').innerText = "";
+                $('#imgpreview').attr('src', e.target.result);
+            }
+            else {
+                $('#imgpreview').attr('src', "../../Content/img/descarga.jpg");
+                document.getElementById('lblCargarFoto').innerText = "";
+                document.getElementById('CargarFoto').value = "";
+                document.getElementById('ImageLength').innerText = "Limite Excedido";
+            }
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#CargarFoto").change(function () {
+    readURL(this);
+});
