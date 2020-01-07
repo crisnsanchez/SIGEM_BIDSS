@@ -162,10 +162,10 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "", ErrorEmail = "", ErrorMessage = "";
             bool Result = false, ResultAdm = false;
             IEnumerable<object> Insert = null;
-            cGetUserInfo GetEmployee = null;
+          
             try
             {
-
+                cGetUserInfo GetEmployee = null;
                 int EmployeeID = Function.GetUser(out UserName);
 
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado

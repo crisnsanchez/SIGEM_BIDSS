@@ -18,19 +18,27 @@ namespace SIGEM_BIDSS.Models
     {
         [Display(Name = "ID")]
         public int Lianvide_Id { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+      
+
         [Display(Name = "Liquidación Anticipo Viático")]
         public int Lianvi_Id { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+      
+
+
         [Display(Name = "Fecha Gastos")]
         public System.DateTime Lianvide_FechaGasto { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Tipo Viatico")]  
+        
+
+
+        [Display(Name = "Tipo Gasto")]  
         public int tpv_Id { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+      
+
         [Display(Name = "Monto Gastos")]
         public decimal Lianvide_MontoGasto { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+    
+
+
         [Display(Name = "Concepto")]
         public string Lianvide_Concepto { get; set; }
       

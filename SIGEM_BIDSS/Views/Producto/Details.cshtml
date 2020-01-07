@@ -5,143 +5,131 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-info  mr-1"></i>
+            Detalle Producto
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="form-horizontal">
+        <div class="card-body">
+            <dl class="dl-horizontal card-columns">
+                <dt>
+                    @Html.DisplayNameFor(model => model.prod_Codigo)
+                </dt>
 
-<div>
-    <h4>tbProducto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_Codigo)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.prod_Codigo)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_Codigo)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.prod_CodigoBarras)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_CodigoBarras)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.prod_CodigoBarras)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_CodigoBarras)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.prod_Descripcion)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_Descripcion)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.prod_Descripcion)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_Descripcion)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.prod_Marca)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_Marca)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.prod_Marca)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_Marca)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.prod_Modelo)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_Modelo)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.prod_Modelo)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_Modelo)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.prod_Talla)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_Talla)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.prod_Talla)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_Talla)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.prod_Color)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_Color)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.prod_Color)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_Color)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.prod_EsActivo)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_EsActivo)
-        </dt>
+                <dd>
+                    @if (Model.prod_EsActivo == true)
+                    {
+                        <p> Activo</p>
+                    }
+                    else
+                    {
+                        <p>Inactivo</p>
+                    }
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tbUnidadMedida.uni_Descripcion)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_EsActivo)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.tbUnidadMedida.uni_Descripcion)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tbProductoSubcategoria.tbProductoCategoria.pcat_Descripcion)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_RazonInactivacion)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.tbProductoSubcategoria.tbProductoCategoria.pcat_Descripcion)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.tbProductoSubcategoria.pscat_Descripcion)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_RazonInactivacion)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.tbProductoSubcategoria.pscat_Descripcion)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_UsuarioCrea)
-        </dt>
+                <dt>
+                    Proveedor
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_UsuarioCrea)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.tbProveedor.prov_Nombre)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_FechaCrea)
-        </dt>
+            </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.prod_FechaCrea)
-        </dd>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-10">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.prod_Id }, new { @class = "btn btn-primary btn-sm" })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_UsuarioModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prod_UsuarioModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.prod_FechaModifica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prod_FechaModifica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbUnidadMedida.uni_Descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbUnidadMedida.uni_Descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbProductoSubcategoria.pscat_Descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbProductoSubcategoria.pscat_Descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tbProveedor.prov_Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tbProveedor.prov_Nombre)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.prod_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

@@ -56,8 +56,10 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbProductoCategoria> tbProductoCategoria { get; set; }
         public virtual DbSet<tbProductoSubcategoria> tbProductoSubcategoria { get; set; }
         public virtual DbSet<tbProducto> tbProducto { get; set; }
-        public virtual DbSet<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
         public virtual DbSet<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
+        public virtual DbSet<tbRequisionCompra> tbRequisionCompra { get; set; }
+        public virtual DbSet<tbRequisionCompraDetalle> tbRequisionCompraDetalle { get; set; }
+        public virtual DbSet<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
         public virtual DbSet<tbSolicitudReembolsoGastosDetalle> tbSolicitudReembolsoGastosDetalle { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
@@ -2172,47 +2174,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Gral_tbPuesto_Update_Result>("UDP_Gral_tbPuesto_Update", pto_IdParameter, are_IdParameter, pto_DescripcionParameter, pto_UsuarioModificaParameter, pto_FechaModificaParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result> UDP_Adm_tbLiquidacionAnticipoViatico_Insert(Nullable<int> anvi_Id, Nullable<System.DateTime> lianvi_FechaLiquida, Nullable<System.DateTime> lianvi_FechaInicio, Nullable<System.DateTime> lianvi_FechaFin, string lianvi_Comentario, Nullable<int> est_Id, string lianvi_RazonRechazo, Nullable<int> lianvi_UsuarioCrea, Nullable<System.DateTime> lianvi_FechaCrea)
-        {
-            var anvi_IdParameter = anvi_Id.HasValue ?
-                new ObjectParameter("Anvi_Id", anvi_Id) :
-                new ObjectParameter("Anvi_Id", typeof(int));
-    
-            var lianvi_FechaLiquidaParameter = lianvi_FechaLiquida.HasValue ?
-                new ObjectParameter("Lianvi_FechaLiquida", lianvi_FechaLiquida) :
-                new ObjectParameter("Lianvi_FechaLiquida", typeof(System.DateTime));
-    
-            var lianvi_FechaInicioParameter = lianvi_FechaInicio.HasValue ?
-                new ObjectParameter("Lianvi_FechaInicio", lianvi_FechaInicio) :
-                new ObjectParameter("Lianvi_FechaInicio", typeof(System.DateTime));
-    
-            var lianvi_FechaFinParameter = lianvi_FechaFin.HasValue ?
-                new ObjectParameter("Lianvi_FechaFin", lianvi_FechaFin) :
-                new ObjectParameter("Lianvi_FechaFin", typeof(System.DateTime));
-    
-            var lianvi_ComentarioParameter = lianvi_Comentario != null ?
-                new ObjectParameter("Lianvi_Comentario", lianvi_Comentario) :
-                new ObjectParameter("Lianvi_Comentario", typeof(string));
-    
-            var est_IdParameter = est_Id.HasValue ?
-                new ObjectParameter("est_Id", est_Id) :
-                new ObjectParameter("est_Id", typeof(int));
-    
-            var lianvi_RazonRechazoParameter = lianvi_RazonRechazo != null ?
-                new ObjectParameter("Lianvi_RazonRechazo", lianvi_RazonRechazo) :
-                new ObjectParameter("Lianvi_RazonRechazo", typeof(string));
-    
-            var lianvi_UsuarioCreaParameter = lianvi_UsuarioCrea.HasValue ?
-                new ObjectParameter("Lianvi_UsuarioCrea", lianvi_UsuarioCrea) :
-                new ObjectParameter("Lianvi_UsuarioCrea", typeof(int));
-    
-            var lianvi_FechaCreaParameter = lianvi_FechaCrea.HasValue ?
-                new ObjectParameter("Lianvi_FechaCrea", lianvi_FechaCrea) :
-                new ObjectParameter("Lianvi_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result>("UDP_Adm_tbLiquidacionAnticipoViatico_Insert", anvi_IdParameter, lianvi_FechaLiquidaParameter, lianvi_FechaInicioParameter, lianvi_FechaFinParameter, lianvi_ComentarioParameter, est_IdParameter, lianvi_RazonRechazoParameter, lianvi_UsuarioCreaParameter, lianvi_FechaCreaParameter);
-        }
-    
         public virtual ObjectResult<UDP_Conf_tbParametro_Insert_Result> UDP_Conf_tbParametro_Insert(string par_NombreEmpresa, string par_TelefonoEmpresa, string par_CorreoEmpresa, string par_CorreoEmisor, string par_CorreoRRHH, string par_Password, string par_Servidor, Nullable<int> par_Puerto, string par_PathLogo, Nullable<decimal> par_PorcentajeAdelantoSalario, Nullable<short> par_FrecuenciaAdelantoSalario)
         {
             var par_NombreEmpresaParameter = par_NombreEmpresa != null ?
@@ -2981,7 +2942,48 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_ValorCodigo_Result>("UDP_Inv_tbProducto_ValorCodigo", pcat_IdParameter, pscat_IdParameter, prod_Codigo);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(Nullable<int> reemga_Id, Nullable<System.DateTime> reemgaDet_FechaGasto, Nullable<int> tpv_Id, Nullable<decimal> reemgaDet_MontoGasto, string reemgaDet_Concepto, string reemgaDet_Archivo, Nullable<decimal> reemgaDet_TotalGastos)
+        public virtual ObjectResult<UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result> UDP_Adm_tbLiquidacionAnticipoViatico_Insert(Nullable<int> anvi_Id, Nullable<System.DateTime> lianvi_FechaLiquida, Nullable<System.DateTime> lianvi_FechaInicio, Nullable<System.DateTime> lianvi_FechaFin, string lianvi_Comentario, Nullable<int> est_Id, string lianvi_RazonRechazo, Nullable<int> lianvi_UsuarioCrea, Nullable<System.DateTime> lianvi_FechaCrea)
+        {
+            var anvi_IdParameter = anvi_Id.HasValue ?
+                new ObjectParameter("Anvi_Id", anvi_Id) :
+                new ObjectParameter("Anvi_Id", typeof(int));
+    
+            var lianvi_FechaLiquidaParameter = lianvi_FechaLiquida.HasValue ?
+                new ObjectParameter("Lianvi_FechaLiquida", lianvi_FechaLiquida) :
+                new ObjectParameter("Lianvi_FechaLiquida", typeof(System.DateTime));
+    
+            var lianvi_FechaInicioParameter = lianvi_FechaInicio.HasValue ?
+                new ObjectParameter("Lianvi_FechaInicio", lianvi_FechaInicio) :
+                new ObjectParameter("Lianvi_FechaInicio", typeof(System.DateTime));
+    
+            var lianvi_FechaFinParameter = lianvi_FechaFin.HasValue ?
+                new ObjectParameter("Lianvi_FechaFin", lianvi_FechaFin) :
+                new ObjectParameter("Lianvi_FechaFin", typeof(System.DateTime));
+    
+            var lianvi_ComentarioParameter = lianvi_Comentario != null ?
+                new ObjectParameter("Lianvi_Comentario", lianvi_Comentario) :
+                new ObjectParameter("Lianvi_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var lianvi_RazonRechazoParameter = lianvi_RazonRechazo != null ?
+                new ObjectParameter("Lianvi_RazonRechazo", lianvi_RazonRechazo) :
+                new ObjectParameter("Lianvi_RazonRechazo", typeof(string));
+    
+            var lianvi_UsuarioCreaParameter = lianvi_UsuarioCrea.HasValue ?
+                new ObjectParameter("Lianvi_UsuarioCrea", lianvi_UsuarioCrea) :
+                new ObjectParameter("Lianvi_UsuarioCrea", typeof(int));
+    
+            var lianvi_FechaCreaParameter = lianvi_FechaCrea.HasValue ?
+                new ObjectParameter("Lianvi_FechaCrea", lianvi_FechaCrea) :
+                new ObjectParameter("Lianvi_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result>("UDP_Adm_tbLiquidacionAnticipoViatico_Insert", anvi_IdParameter, lianvi_FechaLiquidaParameter, lianvi_FechaInicioParameter, lianvi_FechaFinParameter, lianvi_ComentarioParameter, est_IdParameter, lianvi_RazonRechazoParameter, lianvi_UsuarioCreaParameter, lianvi_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(Nullable<int> reemga_Id, Nullable<System.DateTime> reemgaDet_FechaGasto, Nullable<int> tpv_Id, Nullable<decimal> reemgaDet_MontoGasto, string reemgaDet_Concepto, string reemgaDet_Archivo)
         {
             var reemga_IdParameter = reemga_Id.HasValue ?
                 new ObjectParameter("Reemga_Id", reemga_Id) :
@@ -3007,11 +3009,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("ReemgaDet_Archivo", reemgaDet_Archivo) :
                 new ObjectParameter("ReemgaDet_Archivo", typeof(string));
     
-            var reemgaDet_TotalGastosParameter = reemgaDet_TotalGastos.HasValue ?
-                new ObjectParameter("ReemgaDet_TotalGastos", reemgaDet_TotalGastos) :
-                new ObjectParameter("ReemgaDet_TotalGastos", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert", reemga_IdParameter, reemgaDet_FechaGastoParameter, tpv_IdParameter, reemgaDet_MontoGastoParameter, reemgaDet_ConceptoParameter, reemgaDet_ArchivoParameter, reemgaDet_TotalGastosParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert", reemga_IdParameter, reemgaDet_FechaGastoParameter, tpv_IdParameter, reemgaDet_MontoGastoParameter, reemgaDet_ConceptoParameter, reemgaDet_ArchivoParameter);
         }
     }
 }

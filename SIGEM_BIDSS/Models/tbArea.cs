@@ -18,6 +18,7 @@ namespace SIGEM_BIDSS.Models
         public tbArea()
         {
             this.tbPuesto = new HashSet<tbPuesto>();
+            this.tbRequisionCompra = new HashSet<tbRequisionCompra>();
         }
     
         public int are_Id { get; set; }
@@ -29,5 +30,7 @@ namespace SIGEM_BIDSS.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbPuesto> tbPuesto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbRequisionCompra> tbRequisionCompra { get; set; }
     }
 }

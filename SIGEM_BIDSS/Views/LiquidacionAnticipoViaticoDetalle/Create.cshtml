@@ -29,105 +29,133 @@
         @*@Html.HiddenFor(model => model.Anvi_Id)
             @Html.HiddenFor(model => model.est_Id)*@
         @Html.HiddenFor(model => model.Lianvi_Id)
-<input type="hidden" id="custId" name="custId" value="3487">
-<div class="form-horizontal">
-    <div class="card-body">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" id="custId" name="custId" value="3487">
+        <div class="form-horizontal">
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
 
 
-        <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Lianvide_Archivo, htmlAttributes: new { @class = "control-label col-md-6" })
-            <div class="col-md-11">
-                <input type="file" class="custom-file-input" id="LianvideArchivo">
-                <label class="custom-file-label" for="LianvideArchivo" id="Archivo_Name"></label>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.Lianvide_Archivo, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-11">
+                        <input type="file" class="custom-file-input" id="LianvideArchivo">
+                        <label class="custom-file-label" for="LianvideArchivo" id="Archivo_Name"></label>
 
-                @Html.ValidationMessageFor(model => model.Lianvide_Archivo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-row">
-
-
-
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Lianvide_FechaGasto, htmlAttributes: new { @class = "control-label col-md-6" })
-                <div class="col-md-11">
-                    @Html.EditorFor(model => model.Lianvide_FechaGasto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
-                  
-                    @Html.ValidationMessageFor(model => model.Lianvide_FechaGasto, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Lianvide_Archivo, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Lianvide_MontoGasto, htmlAttributes: new { @class = "control-label col-md-6" })
-                <div class="col-md-11">
 
-                    @Html.EditorFor(model => model.Lianvide_MontoGasto, new { htmlAttributes = new { @class = "form-control normalize", @autocomplete = "off", @OnKeyPress = "return soloNumeros(event)", @onChange = "MASK(this,this.value,'-###,###,###,##0.00',1)" } })
-                    @Html.ValidationMessageFor(model => model.Lianvide_MontoGasto, "", new { @class = "text-danger" })
+                <div class="form-row">
+
+
+
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Lianvide_FechaGasto, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-11">
+                            @Html.EditorFor(model => model.Lianvide_FechaGasto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+
+                            @Html.ValidationMessageFor(model => model.Lianvide_FechaGasto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Lianvide_MontoGasto, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-11">
+
+                            @Html.EditorFor(model => model.Lianvide_MontoGasto, new { htmlAttributes = new { @class = "form-control normalize", @autocomplete = "off", @OnKeyPress = "return soloNumeros(event)", @onChange = "MASK(this,this.value,'-###,###,###,##0.00',1)" } })
+                            @Html.ValidationMessageFor(model => model.Lianvide_MontoGasto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
                 </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-11">
+                            @Html.DropDownList("tpv_Id", null, "Seleccione Tipo Gasto", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Lianvide_Concepto, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-11">
+                            @Html.EditorFor(model => model.Lianvide_Concepto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.Lianvide_Concepto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-4">
+                        <input type="button" value="Agregar" id="AgregarDetalle" class="btn btn-primary btn-sm" />
+                    </div>
+                </div>
+
             </div>
+            <table class="table table-bordered table-hover" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvide_FechaGasto)
+                        </th>
+                        <th>
+                            Tipo Gasto
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvide_Concepto)
+                        </th>
+
+                        <th>
+                            Monto de Gastos
+                        </th>
+
+                        <th>
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+
+                <tfoot>
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+
+                        </th>
+                    
+
+
+                        <th>
+                            Total Gastos
+                        </th>
+                        <th>
+
+                        </th>
+
+                    </tr>
+                </tfoot>
+
+            </table>
+
+
+
+
 
         </div>
-
-        <div class="form-row">
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-11">
-                    @Html.DropDownListFor(model => model.tpv_Id, (SelectList)ViewBag.tpv_Id, "Seleccione Tipo Gasto", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.Lianvide_Concepto, htmlAttributes: new { @class = "control-label col-md-6" })
-                <div class="col-md-11">
-                    @Html.EditorFor(model => model.Lianvide_Concepto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
-                    @Html.ValidationMessageFor(model => model.Lianvide_Concepto, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-        </div>
-
-        <br />
-        <div class="form-group">
-            <div class="col-md-offset-4">
-                <input type="button" value="Agregar" id="AgregarDetalle" class="btn btn-primary btn-sm" />
-            </div>
-        </div>
-
-    </div>
-    <table class="table table-bordered table-hover" id="dataTable">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lianvide_FechaGasto)
-                </th>
-                <th>
-                    Tipo Gasto
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lianvide_Concepto)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lianvide_Archivo)
-                </th>
-                <th>
-                    Monto de Gastos
-                </th>
-
-                <th>
-                    Acciones
-                </th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-
-</div>
+    }
 <br />
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
@@ -136,7 +164,7 @@
     </div>
 </div>
 
-}
+
 
 </div>
 

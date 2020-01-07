@@ -164,7 +164,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 if (db.tbProveedor.Any(a => a.prov_RTN == tbProveedor.prov_RTN && a.prov_Id != tbProveedor.prov_Id))
                 {
-                    string Error = "Este RTN ya fue registrado.";
+                    string Error = "Ya existe un proveedor con este RTN.";
                     Function.BitacoraErrores("Proveedor", "EditPost", UserName, Error);
                     ModelState.AddModelError("", Error);
                     return View(tbProveedor);

@@ -255,6 +255,12 @@
     <Compile Include="Models\tbProducto.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbRequisionCompra.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRequisionCompraDetalle.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbSolicitudReembolsoGastos.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -3286,6 +3292,7 @@
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastos.js" />
+    <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastosDetalle.js" />
     <Content Include="Scripts\app\Solicitud\VacacionesPermisosEspeciales\Modals.js" />
     <Content Include="Scripts\app\Solicitud\VacacionesPermisosEspeciales\Vacaciones.js" />
     <Content Include="Scripts\app\SubCategoriaProducto.js" />

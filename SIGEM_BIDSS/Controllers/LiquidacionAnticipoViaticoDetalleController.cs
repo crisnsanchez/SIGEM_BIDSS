@@ -53,6 +53,7 @@ namespace SIGEM_BIDSS.Controllers
             tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id = Id;
             ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+            tbLiquidacionAnticipoViaticoDetalle.Lianvide_FechaGasto = Function.DatetimeNow();
             if (tbLiquidacionAnticipoViaticoDetalle == null)
             {
                 return HttpNotFound();
@@ -106,6 +107,9 @@ namespace SIGEM_BIDSS.Controllers
 
                     if (ModelState.IsValid)
                     {
+
+                        ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+                        ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                         int EmployeeID = Function.GetUser(out UserName);
                        
 
@@ -124,6 +128,8 @@ namespace SIGEM_BIDSS.Controllers
                             ErrorMessage = Area.MensajeError;
                         if (ErrorMessage.StartsWith("-1"))
                         {
+                            ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+                            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                             Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorMessage);
                             ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                             return View(tbLiquidacionAnticipoViaticoDetalle);
@@ -131,10 +137,10 @@ namespace SIGEM_BIDSS.Controllers
 
                         else
                         {
-                                                        TempData["swalfunction"] = "true";
-                            //return RedirectToAction("Create", "tbLiquidacionAnticipoViatico.Lianvi_Id", "LiquidacionAnticipoViaticoDetalle");
-
-                            //return RedirectToAction("Create", new RouteValueDictionary(new { controller = LiquidacionAnticipoViaticoDetalle, action = "Main", Id = Id }));
+                            ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+                            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+                            TempData["swalfunction"] = "true";
+                          
                             return View(tbLiquidacionAnticipoViaticoDetalle);
 
 
@@ -146,6 +152,8 @@ namespace SIGEM_BIDSS.Controllers
 
                 catch (Exception Ex)
                 {
+                    ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
+                    ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                     Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
 
                 }

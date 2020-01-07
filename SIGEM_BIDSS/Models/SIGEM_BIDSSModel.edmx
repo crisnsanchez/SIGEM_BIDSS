@@ -95,6 +95,37 @@
           <Property Name="Lianvide_UsuarioModifica" Type="int" />
           <Property Name="Lianvide_FechaModifica" Type="datetime" />
         </EntityType>
+        <EntityType Name="tbRequisionCompra">
+          <Key>
+            <PropertyRef Name="Reqco_Id" />
+          </Key>
+          <Property Name="Reqco_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reqco_Correlativo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="emp_Id" Type="int" Nullable="false" />
+          <Property Name="are_Id" Type="int" Nullable="false" />
+          <Property Name="Reqco_GralFechaSolicitud" Type="datetime" Nullable="false" />
+          <Property Name="Reqco_Comentario" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="est_Id" Type="int" Nullable="false" />
+          <Property Name="Reqco_RazonRechazo" Type="nvarchar" MaxLength="250" />
+          <Property Name="Reqco_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="Reqco_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="Reqco_UsuarioModifica" Type="int" />
+          <Property Name="Reqco_FechaModifica" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbRequisionCompraDetalle">
+          <Key>
+            <PropertyRef Name="Reqde_Id" />
+          </Key>
+          <Property Name="Reqde_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reqco_Id" Type="int" Nullable="false" />
+          <Property Name="prod_Id" Type="int" Nullable="false" />
+          <Property Name="Reqde_Cantidad" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Reqde_Justificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Reqde_UsuarioCrea" Type="int" Nullable="false" />
+          <Property Name="Reqde_FechaCrea" Type="datetime" Nullable="false" />
+          <Property Name="Reqde_UsuarioModifica" Type="int" />
+          <Property Name="Reqde_FechaModifica" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbSolicitudReembolsoGastos">
           <Key>
             <PropertyRef Name="Reemga_Id" />
@@ -128,7 +159,6 @@
           <Property Name="ReemgaDet_MontoGasto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ReemgaDet_Concepto" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="ReemgaDet_Archivo" Type="varchar(max)" Nullable="false" />
-          <Property Name="ReemgaDet_TotalGastos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="tbVacacionesPermisosEspeciales">
           <Key>
@@ -627,6 +657,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Adm_tbRequisionCompra_tbArea_are_Id">
+          <End Role="tbArea" Type="Self.tbArea" Multiplicity="1" />
+          <End Role="tbRequisionCompra" Type="Self.tbRequisionCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbArea">
+              <PropertyRef Name="are_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompra">
+              <PropertyRef Name="are_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id">
+          <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
+          <End Role="tbRequisionCompra" Type="Self.tbRequisionCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleado">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompra">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbRequisionCompra_tbEstado_est_Id">
+          <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
+          <End Role="tbRequisionCompra" Type="Self.tbRequisionCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompra">
+              <PropertyRef Name="est_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id">
+          <End Role="tbProducto" Type="Self.tbProducto" Multiplicity="1" />
+          <End Role="tbRequisionCompraDetalle" Type="Self.tbRequisionCompraDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProducto">
+              <PropertyRef Name="prod_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompraDetalle">
+              <PropertyRef Name="prod_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id">
+          <End Role="tbRequisionCompra" Type="Self.tbRequisionCompra" Multiplicity="1" />
+          <End Role="tbRequisionCompraDetalle" Type="Self.tbRequisionCompraDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRequisionCompra">
+              <PropertyRef Name="Reqco_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompraDetalle">
+              <PropertyRef Name="Reqco_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id">
           <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
           <End Role="tbVacacionesPermisosEspeciales" Type="Self.tbVacacionesPermisosEspeciales" Multiplicity="*" />
@@ -1060,7 +1150,6 @@
           <Parameter Name="ReemgaDet_MontoGasto" Type="decimal" Mode="In" />
           <Parameter Name="ReemgaDet_Concepto" Type="nvarchar" Mode="In" />
           <Parameter Name="ReemgaDet_Archivo" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="ReemgaDet_TotalGastos" Type="decimal" Mode="In" />
         </Function>
         <Function Name="UDP_Adm_tbVacacionesPermisosEspeciales_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
@@ -1607,6 +1696,8 @@
           <EntitySet Name="tbAnticipoViatico" EntityType="Self.tbAnticipoViatico" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbLiquidacionAnticipoViatico" EntityType="Self.tbLiquidacionAnticipoViatico" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbLiquidacionAnticipoViaticoDetalle" EntityType="Self.tbLiquidacionAnticipoViaticoDetalle" Schema="Adm" store:Type="Tables" />
+          <EntitySet Name="tbRequisionCompra" EntityType="Self.tbRequisionCompra" Schema="Adm" store:Type="Tables" />
+          <EntitySet Name="tbRequisionCompraDetalle" EntityType="Self.tbRequisionCompraDetalle" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbSolicitudReembolsoGastos" EntityType="Self.tbSolicitudReembolsoGastos" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbSolicitudReembolsoGastosDetalle" EntityType="Self.tbSolicitudReembolsoGastosDetalle" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbVacacionesPermisosEspeciales" EntityType="Self.tbVacacionesPermisosEspeciales" Schema="Adm" store:Type="Tables" />
@@ -1685,6 +1776,26 @@
           <AssociationSet Name="FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id" Association="Self.FK_Adm_tbLiquidacionAnticipoViatico_tbTipoViatico_tpv_Id">
             <End Role="tbTipoViatico" EntitySet="tbTipoViatico" />
             <End Role="tbLiquidacionAnticipoViaticoDetalle" EntitySet="tbLiquidacionAnticipoViaticoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompra_tbArea_are_Id" Association="Self.FK_Adm_tbRequisionCompra_tbArea_are_Id">
+            <End Role="tbArea" EntitySet="tbArea" />
+            <End Role="tbRequisionCompra" EntitySet="tbRequisionCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id" Association="Self.FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id">
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+            <End Role="tbRequisionCompra" EntitySet="tbRequisionCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompra_tbEstado_est_Id" Association="Self.FK_Adm_tbRequisionCompra_tbEstado_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbRequisionCompra" EntitySet="tbRequisionCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id" Association="Self.FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id">
+            <End Role="tbProducto" EntitySet="tbProducto" />
+            <End Role="tbRequisionCompraDetalle" EntitySet="tbRequisionCompraDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id" Association="Self.FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id">
+            <End Role="tbRequisionCompra" EntitySet="tbRequisionCompra" />
+            <End Role="tbRequisionCompraDetalle" EntitySet="tbRequisionCompraDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id" Association="Self.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id">
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
@@ -2491,17 +2602,6 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result)">
-            <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Lianvi_FechaLiquida" Mode="In" Type="DateTime" />
-            <Parameter Name="Lianvi_FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="Lianvi_FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="Lianvi_Comentario" Mode="In" Type="String" />
-            <Parameter Name="est_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
-            <Parameter Name="Lianvi_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="Lianvi_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
           <FunctionImport Name="UDP_Conf_tbParametro_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Conf_tbParametro_Insert_Result)">
             <Parameter Name="par_NombreEmpresa" Mode="In" Type="String" />
@@ -2649,19 +2749,6 @@
             <Parameter Name="Anvi_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="Anvi_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="tbSolicitudReembolsoGastos" EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" />
-          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_emp_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_emp_Id">
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_est_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_est_Id">
-            <End Role="tbEstado" EntitySet="tbEstado" />
-            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Adm_tbSolicitudReembolsoGastos_mun_codigo" Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_mun_codigo">
-            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
-            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
-          </AssociationSet>
           <FunctionImport Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="Reemga_GralFechaSolicitud" Mode="In" Type="DateTime" />
@@ -2772,14 +2859,17 @@
             <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
             <Parameter Name="prod_Codigo" Mode="InOut" Type="String" />
           </FunctionImport>
-          <AssociationSet Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos">
-            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
-            <End Role="tbSolicitudReembolsoGastos1" EntitySet="tbSolicitudReembolsoGastos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato" Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato">
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
-            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
-          </AssociationSet>
+          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result)">
+            <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_FechaLiquida" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="Lianvi_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Lianvi_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result)">
             <Parameter Name="Reemga_Id" Mode="In" Type="Int32" />
             <Parameter Name="ReemgaDet_FechaGasto" Mode="In" Type="DateTime" />
@@ -2787,9 +2877,51 @@
             <Parameter Name="ReemgaDet_MontoGasto" Mode="In" Type="Decimal" />
             <Parameter Name="ReemgaDet_Concepto" Mode="In" Type="String" />
             <Parameter Name="ReemgaDet_Archivo" Mode="In" Type="String" />
-            <Parameter Name="ReemgaDet_TotalGastos" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="tbRequisionCompra" EntityType="SIGEM_BIDSSModel.tbRequisionCompra" />
+          <EntitySet Name="tbRequisionCompraDetalle" EntityType="SIGEM_BIDSSModel.tbRequisionCompraDetalle" />
+          <EntitySet Name="tbSolicitudReembolsoGastos" EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" />
           <EntitySet Name="tbSolicitudReembolsoGastosDetalle" EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastosDetalle" />
+          <AssociationSet Name="FK_Adm_tbRequisionCompra_tbArea_are_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbArea_are_Id">
+            <End Role="tbArea" EntitySet="tbArea" />
+            <End Role="tbRequisionCompra" EntitySet="tbRequisionCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id">
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+            <End Role="tbRequisionCompra" EntitySet="tbRequisionCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompra_tbEstado_est_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbEstado_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbRequisionCompra" EntitySet="tbRequisionCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id">
+            <End Role="tbRequisionCompra" EntitySet="tbRequisionCompra" />
+            <End Role="tbRequisionCompraDetalle" EntitySet="tbRequisionCompraDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id" Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id">
+            <End Role="tbProducto" EntitySet="tbProducto" />
+            <End Role="tbRequisionCompraDetalle" EntitySet="tbRequisionCompraDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSolicitudReembolsoGastos_tbEmpleado_emp_Id" Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbEmpleado_emp_Id">
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos">
+            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
+            <End Role="tbSolicitudReembolsoGastos1" EntitySet="tbSolicitudReembolsoGastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_est_Id" Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_est_Id">
+            <End Role="tbEstado" EntitySet="tbEstado" />
+            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato" Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato">
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_mun_codigo" Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_mun_codigo">
+            <End Role="tbMunicipio" EntitySet="tbMunicipio" />
+            <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
+          </AssociationSet>
           <AssociationSet Name="FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id" Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id">
             <End Role="tbSolicitudReembolsoGastos" EntitySet="tbSolicitudReembolsoGastos" />
             <End Role="tbSolicitudReembolsoGastosDetalle" EntitySet="tbSolicitudReembolsoGastosDetalle" />
@@ -3077,6 +3209,7 @@
           <Property Name="are_UsuarioModifica" Type="Int32" />
           <Property Name="are_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbPuesto" Relationship="SIGEM_BIDSSModel.FK_are_Id" FromRole="tbArea" ToRole="tbPuesto" />
+          <NavigationProperty Name="tbRequisionCompra" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbArea_are_Id" FromRole="tbArea" ToRole="tbRequisionCompra" />
         </EntityType>
         <EntityType Name="tbDepartamento">
           <Key>
@@ -3104,8 +3237,9 @@
           <NavigationProperty Name="tbAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbAnticipoViatico" />
           <NavigationProperty Name="tbLiquidacionAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbLiquidacionAnticipoViatico_Adm_tbAnticipoViatico_est_Id" FromRole="tbEstado" ToRole="tbLiquidacionAnticipoViatico" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbEmpleado" />
-          <NavigationProperty Name="tbSolicitudReembolsoGastos" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_est_Id" FromRole="tbEstado" ToRole="tbSolicitudReembolsoGastos" />
           <NavigationProperty Name="tbVacacionesPermisosEspeciales" Relationship="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbVacacionesPermisosEspeciales" />
+          <NavigationProperty Name="tbRequisionCompra" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbEstado_est_Id" FromRole="tbEstado" ToRole="tbRequisionCompra" />
+          <NavigationProperty Name="tbSolicitudReembolsoGastos" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_est_Id" FromRole="tbEstado" ToRole="tbSolicitudReembolsoGastos" />
         </EntityType>
         <EntityType Name="tbMoneda">
           <Key>
@@ -3135,7 +3269,7 @@
           <NavigationProperty Name="tbDepartamento" Relationship="SIGEM_BIDSSModel.FK_dep_Id" FromRole="tbMunicipio" ToRole="tbDepartamento" />
           <NavigationProperty Name="tbProveedor" Relationship="SIGEM_BIDSSModel.FK_Inv_tbProveedor_Gral_tbMunicipio_mun_codigo" FromRole="tbMunicipio" ToRole="tbProveedor" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_Gral_tbMunicipio_mun_codigo" FromRole="tbMunicipio" ToRole="tbEmpleado" />
-          <NavigationProperty Name="tbSolicitudReembolsoGastos" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_mun_codigo" FromRole="tbMunicipio" ToRole="tbSolicitudReembolsoGastos" />
+          <NavigationProperty Name="tbSolicitudReembolsoGastos" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_mun_codigo" FromRole="tbMunicipio" ToRole="tbSolicitudReembolsoGastos" />
         </EntityType>
         <EntityType Name="tbPuesto">
           <Key>
@@ -3326,9 +3460,10 @@
           <NavigationProperty Name="tbTipoSangre" Relationship="SIGEM_BIDSSModel.FK_rrhh_tbEmpleado_tbTipoSangre_tps_Id" FromRole="tbEmpleado" ToRole="tbTipoSangre" />
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id" FromRole="tbEmpleado" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbSueldo" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" FromRole="tbEmpleado" ToRole="tbSueldo" />
-          <NavigationProperty Name="tbSolicitudReembolsoGastos" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_emp_Id" FromRole="tbEmpleado" ToRole="tbSolicitudReembolsoGastos" />
           <NavigationProperty Name="tbVacacionesPermisosEspeciales" Relationship="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbVacacionesPermisosEspeciales" />
           <NavigationProperty Name="tbVacacionesPermisosEspeciales1" Relationship="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id_JefeInmediato" FromRole="tbEmpleado" ToRole="tbVacacionesPermisosEspeciales" />
+          <NavigationProperty Name="tbRequisionCompra" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbRequisionCompra" />
+          <NavigationProperty Name="tbSolicitudReembolsoGastos" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbSolicitudReembolsoGastos" />
           <NavigationProperty Name="tbSolicitudReembolsoGastos1" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato" FromRole="tbEmpleado" ToRole="tbSolicitudReembolsoGastos" />
         </EntityType>
         <EntityType Name="tbSueldo">
@@ -3622,9 +3757,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         <EntityType Name="tbParametro">
           <Key>
             <PropertyRef Name="par_Id" />
@@ -3792,6 +3924,7 @@
           <NavigationProperty Name="tbUnidadMedida" Relationship="SIGEM_BIDSSModel.FK_Inv_tbProducto_Gral_tbUnidadMedida_uni_Id" FromRole="tbProducto" ToRole="tbUnidadMedida" />
           <NavigationProperty Name="tbProductoSubcategoria" Relationship="SIGEM_BIDSSModel.FK_Inv_tbProducto_tbProductoSubcategoria_pscat_Id" FromRole="tbProducto" ToRole="tbProductoSubcategoria" />
           <NavigationProperty Name="tbProveedor" Relationship="SIGEM_BIDSSModel.FK_Inv_tbProducto_tbProveedor_prov_Id" FromRole="tbProducto" ToRole="tbProveedor" />
+          <NavigationProperty Name="tbRequisionCompraDetalle" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id" FromRole="tbProducto" ToRole="tbRequisionCompraDetalle" />
         </EntityType>
         <Association Name="FK_Inv_tbProducto_Gral_tbUnidadMedida_uni_Id">
           <End Type="SIGEM_BIDSSModel.tbUnidadMedida" Role="tbUnidadMedida" Multiplicity="1" />
@@ -3835,71 +3968,6 @@
         <ComplexType Name="UDP_Adm_tbAnticipoViatico_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
-        <EntityType Name="tbSolicitudReembolsoGastos">
-          <Key>
-            <PropertyRef Name="Reemga_Id" />
-          </Key>
-          <Property Name="Reemga_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Reemga_Correlativo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="Reemga_GralFechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reemga_FechaViaje" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reemga_Cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="mun_codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="Reemga_PropositoVisita" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Reemga_DiasVisita" Type="Int32" Nullable="false" />
-          <Property Name="Reemga_Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="est_Id" Type="Int32" Nullable="false" />
-          <Property Name="Reemga_RazonRechazo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Reemga_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="Reemga_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reemga_UsuarioModifica" Type="Int32" />
-          <Property Name="Reemga_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_emp_Id" FromRole="tbSolicitudReembolsoGastos" ToRole="tbEmpleado" />
-          <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_est_Id" FromRole="tbSolicitudReembolsoGastos" ToRole="tbEstado" />
-          <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_mun_codigo" FromRole="tbSolicitudReembolsoGastos" ToRole="tbMunicipio" />
-          <Property Name="Reemga_JefeInmediato" Type="Int32" />
-          <NavigationProperty Name="tbSolicitudReembolsoGastos1" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" FromRole="tbSolicitudReembolsoGastos" ToRole="tbSolicitudReembolsoGastos1" />
-          <NavigationProperty Name="tbSolicitudReembolsoGastos2" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" FromRole="tbSolicitudReembolsoGastos1" ToRole="tbSolicitudReembolsoGastos" />
-          <NavigationProperty Name="tbEmpleado1" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato" FromRole="tbSolicitudReembolsoGastos" ToRole="tbEmpleado" />
-          <NavigationProperty Name="tbSolicitudReembolsoGastosDetalle" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id" FromRole="tbSolicitudReembolsoGastos" ToRole="tbSolicitudReembolsoGastosDetalle" />
-        </EntityType>
-        <Association Name="FK_Adm_tbSolicitudReembolsoGastos_emp_Id">
-          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleado">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitudReembolsoGastos">
-              <PropertyRef Name="emp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Adm_tbSolicitudReembolsoGastos_est_Id">
-          <End Type="SIGEM_BIDSSModel.tbEstado" Role="tbEstado" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEstado">
-              <PropertyRef Name="est_Id" />
-            </Principal>
-            <Dependent Role="tbSolicitudReembolsoGastos">
-              <PropertyRef Name="est_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Adm_tbSolicitudReembolsoGastos_mun_codigo">
-          <End Type="SIGEM_BIDSSModel.tbMunicipio" Role="tbMunicipio" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbMunicipio">
-              <PropertyRef Name="mun_codigo" />
-            </Principal>
-            <Dependent Role="tbSolicitudReembolsoGastos">
-              <PropertyRef Name="mun_codigo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
@@ -4004,6 +4072,161 @@
           <Property Type="Int32" Name="pcat_Id" Nullable="false" />
           <Property Type="String" Name="pcat_Descripcion" Nullable="false" MaxLength="150" />
         </ComplexType>
+        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <EntityType Name="tbRequisionCompra">
+          <Key>
+            <PropertyRef Name="Reqco_Id" />
+          </Key>
+          <Property Name="Reqco_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reqco_Correlativo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="are_Id" Type="Int32" Nullable="false" />
+          <Property Name="Reqco_GralFechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reqco_Comentario" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="est_Id" Type="Int32" Nullable="false" />
+          <Property Name="Reqco_RazonRechazo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Reqco_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="Reqco_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reqco_UsuarioModifica" Type="Int32" />
+          <Property Name="Reqco_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbArea" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbArea_are_Id" FromRole="tbRequisionCompra" ToRole="tbArea" />
+          <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id" FromRole="tbRequisionCompra" ToRole="tbEmpleado" />
+          <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbEstado_est_Id" FromRole="tbRequisionCompra" ToRole="tbEstado" />
+          <NavigationProperty Name="tbRequisionCompraDetalle" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id" FromRole="tbRequisionCompra" ToRole="tbRequisionCompraDetalle" />
+        </EntityType>
+        <EntityType Name="tbRequisionCompraDetalle">
+          <Key>
+            <PropertyRef Name="Reqde_Id" />
+          </Key>
+          <Property Name="Reqde_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reqco_Id" Type="Int32" Nullable="false" />
+          <Property Name="prod_Id" Type="Int32" Nullable="false" />
+          <Property Name="Reqde_Cantidad" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Reqde_Justificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reqde_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="Reqde_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reqde_UsuarioModifica" Type="Int32" />
+          <Property Name="Reqde_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbRequisionCompra" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id" FromRole="tbRequisionCompraDetalle" ToRole="tbRequisionCompra" />
+          <NavigationProperty Name="tbProducto" Relationship="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id" FromRole="tbRequisionCompraDetalle" ToRole="tbProducto" />
+        </EntityType>
+        <EntityType Name="tbSolicitudReembolsoGastos">
+          <Key>
+            <PropertyRef Name="Reemga_Id" />
+          </Key>
+          <Property Name="Reemga_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reemga_Correlativo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="Reemga_JefeInmediato" Type="Int32" />
+          <Property Name="Reemga_GralFechaSolicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reemga_FechaViaje" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reemga_Cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="mun_codigo" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Reemga_PropositoVisita" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Reemga_DiasVisita" Type="Int32" Nullable="false" />
+          <Property Name="Reemga_Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="est_Id" Type="Int32" Nullable="false" />
+          <Property Name="Reemga_RazonRechazo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Reemga_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="Reemga_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reemga_UsuarioModifica" Type="Int32" />
+          <Property Name="Reemga_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbEmpleado_emp_Id" FromRole="tbSolicitudReembolsoGastos" ToRole="tbEmpleado" />
+          <NavigationProperty Name="tbSolicitudReembolsoGastos1" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" FromRole="tbSolicitudReembolsoGastos" ToRole="tbSolicitudReembolsoGastos1" />
+          <NavigationProperty Name="tbSolicitudReembolsoGastos2" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" FromRole="tbSolicitudReembolsoGastos1" ToRole="tbSolicitudReembolsoGastos" />
+          <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_est_Id" FromRole="tbSolicitudReembolsoGastos" ToRole="tbEstado" />
+          <NavigationProperty Name="tbEmpleado1" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato" FromRole="tbSolicitudReembolsoGastos" ToRole="tbEmpleado" />
+          <NavigationProperty Name="tbMunicipio" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_mun_codigo" FromRole="tbSolicitudReembolsoGastos" ToRole="tbMunicipio" />
+          <NavigationProperty Name="tbSolicitudReembolsoGastosDetalle" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id" FromRole="tbSolicitudReembolsoGastos" ToRole="tbSolicitudReembolsoGastosDetalle" />
+        </EntityType>
+        <EntityType Name="tbSolicitudReembolsoGastosDetalle">
+          <Key>
+            <PropertyRef Name="ReemgaDet_Id" />
+          </Key>
+          <Property Name="ReemgaDet_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reemga_Id" Type="Int32" Nullable="false" />
+          <Property Name="ReemgaDet_FechaGasto" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="tpv_Id" Type="Int32" Nullable="false" />
+          <Property Name="ReemgaDet_MontoGasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ReemgaDet_Concepto" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ReemgaDet_Archivo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbSolicitudReembolsoGastos" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id" FromRole="tbSolicitudReembolsoGastosDetalle" ToRole="tbSolicitudReembolsoGastos" />
+          <NavigationProperty Name="tbTipoViatico" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbTipoViatico_tpv_Id" FromRole="tbSolicitudReembolsoGastosDetalle" ToRole="tbTipoViatico" />
+        </EntityType>
+        <Association Name="FK_Adm_tbRequisionCompra_tbArea_are_Id">
+          <End Type="SIGEM_BIDSSModel.tbArea" Role="tbArea" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbRequisionCompra" Role="tbRequisionCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbArea">
+              <PropertyRef Name="are_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompra">
+              <PropertyRef Name="are_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id">
+          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbRequisionCompra" Role="tbRequisionCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleado">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompra">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbRequisionCompra_tbEstado_est_Id">
+          <End Type="SIGEM_BIDSSModel.tbEstado" Role="tbEstado" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbRequisionCompra" Role="tbRequisionCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompra">
+              <PropertyRef Name="est_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id">
+          <End Type="SIGEM_BIDSSModel.tbRequisionCompra" Role="tbRequisionCompra" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbRequisionCompraDetalle" Role="tbRequisionCompraDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRequisionCompra">
+              <PropertyRef Name="Reqco_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompraDetalle">
+              <PropertyRef Name="Reqco_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id">
+          <End Type="SIGEM_BIDSSModel.tbProducto" Role="tbProducto" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbRequisionCompraDetalle" Role="tbRequisionCompraDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProducto">
+              <PropertyRef Name="prod_Id" />
+            </Principal>
+            <Dependent Role="tbRequisionCompraDetalle">
+              <PropertyRef Name="prod_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSolicitudReembolsoGastos_tbEmpleado_emp_Id">
+          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleado">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbSolicitudReembolsoGastos">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos">
           <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos" Multiplicity="1" />
           <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos1" Multiplicity="0..1" />
@@ -4013,6 +4236,18 @@
             </Principal>
             <Dependent Role="tbSolicitudReembolsoGastos1">
               <PropertyRef Name="Reemga_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_est_Id">
+          <End Type="SIGEM_BIDSSModel.tbEstado" Role="tbEstado" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEstado">
+              <PropertyRef Name="est_Id" />
+            </Principal>
+            <Dependent Role="tbSolicitudReembolsoGastos">
+              <PropertyRef Name="est_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4028,24 +4263,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <EntityType Name="tbSolicitudReembolsoGastosDetalle">
-          <Key>
-            <PropertyRef Name="ReemgaDet_Id" />
-          </Key>
-          <Property Name="ReemgaDet_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Reemga_Id" Type="Int32" Nullable="false" />
-          <Property Name="ReemgaDet_FechaGasto" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="tpv_Id" Type="Int32" Nullable="false" />
-          <Property Name="ReemgaDet_MontoGasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ReemgaDet_Concepto" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ReemgaDet_Archivo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ReemgaDet_TotalGastos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="tbSolicitudReembolsoGastos" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id" FromRole="tbSolicitudReembolsoGastosDetalle" ToRole="tbSolicitudReembolsoGastos" />
-          <NavigationProperty Name="tbTipoViatico" Relationship="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbTipoViatico_tpv_Id" FromRole="tbSolicitudReembolsoGastosDetalle" ToRole="tbTipoViatico" />
-        </EntityType>
+        <Association Name="FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_mun_codigo">
+          <End Type="SIGEM_BIDSSModel.tbMunicipio" Role="tbMunicipio" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMunicipio">
+              <PropertyRef Name="mun_codigo" />
+            </Principal>
+            <Dependent Role="tbSolicitudReembolsoGastos">
+              <PropertyRef Name="mun_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id">
           <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Role="tbSolicitudReembolsoGastos" Multiplicity="1" />
           <End Type="SIGEM_BIDSSModel.tbSolicitudReembolsoGastosDetalle" Role="tbSolicitudReembolsoGastosDetalle" Multiplicity="*" />
@@ -4070,6 +4299,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4755,13 +4987,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="tbParametro">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbParametro">
               <MappingFragment StoreEntitySet="tbParametro">
@@ -4953,29 +5178,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="tbSolicitudReembolsoGastos">
-            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos">
-              <MappingFragment StoreEntitySet="tbSolicitudReembolsoGastos">
-                <ScalarProperty Name="Reemga_JefeInmediato" ColumnName="Reemga_JefeInmediato" />
-                <ScalarProperty Name="Reemga_FechaModifica" ColumnName="Reemga_FechaModifica" />
-                <ScalarProperty Name="Reemga_UsuarioModifica" ColumnName="Reemga_UsuarioModifica" />
-                <ScalarProperty Name="Reemga_FechaCrea" ColumnName="Reemga_FechaCrea" />
-                <ScalarProperty Name="Reemga_UsuarioCrea" ColumnName="Reemga_UsuarioCrea" />
-                <ScalarProperty Name="Reemga_RazonRechazo" ColumnName="Reemga_RazonRechazo" />
-                <ScalarProperty Name="est_Id" ColumnName="est_Id" />
-                <ScalarProperty Name="Reemga_Comentario" ColumnName="Reemga_Comentario" />
-                <ScalarProperty Name="Reemga_DiasVisita" ColumnName="Reemga_DiasVisita" />
-                <ScalarProperty Name="Reemga_PropositoVisita" ColumnName="Reemga_PropositoVisita" />
-                <ScalarProperty Name="mun_codigo" ColumnName="mun_codigo" />
-                <ScalarProperty Name="Reemga_Cliente" ColumnName="Reemga_Cliente" />
-                <ScalarProperty Name="Reemga_FechaViaje" ColumnName="Reemga_FechaViaje" />
-                <ScalarProperty Name="Reemga_GralFechaSolicitud" ColumnName="Reemga_GralFechaSolicitud" />
-                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
-                <ScalarProperty Name="Reemga_Correlativo" ColumnName="Reemga_Correlativo" />
-                <ScalarProperty Name="Reemga_Id" ColumnName="Reemga_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbSolicitudReembolsoGastos_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbSolicitudReembolsoGastos_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
@@ -5069,6 +5271,13 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result">
@@ -5076,10 +5285,65 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbRequisionCompra">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbRequisionCompra">
+              <MappingFragment StoreEntitySet="tbRequisionCompra">
+                <ScalarProperty Name="Reqco_FechaModifica" ColumnName="Reqco_FechaModifica" />
+                <ScalarProperty Name="Reqco_UsuarioModifica" ColumnName="Reqco_UsuarioModifica" />
+                <ScalarProperty Name="Reqco_FechaCrea" ColumnName="Reqco_FechaCrea" />
+                <ScalarProperty Name="Reqco_UsuarioCrea" ColumnName="Reqco_UsuarioCrea" />
+                <ScalarProperty Name="Reqco_RazonRechazo" ColumnName="Reqco_RazonRechazo" />
+                <ScalarProperty Name="est_Id" ColumnName="est_Id" />
+                <ScalarProperty Name="Reqco_Comentario" ColumnName="Reqco_Comentario" />
+                <ScalarProperty Name="Reqco_GralFechaSolicitud" ColumnName="Reqco_GralFechaSolicitud" />
+                <ScalarProperty Name="are_Id" ColumnName="are_Id" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="Reqco_Correlativo" ColumnName="Reqco_Correlativo" />
+                <ScalarProperty Name="Reqco_Id" ColumnName="Reqco_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbRequisionCompraDetalle">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbRequisionCompraDetalle">
+              <MappingFragment StoreEntitySet="tbRequisionCompraDetalle">
+                <ScalarProperty Name="Reqde_FechaModifica" ColumnName="Reqde_FechaModifica" />
+                <ScalarProperty Name="Reqde_UsuarioModifica" ColumnName="Reqde_UsuarioModifica" />
+                <ScalarProperty Name="Reqde_FechaCrea" ColumnName="Reqde_FechaCrea" />
+                <ScalarProperty Name="Reqde_UsuarioCrea" ColumnName="Reqde_UsuarioCrea" />
+                <ScalarProperty Name="Reqde_Justificacion" ColumnName="Reqde_Justificacion" />
+                <ScalarProperty Name="Reqde_Cantidad" ColumnName="Reqde_Cantidad" />
+                <ScalarProperty Name="prod_Id" ColumnName="prod_Id" />
+                <ScalarProperty Name="Reqco_Id" ColumnName="Reqco_Id" />
+                <ScalarProperty Name="Reqde_Id" ColumnName="Reqde_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSolicitudReembolsoGastos">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos">
+              <MappingFragment StoreEntitySet="tbSolicitudReembolsoGastos">
+                <ScalarProperty Name="Reemga_FechaModifica" ColumnName="Reemga_FechaModifica" />
+                <ScalarProperty Name="Reemga_UsuarioModifica" ColumnName="Reemga_UsuarioModifica" />
+                <ScalarProperty Name="Reemga_FechaCrea" ColumnName="Reemga_FechaCrea" />
+                <ScalarProperty Name="Reemga_UsuarioCrea" ColumnName="Reemga_UsuarioCrea" />
+                <ScalarProperty Name="Reemga_RazonRechazo" ColumnName="Reemga_RazonRechazo" />
+                <ScalarProperty Name="est_Id" ColumnName="est_Id" />
+                <ScalarProperty Name="Reemga_Comentario" ColumnName="Reemga_Comentario" />
+                <ScalarProperty Name="Reemga_DiasVisita" ColumnName="Reemga_DiasVisita" />
+                <ScalarProperty Name="Reemga_PropositoVisita" ColumnName="Reemga_PropositoVisita" />
+                <ScalarProperty Name="mun_codigo" ColumnName="mun_codigo" />
+                <ScalarProperty Name="Reemga_Cliente" ColumnName="Reemga_Cliente" />
+                <ScalarProperty Name="Reemga_FechaViaje" ColumnName="Reemga_FechaViaje" />
+                <ScalarProperty Name="Reemga_GralFechaSolicitud" ColumnName="Reemga_GralFechaSolicitud" />
+                <ScalarProperty Name="Reemga_JefeInmediato" ColumnName="Reemga_JefeInmediato" />
+                <ScalarProperty Name="emp_Id" ColumnName="emp_Id" />
+                <ScalarProperty Name="Reemga_Correlativo" ColumnName="Reemga_Correlativo" />
+                <ScalarProperty Name="Reemga_Id" ColumnName="Reemga_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbSolicitudReembolsoGastosDetalle">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSolicitudReembolsoGastosDetalle">
               <MappingFragment StoreEntitySet="tbSolicitudReembolsoGastosDetalle">
-                <ScalarProperty Name="ReemgaDet_TotalGastos" ColumnName="ReemgaDet_TotalGastos" />
                 <ScalarProperty Name="ReemgaDet_Archivo" ColumnName="ReemgaDet_Archivo" />
                 <ScalarProperty Name="ReemgaDet_Concepto" ColumnName="ReemgaDet_Concepto" />
                 <ScalarProperty Name="ReemgaDet_MontoGasto" ColumnName="ReemgaDet_MontoGasto" />
