@@ -56,8 +56,10 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbProductoCategoria> tbProductoCategoria { get; set; }
         public virtual DbSet<tbProductoSubcategoria> tbProductoSubcategoria { get; set; }
         public virtual DbSet<tbProducto> tbProducto { get; set; }
-        public virtual DbSet<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
         public virtual DbSet<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
+        public virtual DbSet<tbRequisionCompra> tbRequisionCompra { get; set; }
+        public virtual DbSet<tbRequisionCompraDetalle> tbRequisionCompraDetalle { get; set; }
+        public virtual DbSet<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
         public virtual DbSet<tbSolicitudReembolsoGastosDetalle> tbSolicitudReembolsoGastosDetalle { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
@@ -2940,39 +2942,6 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Inv_tbProducto_ValorCodigo_Result>("UDP_Inv_tbProducto_ValorCodigo", pcat_IdParameter, pscat_IdParameter, prod_Codigo);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(Nullable<int> reemga_Id, Nullable<System.DateTime> reemgaDet_FechaGasto, Nullable<int> tpv_Id, Nullable<decimal> reemgaDet_MontoGasto, string reemgaDet_Concepto, string reemgaDet_Archivo, Nullable<decimal> reemgaDet_TotalGastos)
-        {
-            var reemga_IdParameter = reemga_Id.HasValue ?
-                new ObjectParameter("Reemga_Id", reemga_Id) :
-                new ObjectParameter("Reemga_Id", typeof(int));
-    
-            var reemgaDet_FechaGastoParameter = reemgaDet_FechaGasto.HasValue ?
-                new ObjectParameter("ReemgaDet_FechaGasto", reemgaDet_FechaGasto) :
-                new ObjectParameter("ReemgaDet_FechaGasto", typeof(System.DateTime));
-    
-            var tpv_IdParameter = tpv_Id.HasValue ?
-                new ObjectParameter("tpv_Id", tpv_Id) :
-                new ObjectParameter("tpv_Id", typeof(int));
-    
-            var reemgaDet_MontoGastoParameter = reemgaDet_MontoGasto.HasValue ?
-                new ObjectParameter("ReemgaDet_MontoGasto", reemgaDet_MontoGasto) :
-                new ObjectParameter("ReemgaDet_MontoGasto", typeof(decimal));
-    
-            var reemgaDet_ConceptoParameter = reemgaDet_Concepto != null ?
-                new ObjectParameter("ReemgaDet_Concepto", reemgaDet_Concepto) :
-                new ObjectParameter("ReemgaDet_Concepto", typeof(string));
-    
-            var reemgaDet_ArchivoParameter = reemgaDet_Archivo != null ?
-                new ObjectParameter("ReemgaDet_Archivo", reemgaDet_Archivo) :
-                new ObjectParameter("ReemgaDet_Archivo", typeof(string));
-    
-            var reemgaDet_TotalGastosParameter = reemgaDet_TotalGastos.HasValue ?
-                new ObjectParameter("ReemgaDet_TotalGastos", reemgaDet_TotalGastos) :
-                new ObjectParameter("ReemgaDet_TotalGastos", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert", reemga_IdParameter, reemgaDet_FechaGastoParameter, tpv_IdParameter, reemgaDet_MontoGastoParameter, reemgaDet_ConceptoParameter, reemgaDet_ArchivoParameter, reemgaDet_TotalGastosParameter);
-        }
-    
         public virtual ObjectResult<UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result> UDP_Adm_tbLiquidacionAnticipoViatico_Insert(Nullable<int> anvi_Id, Nullable<System.DateTime> lianvi_FechaLiquida, Nullable<System.DateTime> lianvi_FechaInicio, Nullable<System.DateTime> lianvi_FechaFin, string lianvi_Comentario, Nullable<int> est_Id, string lianvi_RazonRechazo, Nullable<int> lianvi_UsuarioCrea, Nullable<System.DateTime> lianvi_FechaCrea)
         {
             var anvi_IdParameter = anvi_Id.HasValue ?
@@ -3012,6 +2981,35 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Lianvi_FechaCrea", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result>("UDP_Adm_tbLiquidacionAnticipoViatico_Insert", anvi_IdParameter, lianvi_FechaLiquidaParameter, lianvi_FechaInicioParameter, lianvi_FechaFinParameter, lianvi_ComentarioParameter, est_IdParameter, lianvi_RazonRechazoParameter, lianvi_UsuarioCreaParameter, lianvi_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(Nullable<int> reemga_Id, Nullable<System.DateTime> reemgaDet_FechaGasto, Nullable<int> tpv_Id, Nullable<decimal> reemgaDet_MontoGasto, string reemgaDet_Concepto, string reemgaDet_Archivo)
+        {
+            var reemga_IdParameter = reemga_Id.HasValue ?
+                new ObjectParameter("Reemga_Id", reemga_Id) :
+                new ObjectParameter("Reemga_Id", typeof(int));
+    
+            var reemgaDet_FechaGastoParameter = reemgaDet_FechaGasto.HasValue ?
+                new ObjectParameter("ReemgaDet_FechaGasto", reemgaDet_FechaGasto) :
+                new ObjectParameter("ReemgaDet_FechaGasto", typeof(System.DateTime));
+    
+            var tpv_IdParameter = tpv_Id.HasValue ?
+                new ObjectParameter("tpv_Id", tpv_Id) :
+                new ObjectParameter("tpv_Id", typeof(int));
+    
+            var reemgaDet_MontoGastoParameter = reemgaDet_MontoGasto.HasValue ?
+                new ObjectParameter("ReemgaDet_MontoGasto", reemgaDet_MontoGasto) :
+                new ObjectParameter("ReemgaDet_MontoGasto", typeof(decimal));
+    
+            var reemgaDet_ConceptoParameter = reemgaDet_Concepto != null ?
+                new ObjectParameter("ReemgaDet_Concepto", reemgaDet_Concepto) :
+                new ObjectParameter("ReemgaDet_Concepto", typeof(string));
+    
+            var reemgaDet_ArchivoParameter = reemgaDet_Archivo != null ?
+                new ObjectParameter("ReemgaDet_Archivo", reemgaDet_Archivo) :
+                new ObjectParameter("ReemgaDet_Archivo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert", reemga_IdParameter, reemgaDet_FechaGastoParameter, tpv_IdParameter, reemgaDet_MontoGastoParameter, reemgaDet_ConceptoParameter, reemgaDet_ArchivoParameter);
         }
     }
 }

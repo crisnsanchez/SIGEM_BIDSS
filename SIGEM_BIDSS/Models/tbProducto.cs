@@ -14,6 +14,12 @@ namespace SIGEM_BIDSS.Models
     
     public partial class tbProducto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbProducto()
+        {
+            this.tbRequisionCompraDetalle = new HashSet<tbRequisionCompraDetalle>();
+        }
+    
         public int prod_Id { get; set; }
         public string prod_Codigo { get; set; }
         public string prod_CodigoBarras { get; set; }
@@ -35,5 +41,7 @@ namespace SIGEM_BIDSS.Models
         public virtual tbUnidadMedida tbUnidadMedida { get; set; }
         public virtual tbProductoSubcategoria tbProductoSubcategoria { get; set; }
         public virtual tbProveedor tbProveedor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbRequisionCompraDetalle> tbRequisionCompraDetalle { get; set; }
     }
 }

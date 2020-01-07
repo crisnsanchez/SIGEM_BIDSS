@@ -246,6 +246,12 @@
     <Compile Include="Models\tbProducto.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbRequisionCompra.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbRequisionCompraDetalle.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbSolicitudReembolsoGastos.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
