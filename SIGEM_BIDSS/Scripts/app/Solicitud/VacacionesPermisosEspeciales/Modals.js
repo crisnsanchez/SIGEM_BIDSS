@@ -78,5 +78,5 @@ function SendData(_idPrimary, _controller, _action, _spinnerbody, _spinner) {
             type: 'error',
             title: 'Error al actualizar el estado.'
         });
-    }
+    })
 }
