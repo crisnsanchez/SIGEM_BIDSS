@@ -6,6 +6,21 @@
     });
 })
 
+const _id = document.getElementById('RazonRechazo');
+_id.addEventListener("input", function () {
+    this.value = this.value.trimStart()
+    if (!/^[ a-z0-9áéíóúüñ]*$/i.test(_id.value)) {
+        this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
+    }
+})
+$("#RazonRechazo").change(function () {
+    var RazonRechazo = $("#RazonRechazo").val();
+    if (RazonRechazo !== "") {
+        $("#spanRazonRechazo").text("");
+    }
+});
+
+
 
 $(document).on("click", "#_ModalApprove", function () {
     SendData(_idPrimary = "VPE_Id", _controller = "VacacionesPermisosEspeciales", _action = "ApprovePorJefe", _spinnerbody = "spinner-body", _spinner = "spinnerd");
