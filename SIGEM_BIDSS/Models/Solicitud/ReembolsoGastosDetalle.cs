@@ -7,10 +7,7 @@ using System.Web;
 namespace SIGEM_BIDSS.Models.Solicitud
 {
     [MetadataType(typeof(ReembolsoGastosDetalleMetaData))]
-    public partial class tbSolicitudReembolsoGastosDetalle
-    {
-       
-    }
+
     public class ReembolsoGastosDetalleMetaData
     {
 
@@ -46,11 +43,14 @@ namespace SIGEM_BIDSS.Models.Solicitud
         public string ReemgaDet_Archivo { get; set; }
 
 
-        [Display(Name = "Total Gasto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        public decimal ReemgaDet_TotalGastos { get; set; }
+
 
         public virtual tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos { get; set; }
         public virtual tbTipoViatico tbTipoViatico { get; set; }
+    }
+
+    public partial class tbSolicitudReembolsoGastosDetalle
+    {
+
     }
 }

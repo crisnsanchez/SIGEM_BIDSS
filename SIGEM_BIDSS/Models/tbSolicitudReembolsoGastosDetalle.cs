@@ -21,7 +21,6 @@ namespace SIGEM_BIDSS.Models
         public decimal ReemgaDet_MontoGasto { get; set; }
         public string ReemgaDet_Concepto { get; set; }
         public string ReemgaDet_Archivo { get; set; }
-        public decimal ReemgaDet_TotalGastos { get; set; }
     
         public virtual tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos { get; set; }
         public virtual tbTipoViatico tbTipoViatico { get; set; }

@@ -63,18 +63,25 @@
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_Gral_tbUnidadMedida_uni_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_tbProductoSubcategoria_pscat_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Inv_tbProducto_tbProveedor_prov_Id" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Width="1.5" PointX="11.25" PointY="0.75" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_emp_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_est_Id" />
-        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbSolicitudReembolsoGastos_mun_codigo" />
         <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbVacacionesPermisosEspeciales" Width="1.5" PointX="13.25" PointY="19.125" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEmpleado_emp_Id_JefeInmediato" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbEstado_est_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbVacacionesPermisosEspeciales_tbTipoPermiso_tperm_Id" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbRequisionCompra" Width="1.5" PointX="8.25" PointY="21.375" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbRequisionCompraDetalle" Width="1.5" PointX="23.125" PointY="15.5" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastos" Width="1.5" PointX="11.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastosDetalle" Width="1.5" PointX="18" PointY="6.25" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbArea_are_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbEmpleado_emp_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompra_tbEstado_est_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompraDetalle_tbSolicitudReembolsoGastos_Reqco_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_Adm_tbRequisionCompraDetalle_tbProducto_prod_Id" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbEmpleado_emp_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_est_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_JefeInmediato" />
-        <EntityTypeShape EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastosDetalle" Width="1.5" PointX="18" PointY="4.75" />
+        <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastos_tbSolicitudReembolsoGastos_mun_codigo" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbSolicitudReembolsoGastosDetalle_Reemga_Id" />
         <AssociationConnector Association="SIGEM_BIDSSModel.FK_tbSolicitudReembolsoGastosDetalle_tbTipoViatico_tpv_Id" />
         </Diagram>
