@@ -26,11 +26,19 @@ namespace SIGEM_BIDSS.Controllers
         // GET: VacacionesPermisosEspeciales/Details/5
         public ActionResult Details(int? id)
         {
+            string vReturn = "";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbVacacionesPermisosEspeciales tbVacacionesPermisosEspeciales = db.tbVacacionesPermisosEspeciales.Find(id);
+            if (tbVacacionesPermisosEspeciales.est_Id == GeneralFunctions.Enviada)
+            {
+                if (UpdateState(out vReturn, tbVacacionesPermisosEspeciales, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                }
+            }
             if (tbVacacionesPermisosEspeciales == null)
             {
                 return HttpNotFound();
@@ -46,13 +54,11 @@ namespace SIGEM_BIDSS.Controllers
             string MASspan = "", MASspanFecha = "";
             if (cCalFechas.FechaInicio > cCalFechas.FechaFin)
             {
-                MASspanFecha = "1";
                 MASspan = "La Fecha de inicio no puede ser mayor que la final";
             }
             if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
             {
-                MASspanFecha = "2";
-                MASspan = "La Fecha de finalizacion no puede ser menor que la inicio";
+                MASspanFecha = "La Fecha de finalizacion no puede ser menor que la inicio";
             }
             object vCalcular = new { MASspan, MASspanFecha };
             return Json(vCalcular, JsonRequestBehavior.AllowGet);

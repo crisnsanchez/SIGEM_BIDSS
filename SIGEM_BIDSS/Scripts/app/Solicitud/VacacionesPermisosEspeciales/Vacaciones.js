@@ -18,8 +18,7 @@ $('#VPE_FechaFin').datepicker({
     startDate: "01/01/1990",
     language: "es",
     daysOfWeekDisabled: "0",
-}).datepicker("setDate", new Date());
-
+}).datepicker();
 
 $(document).ready(function () {
     $("#VPE_Comentario")[0].maxLength = 250;
@@ -28,7 +27,7 @@ $(document).ready(function () {
 
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
-    $("input[type='text']", 'form').each(function (e) {
+    $(".nospace", 'form').each(function (e) {
         var _id = $(this).attr("id");
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
@@ -74,7 +73,6 @@ function GetFechas() {
 
 document.getElementById("VPE_FechaInicio").addEventListener("blur", function () {
     CalcularFechas()
-
 });
 
 document.getElementById("VPE_FechaFin").addEventListener("blur", function () {
@@ -94,12 +92,8 @@ function CalcularFechas() {
     })
         .done(function (data) {
             console.log(data);
-            if (data.MASspanFecha == "1") {
                 document.getElementById("spanFechaInicio").innerText = data.MASspan
-            }
-            else {
-                document.getElementById("spanFechaFin").innerText = data.MASspan
-            }
+                document.getElementById("spanFechaFin").innerText = data.MASspanFecha
         });
 }
 
