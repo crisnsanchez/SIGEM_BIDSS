@@ -53,6 +53,7 @@ namespace SIGEM_BIDSS.Controllers
             tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id = Id;
             ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+            tbLiquidacionAnticipoViaticoDetalle.Lianvide_FechaGasto = Function.DatetimeNow();
             if (tbLiquidacionAnticipoViaticoDetalle == null)
             {
                 return HttpNotFound();

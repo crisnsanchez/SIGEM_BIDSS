@@ -49,6 +49,7 @@ namespace SIGEM_BIDSS.Controllers
             decimal ReemgaDet_MontoGasto = tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto;
             List<tbSolicitudReembolsoGastosDetalle> sessionSolicitudReembolsoDetalle = new List<tbSolicitudReembolsoGastosDetalle>();
             var list = (List<tbSolicitudReembolsoGastosDetalle>)Session["ReembolsoDetalle"];
+            int ReturnId = tbSolicitudReembolsoGastosDetalle.ReemgaDet_Id;
             if (list == null)
             {
                 sessionSolicitudReembolsoDetalle.Add(tbSolicitudReembolsoGastosDetalle);
@@ -65,13 +66,13 @@ namespace SIGEM_BIDSS.Controllers
                                 CantidadVieja = viejo.ReemgaDet_MontoGasto;
                         CantidadNueva = CantidadVieja + tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto;
                         ReembolsoDetalles.ReemgaDet_MontoGasto = CantidadNueva;
-                        return Json(datos, JsonRequestBehavior.AllowGet);
+                        return Json(ReturnId, JsonRequestBehavior.AllowGet);
                     }
                 list.Add(tbSolicitudReembolsoGastosDetalle);
                 Session["ReembolsoDetalle"] = list;
-                return Json(datos, JsonRequestBehavior.AllowGet);
+                return Json(ReturnId, JsonRequestBehavior.AllowGet);
             }
-            return Json(datos, JsonRequestBehavior.AllowGet);
+            return Json(ReturnId, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -100,7 +101,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ReemgaDet_Id,Reemga_Id,ReemgaDet_FechaGasto,tpv_Id,ReemgaDet_MontoGasto,ReemgaDet_Concepto,ReemgaDet_Archivo,ReemgaDet_TotalGastos")] tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle)
+        public ActionResult Create([Bind(Include = "ReemgaDet_Id,Reemga_Id,ReemgaDet_FechaGasto,tpv_Id,ReemgaDet_MontoGasto,ReemgaDet_Concepto,ReemgaDet_Archivo")] tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle)
         {
             IEnumerable<object> list = null;
            
@@ -118,7 +119,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-                        list = db.UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(tbSolicitudReembolsoGastosDetalle.Reemga_Id,tbSolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,tbSolicitudReembolsoGastosDetalle.tpv_Id,tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,tbSolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,tbSolicitudReembolsoGastosDetalle.ReemgaDet_Archivo,tbSolicitudReembolsoGastosDetalle.ReemgaDet_TotalGastos);
+                        list = db.UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(tbSolicitudReembolsoGastosDetalle.Reemga_Id,tbSolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,tbSolicitudReembolsoGastosDetalle.tpv_Id,tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,tbSolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,tbSolicitudReembolsoGastosDetalle.ReemgaDet_Archivo);
                         foreach (UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result Reembolso in list)
                             MsjError = Reembolso.MensajeError;
                         if (MsjError.StartsWith("-1"))

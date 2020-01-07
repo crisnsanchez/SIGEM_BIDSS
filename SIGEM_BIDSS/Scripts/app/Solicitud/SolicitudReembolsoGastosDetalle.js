@@ -1,4 +1,7 @@
-﻿///Date picket
+﻿var contador = 0;
+
+
+///Date picket
 $('#ReemgaDet_FechaGasto').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1900",
@@ -7,6 +10,11 @@ $('#ReemgaDet_FechaGasto').datepicker({
 });
 
 //Agregar Detalle
+
+
+
+
+
 $('#AgregarDetalle').click(function () {
     var table = $('#dataTable').DataTable();
     var SolicitudReembolsoGastosDetalle = GetDetalle();
@@ -16,15 +24,7 @@ $('#AgregarDetalle').click(function () {
 
 
 
-    table.row.add([
-        SolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,
-        SolicitudReembolsoGastosDetalle.tpv_IdText,
-        SolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,
-        SolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,
-        SolicitudReembolsoGastosDetalle.ReemgaDet_TotalGastos,
-        '<button id = "removeMunicipios" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
-
-    ]).draw(false)
+   
 
 
 
@@ -37,23 +37,49 @@ $('#AgregarDetalle').click(function () {
     })
 
         .done(function (data) {
-            console.log(data);
+            if (contador = data)
+            {
+            
+                $('#dataTable td').each(function() {
+                    table.row($(this).parents('tr')).remove.draw()
+                    var MontoAnterior = $(this).closest('tr').find('td:eq(2)').text();
+                    console.log(MontoAnterior);
 
+                });
+            }
+
+
+            contador = contador + 1
+             
+            
+            table.row.add([
+                SolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,
+                SolicitudReembolsoGastosDetalle.tpv_IdText,
+                SolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,
+                SolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,
+
+                '<button id = "removeMunicipios" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
+
+            ]).draw(false)
         });
+
+
 });
 
 
 
 function GetDetalle()
 {
+   
     var R = document.getElementById('tpv_Id')
     var ReembolsoDetalle = {
+        ReemgaDet_Id : contador,
         ReemgaDet_FechaGasto: $('#ReemgaDet_FechaGasto').val(),
         tpv_Id: $('#tpv_Id').val(),
         tpv_IdText: R.options[R.selectedIndex].text,
         ReemgaDet_MontoGasto: $('#ReemgaDet_MontoGasto').val(),
         ReemgaDet_Concepto: $('#ReemgaDet_Concepto').val(),
-        ReemgaDet_TotalGastos: $('#ReemgaDet_TotalGastos').val()
+
 
 
 
