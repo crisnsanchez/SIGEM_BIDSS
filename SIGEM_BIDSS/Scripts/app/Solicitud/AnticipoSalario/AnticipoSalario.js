@@ -4,6 +4,11 @@ const formatter = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 2,
 });
 
+$(document).ready(function () {
+    $("#Ansal_Justificacion")[0].maxLength = 250;
+    $("#Ansal_Comentario")[0].maxLength = 250;
+});
+
 $("#frmsubmit").click(function () {
     document.getElementById('spinnerForm').classList.add("overlay");
     document.getElementById('spinnerDiv').removeAttribute("hidden");
@@ -63,11 +68,6 @@ $('#Ansal_GralFechaSolicitud').datepicker({
 }).datepicker("setDate", new Date());;
 
 
-$(document).ready(function () {
-    $("#Ansal_Justificacion")[0].maxLength = 250;
-    $("#Ansal_Comentario")[0].maxLength = 250;
-});
-
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
     $(".nospace", 'form').each(function (e) {
@@ -82,6 +82,8 @@ document.addEventListener("input", function () {
         }
     });
 });
+
+
 
 
 //Funcion de Solo letras en el textbox
@@ -103,6 +105,15 @@ function soloLetras(e) {
         return false;
     }
 }
+
+
+
+
+
+
+
+
+
 
 //Quitar mensajes de error cuando el valor cambia
 //DropdownList
