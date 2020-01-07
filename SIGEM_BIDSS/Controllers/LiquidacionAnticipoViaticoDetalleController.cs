@@ -72,13 +72,10 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
 
         [HttpPost]
-        public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle)
+        public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle , HttpPostedFileBase  Archivo)
         {
-
             int datos = 0;
-            decimal CantidadVieja = 0;
-            decimal CantidadNueva = 0;
-            //data_producto = SalidaDetalle.prod_Codigo;
+
             decimal Lianvide_MontoGasto = tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto;
             List<tbLiquidacionAnticipoViaticoDetalle> sessionSolicitudReembolsoDetalle = new List<tbLiquidacionAnticipoViaticoDetalle>();
             var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["NombreLiquidaciondetalle"];
@@ -90,20 +87,10 @@ namespace SIGEM_BIDSS.Controllers
             }
             else
             {
-                foreach (var LiquidacionDetalles in list)
-                    if (LiquidacionDetalles.tpv_Id == tbLiquidacionAnticipoViaticoDetalle.tpv_Id)
-                    {
-                        datos = tbLiquidacionAnticipoViaticoDetalle.tpv_Id;
-                        foreach (var viejo in list)
-                            if (viejo.tpv_Id == datos)
-                                CantidadVieja = viejo.Lianvide_MontoGasto;
-                        CantidadNueva = CantidadVieja + tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto;
-                        LiquidacionDetalles.Lianvide_MontoGasto = CantidadNueva;
-                        return Json(datos, JsonRequestBehavior.AllowGet);
-                    }
+                
                 list.Add(tbLiquidacionAnticipoViaticoDetalle);
                 Session["NombreLiquidaciondetalle"] = list;
-                return Json(datos, JsonRequestBehavior.AllowGet);
+                return Json(tbLiquidacionAnticipoViaticoDetalle, JsonRequestBehavior.AllowGet);
             }
             return Json(datos, JsonRequestBehavior.AllowGet);
         }

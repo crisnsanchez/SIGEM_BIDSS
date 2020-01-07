@@ -29,7 +29,6 @@
     {
         @Html.AntiForgeryToken()
 
-
         <input type="hidden" id="custId" name="custId" value="3487">
         <div class="form-horizontal">
             <div class="card-body">
@@ -37,26 +36,47 @@
 
                 @Html.HiddenFor(model => model.Reemga_Id)
 
-                <div class="form-group col-md-6">
-                    @Html.LabelFor(model => model.ReemgaDet_Archivo, "Archivo", htmlAttributes: new { @class = "control-label col-md-6" })
-                    <div class="col-md-11">
-                        <input type="file" class="custom-file-input" id="LianvideArchivo">
-                        <label class="custom-file-label" for="LianvideArchivo" id="Archivo_Name"></label>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="col-md-6 card-body box-profile">
+                            <img src="~/Content/img/descarga.jpg" class="product-image" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.ReemgaDet_Archivo, htmlAttributes: new { @class = "control-label col-md-6" })
+                            <div class="custom-file col-md-11">
+                                <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="FotoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
+                                <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto"></label>
 
-                        @Html.ValidationMessageFor(model => model.ReemgaDet_Archivo, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ReemgaDet_Archivo, null, new { @class = "text-danger", @id = "errorlogo" })
+                            <div class="input-group-append">
+                            </div>
+                        </div>
+                        <p id="ImageLength" style="color:red"></p>
                     </div>
                 </div>
+
+
+                @*<div class="form-group col-md-6">
+            @Html.LabelFor(model => model.ReemgaDet_Archivo, "Archivo", htmlAttributes: new { @class = "control-label col-md-6" })
+            <div class="col-md-11">
+                <input type="file" class="custom-file-input" id="LianvideArchivo">
+                <label class="custom-file-label" for="LianvideArchivo" id="Archivo_Name"></label>
+
+                @Html.ValidationMessageFor(model => model.ReemgaDet_Archivo, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.ReemgaDet_FechaGasto,"Fecha Gasto", htmlAttributes: new { @class = "control-label col-md-8" })
+                        @Html.LabelFor(model => model.ReemgaDet_FechaGasto, "Fecha Gasto", htmlAttributes: new { @class = "control-label col-md-8" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.ReemgaDet_FechaGasto, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.ReemgaDet_FechaGasto, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-     
+
 
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.tpv_Id, "Gasto", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -86,11 +106,6 @@
                     </div>
                 </div>
 
-
-
-
-
-
                 <br />
                 <div class="form-group">
                     <div class="col-md-offset-4">
@@ -106,53 +121,50 @@
                 <thead>
                     <tr>
                         <th>
-                           Fecha Gasto
+                            Fecha Gasto
                         </th>
                         <th>
-                           Gasto
+                            Gasto
                         </th>
                         <th>
                             Monto Gasto
                         </th>
                         <th>
-                           Concepto
+                            Concepto
                         </th>
-                 
+
                         <th>
                             Acciones
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-
-                   
-                </tbody>
+                <tbody></tbody>
 
                 @*<tfoot>
-                    <tr>
-                        <th>
+                        <tr>
+                            <th>
 
-                        </th>
-                        <th>
+                            </th>
+                            <th>
 
-                        </th>
-                        <th>
+                            </th>
+                            <th>
 
-                        </th>
-                        <th>
+                            </th>
+                            <th>
 
-                        </th>
+                            </th>
 
 
-                        <th>
-                            Total Gastos
-                        </th>
-                        <th>
+                            <th>
+                                Total Gastos
+                            </th>
+                            <th>
 
-                        </th>
+                            </th>
 
-                    </tr>
-                </tfoot>*@
+                        </tr>
+                    </tfoot>*@
 
             </table>
 
