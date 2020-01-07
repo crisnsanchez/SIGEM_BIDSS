@@ -26,7 +26,7 @@ $('#AgregarDetalle').click(function() {
     var LiquidacionAnticipoViatico = GetLiquidacionViatico();
     console.log(LiquidacionAnticipoViatico);
 
-    table.row([
+    table.row.add([
 
         LiquidacionAnticipoViatico.Lianvide_FechaGasto,
         LiquidacionAnticipoViatico.tpv_Id,
@@ -39,6 +39,18 @@ $('#AgregarDetalle').click(function() {
 
 
     ]).draw(false)
+    $.ajax({
+        url: "/LiquidacionAnticipoViaticoDetalle/SaveLiquidacionAnticipoDetalle",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ tbLiquidacionAnticipoViatico: LiquidacionAnticipoViatico }),
+    })
+
+        .done(function (data) {
+            console.log(data);
+
+        });
 
     });
 
@@ -48,12 +60,13 @@ $('#AgregarDetalle').click(function() {
 //ObtenerCampos
 
 function GetLiquidacionViatico() {
+
+    var R = document.getElementById('tpv_Id')
     var LIQUIDACIONDETALLE = {
 
 
-
         tpv_Id: $('#tpv_Id').val(),
-
+        tpv_IdText: R.options[R.selectedIndex].text,
         tpv_IdText: document.getElementById('tpv_Id').options[this.selectedIndex],
         Lianvide_FechaGasto: $('#Lianvide_FechaGasto').val(),
         Lianvide_MontoGasto: $('#Lianvide_MontoGasto').val(),
