@@ -38,6 +38,10 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
                 }
+                else
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_ErrorUpdateState;
+                }
             }
             if (tbVacacionesPermisosEspeciales == null)
             {

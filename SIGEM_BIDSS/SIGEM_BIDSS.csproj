@@ -232,6 +232,7 @@
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RequisionCompraController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosController.cs" />
+    <Compile Include="Controllers\SolicitudReembolsoGastosDetalleController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosDetallesController.cs" />
     <Compile Include="Controllers\SueldoController.cs" />
     <Compile Include="Controllers\SyncController.cs" />
@@ -382,6 +383,15 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbRequisionCompraDetalle_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbRequisionCompra_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbRequisionCompra_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result.cs">
@@ -3551,6 +3561,11 @@
     <Content Include="Views\AccionPersonal\Edit.cshtml" />
     <Content Include="Views\AccionPersonal\Index.cshtml" />
     <Content Include="Views\AccionPersonal\_Modales.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalle\Create.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalle\Delete.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalle\Details.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalle\Edit.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalle\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -5,7 +5,7 @@
         <from>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.pscat_Descripcion, "Nombre Subcategoria",new { @class = "control-label col-md-6" })
+                    @Html.LabelFor(model => model.pscat_Descripcion,new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
                         <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
                         <div id="DescripcionError">
@@ -13,11 +13,12 @@
                                 @Html.ValidationMessageFor(model => model.pscat_Descripcion)
                             </p>
                         </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-primary" type="button" id="CrearSubCategoria">Añadir</button>
+                        </div>
                     </div>
 
-                    <div class="col-md-1">
-                        <button class="btn btn-primary" type="button" id="CrearSubCategoria">Añadir</button>
-                    </div>
+
 
                     <br />
 
