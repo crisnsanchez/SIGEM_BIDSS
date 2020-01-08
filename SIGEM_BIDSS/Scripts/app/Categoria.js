@@ -1,6 +1,18 @@
 ﻿var contador = 0;
 
+document.addEventListener("input", function () {
+    $("input[type='text']", 'form').each(function () {
+        var _id = $(this).attr("id");
+        _value = document.getElementById(_id).value;
+        document.getElementById(_id).value = _value.trimStart();
 
+    });
+    $(".normalize", 'form').each(function (e) {
+        if (!/^[ A-Záéíóúüñ]*$/i.test(this.value)) {
+            this.value = this.value.replace(/[^ .,A-Záéíóúüñ]+/ig, "");
+        }
+    });
+})
 
 //Validacion de solo letras
 function soloLetras(e) {
@@ -35,74 +47,7 @@ function format(input) {
 }
 //fin
 ///Editar por medio de una Modal, tambien obtiene los datos para mostrarlos
-//function EditStudentRecord(pscat_Id) {
 
-
-//    $("#MsjError").text("");
-
-//    $.ajax({
-//        url: "/ProductoCategoria/GetSubCate",
-//        method: "POST",
-//        dataType: 'json',
-//        contentType: "application/json; charset=utf-8",
-//        data: JSON.stringify({ pscat_Id }),
-//    })
-//        .done(function (data) {
-//            $.each(data, function (i, item) {
-//                $("#pscat_Id").val(item.pscat_Id);
-//                $("#pscat_Descripcion_edit").val(item.pscat_Descripcion);
-
-
-
-
-//                $("#MyModal").modal();
-
-//            })
-//        })
-//        .fail(function (jqXHR, textStatus, errorThrown) {
-//            console.log('jqXHR', jqXHR);
-//            console.log('textStatus', textStatus);
-//            console.log('errorThrown', errorThrown);
-//        })
-//}
-
-//$("#Btnsubmit").click(function () {
-//    var data = $("#SubmitForm").serializeArray();
-//    var impu = $("#pscat_ISV_Edit").val();
-//    if (impu > 100) {
-//        $("#MsjISV").text("Campo ISV solo Permite un Rango de 0 a 100");
-//    }
-//    else if (impu == '') {
-//        $("#MsjISV").text("Campo ISV Requerido");
-//    }
-//    else {
-//        $.ajax({
-//            type: "Post",
-//            url: "/ProductoCategoria/UpdateSubCategoria",
-//            data: data,
-//            success: function (result) {
-//                if (result == '-1')
-//                    $("#MsjError").text("No se pudo actualizar el registro, contacte al administrador");
-//                else
-
-//                    location.reload();
-//            }
-//        });
-//    }
-
-
-
-//    function GetSubCategoria() {
-//        var SubCategoria = {
-//            pscat_Descripcion: $('#pscat_Descripcion').val(),
-//            pscat_ISV: $('#pscat_ISV').val(),
-//            pscat_UsuarioCrea: contador,
-//            pscat_Id: contador,
-
-//        };
-//        return SubCategoria;
-//    }
-//})
 
 $(document).on("click", "#TablaSub tbody tr td button#removerSubCategoria", function () {
     $(this).closest('tr').remove();
@@ -138,11 +83,20 @@ $('#AgregarSubCategorias').click(function () {
 
     var Descripcion = $('#pscat_Descripcion').val();
 
+    var Categoria = $('#pcat_Descripcion').val();
+
+    if (Categoria == '') {
+        $('#MessageError').text('');
+        $('#categoria').text('');
+        $('#ErrorISV').text('');
+        $('#categoria').after('<ul id="categoria" class="validation-summary-errors text-danger">Campo Categoría Requerido</ul>');
+
+    }
     if (Descripcion == '') {
         $('#MessageError').text('');
         $('#ErrorDescripcion').text('');
         $('#ErrorISV').text('');
-        $('#DescripcionError').after('<ul id="ErrorDescripcion" class="validation-summary-errors text-danger">Campo Descripción Requerido</ul>');
+        $('#DescripcionError').after('<ul id="ErrorDescripcion" class="validation-summary-errors text-danger">Campo SubCategoría Requerido</ul>');
 
     }
 
@@ -189,16 +143,28 @@ function GetSubCategoria() {
     return SubCategoria;
 }
 
+
 $('#CrearSubCategoria').click(function () {
 
     var Descripcion = $('#pscat_Descripcion').val();
+
+    var Categoria = $('#pcat_Descripcion').val();
+
+
+    if (Categoria == '') {
+        $('#MessageError').text('');
+        $('#categoria').text('');
+        $('#ErrorISV').text('');
+        $('#categoria').after('<ul id="categorias" class="validation-summary-errors text-danger">Campo Categoría Requerido</ul>');
+
+    }
 
 
     if (Descripcion == '') {
         $('#MessageError').text('');
         $('#ErrorDescripcion').text('');
         $('#ErrorISV').text('');
-        $('#DescripcionError').after('<ul id="ErrorDescripcion" class="validation-summary-errors text-danger">Campo Descripción Requerido</ul>');
+        $('#DescripcionError').after('<ul id="ErrorDescripcions" class="validation-summary-errors text-danger">Campo SubCategoría Requerido</ul>');
 
     }
 
@@ -323,28 +289,28 @@ $("#Btnsubmit").click(function () {
     });
 })
 ////////////////////////////////////////////////////////////////////////
-$(document).ready(function () {
-    $('#TablaSub').DataTable(
-        {
-            "searching": true,
-            "lengthChange": true,
-            "oLanguage": {
-                "oPaginate": {
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior",
-                },
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sEmptyTable": "No hay registros",
-                "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-                "sSearch": "Buscar",
-                "sInfo": "Mostrando _START_ a _END_ Entradas",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            }
-        });
-});
+//$(document).ready(function () {
+//    $('#TablaSub').DataTable(
+//        {
+//            "searching": true,
+//            "lengthChange": true,
+//            "oLanguage": {
+//                "oPaginate": {
+//                    "sNext": "Siguiente",
+//                    "sPrevious": "Anterior",
+//                },
+//                "sProcessing": "Procesando...",
+//                "sLengthMenu": "Mostrar _MENU_ registros",
+//                "sZeroRecords": "No se encontraron resultados",
+//                "sEmptyTable": "Ningún dato disponible en esta tabla",
+//                "sEmptyTable": "No hay registros",
+//                "sInfoEmpty": "Mostrando 0 de 0 Entradas",
+//                "sSearch": "Buscar",
+//                "sInfo": "Mostrando _START_ a _END_ Entradas",
+//                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+//            }
+//        });
+//});
 
 
 $('#pscat_Descripcion_edit').blur(function () {
@@ -390,3 +356,39 @@ $("#bton").keypress(function (e) {
         $("form").submit();
     }
 });
+
+
+
+$('#pcat_Descripcion').keyup(function () {
+    $('#categorias').hide();
+});
+
+$('#pscat_Descripcion').keyup(function () {
+    $('#ErrorDescripcions').hide();
+});
+
+
+
+
+////////////////////////////////////////////////////////////
+
+
+$("#frmCreateCategoria").submit(function (event) {
+    var Categoria = $("#categoria").text();
+    var subcategoria = $("#DescripcionError").text();
+    if (Categoria !== "" || subcategoria !== "") {
+        event.preventDefault();
+    }
+});
+
+$("#frmEditCategoria").submit(function (event) {
+    var Categoria = $("#categoria").text();
+    var subcategoria = $("#DescripcionError").text();
+    if (Categoria !== "" || subcategoria !== "") {
+        event.preventDefault();
+    }
+});
+///////////////////////////////////////////////////////////////
+
+
+

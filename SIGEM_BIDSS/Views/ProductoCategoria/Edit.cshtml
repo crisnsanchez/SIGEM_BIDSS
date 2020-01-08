@@ -26,7 +26,7 @@
             </li>
         </ul>
     </div>
-    @using (Html.BeginForm("Edit", "ProductoCategoria", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "ProductoCategoria", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmEditCategoria" }))
     {
         @Html.AntiForgeryToken()
 
@@ -40,9 +40,9 @@
                         <div class="form-group col-md-3">
                             @Html.LabelFor(model => model.pcat_Descripcion, new { @class = "control-label" })
                             @Html.EditorFor(model => model.pcat_Descripcion, new { htmlAttributes = new { @class = "form-control", @maxlength = "100", @autocomplete = "off", @onkeypress = "return soloLetras(event)", @style = "text-transform:uppercase;", @onkeyup = "noespaciosincio(this)" } })
-                            <div id="ValidationDepNombreCreate">
-                                @Html.ValidationMessageFor(model => model.pcat_Descripcion, "", new { @class = "text-danger" })
-                            </div>
+                           
+                                @Html.ValidationMessageFor(model => model.pcat_Descripcion, "", new { @class = "text-danger" , id = "categoria"})
+                           
                         </div>
                         <div class="form-group col-md-3">
                             @Html.LabelFor(model => model.pcat_EsActivo, "Estado", new { @class = "control-label col-md-4" })
