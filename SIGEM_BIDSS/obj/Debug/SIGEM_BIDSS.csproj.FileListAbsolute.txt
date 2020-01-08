@@ -1122,7 +1122,6 @@ C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\es\System.Web.Razor.resources.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\es\System.Web.WebPages.resources.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CoreCompileInputs.cache
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.csproj.CopyComplete
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.dll
 C:\GitHub\SIGEM_BIDSS\SIGEM_BIDSS\obj\Debug\SIGEM_BIDSS.pdb
