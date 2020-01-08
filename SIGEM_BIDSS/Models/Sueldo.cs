@@ -12,11 +12,13 @@ namespace SIGEM_BIDSS.Models
     public partial class tbSueldo
     {
         [NotMapped]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string NombreEmpleado { get; set; }
 
         [NotMapped]
         [Display(Name = "Cantidad")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+       
         public string Cantidad { get; set; }
     }
     public class SueldoMetadata
@@ -28,7 +30,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
 
-
+   
         public Nullable<decimal> sue_Cantidad { get; set; }
         decimal value;
       
