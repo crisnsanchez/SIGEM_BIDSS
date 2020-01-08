@@ -56,10 +56,8 @@
                             @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Apellidos)
                         </td>
                         <td>
-                            @*@{Html.DisplayFor(modelItem => item.sue_Cantidad.ToString))}*@
-
-
-                            string.Format("{0:c0}",
+                            @Html.DisplayFor(modelItem => item.sue_Cantidad)
+                           
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.tbMoneda.tmo_Nombre)
