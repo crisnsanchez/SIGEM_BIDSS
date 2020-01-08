@@ -17,17 +17,19 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbEmpleado()
         {
+            this.tbAccionPersonal = new HashSet<tbAccionPersonal>();
+            this.tbAccionPersonal1 = new HashSet<tbAccionPersonal>();
             this.tbAnticipoSalario = new HashSet<tbAnticipoSalario>();
             this.tbAnticipoSalario1 = new HashSet<tbAnticipoSalario>();
             this.tbAnticipoViatico = new HashSet<tbAnticipoViatico>();
             this.tbAnticipoViatico1 = new HashSet<tbAnticipoViatico>();
-            this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
-            this.tbSueldo = new HashSet<tbSueldo>();
-            this.tbVacacionesPermisosEspeciales = new HashSet<tbVacacionesPermisosEspeciales>();
-            this.tbVacacionesPermisosEspeciales1 = new HashSet<tbVacacionesPermisosEspeciales>();
             this.tbRequisionCompra = new HashSet<tbRequisionCompra>();
             this.tbSolicitudReembolsoGastos = new HashSet<tbSolicitudReembolsoGastos>();
             this.tbSolicitudReembolsoGastos1 = new HashSet<tbSolicitudReembolsoGastos>();
+            this.tbVacacionesPermisosEspeciales = new HashSet<tbVacacionesPermisosEspeciales>();
+            this.tbVacacionesPermisosEspeciales1 = new HashSet<tbVacacionesPermisosEspeciales>();
+            this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
+            this.tbSueldo = new HashSet<tbSueldo>();
         }
     
         public int emp_Id { get; set; }
@@ -53,6 +55,10 @@ namespace SIGEM_BIDSS.Models
         public Nullable<System.DateTime> emp_FechaModifica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAccionPersonal> tbAccionPersonal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAccionPersonal> tbAccionPersonal1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoSalario> tbAnticipoSalario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoSalario> tbAnticipoSalario1 { get; set; }
@@ -60,6 +66,16 @@ namespace SIGEM_BIDSS.Models
         public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbRequisionCompra> tbRequisionCompra { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales1 { get; set; }
         public virtual tbEstado tbEstado { get; set; }
         public virtual tbMunicipio tbMunicipio { get; set; }
         public virtual tbPuesto tbPuesto { get; set; }
@@ -68,15 +84,5 @@ namespace SIGEM_BIDSS.Models
         public virtual ICollection<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSueldo> tbSueldo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequisionCompra> tbRequisionCompra { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos1 { get; set; }
     }
 }

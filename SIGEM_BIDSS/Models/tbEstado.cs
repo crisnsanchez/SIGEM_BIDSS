@@ -17,13 +17,14 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbEstado()
         {
+            this.tbAccionPersonal = new HashSet<tbAccionPersonal>();
             this.tbAnticipoSalario = new HashSet<tbAnticipoSalario>();
             this.tbAnticipoViatico = new HashSet<tbAnticipoViatico>();
             this.tbLiquidacionAnticipoViatico = new HashSet<tbLiquidacionAnticipoViatico>();
-            this.tbEmpleado = new HashSet<tbEmpleado>();
-            this.tbVacacionesPermisosEspeciales = new HashSet<tbVacacionesPermisosEspeciales>();
             this.tbRequisionCompra = new HashSet<tbRequisionCompra>();
             this.tbSolicitudReembolsoGastos = new HashSet<tbSolicitudReembolsoGastos>();
+            this.tbVacacionesPermisosEspeciales = new HashSet<tbVacacionesPermisosEspeciales>();
+            this.tbEmpleado = new HashSet<tbEmpleado>();
         }
     
         public int est_Id { get; set; }
@@ -34,18 +35,20 @@ namespace SIGEM_BIDSS.Models
         public Nullable<System.DateTime> est_FechaModifica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbAccionPersonal> tbAccionPersonal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoSalario> tbAnticipoSalario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbLiquidacionAnticipoViatico> tbLiquidacionAnticipoViatico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbRequisionCompra> tbRequisionCompra { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
     }
 }

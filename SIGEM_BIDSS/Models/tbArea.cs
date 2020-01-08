@@ -17,8 +17,8 @@ namespace SIGEM_BIDSS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbArea()
         {
-            this.tbPuesto = new HashSet<tbPuesto>();
             this.tbRequisionCompra = new HashSet<tbRequisionCompra>();
+            this.tbPuesto = new HashSet<tbPuesto>();
         }
     
         public int are_Id { get; set; }
@@ -29,8 +29,8 @@ namespace SIGEM_BIDSS.Models
         public Nullable<System.DateTime> are_FechaModifica { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbPuesto> tbPuesto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbRequisionCompra> tbRequisionCompra { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbPuesto> tbPuesto { get; set; }
     }
 }

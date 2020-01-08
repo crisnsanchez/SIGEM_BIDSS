@@ -40,9 +40,14 @@ namespace SIGEM_BIDSS.Models
         public const string _isCreated = "Created";
         public const string _isEdited = "Edited";
         public const string _isDelete = "Delete";
+        public const string _isInactiva = "Inactiva";
+        public const string _isActiva = "Activa";
+
         public const string _isDependencia = "Dependencias";
-        public const string _isDependencias = "Dependencia";
-        public const string _isDependenciasS = "DependenciaSub";
+        public const string _isDependenciaCate = "DependenciaCate";
+        public const string _isDependenciasSubCate = "DependenciaSubCate";
+        public const string _isDependenciaCateIn = "DependenciaCateIn";
+        public const string _isDependenciasSubCateIn = "DependenciaSubCateIn";
 
         public const string _YaExiste = "ExisteCo";
         public const string _Nombre = "ExisteNom";
