@@ -13,7 +13,7 @@
                   <tr>
                     <td class="bg_dark email-section" style="text-align:center;background: rgba(0, 0, 0, .8);padding: 2.5em;">
                       <div class="heading-section heading-section-white" style="color: rgba(255, 255, 255, .8);">
-                        <span class="subheading" style="margin-bottom: 20px !important;display: inline-block;font-size: 13px;text-transform: uppercase;letter-spacing: 2px;color: rgba(255, 255, 255, .4);position: relative;">Bienvenido</span>
+                        <span class="subheading" style="margin-bottom: 20px !important;display: inline-block;font-size: 20px;text-transform: uppercase;letter-spacing: 2px;color: rgba(255, 255, 255, .4);position: relative;">Bienvenido</span>
                         <h2 style="font-size: 28px;font-family: line-height: 1;padding-bottom: 0;color: #000000;color: #ffffff;font-size: 28px;margin-top: 0;line-height: 1.4;">
                           <xsl:value-of select="welcome"/>
                         </h2>
@@ -24,7 +24,7 @@
                   <tr>
                     <td class="bg_white email-section" style=" background: #ffffff;padding: 2.5em;">
                       <div class="heading-section" style="text-align: center; padding: 0 30px;">
-                        <span class="subheading" style="margin-bottom: 24px !important;display: inline-block;font-size: 13px;text-transform: uppercase;letter-spacing: 2px;color: rgba(0, 0, 0, .4);position: relative;">
+                        <span class="subheading" style="margin-bottom: 24px !important;display: inline-block;font-size: 14px;text-transform: uppercase;letter-spacing: 2px;color: rgba(0, 0, 0, .4);position: relative;">
                           <xsl:value-of select="nref"/>
                         </span>
                         <p>
@@ -33,28 +33,18 @@
                           </h2>
                         </p>
                         <p style="color: rgba(0, 0, 0, .4);">
-                          <h2 style="padding-bottom: 0;color: rgba(0, 0, 0, .4);font-size: 26px;margin-top: 0;line-height: 1.4;">
+                          <span style="margin-bottom: 4px !important;display: inline-block;font-size: 22px;text-transform: uppercase;letter-spacing: 0.60px;color: rgba(0, 0, 0, .4);position: relative;">
                             <xsl:value-of select="msj"/>.
-                          </h2>
-                        </p>
-                        <p style="color: rgba(0, 0, 0, .4);">
-                          <h2 style="padding-bottom: 0;color: rgba(0, 0, 0, .4);font-size: 32px;margin-top: 0;line-height: 1.4;">
-                            <xsl:value-of select="msjRazon"/>
-                          </h2>
+                          </span>
+                          <span class="subheading" style="margin-bottom: 20px !important;display: inline-block;font-size: 18px;text-transform: uppercase;letter-spacing: 0.5px;color: rgba(0, 0, 0, .4);position: relative;">
+                            <xsl:value-of select="approver"/>
+                          </span>
                         </p>
                       </div>
                       <div class="heading-section" style="text-align: center; padding: 0 30px;">
-                        <span xmlns="http://www.w3.org/1999/xhtml" style="position: absolute;left: 0;right: 0;top:240px;content: '';width: 7%;height: 2px;background: #f3a333;margin: 0 auto;"></span>
                         <p>
-                          <h2 style="padding-bottom: 0;color: rgba(0, 0, 0, .4);font-size: 28px;margin-top: 0;line-height: 1.4;">
+                          <span class="subheading" style="margin-bottom: 18px !important;display: inline-block;font-size:25px;text-transform: uppercase;letter-spacing: 0.5px;color: rgba(0, 0, 0, .4);position: relative;">
                             <xsl:value-of select="RazonRechazo"/>
-                          </h2>
-                        </p>
-                      </div>
-                      <div style="text-align: center; padding: 0 30px;">
-                        <p style="color: rgba(0, 0, 0, .4);">
-                          <span class="subheading" style="margin-bottom: 24px !important;display: inline-block;font-size: 18px;text-transform: uppercase;letter-spacing: 2px;color: rgba(0, 0, 0, .4);position: relative;">
-                            <xsl:value-of select="approver"/>
                           </span>
                         </p>
                       </div>
@@ -78,8 +68,10 @@
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                               <tr>
                                 <td class="text-services" style="text-align: left; padding: 20px 30px;padding-left: 0;padding-right: 20px;text-align: left;max-width: 500px">
-                                  <div class="heading-section heading-section-white" style="color: #000000;font-size: 28px;margin-top: 0;line-height: 1.4;color: rgba(255, 255, 255, .8);">
-                                    <h2 style="padding-left:20%;color: #ffffff;font-size: 28px;margin-top: 0;padding-bottom: 0;font-family: serif;margin-top: 0;">SIGEM</h2>
+                                  <div  style="color: #000000;font-size: 28px;margin-top: 0;line-height: 1.4;color: rgba(255, 255, 255, .8);">
+                                  <span style="padding-left:25%;margin-bottom: 16px !important;display: inline-block;font-size:32px;text-transform: uppercase;letter-spacing: 0.5px;color: rgba(255, 255, 255, .9);position: relative;">
+                                      SIGEM
+                                    </span>
                                   </div>
                                 </td>
                               </tr>
