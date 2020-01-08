@@ -1212,6 +1212,31 @@
           <Parameter Name="Lianvide_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="Lianvide_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Adm_tbRequisionCompra_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="are_Id" Type="int" Mode="In" />
+          <Parameter Name="Reqco_GralFechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="Reqco_Comentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="Reqco_RazonRechazo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Reqco_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="Reqco_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Adm_tbRequisionCompra_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="Reqco_Id" Type="int" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="Reqco_RazonRechazo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Reqco_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="Reqco_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Adm_tbRequisionCompraDetalle_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="Reqco_Id" Type="int" Mode="In" />
+          <Parameter Name="prod_Id" Type="int" Mode="In" />
+          <Parameter Name="Reqde_Cantidad" Type="decimal" Mode="In" />
+          <Parameter Name="Reqde_Justificacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Reqde_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="Reqde_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
           <Parameter Name="Reemga_GralFechaSolicitud" Type="datetime" Mode="In" />
@@ -3064,6 +3089,31 @@
             <Parameter Name="Acp_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="Acp_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbRequisionCompra_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompra_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="are_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Reqco_GralFechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="Reqco_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Reqco_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Reqco_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Reqco_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbRequisionCompra_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompra_Update_Result)">
+            <Parameter Name="Reqco_Id" Mode="In" Type="Int32" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Reqco_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Reqco_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="Reqco_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbRequisionCompraDetalle_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompraDetalle_Insert_Result)">
+            <Parameter Name="Reqco_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prod_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Reqde_Cantidad" Mode="In" Type="Decimal" />
+            <Parameter Name="Reqde_Justificacion" Mode="In" Type="String" />
+            <Parameter Name="Reqde_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="Reqde_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -4516,6 +4566,15 @@
         <ComplexType Name="UDP_Adm_tbAccionPersonal_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Adm_tbRequisionCompra_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Adm_tbRequisionCompra_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Adm_tbRequisionCompraDetalle_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5597,6 +5656,27 @@
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbAccionPersonal_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAccionPersonal_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAccionPersonal_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbRequisionCompra_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbRequisionCompra_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompra_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbRequisionCompra_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbRequisionCompra_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompra_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbRequisionCompraDetalle_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbRequisionCompraDetalle_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompraDetalle_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
