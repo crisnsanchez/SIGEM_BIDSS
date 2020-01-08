@@ -14,20 +14,20 @@
 //    daysOfWeekDisabled: "0"
 //});
 //Funcion no aceptar espacios en el textbox
+//Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
- 
     $("input[type='text']", 'form').each(function () {
-        _id = $(this).attr("id");
+        var _id = $(this).attr("id");
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
-    });
 
-    $("textarea").each(function () {
-        _id = $(this).attr("id");
-        console.log("Hi:", _id);
     });
-
-});
+    $(".normalize", 'form').each(function (e) {
+        if (!/^[ A-Záéíóúüñ]*$/i.test(this.value)) {
+            this.value = this.value.replace(/[^ .,A-Záéíóúüñ]+/ig, "");
+        }
+    });
+})
 
 
 

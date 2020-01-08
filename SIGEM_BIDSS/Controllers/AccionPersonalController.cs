@@ -147,7 +147,8 @@ namespace SIGEM_BIDSS.Controllers
         catch (Exception ex)
         {
                 Function.BitacoraErrores("AccionPersonal", "CreatePost", UserName, ex.Message.ToString());
-        }
+                return RedirectToAction("Index");
+            }
         IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
                                         where _tbEmp.emp_EsJefe == true
                                         select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
