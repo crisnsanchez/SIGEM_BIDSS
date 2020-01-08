@@ -38,10 +38,10 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> prod_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> prod_FechaModifica { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbRequisionCompraDetalle> tbRequisionCompraDetalle { get; set; }
         public virtual tbUnidadMedida tbUnidadMedida { get; set; }
         public virtual tbProductoSubcategoria tbProductoSubcategoria { get; set; }
         public virtual tbProveedor tbProveedor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbRequisionCompraDetalle> tbRequisionCompraDetalle { get; set; }
     }
 }

@@ -18,9 +18,9 @@ namespace SIGEM_BIDSS.Models
         public tbMunicipio()
         {
             this.tbAnticipoViatico = new HashSet<tbAnticipoViatico>();
+            this.tbSolicitudReembolsoGastos = new HashSet<tbSolicitudReembolsoGastos>();
             this.tbProveedor = new HashSet<tbProveedor>();
             this.tbEmpleado = new HashSet<tbEmpleado>();
-            this.tbSolicitudReembolsoGastos = new HashSet<tbSolicitudReembolsoGastos>();
         }
     
         public string mun_codigo { get; set; }
@@ -33,12 +33,12 @@ namespace SIGEM_BIDSS.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoViatico> tbAnticipoViatico { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
         public virtual tbDepartamento tbDepartamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbProveedor> tbProveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbEmpleado> tbEmpleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
     }
 }

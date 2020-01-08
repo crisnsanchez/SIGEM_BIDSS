@@ -29,8 +29,8 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> pscat_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> pscat_FechaModifica { get; set; }
     
-        public virtual tbProductoCategoria tbProductoCategoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbProducto> tbProducto { get; set; }
+        public virtual tbProductoCategoria tbProductoCategoria { get; set; }
     }
 }

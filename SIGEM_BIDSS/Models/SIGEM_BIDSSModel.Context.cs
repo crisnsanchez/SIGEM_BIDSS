@@ -28,9 +28,17 @@ namespace SIGEM_BIDSS.Models
         }
     
         public virtual DbSet<tbBitacoraErrores> tbBitacoraErrores { get; set; }
+        public virtual DbSet<tbAccionPersonal> tbAccionPersonal { get; set; }
         public virtual DbSet<tbAnticipoSalario> tbAnticipoSalario { get; set; }
         public virtual DbSet<tbAnticipoViatico> tbAnticipoViatico { get; set; }
         public virtual DbSet<tbLiquidacionAnticipoViatico> tbLiquidacionAnticipoViatico { get; set; }
+        public virtual DbSet<tbLiquidacionAnticipoViaticoDetalle> tbLiquidacionAnticipoViaticoDetalle { get; set; }
+        public virtual DbSet<tbRequisionCompra> tbRequisionCompra { get; set; }
+        public virtual DbSet<tbRequisionCompraDetalle> tbRequisionCompraDetalle { get; set; }
+        public virtual DbSet<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
+        public virtual DbSet<tbSolicitudReembolsoGastosDetalle> tbSolicitudReembolsoGastosDetalle { get; set; }
+        public virtual DbSet<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
+        public virtual DbSet<tbParametro> tbParametro { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tbActividadEconomica> tbActividadEconomica { get; set; }
         public virtual DbSet<tbArea> tbArea { get; set; }
@@ -46,21 +54,14 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbTipoTransporte> tbTipoTransporte { get; set; }
         public virtual DbSet<tbTipoViatico> tbTipoViatico { get; set; }
         public virtual DbSet<tbUnidadMedida> tbUnidadMedida { get; set; }
+        public virtual DbSet<tbProducto> tbProducto { get; set; }
+        public virtual DbSet<tbProductoCategoria> tbProductoCategoria { get; set; }
+        public virtual DbSet<tbProductoSubcategoria> tbProductoSubcategoria { get; set; }
         public virtual DbSet<tbProveedor> tbProveedor { get; set; }
         public virtual DbSet<tbDeduccionInstitucionFinanciera> tbDeduccionInstitucionFinanciera { get; set; }
         public virtual DbSet<tbInstitucionFinanciera> tbInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbSueldo> tbSueldo { get; set; }
-        public virtual DbSet<tbParametro> tbParametro { get; set; }
-        public virtual DbSet<tbLiquidacionAnticipoViaticoDetalle> tbLiquidacionAnticipoViaticoDetalle { get; set; }
-        public virtual DbSet<tbProductoCategoria> tbProductoCategoria { get; set; }
-        public virtual DbSet<tbProductoSubcategoria> tbProductoSubcategoria { get; set; }
-        public virtual DbSet<tbProducto> tbProducto { get; set; }
-        public virtual DbSet<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
-        public virtual DbSet<tbRequisionCompra> tbRequisionCompra { get; set; }
-        public virtual DbSet<tbRequisionCompraDetalle> tbRequisionCompraDetalle { get; set; }
-        public virtual DbSet<tbSolicitudReembolsoGastos> tbSolicitudReembolsoGastos { get; set; }
-        public virtual DbSet<tbSolicitudReembolsoGastosDetalle> tbSolicitudReembolsoGastosDetalle { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {

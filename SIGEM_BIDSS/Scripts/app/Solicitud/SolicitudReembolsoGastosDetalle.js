@@ -39,7 +39,10 @@ $('#AgregarDetalle').click(function () {
     //                '<button id = "RemoveReembolso" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
 
     //            ]).draw(false)
-  
+
+
+
+
     //    });
 
 });

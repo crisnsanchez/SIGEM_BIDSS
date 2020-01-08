@@ -1,0 +1,118 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbAccionPersonal>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_Correlativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_JefeInmediato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_FechaSolicitud)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_Comentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_RazonRechazo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_UsuarioCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_UsuarioModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Acp_FechaModifica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbTipoMovimiento.tipmo_Movimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEmpleado2.emp_Nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbEmpleado3.emp_Nombres)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_Correlativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_JefeInmediato)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_FechaSolicitud)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_Comentario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_RazonRechazo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_UsuarioCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_UsuarioModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Acp_FechaModifica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbTipoMovimiento.tipmo_Movimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEmpleado1.emp_Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEmpleado2.emp_Nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbEmpleado3.emp_Nombres)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Acp_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Acp_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Acp_Id })
+        </td>
+    </tr>
+}
+
+</table>
