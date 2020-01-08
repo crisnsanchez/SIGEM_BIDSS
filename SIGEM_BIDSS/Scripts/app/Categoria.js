@@ -96,7 +96,7 @@ $('#AgregarSubCategorias').click(function () {
         $('#MessageError').text('');
         $('#ErrorDescripcion').text('');
         $('#ErrorISV').text('');
-        $('#DescripcionError').after('<ul id="ErrorDescripcion" class="validation-summary-errors text-danger">Campo SubCategoría Requerido</ul>');
+        $('#DescripcionError').after('<ul id="ErrorDescripcions" class="validation-summary-errors text-danger">Campo SubCategoría Requerido</ul>');
 
     }
 
