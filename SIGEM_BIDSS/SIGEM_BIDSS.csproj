@@ -208,7 +208,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccionPersonalController.cs" />
     <Compile Include="Controllers\ActividadEconomicaController.cs" />
     <Compile Include="Controllers\AnticipoSalarioController.cs" />
     <Compile Include="Controllers\AnticipoViaticoController.cs" />
@@ -262,9 +261,6 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubCategorias.cs" />
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbAccionPersonal.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
