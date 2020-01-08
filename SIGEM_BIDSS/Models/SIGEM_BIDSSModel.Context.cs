@@ -39,6 +39,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbSolicitudReembolsoGastosDetalle> tbSolicitudReembolsoGastosDetalle { get; set; }
         public virtual DbSet<tbVacacionesPermisosEspeciales> tbVacacionesPermisosEspeciales { get; set; }
         public virtual DbSet<tbParametro> tbParametro { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tbActividadEconomica> tbActividadEconomica { get; set; }
         public virtual DbSet<tbArea> tbArea { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
@@ -3010,6 +3011,68 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("ReemgaDet_Archivo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert", reemga_IdParameter, reemgaDet_FechaGastoParameter, tpv_IdParameter, reemgaDet_MontoGastoParameter, reemgaDet_ConceptoParameter, reemgaDet_ArchivoParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbAccionPersonal_Insert_Result> UDP_Adm_tbAccionPersonal_Insert(Nullable<int> emp_Id, Nullable<int> acp_JefeInmediato, Nullable<System.DateTime> acp_FechaSolicitud, string acp_Comentario, Nullable<int> est_Id, Nullable<int> tipmo_Id, Nullable<int> acp_UsuarioCrea, Nullable<System.DateTime> acp_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var acp_JefeInmediatoParameter = acp_JefeInmediato.HasValue ?
+                new ObjectParameter("Acp_JefeInmediato", acp_JefeInmediato) :
+                new ObjectParameter("Acp_JefeInmediato", typeof(int));
+    
+            var acp_FechaSolicitudParameter = acp_FechaSolicitud.HasValue ?
+                new ObjectParameter("Acp_FechaSolicitud", acp_FechaSolicitud) :
+                new ObjectParameter("Acp_FechaSolicitud", typeof(System.DateTime));
+    
+            var acp_ComentarioParameter = acp_Comentario != null ?
+                new ObjectParameter("Acp_Comentario", acp_Comentario) :
+                new ObjectParameter("Acp_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var tipmo_IdParameter = tipmo_Id.HasValue ?
+                new ObjectParameter("tipmo_Id", tipmo_Id) :
+                new ObjectParameter("tipmo_Id", typeof(int));
+    
+            var acp_UsuarioCreaParameter = acp_UsuarioCrea.HasValue ?
+                new ObjectParameter("Acp_UsuarioCrea", acp_UsuarioCrea) :
+                new ObjectParameter("Acp_UsuarioCrea", typeof(int));
+    
+            var acp_FechaCreaParameter = acp_FechaCrea.HasValue ?
+                new ObjectParameter("Acp_FechaCrea", acp_FechaCrea) :
+                new ObjectParameter("Acp_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAccionPersonal_Insert_Result>("UDP_Adm_tbAccionPersonal_Insert", emp_IdParameter, acp_JefeInmediatoParameter, acp_FechaSolicitudParameter, acp_ComentarioParameter, est_IdParameter, tipmo_IdParameter, acp_UsuarioCreaParameter, acp_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbAccionPersonal_Update_Result> UDP_Adm_tbAccionPersonal_Update(Nullable<int> acp_Id, Nullable<int> est_Id, string acp_RazonRechazo, Nullable<int> acp_UsuarioModifica, Nullable<System.DateTime> acp_FechaModifica)
+        {
+            var acp_IdParameter = acp_Id.HasValue ?
+                new ObjectParameter("Acp_Id", acp_Id) :
+                new ObjectParameter("Acp_Id", typeof(int));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var acp_RazonRechazoParameter = acp_RazonRechazo != null ?
+                new ObjectParameter("Acp_RazonRechazo", acp_RazonRechazo) :
+                new ObjectParameter("Acp_RazonRechazo", typeof(string));
+    
+            var acp_UsuarioModificaParameter = acp_UsuarioModifica.HasValue ?
+                new ObjectParameter("Acp_UsuarioModifica", acp_UsuarioModifica) :
+                new ObjectParameter("Acp_UsuarioModifica", typeof(int));
+    
+            var acp_FechaModificaParameter = acp_FechaModifica.HasValue ?
+                new ObjectParameter("Acp_FechaModifica", acp_FechaModifica) :
+                new ObjectParameter("Acp_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAccionPersonal_Update_Result>("UDP_Adm_tbAccionPersonal_Update", acp_IdParameter, est_IdParameter, acp_RazonRechazoParameter, acp_UsuarioModificaParameter, acp_FechaModificaParameter);
         }
     }
 }

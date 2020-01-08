@@ -208,6 +208,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccionPersonalController.cs" />
     <Compile Include="Controllers\ActividadEconomicaController.cs" />
     <Compile Include="Controllers\AnticipoSalarioController.cs" />
     <Compile Include="Controllers\AnticipoViaticoController.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\Categorias.cs" />
     <Compile Include="Models\RequisionCompra.cs" />
+    <Compile Include="Models\Solicitud\AccionPersonal.cs" />
     <Compile Include="Models\Solicitud\LiquidacionAnticipoViaticodetalle.cs" />
     <Compile Include="Models\Solicitud\LiquidacionAnticipoViatico.cs" />
     <Compile Include="Models\Productos.cs" />
@@ -261,6 +263,9 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubCategorias.cs" />
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbAccionPersonal.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -361,6 +366,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbVacacionesPermisosEspeciales.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbAccionPersonal_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbAccionPersonal_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbAnticipoViatico_Update_Result.cs">
@@ -3301,6 +3312,7 @@
     <Content Include="Scripts\app\Departamento.js" />
     <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\app\Municipio.js" />
+    <Content Include="Scripts\app\Solicitud\AccionPersonal.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\AnticipoSalario.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\Modals.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
@@ -3522,10 +3534,10 @@
     <Content Include="Views\RequisionCompra\Details.cshtml" />
     <Content Include="Views\RequisionCompra\Index.cshtml" />
     <Content Include="Views\AccionPersonal\Create.cshtml" />
-    <Content Include="Views\AccionPersonal\Delete.cshtml" />
     <Content Include="Views\AccionPersonal\Details.cshtml" />
     <Content Include="Views\AccionPersonal\Edit.cshtml" />
     <Content Include="Views\AccionPersonal\Index.cshtml" />
+    <Content Include="Views\AccionPersonal\_Modales.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

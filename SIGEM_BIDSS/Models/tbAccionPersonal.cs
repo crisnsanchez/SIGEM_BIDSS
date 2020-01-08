@@ -28,12 +28,9 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> Acp_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> Acp_FechaModifica { get; set; }
     
-        public virtual tbAccionPersonal tbAccionPersonal1 { get; set; }
-        public virtual tbAccionPersonal tbAccionPersonal2 { get; set; }
         public virtual tbEstado tbEstado { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbTipoMovimiento tbTipoMovimiento { get; set; }
         public virtual tbEmpleado tbEmpleado1 { get; set; }
-        public virtual tbEmpleado tbEmpleado2 { get; set; }
     }
 }

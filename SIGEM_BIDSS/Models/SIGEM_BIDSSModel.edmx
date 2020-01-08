@@ -216,6 +216,16 @@
           <Property Name="par_PorcentajeAdelantoSalario" Type="decimal" Precision="18" Scale="2" />
           <Property Name="par_FrecuenciaAdelantoSalario" Type="smallint" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tbActividadEconomica">
           <Key>
             <PropertyRef Name="acte_Id" />
@@ -965,18 +975,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbAccionPersonal_tbAccionPersonal">
-          <End Role="tbAccionPersonal" Type="Self.tbAccionPersonal" Multiplicity="1" />
-          <End Role="tbAccionPersonal1" Type="Self.tbAccionPersonal" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tbAccionPersonal">
-              <PropertyRef Name="Acp_Id" />
-            </Principal>
-            <Dependent Role="tbAccionPersonal1">
-              <PropertyRef Name="Acp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tbAccionPersonal_tbAccionPersonal_est_Id">
           <End Role="tbEstado" Type="Self.tbEstado" Multiplicity="1" />
           <End Role="tbAccionPersonal" Type="Self.tbAccionPersonal" Multiplicity="*" />
@@ -1010,18 +1008,6 @@
             </Principal>
             <Dependent Role="tbAccionPersonal">
               <PropertyRef Name="tipmo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbAccionPersonal_tbEmpleado">
-          <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
-          <End Role="tbAccionPersonal" Type="Self.tbAccionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleado">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbAccionPersonal">
-              <PropertyRef Name="emp_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1130,6 +1116,23 @@
         </Function>
         <Function Name="UDF_Adm_tbSolicitudReembolsoGastos_Sequence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm" ReturnType="varchar">
           <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_Adm_tbAccionPersonal_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="Acp_JefeInmediato" Type="int" Mode="In" />
+          <Parameter Name="Acp_FechaSolicitud" Type="datetime" Mode="In" />
+          <Parameter Name="Acp_Comentario" Type="nvarchar" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="tipmo_Id" Type="int" Mode="In" />
+          <Parameter Name="Acp_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="Acp_FechaCrea" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UDP_Adm_tbAccionPersonal_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="Acp_Id" Type="int" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="Acp_RazonRechazo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Acp_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="Acp_FechaModifica" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Adm_tbAnticipoSalario_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
@@ -1783,6 +1786,7 @@
           <EntitySet Name="tbSolicitudReembolsoGastosDetalle" EntityType="Self.tbSolicitudReembolsoGastosDetalle" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbVacacionesPermisosEspeciales" EntityType="Self.tbVacacionesPermisosEspeciales" Schema="Adm" store:Type="Tables" />
           <EntitySet Name="tbParametro" EntityType="Self.tbParametro" Schema="Conf" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbActividadEconomica" EntityType="Self.tbActividadEconomica" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbArea" EntityType="Self.tbArea" Schema="Gral" store:Type="Tables" />
           <EntitySet Name="tbDepartamento" EntityType="Self.tbDepartamento" Schema="Gral" store:Type="Tables" />
@@ -1957,10 +1961,6 @@
             <End Role="tbTipoSangre" EntitySet="tbTipoSangre" />
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbAccionPersonal_tbAccionPersonal" Association="Self.FK_tbAccionPersonal_tbAccionPersonal">
-            <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
-            <End Role="tbAccionPersonal1" EntitySet="tbAccionPersonal" />
-          </AssociationSet>
           <AssociationSet Name="FK_tbAccionPersonal_tbAccionPersonal_est_Id" Association="Self.FK_tbAccionPersonal_tbAccionPersonal_est_Id">
             <End Role="tbEstado" EntitySet="tbEstado" />
             <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
@@ -1971,10 +1971,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_tbAccionPersonal_tbAccionPersonal_tipmo_Id" Association="Self.FK_tbAccionPersonal_tbAccionPersonal_tipmo_Id">
             <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
-            <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbAccionPersonal_tbEmpleado" Association="Self.FK_tbAccionPersonal_tbEmpleado">
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
           </AssociationSet>
           <AssociationSet Name="FK_tbAccionPersonal_tbEmpleado_emp_Id" Association="Self.FK_tbAccionPersonal_tbEmpleado_emp_Id">
@@ -2832,6 +2828,7 @@
           <EntitySet Name="tbSolicitudReembolsoGastosDetalle" EntityType="SIGEM_BIDSSModel.tbSolicitudReembolsoGastosDetalle" />
           <EntitySet Name="tbVacacionesPermisosEspeciales" EntityType="SIGEM_BIDSSModel.tbVacacionesPermisosEspeciales" />
           <EntitySet Name="tbParametro" EntityType="SIGEM_BIDSSModel.tbParametro" />
+          <EntitySet Name="sysdiagrams" EntityType="SIGEM_BIDSSModel.sysdiagrams" />
           <EntitySet Name="tbActividadEconomica" EntityType="SIGEM_BIDSSModel.tbActividadEconomica" />
           <EntitySet Name="tbArea" EntityType="SIGEM_BIDSSModel.tbArea" />
           <EntitySet Name="tbDepartamento" EntityType="SIGEM_BIDSSModel.tbDepartamento" />
@@ -2854,10 +2851,6 @@
           <EntitySet Name="tbInstitucionFinanciera" EntityType="SIGEM_BIDSSModel.tbInstitucionFinanciera" />
           <EntitySet Name="tbEmpleado" EntityType="SIGEM_BIDSSModel.tbEmpleado" />
           <EntitySet Name="tbSueldo" EntityType="SIGEM_BIDSSModel.tbSueldo" />
-          <AssociationSet Name="FK_tbAccionPersonal_tbAccionPersonal" Association="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal">
-            <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
-            <End Role="tbAccionPersonal1" EntitySet="tbAccionPersonal" />
-          </AssociationSet>
           <AssociationSet Name="FK_tbAccionPersonal_tbAccionPersonal_est_Id" Association="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal_est_Id">
             <End Role="tbEstado" EntitySet="tbEstado" />
             <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
@@ -2868,10 +2861,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_tbAccionPersonal_tbAccionPersonal_tipmo_Id" Association="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal_tipmo_Id">
             <End Role="tbTipoMovimiento" EntitySet="tbTipoMovimiento" />
-            <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tbAccionPersonal_tbEmpleado" Association="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbEmpleado">
-            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
           </AssociationSet>
           <AssociationSet Name="FK_tbAccionPersonal_tbEmpleado_emp_Id" Association="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbEmpleado_emp_Id">
@@ -3058,6 +3047,23 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Adm_tbAccionPersonal_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbAccionPersonal_Insert_Result)">
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Acp_JefeInmediato" Mode="In" Type="Int32" />
+            <Parameter Name="Acp_FechaSolicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="Acp_Comentario" Mode="In" Type="String" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="tipmo_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Acp_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="Acp_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbAccionPersonal_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbAccionPersonal_Update_Result)">
+            <Parameter Name="Acp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Acp_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Acp_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="Acp_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -3332,13 +3338,10 @@
           <Property Name="Acp_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Acp_UsuarioModifica" Type="Int32" />
           <Property Name="Acp_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbAccionPersonal1" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal" FromRole="tbAccionPersonal" ToRole="tbAccionPersonal1" />
-          <NavigationProperty Name="tbAccionPersonal2" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal" FromRole="tbAccionPersonal1" ToRole="tbAccionPersonal" />
           <NavigationProperty Name="tbEstado" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal_est_Id" FromRole="tbAccionPersonal" ToRole="tbEstado" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal_JefeInmediato" FromRole="tbAccionPersonal" ToRole="tbEmpleado" />
           <NavigationProperty Name="tbTipoMovimiento" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal_tipmo_Id" FromRole="tbAccionPersonal" ToRole="tbTipoMovimiento" />
-          <NavigationProperty Name="tbEmpleado1" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbEmpleado" FromRole="tbAccionPersonal" ToRole="tbEmpleado" />
-          <NavigationProperty Name="tbEmpleado2" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbEmpleado_emp_Id" FromRole="tbAccionPersonal" ToRole="tbEmpleado" />
+          <NavigationProperty Name="tbEmpleado1" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbEmpleado_emp_Id" FromRole="tbAccionPersonal" ToRole="tbEmpleado" />
         </EntityType>
         <EntityType Name="tbAnticipoSalario">
           <Key>
@@ -3555,6 +3558,16 @@
           <Property Name="par_PathLogo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="par_PorcentajeAdelantoSalario" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="par_FrecuenciaAdelantoSalario" Type="Int16" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tbActividadEconomica">
           <Key>
@@ -3877,8 +3890,7 @@
           <Property Name="emp_UsuarioModifica" Type="Int32" />
           <Property Name="emp_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbAccionPersonal" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal_JefeInmediato" FromRole="tbEmpleado" ToRole="tbAccionPersonal" />
-          <NavigationProperty Name="tbAccionPersonal1" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbEmpleado" FromRole="tbEmpleado" ToRole="tbAccionPersonal" />
-          <NavigationProperty Name="tbAccionPersonal2" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbAccionPersonal" />
+          <NavigationProperty Name="tbAccionPersonal1" Relationship="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbAccionPersonal" />
           <NavigationProperty Name="tbAnticipoSalario" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbAnticipoSalario" />
           <NavigationProperty Name="tbAnticipoSalario1" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoSalario_tbEmpleado_emp_Id_JefeInmediato" FromRole="tbEmpleado" ToRole="tbAnticipoSalario" />
           <NavigationProperty Name="tbAnticipoViatico" Relationship="SIGEM_BIDSSModel.FK_Adm_tbAnticipoViatico_tbEmpleado_emp_Id" FromRole="tbEmpleado" ToRole="tbAnticipoViatico" />
@@ -3910,18 +3922,6 @@
           <NavigationProperty Name="tbMoneda" Relationship="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" FromRole="tbSueldo" ToRole="tbMoneda" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" FromRole="tbSueldo" ToRole="tbEmpleado" />
         </EntityType>
-        <Association Name="FK_tbAccionPersonal_tbAccionPersonal">
-          <End Type="SIGEM_BIDSSModel.tbAccionPersonal" Role="tbAccionPersonal" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbAccionPersonal" Role="tbAccionPersonal1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="tbAccionPersonal">
-              <PropertyRef Name="Acp_Id" />
-            </Principal>
-            <Dependent Role="tbAccionPersonal1">
-              <PropertyRef Name="Acp_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tbAccionPersonal_tbAccionPersonal_est_Id">
           <End Type="SIGEM_BIDSSModel.tbEstado" Role="tbEstado" Multiplicity="1" />
           <End Type="SIGEM_BIDSSModel.tbAccionPersonal" Role="tbAccionPersonal" Multiplicity="*" />
@@ -3955,18 +3955,6 @@
             </Principal>
             <Dependent Role="tbAccionPersonal">
               <PropertyRef Name="tipmo_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tbAccionPersonal_tbEmpleado">
-          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="1" />
-          <End Type="SIGEM_BIDSSModel.tbAccionPersonal" Role="tbAccionPersonal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbEmpleado">
-              <PropertyRef Name="emp_Id" />
-            </Principal>
-            <Dependent Role="tbAccionPersonal">
-              <PropertyRef Name="emp_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4522,6 +4510,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Adm_tbAccionPersonal_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Adm_tbAccionPersonal_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5267,6 +5261,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SIGEM_BIDSSModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbActividadEconomica">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbActividadEconomica">
               <MappingFragment StoreEntitySet="tbActividadEconomica">
@@ -5582,6 +5587,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAccionPersonal_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAccionPersonal_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAccionPersonal_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAccionPersonal_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAccionPersonal_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAccionPersonal_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

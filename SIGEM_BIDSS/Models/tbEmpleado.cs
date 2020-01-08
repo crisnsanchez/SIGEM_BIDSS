@@ -19,7 +19,6 @@ namespace SIGEM_BIDSS.Models
         {
             this.tbAccionPersonal = new HashSet<tbAccionPersonal>();
             this.tbAccionPersonal1 = new HashSet<tbAccionPersonal>();
-            this.tbAccionPersonal2 = new HashSet<tbAccionPersonal>();
             this.tbAnticipoSalario = new HashSet<tbAnticipoSalario>();
             this.tbAnticipoSalario1 = new HashSet<tbAnticipoSalario>();
             this.tbAnticipoViatico = new HashSet<tbAnticipoViatico>();
@@ -59,8 +58,6 @@ namespace SIGEM_BIDSS.Models
         public virtual ICollection<tbAccionPersonal> tbAccionPersonal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAccionPersonal> tbAccionPersonal1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbAccionPersonal> tbAccionPersonal2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbAnticipoSalario> tbAnticipoSalario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

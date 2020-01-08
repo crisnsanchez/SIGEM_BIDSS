@@ -4,115 +4,96 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+<link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 
-<h2>Index</h2>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex p-0 ui-sortable-handle">
+        <h3 class="card-title p-3">
+            <i class="fa fa-list mr-1"></i>
+            Listado de Solicitudes de Acción Personal
+        </h3>
+        <ul class="nav nav-pills ml-auto p-2">
+            <li class="nav-item">
+                @Html.ActionLink(" Nuevo", "Create", null, new { @class = "btn btn-primary" })
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>
+                            Correlativo
+                        </th>
+                        <th>
+                            Nombre Empleado
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Acp_FechaSolicitud)
+                        </th>
+                        <th>
+                            Tipo Movimiento
+                        </th>
+                      
+                        <th>
+                            @Html.DisplayNameFor(model => model.Acp_Comentario)
+                        </th>
+                        <th>
+                            Estado
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Acp_Correlativo)
+                            </td>
+                            <td>
+                                @{string Empleado = item.tbEmpleado.emp_Nombres + " " + item.tbEmpleado.emp_Apellidos;}
+                                @Empleado
+                            </td>
+                            <td>
+                                @{ string Acp_FechaSolicitud = item.Acp_FechaSolicitud.ToString("dd/MM/yyyy");}
+                                @Acp_FechaSolicitud
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbTipoMovimiento.tipmo_Movimiento)
+                            </td>
+                           
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Acp_Comentario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+                            </td>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_Correlativo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_JefeInmediato)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_FechaSolicitud)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_Comentario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_RazonRechazo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_UsuarioCrea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_FechaCrea)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_UsuarioModifica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Acp_FechaModifica)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbTipoMovimiento.tipmo_Movimiento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbEmpleado2.emp_Nombres)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbEmpleado3.emp_Nombres)
-        </th>
-        <th></th>
-    </tr>
+                            <td>
+                                @Html.ActionLink("Detalles", "Details", new { id = item.Acp_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_Correlativo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_JefeInmediato)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_FechaSolicitud)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_Comentario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_RazonRechazo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_UsuarioCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_FechaCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_UsuarioModifica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Acp_FechaModifica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbTipoMovimiento.tipmo_Movimiento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbEmpleado1.emp_Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbEmpleado2.emp_Nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbEmpleado3.emp_Nombres)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Acp_Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Acp_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Acp_Id })
-        </td>
-    </tr>
+
+
+    <!-- DataTables -->
+    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+
+    <script src="~/Scripts/app/DataTables.js"></script>
+
+
 }
-
-</table>
