@@ -1173,18 +1173,6 @@
         </Function>
         <Function Name="UDP_Adm_tbAnticipoViatico_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
           <Parameter Name="Anvi_Id" Type="int" Mode="In" />
-          <Parameter Name="emp_Id" Type="int" Mode="In" />
-          <Parameter Name="Anvi_JefeInmediato" Type="int" Mode="In" />
-          <Parameter Name="Anvi_GralFechaSolicitud" Type="datetime" Mode="In" />
-          <Parameter Name="Anvi_FechaViaje" Type="datetime" Mode="In" />
-          <Parameter Name="Anvi_Cliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="mun_Codigo" Type="char" Mode="In" />
-          <Parameter Name="Anvi_PropositoVisita" Type="nvarchar" Mode="In" />
-          <Parameter Name="Anvi_DiasVisita" Type="int" Mode="In" />
-          <Parameter Name="Anvi_Hospedaje" Type="bit" Mode="In" />
-          <Parameter Name="Anvi_tptran_Id" Type="int" Mode="In" />
-          <Parameter Name="Anvi_Autorizacion" Type="bit" Mode="In" />
-          <Parameter Name="Anvi_Comentario" Type="nvarchar" Mode="In" />
           <Parameter Name="est_Id" Type="int" Mode="In" />
           <Parameter Name="Anvi_RazonRechazo" Type="nvarchar" Mode="In" />
           <Parameter Name="Anvi_UsuarioModifica" Type="int" Mode="In" />
@@ -1239,6 +1227,7 @@
         </Function>
         <Function Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
           <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="Reemga_JefeInmediato" Type="int" Mode="In" />
           <Parameter Name="Reemga_GralFechaSolicitud" Type="datetime" Mode="In" />
           <Parameter Name="Reemga_FechaViaje" Type="datetime" Mode="In" />
           <Parameter Name="Reemga_Cliente" Type="varchar" Mode="In" />
@@ -2710,27 +2699,9 @@
             <Parameter Name="emp_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="est_Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Adm_tbAnticipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Update_Result)">
-            <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Anvi_JefeInmediato" Mode="In" Type="Int32" />
-            <Parameter Name="Anvi_GralFechaSolicitud" Mode="In" Type="DateTime" />
-            <Parameter Name="Anvi_FechaViaje" Mode="In" Type="DateTime" />
-            <Parameter Name="Anvi_Cliente" Mode="In" Type="String" />
-            <Parameter Name="mun_Codigo" Mode="In" Type="String" />
-            <Parameter Name="Anvi_PropositoVisita" Mode="In" Type="String" />
-            <Parameter Name="Anvi_DiasVisita" Mode="In" Type="Int32" />
-            <Parameter Name="Anvi_Hospedaje" Mode="In" Type="Boolean" />
-            <Parameter Name="Anvi_tptran_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Anvi_Autorizacion" Mode="In" Type="Boolean" />
-            <Parameter Name="Anvi_Comentario" Mode="In" Type="String" />
-            <Parameter Name="est_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Anvi_RazonRechazo" Mode="In" Type="String" />
-            <Parameter Name="Anvi_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="Anvi_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Reemga_JefeInmediato" Mode="In" Type="Int32" />
             <Parameter Name="Reemga_GralFechaSolicitud" Mode="In" Type="DateTime" />
             <Parameter Name="Reemga_FechaViaje" Mode="In" Type="DateTime" />
             <Parameter Name="Reemga_Cliente" Mode="In" Type="String" />
@@ -3114,6 +3085,13 @@
             <Parameter Name="Reqde_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="Reqde_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbAnticipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Update_Result)">
+            <Parameter Name="Anvi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Anvi_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Anvi_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="Anvi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -3318,9 +3296,6 @@
           <Property Type="DateTime" Name="pscat_FechaModifica" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="UDP_rrhh_tbEmpleado_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Adm_tbAnticipoViatico_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
@@ -4575,6 +4550,9 @@
         <ComplexType Name="UDP_Adm_tbRequisionCompraDetalle_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Adm_tbAnticipoViatico_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5001,13 +4979,6 @@
           <FunctionImportMapping FunctionImportName="UDP_rrhh_tbEmpleado_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_rrhh_tbEmpleado_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_rrhh_tbEmpleado_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAnticipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAnticipoViatico_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -5677,6 +5648,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbRequisionCompraDetalle_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbRequisionCompraDetalle_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompraDetalle_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbAnticipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbAnticipoViatico_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbAnticipoViatico_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

@@ -61,16 +61,53 @@ namespace SIGEM_BIDSS.Controllers
 
             tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = new tbSolicitudReembolsoGastos();
             tbSolicitudReembolsoGastos.Reemga_Id = tbSolicitudReembolsoGastos.Reemga_Id;
+            string ErrorMessage = "", UserName = ""; ;
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+
+                int Year = Function.DatetimeNow().Year;
+                int Month = Function.DatetimeNow().Month;
+
+                int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == Year && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
+                int SolCountMonth = (from _tbSol in db.tbAnticipoSalario where _tbSol.emp_Id == EmployeeID && _tbSol.Ansal_FechaCrea.Month == Month && _tbSol.Ansal_FechaCrea.Year == Year select _tbSol).Count();
+
+                var _Parameters = db.tbParametro.FirstOrDefault();
+                if (_Parameters == null)
+                {
+                    return RedirectToAction("Create", "Parametro");
+                }
+                if (SolCount >= _Parameters.par_FrecuenciaAdelantoSalario)
+                {
+                    TempData["swalfunction"] = GeneralFunctions.YearLimit;
+                    return RedirectToAction("Solicitud", "Menu");
+                }
+                if (SolCount >= 6)
+                {
+                    TempData["swalfunction"] = GeneralFunctions.MonthLimit;
+                    return RedirectToAction("Solicitud", "Menu");
+                }
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
+                                                where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
+                                                select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
 
 
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
-            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
-
-            ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
-            ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
 
 
-            return View();
+                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
+                ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
+                ViewBag.Reemga_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
+                ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+                ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+
+            }
+            catch (Exception Ex)
+            {
+                ErrorMessage = Ex.Message.ToString();
+                throw;
+            }
+
+            return View(tbSolicitudReembolsoGastos);
 
         }
 
@@ -79,55 +116,88 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "emp_Id,emp_EsJefe,Reemga_GralFechaSolicitud," +
+        public ActionResult Create([Bind(Include = "emp_Id,Reemga_JefeInmediato,Reemga_GralFechaSolicitud," +
             "Reemga_FechaViaje,Reemga_Cliente,mun_codigo,Reemga_PropositoVisita,Reemga_DiasVisita,Reemga_Comentario,est_Id")] tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos, string dep_codigo)
         {
+            
+            //string UserName = "",
+            //ErrorEmail = "";
+            //bool Result = false, ResultAdm = false;
+            //int EmployeeID = Function.GetUser(out UserName);
 
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
-            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
 
-            ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
-            ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
-            tbSolicitudReembolsoGastos.Reemga_RazonRechazo = GeneralFunctions.stringDefault;
-            string UserName = "",
-               ErrorEmail = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "";
             bool Result = false, ResultAdm = false;
-            int EmployeeID = Function.GetUser(out UserName);
-            tbSolicitudReembolsoGastos.emp_Id = EmployeeID;
-            tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud = Function.DatetimeNow();
-            tbSolicitudReembolsoGastos.est_Id = GeneralFunctions.Enviada;
+            IEnumerable<object> Insert = null;
 
-
-
-
-            if (tbSolicitudReembolsoGastos.mun_codigo == "Seleccione")
-                ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
-            else
-                ViewBag.muncodigo = tbSolicitudReembolsoGastos.mun_codigo;
-
-
-            if (String.IsNullOrEmpty(dep_codigo))
-                ModelState.AddModelError("Reemga_UsuarioCrea", "El campo Departamento es obligatorio.");
-
-
-
-
-
-            if (ModelState.IsValid)
+            try
             {
+                cGetUserInfo GetEmployee = null;
+                int EmployeeID = Function.GetUser(out UserName);
 
-                try
-                {
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
+                                                where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
+                                                select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+
+                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
+                ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
+                ViewBag.Reemga_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSolicitudReembolsoGastos.Reemga_JefeInmediato);
+                ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+                ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+                tbSolicitudReembolsoGastos.Reemga_RazonRechazo = GeneralFunctions.stringDefault;
 
 
+
+                tbSolicitudReembolsoGastos.emp_Id = EmployeeID;
+                tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud = Function.DatetimeNow();
+                tbSolicitudReembolsoGastos.est_Id = GeneralFunctions.Enviada;
+
+
+
+
+                if (tbSolicitudReembolsoGastos.mun_codigo == "Seleccione")
+                    ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
+                else
+                    ViewBag.muncodigo = tbSolicitudReembolsoGastos.mun_codigo;
+
+
+                if (String.IsNullOrEmpty(dep_codigo))
+                    ModelState.AddModelError("Reemga_UsuarioCrea", "El campo Departamento es obligatorio.");
+
+
+
+
+<<<<<<< HEAD
                     IEnumerable<object> _List = null;
                     string ErrorMessage = "";
-                    _List = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.emp_Id,
-                        tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud, tbSolicitudReembolsoGastos.Reemga_FechaViaje, tbSolicitudReembolsoGastos.Reemga_Cliente,
-                        tbSolicitudReembolsoGastos.mun_codigo, tbSolicitudReembolsoGastos.Reemga_PropositoVisita, tbSolicitudReembolsoGastos.Reemga_DiasVisita,
-                        tbSolicitudReembolsoGastos.Reemga_Comentario, tbSolicitudReembolsoGastos.est_Id, tbSolicitudReembolsoGastos.Reemga_RazonRechazo, EmployeeID, Function.DatetimeNow());
-                    foreach (UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result Reembolso in _List)
+                    //_List = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.emp_Id,
+                    //    tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud, tbSolicitudReembolsoGastos.Reemga_FechaViaje, tbSolicitudReembolsoGastos.Reemga_Cliente,
+                    //    tbSolicitudReembolsoGastos.mun_codigo, tbSolicitudReembolsoGastos.Reemga_PropositoVisita, tbSolicitudReembolsoGastos.Reemga_DiasVisita,
+                    //    tbSolicitudReembolsoGastos.Reemga_Comentario, tbSolicitudReembolsoGastos.est_Id, tbSolicitudReembolsoGastos.Reemga_RazonRechazo, EmployeeID, Function.DatetimeNow());
+                    //foreach (UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result Reembolso in _List)
+                    //    ErrorMessage = Reembolso.MensajeError;
+=======
+                if (ModelState.IsValid)
+                {
+
+                    Insert = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.emp_Id,
+                        tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud,
+                        tbSolicitudReembolsoGastos.Reemga_FechaViaje,
+                        tbSolicitudReembolsoGastos.Reemga_Cliente,
+                        tbSolicitudReembolsoGastos.mun_codigo,
+                        tbSolicitudReembolsoGastos.Reemga_PropositoVisita,
+                        tbSolicitudReembolsoGastos.Reemga_DiasVisita,
+                        tbSolicitudReembolsoGastos.Reemga_Comentario,
+                        tbSolicitudReembolsoGastos.est_Id,
+                        tbSolicitudReembolsoGastos.Reemga_RazonRechazo,
+                        EmployeeID,
+                        Function.DatetimeNow());
+                    foreach (UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result Reembolso in Insert)
                         ErrorMessage = Reembolso.MensajeError;
+
+
+
+>>>>>>> d0f5a781f24544db6e2b9807620e853e33534b04
                     if (ErrorMessage.StartsWith("-1"))
                     {
                         Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorMessage);
@@ -138,7 +208,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     else
                     {
-                        var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                        GetEmployee = Function.GetUserInfo(EmployeeID);
                         var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
                         Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
                         ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
@@ -150,27 +220,23 @@ namespace SIGEM_BIDSS.Controllers
 
                         Session["Reemga_Id"] = ErrorMessage;
                         return RedirectToAction("Create", "SolicitudReembolsoGastosDetalles");
-                        //return RedirectToAction("Index");
+                    
                     }
 
                 }
-
-
-                catch (Exception Ex)
-                {
-                    Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, Ex.Message.ToString());
-                    ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                    return View(tbSolicitudReembolsoGastos);
-                }
-                //db.tbSolicitudReembolsoGastos.Add(tbSolicitudReembolsoGastos);
-                //db.SaveChanges();
-                //return RedirectToAction("Index");
             }
-            else { var errors = ModelState.Values.SelectMany(v => v.Errors); }
-            ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSolicitudReembolsoGastos.emp_Id);
-            ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbSolicitudReembolsoGastos.est_Id);
+
+
+            catch (Exception ex)
+            {
+                Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ex.Message.ToString());
+                return View(tbSolicitudReembolsoGastos);
+            }
+
             return View(tbSolicitudReembolsoGastos);
+
         }
+
 
         // GET: SolicitudReembolsoGastos/Edit/5
         public ActionResult Edit(int? id)

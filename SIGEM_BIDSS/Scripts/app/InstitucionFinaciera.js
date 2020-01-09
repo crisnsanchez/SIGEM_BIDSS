@@ -16,6 +16,8 @@ document.getElementById('insf_Correo').addEventListener('input', function () {
     }
 });
 
+$('#insf_Telefono').inputmask('(999) 9999-9999')
+
 $('#insf_Nombre').change(function () {
     $('#Nombres').hide();
 });
