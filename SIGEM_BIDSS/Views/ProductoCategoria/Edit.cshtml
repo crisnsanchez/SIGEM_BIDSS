@@ -65,14 +65,12 @@
                         if (Model.pcat_EsActivo == true)
                         {
 
-              
-
-                    
-                            <div class="form-horizontal">
-                                @Html.Partial("_CreateSubCategoria", new tbProductoSubcategoria())
+                            <div class="form-group col-md-5">
+                                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#Crear">Registrar Detalle</button>
+                                <div class="ibox-content collapse" id="Crear">
+                                    @Html.Partial("_CreateSubCategoria", new tbProductoSubcategoria())
+                                </div>
                             </div>
-                       
-                   
 
                         }
                         else
@@ -80,7 +78,7 @@
                             <div class="form-group col-md-4">
                                 <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#Crear" disabled>Registrar Detalle</button>
                                 <div class="ibox-content collapse" id="Crear">
-                                   
+                                    @Html.Partial("_CreateSubCategoria", new tbProductoSubcategoria())
                                 </div>
                             </div>
                         }
