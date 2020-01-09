@@ -59,7 +59,7 @@
                                     }
                                     else
                                     {
-                                        <img src="~/Content/img/descarga.jpg" class="product-image img-circle"  id="imgpreview" width="280" height="230" style="border-width: 0px;" />
+                                        <img src="~/Content/img/descarga.jpg" class="product-image img-circle" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
 
                                     }
                                 }
@@ -74,7 +74,7 @@
                                     {@Url.Content(Model.emp_PathImage)}
                                 </label>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -83,19 +83,18 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_Nombres, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", maxLength = 100, @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.emp_Nombres, "", new { @class = "text-danger", id = "Nombres" })
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_Apellidos, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", maxLength = 100, @style = "text-transform:uppercase;", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.emp_Apellidos, "", new { @class = "text-danger", id = "Apellidos" })
                         </div>
                     </div>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_Sexo, htmlAttributes: new { @class = "control-label col-md-6" })
@@ -141,18 +140,25 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger", id = "emailOK" })
+                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                            @Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger", id = "email" })
+
+
+
+
+                            <div id="emailOK" class="text-danger">
+                                <p style="color:red" class="text-danger"></p>
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label col-md-6">Área</label>
                         <div class="col-md-11">
                             @Html.DropDownList("are_Id", null, "Seleccione Área", new { @class = "form-control" })
-                           @Html.ValidationMessageFor(model => model.tbPuesto.are_Id, "", new { @class = "text-danger", id = "Area" })
+                            @Html.ValidationMessageFor(model => model.tbPuesto.are_Id, "", new { @class = "text-danger", id = "Area" })
                         </div>
                     </div>
                     <div id="" class="form-group col-md-6">
@@ -180,12 +186,11 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_Direccion, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger", id = "Direccion" })
                         </div>
-
-
                     </div>
+
 
                 </div>
 
@@ -226,6 +231,8 @@
     <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+    <script src="~/Scripts/app/General_PCAE.js"></script>
     <script src="~/Scripts/app/Empleados.js"></script>
 
 

@@ -34,11 +34,11 @@
                         @Html.DisplayFor(model => model.Acp_Correlativo)
                     </dd>
                     <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres) Y  @Html.DisplayNameFor(model => model.tbEmpleado.emp_Apellidos)
+                        @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Nombres) Y  @Html.DisplayNameFor(model => model.tbEmpleado1.emp_Apellidos)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
+                        @Html.DisplayFor(model => model.tbEmpleado1.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado1.emp_Apellidos)
                     </dd>
                     <dt>
                         @Html.DisplayNameFor(model => model.Acp_FechaSolicitud)
@@ -46,6 +46,8 @@
                     <dd>
                         @Html.DisplayFor(model => model.Acp_FechaSolicitud)
                     </dd>
+
+
                 </div>
 
                 <div class="form-group col-md-3">
@@ -64,7 +66,12 @@
                     <dd>
                         @Html.DisplayFor(model => model.Acp_Comentario)
                     </dd>
-                
+                    <dt>
+                        Jefe Inmediato
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres) @Html.DisplayFor(model => model.tbEmpleado.emp_Apellidos)
+                    </dd>
                 </div>
 
                 <div class="form-group col-md-3">
@@ -89,7 +96,7 @@
                             </dd>
                         }
                     }
-
+               
                 </div>
             </dl>
             <div class="form-group">

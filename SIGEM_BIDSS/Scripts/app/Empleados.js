@@ -222,11 +222,11 @@ $('#emp_Telefono').keyup(function () {
 });
 
 $('#emp_CorreoElectronico').keyup(function () {
-    $('#emailOK').hide();
+    $('#email').hide();
 });
 
 $('#are_Id').change(function () {
-    $('#Area').hide();
+    $('#area').hide();
 });
 
 

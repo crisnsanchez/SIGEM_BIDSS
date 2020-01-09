@@ -32,23 +32,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-lg-8 control-section">
-        <div class="control_wrapper">
-            <!-- Initialize Uploader -->
-            <input type='file' id='fileupload' name='UploadFiles' />
-        </div>
-    </div>
-
-    <div class="col-lg-4 property-section">
-        <div id="property" title="Properties">
-            <div style='margin-left: 50px; padding-top:25px;'>
-                <input id="checkAutoUpload" name="FileUploader" type="checkbox" />
-            </div>
-            <div style='margin-left: 50px; padding-top:25px;'>
-                <input id="sequentialUpload" name="FileUploader" type="checkbox" />
-            </div>
-        </div>
-    </div>
+ 
 
     <style>
         .control_wrapper {
@@ -113,14 +97,14 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_Nombres, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;", @OnKeyPress = "return soloLetras(event)" } })
+                            @Html.EditorFor(model => model.emp_Nombres, new { htmlAttributes = new { @class = "form-control", maxLength = 100, @style = "text-transform:uppercase;", @onkeypress = "return soloLetras(event)", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.emp_Nombres, "", new { @class = "text-danger", id = "Nombres" })
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_Apellidos, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase;" } })
+                            @Html.EditorFor(model => model.emp_Apellidos, new { htmlAttributes = new { @class = "form-control", maxLength = 100, @style = "text-transform:uppercase;", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.emp_Apellidos, "", new { @class = "text-danger", id = "Apellidos" })
                         </div>
                     </div>
@@ -170,8 +154,16 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger", id = "emailOK" })
+                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                            @Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger", id = "email" })
+
+
+
+
+                            <div id="emailOK" class="text-danger">
+                                <p style="color:red" class="text-danger"></p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -180,7 +172,7 @@
                         <label class="control-label col-md-6">Área</label>
                         <div class="col-md-11">
                             @Html.DropDownList("are_Id", null, "Seleccione Área", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger", id = "emp_UsuarioCrea" })
+                            @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger", id = "area" })
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -206,7 +198,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_Direccion, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.emp_Direccion, new { htmlAttributes = new { @class = "form-control", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger", id = "Direccion" })
                         </div>
                     </div>
@@ -218,7 +210,7 @@
                         <label class="control-label col-md-6">Departamento</label>
                         <div class="col-md-11">
                             @Html.DropDownList("dep_Codigo", null, "Seleccione Departamento", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.emp_UsuarioCrea, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.emp_UsuarioCrea, "", new { @class = "text-danger", id = "Departamento" })
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -242,14 +234,16 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-4 col-md-10">
-                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-                    </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
         </div>
+
     }
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -257,6 +251,8 @@
     <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+    <script src="~/Scripts/app/General_PCAE.js"></script>
     <script src="~/Scripts/app/Empleados.js"></script>
 
     <script type="text/javascript">

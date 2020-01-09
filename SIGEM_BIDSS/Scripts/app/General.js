@@ -10,6 +10,27 @@ $(function () {
     });
 
 
+
+
+    function noespaciosincio(e) {
+        var valor = e.value.replace(/^ */, '');
+        e.value = valor;
+    }
+
+
+
+    document.getElementById("Save").onclick = function () {
+        var txtObj = document.getElementById("");
+        txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
+        txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
+
+
+
+
+    };
+
+
+
     //Mensaje que mostrar segun funcion
     _Action = $('#vSwal').val();
     console.log(_Action)
