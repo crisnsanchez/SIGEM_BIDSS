@@ -170,7 +170,8 @@ namespace SIGEM_BIDSS.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    Insert = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.emp_Id,
+                    Insert = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(EmployeeID ,
+                        tbSolicitudReembolsoGastos.emp_Id,
                         tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud,
                         tbSolicitudReembolsoGastos.Reemga_FechaViaje,
                         tbSolicitudReembolsoGastos.Reemga_Cliente,
