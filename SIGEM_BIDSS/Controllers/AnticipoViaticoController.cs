@@ -235,14 +235,14 @@ namespace SIGEM_BIDSS.Controllers
 
 
         [HttpPost]
-        public JsonResult Revisar(int id, string Anvi_RazonRechazo)
+        public JsonResult Revisar(int id, string RazonRechazo)
         {
             string vReturn = "";
             string IsFor = "false";
             tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
             if (tbAnticipoViatico.est_Id == GeneralFunctions.Enviada)
             {
-                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Revisada, Anvi_RazonRechazo))
+                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Revisada, RazonRechazo))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
                     IsFor = "true";
@@ -357,14 +357,14 @@ namespace SIGEM_BIDSS.Controllers
 
         // GET: AnticipoSalario/Approve/5   
         [HttpPost]
-        public JsonResult Reject(int id, string Anvi_RazonRechazo)
+        public JsonResult Reject(int id, string RazonRechazo)
         {
             var list = "";
             string vReturn = "";
             tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
             if (tbAnticipoViatico.est_Id == GeneralFunctions.Revisada)
             {
-                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Rechazada, Anvi_RazonRechazo))
+                if (UpdateState(out vReturn, tbAnticipoViatico, GeneralFunctions.Rechazada, RazonRechazo))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
                 }
