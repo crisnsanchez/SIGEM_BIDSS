@@ -69,7 +69,7 @@
                                     <button type="button" class="btn btn-white btn-xs" id="Editarmodal" onclick='EditStudentRecord(@item.pscat_Id)'>
                                         Editar
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalEstado_@item.pscat_Id">
+                                    <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalEstados_@item.pscat_Id">
                                         Eliminar
                                     </button>
                                     <input type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalEstadoSub_@item.pscat_Id" value="Inactivar" />
@@ -200,17 +200,10 @@
                                 <div class="col-sm-12">
                                     <input type="text" onkeypress="return soloLetras(event)" id="pscat_Descripcion_edit" name="pscat_Descripcion" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
                                     <p style="color:red" id="DescripcionErrorEdit">@Html.ValidationMessageFor(m => subcategoria.pscat_Descripcion)</p>
-                                    <div id="validationDescripcionEdit">
-                                        <p style="color:red"></p>
-                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <label id="MsjError" class="text-danger"></label>
-                                </div>
-                            </div>
+                           
                             <div class="form-group">
                                 <div class="col-md-12 text-center">
                                     <button class="btn btn-primary" type="button" id="Btnsubmit" tabindex="10"> Guardar </button>
@@ -225,4 +218,12 @@
     </div>
 </div>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/app/Categoria.js"></script>
+<script>
+    $('#pscat_Descripcion_edit').blur(function () {
+        if ($.trim($('#pscat_Descripcion_edit').val()) == 0) {
+            $('#DescripcionErrorEdit').text('');
+            $('#DescripcionErrorEdit').after('<ul id="DescripcionErrorEdit" class="validation-summary-errors text-danger">Campo subcategoría Requerido</ul>');
+        }
+    });
+
+</script>
