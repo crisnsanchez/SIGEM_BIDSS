@@ -10,10 +10,41 @@ $("#CargarArchivo").change(function () {
 
 $('#AgregarDetalle').click(function () {
     var table = $('#dataTable').DataTable();
-
     var LiquidacionAnticipoViatico = GetLiquidacionViatico();
-    console.log(LiquidacionAnticipoViatico);
+    var FechaGastos = $('#Lianvide_FechaGasto').val();
+    var Gastos = $('#tpv_Id').val();
+    var Monto = $('#Lianvide_MontoGasto').val();
+    var Concepto = $('#Lianvide_Concepto').val();
+    
+    
+    if (FechaGastos == '') {
+        $('#MessageError').text('');
+        $('#categoria').text('');
+        $('#ErrorISV').text('');
+        $('#categoria').after('<ul id="categoria" class="validation-summary-errors text-danger">Campo Categoría Requerido</ul>');
 
+    }
+    if (Gastos == '') {
+        $('#MessageError').text('');
+        $('#categoria').text('');
+        $('#ErrorISV').text('');
+        $('#categoria').after('<ul id="categoria" class="validation-summary-errors text-danger">Campo Categoría Requerido</ul>');
+
+    }
+    if (Monto == '') {
+        $('#MessageError').text('');
+        $('#categoria').text('');
+        $('#ErrorISV').text('');
+        $('#categoria').after('<ul id="categoria" class="validation-summary-errors text-danger">Campo Categoría Requerido</ul>');
+
+    }
+    if (Concepto == '') {
+        $('#MessageError').text('');
+        $('#categoria').text('');
+        $('#ErrorISV').text('');
+        $('#categoria').after('<ul id="categoria" class="validation-summary-errors text-danger">Campo Categoría Requerido</ul>');
+
+    }
 
     $.ajax({
         url: "/LiquidacionAnticipoViaticoDetalle/SaveLiquidacionAnticipoDetalle",
@@ -64,8 +95,9 @@ $('#AgregarDetalle').click(function () {
 
 
                 ]).draw(false)
-
+            
             }
+            
         });
 
 });
