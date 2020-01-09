@@ -5,8 +5,8 @@
         <from>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.pscat_Descripcion,new { @class = "control-label col-md-6" })
-                    <div class="col-md-11">
+                    @Html.LabelFor(model => model.pscat_Descripcion,new { @class = "control-label col-md-8" })
+                    <div class="col-md-12">
                         <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
                         <div id="DescripcionError">
                             <p style="color:red">
@@ -26,6 +26,9 @@
                 </div>
             </div>
         </from>
+
+
+
         <table id="TablaSub" class="table table-bordered table-hover" style="width:100%">
             <thead>
                 <tr>
@@ -35,6 +38,9 @@
             </thead>
             <tbody></tbody>
         </table>
+
+
+
     </div>
 </div>
 

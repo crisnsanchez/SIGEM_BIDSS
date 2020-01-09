@@ -49,7 +49,7 @@ namespace SIGEM_BIDSS.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
         public System.DateTime Ansal_GralFechaSolicitud { get; set; }
 
-        [Display(Name = "Monto a Solicitar")]
+        [Display(Name = "Monto Solicitado")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")] 
         public decimal Ansal_MontoSolicitado { get; set; }
 

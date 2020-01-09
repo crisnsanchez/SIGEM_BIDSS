@@ -50,29 +50,29 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Reqco_Correlativo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Reqco_GralFechaSolicitud)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Reqco_Comentario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tbArea.are_Descripcion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.Reqco_Id })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reqco_Correlativo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reqco_GralFechaSolicitud)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reqco_Comentario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbArea.are_Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Reqco_Id })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
