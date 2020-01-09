@@ -47,8 +47,8 @@ namespace SIGEM_BIDSS.Controllers
         {
             
 
-         int Id =  Convert.ToInt32(Session["NombreLiquidacione"]);
-
+         //int Id =  Convert.ToInt32(Session["NombreLiquidacione"]);
+            int Id = 18;
             tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle = new tbLiquidacionAnticipoViaticoDetalle();
             tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id = Id;
             ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
@@ -71,29 +71,29 @@ namespace SIGEM_BIDSS.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
 
-        [HttpPost]
-        public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle , HttpPostedFileBase  Archivo)
-        {
-            int datos = 0;
+        //[HttpPost]
+        //public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle , HttpPostedFileBase  Archivo)
+        //{
+        //    int datos = 0;
 
-            decimal Lianvide_MontoGasto = tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto;
-            List<tbLiquidacionAnticipoViaticoDetalle> sessionSolicitudReembolsoDetalle = new List<tbLiquidacionAnticipoViaticoDetalle>();
-            var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["NombreLiquidaciondetalle"];
+        //    decimal Lianvide_MontoGasto = tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto;
+        //    List<tbLiquidacionAnticipoViaticoDetalle> sessionSolicitudReembolsoDetalle = new List<tbLiquidacionAnticipoViaticoDetalle>();
+        //    var list = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["NombreLiquidaciondetalle"];
 
-            if (list == null)
-            {
-                sessionSolicitudReembolsoDetalle.Add(tbLiquidacionAnticipoViaticoDetalle);
-                Session["NombreLiquidaciondetalle"] = sessionSolicitudReembolsoDetalle;
-            }
-            else
-            {
+        //    if (list == null)
+        //    {
+        //        sessionSolicitudReembolsoDetalle.Add(tbLiquidacionAnticipoViaticoDetalle);
+        //        Session["NombreLiquidaciondetalle"] = sessionSolicitudReembolsoDetalle;
+        //    }
+        //    else
+        //    {
                 
-                list.Add(tbLiquidacionAnticipoViaticoDetalle);
-                Session["NombreLiquidaciondetalle"] = list;
-                return Json(tbLiquidacionAnticipoViaticoDetalle, JsonRequestBehavior.AllowGet);
-            }
-            return Json(datos, JsonRequestBehavior.AllowGet);
-        }
+        //        list.Add(tbLiquidacionAnticipoViaticoDetalle);
+        //        Session["NombreLiquidaciondetalle"] = list;
+        //        return Json(tbLiquidacionAnticipoViaticoDetalle, JsonRequestBehavior.AllowGet);
+        //    }
+        //    return Json(datos, JsonRequestBehavior.AllowGet);
+        //}
            [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Lianvide_Id,Lianvi_Id,Lianvide_FechaGasto,tpv_Id,Lianvide_MontoGasto,Lianvide_Concepto,Lianvide_UsuarioCrea,Lianvide_FechaCrea,Lianvide_UsuarioModifica,Lianvide_FechaModifica")] tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle, HttpPostedFileBase ArchivoPath)
@@ -114,7 +114,7 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
                     ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                     int ArchivoCorrelativo = db.tbLiquidacionAnticipoViaticoDetalle.Where(x => x.Lianvi_Id == tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id).Count();
-
+                    ViewBag.Arcxhio = db.tbLiquidacionAnticipoViaticoDetalle.Where(x => x.Lianvi_Id == tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id).ToList();
 
 
                     if (ArchivoPath != null)
@@ -149,7 +149,7 @@ namespace SIGEM_BIDSS.Controllers
                     {
 
                         int EmployeeID = Function.GetUser(out UserName);
-                        Detalle = db.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(tbLiquidacionAnticipoViaticoDetalle.Lianvide_Id, 
+                        Detalle = db.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(
                                                                                         tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id,
                                                                                         tbLiquidacionAnticipoViaticoDetalle.Lianvide_FechaGasto,
                                                                                         tbLiquidacionAnticipoViaticoDetalle.tpv_Id,
@@ -175,7 +175,7 @@ namespace SIGEM_BIDSS.Controllers
                             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                             TempData["swalfunction"] = "true";
                           
-                            return View(tbLiquidacionAnticipoViaticoDetalle);
+                            return RedirectToAction("Create");
 
 
 

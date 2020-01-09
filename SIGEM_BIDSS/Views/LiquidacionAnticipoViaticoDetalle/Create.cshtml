@@ -23,12 +23,14 @@
         </ul>
     </div>
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, FormMethod.Post, new { id = "frmAnticipoViatico" }))
+    @using (Html.BeginForm("Create", "LiquidacionAnticipoViaticoDetalle", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         @*@Html.HiddenFor(model => model.Anvi_Id)
             @Html.HiddenFor(model => model.est_Id)*@
         @Html.HiddenFor(model => model.Lianvi_Id)
+
+        @*@Html.HiddenFor(model => model.Lianvide_Archivo, new { Value = "----" })*@
         <input type="hidden" id="custId" name="custId" value="3487">
         <div class="form-horizontal">
             <div class="card-body">
@@ -40,9 +42,8 @@
                 <div class="form-group col-md-6">
                     @Html.LabelFor(model => model.Lianvide_Archivo, htmlAttributes: new { @class = "control-label col-md-6" })
                     <div class="col-md-11">
-                        <input type="file" class="custom-file-input" id="LianvideArchivo">
-                        <label class="custom-file-label" for="LianvideArchivo" id="Archivo_Name"></label>
-
+                        <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="ArchivoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
+                        <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto"></label>
                         @Html.ValidationMessageFor(model => model.Lianvide_Archivo, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -64,7 +65,7 @@
                         @Html.LabelFor(model => model.Lianvide_MontoGasto, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
 
-                            @Html.EditorFor(model => model.Lianvide_MontoGasto, new { htmlAttributes = new { @class = "form-control normalize", @autocomplete = "off", @OnKeyPress = "return soloNumeros(event)", @onChange = "MASK(this,this.value,'-###,###,###,##0.00',1)" } })
+                            @Html.EditorFor(model => model.Lianvide_MontoGasto, new { htmlAttributes = new { @class = "form-control normalize", @autocomplete = "off", @OnKeyPress = "return soloNumeros(event)" } })
                             <div id="ValidationMonto"> @Html.ValidationMessageFor(model => model.Lianvide_MontoGasto, "", new { @class = "text-danger" })    </div>
                         </div>
                     </div>
@@ -77,7 +78,7 @@
                         @Html.LabelFor(model => model.tpv_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-11">
                             @Html.DropDownList("tpv_Id", null, "Seleccione Tipo Gasto", new { @class = "form-control" })
-                            <div  id="ValidationGastos" > @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })</div>
+                            <div id="ValidationGastos"> @Html.ValidationMessageFor(model => model.tpv_Id, "", new { @class = "text-danger" })</div>
                         </div>
                     </div>
 
@@ -97,105 +98,22 @@
                 <br />
                 <div class="form-group">
                     <div class="col-md-offset-4">
-                        <input type="button" value="Agregar" id="AgregarDetalle" class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
                     </div>
                 </div>
 
             </div>
-            @*<table class="table table-bordered table-hover" id="dataTable">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Lianvide_FechaGasto)
-                        </th>
-                        <th>
-                            Tipo Gasto
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Lianvide_Concepto)
-                        </th>
-                        <th>
-                            Archivo
-                        </th>
-                        <th>
-                            Monto de Gastos
-                        </th>
+            <div class="card card-primary card-outline">
+                <div class="card-header d-flex p-0 ui-sortable-handle">
 
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        @Html.Partial("_CreateDetalle", (List<SIGEM_BIDSS.Models.tbLiquidacionAnticipoViaticoDetalle>)ViewBag.Arcxhio)
+                    </div>
+                </div>
 
-                        <th>
-                            Acciones
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-@foreach (var item in ViewBag.Arcxhio) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lianvide_MontoGasto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lianvide_Concepto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lianvide_Archivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lianvide_UsuarioCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lianvide_FechaCrea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lianvide_UsuarioModifica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lianvide_FechaModifica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbLiquidacionAnticipoViatico.Lianvi_Correlativo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbTipoViatico.tpv_Descripcion)
-        </td>
-        <td>
-         
-        </td>
-    </tr>
-}
-</tbody>
-
-                <tfoot>
-                    <tr>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-
-                        <th>
-                            Total Gastos
-                        </th>
-
-                        <th>
-                         
-                        </th>
-                        <th>
-
-                        </th>
-
-                    </tr>
-                </tfoot>
-
-            </table>*@
-
-
+            </div>
 
 
 

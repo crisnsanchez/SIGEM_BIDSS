@@ -3560,6 +3560,7 @@
     <Content Include="Views\RequisionCompraDetalle\Edit.cshtml" />
     <Content Include="Views\RequisionCompraDetalle\Index.cshtml" />
     <Content Include="Views\RequisionCompraDetalle\_BuscarProducto.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViaticoDetalle\_CreateDetalle.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

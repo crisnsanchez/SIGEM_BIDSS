@@ -2277,12 +2277,8 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Conf_tbParametro_Update_Result>("UDP_Conf_tbParametro_Update", par_IdParameter, par_NombreEmpresaParameter, par_TelefonoEmpresaParameter, par_CorreoEmpresaParameter, par_CorreoEmisorParameter, par_CorreoRRHHParameter, par_PasswordParameter, par_ServidorParameter, par_PuertoParameter, par_PathLogoParameter, par_PorcentajeAdelantoSalarioParameter, par_FrecuenciaAdelantoSalarioParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result> UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(Nullable<int> lianvide_Id, Nullable<int> lianvi_Id, Nullable<System.DateTime> lianvide_FechaGasto, Nullable<int> tpv_Id, Nullable<decimal> lianvide_MontoGasto, string lianvide_Concepto, string lianvide_Archivo, Nullable<int> lianvide_UsuarioCrea, Nullable<System.DateTime> lianvide_FechaCrea)
+        public virtual ObjectResult<UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result> UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(Nullable<int> lianvi_Id, Nullable<System.DateTime> lianvide_FechaGasto, Nullable<int> tpv_Id, Nullable<decimal> lianvide_MontoGasto, string lianvide_Concepto, string lianvide_Archivo, Nullable<int> lianvide_UsuarioCrea, Nullable<System.DateTime> lianvide_FechaCrea)
         {
-            var lianvide_IdParameter = lianvide_Id.HasValue ?
-                new ObjectParameter("Lianvide_Id", lianvide_Id) :
-                new ObjectParameter("Lianvide_Id", typeof(int));
-    
             var lianvi_IdParameter = lianvi_Id.HasValue ?
                 new ObjectParameter("Lianvi_Id", lianvi_Id) :
                 new ObjectParameter("Lianvi_Id", typeof(int));
@@ -2315,7 +2311,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Lianvide_FechaCrea", lianvide_FechaCrea) :
                 new ObjectParameter("Lianvide_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result>("UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert", lianvide_IdParameter, lianvi_IdParameter, lianvide_FechaGastoParameter, tpv_IdParameter, lianvide_MontoGastoParameter, lianvide_ConceptoParameter, lianvide_ArchivoParameter, lianvide_UsuarioCreaParameter, lianvide_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result>("UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert", lianvi_IdParameter, lianvide_FechaGastoParameter, tpv_IdParameter, lianvide_MontoGastoParameter, lianvide_ConceptoParameter, lianvide_ArchivoParameter, lianvide_UsuarioCreaParameter, lianvide_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbProductoCategoria_Delete_Result> UDP_Inv_tbProductoCategoria_Delete(Nullable<int> pcat_Id)
