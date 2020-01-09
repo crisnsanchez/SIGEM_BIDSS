@@ -185,7 +185,6 @@ namespace SIGEM_BIDSS.Controllers
                 Ex.Message.ToString();
                 ModelState.AddModelError("", "No se Actualizo el registro");
             }
-            TempData["swalfunction"] = GeneralFunctions._isEdited;
             return Json(Msj, JsonRequestBehavior.AllowGet);
 
         }

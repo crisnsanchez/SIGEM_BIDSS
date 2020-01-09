@@ -96,7 +96,7 @@ $('#AgregarSubCategorias').click(function () {
         $('#MessageError').text('');
         $('#ErrorDescripcion').text('');
         $('#ErrorISV').text('');
-        $('#DescripcionError').after('<ul id="ErrorDescripcions" class="validation-summary-errors text-danger">Campo SubCategoría Requerido</ul>');
+        $('#DescripcionError').after('<ul id="ErrorDescripcion" class="validation-summary-errors text-danger">Campo SubCategoría Requerido</ul>');
 
     }
 
@@ -282,43 +282,13 @@ $("#Btnsubmit").click(function () {
         data: data,
         success: function (result) {
             if (result == '-1')
-                $("#MsjError").text("No se pudo actualizar el registro, contacte al administrador");
+                $("#Msj").text("No se pudo actualizar el registro, contacte al administrador");
             else
                 location.reload();
         }
     });
 })
-////////////////////////////////////////////////////////////////////////
-//$(document).ready(function () {
-//    $('#TablaSub').DataTable(
-//        {
-//            "searching": true,
-//            "lengthChange": true,
-//            "oLanguage": {
-//                "oPaginate": {
-//                    "sNext": "Siguiente",
-//                    "sPrevious": "Anterior",
-//                },
-//                "sProcessing": "Procesando...",
-//                "sLengthMenu": "Mostrar _MENU_ registros",
-//                "sZeroRecords": "No se encontraron resultados",
-//                "sEmptyTable": "Ningún dato disponible en esta tabla",
-//                "sEmptyTable": "No hay registros",
-//                "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-//                "sSearch": "Buscar",
-//                "sInfo": "Mostrando _START_ a _END_ Entradas",
-//                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-//            }
-//        });
-//});
 
-
-$('#pscat_Descripcion_edit').blur(function () {
-    if ($.trim($('#pscat_Descripcion_edit').val()) == 0) {
-        $('#DescripcionErrorEdit').text('');
-        $('#validationDescripcionEdit').after('<ul id="DescripcionErrorEdit" class="validation-summary-errors text-danger">Campo Descripcion Requerido</ul>');
-    }
-});
 
 $("#pcat_Nombre").change(function () {
     var str = $("#pcat_Nombre").val();
@@ -357,6 +327,12 @@ $("#bton").keypress(function (e) {
     }
 });
 
+$('#pscat_Descripcion_edit').blur(function () {
+    if ($.trim($('#pscat_Descripcion_edit').val()) == 0) {
+        $('#editerror').text('');
+        $('#editerror').after('<ul id="editerror" class="validation-summary-errors text-danger">Campo Descripcion Requerido</ul>');
+    }
+});
 
 
 $('#pcat_Descripcion').keyup(function () {
@@ -367,48 +343,43 @@ $('#pscat_Descripcion').keyup(function () {
     $('#ErrorDescripcions').hide();
 });
 
+$('#pscat_Descripcion').keyup(function () {
+    $('#DescripcionErrorEdit').hide();
+});
+
+$('#pscat_Descripcion_edit').keyup(function () {
+    $('#DescripcionErrorEdit').hide();
+});
+
+
+
+$('#pscat_Descripcion_edit').keyup(function () {
+    $('#editerror').hide();
+});
+
+
 
 
 
 ////////////////////////////////////////////////////////////
 
 
-$("#frmCreateCategoria").submit(function (event) {
-    var Categoria = $("#categoria").text();
-    var subcategoria = $("#DescripcionError").text();
-    if (Categoria !== "" || subcategoria !== "") {
-        event.preventDefault();
-    }
-});
+//$("#frmCreateCategoria").submit(function (event) {
+//    var Categoria = $("#categoria").text();
+//    var subcategoria = $("#DescripcionError").text();
+//    if (Categoria !== "" || subcategoria !== "") {
+//        event.preventDefault();
+//    }
+//});
 
-$("#frmEditCategoria").submit(function (event) {
-    var Categoria = $("#categoria").text();
-    var subcategoria = $("#DescripcionError").text();
-    if (Categoria !== "" || subcategoria !== "") {
-        event.preventDefault();
-    }
-});
+//$("#frmEditCategoria").submit(function (event) {
+//    var Categoria = $("#categoria").text();
+//    var subcategoria = $("#DescripcionError").text();
+//    if (Categoria !== "" || subcategoria !== "") {
+//        event.preventDefault();
+//    }
+//});
 ///////////////////////////////////////////////////////////////
 
-$(document).ready(function () {
-    $('#TablaSub').DataTable(
-        {
-            "searching": true,
-            "lengthChange": true,
-            "oLanguage": {
-                "oPaginate": {
-                    "sNext": "Siguiente",
-                    "sPrevious": "Anterior",
-                },
-                "sProcessing": "Procesando...",
-                "sLengthMenu": "Mostrar _MENU_ registros",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sEmptyTable": "No hay registros",
-                "sInfoEmpty": "Mostrando 0 de 0 Entradas",
-                "sSearch": "Buscar",
-                "sInfo": "Mostrando _START_ a _END_ Entradas",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            }
-        });
-});
+
+

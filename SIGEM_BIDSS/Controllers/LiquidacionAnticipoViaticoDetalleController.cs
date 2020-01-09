@@ -101,8 +101,11 @@ namespace SIGEM_BIDSS.Controllers
 
 
             {
-                string UserName = "";
                
+                IEnumerable<object> Detalle = null;
+                string UserName = "";
+                string MsjError = "";
+                var listaDetalle = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["NombreLiquidaciondetalle"];
 
                 try
                 {
@@ -114,26 +117,21 @@ namespace SIGEM_BIDSS.Controllers
                         ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
                         ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                         int EmployeeID = Function.GetUser(out UserName);
-                       
-
-                        IEnumerable<object> _List = null;
-                        string ErrorMessage = "";
-                        _List = db.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id,
-                                                                              1,
-                                                                              tbLiquidacionAnticipoViaticoDetalle.Lianvide_FechaGasto,
-                                                                              tbLiquidacionAnticipoViaticoDetalle.tpv_Id,
-                                                                              tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto,
-                                                                              tbLiquidacionAnticipoViaticoDetalle.Lianvide_Concepto,
-                                                                              tbLiquidacionAnticipoViaticoDetalle.Lianvide_Archivo,
-                                                                         
-                                                                              EmployeeID, Function.DatetimeNow());
-                        foreach (UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result Area in _List)
-                            ErrorMessage = Area.MensajeError;
-                        if (ErrorMessage.StartsWith("-1"))
+                        Detalle = db.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(tbLiquidacionAnticipoViaticoDetalle.Lianvide_Id, 
+                                                                                        tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id,
+                                                                                        tbLiquidacionAnticipoViaticoDetalle.Lianvide_FechaGasto,
+                                                                                        tbLiquidacionAnticipoViaticoDetalle.tpv_Id,
+                                                                                        tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto,
+                                                                                        tbLiquidacionAnticipoViaticoDetalle.Lianvide_Concepto
+                                                                                        ,"hols", EmployeeID, Function.DatetimeNow());
+                   
+                        foreach (UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result categoria in Detalle)
+                            MsjError = categoria.MensajeError;
+                        if (MsjError.StartsWith("-1"))
                         {
                             ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
                             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
-                            Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorMessage);
+                            Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, MsjError);
                             ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                             return View(tbLiquidacionAnticipoViaticoDetalle);
                         }

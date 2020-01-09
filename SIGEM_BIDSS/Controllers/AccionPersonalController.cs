@@ -20,20 +20,31 @@ namespace SIGEM_BIDSS.Controllers
         // GET: AccionPersonal
         public async Task<ActionResult> Index()
         {
-            var tbAccionPersonal = db.tbAccionPersonal.Include(t => t.tbEstado).Include(t => t.tbEmpleado).Include(t => t.tbTipoMovimiento).Include(t => t.tbEmpleado1);
-            return View(await tbAccionPersonal.ToListAsync());
+            try
+            {
+                var tbAccionPersonal = db.tbAccionPersonal.Include(t => t.tbEstado).Include(t => t.tbEmpleado).Include(t => t.tbTipoMovimiento).Include(t => t.tbEmpleado1);
+                return View(await tbAccionPersonal.ToListAsync());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         // GET: AccionPersonal/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            string vReturn = "";
+            tbAccionPersonal tbAccionPersonal = db.tbAccionPersonal.Find(id);
+            string ErrorMessage = "", UserName = "";
+            try
+            {
+                string vReturn = "";
             if (id == null)
             {
 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbAccionPersonal tbAccionPersonal = db.tbAccionPersonal.Find(id);
+
             if (tbAccionPersonal.est_Id == GeneralFunctions.Enviada)
             {
                 if (UpdateState(out vReturn, tbAccionPersonal, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
@@ -44,6 +55,13 @@ namespace SIGEM_BIDSS.Controllers
             if (tbAccionPersonal == null)
             {
                 return HttpNotFound();
+            }
+
+        }
+            catch (Exception Ex)
+            {
+                ErrorMessage = Ex.Message.ToString();
+                throw;
             }
             return View(tbAccionPersonal);
         }

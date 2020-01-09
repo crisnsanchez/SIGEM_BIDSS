@@ -60,7 +60,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 MASspan1 = "";
                    MASspanFecha = "2";
-                MASspan = "La Fecha de regreso no puede ser mayor a la fecha actual";
+                MASspan = "La Fecha de regreso no puede ser igual mayor a la fecha actual";
             }
             if (cCalFechas.FechaInicio >= Function.DatetimeNow())
             {
@@ -168,10 +168,10 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
 
-                    return RedirectToAction("Create", "tbLiquidacionAnticipoViatico.Lianvi_Id", "LiquidacionAnticipoViaticoDetalle");
+                    return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
                 }
             }
-            return RedirectToAction("Create", "tbLiquidacionAnticipoViatico.Lianvi_Id" , "LiquidacionAnticipoViaticoDetalle");
+            return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");
         }
 // GET: LiquidacionAnticipoViatico/Edit/5
 public ActionResult Edit(int? id)

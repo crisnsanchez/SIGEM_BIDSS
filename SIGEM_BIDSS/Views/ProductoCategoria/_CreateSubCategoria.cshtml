@@ -1,24 +1,23 @@
 ﻿@model SIGEM_BIDSS.Models.tbProductoSubcategoria
 
+<br />
 
-
-        <from>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.pscat_Descripcion, new { @class = "control-label col-md-6" })
-                    <div class="col-md-9">
-                        <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
-                        <div id="DescripcionError">
-                            <p style="color:red">
-                                @Html.ValidationMessageFor(model => model.pscat_Descripcion)
-                            </p>
-                        </div>
-                        <div class="col-md-1">
-                            <input type="button" value="Agregar" id="AgregarSubCategorias" class="btn btn btn-primary btn-sm" />
-                        </div>
-                    </div>
-                    <br />
-                </div>
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.pscat_Descripcion, new { @class = "control-label col-md-6" })
+        <div class="col-md-11">
+            <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
+            <div id="DescripcionError">
+                <p style="color:red">
+                    @Html.ValidationMessageFor(model => model.pscat_Descripcion)
+                </p>
             </div>
-        </from>
+        </div>
+       
+        <div class="col-md-2">
+            <input type="button" value="Agregar" id="AgregarSubCategorias" class="btn btn btn-primary btn-sm" />
+        </div>
 
+
+    </div>
+</div>

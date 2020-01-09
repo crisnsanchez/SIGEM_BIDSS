@@ -84,7 +84,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Lianvide_Concepto, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Lianvide_Concepto, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                            @Html.EditorFor(model => model.Lianvide_Concepto, new { htmlAttributes = new { @class = "form-control", @maxlength = 250, @autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.Lianvide_Concepto, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -112,10 +112,13 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Lianvide_Concepto)
                         </th>
-
+                        <th>
+                            Archivo
+                        </th>
                         <th>
                             Monto de Gastos
                         </th>
+
 
                         <th>
                             Acciones
@@ -135,11 +138,13 @@
                         <th>
 
                         </th>
-                    
-
 
                         <th>
                             Total Gastos
+                        </th>
+
+                        <th>
+                         
                         </th>
                         <th>
 
@@ -156,13 +161,13 @@
 
         </div>
     }
-<br />
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Guardar" class="btn btn-primary" />
-        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+        </div>
     </div>
-</div>
 
 
 
@@ -178,9 +183,10 @@
     <!-- DataTables -->
     <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
-    <script src="~/Scripts/app/General.js"></script>
+
     <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-    <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
+
+    <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViaticoDetalle.js"></script>
     <script src="~/Scripts/app/DataTables.js"></script>
     <script>
         $("#Lianvi_FechaLiquida").keyup(function () {

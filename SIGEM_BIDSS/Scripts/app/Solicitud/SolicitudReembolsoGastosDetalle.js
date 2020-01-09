@@ -19,31 +19,31 @@ $('#AgregarDetalle').click(function () {
     var Documento = document.getElementById('CargarFoto').reader;
     console.log(Documento)
 
-    //$.ajax({
-    //    url: "/SolicitudReembolsoGastosDetalles/SaveReembolsoDetalle",
-    //    method: "POST",
-    //    dataType: 'json',
-    //    contentType: "application/json; charset=utf-8",
-    //    data: JSON.stringify({ tbSolicitudReembolsoGastosDetalle: SolicitudReembolsoGastosDetalle }),
-    //})
-    //    .done(function (data) {
+    $.ajax({
+        url: "/SolicitudReembolsoGastosDetalles/SaveReembolsoDetalle",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ tbSolicitudReembolsoGastosDetalle: SolicitudReembolsoGastosDetalle, Archivo: SolicitudReembolsoGastosDetalle.ReemgaDet_Archivo}),
+    })
+        .done(function (data) {
         
-    //            contador = contador + 1
+                contador = contador + 1
 
-    //            table.row.add([
-    //                SolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,
-    //                SolicitudReembolsoGastosDetalle.tpv_IdText,
-    //                SolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,
-    //                SolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,
+                table.row.add([
+                    SolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,
+                    SolicitudReembolsoGastosDetalle.tpv_IdText,
+                    SolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,
+                    SolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,
+                    SolicitudReembolsoGastosDetalle.ReemgaDet_Archivo,
+                    '<button id = "RemoveReembolso" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
 
-    //                '<button id = "RemoveReembolso" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>'
-
-    //            ]).draw(false)
-
-
+                ]).draw(false)
 
 
-    //    });
+
+
+        });
 
 });
 
@@ -59,6 +59,7 @@ function GetDetalle() {
         tpv_IdText: R.options[R.selectedIndex].text,
         ReemgaDet_MontoGasto: $('#ReemgaDet_MontoGasto').val(),
         ReemgaDet_Concepto: $('#ReemgaDet_Concepto').val(),
+        ReemgaDet_Archivo: $('#ReemgaDet_Archivo').val(),
     }
     return ReembolsoDetalle;
 };
@@ -92,3 +93,24 @@ function readURL(input) {
 $("#CargarFoto").change(function () {
     readURL(this);
 });
+
+
+
+////MAX LENGTH DE LOS CAMPOS
+
+$(document).ready(function () {
+    $("#ReemgaDet_Concepto")[0].maxLength =250;
+ 
+
+
+
+    //var selectedPuesto = $('#selectedPuesto').val();
+    //if (selectedPuesto !== "" || selectedPuesto !== null) { Getpuesto(); } else { console.log(selectedPuesto); }
+
+    //console.log(selectedPuesto);
+    //var muni = $('#municipios').val();
+    //if (muni === "true") { GetMunicipios(); } else { console.log(muni); }
+    //var are = $('#municipios').val();
+    //if (are === "true") { GetMunicipios(); } else { console.log(are); }
+
+})

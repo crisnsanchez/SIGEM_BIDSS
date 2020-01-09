@@ -59,7 +59,7 @@
 
                             @Html.EditorFor(model => model.Lianvi_FechaFinViaje, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off", @style = "background-color:white" } })
                             @Html.ValidationMessageFor(model => model.Lianvi_FechaFinViaje, "", new { @class = "text-danger", id = "spanFechaFin" })
-                          
+
                         </div>
                     </div>
 
@@ -67,8 +67,8 @@
                         @Html.LabelFor(model => model.Lianvi_Comentario, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
                             <div class="col-md-13">
-                                <textarea class="form-control" name="Lianvi_Comentario" maxlength="250"></textarea>
-                                @Html.ValidationMessageFor(model => model.Lianvi_Comentario, "", new { @class = "text-danger" })
+                                <textarea class="form-control" name="Lianvi_Comentario" maxlength="250 " onkeypress="return soloLetras(event)" onkeyup="this.value=this.value.toUpperCase(),noespaciosincio(this)"></textarea>
+                                @Html.ValidationMessageFor(model => model.Lianvi_Comentario, "", new { @class = "text-danger", id = "Comentario" })
                             </div>
 
                         </div>
@@ -79,7 +79,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <input type="submit" value="Guardar" class="btn btn-primary" id="Save" />
                         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                     </div>
                 </div>
@@ -100,7 +100,8 @@
 
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="~/Scripts/app/General.js"></script>
+    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+    <script src="~/Scripts/app/General_PCAE.js"></script>
     <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
     <script src="~/Scripts/app/Solicitud/LiquidacionAnticipoViatico.js"></script>
 
@@ -108,6 +109,9 @@
 
         $("#Lianvi_FechaFinViaje").keyup(function () {
             $('#spanFechaFin').hide();
+        });
+        $("#Lianvi_Comentario").keyup(function () {
+            $('#Comentario').hide();
         });
 
     </script>

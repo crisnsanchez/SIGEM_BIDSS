@@ -519,6 +519,6 @@ $('#mun_NombreEdit_').keyup(function () {
 $('#mun_NombreEdit_').blur(function () {
     if ($.trim($('#mun_NombreEdit_').val()) == 0) {
         $('#DescripcionErrorEdit').text('');
-        $('#editerror').after('<ul id="DescripcionErrorEdit" class="validation-summary-errors text-danger">Campo Descripcion Requerido</ul>');
+        $('#DescripcionErrorEdit').after('<ul id="DescripcionErrorEdit" class="validation-summary-errors text-danger">Campo Descripcion Requerido</ul>');
     }
 });
