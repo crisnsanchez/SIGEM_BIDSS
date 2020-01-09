@@ -24,9 +24,6 @@ $(function () {
         txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
         txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
 
-
-
-
     };
 
 
