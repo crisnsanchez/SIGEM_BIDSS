@@ -231,6 +231,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RequisionCompraController.cs" />
+    <Compile Include="Controllers\RequisionCompraDetalleController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosDetalleController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosDetallesController.cs" />
@@ -250,7 +251,8 @@
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\Categorias.cs" />
-    <Compile Include="Models\RequisionCompra.cs" />
+    <Compile Include="Models\Solicitud\RequisicionCompraDetalle.cs" />
+    <Compile Include="Models\Solicitud\RequisionCompra.cs" />
     <Compile Include="Models\Solicitud\AccionPersonal.cs" />
     <Compile Include="Models\Solicitud\LiquidacionAnticipoViaticodetalle.cs" />
     <Compile Include="Models\Solicitud\LiquidacionAnticipoViatico.cs" />
@@ -3330,6 +3332,7 @@
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionCompra.js" />
+    <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionDetalle.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastos.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastosDetalle.js" />
     <Content Include="Scripts\app\Solicitud\VacacionesPermisosEspeciales\Modals.js" />
@@ -3554,6 +3557,11 @@
     <Content Include="Views\SolicitudReembolsoGastosDetalle\Details.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastosDetalle\Edit.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastosDetalle\Index.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Create.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Details.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Edit.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Index.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\_BuscarProducto.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

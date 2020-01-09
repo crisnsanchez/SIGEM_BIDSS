@@ -108,7 +108,7 @@ namespace SIGEM_BIDSS.Controllers
                                                                 tbRequisionCompra.Reqco_RazonRechazo,
                                                                 EmployeeID,
                                                                 Function.DatetimeNow());
-                    foreach (UDP_Adm_tbRequisionCompraDetalle_Insert_Result Res in Insert)
+                    foreach (UDP_Adm_tbRequisionCompra_Insert_Result Res in Insert)
                         ErrorMessage = Res.MensajeError;
                     if (ErrorMessage.StartsWith("-1"))
                     {

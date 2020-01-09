@@ -172,7 +172,6 @@ function AgregarMunicipiosDT() {
 
     if (MunCodigo == '') {
         $('#MunCodigoCodigoError').text('');
-
         $('#ValidationMunCodigoCreate').after('<ul id="MunCodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Municipio Requerido</ul>');
         _MunCodigo = false;
     } else {
@@ -217,7 +216,6 @@ function AgregarMunicipiosDT() {
     //------------------------------Fin Validaciones Municipio------------------------------
 
 
-
     //-----------------------------Validaciones de Municipio Existente------------------------------
     if ($('#tblMunicipio >tbody >tr').length > 0) {
         $('#tblMunicipio >tbody >tr').each(function () {
@@ -244,14 +242,6 @@ function AgregarMunicipiosDT() {
         })
     }
 
- 
-
-
-    if (!_depCodigo || !_depLength || !_DepNombre || !_MunCodigo || !_munLength || !_munNombreLength || !_MunNombre || !_MunNombreSP) {
-        return false
-    }
-    else {
-
         $('#dep_Codigo').prop('readonly', true);
         $('#dep_Nombre').prop('readonly', true);
         $('#Valida').prop('disabled', false);
@@ -264,9 +254,7 @@ function AgregarMunicipiosDT() {
             tbMunicipio.mun_Nombre.toUpperCase().trim(),
             '<button id = "removeMunicipios" class= "btn btn-danger btn-xs eliminar" type = "button">Eliminar</button>',
         ]).draw(false);
-
         _ValuesTrue = { _Bool : true, _tbMunicipio : tbMunicipio }
-
         return _ValuesTrue
     }
 }

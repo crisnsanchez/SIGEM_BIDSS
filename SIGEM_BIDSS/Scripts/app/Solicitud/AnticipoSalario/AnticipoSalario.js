@@ -12,7 +12,7 @@ $(document).ready(function () {
 $("#frmsubmit").click(function () {
     document.getElementById('spinnerForm').classList.add("overlay");
     document.getElementById('spinnerDiv').removeAttribute("hidden");
-    $("form").submit()
+    document.getElementsByTagName("form").submit();
 })
 
 
@@ -40,7 +40,6 @@ function GetDecimales() {
 }
 
 var monto = document.getElementById("Cantidad");
-
 monto.addEventListener("input", function () {
     document.getElementById("number").value = this.value.replace(/,/g, "")
     vDecimales = GetDecimales()
@@ -105,11 +104,6 @@ function soloLetras(e) {
         return false;
     }
 }
-
-
-
-
-
 
 
 
