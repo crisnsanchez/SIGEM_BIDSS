@@ -234,6 +234,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RequisionCompraController.cs" />
+    <Compile Include="Controllers\RequisionCompraDetalleController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosDetallesController.cs" />
     <Compile Include="Controllers\SueldoController.cs" />
@@ -3343,6 +3344,7 @@
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViaticoDetalle.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionCompra.js" />
+    <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionDetalle.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastos.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastosDetalle.js" />
     <Content Include="Scripts\app\Solicitud\VacacionesPermisosEspeciales\Modals.js" />
@@ -3564,6 +3566,11 @@
     <Content Include="Views\AccionPersonal\Edit.cshtml" />
     <Content Include="Views\AccionPersonal\Index.cshtml" />
     <Content Include="Views\AccionPersonal\_Modales.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Create.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Details.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Edit.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Index.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\_BuscarProducto.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
