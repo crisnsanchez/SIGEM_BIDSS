@@ -167,16 +167,6 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-<<<<<<< HEAD
-                    IEnumerable<object> _List = null;
-                    string ErrorMessage = "";
-                    //_List = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.emp_Id,
-                    //    tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud, tbSolicitudReembolsoGastos.Reemga_FechaViaje, tbSolicitudReembolsoGastos.Reemga_Cliente,
-                    //    tbSolicitudReembolsoGastos.mun_codigo, tbSolicitudReembolsoGastos.Reemga_PropositoVisita, tbSolicitudReembolsoGastos.Reemga_DiasVisita,
-                    //    tbSolicitudReembolsoGastos.Reemga_Comentario, tbSolicitudReembolsoGastos.est_Id, tbSolicitudReembolsoGastos.Reemga_RazonRechazo, EmployeeID, Function.DatetimeNow());
-                    //foreach (UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result Reembolso in _List)
-                    //    ErrorMessage = Reembolso.MensajeError;
-=======
                 if (ModelState.IsValid)
                 {
 
@@ -197,7 +187,6 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
->>>>>>> d0f5a781f24544db6e2b9807620e853e33534b04
                     if (ErrorMessage.StartsWith("-1"))
                     {
                         Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorMessage);
