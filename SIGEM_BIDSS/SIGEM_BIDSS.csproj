@@ -3480,9 +3480,7 @@
     <Content Include="Views\TipoTransporte\Index.cshtml" />
     <Content Include="web.config" />
     <Content Include="Views\AnticipoViatico\Create.cshtml" />
-    <Content Include="Views\AnticipoViatico\Delete.cshtml" />
     <Content Include="Views\AnticipoViatico\Details.cshtml" />
-    <Content Include="Views\AnticipoViatico\Edit.cshtml" />
     <Content Include="Views\AnticipoViatico\Index.cshtml" />
     <Content Include="Views\Menu\Configuracion.cshtml" />
     <Content Include="Views\Menu\Planilla.cshtml" />
