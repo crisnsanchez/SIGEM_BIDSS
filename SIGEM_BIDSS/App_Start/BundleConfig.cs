@@ -18,9 +18,6 @@ namespace SIGEM_BIDSS
                  "~/Content/template/plugins/sweetalert2/sweetalert2.min.css"));
 
 
-
-
-
             bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
                         "~/Content/template/plugins/jquery/jquery.min.js"));
 

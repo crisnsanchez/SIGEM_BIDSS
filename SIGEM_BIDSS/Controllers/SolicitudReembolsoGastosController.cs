@@ -49,15 +49,6 @@ namespace SIGEM_BIDSS.Controllers
         // GET: SolicitudReembolsoGastos/Create
         public ActionResult Create()
         {
-            //string lvMensajeError = "";
-
-            //var userClaims = User.Identity as System.Security.Claims.ClaimsIdentity;
-
-            //string fullName = userClaims?.FindFirst("name")?.Value;
-            //string[] names = fullName.Split(' ');
-            //ViewBag.firstName = names.First();
-            //ViewBag.lastName = names.Last();
-            //ViewBag.Email = userClaims?.FindFirst("preferred_username")?.Value;
 
             tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = new tbSolicitudReembolsoGastos();
             tbSolicitudReembolsoGastos.Reemga_Id = tbSolicitudReembolsoGastos.Reemga_Id;
@@ -69,8 +60,8 @@ namespace SIGEM_BIDSS.Controllers
                 int Year = Function.DatetimeNow().Year;
                 int Month = Function.DatetimeNow().Month;
 
-                int SolCount = (from _tbSol in db.tbAnticipoSalario where _tbSol.Ansal_FechaCrea.Year == Year && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
-                int SolCountMonth = (from _tbSol in db.tbAnticipoSalario where _tbSol.emp_Id == EmployeeID && _tbSol.Ansal_FechaCrea.Month == Month && _tbSol.Ansal_FechaCrea.Year == Year select _tbSol).Count();
+                int SolCount = (from _tbSol in db.tbSolicitudReembolsoGastos where _tbSol.Reemga_FechaCrea.Year == Year && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
+                int SolCountMonth = (from _tbSol in db.tbSolicitudReembolsoGastos where _tbSol.emp_Id == EmployeeID && _tbSol.Reemga_FechaCrea.Month == Month && _tbSol.Reemga_FechaCrea.Year == Year select _tbSol).Count();
 
                 var _Parameters = db.tbParametro.FirstOrDefault();
                 if (_Parameters == null)
@@ -120,11 +111,6 @@ namespace SIGEM_BIDSS.Controllers
             "Reemga_FechaViaje,Reemga_Cliente,mun_codigo,Reemga_PropositoVisita,Reemga_DiasVisita,Reemga_Comentario,est_Id")] tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos, string dep_codigo)
         {
             
-            //string UserName = "",
-            //ErrorEmail = "";
-            //bool Result = false, ResultAdm = false;
-            //int EmployeeID = Function.GetUser(out UserName);
-
 
             string UserName = "", ErrorEmail = "", ErrorMessage = "";
             bool Result = false, ResultAdm = false;
@@ -141,7 +127,8 @@ namespace SIGEM_BIDSS.Controllers
 
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
-                ViewBag.Reemga_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSolicitudReembolsoGastos.Reemga_JefeInmediato);
+
+                ViewBag.Reemga_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
                 ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
                 ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
                 tbSolicitudReembolsoGastos.Reemga_RazonRechazo = GeneralFunctions.stringDefault;
@@ -170,7 +157,9 @@ namespace SIGEM_BIDSS.Controllers
                 if (ModelState.IsValid)
                 {
 
+
                     Insert = db.UDP_Adm_tbSolicitudReembolsoGastos_Insert(tbSolicitudReembolsoGastos.emp_Id,
+                        tbSolicitudReembolsoGastos.Reemga_JefeInmediato,
                         tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud,
                         tbSolicitudReembolsoGastos.Reemga_FechaViaje,
                         tbSolicitudReembolsoGastos.Reemga_Cliente,
@@ -189,6 +178,7 @@ namespace SIGEM_BIDSS.Controllers
 
                     if (ErrorMessage.StartsWith("-1"))
                     {
+
                         Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
 
@@ -219,10 +209,10 @@ namespace SIGEM_BIDSS.Controllers
             catch (Exception ex)
             {
                 Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ex.Message.ToString());
-                return View(tbSolicitudReembolsoGastos);
+                return RedirectToAction("Create", "SolicitudReembolsoGastosDetalle");
             }
-
-            return View(tbSolicitudReembolsoGastos);
+            return RedirectToAction("Create", "SolicitudReembolsoGastosDetalle");
+      
 
         }
 

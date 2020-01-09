@@ -36,7 +36,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Anvi_JefeInmediato, "Jefe Inmediato", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.DropDownList("Anvi_JefeInmediato", null, "Seleccione", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("Anvi_JefeInmediato", null, "Seleccione Jefe Inmediato", htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Anvi_JefeInmediato, "", new { @class = "text-danger", id = "JefeInmediato" })
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                     <div class="form-group col-md-6">
                         <label class="control-label col-md-6">Departamento</label>
                         <div class="col-md-11">
-                            @Html.DropDownList("dep_codigo", null, "Seleccione", new { @class = "form-control" })
+                            @Html.DropDownList("dep_codigo", null, "Seleccione Departamento", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Anvi_UsuarioCrea, "", new { @class = "text-danger", id = "UsuarioCrea" })
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         <div class="col-md-11">
                             <input type="hidden" id="munCodigo" name="munCodigo" value="@ViewBag.munCodigo" />
                             <select class="form-control" name="mun_Codigo" id="mun_Codigo">
-                                <option>Seleccione</option>
+                                <option>Seleccione Municipio</option>
                             </select>
                             @Html.ValidationMessageFor(model => model.mun_Codigo, "", new { @class = "text-danger", id = "CodigoMun" })
                         </div>
@@ -103,7 +103,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Anvi_DiasVisita, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Anvi_DiasVisita, new { htmlAttributes = new { @style = "text" ,@class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
+                            @Html.EditorFor(model => model.Anvi_DiasVisita, new { htmlAttributes = new { @type = "text", @class = "form-control", @maxlength = "2", @minlength = "1", @OnKeyPress = "return soloNumeros(event)" } })
                             @Html.ValidationMessageFor(model => model.Anvi_DiasVisita, "", new { @class = "text-danger", id = "DiasVisita" })
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Anvi_tptran_Id, "Tipo Transporte", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.DropDownList("Anvi_tptran_Id", null, "Seleccione", htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("Anvi_tptran_Id", null, "Seleccione Tipo Transporte", htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Anvi_tptran_Id, "", new { @class = "text-danger", id = "tptran_Id" })
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalAuth" value="Guardar" />
                         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                     </div>
                 </div>
@@ -148,32 +148,67 @@
     }
 </div>
 
-<div class="modal fade" id="AutorizacionModal" aria-hidden="true">
-    <div class="modal-dialog danger">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Alerta</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body text-center">
-                <p>¿Autoriza  a BI- DSS Technology para que debite de su sueldo el anticipo que no hubiere liquidado, dentro del plazo de 30 días contados a partir de su regreso del viaje?</p>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <div class="col-md-offset-4 col-md-10">
-                    <input class="btn btn-danger" value="Aceptar" id="btnAutorizacion" type="button" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+@*<div class="modal fade" id="AutorizacionModal" aria-hidden="true">
+        <div class="modal-dialog danger">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Alerta</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>¿Autoriza  a BI- DSS Technology para que debite de su sueldo el anticipo que no hubiere liquidado, dentro del plazo de 30 días contados a partir de su regreso del viaje?</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <div class="col-md-offset-4 col-md-10">
+                        <input class="btn btn-danger" value="Aceptar" id="btnAutorizacion" type="button" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal"> Cancelar </button>
+                    </div>
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
+    </div>*@
+
+
+<div class="modal fade" id="ModalAuth" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="d-flex justify-content-center align-items-center" id="spinnerForm">
+                <div id="spinnerDiv" class="text-center" hidden>
+                    <div class="spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="text-light">
+                        <label>Guardando, estado porfavor espere</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Mensaje de Autorizacion</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="control-label col-md-8 "></h5>
+                <div class="form-group">
+                    <p>
+                        ¿Autoriza  a BI- DSS Technology para que debite de su sueldo el anticipo que no hubiere liquidado, dentro del plazo de 30 días contados a partir de su regreso del viaje?
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" id="frmsubmit">Autorizar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
     </div>
-    <!-- /.modal-dialog -->
 </div>
-
-
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-<script src="~/Scripts/app/Solicitud/AnticipoViatico.js"></script>
+@section Scripts {
+    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="~/Scripts/app/Solicitud/AnticipoViatico/AnticipoViatico.js"></script>
+}

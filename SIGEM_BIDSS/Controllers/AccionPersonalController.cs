@@ -112,7 +112,11 @@ namespace SIGEM_BIDSS.Controllers
 
         try
         {
-            bool Result = false, ResultAdm = false;
+                
+                
+                 cGetUserInfo GetEmployee = null;
+                cGetUserInfo EmpJefe = null;
+                bool Result = false, ResultAdm = false;
             int EmployeeID = Function.GetUser(out UserName);
             tbAccionPersonal.emp_Id = EmployeeID;
             tbAccionPersonal.Acp_FechaSolicitud = Function.DatetimeNow();
@@ -145,15 +149,15 @@ namespace SIGEM_BIDSS.Controllers
                     ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
                 }
                 else
-                {
-                    var EmpJefe = db.tbEmpleado.Where(x => x.emp_Id == tbAccionPersonal.Acp_JefeInmediato).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
-                    var GetEmployee = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).Select(x => new { emp_Nombres = x.emp_Nombres + " " + x.emp_Apellidos, x.emp_CorreoElectronico }).FirstOrDefault();
+                    {
+                         GetEmployee = Function.GetUserInfo(EmployeeID);
+                         EmpJefe = Function.GetUserInfo(tbAccionPersonal.Acp_JefeInmediato);
 
-                    Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
-                    ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
 
 
-                    if (!Result) Function.BitacoraErrores("AccionPersonal", "CreatePost", UserName, ErrorEmail);
+                        if (!Result) Function.BitacoraErrores("AccionPersonal", "CreatePost", UserName, ErrorEmail);
                     if (!ResultAdm) Function.BitacoraErrores("AccionPersonal", "CreatePost", UserName, ErrorEmail);
 
                     TempData["swalfunction"] = GeneralFunctions.sol_Enviada;

@@ -234,6 +234,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RequisionCompraController.cs" />
+    <Compile Include="Controllers\RequisionCompraDetalleController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosController.cs" />
     <Compile Include="Controllers\SolicitudReembolsoGastosDetallesController.cs" />
     <Compile Include="Controllers\SueldoController.cs" />
@@ -252,7 +253,6 @@
     <Compile Include="Helpers\GraphHelper.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\Categorias.cs" />
-    <Compile Include="Models\RequisionCompra.cs" />
     <Compile Include="Models\Solicitud\AccionPersonal.cs" />
     <Compile Include="Models\Solicitud\LiquidacionAnticipoViaticodetalle.cs" />
     <Compile Include="Models\Solicitud\LiquidacionAnticipoViatico.cs" />
@@ -262,6 +262,8 @@
     </Compile>
     <Compile Include="Models\Solicitud\ReembolsoGastos.cs" />
     <Compile Include="Models\Solicitud\ReembolsoGastosDetalle.cs" />
+    <Compile Include="Models\Solicitud\RequisicionCompraDetalle.cs" />
+    <Compile Include="Models\Solicitud\RequisionCompra.cs" />
     <Compile Include="Models\Solicitud\VacacionesPermisosEspeciales.cs" />
     <Compile Include="Models\spGetCategoria_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
@@ -651,16 +653,6 @@
     <Compile Include="TokenStorage\SessionTokenStore.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\ej2\bootstrap.css" />
-    <Content Include="Content\ej2\bootstrap4.css" />
-    <Content Include="Content\ej2\compatibility\bootstrap.css" />
-    <Content Include="Content\ej2\compatibility\bootstrap4.css" />
-    <Content Include="Content\ej2\compatibility\fabric.css" />
-    <Content Include="Content\ej2\compatibility\highcontrast.css" />
-    <Content Include="Content\ej2\compatibility\material.css" />
-    <Content Include="Content\ej2\fabric.css" />
-    <Content Include="Content\ej2\highcontrast.css" />
-    <Content Include="Content\ej2\material.css" />
     <Content Include="Content\Email\Solicitud.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -3338,11 +3330,13 @@
     <Content Include="Scripts\app\Solicitud\AccionPersonal.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\AnticipoSalario.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\Modals.js" />
-    <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoViatico\AnticipoViatico.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoViatico\Modals.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViaticoDetalle.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionCompra.js" />
+    <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionDetalle.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastos.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastosDetalle.js" />
     <Content Include="Scripts\app\Solicitud\VacacionesPermisosEspeciales\Modals.js" />
@@ -3376,8 +3370,6 @@
     <Content Include="PrivateSettings.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\SIGEM.pubxml" />
-    <Content Include="Scripts\ej2\ej2.min.js" />
-    <Content Include="Scripts\ej2\ej2.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -3488,9 +3480,7 @@
     <Content Include="Views\TipoTransporte\Index.cshtml" />
     <Content Include="web.config" />
     <Content Include="Views\AnticipoViatico\Create.cshtml" />
-    <Content Include="Views\AnticipoViatico\Delete.cshtml" />
     <Content Include="Views\AnticipoViatico\Details.cshtml" />
-    <Content Include="Views\AnticipoViatico\Edit.cshtml" />
     <Content Include="Views\AnticipoViatico\Index.cshtml" />
     <Content Include="Views\Menu\Configuracion.cshtml" />
     <Content Include="Views\Menu\Planilla.cshtml" />
@@ -3564,6 +3554,11 @@
     <Content Include="Views\AccionPersonal\Edit.cshtml" />
     <Content Include="Views\AccionPersonal\Index.cshtml" />
     <Content Include="Views\AccionPersonal\_Modales.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Create.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Details.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Edit.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\Index.cshtml" />
+    <Content Include="Views\RequisionCompraDetalle\_BuscarProducto.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -3596,7 +3591,6 @@
     <TypeScriptCompile Include="Content\template\plugins\fullcalendar-interaction\main.d.ts" />
     <TypeScriptCompile Include="Content\template\plugins\fullcalendar-timegrid\main.d.ts" />
     <TypeScriptCompile Include="Content\template\plugins\fullcalendar\main.d.ts" />
-    <TypeScriptCompile Include="Scripts\ej2\ej2.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
