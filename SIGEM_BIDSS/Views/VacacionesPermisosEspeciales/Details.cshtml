@@ -91,38 +91,30 @@
                 </div>
 
                 <div class="form-group col-md-3">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.VPE_Comentario)
-                    </dt>
 
-                    <dd>
-                        {@Html.DisplayFor(model => model.VPE_Comentario)}
-                    </dd>
 
                     @if (Model.VPE_Comentario != GeneralFunctions.stringDefault)
                     {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.VPE_Comentario)
+                        </dt>
 
+                        <dd>
+                            @Html.DisplayFor(model => model.VPE_Comentario)
+                        </dd>
                     }
 
                     <dt>
                         @Html.DisplayNameFor(model => model.est_Id)
                     </dt>
-
                     <dd>
                         @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
                     </dd>
-
-                </div>
-                <div class="form-group col-md-3">
+                 
                     @if (Model.est_Id == GeneralFunctions.Rechazada)
                     {
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.est_Id)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-                        </dd>
+
                         if (Model.VPE_RazonRechazo != GeneralFunctions.stringDefault)
                         {
                             <dt>
