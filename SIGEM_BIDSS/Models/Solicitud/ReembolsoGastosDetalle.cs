@@ -22,6 +22,7 @@ namespace SIGEM_BIDSS.Models.Solicitud
 
         [Display(Name = "Fecha Gasto")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime ReemgaDet_FechaGasto { get; set; }
 
 
