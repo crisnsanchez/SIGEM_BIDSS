@@ -3330,8 +3330,9 @@
     <Content Include="Scripts\app\Solicitud\AccionPersonal.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\AnticipoSalario.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\Modals.js" />
-    <Content Include="Scripts\app\Solicitud\AnticipoViatico.js" />
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoViatico\AnticipoViatico.js" />
+    <Content Include="Scripts\app\Solicitud\AnticipoViatico\Modals.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViaticoDetalle.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionCompra.js" />
