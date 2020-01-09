@@ -101,6 +101,8 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
+                cGetUserInfo GetEmployee = null;
+                cGetUserInfo EmpJefe = null;
 
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
                                                 where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
@@ -143,11 +145,14 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        var GetEmployee = Function.GetUserInfo(EmployeeID);
-                        var EmpJefe = Function.GetUserInfo(tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
+                         GetEmployee = Function.GetUserInfo(EmployeeID);
+                        EmpJefe = Function.GetUserInfo(tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
 
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, EmpJefe.emp_CorreoElectronico, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
+
+
 
                         if (!Result) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);

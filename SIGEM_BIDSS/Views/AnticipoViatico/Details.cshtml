@@ -122,13 +122,14 @@
                 <div class="col-md-offset-2 col-md-10">
                     @if (Model.est_Id == GeneralFunctions.Revisada)
                     {
-                        <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                        <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="AprobarJefe" />
+                        <input type="button" id="ApproveAdmin" class="btn btn-primary" data-toggle="modal" data-target="#ModalApproveAdmin" value="AprobarAdmin" />
                         <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
                     }
                     else
                     {
-                        <input type="button" disabled id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
-                        <input type="button" disabled id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
+                        <input disabled type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                        <input disabled type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
                     }
                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                 </div>
@@ -143,6 +144,8 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
     <script src="~/Scripts/app/General_Details.js"></script>
-    <script src="~/Scripts/app/Solicitud/AnticipoViatico.js"></script>
+
+    <script src="~/Scripts/app/Solicitud/AnticipoViatico/Modals.js"></script>
 }

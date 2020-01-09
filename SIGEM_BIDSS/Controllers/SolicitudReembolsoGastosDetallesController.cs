@@ -87,12 +87,8 @@ namespace SIGEM_BIDSS.Controllers
 
             tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle = new tbSolicitudReembolsoGastosDetalle();
             tbSolicitudReembolsoGastosDetalle.Reemga_Id = Id;
-
-
-            ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Id");
-       
-
-            
+            tbSolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto = Function.DatetimeNow();
+            ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Id");      
             ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
 
