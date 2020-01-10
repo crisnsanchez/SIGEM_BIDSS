@@ -1,0 +1,99 @@
+﻿@model SIGEM_BIDSS.Models.tbDeduccionInstitucionFinanciera
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbDeduccionInstitucionFinanciera</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.deif_Monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deif_Monto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deif_Comentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deif_Comentarios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deif_UsuarioCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deif_UsuarioCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deif_FechaCrea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deif_FechaCrea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deif_UsuarioModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deif_UsuarioModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deif_FechaModifica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deif_FechaModifica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deif_Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deif_Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deif_Pagado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deif_Pagado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbInstitucionFinanciera.insf_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbInstitucionFinanciera.insf_Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.deif_IdDeduccionInstFinanciera }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
