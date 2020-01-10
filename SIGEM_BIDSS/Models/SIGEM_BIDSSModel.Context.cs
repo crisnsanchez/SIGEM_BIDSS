@@ -2970,6 +2970,43 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAccionPersonal_Update_Result>("UDP_Adm_tbAccionPersonal_Update", acp_IdParameter, est_IdParameter, acp_RazonRechazoParameter, acp_UsuarioModificaParameter, acp_FechaModificaParameter);
         }
     
+        public virtual ObjectResult<UDP_Adm_tbRequisionCompra_Insert_Result> UDP_Adm_tbRequisionCompra_Insert(Nullable<int> emp_Id, Nullable<int> are_Id, Nullable<System.DateTime> reqco_GralFechaSolicitud, string reqco_Comentario, Nullable<int> est_Id, string reqco_RazonRechazo, Nullable<int> reqco_UsuarioCrea, Nullable<System.DateTime> reqco_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var are_IdParameter = are_Id.HasValue ?
+                new ObjectParameter("are_Id", are_Id) :
+                new ObjectParameter("are_Id", typeof(int));
+    
+            var reqco_GralFechaSolicitudParameter = reqco_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("Reqco_GralFechaSolicitud", reqco_GralFechaSolicitud) :
+                new ObjectParameter("Reqco_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var reqco_ComentarioParameter = reqco_Comentario != null ?
+                new ObjectParameter("Reqco_Comentario", reqco_Comentario) :
+                new ObjectParameter("Reqco_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var reqco_RazonRechazoParameter = reqco_RazonRechazo != null ?
+                new ObjectParameter("Reqco_RazonRechazo", reqco_RazonRechazo) :
+                new ObjectParameter("Reqco_RazonRechazo", typeof(string));
+    
+            var reqco_UsuarioCreaParameter = reqco_UsuarioCrea.HasValue ?
+                new ObjectParameter("Reqco_UsuarioCrea", reqco_UsuarioCrea) :
+                new ObjectParameter("Reqco_UsuarioCrea", typeof(int));
+    
+            var reqco_FechaCreaParameter = reqco_FechaCrea.HasValue ?
+                new ObjectParameter("Reqco_FechaCrea", reqco_FechaCrea) :
+                new ObjectParameter("Reqco_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompra_Insert_Result>("UDP_Adm_tbRequisionCompra_Insert", emp_IdParameter, are_IdParameter, reqco_GralFechaSolicitudParameter, reqco_ComentarioParameter, est_IdParameter, reqco_RazonRechazoParameter, reqco_UsuarioCreaParameter, reqco_FechaCreaParameter);
+        }
+    
         public virtual ObjectResult<UDP_Adm_tbRequisionCompra_Update_Result> UDP_Adm_tbRequisionCompra_Update(Nullable<int> reqco_Id, Nullable<int> est_Id, string reqco_RazonRechazo, Nullable<int> reqco_UsuarioModifica, Nullable<System.DateTime> reqco_FechaModifica)
         {
             var reqco_IdParameter = reqco_Id.HasValue ?
@@ -2993,6 +3030,72 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Reqco_FechaModifica", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompra_Update_Result>("UDP_Adm_tbRequisionCompra_Update", reqco_IdParameter, est_IdParameter, reqco_RazonRechazoParameter, reqco_UsuarioModificaParameter, reqco_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbRequisionCompraDetalle_Insert_Result> UDP_Adm_tbRequisionCompraDetalle_Insert(Nullable<int> reqco_Id, Nullable<int> prod_Id, Nullable<decimal> reqde_Cantidad, string reqde_Justificacion, Nullable<int> reqde_UsuarioCrea, Nullable<System.DateTime> reqde_FechaCrea)
+        {
+            var reqco_IdParameter = reqco_Id.HasValue ?
+                new ObjectParameter("Reqco_Id", reqco_Id) :
+                new ObjectParameter("Reqco_Id", typeof(int));
+    
+            var prod_IdParameter = prod_Id.HasValue ?
+                new ObjectParameter("prod_Id", prod_Id) :
+                new ObjectParameter("prod_Id", typeof(int));
+    
+            var reqde_CantidadParameter = reqde_Cantidad.HasValue ?
+                new ObjectParameter("Reqde_Cantidad", reqde_Cantidad) :
+                new ObjectParameter("Reqde_Cantidad", typeof(decimal));
+    
+            var reqde_JustificacionParameter = reqde_Justificacion != null ?
+                new ObjectParameter("Reqde_Justificacion", reqde_Justificacion) :
+                new ObjectParameter("Reqde_Justificacion", typeof(string));
+    
+            var reqde_UsuarioCreaParameter = reqde_UsuarioCrea.HasValue ?
+                new ObjectParameter("Reqde_UsuarioCrea", reqde_UsuarioCrea) :
+                new ObjectParameter("Reqde_UsuarioCrea", typeof(int));
+    
+            var reqde_FechaCreaParameter = reqde_FechaCrea.HasValue ?
+                new ObjectParameter("Reqde_FechaCrea", reqde_FechaCrea) :
+                new ObjectParameter("Reqde_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompraDetalle_Insert_Result>("UDP_Adm_tbRequisionCompraDetalle_Insert", reqco_IdParameter, prod_IdParameter, reqde_CantidadParameter, reqde_JustificacionParameter, reqde_UsuarioCreaParameter, reqde_FechaCreaParameter);
+        }
+    
+        public virtual ObjectResult<string> UDP_Adm_tbRequisionCompra_Insert1(Nullable<int> emp_Id, Nullable<int> are_Id, Nullable<System.DateTime> reqco_GralFechaSolicitud, string reqco_Comentario, Nullable<int> est_Id, string reqco_RazonRechazo, Nullable<int> reqco_UsuarioCrea, Nullable<System.DateTime> reqco_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var are_IdParameter = are_Id.HasValue ?
+                new ObjectParameter("are_Id", are_Id) :
+                new ObjectParameter("are_Id", typeof(int));
+    
+            var reqco_GralFechaSolicitudParameter = reqco_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("Reqco_GralFechaSolicitud", reqco_GralFechaSolicitud) :
+                new ObjectParameter("Reqco_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var reqco_ComentarioParameter = reqco_Comentario != null ?
+                new ObjectParameter("Reqco_Comentario", reqco_Comentario) :
+                new ObjectParameter("Reqco_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var reqco_RazonRechazoParameter = reqco_RazonRechazo != null ?
+                new ObjectParameter("Reqco_RazonRechazo", reqco_RazonRechazo) :
+                new ObjectParameter("Reqco_RazonRechazo", typeof(string));
+    
+            var reqco_UsuarioCreaParameter = reqco_UsuarioCrea.HasValue ?
+                new ObjectParameter("Reqco_UsuarioCrea", reqco_UsuarioCrea) :
+                new ObjectParameter("Reqco_UsuarioCrea", typeof(int));
+    
+            var reqco_FechaCreaParameter = reqco_FechaCrea.HasValue ?
+                new ObjectParameter("Reqco_FechaCrea", reqco_FechaCrea) :
+                new ObjectParameter("Reqco_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_Adm_tbRequisionCompra_Insert1", emp_IdParameter, are_IdParameter, reqco_GralFechaSolicitudParameter, reqco_ComentarioParameter, est_IdParameter, reqco_RazonRechazoParameter, reqco_UsuarioCreaParameter, reqco_FechaCreaParameter);
         }
     
         public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastos_Insert(Nullable<int> emp_Id, Nullable<int> reemga_JefeInmediato, Nullable<System.DateTime> reemga_GralFechaSolicitud, Nullable<System.DateTime> reemga_FechaViaje, string reemga_Cliente, string mun_codigo, string reemga_PropositoVisita, Nullable<int> reemga_DiasVisita, string reemga_Comentario, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioCrea, Nullable<System.DateTime> reemga_FechaCrea)
@@ -3050,72 +3153,6 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Reemga_FechaCrea", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastos_Insert", emp_IdParameter, reemga_JefeInmediatoParameter, reemga_GralFechaSolicitudParameter, reemga_FechaViajeParameter, reemga_ClienteParameter, mun_codigoParameter, reemga_PropositoVisitaParameter, reemga_DiasVisitaParameter, reemga_ComentarioParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioCreaParameter, reemga_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Adm_tbRequisionCompra_Insert_Result> UDP_Adm_tbRequisionCompra_Insert(Nullable<int> emp_Id, Nullable<int> are_Id, Nullable<System.DateTime> reqco_GralFechaSolicitud, string reqco_Comentario, Nullable<int> est_Id, string reqco_RazonRechazo, Nullable<int> reqco_UsuarioCrea, Nullable<System.DateTime> reqco_FechaCrea)
-        {
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var are_IdParameter = are_Id.HasValue ?
-                new ObjectParameter("are_Id", are_Id) :
-                new ObjectParameter("are_Id", typeof(int));
-    
-            var reqco_GralFechaSolicitudParameter = reqco_GralFechaSolicitud.HasValue ?
-                new ObjectParameter("Reqco_GralFechaSolicitud", reqco_GralFechaSolicitud) :
-                new ObjectParameter("Reqco_GralFechaSolicitud", typeof(System.DateTime));
-    
-            var reqco_ComentarioParameter = reqco_Comentario != null ?
-                new ObjectParameter("Reqco_Comentario", reqco_Comentario) :
-                new ObjectParameter("Reqco_Comentario", typeof(string));
-    
-            var est_IdParameter = est_Id.HasValue ?
-                new ObjectParameter("est_Id", est_Id) :
-                new ObjectParameter("est_Id", typeof(int));
-    
-            var reqco_RazonRechazoParameter = reqco_RazonRechazo != null ?
-                new ObjectParameter("Reqco_RazonRechazo", reqco_RazonRechazo) :
-                new ObjectParameter("Reqco_RazonRechazo", typeof(string));
-    
-            var reqco_UsuarioCreaParameter = reqco_UsuarioCrea.HasValue ?
-                new ObjectParameter("Reqco_UsuarioCrea", reqco_UsuarioCrea) :
-                new ObjectParameter("Reqco_UsuarioCrea", typeof(int));
-    
-            var reqco_FechaCreaParameter = reqco_FechaCrea.HasValue ?
-                new ObjectParameter("Reqco_FechaCrea", reqco_FechaCrea) :
-                new ObjectParameter("Reqco_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompra_Insert_Result>("UDP_Adm_tbRequisionCompra_Insert", emp_IdParameter, are_IdParameter, reqco_GralFechaSolicitudParameter, reqco_ComentarioParameter, est_IdParameter, reqco_RazonRechazoParameter, reqco_UsuarioCreaParameter, reqco_FechaCreaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Adm_tbRequisionCompraDetalle_Insert_Result> UDP_Adm_tbRequisionCompraDetalle_Insert(Nullable<int> reqco_Id, Nullable<int> prod_Id, Nullable<decimal> reqde_Cantidad, string reqde_Justificacion, Nullable<int> reqde_UsuarioCrea, Nullable<System.DateTime> reqde_FechaCrea)
-        {
-            var reqco_IdParameter = reqco_Id.HasValue ?
-                new ObjectParameter("Reqco_Id", reqco_Id) :
-                new ObjectParameter("Reqco_Id", typeof(int));
-    
-            var prod_IdParameter = prod_Id.HasValue ?
-                new ObjectParameter("prod_Id", prod_Id) :
-                new ObjectParameter("prod_Id", typeof(int));
-    
-            var reqde_CantidadParameter = reqde_Cantidad.HasValue ?
-                new ObjectParameter("Reqde_Cantidad", reqde_Cantidad) :
-                new ObjectParameter("Reqde_Cantidad", typeof(decimal));
-    
-            var reqde_JustificacionParameter = reqde_Justificacion != null ?
-                new ObjectParameter("Reqde_Justificacion", reqde_Justificacion) :
-                new ObjectParameter("Reqde_Justificacion", typeof(string));
-    
-            var reqde_UsuarioCreaParameter = reqde_UsuarioCrea.HasValue ?
-                new ObjectParameter("Reqde_UsuarioCrea", reqde_UsuarioCrea) :
-                new ObjectParameter("Reqde_UsuarioCrea", typeof(int));
-    
-            var reqde_FechaCreaParameter = reqde_FechaCrea.HasValue ?
-                new ObjectParameter("Reqde_FechaCrea", reqde_FechaCrea) :
-                new ObjectParameter("Reqde_FechaCrea", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompraDetalle_Insert_Result>("UDP_Adm_tbRequisionCompraDetalle_Insert", reqco_IdParameter, prod_IdParameter, reqde_CantidadParameter, reqde_JustificacionParameter, reqde_UsuarioCreaParameter, reqde_FechaCreaParameter);
         }
     }
 }

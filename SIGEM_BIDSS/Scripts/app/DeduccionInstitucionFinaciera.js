@@ -1,0 +1,1 @@
+﻿var prodtable = $('#tblBusquedaGenerica').DataTable();

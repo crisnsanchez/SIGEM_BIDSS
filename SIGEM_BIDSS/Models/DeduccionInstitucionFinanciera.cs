@@ -56,8 +56,7 @@ namespace SIGEM_BIDSS.Models
         public bool deif_Activo { get; set; }
 
 
-        [Display(Name = "Pagado")]
-        public Nullable<bool> deif_Pagado { get; set; }
+
 
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbInstitucionFinanciera tbInstitucionFinanciera { get; set; }
