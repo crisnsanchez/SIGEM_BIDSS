@@ -20,14 +20,7 @@
     </div>
     <div class="form-horizontal">
         <div class="card-body">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.insf_Id)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.insf_Id)
-                </dd>
+            <dl class="dl-horizontal card-columns">
                 <dt>
                     @Html.DisplayNameFor(model => model.insf_Nombre)
                 </dt>
@@ -59,7 +52,14 @@
                 </dt>
             
                 <dd>
-                    @Html.DisplayFor(model => model.insf_Activo)
+                    @if (Model.insf_Activo == true)
+                    {
+                        <p> Activo</p>
+                    }
+                    else
+                    {
+                        <p>Inactivo</p>
+                    }
                 </dd>
             </dl>
 

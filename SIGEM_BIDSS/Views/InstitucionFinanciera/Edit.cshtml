@@ -1,5 +1,5 @@
 ﻿@model SIGEM_BIDSS.Models.tbInstitucionFinanciera
-
+@using SIGEM_BIDSS.Models
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -60,8 +60,9 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
+                            <input type="submit" value="Guardar" id="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-primary" })
+
                     </div>
                 </div>
             </div>
@@ -79,7 +80,13 @@
 <script src="~/Scripts/app/General_PCAE.js"></script>
 <script src="~/Scripts/app/InstitucionFinaciera.js"></script>
 
+<script type="text/javascript">
+    $('#insf_Telefono').inputmask('(999) 9999-9999')
 
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
 
 
 
