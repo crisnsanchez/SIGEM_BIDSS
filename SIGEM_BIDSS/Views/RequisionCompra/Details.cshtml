@@ -2,11 +2,13 @@
 @using SIGEM_BIDSS.Models
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+
 
 
 <div class="card card-primary card-outline">
@@ -123,10 +125,18 @@
 </div>
 
 
+@Html.Partial("_Modales")
 
 
 
 @section Scripts {
+
+    <!-- DataTables -->
+    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+    <script src="~/Scripts/app/DataTables.js"></script>
     <script src="~/Scripts/app/General_Details.js"></script>
-    <script src="~/Scripts/app/Solicitud/VacacionesPermisosEspeciales/Modals.js"></script>
+    <script src="~/Scripts/app/Solicitud/RequisicionCompra/Modals.js"></script>
 }

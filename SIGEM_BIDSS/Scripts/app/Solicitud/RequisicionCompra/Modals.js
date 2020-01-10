@@ -23,13 +23,13 @@ $("#RazonRechazo").change(function () {
 
 
 $(document).on("click", "#_ModalApprove", function () {
-    SendData(_idPrimary = "Reqco_Id", _controller = "RequisicionCompra", _action = "ApprovePorJefe", _spinnerbody = "spinner-body", _spinner = "spinnerd");
+    SendData(_idPrimary = "Reqco_Id", _controller = "RequisionCompra", _action = "ApprovePorJefe", _spinnerbody = "spinner-body", _spinner = "spinnerd");
 });
 
 
 
 $(document).on("click", "#_ModalApproveAdmin", function () {
-    SendData(_idPrimary = "Reqco_Id", _controller = "RequisicionCompra", _action = "ApprovePorAdmin", _spinnerbody = "spinner-body", _spinner = "spinnerd");
+    SendData(_idPrimary = "Reqco_Id", _controller = "RequisionCompra", _action = "ApprovePorAdmin", _spinnerbody = "spinner-body", _spinner = "spinnerd");
 });
 
 
@@ -46,7 +46,7 @@ $(document).on("click", "#_ModalReject", function () {
     }
     else {
         document.getElementById("spanRazonRechazo").innerText = "";
-        SendData(_idPrimary = "VPE_Id", _controller = "VacacionesPermisosEspeciales", _action = "Reject", _spinnerbody = "spinner-body-reject", _spinner = "spinnerd-reject");
+        SendData(_idPrimary = "Reqco_Id", _controller = "RequisionCompra", _action = "Reject", _spinnerbody = "spinner-body-reject", _spinner = "spinnerd-reject");
     }
 });
 

@@ -28,29 +28,36 @@ namespace SIGEM_BIDSS.Controllers
         // GET: RequisionCompra/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            string vReturn = "";
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbRequisionCompra tbRequisionCompra = await db.tbRequisionCompra.FindAsync(id);
-            if (tbRequisionCompra.est_Id == GeneralFunctions.Enviada)
-            {
-                ViewBag.RequisicionDetalle = await db.tbRequisionCompraDetalle.Where(x => x.Reqco_Id == tbRequisionCompra.Reqco_Id).ToListAsync();
-                if (UpdateState(out vReturn, tbRequisionCompra, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                string vReturn = "";
+                if (id == null)
                 {
-                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                else
+                tbRequisionCompra tbRequisionCompra = await db.tbRequisionCompra.FindAsync(id);
+                ViewBag.RequisicionDetalle = db.tbRequisionCompraDetalle.Where(x => x.Reqco_Id == tbRequisionCompra.Reqco_Id).ToList();
+                if (tbRequisionCompra.est_Id == GeneralFunctions.Enviada)
                 {
-                    TempData["swalfunction"] = GeneralFunctions.sol_ErrorUpdateState;
+                    if (UpdateState(out vReturn, tbRequisionCompra, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                    {
+                        TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                    }
+                    else
+                    {
+                        TempData["swalfunction"] = GeneralFunctions.sol_ErrorUpdateState;
+                    }
                 }
+                if (tbRequisionCompra == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbRequisionCompra);
             }
-            if (tbRequisionCompra == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                throw; 
             }
-            return View(tbRequisionCompra);
           }
 
         // GET: RequisionCompra/Create
