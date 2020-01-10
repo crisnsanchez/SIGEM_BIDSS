@@ -1,7 +1,7 @@
 ﻿var contador = 0;
 
 $(document).ready(function () {
-    $("#Reqde_Justificacion")[0].maxLength = 250;
+    $("#Reqde_Justificacion")[0].maxLength = 50;
     $('.select2').select2()
 });
 

@@ -45,9 +45,7 @@ namespace SIGEM_BIDSS.Controllers
         //GET: LiquidacionAnticipoViaticoDetalle/Create
         public ActionResult Create( )
         {
-            
-
-         int Id =  Convert.ToInt32(Session["NombreLiquidacione"]);
+         int Id =  Convert.ToInt32(18);
 
             tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle = new tbLiquidacionAnticipoViaticoDetalle();
             tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id = Id;
@@ -62,19 +60,17 @@ namespace SIGEM_BIDSS.Controllers
                 return HttpNotFound();
             }
             return View(tbLiquidacionAnticipoViaticoDetalle);
-         
-
         }
 
       
         // POST: LiquidacionAnticipoViaticoDetalle/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-
         [HttpPost]
         public JsonResult SaveLiquidacionAnticipoDetalle(tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle , HttpPostedFileBase  Archivo)
         {
             int datos = 0;
+
 
             decimal Lianvide_MontoGasto = tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto;
             List<tbLiquidacionAnticipoViaticoDetalle> sessionSolicitudReembolsoDetalle = new List<tbLiquidacionAnticipoViaticoDetalle>();
@@ -94,22 +90,16 @@ namespace SIGEM_BIDSS.Controllers
             }
             return Json(datos, JsonRequestBehavior.AllowGet);
         }
-           [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Lianvide_Id,Lianvi_Id,Lianvide_FechaGasto,tpv_Id,Lianvide_MontoGasto,Lianvide_Concepto,Lianvide_UsuarioCrea,Lianvide_FechaCrea,Lianvide_UsuarioModifica,Lianvide_FechaModifica")] tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle, HttpPostedFileBase ArchivoPath)
         {
-
-
-            {
-               
-                IEnumerable<object> Detalle = null;
+                IEnumerable<object> AnticipoViaticoDetalle = null;
                 string UserName = "";
                 string MsjError = "";
                 var listaDetalle = (List<tbLiquidacionAnticipoViaticoDetalle>)Session["NombreLiquidaciondetalle"];
-
                 try
                 {
-
                     var path = "";
                     ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
                     ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
@@ -117,81 +107,14 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-                    if (ArchivoPath != null)
-                    {
-                        if (ArchivoPath.ContentLength > 0)
-                        {
-                            if (Path.GetExtension(ArchivoPath.FileName).ToLower() == ".jpg" || Path.GetExtension(ArchivoPath.FileName).ToLower() == ".png")
-                            {
-                                string Extension = Path.GetExtension(ArchivoPath.FileName).ToLower();
-                                string _NamePicture = tbLiquidacionAnticipoViaticoDetalle.Lianvide_Id + "." + ArchivoCorrelativo;
-                                string Archivo = _NamePicture + Extension;
-                                //string Archivo = tbEmpleado.emp_Id + Extension;
-                                path = Path.Combine(Server.MapPath("~/Content/Profile_Pics"), Archivo);
-                                ArchivoPath.SaveAs(path);
-                                tbLiquidacionAnticipoViaticoDetalle.Lianvide_Archivo = "~/Content/Profile_Pics/" + Archivo;
-                            }
-                            else
-                            {
-                                string Error = "Formato de archivo incorrecto, favor adjuntar una fotografía con extensión .jpg";
-                                ModelState.AddModelError("FotoPath", Error);
-
-                                return View("Index");
-                            }
-
-
-                        }
-                    }
-
-
-
-                    if (ModelState.IsValid)
-                    {
-
-                        int EmployeeID = Function.GetUser(out UserName);
-                        Detalle = db.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert(tbLiquidacionAnticipoViaticoDetalle.Lianvide_Id, 
-                                                                                        tbLiquidacionAnticipoViaticoDetalle.Lianvi_Id,
-                                                                                        tbLiquidacionAnticipoViaticoDetalle.Lianvide_FechaGasto,
-                                                                                        tbLiquidacionAnticipoViaticoDetalle.tpv_Id,
-                                                                                        tbLiquidacionAnticipoViaticoDetalle.Lianvide_MontoGasto,
-                                                                                        tbLiquidacionAnticipoViaticoDetalle.Lianvide_Concepto
-                                                                                        ,tbLiquidacionAnticipoViaticoDetalle.Lianvide_Archivo,
-                                                                                        EmployeeID, Function.DatetimeNow());
-                   
-                        foreach (UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result categoria in Detalle)
-                            MsjError = categoria.MensajeError;
-                        if (MsjError.StartsWith("-1"))
-                        {
-                            ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
-                            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
-                            Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, MsjError);
-                            ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                            return View(tbLiquidacionAnticipoViaticoDetalle);
-                        }
-
-                        else
-                        {
-                            ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
-                            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
-                            TempData["swalfunction"] = "true";
-                          
-                            return View(tbLiquidacionAnticipoViaticoDetalle);
-
-
-
-                        }
-
-                    }
                 }
 
                 catch (Exception Ex)
                 {
-                    ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
-                    ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+                   
                     Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, Ex.Message.ToString());
 
                 }
-            }
             return View(tbLiquidacionAnticipoViaticoDetalle);
         }
 

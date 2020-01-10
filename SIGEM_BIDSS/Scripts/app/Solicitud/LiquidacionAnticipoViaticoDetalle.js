@@ -36,7 +36,7 @@ $('#AgregarDetalle').click(function () {
         method: "POST",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ tbLiquidacionAnticipoViaticoDetalle: LiquidacionAnticipoViatico }),
+        data: JSON.stringify({ tbLiquidacionAnticipoViaticoDetalle: LiquidacionAnticipoViatico, Archivo: LiquidacionAnticipoViatico.Lianvide_Archivo }),
     })
 
         .done(function (data) {
@@ -100,7 +100,7 @@ function GetLiquidacionViatico() {
         Lianvide_FechaGasto: $('#Lianvide_FechaGasto').val(),
         Lianvide_MontoGasto: $('#Lianvide_MontoGasto').val(),
         Lianvide_Concepto: $('#Lianvide_Concepto').val(),
-
+        Lianvide_Archivo: $('#LianvideArchivo').val(),
     };
     return LIQUIDACIONDETALLE;
 }

@@ -28,6 +28,7 @@
 
         <div class="form-horizontal">
             <div class="card-body">
+                @Html.HiddenFor(model => model.Reqco_Id)
                 <div class="form-row">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
