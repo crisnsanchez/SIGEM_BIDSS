@@ -145,7 +145,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                         GetEmployee = Function.GetUserInfo(EmployeeID);
+                        GetEmployee = Function.GetUserInfo(EmployeeID);
                         EmpJefe = Function.GetUserInfo(tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
 
 
