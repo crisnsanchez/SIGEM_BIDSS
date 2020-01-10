@@ -44,6 +44,9 @@
     #prov_NombreContacto {
         text-transform: uppercase;
     }
+    #prov_Direccion {
+        text-transform: uppercase;
+    }
 </style>
 
 <div class="card card-primary card-outline">
@@ -138,7 +141,7 @@
 
                         <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
-                            @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control normalize", @maxlength = "250", @style = "text-transform:uppercase;", @OnKeyPress = "return soloLetras(event)" })
+                            @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control normalize", maxlength = "250" })
                             @Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger", @Id = "Direccion" })
                         </div>
                     </div>
