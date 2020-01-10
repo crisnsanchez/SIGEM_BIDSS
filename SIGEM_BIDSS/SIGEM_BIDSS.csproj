@@ -3335,6 +3335,7 @@
     <Content Include="Scripts\app\Solicitud\AnticipoViatico\Modals.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViaticoDetalle.js" />
+    <Content Include="Scripts\app\Solicitud\RequisicionCompra\Modals.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionCompra.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionDetalle.js" />
     <Content Include="Scripts\app\Solicitud\SolicitudReembolsoGastos.js" />
@@ -3381,6 +3382,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Create.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -3515,7 +3517,6 @@
     <Content Include="Views\LiquidacionAnticipoViatico\Edit.cshtml" />
     <Content Include="Views\AnticipoSalario\_Modales.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViatico\Index.cshtml" />
-    <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Create.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Delete.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Details.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\Edit.cshtml" />
@@ -3555,13 +3556,13 @@
     <Content Include="Views\AccionPersonal\Index.cshtml" />
     <Content Include="Views\AccionPersonal\_Modales.cshtml" />
     <Content Include="Views\RequisionCompraDetalle\Create.cshtml" />
-    <Content Include="Views\RequisionCompraDetalle\Details.cshtml" />
-    <Content Include="Views\RequisionCompraDetalle\Edit.cshtml" />
-    <Content Include="Views\RequisionCompraDetalle\Index.cshtml" />
     <Content Include="Views\RequisionCompraDetalle\_BuscarProducto.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\_CreateDetalle.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastosDetalles\_CreateDetalle.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\_Details.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\_Details.cshtml" />
+    <Content Include="Views\RequisionCompra\_Modales.cshtml" />
+    <Content Include="Views\RequisionCompra\_RequisicionDetalle.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

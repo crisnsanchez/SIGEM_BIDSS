@@ -65,7 +65,6 @@
         @Html.HiddenFor(model => model.emp_UsuarioModifica, new { Value = "1" })
         @Html.HiddenFor(model => model.emp_FechaModifica, new { Value = "2019-12-12" })
         @Html.HiddenFor(model => model.emp_RazonInactivacion, new { Value = "----" })
-
         @Html.HiddenFor(model => model.emp_PathImage, new { Value = "----" })
 
         @Html.AntiForgeryToken()
@@ -81,7 +80,7 @@
                         <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.emp_PathImage, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="custom-file col-md-11">
-                                <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="ArchivoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
+                                <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="FotoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
                                 <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto"></label>
 
                             </div>
@@ -154,12 +153,8 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_CorreoElectronico, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
+                            @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control", onkeyup = "noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger", id = "email" })
-
-
-
-
                             <div id="emailOK" class="text-danger">
                                 <p style="color:red" class="text-danger"></p>
                             </div>
@@ -185,9 +180,7 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="form-row">
-
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_EsJefe, "¿Es Jefe?", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
@@ -202,7 +195,6 @@
                             @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger", id = "Direccion" })
                         </div>
                     </div>
-
                 </div>
 
                 <div class="form-row">
@@ -263,23 +255,23 @@
         });
 
 
-        $("#emp_FechaNacimiento").blur(function () {
-            valido = document.getElementById('FechaNacimiento');
-            var FechaNacimiento = $('#emp_FechaNacimiento').val();
+        //$("#emp_FechaNacimiento").blur(function () {
+        //    valido = document.getElementById('FechaNacimiento');
+        //    var FechaNacimiento = $('#emp_FechaNacimiento').val();
 
 
-            if (FechaNacimiento > GetTodayDate()) {
-                $('#emp_FechaNacimiento').val("");
-                $('#emp_FechaNacimiento').focus();
+        //    if (FechaNacimiento > GetTodayDate()) {
+        //        $('#emp_FechaNacimiento').val("");
+        //        $('#emp_FechaNacimiento').focus();
 
-                valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+        //        valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
 
-            }
+        //    }
 
-            else {
-                valido.innerText = "";
-            }
-        });
+        //    else {
+        //        valido.innerText = "";
+        //    }
+        //});
 
 
         $("#emp_FechaIngreso").blur(function () {

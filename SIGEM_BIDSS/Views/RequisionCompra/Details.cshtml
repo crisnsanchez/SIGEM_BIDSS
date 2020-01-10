@@ -2,11 +2,13 @@
 @using SIGEM_BIDSS.Models
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+
 
 
 <div class="card card-primary card-outline">
@@ -25,6 +27,7 @@
         <div class="card-body">
             @Html.HiddenFor(model => model.Reqco_Id)
             <dl class="form-row">
+                @Html.HiddenFor(model => model.Reqco_Id)
                 <div class="form-group col-md-3">
                     <dt>
                         @Html.DisplayNameFor(model => model.Reqco_Correlativo)
@@ -32,6 +35,14 @@
 
                     <dd>
                         @Html.DisplayFor(model => model.Reqco_Correlativo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.emp_Id)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
                     </dd>
 
                     <dt>
@@ -43,43 +54,25 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.tbArea.are_Descripcion)
+                        @Html.DisplayNameFor(model => model.are_Id)
                     </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.tbArea.are_Descripcion)
                     </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-                    </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-                    </dd>
-
-
+                </div>
+                <div class="form-group col-md-3">
                     @if (Model.Reqco_Comentario != GeneralFunctions.stringDefault)
                     {
-
                         <dt>
                             @Html.DisplayNameFor(model => model.Reqco_Comentario)
                         </dt>
-
                         <dd>
                             @Html.DisplayFor(model => model.Reqco_Comentario)
                         </dd>
-
                     }
-
                     <dt>
                         @Html.DisplayNameFor(model => model.est_Id)
                     </dt>
@@ -87,19 +80,13 @@
                         @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
                     </dd>
 
-                </div>
-                <div class="form-group col-md-3">
                     @if (Model.est_Id == GeneralFunctions.Rechazada)
                     {
-
-                       
                         if (Model.Reqco_RazonRechazo != GeneralFunctions.stringDefault)
                         {
-
                             <dt>
                                 @Html.DisplayNameFor(model => model.Reqco_RazonRechazo)
                             </dt>
-
                             <dd>
                                 @Html.DisplayFor(model => model.Reqco_RazonRechazo)
                             </dd>
@@ -108,6 +95,13 @@
 
                 </div>
             </dl>
+
+            <div class="card card-primary card-outline">
+                <div class="card-body">
+                    @Html.Partial("_RequisicionDetalle", (List<SIGEM_BIDSS.Models.tbRequisionCompraDetalle>)ViewBag.RequisicionDetalle)
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     @if (Model.est_Id == GeneralFunctions.Revisada)
@@ -124,16 +118,25 @@
                     @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
 
+
 @Html.Partial("_Modales")
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 
+@section Scripts {
+
+    <!-- DataTables -->
+    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/template/dist/js/adminlte.min.js"></script>
+    <script src="~/Scripts/app/DataTables.js"></script>
     <script src="~/Scripts/app/General_Details.js"></script>
-    <script src="~/Scripts/app/Solicitud/VacacionesPermisosEspeciales/Modals.js"></script>
+    <script src="~/Scripts/app/Solicitud/RequisicionCompra/Modals.js"></script>
 }

@@ -24,15 +24,12 @@ namespace SIGEM_BIDSS.Models
         public int Reqco_Id { get; set; }
 
         [Display(Name = "Producto")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
         public int prod_Id { get; set; }
 
         [Display(Name = "Cantidad")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
         public decimal Reqde_Cantidad { get; set; }
 
         [Display(Name = "Justificación")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")] 
         public string Reqde_Justificacion { get; set; }
 
         [Display(Name = "Usuario Crea")]

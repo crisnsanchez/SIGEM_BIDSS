@@ -15,34 +15,27 @@ namespace SIGEM_BIDSS.Controllers
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
         GeneralFunctions Function = new GeneralFunctions();
 
-        // GET: RequisionCompraDetalle
-        public ActionResult Index()
-        {
-            var tbRequisionCompraDetalle = db.tbRequisionCompraDetalle.Include(t => t.tbRequisionCompra).Include(t => t.tbProducto);
-            return View(tbRequisionCompraDetalle.ToList());
-        }
-
-        // GET: RequisionCompraDetalle/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbRequisionCompraDetalle tbRequisionCompraDetalle = db.tbRequisionCompraDetalle.Find(id);
-            if (tbRequisionCompraDetalle == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbRequisionCompraDetalle);
-        }
-
         // GET: RequisionCompraDetalle/Create
         public ActionResult Create()
         {
-            ViewBag.prod_Id = new SelectList(db.tbProducto, "prod_Id", "prod_Descripcion");
-            ViewBag.Producto = db.tbProducto.Where(x => x.prod_EsActivo == true).ToList();
-            return View();
+            try
+            {
+                int Id = Convert.ToInt32(Session["Reqco_Id"]);
+                if (Id==0)
+                {
+                    return RedirectToAction("Create", "RequisionCompra");
+                }
+                tbRequisionCompraDetalle tbRequisionCompraDetalle = new tbRequisionCompraDetalle();
+                tbRequisionCompraDetalle.Reqco_Id = Id;
+                ViewBag.prod_Id = new SelectList(db.tbProducto, "prod_Id", "prod_Descripcion");
+                ViewBag.Producto = db.tbProducto.Where(x => x.prod_EsActivo == true).ToList();
+                return View();
+            }
+            catch (Exception)
+            {
+                throw;
+                return View();
+            }
         }
 
         // POST: RequisionCompraDetalle/Create
@@ -52,47 +45,41 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Reqco_Id,prod_Id,Reqde_Cantidad,Reqde_Justificacion")] tbRequisionCompraDetalle tbRequisionCompraDetalle)
         {
-            string UserName = "", ErrorMessage = "";
-            IEnumerable<object> Insert = null;
-
+            IEnumerable<object> List = null;
+            string UserName = "";
+            string MensajeError = "";
+            var listaDetalle = (List<tbRequisionCompraDetalle>)Session["RequisionCompraDetalle"];
             try
             {
-                cGetUserInfo GetEmployee = null;
+                ViewBag.prod_Id = new SelectList(db.tbProducto, "prod_Id", "prod_Descripcion");
+                ViewBag.Producto = db.tbProducto.Where(x => x.prod_EsActivo == true).ToList();
                 int EmployeeID = Function.GetUser(out UserName);
-
-                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
-                                                where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
-                                                select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
-
-                ViewBag.prod_Id = new SelectList(db.tbArea, "prod_Id", "prod_Descripcion", tbRequisionCompraDetalle.prod_Id);
-                if (ModelState.IsValid)
+                if (listaDetalle != null)
                 {
-
-                    Insert = db.UDP_Adm_tbRequisionCompraDetalle_Insert(EmployeeID, 
-                                                                        tbRequisionCompraDetalle.prod_Id, 
-                                                                        tbRequisionCompraDetalle.Reqde_Cantidad,
-                                                                        tbRequisionCompraDetalle.Reqde_Justificacion,
-                                                                        EmployeeID,
-                                                                        Function.DatetimeNow());
-                    foreach (UDP_Adm_tbRequisionCompraDetalle_Insert_Result Res in Insert)
-                        ErrorMessage = Res.MensajeError;
-                    if (ErrorMessage.StartsWith("-1"))
+                    if (listaDetalle.Count > 0)
                     {
-                        Function.BitacoraErrores("RequisionCompraDetalle", "CreatePost", UserName, ErrorMessage);
-                        ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
-                    }
-                    else
-                    {
-                       
-                        TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
-                        return RedirectToAction("Index");
-                    }
+                        foreach (tbRequisionCompraDetalle RequisionCompraDetalle in listaDetalle)
+                        {
+                            List = db.UDP_Adm_tbRequisionCompraDetalle_Insert(RequisionCompraDetalle.Reqco_Id,
+                                RequisionCompraDetalle.prod_Id, RequisionCompraDetalle.Cantidad, RequisionCompraDetalle.Reqde_Justificacion, EmployeeID, Function.DatetimeNow());
+                            foreach (UDP_Adm_tbRequisionCompraDetalle_Insert_Result RequisionCompra in List)
+                                MensajeError = RequisionCompra.MensajeError;
+                            if (MensajeError.StartsWith("-1"))
+                            {
 
+                                ModelState.AddModelError("", "No se pudo insertar el registro detalle, favor contacte al administrador.");
+                                return View(tbRequisionCompraDetalle);
+                            }
+                        }
+                    }
                 }
+
+
             }
-            catch (Exception ex)
+
+            catch (Exception Ex)
             {
-                Function.BitacoraErrores("RequisionCompraDetalle", "CreatePost", UserName, ex.Message.ToString() + " " + ex.InnerException.Message.ToString());
+                Function.BitacoraErrores("RequisionCompraDetalle", "CreatePost", UserName, Ex.Message.ToString());
             }
             return View(tbRequisionCompraDetalle);
         }
@@ -137,67 +124,19 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-        // GET: RequisionCompraDetalle/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tbRequisionCompraDetalle tbRequisionCompraDetalle = db.tbRequisionCompraDetalle.Find(id);
-            if (tbRequisionCompraDetalle == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Reqco_Id = new SelectList(db.tbRequisionCompra, "Reqco_Id", "Reqco_Correlativo", tbRequisionCompraDetalle.Reqco_Id);
-            ViewBag.prod_Id = new SelectList(db.tbProducto, "prod_Id", "prod_Codigo", tbRequisionCompraDetalle.prod_Id);
-            return View(tbRequisionCompraDetalle);
-        }
-
-        // POST: RequisionCompraDetalle/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Reqde_Id,Reqco_Id,prod_Id,Reqde_Cantidad,Reqde_Justificacion,Reqde_UsuarioCrea,Reqde_FechaCrea,Reqde_UsuarioModifica,Reqde_FechaModifica")] tbRequisionCompraDetalle tbRequisionCompraDetalle)
+        public JsonResult Remove(tbRequisionCompraDetalle tbRequisionCompraDetalle)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tbRequisionCompraDetalle).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Reqco_Id = new SelectList(db.tbRequisionCompra, "Reqco_Id", "Reqco_Correlativo", tbRequisionCompraDetalle.Reqco_Id);
-            ViewBag.prod_Id = new SelectList(db.tbProducto, "prod_Id", "prod_Codigo", tbRequisionCompraDetalle.prod_Id);
-            return View(tbRequisionCompraDetalle);
-        }
+            var list = (List<tbRequisionCompraDetalle>)Session["RequisionCompraDetalle"];
 
-        // GET: RequisionCompraDetalle/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
+            if (list != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var itemToRemove = list.Single(r => r.prod_Id == tbRequisionCompraDetalle.prod_Id);
+                list.Remove(itemToRemove);
+                Session["tbRequisionCompraDetalle"] = list;
             }
-            tbRequisionCompraDetalle tbRequisionCompraDetalle = db.tbRequisionCompraDetalle.Find(id);
-            if (tbRequisionCompraDetalle == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbRequisionCompraDetalle);
+            return Json("Exito", JsonRequestBehavior.AllowGet);
         }
-
-        // POST: RequisionCompraDetalle/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tbRequisionCompraDetalle tbRequisionCompraDetalle = db.tbRequisionCompraDetalle.Find(id);
-            db.tbRequisionCompraDetalle.Remove(tbRequisionCompraDetalle);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
