@@ -3555,14 +3555,13 @@
     <Content Include="Views\AccionPersonal\Index.cshtml" />
     <Content Include="Views\AccionPersonal\_Modales.cshtml" />
     <Content Include="Views\RequisionCompraDetalle\Create.cshtml" />
-    <Content Include="Views\RequisionCompraDetalle\Details.cshtml" />
-    <Content Include="Views\RequisionCompraDetalle\Edit.cshtml" />
-    <Content Include="Views\RequisionCompraDetalle\Index.cshtml" />
     <Content Include="Views\RequisionCompraDetalle\_BuscarProducto.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\_CreateDetalle.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastosDetalles\_CreateDetalle.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\_Details.cshtml" />
     <Content Include="Views\LiquidacionAnticipoViatico\_Details.cshtml" />
+    <Content Include="Views\RequisionCompra\_Modales.cshtml" />
+    <Content Include="Views\RequisionCompra\_RequisicionDetalle.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
