@@ -1,42 +1,45 @@
 ﻿@model IEnumerable<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastosDetalle>
-
-<table>
-    <thead>
-        <tr>
-            <td>Fecha Gasto</td>
-            <td>Gasto</td>
-            <td>Monto Gasto</td>
-            <td>Concepto</td>
-            <td>Archivo</td>
-
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReemgaDet_FechaGasto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tbTipoViatico.tpv_Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReemgaDet_MontoGasto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReemgaDet_Concepto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReemgaDet_Archivo)
-                </td>
-            </tr>
-        }
+<div class="card card-primary card-outline">
+    <div class="form-horizontal">
+        <div class="card-body">
+            <table class="table table-bordered table-hover table-responsive" id="">
+                <thead>
+                    <tr>
+                        <td>Fecha Gasto</td>
+                        <td>Gasto</td>
+                        <td>Monto Gasto</td>
+                        <td>Concepto</td>
+                        <td>Archivo</td>
 
 
-    </tbody>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReemgaDet_FechaGasto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tbTipoViatico.tpv_Descripcion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReemgaDet_MontoGasto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReemgaDet_Concepto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReemgaDet_Archivo)
+                            </td>
+                        </tr>
+                    }
 
-</table>
 
+                </tbody>
 
+            </table>
+        </div>
+    </div>
+    </div>

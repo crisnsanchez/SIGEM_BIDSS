@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="card card-primary card-outline">
+<di class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-info  mr-1"></i>
@@ -19,113 +19,111 @@
     </div>
     <div class="form-horizontal">
         <div class="card-body">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_Correlativo)
-                </dt>
+            <dl class="dl-horizontal card-columns">
+               
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reemga_Correlativo)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_Correlativo)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_Correlativo)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_JefeInmediato)
-                </dt>
+                    <dt>
+                     Jefe Inmediato
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_JefeInmediato)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_JefeInmediato)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_GralFechaSolicitud)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reemga_GralFechaSolicitud)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_GralFechaSolicitud)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_GralFechaSolicitud)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_FechaViaje)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reemga_FechaViaje)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_FechaViaje)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_FechaViaje)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_Cliente)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reemga_Cliente)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_Cliente)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_Cliente)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.mun_codigo)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.mun_codigo)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.mun_codigo)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.mun_codigo)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_PropositoVisita)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reemga_PropositoVisita)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_PropositoVisita)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_PropositoVisita)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_DiasVisita)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reemga_DiasVisita)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_DiasVisita)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_DiasVisita)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_Comentario)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reemga_Comentario)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_Comentario)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_Comentario)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Reemga_RazonRechazo)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reemga_RazonRechazo)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Reemga_RazonRechazo)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reemga_RazonRechazo)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-                </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-                </dd>
-            </dl>
+                    <dd>
+                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+                    </dd>
+                </dl>
 
-            <div class="form-group">
-                @Html.Partial("_Details",(List<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastosDetalle>)ViewBag.IdFull)
-
-
-            </div>
+                <div class="form-group">
+                    @Html.Partial("_Details", (List<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastosDetalle>)ViewBag.IdFull)
+                </div>
         </div>
     </div>
- 
-</div>
+
+</di>
 
 
-                               
