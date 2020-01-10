@@ -2894,16 +2894,6 @@
             <Parameter Name="Reqde_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="Reqde_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Adm_tbRequisionCompra_Insert1" ReturnType="Collection(String)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="are_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Reqco_GralFechaSolicitud" Mode="In" Type="DateTime" />
-            <Parameter Name="Reqco_Comentario" Mode="In" Type="String" />
-            <Parameter Name="est_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Reqco_RazonRechazo" Mode="In" Type="String" />
-            <Parameter Name="Reqco_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="Reqco_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="Reemga_JefeInmediato" Mode="In" Type="Int32" />
@@ -3150,7 +3140,7 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result)">
             <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="deif_Monto" Mode="In" Type="Decimal" />
@@ -3159,7 +3149,7 @@
             <Parameter Name="deif_FechaCrea" Mode="In" Type="DateTime" />
             <Parameter Name="deif_Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" ReturnType="Collection(String)">
+          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result)">
             <Parameter Name="deif_IdDeduccionInstFinanciera" Mode="In" Type="Int32" />
             <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
@@ -3420,6 +3410,7 @@
         </ComplexType>
         <ComplexType Name="UDP_Adm_tbRequisionCompra_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ScopeIdentity" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Adm_tbRequisionCompra_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
@@ -4629,6 +4620,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5172,7 +5169,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbRequisionCompra_Insert1" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbRequisionCompra_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbSolicitudReembolsoGastos_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbSolicitudReembolsoGastos_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
@@ -5728,8 +5724,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" />
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Update" />
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbRequisionCompra_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbRequisionCompra_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompra_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+                <ScalarProperty Name="ScopeIdentity" ColumnName="ScopeIdentity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -11,9 +11,8 @@ namespace SIGEM_BIDSS.Models
 {
     using System;
     
-    public partial class UDP_Adm_tbRequisionCompra_Insert_Result
+    public partial class UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result
     {
         public string MensajeError { get; set; }
-        public string ScopeIdentity { get; set; }
     }
 }
