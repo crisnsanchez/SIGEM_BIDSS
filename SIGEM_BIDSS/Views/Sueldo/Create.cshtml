@@ -142,7 +142,8 @@
 
             var emp = $('#emp_Id').val();
             var Moneda = $('#tmo_Id').val();
-
+            var Existe = $('#Existe').val();
+            
             $.ajax({
                 url: "/Sueldo/GetExistencia",
                 method: "POST",
@@ -157,7 +158,7 @@
 
                     if (data.ver) {
                         document.getElementById('Aceptar').setAttribute('href', '/Sueldo/Edit/' + data.emp_Id);
-                        $('#ModalExisteEmpleado').modal('show');
+                        $('#ModalGuardar').modal('show');
                     }
                     else {
                         $("form").submit();

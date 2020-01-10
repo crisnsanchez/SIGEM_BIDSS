@@ -215,7 +215,7 @@ namespace SIGEM_BIDSS.Controllers
 
             try
             {
-
+                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                 int EmployeeID = Function.GetUser(out UserName);
                 //int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select based).Count();
                 int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id && based.sue_Id != tbSueldo.sue_Id select based).Count();
