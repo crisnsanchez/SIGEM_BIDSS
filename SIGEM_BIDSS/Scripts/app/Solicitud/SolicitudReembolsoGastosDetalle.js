@@ -30,7 +30,8 @@ $('#AgregarDetalle').click(function () {
         
                 contador = contador + 1
 
-                table.row.add([
+            table.row.add([
+
                     SolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,
                     SolicitudReembolsoGastosDetalle.tpv_IdText,
                     SolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,
@@ -53,6 +54,7 @@ function GetDetalle() {
 
     var R = document.getElementById('tpv_Id')
     var ReembolsoDetalle = {
+        Reemga_Id: $('#Reemga_Id').val(),
         ReemgaDet_Id: contador,
         ReemgaDet_FechaGasto: $('#ReemgaDet_FechaGasto').val(),
         tpv_Id: $('#tpv_Id').val(),

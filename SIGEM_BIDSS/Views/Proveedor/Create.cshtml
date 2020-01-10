@@ -26,10 +26,11 @@
     #prov_Nombre {
         text-transform: uppercase;
     }
-
-    #prov_NombreContacto {
+    #prov_Direccion {
         text-transform: uppercase;
     }
+
+    
 </style>
 
 @{
@@ -137,7 +138,7 @@
 
                             <div class="form-group col-md-6">
                                 @Html.LabelFor(model => model.prov_Direccion, htmlAttributes: new { @class = "control-label col-md-8" })
-                                @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control normalize", @maxlength = "250", @onkeyup = "this.value=this.value.toUpperCase()" })
+                                @Html.TextAreaFor(model => model.prov_Direccion, new { @class = "form-control normalize", maxlength = "250" })
                                 @Html.ValidationMessageFor(model => model.prov_Direccion, "", new { @class = "text-danger", @Id = "Direccion" })
                             </div>
                         </div>

@@ -1202,7 +1202,6 @@
           <Parameter Name="Lianvi_FechaCrea" Type="datetime" Mode="In" />
         </Function>
         <Function Name="UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
-          <Parameter Name="Lianvide_Id" Type="int" Mode="In" />
           <Parameter Name="Lianvi_Id" Type="int" Mode="In" />
           <Parameter Name="Lianvide_FechaGasto" Type="datetime" Mode="In" />
           <Parameter Name="tpv_Id" Type="int" Mode="In" />
@@ -2640,7 +2639,6 @@
             <Parameter Name="par_FrecuenciaAdelantoSalario" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result)">
-            <Parameter Name="Lianvide_Id" Mode="In" Type="Int32" />
             <Parameter Name="Lianvi_Id" Mode="In" Type="Int32" />
             <Parameter Name="Lianvide_FechaGasto" Mode="In" Type="DateTime" />
             <Parameter Name="tpv_Id" Mode="In" Type="Int32" />

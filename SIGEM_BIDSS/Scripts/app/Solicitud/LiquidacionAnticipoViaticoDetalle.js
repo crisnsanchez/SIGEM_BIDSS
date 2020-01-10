@@ -11,25 +11,7 @@ $("#CargarArchivo").change(function () {
 $('#AgregarDetalle').click(function () {
     var table = $('#dataTable').DataTable();
     var LiquidacionAnticipoViatico = GetLiquidacionViatico();
-    var FechaGastos = $('#Lianvide_FechaGasto').val();
-    var Gastos = $('#tpv_Id').val();
-    var Monto = $('#Lianvide_MontoGasto').val();
-    var Concepto = $('#Lianvide_Concepto').val();
-    
-    
   
-    //if (Gastos == 'Seleccione Tipo Gasto') {
-    //    $('#ValidationGastos').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
-
-    //}
-    if (Monto == '') {
-        $('#ValidationMonto').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
-    }
-    if (Concepto == '') {
-        $('#ValidationDepconcepto').after('<ul id="dep_CodigoCodigoError" class="validation-summary-errors text-danger"><span class="fa fa-ban text-danger"></span> Campo Codigo Departamento Requerido</ul>');
-
-
-    }
 
     $.ajax({
         url: "/LiquidacionAnticipoViaticoDetalle/SaveLiquidacionAnticipoDetalle",
@@ -95,6 +77,7 @@ function GetLiquidacionViatico() {
 
 
         Lianvide_Id: contador,
+        Lianvi_Id: $('#Lianvi_Id').val(),
         tpv_Id: $('#tpv_Id').val(),
         tpv_IdText: R.options[R.selectedIndex].text,
         Lianvide_FechaGasto: $('#Lianvide_FechaGasto').val(),

@@ -4,13 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
 <link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
-
-
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
@@ -25,7 +20,7 @@
         </ul>
     </div>
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, FormMethod.Post, new { id = "frmAnticipoViatico" }))
+    @using (Html.BeginForm(null, null, FormMethod.Post, FormMethod.Post, new { id = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -36,28 +31,17 @@
 
                 @Html.HiddenFor(model => model.Reemga_Id)
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <div class="col-md-6 card-body box-profile">
-                            <img src="~/Content/img/descarga.jpg" class="product-image" id="imgpreview" width="280" height="230" style="border-width: 0px;" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            @Html.LabelFor(model => model.ReemgaDet_Archivo,"Archivo", htmlAttributes: new { @class = "control-label col-md-6" })
-                            <div class="custom-file col-md-11">
-                                <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="FotoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
-                                <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto"></label>
-
-                            </div>
-                            @Html.ValidationMessageFor(model => model.ReemgaDet_Archivo, null, new { @class = "text-danger", @id = "errorlogo" })
-                            <div class="input-group-append">
-                            </div>
-                        </div>
-                        <p id="ImageLength" style="color:red"></p>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.ReemgaDet_Archivo, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-11">
+                        <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="ArchivoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
+                        <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto"></label>
+                        @Html.ValidationMessageFor(model => model.ReemgaDet_Archivo, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
 
-          
+
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
@@ -107,66 +91,18 @@
 
             </div>
 
+            @*<div class="card card-primary card-outline">
+                    <div class="card-header d-flex p-0 ui-sortable-handle">
 
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
 
-            <table class="table table-bordered table-hover" id="dataTable">
-                <thead>
-                    <tr>
-                        <th>
-                            Fecha Gasto
-                        </th>
-                        <th>
-                            Gasto
-                        </th>
-                        <th>
-                            Monto Gasto
-                        </th>
-                        <th>
-                            Concepto
-                        </th>
+                            @Html.Partial("_CreateDetalle", (List<SIGEM_BIDSS.Models.tbLiquidacionAnticipoViaticoDetalle>)ViewBag.Archivo)
+                        </div>
+                    </div>
 
-                        <th>
-                            Archivo
-                        </th>
-                        <th>
-                            Acciones
-                        </th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-
-                @*<tfoot>
-                        <tr>
-                            <th>
-
-                            </th>
-                            <th>
-
-                            </th>
-                            <th>
-
-                            </th>
-                            <th>
-
-                            </th>
-
-
-                            <th>
-                                Total Gastos
-                            </th>
-                            <th>
-
-                            </th>
-
-                        </tr>
-                    </tfoot>*@
-
-            </table>
-
-
-
-
-
+                </div>*@
         </div>
         <br />
         <div class="form-group">
@@ -178,6 +114,65 @@
 
     }
 
+
+
+
+    <table class="table table-bordered table-hover" id="dataTable">
+        <thead>
+            <tr>
+                <th>
+                    Fecha Gasto
+                </th>
+                <th>
+                    Tipo Gasto
+                </th>
+
+                <th>
+                    Monto Gasto
+                </th>
+                <th>
+                    Concepto
+                </th>
+
+                <th>
+                    Archivo
+                </th>
+
+
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
+        <tfoot>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+
+                <th>
+                    Total Gastos
+                </th>
+
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+        </tfoot>
+
+    </table>
 </div>
 
 @section Scripts {
@@ -190,6 +185,87 @@
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
     <script src="~/Scripts/app/DataTables.js"></script>
     <script src="~/Scripts/app/Solicitud/SolicitudReembolsoGastosDetalle.js"></script>
+    <script>
+    
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+        function MASK(form, n, mask, format) {
+            if (format == "undefined") format = false;
+            if (format || NUM(n)) {
+                dec = 0, point = 0;
+                x = mask.indexOf(".") + 1;
+                if (x) { dec = mask.length - x; }
+
+
+
+                if (dec) {
+                    n = NUM(n, dec) + "";
+                    x = n.indexOf(".") + 1;
+                    if (x) { point = n.length - x; } else { n += "."; }
+                } else {
+                    n = NUM(n, 0) + "";
+                }
+                for (var x = point; x < dec; x++) {
+                    n += "0";
+                }
+                x = n.length, y = mask.length, XMASK = "";
+                while (x || y) {
+                    if (x) {
+                        while (y && "#0.".indexOf(mask.charAt(y - 1)) == -1) {
+                            if (n.charAt(x - 1) != "-")
+                                XMASK = mask.charAt(y - 1) + XMASK;
+                            y--;
+                        }
+                        XMASK = n.charAt(x - 1) + XMASK, x--;
+                    } else if (y && "$0".indexOf(mask.charAt(y - 1)) + 1) {
+                        XMASK = mask.charAt(y - 1) + XMASK;
+                    }
+                    if (y) { y-- }
+                }
+            } else {
+                XMASK = "";
+            }
+            if (form) {
+                form.value = XMASK;
+                if (NUM(n) < 0) {
+                    form.style.color = "#FF0000";
+                } else {
+                    form.style.color = "#000000";
+                }
+            }
+            return XMASK;
+        }
+
+        // Convierte una cadena alfanumérica a numérica (incluyendo formulas aritméticas)
+        //
+        // s   = cadena a ser convertida a numérica
+        // dec = numero de decimales a redondear
+        //
+        // La función devuelve el numero redondeado
+
+        function NUM(s, dec) {
+            for (var s = s + "", num = "", x = 0; x < s.length; x++) {
+                c = s.charAt(x);
+                if (".-+/*".indexOf(c) + 1 || c != " " && !isNaN(c)) { num += c; }
+            }
+            if (isNaN(num)) { num = eval(num); }
+            if (num == "") { num = 0; } else { num = parseFloat(num); }
+            if (dec != undefined) {
+                r = .5; if (num < 0) r = -r;
+                e = Math.pow(10, (dec > 0) ? dec : 0);
+                return parseInt(num * e + r) / e;
+            } else {
+                return num;
+            }
+        }
+
+
+    </script>
 
 }
 

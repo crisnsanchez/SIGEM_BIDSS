@@ -154,7 +154,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
+        public ActionResult Edit(int? id, [Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
 
             string UserName = "";
