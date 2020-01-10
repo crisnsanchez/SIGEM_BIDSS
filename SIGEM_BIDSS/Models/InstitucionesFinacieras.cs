@@ -29,12 +29,10 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Teléfono")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         [Phone(ErrorMessage = "Por favor complete el campo Télefono")]
-        //[MinLength(11, ErrorMessage = "Minimo {1} caracteres")]
         public string insf_Telefono { get; set; }
 
 
         [Display(Name = "Correo Electrónico")]
-
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string insf_Correo { get; set; }
 

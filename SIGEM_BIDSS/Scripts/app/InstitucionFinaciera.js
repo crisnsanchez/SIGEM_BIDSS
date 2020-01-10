@@ -1,5 +1,22 @@
 ﻿
 
+$('#Inactivar').click(function () {
+    insf_Id = $("#instfinanciera").val()
+    $.ajax({
+        url: "/InstitucionFinanciera/InactivarInstitucionFinanciera",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ insf_Id: insf_Id }),
+    })
+        .done(function (data) {
+            $("_tbInac_Id").val("");
+            window.location.href = "/institucionFinanciera/Index"
+        });
+});
+
+
+
 document.getElementById('insf_Correo').addEventListener('input', function () {
     campo = event.target;
     valido = document.getElementById('errorcorreo');
@@ -31,4 +48,12 @@ $('#insf_Telefono').change(function () {
 
 $("#insf_Correo").keyup(function () {
     $('#correo').hide();
+});
+
+$("#frmEditInst").submit(function (event) {
+    var Correo = $("#errorcorreo").text();
+   
+    if (Correo !== "") {
+        event.preventDefault();
+    }
 });
