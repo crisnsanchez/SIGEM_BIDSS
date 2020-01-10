@@ -20,37 +20,48 @@ namespace SIGEM_BIDSS.Models
     {
         [Display(Name = "ID")]
         public int prov_Id { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        
         [Display(Name = "Nombre")]
-        public string prov_Nombre { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Contacto")]
-        public string prov_NombreContacto { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Dirección")]
-        public string prov_Direccion { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Display(Name = "Municipio")]
-        public string mun_codigo { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
 
+
+        public string prov_Nombre { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+
+
+        [Display(Name = "Contacto")]
+        public string prov_NombreContacto { get; set; }
+
+
+       
+        [Display(Name = "Dirección")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public string prov_Direccion { get; set; }
+
+       
+        [Display(Name = "Municipio")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public string mun_codigo { get; set; }
+
+
+
         [Display(Name = "Correo Electrónico")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string prov_Email { get; set; }
 
         [Display(Name = "Teléfono")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        [Phone( ErrorMessage = "Por favor complete el campo teléfono")]
-        //[MinLength(11, ErrorMessage = "El campo Teléfono debe tener minimo {1} caracteres")]
+        [Phone(ErrorMessage = "Por favor complete el campo Télefono")]
         public string prov_Telefono { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+       
 
         [Display(Name = "RTN")]
-        public string prov_RTN { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        public string prov_RTN { get; set; }
 
+       
         [Display(Name = "Actividad Económica")]
-
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public short acte_Id { get; set; }
   
 

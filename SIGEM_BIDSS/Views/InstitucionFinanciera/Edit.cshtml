@@ -17,7 +17,7 @@
             </li>
         </ul>
     </div>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "InstitucionFinanciera", FormMethod.Post, new { enctype = "multipart/form-data", id = "frmEditInst" }))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.insf_Id)
@@ -46,7 +46,7 @@
                 <div class="form-group ">
                     @Html.LabelFor(model => model.insf_Telefono, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
-                        @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
+                        @Html.EditorFor(model => model.insf_Telefono, new { htmlAttributes = new { @class = "form-control", @maxlength = "50", @OnKeyPress = "return soloNumeros(event)" } })
                         @Html.ValidationMessageFor(model => model.insf_Telefono, "", new { @class = "text-danger", @Id = "Telefono" })
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     @Html.LabelFor(model => model.insf_Correo, htmlAttributes: new { @class = "control-label col-md-8" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.insf_Correo, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                        <p id="emailEoK" style="color:red">@Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", id = "correo" })</p>
+                        @Html.ValidationMessageFor(model => model.insf_Correo, "", new { @class = "text-danger", id = "errorcorreo" })
                     </div>
                 </div>
                 <div class="form-group">
