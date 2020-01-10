@@ -139,12 +139,13 @@ namespace SIGEM_BIDSS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbProveedor tbProveedor = db.tbProveedor.Find(id);
+            string _depto = db.tbMunicipio.Find(tbProveedor.mun_codigo).dep_codigo;
             if (tbProveedor == null)
             {
                 return HttpNotFound();
             }
 
-
+            ViewBag.mun_codigo = new SelectList(db.tbMunicipio.Where(x => x.dep_codigo == _depto), "mun_codigo", "mun_nombre", tbProveedor.mun_codigo);
             ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion",tbProveedor.acte_Id);
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbProveedor.mun_codigo);
             string depCod = (from _dep in db.tbMunicipio where _dep.mun_codigo == tbProveedor.mun_codigo select _dep.dep_codigo).FirstOrDefault();

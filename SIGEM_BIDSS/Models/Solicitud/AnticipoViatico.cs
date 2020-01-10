@@ -77,18 +77,18 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Razon de Rechazo")]
         public string Anvi_RazonRechazo { get; set; }
 
-        [Display(Name = "Usuario Crea")]
-        public int Anvi_UsuarioCrea { get; set; }
+        //[Display(Name = "Usuario Crea")]
+        //public int Anvi_UsuarioCrea { get; set; }
 
-        [Display(Name = "Fecha Crea")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
-        public System.DateTime Anvi_FechaCrea { get; set; }
+        //[Display(Name = "Fecha Crea")]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
+        //public System.DateTime Anvi_FechaCrea { get; set; }
 
-        [Display(Name = "Usuario Modifica")]
-        public Nullable<int> Anvi_UsuarioModifica { get; set; }
+        //[Display(Name = "Usuario Modifica")]
+        //public Nullable<int> Anvi_UsuarioModifica { get; set; }
 
-        [Display(Name = "Fecha Modifica")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> Anvi_FechaModifica { get; set; }
+        //[Display(Name = "Fecha Modifica")]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy H:mm:ss tt}", ApplyFormatInEditMode = true)]
+        //public Nullable<System.DateTime> Anvi_FechaModifica { get; set; }
     }
 }

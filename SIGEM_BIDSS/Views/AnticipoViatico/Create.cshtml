@@ -9,6 +9,11 @@
     var test = new SIGEM_BIDSS.Models.tbMunicipio();
 }
 
+<style>
+    #Anvi_Comentario {
+        text-transform: uppercase;
+    }
+</style>
 <link href="~/Content/template/plugins/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
 <div class="card card-primary card-outline">
     <div class="card-header d-flex p-0 ui-sortable-handle">
@@ -45,7 +50,8 @@
                         @Html.LabelFor(model => model.Anvi_GralFechaSolicitud, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
                             @Html.EditorFor(model => model.Anvi_GralFechaSolicitud, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                            @Html.ValidationMessageFor(model => model.Anvi_GralFechaSolicitud, "", new { @class = "text-danger", id = "GralFechaSolicitud" })
+                            @*@Html.ValidationMessageFor(model => model.Anvi_GralFechaSolicitud, "", new { @class = "text-danger", id = "GralFechaSolicitud" })*@
+                            @Html.ValidationMessageFor(model => model.Anvi_GralFechaSolicitud, "", new { @class = "text-danger", id = "spanFechaInicio" })
                         </div>
                     </div>
                 </div>
@@ -62,8 +68,9 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.Anvi_FechaViaje, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.Anvi_FechaViaje, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @style = "background-color:white" } })
-                            @Html.ValidationMessageFor(model => model.Anvi_FechaViaje, "", new { @class = "text-danger", id = "FechaViaje" })
+                            @Html.EditorFor(model => model.Anvi_FechaViaje, new { htmlAttributes = new { @class = "form-control", @style = "background-color:white" } })
+                            @*@Html.ValidationMessageFor(model => model.Anvi_FechaViaje, "", new { @class = "text-danger", id = "FechaViaje" })*@
+                            @Html.ValidationMessageFor(model => model.Anvi_FechaViaje, "", new { @class = "text-danger", id = "spanFechaFin" })
                         </div>
                     </div>
                 </div>

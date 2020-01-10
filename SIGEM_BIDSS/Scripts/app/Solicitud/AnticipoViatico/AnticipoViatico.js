@@ -10,7 +10,44 @@ var Anvi_PropositoVisita;
 var Anvi_DiasVisita;
 var Anvi_tptran_Id;
 
+function GetFechas() {
+    var Fechas = {
+        FechaInicio: document.getElementById("Anvi_GralFechaSolicitud").value,
+        FechaFin: document.getElementById("Anvi_FechaViaje").value
+    };
+    return Fechas;
+}
+$("#frmsubmit").click(function () {
+    document.getElementById('spinnerForm').classList.add("overlay");
+    document.getElementById('spinnerDiv').removeAttribute("hidden");
+    $("form").submit()
+})
 
+document.getElementById("Anvi_GralFechaSolicitud").addEventListener("blur", function () {
+    CalcularFechas()
+});
+
+document.getElementById("Anvi_FechaViaje").addEventListener("blur", function () {
+    CalcularFechas()
+});
+
+function CalcularFechas() {
+    vFechas = GetFechas()
+    console.log("JS: " + vFechas);
+
+    $.ajax({
+        url: "/AnticipoViatico/CalcularFecha",
+        method: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ cCalFechas: vFechas }),
+    })
+        .done(function (data) {
+            console.log(data);
+            document.getElementById("spanFechaInicio").innerText = data.MASspan
+            document.getElementById("spanFechaFin").innerText = data.MASspanFecha
+        });
+}
 
 
 $(document).ready(function () {
@@ -24,11 +61,24 @@ function soloNumeros(e) {
     return /^[0-9]+$/.test(tecla);
 }
 
-$("#frmsubmit").click(function () {
-    document.getElementById('spinnerForm').classList.add("overlay");
-    document.getElementById('spinnerDiv').removeAttribute("hidden");
-    $("form").submit()
-})
+function soloLetras(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " '/áéíóúabcdefghijklmnñopqrstuvwxyz";
+    especiales = "8-37-39-46";
+
+    tecla_especial = false
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+        return false;
+    }
+}
 
 $(document).ready(function () {
     $("#Anvi_Cliente")[0].maxLength = 100;
@@ -86,56 +136,56 @@ $(document).ready(function () {
 
 //
 
-$("#btnAutorizacion").click(function () {
-    Formulario={
-        Anvi_JefeInmediato: Anvi_JefeInmediato,
-        Anvi_GralFechaSolicitud: Anvi_GralFechaSolicitud,
-        Anvi_Cliente: Anvi_Cliente,
-        Anvi_FechaViaje: Anvi_FechaViaje,
-        mun_Codigo: mun_Codigo,
-        Anvi_PropositoVisita: Anvi_PropositoVisita,
-        Anvi_DiasVisita: Anvi_DiasVisita,
-        Anvi_tptran_Id: Anvi_tptran_Id,
-        Anvi_Hospedaje: Anvi_Hospedaje,
-        Anvi_Comentario: Anvi_Comentario
+//$("#btnAutorizacion").click(function () {
+//    Formulario={
+//        Anvi_JefeInmediato: Anvi_JefeInmediato,
+//        Anvi_GralFechaSolicitud: Anvi_GralFechaSolicitud,
+//        Anvi_Cliente: Anvi_Cliente,
+//        Anvi_FechaViaje: Anvi_FechaViaje,
+//        mun_Codigo: mun_Codigo,
+//        Anvi_PropositoVisita: Anvi_PropositoVisita,
+//        Anvi_DiasVisita: Anvi_DiasVisita,
+//        Anvi_tptran_Id: Anvi_tptran_Id,
+//        Anvi_Hospedaje: Anvi_Hospedaje,
+//        Anvi_Comentario: Anvi_Comentario
 
-    };
+//    };
 
-    $.ajax({
-        url: "/AnticipoViatico/Create",
-        method: "POST",
-        dataType: 'json',
-        data: { __RequestVerificationToken: token, tbAnticipoViatico: Formulario, dep_codigo: "ajax" }
-    })
-        .done(function (data) {
-            if (data === "Index") {
-                $("#AutorizacionModal").modal("hide");
-                window.location.href = "/AnticipoViatico/Index";
-            }
-            else {
-                Anvi_JefeInmediato = $("#Anvi_JefeInmediato").val();
-                $("#AutorizacionModal").modal("hide");
-                //Anvi_GralFechaSolicitud = $("#Anvi_GralFechaSolicitud").val();
-                //Anvi_Cliente = $("#Anvi_Cliente").val();
-                //Anvi_FechaViaje = $("#Anvi_FechaViaje").val();
-                //dep_codigo = $("#dep_codigo").val();
-                //mun_Codigo = $("#mun_Codigo").val();
-                //Anvi_PropositoVisita = $("#Anvi_PropositoVisita").val();
-                //Anvi_DiasVisita = $("#Anvi_DiasVisita").val();
-                //Anvi_tptran_Id = $("#Anvi_tptran_Id").val();
-            }
-        }).fail(function (xhr, a, error) {
-            console.log("error",error);
-        });
-});
+//    $.ajax({
+//        url: "/AnticipoViatico/Create",
+//        method: "POST",
+//        dataType: 'json',
+//        data: { __RequestVerificationToken: token, tbAnticipoViatico: Formulario, dep_codigo: "ajax" }
+//    })
+//        .done(function (data) {
+//            if (data === "Index") {
+//                $("#AutorizacionModal").modal("hide");
+//                window.location.href = "/AnticipoViatico/Index";
+//            }
+//            else {
+//                Anvi_JefeInmediato = $("#Anvi_JefeInmediato").val();
+//                $("#AutorizacionModal").modal("hide");
+//                //Anvi_GralFechaSolicitud = $("#Anvi_GralFechaSolicitud").val();
+//                //Anvi_Cliente = $("#Anvi_Cliente").val();
+//                //Anvi_FechaViaje = $("#Anvi_FechaViaje").val();
+//                //dep_codigo = $("#dep_codigo").val();
+//                //mun_Codigo = $("#mun_Codigo").val();
+//                //Anvi_PropositoVisita = $("#Anvi_PropositoVisita").val();
+//                //Anvi_DiasVisita = $("#Anvi_DiasVisita").val();
+//                //Anvi_tptran_Id = $("#Anvi_tptran_Id").val();
+//            }
+//        }).fail(function (xhr, a, error) {
+//            console.log("error",error);
+//        });
+//});
 
 //--Date Picker--//
 $('#Anvi_GralFechaSolicitud,#Anvi_FechaViaje').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1990",
     language: "es",
-    daysOfWeekDisabled: "0"
-});
+    daysOfWeekDisabled: "0",
+}).datepicker("setDate", new Date());
 
 $(document).on("change", "#dep_codigo", function () {
     GetMunicipios();
@@ -184,26 +234,26 @@ function GetTodayDate() {
 }
 
 //Prevent Submit
-$("#frmAnticipoViatico").submit(function (event) {    
-    token = $('[name=__RequestVerificationToken]').val();
-    Anvi_JefeInmediato = $("#Anvi_JefeInmediato").val();
-    Anvi_GralFechaSolicitud = $("#Anvi_GralFechaSolicitud").val();
-    Anvi_Cliente = $("#Anvi_Cliente").val();
-    Anvi_FechaViaje = $("#Anvi_FechaViaje").val();
-    dep_codigo = $("#dep_codigo").val();
-    mun_Codigo = $("#mun_Codigo").val();
-    Anvi_PropositoVisita = $("#Anvi_PropositoVisita").val();
-    Anvi_DiasVisita = $("#Anvi_DiasVisita").val();
-    Anvi_tptran_Id = $("#Anvi_tptran_Id").val();
-    Anvi_Hospedaje = $("#Anvi_Hospedaje").val();
-    Anvi_Comentario = $("#Anvi_Comentario").val();
+//$("#frmAnticipoViatico").submit(function (event) {    
+//    token = $('[name=__RequestVerificationToken]').val();
+//    Anvi_JefeInmediato = $("#Anvi_JefeInmediato").val();
+//    Anvi_GralFechaSolicitud = $("#Anvi_GralFechaSolicitud").val();
+//    Anvi_Cliente = $("#Anvi_Cliente").val();
+//    Anvi_FechaViaje = $("#Anvi_FechaViaje").val();
+//    dep_codigo = $("#dep_codigo").val();
+//    mun_Codigo = $("#mun_Codigo").val();
+//    Anvi_PropositoVisita = $("#Anvi_PropositoVisita").val();
+//    Anvi_DiasVisita = $("#Anvi_DiasVisita").val();
+//    Anvi_tptran_Id = $("#Anvi_tptran_Id").val();
+//    Anvi_Hospedaje = $("#Anvi_Hospedaje").val();
+//    Anvi_Comentario = $("#Anvi_Comentario").val();
 
-    if (Anvi_JefeInmediato !== "" && Anvi_GralFechaSolicitud !== "" && Anvi_Cliente !== "" && Anvi_FechaViaje !== "" && dep_codigo !== "" && mun_Codigo !== "" && Anvi_PropositoVisita !== "" && Anvi_DiasVisita !== "" && Anvi_tptran_Id !== "" && Anvi_Hospedaje !== "" && Anvi_Comentario !== "") {
-        event.preventDefault();
-        dep_codigo = "ajax";
-        $("#AutorizacionModal").modal();
-     }
-});
+//    if (Anvi_JefeInmediato !== "" && Anvi_GralFechaSolicitud !== "" && Anvi_Cliente !== "" && Anvi_FechaViaje !== "" && dep_codigo !== "" && mun_Codigo !== "" && Anvi_PropositoVisita !== "" && Anvi_DiasVisita !== "" && Anvi_tptran_Id !== "" && Anvi_Hospedaje !== "" && Anvi_Comentario !== "") {
+//        event.preventDefault();
+//        dep_codigo = "ajax";
+//        $("#AutorizacionModal").modal();
+//     }
+//});
 
 //Quitar mensajes de error cuando el valor cambia
 //DropdownList
@@ -261,7 +311,9 @@ $('#Anvi_Cliente').keyup(function () {
 
 $('#Anvi_FechaViaje').keyup(function () {
     $('#FechaViaje').hide();
+    $('#spanFechaFin').hide();
 });
+
 
 
 $('#Anvi_UsuarioCrea').change(function () {
