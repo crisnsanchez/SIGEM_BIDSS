@@ -23,7 +23,7 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Index()
         {
             
-            var tbAnticipoViatico = db.tbAnticipoViatico.Where(t=>t.est_Id==GeneralFunctions.Aprobada).Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMunicipio).Include(t => t.tbTipoTransporte);
+            var tbAnticipoViatico = db.tbAnticipoViatico.Where(t=>t.est_Id==GeneralFunctions.AprobadaPorJefe).Include(t => t.tbEmpleado).Include(t => t.tbEmpleado1).Include(t => t.tbMunicipio).Include(t => t.tbTipoTransporte);
             return View(tbAnticipoViatico.ToList());
         }
 
@@ -83,6 +83,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             ViewBag.uni_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
             tbAnticipoViatico tbAnticipoViatico = db.tbAnticipoViatico.Find(id);
             tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = new tbLiquidacionAnticipoViatico();
@@ -98,13 +99,6 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbLiquidacionAnticipoViatico);
         }
 
-
-        public ActionResult IdCreate(int? Id)
-        {
-        //    ViewBag.Mensaje = mensaje;
-
-            return View();
-        }
         // POST: LiquidacionAnticipoViatico/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -119,10 +113,13 @@ namespace SIGEM_BIDSS.Controllers
                 try
                 {
                     cGetUserInfo GetEmployee = null;
+                    cGetUserInfo EmpJefe = null;
+                    bool Result = false, ResultAdm = false;
+                
                     if (ModelState.IsValid)
                     {
                         int EmployeeID = Function.GetUser(out UserName);
-                        bool Result = false, ResultAdm = false;
+                      
 
                         IEnumerable<object> _List = null;
                         string ErrorMessage = "";
@@ -145,18 +142,14 @@ namespace SIGEM_BIDSS.Controllers
 
                         else
                         {
-                          
-                            var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                            GetEmployee = Function.GetUserInfo(EmployeeID);
+                            
 
-                            Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
-                            ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, _Parameters.par_CorreoRRHH);
-                            if (!Result) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
-                            if (!ResultAdm) Function.BitacoraErrores("LiquidacionAnticipoViatico", "CreatePost", UserName, ErrorEmail);
+                    
+
                             TempData["swalfunction"] = "true";
 
                             
-                            Session["NombreLiquidacion"] = ErrorMessage;
+                            Session["NombreLiquidacione"] = ErrorMessage;
 
 
                             return RedirectToAction("Create", "LiquidacionAnticipoViaticoDetalle");

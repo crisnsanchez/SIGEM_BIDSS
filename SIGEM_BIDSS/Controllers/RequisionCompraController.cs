@@ -99,7 +99,6 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (ModelState.IsValid)
                 {
-
                     Insert = db.UDP_Adm_tbRequisionCompra_Insert(EmployeeID,
                                                                 tbRequisionCompra.are_Id,
                                                                 Function.DatetimeNow(),
