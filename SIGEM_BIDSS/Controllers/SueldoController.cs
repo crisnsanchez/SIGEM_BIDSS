@@ -111,7 +111,7 @@ namespace SIGEM_BIDSS.Controllers
 
                 var Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id select new { emp_Id = based.emp_Id }).SingleOrDefault();
 
-                if (Existe == null)
+                if (Existe != null)
                 {
                     ViewBag.Existencia = Existe;
                     ModelState.AddModelError("", "Esta empleado ya tiene sueldo.");
