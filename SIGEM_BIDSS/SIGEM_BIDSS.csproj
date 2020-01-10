@@ -218,7 +218,7 @@
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CargosController.cs" />
-    <Compile Include="Controllers\DeduccionInstitucionFinancierasController.cs" />
+    <Compile Include="Controllers\DeduccionInstitucionFinancieraController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
@@ -3460,11 +3460,6 @@
     <Content Include="Views\tbTipoPermiso\Index.cshtml" />
     <Content Include="Views\Home\Error500.cshtml" />
     <Content Include="Views\CodeQR\Index.cshtml" />
-    <Content Include="Views\DeduccionInstitucionFinancieras\Create.cshtml" />
-    <Content Include="Views\DeduccionInstitucionFinancieras\Delete.cshtml" />
-    <Content Include="Views\DeduccionInstitucionFinancieras\Details.cshtml" />
-    <Content Include="Views\DeduccionInstitucionFinancieras\Edit.cshtml" />
-    <Content Include="Views\DeduccionInstitucionFinancieras\Index.cshtml" />
     <Content Include="Views\Parametro\Create.cshtml" />
     <Content Include="Views\Parametro\Delete.cshtml" />
     <Content Include="Views\Parametro\Details.cshtml" />
@@ -3563,6 +3558,11 @@
     <Content Include="Views\LiquidacionAnticipoViatico\_Details.cshtml" />
     <Content Include="Views\RequisionCompra\_Modales.cshtml" />
     <Content Include="Views\RequisionCompra\_RequisicionDetalle.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinanciera\Create.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinanciera\Delete.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinanciera\Details.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinanciera\Edit.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinanciera\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
