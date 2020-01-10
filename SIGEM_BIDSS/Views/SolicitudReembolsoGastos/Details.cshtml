@@ -195,7 +195,7 @@
             </div>
 
 
-     
+
 
         </div>
     </div>
@@ -206,6 +206,16 @@
     </div>
 </div>
 
+@Html.Partial("_Modales")
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/app/General_Details.js"></script>
+
+    <script src="~/Scripts/app/Solicitud/ModalesReembolsoGastos.js"></script>
+}
 
 
 
