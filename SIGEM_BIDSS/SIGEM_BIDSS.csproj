@@ -452,6 +452,12 @@
     <Compile Include="Models\UDP_Inv_tbProducto_ValorCodigo_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_rrhh_tbEmpleado_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -1074,6 +1080,7 @@
     <Content Include="Content\template\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\app\Categoria.js" />
     <Content Include="Scripts\app\DataTables.js" />
+    <Content Include="Scripts\app\DeduccionInstitucionFinaciera.js" />
     <Content Include="Scripts\app\General.js" />
     <Content Include="Scripts\app\General_Details.js" />
     <Content Include="Scripts\app\General_PCAE.js" />
@@ -3563,6 +3570,7 @@
     <Content Include="Views\DeduccionInstitucionFinanciera\Details.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinanciera\Edit.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinanciera\Index.cshtml" />
+    <Content Include="Views\DeduccionInstitucionFinanciera\_EmpleadoBus.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

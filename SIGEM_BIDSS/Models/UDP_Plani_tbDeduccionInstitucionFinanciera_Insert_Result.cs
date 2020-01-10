@@ -11,7 +11,7 @@ namespace SIGEM_BIDSS.Models
 {
     using System;
     
-    public partial class UDP_Adm_tbAnticipoSalario_Insert_Result
+    public partial class UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result
     {
         public string MensajeError { get; set; }
     }

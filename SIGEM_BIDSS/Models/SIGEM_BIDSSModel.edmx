@@ -830,6 +830,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldoHistorico_emp_Id">
+          <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
+          <End Role="tbSueldo" Type="Self.tbSueldo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleado">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbSueldo">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id">
           <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
           <End Role="tbSueldo" Type="Self.tbSueldo" Multiplicity="*" />
@@ -851,6 +863,18 @@
             </Principal>
             <Dependent Role="tbDeduccionInstitucionFinanciera">
               <PropertyRef Name="insf_IdInstitucionFinanciera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldoHistorico_tmo_Id">
+          <End Role="tbMoneda" Type="Self.tbMoneda" Multiplicity="1" />
+          <End Role="tbSueldo" Type="Self.tbSueldo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMoneda">
+              <PropertyRef Name="tmo_Id" />
+            </Principal>
+            <Dependent Role="tbSueldo">
+              <PropertyRef Name="tmo_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1712,6 +1736,25 @@
           <Parameter Name="prov_UsuarioModifica" Type="int" Mode="In" />
           <Parameter Name="prov_FechaModifica" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="deif_Monto" Type="decimal" Mode="In" />
+          <Parameter Name="deif_Comentarios" Type="varchar" Mode="In" />
+          <Parameter Name="deif_UsuarioCrea" Type="int" Mode="In" />
+          <Parameter Name="deif_FechaCrea" Type="datetime" Mode="In" />
+          <Parameter Name="deif_Activo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
+          <Parameter Name="deif_IdDeduccionInstFinanciera" Type="int" Mode="In" />
+          <Parameter Name="insf_IdInstitucionFinanciera" Type="int" Mode="In" />
+          <Parameter Name="emp_Id" Type="int" Mode="In" />
+          <Parameter Name="deif_Monto" Type="decimal" Mode="In" />
+          <Parameter Name="deif_Comentarios" Type="varchar" Mode="In" />
+          <Parameter Name="deif_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="deif_FechaModifica" Type="datetime" Mode="In" />
+          <Parameter Name="deif_Activo" Type="bit" Mode="In" />
+        </Function>
         <Function Name="UDP_Plani_tbInstitucionFinanciera_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Plani">
           <Parameter Name="insf_Id" Type="int" Mode="In" />
           <Parameter Name="insf_DescInstitucionFinanc" Type="varchar" Mode="In" />
@@ -1925,6 +1968,10 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
           </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldoHistorico_emp_Id" Association="Self.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldoHistorico_emp_Id">
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+            <End Role="tbSueldo" EntitySet="tbSueldo" />
+          </AssociationSet>
           <AssociationSet Name="FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" Association="Self.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id">
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
@@ -1932,6 +1979,10 @@
           <AssociationSet Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" Association="Self.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
             <End Role="tbInstitucionFinanciera" EntitySet="tbInstitucionFinanciera" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldoHistorico_tmo_Id" Association="Self.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldoHistorico_tmo_Id">
+            <End Role="tbMoneda" EntitySet="tbMoneda" />
+            <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
           <AssociationSet Name="FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" Association="Self.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id">
             <End Role="tbMoneda" EntitySet="tbMoneda" />
@@ -2843,16 +2894,6 @@
             <Parameter Name="Reqde_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="Reqde_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Adm_tbRequisionCompra_Insert1" ReturnType="Collection(String)">
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="are_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Reqco_GralFechaSolicitud" Mode="In" Type="DateTime" />
-            <Parameter Name="Reqco_Comentario" Mode="In" Type="String" />
-            <Parameter Name="est_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Reqco_RazonRechazo" Mode="In" Type="String" />
-            <Parameter Name="Reqco_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="Reqco_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Adm_tbSolicitudReembolsoGastos_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="Reemga_JefeInmediato" Mode="In" Type="Int32" />
@@ -3099,6 +3140,25 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
+          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result)">
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="deif_Monto" Mode="In" Type="Decimal" />
+            <Parameter Name="deif_Comentarios" Mode="In" Type="String" />
+            <Parameter Name="deif_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="deif_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="deif_Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result)">
+            <Parameter Name="deif_IdDeduccionInstFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_IdInstitucionFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="deif_Monto" Mode="In" Type="Decimal" />
+            <Parameter Name="deif_Comentarios" Mode="In" Type="String" />
+            <Parameter Name="deif_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="deif_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="deif_Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -3350,6 +3410,7 @@
         </ComplexType>
         <ComplexType Name="UDP_Adm_tbRequisionCompra_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ScopeIdentity" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Adm_tbRequisionCompra_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
@@ -4559,6 +4620,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5102,7 +5169,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbRequisionCompra_Insert1" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbRequisionCompra_Insert" />
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbSolicitudReembolsoGastos_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbSolicitudReembolsoGastos_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result">
@@ -5658,6 +5724,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbRequisionCompra_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbRequisionCompra_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbRequisionCompra_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+                <ScalarProperty Name="ScopeIdentity" ColumnName="ScopeIdentity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
