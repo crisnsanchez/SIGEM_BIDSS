@@ -3571,6 +3571,7 @@
     <Content Include="Views\DeduccionInstitucionFinanciera\Edit.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinanciera\Index.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinanciera\_EmpleadoBus.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalles\_Modales.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
