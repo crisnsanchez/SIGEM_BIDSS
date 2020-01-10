@@ -13,7 +13,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-upload mr-1"></i>
-            Solicitud de Vacaciones
+            Solicitud de Requisicion
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -29,26 +29,31 @@
         <div class="form-horizontal">
             <div class="card-body">
                 @Html.HiddenFor(model => model.Reqco_Id)
-                <div class="form-row">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+                <div class="form-row">
                     <div class="form-group col-md-6">
+
                         @Html.LabelFor(model => model.prod_Id, null, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
-                            @Html.DropDownList("prod_Id", null, "Seleccione un Producto", htmlAttributes: new { @class = "form-control select2", @style = "width: 100%;" })
-                            <div id="Validationprod_IdCreate">
+                            <div class="input-group date" id="prod_Search" data-target-input="nearest">
+                                <input type="text" id="prod_Text" class="form-control datetimepicker-input" data-target="#prod_Search" readonly="readonly">
+
+                                <input type="hidden" id="prod_Id">
+                                <div class="input-group-append" data-target="#prod_Search" data-toggle="datetimepicker">
+                                    <button id="SelectProduct" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAgregarProducto"><span class="fa fa-search"></span></button>
+                                </div>
+                            </div>
+                            <div id="Validationprod_TextCreate">
                                 @Html.ValidationMessageFor(model => model.prod_Id, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-                        <div class="col-md-1">
-                            <button id="SelectProduct" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAgregarProducto"><span class="fa fa-search"></span></button>
                         </div>
                     </div>
                     <div class="form-group  col-md-6">
                         @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
                             <input id="number" type="hidden" />
-                            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)" } })
                             <div id="ValidationCantidadCreate">
                                 @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
                             </div>
@@ -73,10 +78,9 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <table class="table table-bordered table-hover" id="dataTable">
+                <div class="form-row col-lg-12">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-hover table-responsive-lg" id="dataTable">
                             <thead>
                                 <tr>
                                     <th>
@@ -99,7 +103,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        @Html.ActionLink("Cancelar", "Index", "RequisionCompra", new { @class = "btn btn-default" })
                     </div>
                 </div>
             </div>

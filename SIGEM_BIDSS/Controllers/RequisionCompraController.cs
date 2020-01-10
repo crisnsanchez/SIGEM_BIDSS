@@ -36,6 +36,7 @@ namespace SIGEM_BIDSS.Controllers
             tbRequisionCompra tbRequisionCompra = await db.tbRequisionCompra.FindAsync(id);
             if (tbRequisionCompra.est_Id == GeneralFunctions.Enviada)
             {
+                ViewBag.RequisicionDetalle = await db.tbRequisionCompraDetalle.Where(x => x.Reqco_Id == tbRequisionCompra.Reqco_Id).ToListAsync();
                 if (UpdateState(out vReturn, tbRequisionCompra, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
                 {
                     TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
@@ -50,17 +51,38 @@ namespace SIGEM_BIDSS.Controllers
                 return HttpNotFound();
             }
             return View(tbRequisionCompra);
-          
-            return View(tbRequisionCompra);
-        }
+          }
 
         // GET: RequisionCompra/Create
         public ActionResult Create()
         {
-            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion");
+            string UserName = "";
+            int EmployeeID = Function.GetUser(out UserName);
+            cGetUserInfo GetEmployee = null, EmpJefe = null;
+            tbRequisionCompra tbRequisionCompra = new tbRequisionCompra();
+            var UserInfo = (from _emp in db.tbEmpleado 
+                            join _pto in db.tbPuesto on _emp.pto_Id equals _pto.pto_Id 
+                            join _are in db.tbArea on _pto.are_Id equals _are.are_Id
+                            where _emp.emp_Id == EmployeeID
+                            select new { _emp, _are , _pto }).FirstOrDefault();
+
+            var UserAreaInfo = (from _emp in db.tbEmpleado
+                                join _pto in db.tbPuesto on _emp.pto_Id equals _pto.pto_Id
+                                join _are in db.tbArea on _pto.are_Id equals _are.are_Id
+                                where _emp.emp_EsJefe == true && _pto.are_Id == UserInfo._are.are_Id && _pto.pto_Id == UserInfo._pto.pto_Id
+                                select new { _emp, _are }).FirstOrDefault();
+
+            GetEmployee = Function.GetUserInfo(EmployeeID);
+            EmpJefe = Function.GetUserInfo(UserInfo._emp.emp_Id);
+
+            tbRequisionCompra.Reqco_Jefe = UserAreaInfo._emp.emp_Nombres + " " + UserAreaInfo._emp.emp_Apellidos;
+            tbRequisionCompra.are_Id = UserAreaInfo._are.are_Id;
+            tbRequisionCompra.Area = UserAreaInfo._are.are_Descripcion;
+
+            ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", UserInfo._pto.are_Id);
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
-            return View();
+            return View(tbRequisionCompra);
         }
 
         // POST: RequisionCompra/Create
@@ -70,13 +92,13 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "are_Id,Reqco_GralFechaSolicitud,Reqco_Comentario,Reqco_RazonRechazo")] tbRequisionCompra tbRequisionCompra)
         {
-            string UserName = "", ErrorEmail = "", ErrorMessage = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "",Scope = "";
             bool Result = false, ResultAdm = false;
             IEnumerable<object> Insert = null;
 
             try
             {
-                cGetUserInfo GetEmployee = null;
+                cGetUserInfo GetEmployee = null, EmpJefe = null;
                 int EmployeeID = Function.GetUser(out UserName);
 
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
@@ -108,7 +130,9 @@ namespace SIGEM_BIDSS.Controllers
                                                                 EmployeeID,
                                                                 Function.DatetimeNow());
                     foreach (UDP_Adm_tbRequisionCompra_Insert_Result Res in Insert)
-                        ErrorMessage = Res.MensajeError;
+                    {
+                        ErrorMessage = Res.MensajeError; Scope = Res.ScopeIdentity;
+                    }
                     if (ErrorMessage.StartsWith("-1"))
                     {
                         Function.BitacoraErrores("RequisionCompra", "CreatePost", UserName, ErrorMessage);
@@ -116,16 +140,33 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+                        var UserInfo = (from _emp in db.tbEmpleado
+                                        join _pto in db.tbPuesto on _emp.pto_Id equals _pto.pto_Id
+                                        join _are in db.tbArea on _pto.are_Id equals _are.are_Id
+                                        where _emp.emp_Id == EmployeeID
+                                        select new { _emp, _are, _pto }).FirstOrDefault();
+
+                        var UserAreaInfo = (from _emp in db.tbEmpleado
+                                            join _pto in db.tbPuesto on _emp.pto_Id equals _pto.pto_Id
+                                            join _are in db.tbArea on _pto.are_Id equals _are.are_Id
+                                            where _emp.emp_EsJefe == true && _pto.are_Id == UserInfo._are.are_Id && _pto.pto_Id == UserInfo._pto.pto_Id
+                                            select new { _emp, _are }).FirstOrDefault();
                         GetEmployee = Function.GetUserInfo(EmployeeID);
+                        EmpJefe = Function.GetUserInfo(UserAreaInfo._emp.emp_Id);
+
 
                         Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, _Parameters.par_CorreoRRHH);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
+
+
 
                         if (!Result) Function.BitacoraErrores("RequisionCompra", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("RequisionCompra", "CreatePost", UserName, ErrorEmail);
 
+                        Session["Reqco_Id"] = Scope;
                         TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
-                        return RedirectToAction("Index");
+
+                        return RedirectToAction("Create", "RequisionCompraDetalle");
                     }
 
                 }
@@ -136,7 +177,57 @@ namespace SIGEM_BIDSS.Controllers
             }
             return View(tbRequisionCompra);
         }
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult ApprovePorJefe(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbRequisionCompra tbRequisionCompra = db.tbRequisionCompra.Find(id);
+            if (tbRequisionCompra.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbRequisionCompra, GeneralFunctions.AprobadaPorJefe, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbRequisionCompra == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
 
+        [HttpPost]
+        public JsonResult ApprovePorAdmin(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbRequisionCompra tbRequisionCompra = db.tbRequisionCompra.Find(id);
+            if (tbRequisionCompra.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbRequisionCompra, GeneralFunctions.AprobadaPorAdmin, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbRequisionCompra == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        // GET: AnticipoSalario/Approve/5
 
         public bool UpdateState(out string pvReturn, tbRequisionCompra tbRequisionCompra, int State, string RazonRechazo)
         {

@@ -156,10 +156,6 @@
                         <div class="col-md-11">
                             @Html.EditorFor(model => model.emp_CorreoElectronico, new { htmlAttributes = new { @class = "form-control", onkeyup = "this.value=this.value.toUpperCase(),noespaciosincio(this)" } })
                             @Html.ValidationMessageFor(model => model.emp_CorreoElectronico, "", new { @class = "text-danger", id = "email" })
-
-
-
-
                             <div id="emailOK" class="text-danger">
                                 <p style="color:red" class="text-danger"></p>
                             </div>
@@ -175,19 +171,8 @@
                             @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger", id = "area" })
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.pto_Id, "Puesto", new { @class = "control-label col-md-6" })
-                        <div class="col-md-11">
-                            <select class="form-control" name="pto_Id" id="pto_Id">
-                                <option>Seleccione Puesto</option>
-                            </select>
-                            @Html.ValidationMessageFor(model => model.pto_Id, "", new { @class = "text-danger", id = "Puesto" })
-                        </div>
-                    </div>
                 </div>
-
                 <div class="form-row">
-
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.emp_EsJefe, "¿Es Jefe?", htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
@@ -202,7 +187,6 @@
                             @Html.ValidationMessageFor(model => model.emp_Direccion, "", new { @class = "text-danger", id = "Direccion" })
                         </div>
                     </div>
-
                 </div>
 
                 <div class="form-row">

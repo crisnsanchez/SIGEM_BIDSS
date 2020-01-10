@@ -2528,61 +2528,29 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_rrhh_tbEmpleado_Insert_Result>("UDP_rrhh_tbEmpleado_Insert", emp_NombresParameter, emp_ApellidosParameter, emp_SexoParameter, emp_FechaNacimientoParameter, emp_IdentificacionParameter, emp_TelefonoParameter, emp_CorreoElectronicoParameter, emp_EsJefeParameter, tps_IdParameter, pto_IdParameter, emp_FechaIngresoParameter, emp_DireccionParameter, emp_PathImageParameter, mun_IdParameter, emp_UsuarioCreaParameter, est_IdParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastos_Insert(Nullable<int> emp_Id, Nullable<int> reemga_JefeInmediato, Nullable<System.DateTime> reemga_GralFechaSolicitud, Nullable<System.DateTime> reemga_FechaViaje, string reemga_Cliente, string mun_codigo, string reemga_PropositoVisita, Nullable<int> reemga_DiasVisita, string reemga_Comentario, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioCrea, Nullable<System.DateTime> reemga_FechaCrea)
+        public virtual ObjectResult<UDP_Adm_tbAnticipoViatico_Update_Result> UDP_Adm_tbAnticipoViatico_Update(Nullable<int> anvi_Id, Nullable<int> est_Id, string anvi_RazonRechazo, Nullable<int> anvi_UsuarioModifica, Nullable<System.DateTime> anvi_FechaModifica)
         {
-            var emp_IdParameter = emp_Id.HasValue ?
-                new ObjectParameter("emp_Id", emp_Id) :
-                new ObjectParameter("emp_Id", typeof(int));
-    
-            var reemga_JefeInmediatoParameter = reemga_JefeInmediato.HasValue ?
-                new ObjectParameter("Reemga_JefeInmediato", reemga_JefeInmediato) :
-                new ObjectParameter("Reemga_JefeInmediato", typeof(int));
-    
-            var reemga_GralFechaSolicitudParameter = reemga_GralFechaSolicitud.HasValue ?
-                new ObjectParameter("Reemga_GralFechaSolicitud", reemga_GralFechaSolicitud) :
-                new ObjectParameter("Reemga_GralFechaSolicitud", typeof(System.DateTime));
-    
-            var reemga_FechaViajeParameter = reemga_FechaViaje.HasValue ?
-                new ObjectParameter("Reemga_FechaViaje", reemga_FechaViaje) :
-                new ObjectParameter("Reemga_FechaViaje", typeof(System.DateTime));
-    
-            var reemga_ClienteParameter = reemga_Cliente != null ?
-                new ObjectParameter("Reemga_Cliente", reemga_Cliente) :
-                new ObjectParameter("Reemga_Cliente", typeof(string));
-    
-            var mun_codigoParameter = mun_codigo != null ?
-                new ObjectParameter("mun_codigo", mun_codigo) :
-                new ObjectParameter("mun_codigo", typeof(string));
-    
-            var reemga_PropositoVisitaParameter = reemga_PropositoVisita != null ?
-                new ObjectParameter("Reemga_PropositoVisita", reemga_PropositoVisita) :
-                new ObjectParameter("Reemga_PropositoVisita", typeof(string));
-    
-            var reemga_DiasVisitaParameter = reemga_DiasVisita.HasValue ?
-                new ObjectParameter("Reemga_DiasVisita", reemga_DiasVisita) :
-                new ObjectParameter("Reemga_DiasVisita", typeof(int));
-    
-            var reemga_ComentarioParameter = reemga_Comentario != null ?
-                new ObjectParameter("Reemga_Comentario", reemga_Comentario) :
-                new ObjectParameter("Reemga_Comentario", typeof(string));
+            var anvi_IdParameter = anvi_Id.HasValue ?
+                new ObjectParameter("Anvi_Id", anvi_Id) :
+                new ObjectParameter("Anvi_Id", typeof(int));
     
             var est_IdParameter = est_Id.HasValue ?
                 new ObjectParameter("est_Id", est_Id) :
                 new ObjectParameter("est_Id", typeof(int));
     
-            var reemga_RazonRechazoParameter = reemga_RazonRechazo != null ?
-                new ObjectParameter("Reemga_RazonRechazo", reemga_RazonRechazo) :
-                new ObjectParameter("Reemga_RazonRechazo", typeof(string));
+            var anvi_RazonRechazoParameter = anvi_RazonRechazo != null ?
+                new ObjectParameter("Anvi_RazonRechazo", anvi_RazonRechazo) :
+                new ObjectParameter("Anvi_RazonRechazo", typeof(string));
     
-            var reemga_UsuarioCreaParameter = reemga_UsuarioCrea.HasValue ?
-                new ObjectParameter("Reemga_UsuarioCrea", reemga_UsuarioCrea) :
-                new ObjectParameter("Reemga_UsuarioCrea", typeof(int));
+            var anvi_UsuarioModificaParameter = anvi_UsuarioModifica.HasValue ?
+                new ObjectParameter("Anvi_UsuarioModifica", anvi_UsuarioModifica) :
+                new ObjectParameter("Anvi_UsuarioModifica", typeof(int));
     
-            var reemga_FechaCreaParameter = reemga_FechaCrea.HasValue ?
-                new ObjectParameter("Reemga_FechaCrea", reemga_FechaCrea) :
-                new ObjectParameter("Reemga_FechaCrea", typeof(System.DateTime));
+            var anvi_FechaModificaParameter = anvi_FechaModifica.HasValue ?
+                new ObjectParameter("Anvi_FechaModifica", anvi_FechaModifica) :
+                new ObjectParameter("Anvi_FechaModifica", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastos_Insert", emp_IdParameter, reemga_JefeInmediatoParameter, reemga_GralFechaSolicitudParameter, reemga_FechaViajeParameter, reemga_ClienteParameter, mun_codigoParameter, reemga_PropositoVisitaParameter, reemga_DiasVisitaParameter, reemga_ComentarioParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioCreaParameter, reemga_FechaCreaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoViatico_Update_Result>("UDP_Adm_tbAnticipoViatico_Update", anvi_IdParameter, est_IdParameter, anvi_RazonRechazoParameter, anvi_UsuarioModificaParameter, anvi_FechaModificaParameter);
         }
     
         public virtual ObjectResult<UDP_Inv_tbProducto_Update_Result> UDP_Inv_tbProducto_Update(Nullable<int> prod_Id, string prod_CodigoBarras, string prod_Descripcion, string prod_Marca, string prod_Modelo, string prod_Talla, string prod_Color, Nullable<int> pscat_Id, Nullable<int> uni_Id, Nullable<int> prov_Id, Nullable<bool> prod_EsActivo, string prod_RazonInactivacion, Nullable<int> prod_UsuarioModifica, Nullable<System.DateTime> prod_FechaModifica)
@@ -3002,6 +2970,88 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAccionPersonal_Update_Result>("UDP_Adm_tbAccionPersonal_Update", acp_IdParameter, est_IdParameter, acp_RazonRechazoParameter, acp_UsuarioModificaParameter, acp_FechaModificaParameter);
         }
     
+        public virtual ObjectResult<UDP_Adm_tbRequisionCompra_Update_Result> UDP_Adm_tbRequisionCompra_Update(Nullable<int> reqco_Id, Nullable<int> est_Id, string reqco_RazonRechazo, Nullable<int> reqco_UsuarioModifica, Nullable<System.DateTime> reqco_FechaModifica)
+        {
+            var reqco_IdParameter = reqco_Id.HasValue ?
+                new ObjectParameter("Reqco_Id", reqco_Id) :
+                new ObjectParameter("Reqco_Id", typeof(int));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var reqco_RazonRechazoParameter = reqco_RazonRechazo != null ?
+                new ObjectParameter("Reqco_RazonRechazo", reqco_RazonRechazo) :
+                new ObjectParameter("Reqco_RazonRechazo", typeof(string));
+    
+            var reqco_UsuarioModificaParameter = reqco_UsuarioModifica.HasValue ?
+                new ObjectParameter("Reqco_UsuarioModifica", reqco_UsuarioModifica) :
+                new ObjectParameter("Reqco_UsuarioModifica", typeof(int));
+    
+            var reqco_FechaModificaParameter = reqco_FechaModifica.HasValue ?
+                new ObjectParameter("Reqco_FechaModifica", reqco_FechaModifica) :
+                new ObjectParameter("Reqco_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompra_Update_Result>("UDP_Adm_tbRequisionCompra_Update", reqco_IdParameter, est_IdParameter, reqco_RazonRechazoParameter, reqco_UsuarioModificaParameter, reqco_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result> UDP_Adm_tbSolicitudReembolsoGastos_Insert(Nullable<int> emp_Id, Nullable<int> reemga_JefeInmediato, Nullable<System.DateTime> reemga_GralFechaSolicitud, Nullable<System.DateTime> reemga_FechaViaje, string reemga_Cliente, string mun_codigo, string reemga_PropositoVisita, Nullable<int> reemga_DiasVisita, string reemga_Comentario, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioCrea, Nullable<System.DateTime> reemga_FechaCrea)
+        {
+            var emp_IdParameter = emp_Id.HasValue ?
+                new ObjectParameter("emp_Id", emp_Id) :
+                new ObjectParameter("emp_Id", typeof(int));
+    
+            var reemga_JefeInmediatoParameter = reemga_JefeInmediato.HasValue ?
+                new ObjectParameter("Reemga_JefeInmediato", reemga_JefeInmediato) :
+                new ObjectParameter("Reemga_JefeInmediato", typeof(int));
+    
+            var reemga_GralFechaSolicitudParameter = reemga_GralFechaSolicitud.HasValue ?
+                new ObjectParameter("Reemga_GralFechaSolicitud", reemga_GralFechaSolicitud) :
+                new ObjectParameter("Reemga_GralFechaSolicitud", typeof(System.DateTime));
+    
+            var reemga_FechaViajeParameter = reemga_FechaViaje.HasValue ?
+                new ObjectParameter("Reemga_FechaViaje", reemga_FechaViaje) :
+                new ObjectParameter("Reemga_FechaViaje", typeof(System.DateTime));
+    
+            var reemga_ClienteParameter = reemga_Cliente != null ?
+                new ObjectParameter("Reemga_Cliente", reemga_Cliente) :
+                new ObjectParameter("Reemga_Cliente", typeof(string));
+    
+            var mun_codigoParameter = mun_codigo != null ?
+                new ObjectParameter("mun_codigo", mun_codigo) :
+                new ObjectParameter("mun_codigo", typeof(string));
+    
+            var reemga_PropositoVisitaParameter = reemga_PropositoVisita != null ?
+                new ObjectParameter("Reemga_PropositoVisita", reemga_PropositoVisita) :
+                new ObjectParameter("Reemga_PropositoVisita", typeof(string));
+    
+            var reemga_DiasVisitaParameter = reemga_DiasVisita.HasValue ?
+                new ObjectParameter("Reemga_DiasVisita", reemga_DiasVisita) :
+                new ObjectParameter("Reemga_DiasVisita", typeof(int));
+    
+            var reemga_ComentarioParameter = reemga_Comentario != null ?
+                new ObjectParameter("Reemga_Comentario", reemga_Comentario) :
+                new ObjectParameter("Reemga_Comentario", typeof(string));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var reemga_RazonRechazoParameter = reemga_RazonRechazo != null ?
+                new ObjectParameter("Reemga_RazonRechazo", reemga_RazonRechazo) :
+                new ObjectParameter("Reemga_RazonRechazo", typeof(string));
+    
+            var reemga_UsuarioCreaParameter = reemga_UsuarioCrea.HasValue ?
+                new ObjectParameter("Reemga_UsuarioCrea", reemga_UsuarioCrea) :
+                new ObjectParameter("Reemga_UsuarioCrea", typeof(int));
+    
+            var reemga_FechaCreaParameter = reemga_FechaCrea.HasValue ?
+                new ObjectParameter("Reemga_FechaCrea", reemga_FechaCrea) :
+                new ObjectParameter("Reemga_FechaCrea", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastos_Insert", emp_IdParameter, reemga_JefeInmediatoParameter, reemga_GralFechaSolicitudParameter, reemga_FechaViajeParameter, reemga_ClienteParameter, mun_codigoParameter, reemga_PropositoVisitaParameter, reemga_DiasVisitaParameter, reemga_ComentarioParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioCreaParameter, reemga_FechaCreaParameter);
+        }
+    
         public virtual ObjectResult<UDP_Adm_tbRequisionCompra_Insert_Result> UDP_Adm_tbRequisionCompra_Insert(Nullable<int> emp_Id, Nullable<int> are_Id, Nullable<System.DateTime> reqco_GralFechaSolicitud, string reqco_Comentario, Nullable<int> est_Id, string reqco_RazonRechazo, Nullable<int> reqco_UsuarioCrea, Nullable<System.DateTime> reqco_FechaCrea)
         {
             var emp_IdParameter = emp_Id.HasValue ?
@@ -3039,32 +3089,7 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompra_Insert_Result>("UDP_Adm_tbRequisionCompra_Insert", emp_IdParameter, are_IdParameter, reqco_GralFechaSolicitudParameter, reqco_ComentarioParameter, est_IdParameter, reqco_RazonRechazoParameter, reqco_UsuarioCreaParameter, reqco_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Adm_tbRequisionCompra_Update_Result> UDP_Adm_tbRequisionCompra_Update(Nullable<int> reqco_Id, Nullable<int> est_Id, string reqco_RazonRechazo, Nullable<int> reqco_UsuarioModifica, Nullable<System.DateTime> reqco_FechaModifica)
-        {
-            var reqco_IdParameter = reqco_Id.HasValue ?
-                new ObjectParameter("Reqco_Id", reqco_Id) :
-                new ObjectParameter("Reqco_Id", typeof(int));
-    
-            var est_IdParameter = est_Id.HasValue ?
-                new ObjectParameter("est_Id", est_Id) :
-                new ObjectParameter("est_Id", typeof(int));
-    
-            var reqco_RazonRechazoParameter = reqco_RazonRechazo != null ?
-                new ObjectParameter("Reqco_RazonRechazo", reqco_RazonRechazo) :
-                new ObjectParameter("Reqco_RazonRechazo", typeof(string));
-    
-            var reqco_UsuarioModificaParameter = reqco_UsuarioModifica.HasValue ?
-                new ObjectParameter("Reqco_UsuarioModifica", reqco_UsuarioModifica) :
-                new ObjectParameter("Reqco_UsuarioModifica", typeof(int));
-    
-            var reqco_FechaModificaParameter = reqco_FechaModifica.HasValue ?
-                new ObjectParameter("Reqco_FechaModifica", reqco_FechaModifica) :
-                new ObjectParameter("Reqco_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompra_Update_Result>("UDP_Adm_tbRequisionCompra_Update", reqco_IdParameter, est_IdParameter, reqco_RazonRechazoParameter, reqco_UsuarioModificaParameter, reqco_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Adm_tbRequisionCompraDetalle_Insert_Result> UDP_Adm_tbRequisionCompraDetalle_Insert(Nullable<int> reqco_Id, Nullable<int> prod_Id, Nullable<decimal> reqde_Cantidad, string reqde_Justificacion, Nullable<int> reqde_UsuarioModifica, Nullable<System.DateTime> reqde_FechaModifica)
+        public virtual ObjectResult<UDP_Adm_tbRequisionCompraDetalle_Insert_Result> UDP_Adm_tbRequisionCompraDetalle_Insert(Nullable<int> reqco_Id, Nullable<int> prod_Id, Nullable<decimal> reqde_Cantidad, string reqde_Justificacion, Nullable<int> reqde_UsuarioCrea, Nullable<System.DateTime> reqde_FechaCrea)
         {
             var reqco_IdParameter = reqco_Id.HasValue ?
                 new ObjectParameter("Reqco_Id", reqco_Id) :
@@ -3082,40 +3107,15 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("Reqde_Justificacion", reqde_Justificacion) :
                 new ObjectParameter("Reqde_Justificacion", typeof(string));
     
-            var reqde_UsuarioModificaParameter = reqde_UsuarioModifica.HasValue ?
-                new ObjectParameter("Reqde_UsuarioModifica", reqde_UsuarioModifica) :
-                new ObjectParameter("Reqde_UsuarioModifica", typeof(int));
+            var reqde_UsuarioCreaParameter = reqde_UsuarioCrea.HasValue ?
+                new ObjectParameter("Reqde_UsuarioCrea", reqde_UsuarioCrea) :
+                new ObjectParameter("Reqde_UsuarioCrea", typeof(int));
     
-            var reqde_FechaModificaParameter = reqde_FechaModifica.HasValue ?
-                new ObjectParameter("Reqde_FechaModifica", reqde_FechaModifica) :
-                new ObjectParameter("Reqde_FechaModifica", typeof(System.DateTime));
+            var reqde_FechaCreaParameter = reqde_FechaCrea.HasValue ?
+                new ObjectParameter("Reqde_FechaCrea", reqde_FechaCrea) :
+                new ObjectParameter("Reqde_FechaCrea", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompraDetalle_Insert_Result>("UDP_Adm_tbRequisionCompraDetalle_Insert", reqco_IdParameter, prod_IdParameter, reqde_CantidadParameter, reqde_JustificacionParameter, reqde_UsuarioModificaParameter, reqde_FechaModificaParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Adm_tbAnticipoViatico_Update_Result> UDP_Adm_tbAnticipoViatico_Update(Nullable<int> anvi_Id, Nullable<int> est_Id, string anvi_RazonRechazo, Nullable<int> anvi_UsuarioModifica, Nullable<System.DateTime> anvi_FechaModifica)
-        {
-            var anvi_IdParameter = anvi_Id.HasValue ?
-                new ObjectParameter("Anvi_Id", anvi_Id) :
-                new ObjectParameter("Anvi_Id", typeof(int));
-    
-            var est_IdParameter = est_Id.HasValue ?
-                new ObjectParameter("est_Id", est_Id) :
-                new ObjectParameter("est_Id", typeof(int));
-    
-            var anvi_RazonRechazoParameter = anvi_RazonRechazo != null ?
-                new ObjectParameter("Anvi_RazonRechazo", anvi_RazonRechazo) :
-                new ObjectParameter("Anvi_RazonRechazo", typeof(string));
-    
-            var anvi_UsuarioModificaParameter = anvi_UsuarioModifica.HasValue ?
-                new ObjectParameter("Anvi_UsuarioModifica", anvi_UsuarioModifica) :
-                new ObjectParameter("Anvi_UsuarioModifica", typeof(int));
-    
-            var anvi_FechaModificaParameter = anvi_FechaModifica.HasValue ?
-                new ObjectParameter("Anvi_FechaModifica", anvi_FechaModifica) :
-                new ObjectParameter("Anvi_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbAnticipoViatico_Update_Result>("UDP_Adm_tbAnticipoViatico_Update", anvi_IdParameter, est_IdParameter, anvi_RazonRechazoParameter, anvi_UsuarioModificaParameter, anvi_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbRequisionCompraDetalle_Insert_Result>("UDP_Adm_tbRequisionCompraDetalle_Insert", reqco_IdParameter, prod_IdParameter, reqde_CantidadParameter, reqde_JustificacionParameter, reqde_UsuarioCreaParameter, reqde_FechaCreaParameter);
         }
     }
 }

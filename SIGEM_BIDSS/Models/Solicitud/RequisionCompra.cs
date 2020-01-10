@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,8 +10,18 @@ namespace SIGEM_BIDSS.Models
     [MetadataType(typeof(RequisionCompraMetadata))]
     public partial class tbRequisionCompra
     {
+        [NotMapped]
+        [Display(Name = "Jefe de Area")]
+        public string Reqco_Jefe { get; set; }
+        [NotMapped]
+        [Display(Name = "Puesto")]
+        public string pto_Id { get; set; }
+        [NotMapped]
+        [Display(Name = "Area")]
+        public string Area { get; set; }
 
-       
+
+
     }
 
 

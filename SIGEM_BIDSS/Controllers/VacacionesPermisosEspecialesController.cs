@@ -310,6 +310,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+
         // GET: AnticipoSalario/Approve/5
         [HttpPost]
         public JsonResult ApprovePorRRHH(int? id)
