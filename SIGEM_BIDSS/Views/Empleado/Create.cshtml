@@ -263,23 +263,23 @@
         });
 
 
-        $("#emp_FechaNacimiento").blur(function () {
-            valido = document.getElementById('FechaNacimiento');
-            var FechaNacimiento = $('#emp_FechaNacimiento').val();
+        //$("#emp_FechaNacimiento").blur(function () {
+        //    valido = document.getElementById('FechaNacimiento');
+        //    var FechaNacimiento = $('#emp_FechaNacimiento').val();
 
 
-            if (FechaNacimiento > GetTodayDate()) {
-                $('#emp_FechaNacimiento').val("");
-                $('#emp_FechaNacimiento').focus();
+        //    if (FechaNacimiento > GetTodayDate()) {
+        //        $('#emp_FechaNacimiento').val("");
+        //        $('#emp_FechaNacimiento').focus();
 
-                valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
+        //        valido.innerText = "La fecha de nacimiento debe ser menor a la fecha actual.";
 
-            }
+        //    }
 
-            else {
-                valido.innerText = "";
-            }
-        });
+        //    else {
+        //        valido.innerText = "";
+        //    }
+        //});
 
 
         $("#emp_FechaIngreso").blur(function () {

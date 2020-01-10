@@ -3562,6 +3562,7 @@
     <Content Include="Views\LiquidacionAnticipoViaticoDetalle\_CreateDetalle.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastosDetalles\_CreateDetalle.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\_Details.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\_Details.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
