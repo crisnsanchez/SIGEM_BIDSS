@@ -1,129 +1,36 @@
-﻿@model SIGEM_BIDSS.Models.tbSolicitudReembolsoGastos
-@using SIGEM_BIDSS.Models
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastosDetalle>
+<table>
+    <thead>
+        <tr>
+            <td>Fecha Gasto</td>
+            <td>Gasto</td>
+            <td>Monto Gasto</td>
+            <td>Concepto</td>
+            <td>Archivo</td>
 
-<di class="card card-primary card-outline">
-    <div class="card-header d-flex p-0 ui-sortable-handle">
-        <h3 class="card-title p-3">
-            <i class="fa fa-info  mr-1"></i>
-            Detalle Solicitud Reembolso Gastos
-        </h3>
-        <ul class="nav nav-pills ml-auto p-2">
-            <li class="nav-item">
-                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
-            </li>
-        </ul>
-    </div>
-    <div class="form-horizontal">
-        <div class="card-body">
-            <dl class="dl-horizontal card-columns">
-               
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Reemga_Correlativo)
-                    </dt>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReemgaDet_FechaGasto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbTipoViatico.tpv_Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReemgaDet_MontoGasto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReemgaDet_Concepto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReemgaDet_Archivo)
+                </td>
+            </tr>
+        }
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_Correlativo)
-                    </dd>
-
-                    <dt>
-                     Jefe Inmediato
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_JefeInmediato)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Reemga_GralFechaSolicitud)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_GralFechaSolicitud)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Reemga_FechaViaje)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_FechaViaje)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Reemga_Cliente)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_Cliente)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.mun_codigo)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.mun_codigo)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Reemga_PropositoVisita)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_PropositoVisita)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Reemga_DiasVisita)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_DiasVisita)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Reemga_Comentario)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_Comentario)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Reemga_RazonRechazo)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Reemga_RazonRechazo)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-                    </dd>
-                </dl>
-
-                <div class="form-group">
-                    @Html.Partial("_Details", (List<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastosDetalle>)ViewBag.IdFull)
-                </div>
-        </div>
-    </div>
-
-</di>
-
-
+    </tbody>
+</table>

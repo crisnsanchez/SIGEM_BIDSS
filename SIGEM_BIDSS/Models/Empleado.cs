@@ -110,7 +110,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Estado")]
         public int est_Id { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+      
         [Display(Name = "Imagen")]
         public string emp_PathImage { get; set; }
 
