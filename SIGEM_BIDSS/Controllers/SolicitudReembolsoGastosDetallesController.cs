@@ -54,7 +54,7 @@ namespace SIGEM_BIDSS.Controllers
 
         //GetDetalle
         [HttpPost]
-        public JsonResult SaveReembolsoDetalle(tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle, HttpPostedFileBase Archivo) 
+        public JsonResult SaveReembolsoDetalle(tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle, HttpPostedFileBase ArchivoPath) 
         {
             int datos = 0;
        
@@ -70,7 +70,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             else
             {
-           
+               
                 list.Add(tbSolicitudReembolsoGastosDetalle);
                 Session["ReembolsoDetalle"] = list;
                 return Json(tbSolicitudReembolsoGastosDetalle, JsonRequestBehavior.AllowGet);
@@ -91,6 +91,7 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Id");      
             ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo");
             ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+            ViewBag.Archivo = db.tbSolicitudReembolsoGastosDetalle.Where(x => x.Reemga_Id == tbSolicitudReembolsoGastosDetalle.Reemga_Id).ToList();
 
             return View(tbSolicitudReembolsoGastosDetalle);
         }
@@ -102,78 +103,49 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ReemgaDet_Id,Reemga_Id,ReemgaDet_FechaGasto,tpv_Id,ReemgaDet_MontoGasto,ReemgaDet_Concepto,ReemgaDet_Archivo")] tbSolicitudReembolsoGastosDetalle tbSolicitudReembolsoGastosDetalle, HttpPostedFileBase FotoPath)
         {
-            IEnumerable<object> list = null;
+           
            
             string UserName = "";
-            //string MensajeError = "";
             string MsjError = "";
-            var listaLiquidacion = (List<tbSolicitudReembolsoGastosDetalle>)Session["tbSolicitudReembolsoGastosDetalle"];
-            if (ModelState.IsValid)
-            {
-                using (TransactionScope _Tran = new TransactionScope())
-                {
+            var listaLiquidacion = (List<tbSolicitudReembolsoGastosDetalle>)Session["ReembolsoDetalle"];
+           
                     try
                     {
+                ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
+                IEnumerable<object> lista = null;
                         int EmployeeID = Function.GetUser(out UserName);
+                        if (listaLiquidacion != null)
+                            {
+                            if (listaLiquidacion.Count > 0)
+                            {
+                                foreach (tbSolicitudReembolsoGastosDetalle Sol in listaLiquidacion)
+                                {
+                                    lista = db.UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(tbSolicitudReembolsoGastosDetalle.Reemga_Id, Sol.ReemgaDet_FechaGasto, Sol.tpv_Id, Sol.ReemgaDet_MontoGasto, Sol.ReemgaDet_Concepto, Sol.ReemgaDet_Archivo);
+                                    foreach (UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert_Result SolicitudDetalle in lista)
+                                       MsjError = SolicitudDetalle.MensajeError;
+                                    if (MsjError.StartsWith("-1"))
+                                    {
 
-
-
-                        list = db.UDP_Adm_tbSolicitudReembolsoGastosDetalle_Insert(tbSolicitudReembolsoGastosDetalle.Reemga_Id,tbSolicitudReembolsoGastosDetalle.ReemgaDet_FechaGasto,tbSolicitudReembolsoGastosDetalle.tpv_Id,tbSolicitudReembolsoGastosDetalle.ReemgaDet_MontoGasto,tbSolicitudReembolsoGastosDetalle.ReemgaDet_Concepto,tbSolicitudReembolsoGastosDetalle.ReemgaDet_Archivo);
-                        foreach (UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert_Result Reembolso in list)
-                            MsjError = Reembolso.MensajeError;
-                        if (MsjError.StartsWith("-1"))
-                        {
-                            ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo", tbSolicitudReembolsoGastosDetalle.Reemga_Id);
-                            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion", tbSolicitudReembolsoGastosDetalle.tpv_Id);
-
-
-                            ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Id");
-
-
-
-                            //ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo");
-                            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
-                            ModelState.AddModelError("", "Ya existe un detalle de esta solicitud.");
-                            return View(tbSolicitudReembolsoGastosDetalle);
+                                        ModelState.AddModelError("", "No se pudo insertar el registro detalle, favor contacte al administrador.");
+                                        return View(tbSolicitudReembolsoGastosDetalle);
+                                    }
+                                }
+                            }
                         }
 
-                        else
-                        {
 
-                            TempData["swalfunction"] = "true";
-
-                            return RedirectToAction("Index");
-                        }
-                    }
+                           return RedirectToAction("Index");
+            }
                     catch (Exception)
                     {
                         TempData["swalfunction"] = GeneralFunctions._isCreated;
-
-
                         ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Id");
-
-
-
                         ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo");
                         ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbSolicitudReembolsoGastosDetalle);
                     }
-                }
 
-            }
-            return View(tbSolicitudReembolsoGastosDetalle);
-
-            //if (ModelState.IsValid)
-            //{
-            //    db.tbSolicitudReembolsoGastosDetalle.Add(tbSolicitudReembolsoGastosDetalle);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //ViewBag.Reemga_Id = new SelectList(db.tbSolicitudReembolsoGastos, "Reemga_Id", "Reemga_Correlativo", tbSolicitudReembolsoGastosDetalle.Reemga_Id);
-            //ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion", tbSolicitudReembolsoGastosDetalle.tpv_Id);
-            //return View(tbSolicitudReembolsoGastosDetalle);
         }
 
         // GET: SolicitudReembolsoGastosDetalles/Edit/5

@@ -84,7 +84,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-
+                tbSolicitudReembolsoGastos.Reemga_FechaViaje = Function.DatetimeNow();
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
                 ViewBag.Reemga_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
@@ -110,15 +110,19 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create([Bind(Include = "emp_Id,Reemga_JefeInmediato,Reemga_GralFechaSolicitud," +
             "Reemga_FechaViaje,Reemga_Cliente,mun_codigo,Reemga_PropositoVisita,Reemga_DiasVisita,Reemga_Comentario,est_Id")] tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos, string dep_codigo)
         {
-            
 
-            string UserName = "", ErrorEmail = "", ErrorMessage = "";
-            bool Result = false, ResultAdm = false;
             IEnumerable<object> Insert = null;
 
+
+
+            string UserName = "", ErrorEmail = "", ErrorMessage = "";
             try
             {
                 cGetUserInfo GetEmployee = null;
+                cGetUserInfo EmpJefe = null;
+                bool Result = false, ResultAdm = false;
+           
+         
                 int EmployeeID = Function.GetUser(out UserName);
 
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
@@ -132,9 +136,6 @@ namespace SIGEM_BIDSS.Controllers
                 ViewBag.dep_codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
                 ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
                 tbSolicitudReembolsoGastos.Reemga_RazonRechazo = GeneralFunctions.stringDefault;
-
-
-
                 tbSolicitudReembolsoGastos.emp_Id = EmployeeID;
                 tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud = Function.DatetimeNow();
                 tbSolicitudReembolsoGastos.est_Id = GeneralFunctions.Enviada;
@@ -187,15 +188,25 @@ namespace SIGEM_BIDSS.Controllers
 
                     else
                     {
+
+
                         GetEmployee = Function.GetUserInfo(EmployeeID);
-                        var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, _Parameters.par_NombreEmpresa, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, _Parameters.par_CorreoEmpresa, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+                        EmpJefe = Function.GetUserInfo(tbSolicitudReembolsoGastos.Reemga_JefeInmediato??0);
+
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
 
 
-                        if (!Result) Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorEmail);
-                        if (!ResultAdm) Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorEmail);
-                        TempData["swalfunction"] = "true";
+                        if (!Result) Function.BitacoraErrores("AccionPersonal", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Function.BitacoraErrores("AccionPersonal", "CreatePost", UserName, ErrorEmail);
+
+                        // GetEmployee = Function.GetUserInfo(EmployeeID);
+                        // var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                        // Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
+                        //ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
+                        // if (!Result) Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorEmail);
+                        // if (!ResultAdm) Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ErrorEmail);
+                        // TempData["swalfunction"] = "true";
 
                         Session["Reemga_Id"] = ErrorMessage;
                         return RedirectToAction("Create", "SolicitudReembolsoGastosDetalles");
@@ -209,9 +220,9 @@ namespace SIGEM_BIDSS.Controllers
             catch (Exception ex)
             {
                 Function.BitacoraErrores("SolicitudReembolsoGastos", "CreatePost", UserName, ex.Message.ToString());
-                return RedirectToAction("Create", "SolicitudReembolsoGastosDetalle");
+                return RedirectToAction("Create", "SolicitudReembolsoGastos");
             }
-            return RedirectToAction("Create", "SolicitudReembolsoGastosDetalle");
+            return RedirectToAction("Create", "SolicitudReembolsoGastosDetalles");
       
 
         }
