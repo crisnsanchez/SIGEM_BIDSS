@@ -80,7 +80,7 @@
                         <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.emp_PathImage, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="custom-file col-md-11">
-                                <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="ArchivoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
+                                <input id="CargarFoto" value="Cargar Fotografía" max-size=32154 name="FotoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg">
                                 <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto"></label>
 
                             </div>
@@ -168,6 +168,15 @@
                         <div class="col-md-11">
                             @Html.DropDownList("are_Id", null, "Seleccione Área", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.are_Id, "", new { @class = "text-danger", id = "area" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.pto_Id, "Puesto", new { @class = "control-label col-md-6" })
+                        <div class="col-md-11">
+                            <select class="form-control" name="pto_Id" id="pto_Id">
+                                <option>Seleccione Puesto</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.pto_Id, "", new { @class = "text-danger", id = "Puesto" })
                         </div>
                     </div>
                 </div>
