@@ -117,33 +117,14 @@
                 </dd>
             </dl>
 
+            <div class="form-group">
+                @Html.Partial("_Details",(List<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastosDetalle>)ViewBag.IdFull)
+
+
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-10">
-            @Html.ActionLink("Editar", "Edit", new { id = Model.Reemga_Id }, new { @class = "btn btn-primary btn-sm" })
-
-        </div>
-    </div>
-</div>
-<div class="card card-primary card-outline">
-    <div class="card-header d-flex p-0 ui-sortable-handle">
-
-    </div>
-    <div class="card-body">
-        <div class="form-group">
-
-
-
-            if (item.Reemga_Id == item.Reemga_Id)
-            {
-               @Html.ActionLink("Details", "Details", new { item = Item.Reemga_Id })
-            }
-
-
-
-        </div>
-    </div>
+ 
 </div>
 
 

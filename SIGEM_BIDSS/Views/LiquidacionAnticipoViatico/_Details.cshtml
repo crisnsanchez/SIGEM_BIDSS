@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbLiquidacionAnticipoViaticoDetalle>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <td>Fecha Gasto</td>
+            <td>Tipo Viático</td>
+            <td>Monto Gasto</td>
+            <td>Concepto</td>
+            <td>Archivo</td>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lianvide_FechaGasto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbTipoViatico.tpv_Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lianvide_MontoGasto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lianvide_Concepto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lianvide_Archivo)
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>

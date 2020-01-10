@@ -32,11 +32,15 @@ namespace SIGEM_BIDSS.Controllers
         // GET: LiquidacionAnticipoViatico/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+
+
+            ViewBag.IdFull = db.tbLiquidacionAnticipoViaticoDetalle.Where(x => x.Lianvi_Id == tbLiquidacionAnticipoViatico.Lianvi_Id).ToList();
             if (tbLiquidacionAnticipoViatico == null)
             {
                 return HttpNotFound();

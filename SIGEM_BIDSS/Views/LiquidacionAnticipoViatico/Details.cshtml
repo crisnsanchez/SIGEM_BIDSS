@@ -58,14 +58,18 @@
                 </dd>
             </dl>
 
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-10">
-            @Html.ActionLink("Editar", "Edit", new { id = Model.Lianvi_Id }, new { @class = "btn btn-primary btn-sm" })
 
+            <div class="form-group">
+                @Html.Partial("_Details", (List<SIGEM_BIDSS.Models.tbLiquidacionAnticipoViaticoDetalle>)ViewBag.IdFull)
+
+
+            </div>
         </div>
     </div>
+  
+
+
+
 </div>
 
 

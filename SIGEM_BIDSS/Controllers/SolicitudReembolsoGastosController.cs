@@ -39,6 +39,9 @@ namespace SIGEM_BIDSS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = db.tbSolicitudReembolsoGastos.Find(id);
+
+           ViewBag.IdFull = db.tbSolicitudReembolsoGastosDetalle.Where(x => x.Reemga_Id == tbSolicitudReembolsoGastos.Reemga_Id).ToList();
+
             if (tbSolicitudReembolsoGastos == null)
             {
                 return HttpNotFound();
