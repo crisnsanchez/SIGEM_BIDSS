@@ -24,7 +24,6 @@ namespace SIGEM_BIDSS.Models
         public Nullable<int> deif_UsuarioModifica { get; set; }
         public Nullable<System.DateTime> deif_FechaModifica { get; set; }
         public bool deif_Activo { get; set; }
-        public Nullable<bool> deif_Pagado { get; set; }
     
         public virtual tbEmpleado tbEmpleado { get; set; }
         public virtual tbInstitucionFinanciera tbInstitucionFinanciera { get; set; }

@@ -14,5 +14,6 @@ namespace SIGEM_BIDSS.Models
     public partial class UDP_Adm_tbRequisionCompra_Insert_Result
     {
         public string MensajeError { get; set; }
+        public string ScopeIdentity { get; set; }
     }
 }

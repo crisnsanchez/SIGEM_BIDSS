@@ -12,7 +12,6 @@ namespace SIGEM_BIDSS.Models
     public partial class tbSueldo
     {
         [NotMapped]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string NombreEmpleado { get; set; }
 
         [NotMapped]

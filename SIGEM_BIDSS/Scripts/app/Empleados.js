@@ -186,9 +186,6 @@ document.getElementById('emp_CorreoElectronico').addEventListener('input', funct
 });
 
 
-$('#CargarFoto').change(function () {
-    $('#errorlogo').hide();
-});
 
 
 $('#emp_Nombres').keyup(function () {

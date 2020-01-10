@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SIGEM_BIDSS.Models.tbRequisionCompra>
-
+@using SIGEM_BIDSS.Models
 @{
     ViewBag.Title = "L";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -61,7 +61,8 @@
                             @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Reqco_Comentario)
+                            @if (item.Reqco_Comentario != GeneralFunctions.stringDefault)
+                            {@Html.DisplayFor(modelItem => item.Reqco_Comentario)}
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.tbArea.are_Descripcion)
@@ -70,7 +71,7 @@
                             @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
                         </td>
                         <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.Reqco_Id })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Reqco_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
                         </td>
                     </tr>
                 }
