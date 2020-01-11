@@ -4,7 +4,8 @@ $('#Reemga_FechaViaje').datepicker({
     startDate: "01/01/1900",
     language: "es",
     daysOfWeekDisabled: "0"
-});
+}.datepicker("setDate", new Date());
+
 
 ////MAX LENGTH DE LOS CAMPOS
 
