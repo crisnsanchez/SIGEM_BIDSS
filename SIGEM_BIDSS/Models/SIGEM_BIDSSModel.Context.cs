@@ -62,6 +62,7 @@ namespace SIGEM_BIDSS.Models
         public virtual DbSet<tbInstitucionFinanciera> tbInstitucionFinanciera { get; set; }
         public virtual DbSet<tbEmpleado> tbEmpleado { get; set; }
         public virtual DbSet<tbSueldo> tbSueldo { get; set; }
+        public virtual DbSet<tbSueldoHistorico> tbSueldoHistorico { get; set; }
     
         public virtual int SDP_tbAnticipoSalario_Select(Nullable<int> tipsol_id)
         {
@@ -3118,11 +3119,36 @@ namespace SIGEM_BIDSS.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbSolicitudReembolsoGastos_Insert_Result>("UDP_Adm_tbSolicitudReembolsoGastos_Insert", emp_IdParameter, reemga_JefeInmediatoParameter, reemga_GralFechaSolicitudParameter, reemga_FechaViajeParameter, reemga_ClienteParameter, mun_codigoParameter, reemga_PropositoVisitaParameter, reemga_DiasVisitaParameter, reemga_ComentarioParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioCreaParameter, reemga_FechaCreaParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result> UDP_Plani_tbDeduccionInstitucionFinanciera_Insert(Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> emp_Id, Nullable<decimal> deif_Monto, string deif_Comentarios, Nullable<int> deif_UsuarioCrea, Nullable<System.DateTime> deif_FechaCrea, Nullable<bool> deif_Activo)
+        public virtual ObjectResult<UDP_Adm_tbReembolsoGastos_Update_Result> UDP_Adm_tbReembolsoGastos_Update(Nullable<int> reemga_Id, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioModifica, Nullable<System.DateTime> reemga_FechaModifica)
         {
-            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
-                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
-                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
+            var reemga_IdParameter = reemga_Id.HasValue ?
+                new ObjectParameter("Reemga_Id", reemga_Id) :
+                new ObjectParameter("Reemga_Id", typeof(int));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var reemga_RazonRechazoParameter = reemga_RazonRechazo != null ?
+                new ObjectParameter("Reemga_RazonRechazo", reemga_RazonRechazo) :
+                new ObjectParameter("Reemga_RazonRechazo", typeof(string));
+    
+            var reemga_UsuarioModificaParameter = reemga_UsuarioModifica.HasValue ?
+                new ObjectParameter("Reemga_UsuarioModifica", reemga_UsuarioModifica) :
+                new ObjectParameter("Reemga_UsuarioModifica", typeof(int));
+    
+            var reemga_FechaModificaParameter = reemga_FechaModifica.HasValue ?
+                new ObjectParameter("Reemga_FechaModifica", reemga_FechaModifica) :
+                new ObjectParameter("Reemga_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbReembolsoGastos_Update_Result>("UDP_Adm_tbReembolsoGastos_Update", reemga_IdParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioModificaParameter, reemga_FechaModificaParameter);
+        }
+    
+        public virtual ObjectResult<UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result> UDP_Plani_tbDeduccionInstitucionFinanciera_Insert(Nullable<int> insf_Id, Nullable<int> emp_Id, Nullable<decimal> deif_Monto, string deif_Comentarios, Nullable<int> deif_UsuarioCrea, Nullable<System.DateTime> deif_FechaCrea, Nullable<bool> deif_Activo)
+        {
+            var insf_IdParameter = insf_Id.HasValue ?
+                new ObjectParameter("insf_Id", insf_Id) :
+                new ObjectParameter("insf_Id", typeof(int));
     
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -3148,18 +3174,18 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("deif_Activo", deif_Activo) :
                 new ObjectParameter("deif_Activo", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result>("UDP_Plani_tbDeduccionInstitucionFinanciera_Insert", insf_IdInstitucionFinancieraParameter, emp_IdParameter, deif_MontoParameter, deif_ComentariosParameter, deif_UsuarioCreaParameter, deif_FechaCreaParameter, deif_ActivoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result>("UDP_Plani_tbDeduccionInstitucionFinanciera_Insert", insf_IdParameter, emp_IdParameter, deif_MontoParameter, deif_ComentariosParameter, deif_UsuarioCreaParameter, deif_FechaCreaParameter, deif_ActivoParameter);
         }
     
-        public virtual ObjectResult<UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result> UDP_Plani_tbDeduccionInstitucionFinanciera_Update(Nullable<int> deif_IdDeduccionInstFinanciera, Nullable<int> insf_IdInstitucionFinanciera, Nullable<int> emp_Id, Nullable<decimal> deif_Monto, string deif_Comentarios, Nullable<int> deif_UsuarioModifica, Nullable<System.DateTime> deif_FechaModifica, Nullable<bool> deif_Activo)
+        public virtual ObjectResult<UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result> UDP_Plani_tbDeduccionInstitucionFinanciera_Update(Nullable<int> deif_IdDeduccionInstFinanciera, Nullable<int> insf_Id, Nullable<int> emp_Id, Nullable<decimal> deif_Monto, string deif_Comentarios, Nullable<int> deif_UsuarioModifica, Nullable<System.DateTime> deif_FechaModifica, Nullable<bool> deif_Activo)
         {
             var deif_IdDeduccionInstFinancieraParameter = deif_IdDeduccionInstFinanciera.HasValue ?
                 new ObjectParameter("deif_IdDeduccionInstFinanciera", deif_IdDeduccionInstFinanciera) :
                 new ObjectParameter("deif_IdDeduccionInstFinanciera", typeof(int));
     
-            var insf_IdInstitucionFinancieraParameter = insf_IdInstitucionFinanciera.HasValue ?
-                new ObjectParameter("insf_IdInstitucionFinanciera", insf_IdInstitucionFinanciera) :
-                new ObjectParameter("insf_IdInstitucionFinanciera", typeof(int));
+            var insf_IdParameter = insf_Id.HasValue ?
+                new ObjectParameter("insf_Id", insf_Id) :
+                new ObjectParameter("insf_Id", typeof(int));
     
             var emp_IdParameter = emp_Id.HasValue ?
                 new ObjectParameter("emp_Id", emp_Id) :
@@ -3185,32 +3211,7 @@ namespace SIGEM_BIDSS.Models
                 new ObjectParameter("deif_Activo", deif_Activo) :
                 new ObjectParameter("deif_Activo", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result>("UDP_Plani_tbDeduccionInstitucionFinanciera_Update", deif_IdDeduccionInstFinancieraParameter, insf_IdInstitucionFinancieraParameter, emp_IdParameter, deif_MontoParameter, deif_ComentariosParameter, deif_UsuarioModificaParameter, deif_FechaModificaParameter, deif_ActivoParameter);
-        }
-    
-        public virtual ObjectResult<UDP_Adm_tbReembolsoGastos_Update_Result> UDP_Adm_tbReembolsoGastos_Update(Nullable<int> reemga_Id, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioModifica, Nullable<System.DateTime> reemga_FechaModifica)
-        {
-            var reemga_IdParameter = reemga_Id.HasValue ?
-                new ObjectParameter("Reemga_Id", reemga_Id) :
-                new ObjectParameter("Reemga_Id", typeof(int));
-    
-            var est_IdParameter = est_Id.HasValue ?
-                new ObjectParameter("est_Id", est_Id) :
-                new ObjectParameter("est_Id", typeof(int));
-    
-            var reemga_RazonRechazoParameter = reemga_RazonRechazo != null ?
-                new ObjectParameter("Reemga_RazonRechazo", reemga_RazonRechazo) :
-                new ObjectParameter("Reemga_RazonRechazo", typeof(string));
-    
-            var reemga_UsuarioModificaParameter = reemga_UsuarioModifica.HasValue ?
-                new ObjectParameter("Reemga_UsuarioModifica", reemga_UsuarioModifica) :
-                new ObjectParameter("Reemga_UsuarioModifica", typeof(int));
-    
-            var reemga_FechaModificaParameter = reemga_FechaModifica.HasValue ?
-                new ObjectParameter("Reemga_FechaModifica", reemga_FechaModifica) :
-                new ObjectParameter("Reemga_FechaModifica", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbReembolsoGastos_Update_Result>("UDP_Adm_tbReembolsoGastos_Update", reemga_IdParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioModificaParameter, reemga_FechaModificaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result>("UDP_Plani_tbDeduccionInstitucionFinanciera_Update", deif_IdDeduccionInstFinancieraParameter, insf_IdParameter, emp_IdParameter, deif_MontoParameter, deif_ComentariosParameter, deif_UsuarioModificaParameter, deif_FechaModificaParameter, deif_ActivoParameter);
         }
     }
 }

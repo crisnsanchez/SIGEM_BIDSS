@@ -27,7 +27,7 @@ namespace SIGEM_BIDSS.Models
 
 
         [Display(Name = "Institucion Financiera")]
-        public int insf_IdInstitucionFinanciera { get; set; }
+        public int insf_Id { get; set; }
 
 
         [Display(Name = "Monto")]
