@@ -3187,5 +3187,30 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result>("UDP_Plani_tbDeduccionInstitucionFinanciera_Update", deif_IdDeduccionInstFinancieraParameter, insf_IdInstitucionFinancieraParameter, emp_IdParameter, deif_MontoParameter, deif_ComentariosParameter, deif_UsuarioModificaParameter, deif_FechaModificaParameter, deif_ActivoParameter);
         }
+    
+        public virtual ObjectResult<UDP_Adm_tbReembolsoGastos_Update_Result> UDP_Adm_tbReembolsoGastos_Update(Nullable<int> reemga_Id, Nullable<int> est_Id, string reemga_RazonRechazo, Nullable<int> reemga_UsuarioModifica, Nullable<System.DateTime> reemga_FechaModifica)
+        {
+            var reemga_IdParameter = reemga_Id.HasValue ?
+                new ObjectParameter("Reemga_Id", reemga_Id) :
+                new ObjectParameter("Reemga_Id", typeof(int));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var reemga_RazonRechazoParameter = reemga_RazonRechazo != null ?
+                new ObjectParameter("Reemga_RazonRechazo", reemga_RazonRechazo) :
+                new ObjectParameter("Reemga_RazonRechazo", typeof(string));
+    
+            var reemga_UsuarioModificaParameter = reemga_UsuarioModifica.HasValue ?
+                new ObjectParameter("Reemga_UsuarioModifica", reemga_UsuarioModifica) :
+                new ObjectParameter("Reemga_UsuarioModifica", typeof(int));
+    
+            var reemga_FechaModificaParameter = reemga_FechaModifica.HasValue ?
+                new ObjectParameter("Reemga_FechaModifica", reemga_FechaModifica) :
+                new ObjectParameter("Reemga_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbReembolsoGastos_Update_Result>("UDP_Adm_tbReembolsoGastos_Update", reemga_IdParameter, est_IdParameter, reemga_RazonRechazoParameter, reemga_UsuarioModificaParameter, reemga_FechaModificaParameter);
+        }
     }
 }

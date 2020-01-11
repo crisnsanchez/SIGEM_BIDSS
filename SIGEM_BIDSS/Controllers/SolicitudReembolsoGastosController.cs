@@ -34,13 +34,24 @@ namespace SIGEM_BIDSS.Controllers
         // GET: SolicitudReembolsoGastos/Details/5
         public ActionResult Details(int? id)
         {
+            string vReturn = "";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = db.tbSolicitudReembolsoGastos.Find(id);
-
-           ViewBag.IdFull = db.tbSolicitudReembolsoGastosDetalle.Where(x => x.Reemga_Id == tbSolicitudReembolsoGastos.Reemga_Id).ToList();
+            if (tbSolicitudReembolsoGastos.est_Id == GeneralFunctions.Enviada)
+            {
+                if (UpdateState(out vReturn, tbSolicitudReembolsoGastos, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                }
+                else
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_ErrorUpdateState;
+                }
+            }
+            ViewBag.IdFull = db.tbSolicitudReembolsoGastosDetalle.Where(x => x.Reemga_Id == tbSolicitudReembolsoGastos.Reemga_Id).ToList();
 
             if (tbSolicitudReembolsoGastos == null)
             {
@@ -265,6 +276,245 @@ namespace SIGEM_BIDSS.Controllers
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbSolicitudReembolsoGastos.est_Id);
             return View(tbSolicitudReembolsoGastos);
         }
+
+
+        ///
+
+
+        [HttpPost]
+        public JsonResult Revisar(int id, string RazonRechazo)
+        {
+            string vReturn = "";
+            string IsFor = "false";
+            tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = db.tbSolicitudReembolsoGastos.Find(id);
+            if (tbSolicitudReembolsoGastos.est_Id == GeneralFunctions.Enviada)
+            {
+                if (UpdateState(out vReturn, tbSolicitudReembolsoGastos, GeneralFunctions.Revisada, RazonRechazo))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                    IsFor = "true";
+                }
+            }
+            if (tbSolicitudReembolsoGastos == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(IsFor, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult ApprovePorJefe(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = db.tbSolicitudReembolsoGastos.Find(id);
+            if (tbSolicitudReembolsoGastos.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbSolicitudReembolsoGastos, GeneralFunctions.AprobadaPorJefe, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbSolicitudReembolsoGastos == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult ApprovePorRRHH(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = db.tbSolicitudReembolsoGastos.Find(id);
+            if (tbSolicitudReembolsoGastos.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbSolicitudReembolsoGastos, GeneralFunctions.AprobadaPorRRHH, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbSolicitudReembolsoGastos == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult ApprovePorAdmin(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = db.tbSolicitudReembolsoGastos.Find(id);
+            if (tbSolicitudReembolsoGastos.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbSolicitudReembolsoGastos, GeneralFunctions.AprobadaPorAdmin, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbSolicitudReembolsoGastos == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult Approve(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = db.tbSolicitudReembolsoGastos.Find(id);
+            if (tbSolicitudReembolsoGastos.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbSolicitudReembolsoGastos, GeneralFunctions.Aprobada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbSolicitudReembolsoGastos == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // GET: AnticipoSalario/Approve/5   
+        [HttpPost]
+        public JsonResult Reject(int id, string RazonRechazo)
+        {
+            var list = "";
+            string vReturn = "";
+            tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos = db.tbSolicitudReembolsoGastos.Find(id);
+            if (tbSolicitudReembolsoGastos.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbSolicitudReembolsoGastos, GeneralFunctions.Rechazada, RazonRechazo))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
+                }
+            }
+            if (tbSolicitudReembolsoGastos == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+                //return HttpNotFound();
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        /// 
+        public bool UpdateState(out string pvReturn, tbSolicitudReembolsoGastos tbSolicitudReembolsoGastos, int State, string Reemga_RazonRechazo)
+        {
+            pvReturn = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "", _msj = "", _msjFor = "";
+            bool Result = false, ResultFor = false;
+            IEnumerable<object> Update = null;
+            var reject = "";
+
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+
+                tbSolicitudReembolsoGastos.est_Id = State;
+
+                tbSolicitudReembolsoGastos.Reemga_RazonRechazo = Reemga_RazonRechazo;
+                Update = db.UDP_Adm_tbReembolsoGastos_Update(tbSolicitudReembolsoGastos.Reemga_Id,
+                                                        tbSolicitudReembolsoGastos.est_Id,
+                                                        tbSolicitudReembolsoGastos.Reemga_RazonRechazo,
+                                                                 EmployeeID,
+                                                                 Function.DatetimeNow()
+
+                    );
+                foreach (UDP_Adm_tbReembolsoGastos_Update_Result Res in Update)
+                    ErrorMessage = Res.MensajeError;
+                pvReturn = ErrorMessage;
+                if (ErrorMessage.StartsWith("-1"))
+                {
+
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
+                    ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                    return false;
+                }
+                else
+                {
+                    var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                    var GetEmployee = Function.GetUserInfo(tbSolicitudReembolsoGastos.emp_Id);
+                    var Approver = Function.GetUserInfo(EmployeeID);
+                    string Correlativo = tbSolicitudReembolsoGastos.Reemga_Correlativo;
+                    string Nombres = GetEmployee.emp_Nombres;
+                    string CorreoElectronico = GetEmployee.emp_CorreoElectronico;
+                    string sApprover = Approver.strFor + Approver.emp_Nombres;
+                    if (Reemga_RazonRechazo == GeneralFunctions.stringDefault) { Reemga_RazonRechazo = null; };
+                    _msjFor = GeneralFunctions.msj_ToAdmin;
+                    switch (State)
+                    {
+                        case GeneralFunctions.Revisada:
+                            _msj = GeneralFunctions.msj_Revisada;
+                            break;
+                        case GeneralFunctions.AprobadaPorJefe:
+                            _msj = GeneralFunctions.msj_RevisadaPorJefe;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.AprobadaPorRRHH:
+                            _msj = GeneralFunctions.msj_RevisadaPorRRHH;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.AprobadaPorAdmin:
+                            _msj = GeneralFunctions.msj_RevisadaPorAdmin;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.Aprobada:
+                            _msj = GeneralFunctions.msj_Aprobada;
+                            break;
+                        case GeneralFunctions.Rechazada:
+                            _msj = GeneralFunctions.msj_Rechazada;
+                            reject = " Razon de Rechazo:";
+                            break;
+                    }
+                    Result = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + Reemga_RazonRechazo, sApprover, CorreoElectronico);
+
+
+                    if (!Result) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+                    if (!ResultFor) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                pvReturn = ex.Message.ToString();
+                Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
+                return false;
+            }
+        }
+
+
+
 
         // GET: SolicitudReembolsoGastos/Delete/5
         public ActionResult Delete(int? id)
