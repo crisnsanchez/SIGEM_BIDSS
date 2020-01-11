@@ -3334,7 +3334,8 @@
     <Content Include="Scripts\app\Departamento.js" />
     <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\app\Municipio.js" />
-    <Content Include="Scripts\app\Solicitud\AccionPersonal.js" />
+    <Content Include="Scripts\app\Solicitud\AccionPersonal\AccionPersonal.js" />
+    <Content Include="Scripts\app\Solicitud\AccionPersonal\Modals.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\AnticipoSalario.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\Modals.js" />
     <Content Include="Scripts\app\InstitucionFinaciera.js" />

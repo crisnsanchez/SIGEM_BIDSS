@@ -122,7 +122,7 @@ namespace SIGEM_BIDSS.Controllers
             tbAccionPersonal.Acp_FechaSolicitud = Function.DatetimeNow();
             tbAccionPersonal.est_Id = GeneralFunctions.Enviada;
 
-            var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+       
 
             
             if (ModelState.IsValid)
@@ -150,8 +150,8 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 else
                     {
-                         GetEmployee = Function.GetUserInfo(EmployeeID);
-                         EmpJefe = Function.GetUserInfo(tbAccionPersonal.Acp_JefeInmediato);
+                        GetEmployee = Function.GetUserInfo(EmployeeID);
+                        EmpJefe = Function.GetUserInfo(tbAccionPersonal.Acp_JefeInmediato);
 
                         Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
                         ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
@@ -258,42 +258,65 @@ namespace SIGEM_BIDSS.Controllers
         }
 
         /////////////////////////////////////////////////////////  
-        public bool UpdateState(out string pvReturn, tbAccionPersonal tbAccionPersonal, int State, string RazonRechazo)
+        public bool UpdateState(out string pvReturn, tbAccionPersonal tbAccionPersonal, int State, string Acp_RazonRechazo)
         {
             pvReturn = "";
-            string UserName = "",
-                ErrorEmail = "",
-                ErrorMessage = "",
-                _msj = "",
-                reject = "";
-            bool Result = false;
+            string UserName = "", ErrorEmail = "", ErrorMessage = "", _msj = "", _msjFor = "";
+            bool Result = false, ResultFor = false;
             IEnumerable<object> Update = null;
-            cGetUserInfo GetEmployee = null, Approver = null;
+            var reject = "";
+
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
+
                 tbAccionPersonal.est_Id = State;
-                tbAccionPersonal.Acp_RazonRechazo = RazonRechazo;
+
+                tbAccionPersonal.Acp_RazonRechazo = Acp_RazonRechazo;
                 Update = db.UDP_Adm_tbAccionPersonal_Update(tbAccionPersonal.Acp_Id,
-                                                                tbAccionPersonal.est_Id,
-                                                                tbAccionPersonal.Acp_RazonRechazo,
-                                                                EmployeeID,
-                                                                Function.DatetimeNow());
+                                                        tbAccionPersonal.est_Id,
+                                                        tbAccionPersonal.Acp_RazonRechazo,
+                                                                 EmployeeID,
+                                                                 Function.DatetimeNow()
+
+                    );
                 foreach (UDP_Adm_tbAccionPersonal_Update_Result Res in Update)
                     ErrorMessage = Res.MensajeError;
                 pvReturn = ErrorMessage;
                 if (ErrorMessage.StartsWith("-1"))
                 {
-                    Function.BitacoraErrores("AccionPersonal", "UpdateState", UserName, ErrorMessage);
+
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
                     ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
                     return false;
                 }
                 else
                 {
+                    var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                    var GetEmployee = Function.GetUserInfo(tbAccionPersonal.emp_Id);
+                    var Approver = Function.GetUserInfo(EmployeeID);
+                    string Correlativo = tbAccionPersonal.Acp_Correlativo;
+                    string Nombres = GetEmployee.emp_Nombres;
+                    string CorreoElectronico = GetEmployee.emp_CorreoElectronico;
+                    string sApprover = Approver.strFor + Approver.emp_Nombres;
+                    if (Acp_RazonRechazo == GeneralFunctions.stringDefault) { Acp_RazonRechazo = null; };
+                    _msjFor = GeneralFunctions.msj_ToAdmin;
                     switch (State)
                     {
                         case GeneralFunctions.Revisada:
                             _msj = GeneralFunctions.msj_Revisada;
+                            break;
+                        case GeneralFunctions.AprobadaPorJefe:
+                            _msj = GeneralFunctions.msj_RevisadaPorJefe;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.AprobadaPorRRHH:
+                            _msj = GeneralFunctions.msj_RevisadaPorRRHH;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.AprobadaPorAdmin:
+                            _msj = GeneralFunctions.msj_RevisadaPorAdmin;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
                             break;
                         case GeneralFunctions.Aprobada:
                             _msj = GeneralFunctions.msj_Aprobada;
@@ -303,31 +326,23 @@ namespace SIGEM_BIDSS.Controllers
                             reject = " Razon de Rechazo:";
                             break;
                     }
-                    if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
+                    Result = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + Acp_RazonRechazo, sApprover, CorreoElectronico);
 
-                    GetEmployee = Function.GetUserInfo(tbAccionPersonal.emp_Id);
-                    Approver = Function.GetUserInfo(EmployeeID);
-                    if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
 
-                    Result = Function.LeerDatos(out ErrorEmail, tbAccionPersonal.Acp_Correlativo, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + RazonRechazo, Approver.strFor + Approver.emp_Nombres, GetEmployee.emp_CorreoElectronico);
+                    if (!Result) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+                    if (!ResultFor) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
 
-                    if (!Result)
-                    {
-                        Function.BitacoraErrores("AccionPersonal", "UpdateState", UserName, ErrorEmail);
-                        return false;
-                    }
                 }
                 return true;
+
             }
             catch (Exception ex)
             {
                 pvReturn = ex.Message.ToString();
-                Function.BitacoraErrores("AccionPersonal","UpdateState", UserName, ex.Message.ToString());
+                Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
                 return false;
             }
         }
-
-
 
         [HttpPost]
         public JsonResult Revisar(int id, string RazonRechazo)
@@ -349,6 +364,88 @@ namespace SIGEM_BIDSS.Controllers
             }
             return Json(IsFor, JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public JsonResult ApprovePorJefe(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbAccionPersonal tbAccionPersonal = db.tbAccionPersonal.Find(id);
+            if (tbAccionPersonal.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbAccionPersonal, GeneralFunctions.AprobadaPorJefe, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbAccionPersonal == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult ApprovePorRRHH(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbAccionPersonal tbAccionPersonal = db.tbAccionPersonal.Find(id);
+            if (tbAccionPersonal.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbAccionPersonal, GeneralFunctions.AprobadaPorRRHH, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbAccionPersonal == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult ApprovePorAdmin(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbAccionPersonal tbAccionPersonal = db.tbAccionPersonal.Find(id);
+            if (tbAccionPersonal.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbAccionPersonal, GeneralFunctions.AprobadaPorAdmin, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbAccionPersonal == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
 
 
 
