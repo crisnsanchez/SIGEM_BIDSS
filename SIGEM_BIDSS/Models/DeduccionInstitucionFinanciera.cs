@@ -23,18 +23,22 @@ namespace SIGEM_BIDSS.Models
 
 
         [Display(Name = "Empleado")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int emp_Id { get; set; }
 
 
-        [Display(Name = "Institucion Financiera")]
+        [Display(Name = "Institución Financiera")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int insf_Id { get; set; }
 
 
         [Display(Name = "Monto")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public Nullable<decimal> deif_Monto { get; set; }
 
 
         [Display(Name = "Comentario")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string deif_Comentarios { get; set; }
 
 
