@@ -3584,7 +3584,6 @@
     <Content Include="Views\DeduccionInstitucionFinanciera\Edit.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinanciera\Index.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinanciera\_EmpleadoBus.cshtml" />
-    <Content Include="Views\SolicitudReembolsoGastosDetalles\_Modales.cshtml" />
     <Content Include="Views\SolicitudReembolsoGastos\_Modales.cshtml" />
     <Content Include="Views\prie\Create.cshtml" />
     <Content Include="Views\prie\Delete.cshtml" />
