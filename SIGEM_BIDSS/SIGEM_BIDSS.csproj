@@ -666,6 +666,8 @@
     <Compile Include="TokenStorage\SessionTokenStore.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\SIGEM_BIDSS.dll" />
+    <Content Include="bin\SIGEM_BIDSS.pdb" />
     <Content Include="Content\Email\Solicitud.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -744,6 +746,14 @@
     <Content Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </Content>
+    <Content Include="CodeTemplates\MvcView\Create.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Delete.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Details.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Edit.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Empty.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\Imports.include.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
+    <Content Include="CodeTemplates\MvcView\ModelMetadataFunctions.cs.include.t4" />
     <None Include="Content\template\build\scss\_buttons.scss" />
     <Content Include="Content\template\build\scss\_callout.scss" />
     <Content Include="Content\template\build\scss\_cards.scss" />

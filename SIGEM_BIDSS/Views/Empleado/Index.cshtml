@@ -103,16 +103,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Razon de Inactivacion</h4>
+                <h4 class="modal-title" id="myModalLabel">Razon de Inactivación</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <input type="hidden" id="Em_Id" />
             <div class="modal-body">
-                @Html.LabelFor(model => tbEmpleado.emp_RazonInactivacion, "Razon de Inactivacion", new { @class = "control-label col-md-8 required" })
+                @Html.LabelFor(model => tbEmpleado.emp_RazonInactivacion, "Razon de Inactivación", new { @class = "control-label col-md-8 required" })
                 <div class="form-group">
-                    @Html.TextAreaFor(model => tbEmpleado.emp_RazonInactivacion, new { @class = "form-control", @rows = "5", @cols = "12"@*, onkeypress = "return check(event)"*@})
+                    @Html.TextAreaFor(model => tbEmpleado.emp_RazonInactivacion, new { @class = "form-control normalize", @onkeypress = "return soloLetras(event)", @onkeyup = "this.value=this.value.toUpperCase()",@rows = "5", @cols = "12"@*, onkeypress = "return check(event)"*@})
                     <p style="color:red">
                         @Html.ValidationMessageFor(model => tbEmpleado.emp_RazonInactivacion)
                     </p>
@@ -137,6 +137,8 @@
     <!-- AdminLTE App -->
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
     <script src="~/Scripts/app/DataTables.js"></script>
+    <script src="~/Scripts/app/ValidacionesGenerales.js"></script>
+    <script src="~/Scripts/app/General_PCAE.js"></script>
     <script type="text/javascript">
 
 
@@ -164,7 +166,7 @@
                 $('#MessageError').text('');
                 $('#CodigoError').text('');
                 $('#NombreError').text('');
-                $('#tbEmpleado_emp_RazonInactivacion').after('<ul id="MessageError" class="validation-summary-errors text-danger">Campo Requerido</ul>');
+                $('#tbEmpleado_emp_RazonInactivacion').after('<ul id="MessageError" class="validation-summary-errors text-danger">Campo Razon Inactivación Requerido</ul>');
             }
             else {
                 var tbEmpleado = GetValInac();
@@ -177,16 +179,40 @@
                 })
                     .done(function (data) {
 
-                        
+
                         $("Em_Id").val("");
                         //window.location.href = "/Empleado/Index"
                         location.reload();
                     });
-           
+
+            }
+        });
+
+        $('#emp_RazonInactivacion').change(function (e) {
+            var Contacto = $.trim(this.value);
+            if (Contacto != '') {
+                $('#Contacto').text('');
+                $('#errorContacto').text('');
             }
         });
 
 
+        //Funcion no aceptar espacios en el textbox
+        document.addEventListener("input", function () {
+            $("textarea", 'body').each(function (e) {
+                var _id = $(this).attr("id");
+                _value = document.getElementById(_id).value;
+                _value = _value.trimStart();
+
+            });
+            $(".normalize", 'body').each(function (e) {
+                if (!/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)) {
+                    this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
+                }
+            });
+
+
+        });
 
 
 

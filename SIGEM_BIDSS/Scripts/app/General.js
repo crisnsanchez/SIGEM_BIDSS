@@ -19,12 +19,22 @@ $(function () {
 
 
 
-    document.getElementById("Save").onclick = function () {
-        var txtObj = document.getElementById("");
-        txtObj.value = txtObj.value.replace(/^\s+/, ""); //Left trim
-        txtObj.value = txtObj.value.replace(/\s+$/, ""); //Right trim
+    //Funcion no aceptar espacios en el textbox
+    document.addEventListener("input", function () {
+        $("textarea", 'body').each(function (e) {
+            var _id = $(this).attr("id");
+            _value = document.getElementById(_id).value;
+            _value = _value.trimStart();
 
-    };
+        });
+        $(".normalize", 'body').each(function (e) {
+            if (!/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)) {
+                this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
+            }
+        });
+
+
+    });
 
 
 
