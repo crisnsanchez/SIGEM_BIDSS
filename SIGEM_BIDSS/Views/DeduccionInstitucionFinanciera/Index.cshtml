@@ -44,7 +44,8 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr data-id="@item.deif_IdDeduccionInstFinanciera">
+
                         <td>
                             @Html.DisplayFor(modelItem => item.deif_IdDeduccionInstFinanciera)
                         </td>
@@ -62,12 +63,12 @@
                             @if (item.deif_Activo == GeneralFunctions.instfinAceptar)
                             {
                                 <input type="button" id="Desactivar" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalRazonInactivacion" value="Inactivar" />
-                                <input type="hidden" id="_Insf_Id" value="@item.deif_IdDeduccionInstFinanciera" />
+
                             }
                             else if (item.deif_Activo == GeneralFunctions.instfinDenegar)
                             {
                                 <input type="button" id="Activar" class="btn btn-success btn-xs" data-toggle="modal" data-target="#ModalRazonActivacion" Style="width:55px" value="Activar" />
-                                <input type="hidden" id="_Insf_Id" value="@item.deif_IdDeduccionInstFinanciera" />
+
                             }
                         </td>
 
@@ -91,11 +92,15 @@
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
     <script src="~/Scripts/app/General.js"></script>
     <script src="~/Scripts/app/DataTables.js"></script>
+
+    <input id="Deduccioninstfinanciera" type="hidden" />
+
+
     <div class="modal fade" id="ModalRazonInactivacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <input id="Deduccioninstfinanciera" type="hidden" />
+
                     <h4 class="modal-title" id="myModalLabel">¿Está seguro que desea inactivar el registro seleccionado?</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -114,7 +119,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <input id="Deduccioninstfinanciera" type="hidden" />
+
                     <h4 class="modal-title" id="myModalLabel">¿Está seguro que desea activar el registro seleccionado?</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -131,68 +136,69 @@
     </div>
 
 
-        <!-- DataTables -->
-        <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
-        <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- DataTables -->
+    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
 
 
-        <script>
+    <script>
 
 
-            $(document).on("click", "#dataTable tbody tr td input#Activar", function () {
-                _deif_IdDeduccionInstFinanciera = $(this).closest('tr').data('id');
-                $("#Deduccioninstfinanciera").val(_deif_IdDeduccionInstFinanciera);
+
+        $(document).on("click", "#dataTable tbody tr td input#Activar", function () {
+         var   _Insf_Id = $(this).closest('tr').data('id');
+            $("#Deduccioninstfinanciera").val(_Insf_Id);
+        })
+
+
+        $('#btnAc').click(function () {
+            insf_Id = $("#Deduccioninstfinanciera").val()
+            $.ajax({
+                url: "/DeduccionInstitucionFinanciera/ActivarInstitucionFinanciera",
+                method: "POST",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ insf_Id: insf_Id }),
+
             })
+                .done(function (data) {
 
-
-            $('#btnAc').click(function () {
-                console.log("Hola");
-                deif_IdDeduccionInstFinanciera = $("#Deduccioninstfinanciera").val()
-                $.ajax({
-                    url: "/DeduccionInstitucionFinanciera/ActivarInstitucionFinanciera",
-                    method: "POST",
-                    dataType: 'json',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ deif_IdDeduccionInstFinanciera: deif_IdDeduccionInstFinanciera }),
-                    success: function () {
-
-                        location.reload();
-                    }
-                })
-                    .done(function (data) {
-
-                        window.location.href = "/DeduccioninstitucionFinanciera/Index"
-                    });
-            });
+                    location.reload();
+                });
+        });
 
 
 
-            $(document).on("click", "#dataTable tbody tr td input#Desactivar", function () {
-                _deif_IdDeduccionInstFinanciera = $(this).closest('tr').data('id');
-                $("#Deduccioninstfinanciera").val(_deif_IdDeduccionInstFinanciera);
-                console.log(_Insf_Id)
+
+
+        $(document).on("click", "#dataTable tbody tr td input#Desactivar", function () {
+          var  _Insf_Id = $(this).closest('tr').data('id');
+            $("#Deduccioninstfinanciera").val(_Insf_Id);
+
+        })
+
+
+        $('#btnRaInac').click(function () {
+
+            insf_Id = $("#Deduccioninstfinanciera").val()
+            console.log(Deduccioninstfinanciera);
+            $.ajax({
+                url: "/DeduccionInstitucionFinanciera/InactivarInstitucionFinanciera",
+                method: "POST",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ insf_Id: insf_Id }),
             })
+                .done(function (data) {
+                    $("Deduccioninstfinanciera").val("");
+                    window.location.href = "/DeduccioninstitucionFinanciera/Index"
+                });
+        });
 
 
-            $('#btnRaInac').click(function () {
-                deif_IdDeduccionInstFinanciera = $("#Deduccioninstfinanciera").val()
-                $.ajax({
-                    url: "/DeduccionInstitucionFinanciera/InactivarInstitucionFinanciera",
-                    method: "POST",
-                    dataType: 'json',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ deif_IdDeduccionInstFinanciera: deif_IdDeduccionInstFinanciera }),
-                })
-                    .done(function (data) {
-                        $("_tbInac_Id").val("");
-                        window.location.href = "/DeduccioninstitucionFinanciera/Index"
-                    });
-            });
-
-
-        </script>
+    </script>
 
 
 
 
-    }
+}

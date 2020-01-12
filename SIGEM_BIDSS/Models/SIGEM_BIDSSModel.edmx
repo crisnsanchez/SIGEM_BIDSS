@@ -867,7 +867,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
+        <Association Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera">
           <End Role="tbInstitucionFinanciera" Type="Self.tbInstitucionFinanciera" Multiplicity="1" />
           <End Role="tbDeduccionInstitucionFinanciera" Type="Self.tbDeduccionInstitucionFinanciera" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2004,7 +2004,7 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
-          <AssociationSet Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" Association="Self.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
+          <AssociationSet Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera" Association="Self.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera">
             <End Role="tbInstitucionFinanciera" EntitySet="tbInstitucionFinanciera" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
           </AssociationSet>
@@ -2944,6 +2944,32 @@
             <Parameter Name="Reemga_UsuarioModifica" Mode="In" Type="Int32" />
             <Parameter Name="Reemga_FechaModifica" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result)">
+            <Parameter Name="insf_Id" Mode="In" Type="Int32" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="deif_Monto" Mode="In" Type="Decimal" />
+            <Parameter Name="deif_Comentarios" Mode="In" Type="String" />
+            <Parameter Name="deif_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="deif_FechaCrea" Mode="In" Type="DateTime" />
+            <Parameter Name="deif_Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result)">
+            <Parameter Name="deif_IdDeduccionInstFinanciera" Mode="In" Type="Int32" />
+            <Parameter Name="insf_Id" Mode="In" Type="Int32" />
+            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
+            <Parameter Name="deif_Monto" Mode="In" Type="Decimal" />
+            <Parameter Name="deif_Comentarios" Mode="In" Type="String" />
+            <Parameter Name="deif_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="deif_FechaModifica" Mode="In" Type="DateTime" />
+            <Parameter Name="deif_Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result)">
+            <Parameter Name="Lianvi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Lianvi_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <EntitySet Name="tbBitacoraErrores" EntityType="SIGEM_BIDSSModel.tbBitacoraErrores" />
           <EntitySet Name="tbAccionPersonal" EntityType="SIGEM_BIDSSModel.tbAccionPersonal" />
           <EntitySet Name="tbAnticipoSalario" EntityType="SIGEM_BIDSSModel.tbAnticipoSalario" />
@@ -3172,7 +3198,7 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
           </AssociationSet>
-          <AssociationSet Name="FK_Gral_tbInstitucionesFinancieras_insf_Id_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" Association="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_Id_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
+          <AssociationSet Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" Association="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
             <End Role="tbInstitucionFinanciera" EntitySet="tbInstitucionFinanciera" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
           </AssociationSet>
@@ -3184,32 +3210,6 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
-          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result)">
-            <Parameter Name="insf_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="deif_Monto" Mode="In" Type="Decimal" />
-            <Parameter Name="deif_Comentarios" Mode="In" Type="String" />
-            <Parameter Name="deif_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="deif_FechaCrea" Mode="In" Type="DateTime" />
-            <Parameter Name="deif_Activo" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result)">
-            <Parameter Name="deif_IdDeduccionInstFinanciera" Mode="In" Type="Int32" />
-            <Parameter Name="insf_Id" Mode="In" Type="Int32" />
-            <Parameter Name="emp_Id" Mode="In" Type="Int32" />
-            <Parameter Name="deif_Monto" Mode="In" Type="Decimal" />
-            <Parameter Name="deif_Comentarios" Mode="In" Type="String" />
-            <Parameter Name="deif_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="deif_FechaModifica" Mode="In" Type="DateTime" />
-            <Parameter Name="deif_Activo" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result)">
-            <Parameter Name="Lianvi_Id" Mode="In" Type="Int32" />
-            <Parameter Name="est_Id" Mode="In" Type="Int32" />
-            <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
-            <Parameter Name="Lianvi_UsuarioModifica" Mode="In" Type="Int32" />
-            <Parameter Name="Lianvi_FechaModifica" Mode="In" Type="DateTime" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -3473,6 +3473,15 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Adm_tbReembolsoGastos_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <EntityType Name="tbBitacoraErrores">
@@ -4011,7 +4020,7 @@
           <Property Name="deif_FechaModifica" Type="DateTime" Precision="3" />
           <Property Name="deif_Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbEmpleado" />
-          <NavigationProperty Name="tbInstitucionFinanciera" Relationship="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_Id_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbInstitucionFinanciera" />
+          <NavigationProperty Name="tbInstitucionFinanciera" Relationship="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" FromRole="tbDeduccionInstitucionFinanciera" ToRole="tbInstitucionFinanciera" />
         </EntityType>
         <EntityType Name="tbInstitucionFinanciera">
           <Key>
@@ -4027,7 +4036,7 @@
           <Property Name="insf_FechaCrea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="insf_UsuarioModifica" Type="Int32" />
           <Property Name="insf_FechaModifica" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_Id_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" FromRole="tbInstitucionFinanciera" ToRole="tbDeduccionInstitucionFinanciera" />
+          <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="SIGEM_BIDSSModel.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc" FromRole="tbInstitucionFinanciera" ToRole="tbDeduccionInstitucionFinanciera" />
         </EntityType>
         <EntityType Name="tbEmpleado">
           <Key>
@@ -4679,7 +4688,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Gral_tbInstitucionesFinancieras_insf_Id_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
+        <Association Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera_Gral_tbDeduccionInstitucionFinanciera_insf_IdInstitucionFinanc">
           <End Type="SIGEM_BIDSSModel.tbInstitucionFinanciera" Role="tbInstitucionFinanciera" Multiplicity="1" />
           <End Type="SIGEM_BIDSSModel.tbDeduccionInstitucionFinanciera" Role="tbDeduccionInstitucionFinanciera" Multiplicity="*" />
           <ReferentialConstraint>
@@ -4715,15 +4724,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5285,6 +5285,27 @@
           <FunctionImportMapping FunctionImportName="UDP_Adm_tbReembolsoGastos_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbReembolsoGastos_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbReembolsoGastos_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -5851,27 +5872,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Update" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
