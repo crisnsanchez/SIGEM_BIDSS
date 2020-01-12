@@ -25,40 +25,40 @@ namespace SIGEM_BIDSS.Controllers
             return View(tbLiquidacionAnticipoViatico.ToList());
         }
 
-        ////GET: LiquidacionAnticipoViaticoDetalle/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    try
-        //    {
-        //        string vReturn = "";
-        //        if (id == null)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //        }
-        //        tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
-        //        ViewBag.RequisicionDetalle = db.tbRequisionCompraDetalle.Where(x => x.Reqco_Id == tbLiquidacionAnticipoViatico.Lianvi_Id).ToList();
-        //        if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Enviada)
-        //        {
-        //            if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
-        //            {
-        //                TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
-        //            }
-        //            else
-        //            {
-        //                TempData["swalfunction"] = GeneralFunctions.sol_ErrorUpdateState;
-        //            }
-        //        }
-        //        if (tbLiquidacionAnticipoViatico == null)
-        //        {
-        //            return HttpNotFound();
-        //        }
-        //        return View(tbLiquidacionAnticipoViatico);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        //GET: LiquidacionAnticipoViaticoDetalle/Details/5
+        public ActionResult Details(int? id)
+        {
+            try
+            {
+                //string vReturn = "";
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+                ViewBag.RequisicionDetalle = db.tbRequisionCompraDetalle.Where(x => x.Reqco_Id == tbLiquidacionAnticipoViatico.Lianvi_Id).ToList();
+                if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Enviada)
+                {
+                    //if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                    //{
+                    //    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                    //}
+                    //else
+                    //{
+                    //    TempData["swalfunction"] = GeneralFunctions.sol_ErrorUpdateState;
+                    //}
+                }
+                if (tbLiquidacionAnticipoViatico == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbLiquidacionAnticipoViatico);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         //GET: LiquidacionAnticipoViaticoDetalle/Create
         public ActionResult Create( )

@@ -32,13 +32,25 @@ namespace SIGEM_BIDSS.Controllers
         // GET: LiquidacionAnticipoViatico/Details/5
         public ActionResult Details(int? id)
         {
-
+            string vReturn = "";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+        
             tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
-
+            if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Enviada)
+            {
+                if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                }
+                else
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_ErrorUpdateState;
+                }
+            }
+            ViewBag.IdFull = db.tbLiquidacionAnticipoViaticoDetalle.Where(x => x.Lianvi_Id == tbLiquidacionAnticipoViatico.Lianvi_Id).ToList();
 
             ViewBag.IdFull = db.tbLiquidacionAnticipoViaticoDetalle.Where(x => x.Lianvi_Id == tbLiquidacionAnticipoViatico.Lianvi_Id).ToList();
             if (tbLiquidacionAnticipoViatico == null)
@@ -203,6 +215,249 @@ public ActionResult Edit(int? id)
             ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion", tbLiquidacionAnticipoViatico.est_Id);
             return View(tbLiquidacionAnticipoViatico);
         }
+
+
+
+
+
+        ///
+
+
+        [HttpPost]
+        public JsonResult Revisar(int id, string RazonRechazo)
+        {
+            string vReturn = "";
+            string IsFor = "false";
+            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+            if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Enviada)
+            {
+                if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.Revisada, RazonRechazo))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                    IsFor = "true";
+                }
+            }
+            if (tbLiquidacionAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(IsFor, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult ApprovePorJefe(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+            if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.AprobadaPorJefe, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbLiquidacionAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult ApprovePorRRHH(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+            if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.AprobadaPorRRHH, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbLiquidacionAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult ApprovePorAdmin(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+            if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.AprobadaPorAdmin, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbLiquidacionAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: AnticipoSalario/Approve/5
+        [HttpPost]
+        public JsonResult Approve(int? id)
+        {
+            var list = "";
+            string vReturn = "";
+            if (id == null)
+            {
+                return Json("Valor Nulo", JsonRequestBehavior.AllowGet);
+            }
+            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+            if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.Aprobada, GeneralFunctions.stringDefault))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Aprobada;
+                    list = vReturn;
+                }
+            }
+            if (tbLiquidacionAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // GET: AnticipoSalario/Approve/5   
+        [HttpPost]
+        public JsonResult Reject(int id, string RazonRechazo)
+        {
+            var list = "";
+            string vReturn = "";
+            tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+            if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Revisada)
+            {
+                if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.Rechazada, RazonRechazo))
+                {
+                    TempData["swalfunction"] = GeneralFunctions.sol_Rechazada;
+                }
+            }
+            if (tbLiquidacionAnticipoViatico == null)
+            {
+                return Json("Error al cargar datos", JsonRequestBehavior.AllowGet);
+                //return HttpNotFound();
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+        /// 
+        public bool UpdateState(out string pvReturn, tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico, int State, string Lianvi_RazonRechazo)
+        {
+            pvReturn = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "", _msj = "", _msjFor = "";
+            bool Result = false, ResultFor = false;
+            IEnumerable<object> Update = null;
+            var reject = "";
+
+            try
+            {
+                tbAnticipoViatico tbAnticipoViatico = new tbAnticipoViatico();
+                int EmployeeID = Function.GetUser(out UserName);
+
+                tbLiquidacionAnticipoViatico.est_Id = State;
+                tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo = Lianvi_RazonRechazo;
+                Update = db.UDP_Adm_tbAnticipoViatico_Update(tbLiquidacionAnticipoViatico.Anvi_Id,
+                                                        tbLiquidacionAnticipoViatico.est_Id,
+                                                        tbLiquidacionAnticipoViatico.Lianvi_RazonRechazo,
+                                                                 EmployeeID,
+                                                                 Function.DatetimeNow()
+
+                    );
+                foreach (UDP_Adm_tbReembolsoGastos_Update_Result liq in Update)
+                    ErrorMessage = liq.MensajeError;
+                pvReturn = ErrorMessage;
+                if (ErrorMessage.StartsWith("-1"))
+                {
+
+                    Function.BitacoraErrores("LiquidacionAnticipoViatico", "UpdateState", UserName, ErrorMessage);
+                    ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                    return false;
+                }
+                else
+                {
+                    var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                    var GetEmployee = Function.GetUserInfo(tbAnticipoViatico.emp_Id);
+                    var Approver = Function.GetUserInfo(EmployeeID);
+                    string Correlativo = tbLiquidacionAnticipoViatico.Lianvi_Correlativo;
+                    string Nombres = GetEmployee.emp_Nombres;
+                    string CorreoElectronico = GetEmployee.emp_CorreoElectronico;
+                    string sApprover = Approver.strFor + Approver.emp_Nombres;
+                    if (Lianvi_RazonRechazo == GeneralFunctions.stringDefault) { Lianvi_RazonRechazo = null; };
+                    _msjFor = GeneralFunctions.msj_ToAdmin;
+                    switch (State)
+                    {
+                        case GeneralFunctions.Revisada:
+                            _msj = GeneralFunctions.msj_Revisada;
+                            break;
+                        case GeneralFunctions.AprobadaPorJefe:
+                            _msj = GeneralFunctions.msj_RevisadaPorJefe;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.AprobadaPorRRHH:
+                            _msj = GeneralFunctions.msj_RevisadaPorRRHH;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.AprobadaPorAdmin:
+                            _msj = GeneralFunctions.msj_RevisadaPorAdmin;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.Aprobada:
+                            _msj = GeneralFunctions.msj_Aprobada;
+                            break;
+                        case GeneralFunctions.Rechazada:
+                            _msj = GeneralFunctions.msj_Rechazada;
+                            reject = " Razon de Rechazo:";
+                            break;
+                    }
+                    Result = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + Lianvi_RazonRechazo, sApprover, CorreoElectronico);
+
+
+                    if (!Result) { Function.BitacoraErrores("LiquidacionAnticipoViatico", "UpdateState", UserName, ErrorEmail); return false; }
+                    if (!ResultFor) { Function.BitacoraErrores("LiquidacionAnticipoViatico", "UpdateState", UserName, ErrorEmail); return false; }
+
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                pvReturn = ex.Message.ToString();
+                Function.BitacoraErrores("LiquidacionAnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
+                return false;
+            }
+        }
+
+
+
 
         // GET: LiquidacionAnticipoViatico/Delete/5
         public ActionResult Delete(int? id)

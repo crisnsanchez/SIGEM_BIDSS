@@ -393,6 +393,9 @@
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UDP_Adm_tbReembolsoGastos_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -3350,6 +3353,7 @@
     <Content Include="Scripts\app\Solicitud\AnticipoViatico\Modals.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViaticoDetalle.js" />
+    <Content Include="Scripts\app\Solicitud\ModalesLiquidacionViaticos.js" />
     <Content Include="Scripts\app\Solicitud\ModalesReembolsoGastos.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\Modals.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionCompra.js" />
@@ -3587,6 +3591,7 @@
     <Content Include="Views\prie\Details.cshtml" />
     <Content Include="Views\prie\Edit.cshtml" />
     <Content Include="Views\prie\Index.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\_Modales.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

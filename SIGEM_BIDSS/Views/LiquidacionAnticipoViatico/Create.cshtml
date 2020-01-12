@@ -67,7 +67,7 @@
                         @Html.LabelFor(model => model.Lianvi_Comentario, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-11">
                             <div class="col-md-13">
-                                <textarea class="form-control" name="Lianvi_Comentario" maxlength="250 " onkeypress="return soloLetras(event)" onkeyup="this.value=this.value.toUpperCase(),noespaciosincio(this)"></textarea>
+                                <textarea class="form-control" name="Lianvi_Comentario" maxlength="250 " onkeypress="return soloLetras(event)" onkeyup="noespaciosincio(this)"></textarea>
                                 @Html.ValidationMessageFor(model => model.Lianvi_Comentario, "", new { @class = "text-danger", id = "Comentario" })
                             </div>
 
