@@ -16,7 +16,7 @@ namespace SIGEM_BIDSS.Controllers
     public class AnticipoViaticoController : BaseController
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
-        GeneralFunctions Funtion = new GeneralFunctions();
+        GeneralFunctions Function = new GeneralFunctions();
 
         // GET: AnticipoViatico
         public ActionResult Index()
@@ -68,8 +68,8 @@ namespace SIGEM_BIDSS.Controllers
             try
             {
                 string UserName = "";
-                int EmployeeID = Funtion.GetUser(out UserName);
-                int fecha = Funtion.DatetimeNow().Year;
+                int EmployeeID = Function.GetUser(out UserName);
+                int fecha = Function.DatetimeNow().Year;
                 int SolCount = (from _tbSol in db.tbAnticipoViatico where _tbSol.Anvi_FechaCrea.Year == fecha && _tbSol.emp_Id == EmployeeID select _tbSol).Count();
 
 
@@ -106,7 +106,7 @@ namespace SIGEM_BIDSS.Controllers
 
             try
             {
-                int EmployeeID = Funtion.GetUser(out UserName);
+                int EmployeeID = Function.GetUser(out UserName);
 
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
                                                 where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
@@ -118,7 +118,7 @@ namespace SIGEM_BIDSS.Controllers
                 ViewBag.Anvi_tptran_Id = new SelectList(db.tbTipoTransporte, "tptran_Id", "tptran_Descripcion", tbAnticipoViatico.Anvi_tptran_Id);
 
                 tbAnticipoViatico.emp_Id = EmployeeID;
-                tbAnticipoViatico.Anvi_GralFechaSolicitud = Funtion.DatetimeNow();
+                tbAnticipoViatico.Anvi_GralFechaSolicitud = Function.DatetimeNow();
                 tbAnticipoViatico.est_Id = GeneralFunctions.Enviada;
 
 
@@ -129,7 +129,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     Insert = db.UDP_Adm_tbAnticipoViatico_Insert(EmployeeID,
                                                                tbAnticipoViatico.Anvi_JefeInmediato,
-                                                               Funtion.DatetimeNow(),
+                                                               Function.DatetimeNow(),
                                                                tbAnticipoViatico.Anvi_FechaViaje,
                                                                tbAnticipoViatico.Anvi_Cliente.ToUpper(),
                                                                tbAnticipoViatico.mun_Codigo,
@@ -141,25 +141,26 @@ namespace SIGEM_BIDSS.Controllers
                                                                tbAnticipoViatico.Anvi_Comentario,
                                                                tbAnticipoViatico.est_Id,
                                                                EmployeeID,
-                                                               Funtion.DatetimeNow());
+                                                               Function.DatetimeNow());
                     foreach (UDP_Adm_tbAnticipoViatico_Insert_Result Res in Insert)
                         ErrorMessage = Res.MensajeError;
 
                     if (ErrorMessage.StartsWith("-1"))
                     {
-                        Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorMessage);
+                        Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro contacte al administrador.");
                     }
                     else
                     {
-                        var GetEmployee = Funtion.GetUserInfo(EmployeeID);
-                        var EmpJefe = Funtion.GetUserInfo(tbAnticipoViatico.Anvi_JefeInmediato);
+                        var GetEmployee = Function.GetUserInfo(EmployeeID);
+                        var EmpJefe = Function.GetUserInfo(tbAnticipoViatico.Anvi_JefeInmediato);
 
-                        Result = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty);
-                        ResultAdm = Funtion.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GeneralFunctions.stringEmpty, GetEmployee.emp_Nombres, EmpJefe.emp_CorreoElectronico, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty);
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
 
-                        if (!Result) Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
-                        if (!ResultAdm) Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
+
+                        if (!Result) Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ErrorEmail);
 
                         TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
                         return RedirectToAction("Index");
@@ -168,7 +169,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch (Exception ex)
             {
-                Funtion.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
+                Function.BitacoraErrores("AnticipoViatico", "CreatePost", UserName, ex.Message.ToString());
             }
 
             return View(tbAnticipoViatico);
@@ -377,6 +378,19 @@ namespace SIGEM_BIDSS.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult CalcularFecha(cCalFechas cCalFechas)
+        {
+
+            string MASspan = "", MASspanFecha = "";
+
+            if (cCalFechas.FechaFin < cCalFechas.FechaInicio)
+            {
+                MASspanFecha = "La Fecha de Viaje no puede ser menor que la Fecha Actual";
+            }
+            object vCalcular = new { MASspan, MASspanFecha };
+            return Json(vCalcular, JsonRequestBehavior.AllowGet);
+        }
 
         public bool UpdateState(out string pvReturn, tbAnticipoViatico tbAnticipoViatico, int State, string Anvi_RazonRechazo)
         {
@@ -388,7 +402,7 @@ namespace SIGEM_BIDSS.Controllers
 
             try
             {
-                int EmployeeID = Funtion.GetUser(out UserName);
+                int EmployeeID = Function.GetUser(out UserName);
 
                 tbAnticipoViatico.est_Id = State;
 
@@ -397,7 +411,7 @@ namespace SIGEM_BIDSS.Controllers
                                                         tbAnticipoViatico.est_Id,
                                                         tbAnticipoViatico.Anvi_RazonRechazo,
                                                                  EmployeeID,
-                                                                 Funtion.DatetimeNow()
+                                                                 Function.DatetimeNow()
 
                     );
                 foreach (UDP_Adm_tbAnticipoViatico_Update_Result Res in Update)
@@ -406,15 +420,15 @@ namespace SIGEM_BIDSS.Controllers
                 if (ErrorMessage.StartsWith("-1"))
                 {
 
-                    Funtion.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
+                    Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorMessage);
                     ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
                     return false;
                 }
                 else
                 {
                     var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
-                    var GetEmployee = Funtion.GetUserInfo(tbAnticipoViatico.emp_Id);
-                    var Approver = Funtion.GetUserInfo(EmployeeID);
+                    var GetEmployee = Function.GetUserInfo(tbAnticipoViatico.emp_Id);
+                    var Approver = Function.GetUserInfo(EmployeeID);
                     string Correlativo = tbAnticipoViatico.Anvi_Correlativo;
                     string Nombres = GetEmployee.emp_Nombres;
                     string CorreoElectronico = GetEmployee.emp_CorreoElectronico;
@@ -428,15 +442,15 @@ namespace SIGEM_BIDSS.Controllers
                             break;
                         case GeneralFunctions.AprobadaPorJefe:
                             _msj = GeneralFunctions.msj_RevisadaPorJefe;
-                            ResultFor = Funtion.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
                             break;
                         case GeneralFunctions.AprobadaPorRRHH:
                             _msj = GeneralFunctions.msj_RevisadaPorRRHH;
-                            ResultFor = Funtion.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
                             break;
                         case GeneralFunctions.AprobadaPorAdmin:
                             _msj = GeneralFunctions.msj_RevisadaPorAdmin;
-                            ResultFor = Funtion.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
                             break;
                         case GeneralFunctions.Aprobada:
                             _msj = GeneralFunctions.msj_Aprobada;
@@ -446,11 +460,11 @@ namespace SIGEM_BIDSS.Controllers
                             reject = " Razon de Rechazo:";
                             break;
                     }
-                    Result = Funtion.LeerDatos(out ErrorEmail, Correlativo, Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + Anvi_RazonRechazo, sApprover, CorreoElectronico);
+                    Result = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + Anvi_RazonRechazo, sApprover, CorreoElectronico);
 
 
-                    if (!Result) { Funtion.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
-                    if (!ResultFor) { Funtion.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+                    if (!Result) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+                    if (!ResultFor) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
 
                 }
                 return true;
@@ -459,7 +473,7 @@ namespace SIGEM_BIDSS.Controllers
             catch (Exception ex)
             {
                 pvReturn = ex.Message.ToString();
-                Funtion.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
+                Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
                 return false;
             }
         }

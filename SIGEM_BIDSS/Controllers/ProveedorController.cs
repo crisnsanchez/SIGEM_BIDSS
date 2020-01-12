@@ -139,12 +139,13 @@ namespace SIGEM_BIDSS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tbProveedor tbProveedor = db.tbProveedor.Find(id);
+            string _depto = db.tbMunicipio.Find(tbProveedor.mun_codigo).dep_codigo;
             if (tbProveedor == null)
             {
                 return HttpNotFound();
             }
 
-
+            ViewBag.mun_codigo = new SelectList(db.tbMunicipio.Where(x => x.dep_codigo == _depto), "mun_codigo", "mun_nombre", tbProveedor.mun_codigo);
             ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion",tbProveedor.acte_Id);
             ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre", tbProveedor.mun_codigo);
             string depCod = (from _dep in db.tbMunicipio where _dep.mun_codigo == tbProveedor.mun_codigo select _dep.dep_codigo).FirstOrDefault();
@@ -162,47 +163,52 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "";
             try
             {
-                if (db.tbProveedor.Any(a => a.prov_RTN == tbProveedor.prov_RTN && a.prov_Id != tbProveedor.prov_Id))
-                {
-                    string Error = "Ya existe un proveedor con este RTN.";
-                    Function.BitacoraErrores("Proveedor", "EditPost", UserName, Error);
-                    ModelState.AddModelError("", Error);
-                    return View(tbProveedor);
-                }
                 int EmployeeID = Function.GetUser(out UserName);
-
                 ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
                 ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
                 ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
                 ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
-                IEnumerable<Object> List = null;
-                string Msj = "";
-                List = db.UDP_Inv_tbProveedor_Update(tbProveedor.prov_Id,
-                                                    tbProveedor.prov_Nombre,
-                                                    tbProveedor.prov_NombreContacto,
-                                                    tbProveedor.prov_Direccion,
-                                                    tbProveedor.mun_codigo,
-                                                    tbProveedor.prov_Email,
-                                                    tbProveedor.prov_Telefono,
-                                                    tbProveedor.prov_RTN,
-                                                    tbProveedor.acte_Id,
-                                                    EmployeeID, Function.DatetimeNow());
-                foreach (UDP_Inv_tbProveedor_Update_Result Permiso in List)
-                    Msj = Permiso.MensajeError;
-                if (Msj.StartsWith("-1"))
+                if (ModelState.IsValid)
                 {
-                    Function.BitacoraErrores("Proveedor", "EditPost", UserName, Msj);
-                    ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
-                    ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
-                    ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
-                    ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
-                    return View(tbProveedor);
+                    if (db.tbProveedor.Any(a => a.prov_RTN == tbProveedor.prov_RTN && a.prov_Id != tbProveedor.prov_Id))
+                    {
+                        string Error = "Ya existe un proveedor con este RTN.";
+                        Function.BitacoraErrores("Proveedor", "EditPost", UserName, Error);
+                        ModelState.AddModelError("", Error);
+                        return View(tbProveedor);
+                    }
+                  
+
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Inv_tbProveedor_Update(tbProveedor.prov_Id,
+                                                   tbProveedor.prov_Nombre,
+                                                   tbProveedor.prov_NombreContacto,
+                                                   tbProveedor.prov_Direccion,
+                                                   tbProveedor.mun_codigo,
+                                                   tbProveedor.prov_Email,
+                                                   tbProveedor.prov_Telefono,
+                                                   tbProveedor.prov_RTN,
+                                                   tbProveedor.acte_Id,
+                                                   EmployeeID, Function.DatetimeNow());
+                    foreach (UDP_Inv_tbProveedor_Update_Result Permiso in List)
+                        Msj = Permiso.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        Function.BitacoraErrores("Proveedor", "EditPost", UserName, Msj);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        ViewBag.acte_Id = new SelectList(db.tbActividadEconomica, "acte_Id", "acte_Descripcion");
+                        ViewBag.mun_Codigo = new SelectList(db.tbMunicipio, "mun_codigo", "dep_codigo", tbProveedor.mun_codigo);
+                        ViewBag.mun_codigo = new SelectList(db.tbMunicipio, "mun_codigo", "mun_nombre");
+                        ViewBag.dep_Codigo = new SelectList(db.tbDepartamento, "dep_Codigo", "dep_Nombre");
+                        return View(tbProveedor);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
-                else
-                {
-                    TempData["swalfunction"] = "true";
-                    return RedirectToAction("Index");
-                }
+                return View(tbProveedor);
             }
             catch (Exception Ex)
             {
@@ -210,7 +216,6 @@ namespace SIGEM_BIDSS.Controllers
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 return View(tbProveedor);
             }
-            return View(tbProveedor);
         }
 
         // GET: Proveedor/Delete/5

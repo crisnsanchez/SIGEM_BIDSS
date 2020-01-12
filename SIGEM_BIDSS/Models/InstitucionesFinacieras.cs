@@ -36,7 +36,7 @@ namespace SIGEM_BIDSS.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string insf_Correo { get; set; }
 
-        [Display(Name = "¿Es Activo?")]
+        [Display(Name = "Estado")]
         public bool insf_Activo { get; set; }
 
         [Display(Name = "Usuario Crea")]

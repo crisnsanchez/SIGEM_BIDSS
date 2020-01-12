@@ -96,14 +96,15 @@
                             </dd>
                         }
                     }
-               
+
                 </div>
             </dl>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     @if (Model.est_Id == GeneralFunctions.Revisada)
                     {
-                        <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="Aprobar" />
+                        <input type="button" id="Approve" class="btn btn-primary" data-toggle="modal" data-target="#ModalApprove" value="AprobarJefe" />
+                        <input type="button" id="ApproveAdmin" class="btn btn-primary" data-toggle="modal" data-target="#ModalApproveAdmin" value="AprobarAdmin" />
                         <input type="button" id="Reject" class="btn btn-danger" data-toggle="modal" data-target="#ModalReject" value="Rechazar" />
                     }
                     else
@@ -124,7 +125,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/app/General_Details.js"></script>
-    <script src="~/Scripts/app/Solicitud/AccionPersonal.js"></script>
 
+    <script src="~/Scripts/app/General_Details.js"></script>
+    <script src="~/Scripts/app/Solicitud/AccionPersonal/Modals.js"></script>
 }

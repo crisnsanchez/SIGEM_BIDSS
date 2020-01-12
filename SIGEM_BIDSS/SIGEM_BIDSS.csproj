@@ -1,10 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" />
-  <Import Project="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props" Condition="Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props" Condition="Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props')" />
-  <Import Project="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props" Condition="Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -41,7 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TypeScriptTarget>ES2018</TypeScriptTarget>
+    <TypeScriptTarget>ES2015</TypeScriptTarget>
     <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
     <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
@@ -235,6 +230,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\ParametroController.cs" />
+    <Compile Include="Controllers\prie.cs" />
     <Compile Include="Controllers\ProductoCategoriaController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
@@ -355,6 +351,9 @@
     <Compile Include="Models\tbSueldo.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tbSueldoHistorico.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbTipoMovimiento.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
@@ -392,6 +391,12 @@
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Insert_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result.cs">
+      <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UDP_Adm_tbReembolsoGastos_Update_Result.cs">
       <DependentUpon>SIGEM_BIDSSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UDP_Adm_tbRequisionCompraDetalle_Insert_Result.cs">
@@ -664,16 +669,6 @@
     <Compile Include="TokenStorage\SessionTokenStore.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\ej2\bootstrap.css" />
-    <Content Include="Content\ej2\bootstrap4.css" />
-    <Content Include="Content\ej2\compatibility\bootstrap.css" />
-    <Content Include="Content\ej2\compatibility\bootstrap4.css" />
-    <Content Include="Content\ej2\compatibility\fabric.css" />
-    <Content Include="Content\ej2\compatibility\highcontrast.css" />
-    <Content Include="Content\ej2\compatibility\material.css" />
-    <Content Include="Content\ej2\fabric.css" />
-    <Content Include="Content\ej2\highcontrast.css" />
-    <Content Include="Content\ej2\material.css" />
     <Content Include="Content\Email\Solicitud.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -3349,7 +3344,8 @@
     <Content Include="Scripts\app\Departamento.js" />
     <Content Include="Scripts\app\Empleados.js" />
     <Content Include="Scripts\app\Municipio.js" />
-    <Content Include="Scripts\app\Solicitud\AccionPersonal.js" />
+    <Content Include="Scripts\app\Solicitud\AccionPersonal\AccionPersonal.js" />
+    <Content Include="Scripts\app\Solicitud\AccionPersonal\Modals.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\AnticipoSalario.js" />
     <Content Include="Scripts\app\Solicitud\AnticipoSalario\Modals.js" />
     <Content Include="Scripts\app\InstitucionFinaciera.js" />
@@ -3357,6 +3353,8 @@
     <Content Include="Scripts\app\Solicitud\AnticipoViatico\Modals.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViatico.js" />
     <Content Include="Scripts\app\Solicitud\LiquidacionAnticipoViaticoDetalle.js" />
+    <Content Include="Scripts\app\Solicitud\ModalesLiquidacionViaticos.js" />
+    <Content Include="Scripts\app\Solicitud\ModalesReembolsoGastos.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\Modals.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionCompra.js" />
     <Content Include="Scripts\app\Solicitud\RequisicionCompra\RequisicionDetalle.js" />
@@ -3393,8 +3391,6 @@
     <Content Include="PrivateSettings.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\SIGEM.pubxml" />
-    <Content Include="Scripts\ej2\ej2.min.js" />
-    <Content Include="Scripts\ej2\ej2.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -3588,8 +3584,14 @@
     <Content Include="Views\DeduccionInstitucionFinanciera\Edit.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinanciera\Index.cshtml" />
     <Content Include="Views\DeduccionInstitucionFinanciera\_EmpleadoBus.cshtml" />
-    <Content Include="Views\Sync\View.cshtml" />
-    <Content Include="Views\Sync\ViewOne.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastosDetalles\_Modales.cshtml" />
+    <Content Include="Views\SolicitudReembolsoGastos\_Modales.cshtml" />
+    <Content Include="Views\prie\Create.cshtml" />
+    <Content Include="Views\prie\Delete.cshtml" />
+    <Content Include="Views\prie\Details.cshtml" />
+    <Content Include="Views\prie\Edit.cshtml" />
+    <Content Include="Views\prie\Index.cshtml" />
+    <Content Include="Views\LiquidacionAnticipoViatico\_Modales.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -3601,6 +3603,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Reportes\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Sync\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3621,19 +3624,6 @@
     <TypeScriptCompile Include="Content\template\plugins\fullcalendar-interaction\main.d.ts" />
     <TypeScriptCompile Include="Content\template\plugins\fullcalendar-timegrid\main.d.ts" />
     <TypeScriptCompile Include="Content\template\plugins\fullcalendar\main.d.ts" />
-    <TypeScriptCompile Include="Scripts\ej2\ej2.d.ts" />
-    <TypeScriptCompile Include="Scripts\file1.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\analyzers\dotnet\cs\Microsoft.CodeAnalysis.VersionCheckAnalyzer.resources.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\analyzers\dotnet\Microsoft.CodeAnalysis.VersionCheckAnalyzer.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Humanizer.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.CodeQuality.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.CodeQuality.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetCore.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -3669,11 +3659,6 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.VersionCheckAnalyzer.2.9.6\build\Microsoft.CodeAnalysis.VersionCheckAnalyzer.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeQuality.Analyzers.2.9.6\build\Microsoft.CodeQuality.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetCore.Analyzers.2.9.6\build\Microsoft.NetCore.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NetFramework.Analyzers.2.9.6\build\Microsoft.NetFramework.Analyzers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeAnalysis.FxCopAnalyzers.2.9.6\build\Microsoft.CodeAnalysis.FxCopAnalyzers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

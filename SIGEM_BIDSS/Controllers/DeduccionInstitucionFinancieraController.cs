@@ -47,7 +47,7 @@ namespace SIGEM_BIDSS.Controllers
                 int EmployeeID = Function.GetUser(out UserName);
                 tbDeduccionInstitucionFinanciera tbDeduccionInstitucionFinanciera = db.tbDeduccionInstitucionFinanciera.Find(insf_Id);
                 list = db.UDP_Plani_tbDeduccionInstitucionFinanciera_Update(tbDeduccionInstitucionFinanciera.deif_IdDeduccionInstFinanciera,
-                                                                            tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera,
+                                                                            tbDeduccionInstitucionFinanciera.insf_Id,
                                                                             tbDeduccionInstitucionFinanciera.emp_Id,
                                                                             tbDeduccionInstitucionFinanciera.deif_Monto,
                                                                             tbDeduccionInstitucionFinanciera.deif_Comentarios,
@@ -74,7 +74,7 @@ namespace SIGEM_BIDSS.Controllers
                 int EmployeeID = Function.GetUser(out UserName);
                 tbDeduccionInstitucionFinanciera tbDeduccionInstitucionFinanciera = db.tbDeduccionInstitucionFinanciera.Find(insf_Id);
                 list = db.UDP_Plani_tbDeduccionInstitucionFinanciera_Update(tbDeduccionInstitucionFinanciera.deif_IdDeduccionInstFinanciera,
-                                                                            tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera,
+                                                                            tbDeduccionInstitucionFinanciera.insf_Id,
                                                                             tbDeduccionInstitucionFinanciera.emp_Id,
                                                                             tbDeduccionInstitucionFinanciera.deif_Monto,
                                                                             tbDeduccionInstitucionFinanciera.deif_Comentarios,
@@ -93,7 +93,7 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Create()
         {
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
-            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre");
+            ViewBag.insf_Id = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre");
             return View();
         }
 
@@ -102,58 +102,53 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "deif_IdDeduccionInstFinanciera,emp_Id,insf_IdInstitucionFinanciera,deif_Monto,deif_Comentarios,deif_UsuarioCrea,deif_FechaCrea,deif_UsuarioModifica,deif_FechaModifica,deif_Activo")] tbDeduccionInstitucionFinanciera tbDeduccionInstitucionFinanciera)
+        public ActionResult Create([Bind(Include = "deif_IdDeduccionInstFinanciera,emp_Id,insf_Id,deif_Monto,deif_Comentarios,deif_UsuarioCrea,deif_FechaCrea,deif_UsuarioModifica,deif_FechaModifica,deif_Activo")] tbDeduccionInstitucionFinanciera tbDeduccionInstitucionFinanciera)
         {
+
             string UserName = "";
             try
             {
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
-                ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre");
+                ViewBag.insf_Id= new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre");
                 int EmployeeID = Function.GetUser(out UserName);
                 if (ModelState.IsValid)
                 {
-                    IEnumerable<Object> List = null;
-                    string Msj = "";
-                    List = db.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert(
-                                                                            tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera,
-                                                                            tbDeduccionInstitucionFinanciera.emp_Id,
-                                                                            tbDeduccionInstitucionFinanciera.deif_Monto,
-                                                                            tbDeduccionInstitucionFinanciera.deif_Comentarios,
-                                                                           EmployeeID,
-                                                                            Function.DatetimeNow(),
-                                                                         GeneralFunctions.Activo
-                                                                    );
-                    foreach (UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result TipoSangre in List)
-                        Msj = TipoSangre.MensajeError;
-                    if (Msj.StartsWith("-1"))
+                    IEnumerable<object> _List = null;
+                    string ErrorMessage = "";
+                    _List = db.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert(tbDeduccionInstitucionFinanciera.insf_Id, tbDeduccionInstitucionFinanciera.emp_Id,tbDeduccionInstitucionFinanciera.deif_Monto,tbDeduccionInstitucionFinanciera.deif_Comentarios, EmployeeID, Function.DatetimeNow(), GeneralFunctions.Activo);
+                    foreach (UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result Area in _List)
+                        ErrorMessage = Area.MensajeError;
+                    if (ErrorMessage.StartsWith("-1"))
                     {
-                        Function.BitacoraErrores("InstitucionFinanciera", "CreatePost", UserName, Msj);
+                        Function.BitacoraErrores("Area", "CreatePost", UserName, ErrorMessage);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbDeduccionInstitucionFinanciera);
                     }
-                    if (Msj.StartsWith("-2"))
-                    {
-                        ModelState.AddModelError("", "Ya existe una Institución con el mismo nombre.");
-                        return View();
-                    }
+                  
                     else
                     {
+
+                        TempData["swalfunction"] = "true";
+
                         return RedirectToAction("Index");
                     }
+
                 }
+                return View(tbDeduccionInstitucionFinanciera);
             }
             catch (Exception Ex)
             {
-                Function.BitacoraErrores("InstitucionFinanciera", "CreatePost", UserName, Ex.Message.ToString());
-
-                return View();
+                Function.BitacoraErrores("Area", "CreatePost", UserName, Ex.Message.ToString());
+                ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                return View(tbDeduccionInstitucionFinanciera);
             }
-            return View();
+
         }
 
-    
 
-    // GET: DeduccionInstitucionFinanciera/Edit/5
-    public ActionResult Edit(int? id)
+
+        // GET: DeduccionInstitucionFinanciera/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -165,7 +160,7 @@ namespace SIGEM_BIDSS.Controllers
                 return HttpNotFound();
             }
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
-            ViewBag.insf_IdInstitucionFinanciera = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre", tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera);
+            ViewBag.insf_Id = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre", tbDeduccionInstitucionFinanciera.insf_Id);
             return View(tbDeduccionInstitucionFinanciera);
         }
 
@@ -174,14 +169,16 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "deif_IdDeduccionInstFinanciera,emp_Id,insf_IdInstitucionFinanciera,deif_Monto,deif_Comentarios,deif_UsuarioCrea,deif_FechaCrea,deif_UsuarioModifica,deif_FechaModifica,deif_Activo")] tbDeduccionInstitucionFinanciera tbDeduccionInstitucionFinanciera)
+        public ActionResult Edit([Bind(Include = "deif_IdDeduccionInstFinanciera,emp_Id,insf_Id,deif_Monto,deif_Comentarios,deif_UsuarioCrea,deif_FechaCrea,deif_UsuarioModifica,deif_FechaModifica,deif_Activo")] tbDeduccionInstitucionFinanciera tbDeduccionInstitucionFinanciera)
         {
             string UserName = "";
             try
             {
+                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
+                ViewBag.insf_Id = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre", tbDeduccionInstitucionFinanciera.insf_Id);
                 int EmployeeID = Function.GetUser(out UserName);
                 if (ModelState.IsValid)
-                    if (db.tbDeduccionInstitucionFinanciera.Any(a => a.insf_IdInstitucionFinanciera == tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera && a.insf_IdInstitucionFinanciera != tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera))
+                    if (db.tbDeduccionInstitucionFinanciera.Any(a => a.insf_Id == tbDeduccionInstitucionFinanciera.insf_Id && a.insf_Id != tbDeduccionInstitucionFinanciera.insf_Id))
                     {
                        
                     }
@@ -189,7 +186,7 @@ namespace SIGEM_BIDSS.Controllers
                 IEnumerable<Object> List = null;
                 string Msj = "";
                 List = db.UDP_Plani_tbDeduccionInstitucionFinanciera_Update(tbDeduccionInstitucionFinanciera.deif_IdDeduccionInstFinanciera,
-                                                                            tbDeduccionInstitucionFinanciera.insf_IdInstitucionFinanciera,
+                                                                            tbDeduccionInstitucionFinanciera.insf_Id,
                                                                             tbDeduccionInstitucionFinanciera.emp_Id,
                                                                             tbDeduccionInstitucionFinanciera.deif_Monto,
                                                                             tbDeduccionInstitucionFinanciera.deif_Comentarios,

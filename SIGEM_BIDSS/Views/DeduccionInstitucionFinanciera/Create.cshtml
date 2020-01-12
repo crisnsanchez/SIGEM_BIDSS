@@ -40,7 +40,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-upload mr-1"></i>
-            Insertar Cargo
+            Insertar Deducción Institución Financiera
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -55,12 +55,22 @@
         <div class="form-horizontal">
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.insf_IdInstitucionFinanciera, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-sm-4">
-                        @Html.DropDownListFor(model => model.insf_IdInstitucionFinanciera, (SelectList)ViewBag.insf_IdInstitucionFinanciera, "Seleccione Área", new { @class = "form-control" })
 
-                        @Html.ValidationMessageFor(model => model.insf_IdInstitucionFinanciera, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.emp_Id, (SelectList)ViewBag.emp_Id, "Seleccione Empleado", new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.insf_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(model => model.insf_Id, (SelectList)ViewBag.insf_Id, "Seleccione Área", new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.insf_Id, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -97,38 +107,6 @@
 </div>
 
 
-@*PARA AGREGAR NUEVO PRODUCTO*@
-<div class="modal fade" id="ModalAgregarProducto">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Buscar Productos</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body justify-content-center">
-                <div class="card card-primary card-outline">
-                    <div class="card-header d-flex p-0 ui-sortable-handle">
-                        <h3 class="card-title p-3">
-                            <input id="prodSearch" type="text" class="form-control nospace col-lg-12" placeholder="Producto" />
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            @Html.Partial("_BuscarProducto", (List<SIGEM_BIDSS.Models.tbProducto>)ViewBag.Producto)
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-</div>
 
 
 

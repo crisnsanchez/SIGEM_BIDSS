@@ -21,25 +21,43 @@ namespace SIGEM_BIDSS.Controllers
         // GET: LiquidacionAnticipoViaticoDetalle
         public ActionResult Index()
         {
-            ViewBag.Lianvi_Id = new SelectList(db.tbLiquidacionAnticipoViatico, "Lianvi_Id", "Lianvi_Correlativo");
-            ViewBag.tpv_Id = new SelectList(db.tbTipoViatico, "tpv_Id", "tpv_Descripcion");
-            var tbLiquidacionAnticipoViaticoDetalle = db.tbLiquidacionAnticipoViaticoDetalle.Include(t => t.tbLiquidacionAnticipoViatico).Include(t => t.tbTipoViatico);
-            return View(tbLiquidacionAnticipoViaticoDetalle.ToList());
+            var tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Include(t => t.tbAnticipoViatico).Include(t => t.tbEstado);
+            return View(tbLiquidacionAnticipoViatico.ToList());
         }
 
         //GET: LiquidacionAnticipoViaticoDetalle/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //string vReturn = "";
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                tbLiquidacionAnticipoViatico tbLiquidacionAnticipoViatico = db.tbLiquidacionAnticipoViatico.Find(id);
+                ViewBag.RequisicionDetalle = db.tbRequisionCompraDetalle.Where(x => x.Reqco_Id == tbLiquidacionAnticipoViatico.Lianvi_Id).ToList();
+                if (tbLiquidacionAnticipoViatico.est_Id == GeneralFunctions.Enviada)
+                {
+                    //if (UpdateState(out vReturn, tbLiquidacionAnticipoViatico, GeneralFunctions.Revisada, GeneralFunctions.stringDefault))
+                    //{
+                    //    TempData["swalfunction"] = GeneralFunctions.sol_Revisada;
+                    //}
+                    //else
+                    //{
+                    //    TempData["swalfunction"] = GeneralFunctions.sol_ErrorUpdateState;
+                    //}
+                }
+                if (tbLiquidacionAnticipoViatico == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(tbLiquidacionAnticipoViatico);
             }
-            tbLiquidacionAnticipoViaticoDetalle tbLiquidacionAnticipoViaticoDetalle = db.tbLiquidacionAnticipoViaticoDetalle.Find(id);
-            if (tbLiquidacionAnticipoViaticoDetalle == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                throw;
             }
-            return View(tbLiquidacionAnticipoViaticoDetalle);
         }
 
         //GET: LiquidacionAnticipoViaticoDetalle/Create
@@ -214,7 +232,90 @@ namespace SIGEM_BIDSS.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public bool UpdateState(out string pvReturn, tbRequisionCompra tbRequisionCompra, int State, string RazonRechazo)
+        {
+            pvReturn = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "", _msj = "", _msjFor = "";
+            bool Result = false, ResultFor = false;
+            IEnumerable<object> Update = null;
+            var reject = "";
 
+            try
+            {
+                int EmployeeID = Function.GetUser(out UserName);
+
+                tbRequisionCompra.est_Id = State;
+
+                tbRequisionCompra.Reqco_RazonRechazo = RazonRechazo;
+
+                Update = db.UDP_Adm_tbRequisionCompra_Update(tbRequisionCompra.Reqco_Id,
+                                                                              tbRequisionCompra.est_Id,
+                                                                              tbRequisionCompra.Reqco_RazonRechazo,
+                                                                              EmployeeID,
+                                                                              Function.DatetimeNow());
+                foreach (UDP_Adm_tbRequisionCompra_Update_Result Res in Update)
+                    ErrorMessage = Res.MensajeError;
+                pvReturn = ErrorMessage;
+                if (ErrorMessage.StartsWith("-1"))
+                {
+
+                    Function.BitacoraErrores("RequisionCompra", "UpdateState", UserName, ErrorMessage);
+                    ModelState.AddModelError("", "No se pudo actualizar el registro contacte al administrador.");
+                    return false;
+                }
+                else
+                {
+                    var _Parameters = (from _tbParm in db.tbParametro select _tbParm).FirstOrDefault();
+                    var GetEmployee = Function.GetUserInfo(tbRequisionCompra.emp_Id);
+                    var Approver = Function.GetUserInfo(EmployeeID);
+                    string Correlativo = tbRequisionCompra.Reqco_Correlativo;
+                    string Nombres = GetEmployee.emp_Nombres;
+                    string CorreoElectronico = GetEmployee.emp_CorreoElectronico;
+                    string sApprover = Approver.strFor + Approver.emp_Nombres;
+                    if (RazonRechazo == GeneralFunctions.stringDefault) { RazonRechazo = null; };
+                    _msjFor = GeneralFunctions.msj_ToAdmin;
+                    switch (State)
+                    {
+                        case GeneralFunctions.Revisada:
+                            _msj = GeneralFunctions.msj_Revisada;
+                            break;
+                        case GeneralFunctions.AprobadaPorJefe:
+                            _msj = GeneralFunctions.msj_RevisadaPorJefe;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.AprobadaPorRRHH:
+                            _msj = GeneralFunctions.msj_RevisadaPorRRHH;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.AprobadaPorAdmin:
+                            _msj = GeneralFunctions.msj_RevisadaPorAdmin;
+                            ResultFor = Function.LeerDatos(out ErrorEmail, Correlativo, _Parameters.par_NombreEmpresa, Nombres, _msjFor, GeneralFunctions.stringEmpty, sApprover, _Parameters.par_CorreoEmpresa);
+                            break;
+                        case GeneralFunctions.Aprobada:
+                            _msj = GeneralFunctions.msj_Aprobada;
+                            break;
+                        case GeneralFunctions.Rechazada:
+                            _msj = GeneralFunctions.msj_Rechazada;
+                            reject = " Razon de Rechazo:";
+                            break;
+                    }
+                    Result = Function.LeerDatos(out ErrorEmail, Correlativo, Nombres, GeneralFunctions.stringEmpty, _msj, reject + " " + RazonRechazo, sApprover, CorreoElectronico);
+
+
+                    if (!Result) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+                    if (!ResultFor) { Function.BitacoraErrores("AnticipoSalario", "UpdateState", UserName, ErrorEmail); return false; }
+
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                pvReturn = ex.Message.ToString();
+                Function.BitacoraErrores("AnticipoViatico", "UpdateState", UserName, ex.Message.ToString());
+                return false;
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

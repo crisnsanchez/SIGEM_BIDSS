@@ -24,6 +24,8 @@ namespace SIGEM_BIDSS.Models
         public Nullable<System.DateTime> sue_FechaModifica { get; set; }
     
         public virtual tbMoneda tbMoneda { get; set; }
+        public virtual tbMoneda tbMoneda1 { get; set; }
         public virtual tbEmpleado tbEmpleado { get; set; }
+        public virtual tbEmpleado tbEmpleado1 { get; set; }
     }
 }

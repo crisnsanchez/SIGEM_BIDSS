@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SIGEM_BIDSS.Models.tbDeduccionInstitucionFinanciera>
-
+@using SIGEM_BIDSS.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -57,7 +57,20 @@
                         <td>
                             @Html.ActionLink("Editar", "Edit", new { id = item.deif_IdDeduccionInstFinanciera }, new { @class = "btn btn-primary btn-xs" })
                             @Html.ActionLink("Detalles", "Details", new { id = item.deif_IdDeduccionInstFinanciera }, new { @class = "btn btn-default btn-xs" })
+
+
+                            @if (item.deif_Activo == GeneralFunctions.instfinAceptar)
+                            {
+                                <input type="button" id="Desactivar" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#ModalRazonInactivacion" value="Inactivar" />
+                                <input type="hidden" id="_Insf_Id" value="@item.deif_IdDeduccionInstFinanciera" />
+                            }
+                            else if (item.deif_Activo == GeneralFunctions.instfinDenegar)
+                            {
+                                <input type="button" id="Activar" class="btn btn-success btn-xs" data-toggle="modal" data-target="#ModalRazonActivacion" Style="width:55px" value="Activar" />
+                                <input type="hidden" id="_Insf_Id" value="@item.deif_IdDeduccionInstFinanciera" />
+                            }
                         </td>
+
                     </tr>
                 }
             </tbody>
@@ -78,7 +91,108 @@
     <script src="~/Content/template/dist/js/adminlte.min.js"></script>
     <script src="~/Scripts/app/General.js"></script>
     <script src="~/Scripts/app/DataTables.js"></script>
+    <div class="modal fade" id="ModalRazonInactivacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input id="Deduccioninstfinanciera" type="hidden" />
+                    <h4 class="modal-title" id="myModalLabel">¿Está seguro que desea inactivar el registro seleccionado?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-}
+                <div class="modal-footer">
 
-</table>
+                    <button class="btn btn-primary" type="submit" id="btnRaInac">Inactivar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ModalRazonActivacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <input id="Deduccioninstfinanciera" type="hidden" />
+                    <h4 class="modal-title" id="myModalLabel">¿Está seguro que desea activar el registro seleccionado?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="btn btn-primary" type="submit" id="btnAc">Activar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- DataTables -->
+        <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+        <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+
+
+        <script>
+
+
+            $(document).on("click", "#dataTable tbody tr td input#Activar", function () {
+                _deif_IdDeduccionInstFinanciera = $(this).closest('tr').data('id');
+                $("#Deduccioninstfinanciera").val(_deif_IdDeduccionInstFinanciera);
+            })
+
+
+            $('#btnAc').click(function () {
+                console.log("Hola");
+                deif_IdDeduccionInstFinanciera = $("#Deduccioninstfinanciera").val()
+                $.ajax({
+                    url: "/DeduccionInstitucionFinanciera/ActivarInstitucionFinanciera",
+                    method: "POST",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ deif_IdDeduccionInstFinanciera: deif_IdDeduccionInstFinanciera }),
+                    success: function () {
+
+                        location.reload();
+                    }
+                })
+                    .done(function (data) {
+
+                        window.location.href = "/DeduccioninstitucionFinanciera/Index"
+                    });
+            });
+
+
+
+            $(document).on("click", "#dataTable tbody tr td input#Desactivar", function () {
+                _deif_IdDeduccionInstFinanciera = $(this).closest('tr').data('id');
+                $("#Deduccioninstfinanciera").val(_deif_IdDeduccionInstFinanciera);
+                console.log(_Insf_Id)
+            })
+
+
+            $('#btnRaInac').click(function () {
+                deif_IdDeduccionInstFinanciera = $("#Deduccioninstfinanciera").val()
+                $.ajax({
+                    url: "/DeduccionInstitucionFinanciera/InactivarInstitucionFinanciera",
+                    method: "POST",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ deif_IdDeduccionInstFinanciera: deif_IdDeduccionInstFinanciera }),
+                })
+                    .done(function (data) {
+                        $("_tbInac_Id").val("");
+                        window.location.href = "/DeduccioninstitucionFinanciera/Index"
+                    });
+            });
+
+
+        </script>
+
+
+
+
+    }

@@ -156,44 +156,51 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int? id, [Bind(Include = "insf_Id,insf_Nombre,insf_Contacto,insf_Telefono,insf_Correo,insf_Activo")] tbInstitucionFinanciera tbInstitucionFinanciera)
         {
-
             string UserName = "";
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
+                
                 if (ModelState.IsValid)
+                {
                     if (db.tbInstitucionFinanciera.Any(a => a.insf_Nombre == tbInstitucionFinanciera.insf_Nombre && a.insf_Id != tbInstitucionFinanciera.insf_Id))
                     {
                         ModelState.AddModelError("", "Ya existe una Institución con el mismo nombre.");
                         return View(tbInstitucionFinanciera);
                     }
 
-                IEnumerable<Object> List = null;
-                string Msj = "";
-                List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
+
+                    IEnumerable<Object> List = null;
+                    string Msj = "";
+                    List = db.UDP_Plani_tbInstitucionFinanciera_Update(tbInstitucionFinanciera.insf_Id, tbInstitucionFinanciera.insf_Nombre,
                                                                      tbInstitucionFinanciera.insf_Contacto,
                                                                      tbInstitucionFinanciera.insf_Telefono,
                                                                      tbInstitucionFinanciera.insf_Correo, EmployeeID,
                                                                         Function.DatetimeNow(),
-                                                                     tbInstitucionFinanciera.insf_Activo);
-                foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result inst in List)
-                    Msj = inst.MensajeError;
-                if (Msj.StartsWith("-1"))
-                {
-                    Function.BitacoraErrores("InstitucionFinanciera", "EditPost", UserName, Msj);
-                    return View(tbInstitucionFinanciera);
+                                                                     GeneralFunctions.Activo);
+                    foreach (UDP_Plani_tbInstitucionFinanciera_Update_Result inst in List)
+                        Msj = inst.MensajeError;
+                    if (Msj.StartsWith("-1"))
+                    {
+                        Function.BitacoraErrores("InstitucionFinanciera", "EditPost", UserName, Msj);
+                        ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                     
+                        return View(tbInstitucionFinanciera);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
+                return View(tbInstitucionFinanciera);
             }
             catch (Exception Ex)
             {
                 Function.BitacoraErrores("InstitucionFinanciera", "EditPost", UserName, Ex.Message.ToString());
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
-                return View();
+                return View(tbInstitucionFinanciera);
             }
+
         }
 
         // GET: InstitucionFinanciera/Delete/5

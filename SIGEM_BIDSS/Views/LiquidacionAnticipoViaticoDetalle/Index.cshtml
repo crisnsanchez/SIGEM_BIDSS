@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SIGEM_BIDSS.Models.tbLiquidacionAnticipoViaticoDetalle>
+﻿@model IEnumerable<SIGEM_BIDSS.Models.tbLiquidacionAnticipoViatico>
 
 @{
     ViewBag.Title = "Index";
@@ -22,53 +22,57 @@
                 <thead>
                     <tr>
                         <th>
-                            Correlativo
+                            @Html.DisplayNameFor(model => model.Lianvi_Correlativo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvi_FechaLiquida)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvi_FechaInicioViaje)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvi_FechaFinViaje)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvi_Comentario)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Lianvi_RazonRechazo)
                         </th>
 
-                        <th>
-                         @Html.DisplayNameFor(model => model.Lianvide_FechaGasto)
-              
-                  
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Lianvide_MontoGasto)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.tpv_Id)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Lianvide_Concepto)
-                        </th>
-                       
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbLiquidacionAnticipoViatico.tbAnticipoViatico.Anvi_Correlativo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Lianvide_FechaGasto)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Lianvide_MontoGasto)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbTipoViatico.tpv_Descripcion)
-                            </td>
-                   
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Lianvide_Concepto)
-                            </td>
-                       
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lianvi_Correlativo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lianvi_FechaLiquida)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lianvi_FechaInicioViaje)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lianvi_FechaFinViaje)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lianvi_Comentario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lianvi_RazonRechazo)
+                        </td>
 
-                            <td>
-                                @Html.ActionLink("Detalle", "Details", new { id = item.Lianvide_Id }, new { @class = "btn btn-danger btn-xs", @style = "width: 57px;" })
-                            </td>
-                        </tr>
+                        <td>
+
+                        <td>
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Lianvi_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
+                        </td>
+                       
+                    </tr>
                     }
                 </tbody>
             </table>
