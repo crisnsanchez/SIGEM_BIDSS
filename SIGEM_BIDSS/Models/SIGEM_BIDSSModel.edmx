@@ -1225,6 +1225,13 @@
           <Parameter Name="Lianvi_UsuarioCrea" Type="int" Mode="In" />
           <Parameter Name="Lianvi_FechaCrea" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="UDP_Adm_tbLiquidacionAnticipoViatico_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
+          <Parameter Name="Lianvi_Id" Type="int" Mode="In" />
+          <Parameter Name="est_Id" Type="int" Mode="In" />
+          <Parameter Name="Lianvi_RazonRechazo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lianvi_UsuarioModifica" Type="int" Mode="In" />
+          <Parameter Name="Lianvi_FechaModifica" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="UDP_Adm_tbLiquidacionAnticipoViaticoDetalle_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Adm">
           <Parameter Name="Lianvi_Id" Type="int" Mode="In" />
           <Parameter Name="Lianvide_FechaGasto" Type="datetime" Mode="In" />
@@ -3196,6 +3203,13 @@
             <Parameter Name="deif_FechaModifica" Mode="In" Type="DateTime" />
             <Parameter Name="deif_Activo" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="UDP_Adm_tbLiquidacionAnticipoViatico_Update" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result)">
+            <Parameter Name="Lianvi_Id" Mode="In" Type="Int32" />
+            <Parameter Name="est_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_RazonRechazo" Mode="In" Type="String" />
+            <Parameter Name="Lianvi_UsuarioModifica" Mode="In" Type="Int32" />
+            <Parameter Name="Lianvi_FechaModifica" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
           <Property Type="String" Name="mun_Codigo" Nullable="false" MaxLength="4" />
@@ -4707,6 +4721,9 @@
         <ComplexType Name="UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <ComplexType Name="UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5844,6 +5861,13 @@
           <FunctionImportMapping FunctionImportName="UDP_Plani_tbDeduccionInstitucionFinanciera_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Plani_tbDeduccionInstitucionFinanciera_Update" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Adm_tbLiquidacionAnticipoViatico_Update" FunctionName="SIGEM_BIDSSModel.Store.UDP_Adm_tbLiquidacionAnticipoViatico_Update" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>

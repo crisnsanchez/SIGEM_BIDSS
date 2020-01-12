@@ -3213,5 +3213,30 @@ namespace SIGEM_BIDSS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Plani_tbDeduccionInstitucionFinanciera_Update_Result>("UDP_Plani_tbDeduccionInstitucionFinanciera_Update", deif_IdDeduccionInstFinancieraParameter, insf_IdParameter, emp_IdParameter, deif_MontoParameter, deif_ComentariosParameter, deif_UsuarioModificaParameter, deif_FechaModificaParameter, deif_ActivoParameter);
         }
+    
+        public virtual ObjectResult<UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result> UDP_Adm_tbLiquidacionAnticipoViatico_Update(Nullable<int> lianvi_Id, Nullable<int> est_Id, string lianvi_RazonRechazo, Nullable<int> lianvi_UsuarioModifica, Nullable<System.DateTime> lianvi_FechaModifica)
+        {
+            var lianvi_IdParameter = lianvi_Id.HasValue ?
+                new ObjectParameter("Lianvi_Id", lianvi_Id) :
+                new ObjectParameter("Lianvi_Id", typeof(int));
+    
+            var est_IdParameter = est_Id.HasValue ?
+                new ObjectParameter("est_Id", est_Id) :
+                new ObjectParameter("est_Id", typeof(int));
+    
+            var lianvi_RazonRechazoParameter = lianvi_RazonRechazo != null ?
+                new ObjectParameter("Lianvi_RazonRechazo", lianvi_RazonRechazo) :
+                new ObjectParameter("Lianvi_RazonRechazo", typeof(string));
+    
+            var lianvi_UsuarioModificaParameter = lianvi_UsuarioModifica.HasValue ?
+                new ObjectParameter("Lianvi_UsuarioModifica", lianvi_UsuarioModifica) :
+                new ObjectParameter("Lianvi_UsuarioModifica", typeof(int));
+    
+            var lianvi_FechaModificaParameter = lianvi_FechaModifica.HasValue ?
+                new ObjectParameter("Lianvi_FechaModifica", lianvi_FechaModifica) :
+                new ObjectParameter("Lianvi_FechaModifica", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_Adm_tbLiquidacionAnticipoViatico_Update_Result>("UDP_Adm_tbLiquidacionAnticipoViatico_Update", lianvi_IdParameter, est_IdParameter, lianvi_RazonRechazoParameter, lianvi_UsuarioModificaParameter, lianvi_FechaModificaParameter);
+        }
     }
 }

@@ -50,42 +50,45 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Anvi_Correlativo)
-                            </td>
-                            <td>
-                                @{string Empleado = item.tbEmpleado.emp_Nombres + " " + item.tbEmpleado.emp_Apellidos;}
-                                @Empleado
-                            </td>
-                            <td>
-                                @{ string Anvi_GralFechaSolicitud = item.Anvi_GralFechaSolicitud.ToString("dd/MM/yyyy");}
-                                @Anvi_GralFechaSolicitud
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Anvi_Cliente)
-                            </td>
-                            <td>
-                                @if (item.Anvi_Hospedaje == true)
-                                {
-                                    <p> SI</p>
-                                }
-                                else
-                                {
-                                    <p>NO</p>
-                                }
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Anvi_Comentario)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
-                            </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Anvi_Correlativo)
+                        </td>
+                        <td>
+                            @{string Empleado = item.tbEmpleado.emp_Nombres + " " + item.tbEmpleado.emp_Apellidos;}
+                            @Empleado
+                        </td>
+                        <td>
+                            @{ string Anvi_GralFechaSolicitud = item.Anvi_GralFechaSolicitud.ToString("dd/MM/yyyy");}
+                            @Anvi_GralFechaSolicitud
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Anvi_Cliente)
+                        </td>
+                        <td>
+                            @if (item.Anvi_Hospedaje == true)
+                            {
+                                <p> SI</p>
+                            }
+                            else
+                            {
+                                <p>NO</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Anvi_Comentario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbEstado.est_Descripcion)
+                        </td>
 
-                            <td>
-                                @Html.ActionLink("Liquidar", "Create", new { id = item.Anvi_Id }, new { @class = "btn btn-danger btn-xs", @style = "width: 57px;" })
-                            </td>
-                        </tr>
+                        <td>
+                            @Html.ActionLink("Liquidar", "Create", new { id = item.Anvi_Id }, new { @class = "btn btn-danger btn-xs", @style = "width: 57px;" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Anvi_Id }, new { @class = "btn btn-default btn-xs", @style = "width: 57px;" })
+
+                        </td>
+                       
+                    </tr>
                     }
                 </tbody>
             </table>
