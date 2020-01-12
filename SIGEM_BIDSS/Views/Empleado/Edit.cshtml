@@ -68,7 +68,7 @@
                         <div class="form-group col-md-6">
                             @Html.LabelFor(model => model.emp_PathImage, htmlAttributes: new { @class = "control-label col-md-6" })
                             <div class="custom-file col-md-11">
-                                <input id="CargarFoto" value="Cargar Fotografía" name="FotoPath" type="file" class="custom-file-input">
+                                <input id="CargarFoto" value="Cargar Fotografía" name="FotoPath" type="file" class="custom-file-input col-md-6" accept="image/png, image/jpeg" />
                                 <label id="lblCargarFoto" style="width:400px" class="custom-file-label" for="CargarFoto">
                                     @if (Model.emp_PathImage != null && Model.emp_PathImage != "")
                                     {@Url.Content(Model.emp_PathImage)}
