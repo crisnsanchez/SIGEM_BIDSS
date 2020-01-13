@@ -11,17 +11,14 @@ namespace SIGEM_BIDSS.Models
     public partial class tbRequisionCompra
     {
         [NotMapped]
-        [Display(Name = "Jefe de Area")]
+        [Display(Name = "Jefe de Área")]
         public string Reqco_Jefe { get; set; }
         [NotMapped]
         [Display(Name = "Puesto")]
         public string pto_Id { get; set; }
         [NotMapped]
-        [Display(Name = "Area")]
+        [Display(Name = "Área")]
         public string Area { get; set; }
-
-
-
     }
 
 
@@ -36,7 +33,7 @@ namespace SIGEM_BIDSS.Models
         [Display(Name = "Empleado")]
         public int emp_Id { get; set; }
 
-        [Display(Name = "Area")]
+        [Display(Name = "Área")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es obligatorio.")]
         public int are_Id { get; set; }
 
