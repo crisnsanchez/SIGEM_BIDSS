@@ -157,7 +157,9 @@ namespace SIGEM_BIDSS.Controllers
 
                 if (!Result) Function.BitacoraErrores("AccionPersonal", "CreatePost", UserName, ErrorEmail);
                 if (!ResultAdm) Function.BitacoraErrores("AccionPersonal", "CreatePost", UserName, ErrorEmail);
-                return RedirectToAction("Index");
+
+
+                return RedirectToAction("Index", "LiquidacionAnticipoViatico");
             }
             catch (Exception)
             {

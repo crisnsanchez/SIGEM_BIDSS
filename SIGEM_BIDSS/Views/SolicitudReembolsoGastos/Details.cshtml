@@ -11,7 +11,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-info  mr-1"></i>
-            Detalle Solicitud Reembolso Gastos
+             Solicitud Reembolso Gastos
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -39,6 +39,24 @@
                     @Html.DisplayFor(model => model.Reemga_GralFechaSolicitud)
                 </dd>
 
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
+                </dd>
+
+
                 <dt>
                     @Html.DisplayNameFor(model => model.Reemga_FechaViaje)
                 </dt>
@@ -46,7 +64,7 @@
                 <dd>
                     @Html.DisplayFor(model => model.Reemga_FechaViaje)
                 </dd>
-
+                <br />
                 <dt>
                     @Html.DisplayNameFor(model => model.Reemga_Cliente)
                 </dt>
@@ -127,22 +145,6 @@
                     @Html.DisplayFor(model => model.Reemga_FechaModifica)
                 </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.tbEmpleado.emp_Nombres)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.tbEmpleado.emp_Nombres)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.tbEstado.est_Descripcion)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.tbEstado.est_Descripcion)
-                </dd>
-
 
 
                 <div class="form-group col-md-3">
@@ -178,7 +180,7 @@
             </dl>
 
 
-   
+
 
 
             <div class="form-group">
@@ -200,9 +202,17 @@
 
         </div>
     </div>
-    <div class="card-body">
-        <div class="form-group">
-            @Html.Partial("_Details", (List<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastosDetalle>)ViewBag.IdFull)
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.Partial("_Details", (List<SIGEM_BIDSS.Models.tbSolicitudReembolsoGastosDetalle>)ViewBag.IdFull)
+                </div>
+            </div>
         </div>
     </div>
 </div>
