@@ -68,7 +68,7 @@ function readURL(input) {
                 $('#imgpreview').attr('src',"../../Content/img/descarga.jpg");
                 document.getElementById('lblCargarFoto').innerText = "";
                 document.getElementById('CargarFoto').value = "";
-                document.getElementById('ImageLength').innerText = "Limite Excedido";
+                document.getElementById('ImageLength').innerText = "Limite Excedido, máximo 2 MB";
             }
         }
         reader.readAsDataURL(input.files[0]);
