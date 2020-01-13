@@ -67,6 +67,7 @@ namespace SIGEM_BIDSS.Controllers
             string ErrorMessage = "";
             try
             {
+              
                 string UserName = "";
                 int EmployeeID = Function.GetUser(out UserName);
                 int fecha = Function.DatetimeNow().Year;
@@ -103,9 +104,17 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "", ErrorEmail = "", ErrorMessage = "";
             bool Result = false, ResultAdm = false;
             IEnumerable<object> Insert = null;
-
+            if (tbAnticipoViatico.mun_Codigo == "Seleccione Municipio")
+                ModelState.AddModelError("mun_codigo", "El campo Municipio es obligatorio.");
+            else
+                ViewBag.munCodigo = tbAnticipoViatico.mun_Codigo;
+            if (String.IsNullOrEmpty(dep_codigo))
+                ModelState.AddModelError("Anvi_UsuarioCrea", "El campo Departamento es obligatorio.");
+            else
+                ModelState.AddModelError("Anvi_UsuarioCrea", "");
             try
             {
+
                 int EmployeeID = Function.GetUser(out UserName);
 
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado

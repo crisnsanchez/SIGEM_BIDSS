@@ -96,7 +96,7 @@ $(document).ready(function () {
             .done(function (data) {
                 if (data.length > 0) {
                     $('#mun_Codigo').empty();
-                    $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+                    $('#mun_Codigo').append("<option value=''>Seleccione Municipio</option>");
                     $.each(data, function (key, val) {
                         if (muncod !== "") {
                             if (val.mun_codigo === muncod) {
@@ -112,7 +112,7 @@ $(document).ready(function () {
                 }
                 else {
                     $('#mun_Codigo').empty();
-                    $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+                    $('#mun_Codigo').append("<option value=''>Seleccione Municipio</option>");
                 }
             });
     }
@@ -204,7 +204,7 @@ function GetMunicipios() {
             .done(function (data) {
                 if (data.length > 0) {
                     $('#mun_Codigo').empty();
-                    $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+                    $('#mun_Codigo').append("<option value=''>Seleccione Municipio</option>");
                     $.each(data, function (key, val) {
                         $('#mun_Codigo').append("<option value=" + val.mun_codigo + ">" + val.mun_nombre + "</option>");
                     });
@@ -213,13 +213,13 @@ function GetMunicipios() {
                 }
                 else {
                     $('#mun_Codigo').empty();
-                    $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+                    $('#mun_Codigo').append("<option value=''>Seleccione Municipo</option>");
                 }
             });
     }
     else {
         $('#mun_Codigo').empty();
-        $('#mun_Codigo').append("<option value=''>Seleccione</option>");
+        $('#mun_Codigo').append("<option value=''>Seleccione Municipio</option>");
     }
 }
 
