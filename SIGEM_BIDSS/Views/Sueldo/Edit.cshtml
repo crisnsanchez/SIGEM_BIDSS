@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                    @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control", @readonly= "@readonly" })
                                     @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.tmo_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("tmo_Id", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                    @Html.DropDownList("tmo_Id", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.tmo_Id, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                 @Html.LabelFor(model => model.Cantidad, "Sueldo", htmlAttributes: new { @class = "control-label col-md-4" })
                                 <div class="col-md-10">
 
-                                    @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control", @onChange = "MASK(this,this.value,'-###,###,###,##0.00',1)" } })
+                                    @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control", @OnKeyPress = "return soloNumeros(event)", @onChange = "MASK(this,this.value,'-###,###,###,##0.00',1)" } })
                                     @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger", @id = "cant" })
                                 </div>
                             </div>

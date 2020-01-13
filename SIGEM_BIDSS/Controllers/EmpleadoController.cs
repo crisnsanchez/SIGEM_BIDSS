@@ -84,16 +84,26 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Empleado/Details/5
         public ActionResult Details(short? id)
         {
+
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             tbEmpleado tbEmpleado = db.tbEmpleado.Find(id);
+          
+                  //ViewBag.emp_sexo = new SelectItem(Function.Sexo, "are_Id", "are_Descripcion");
+
             if (tbEmpleado == null)
             {
                 return HttpNotFound();
             }
+           
             return View(tbEmpleado);
+
+
+
         }
 
         // GET: Empleado/Activar/5
