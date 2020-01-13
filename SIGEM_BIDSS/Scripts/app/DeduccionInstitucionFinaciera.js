@@ -3,10 +3,22 @@
 
 
 
-
+var prodtable = $("#tblBusquedaGenerica").DataTable({
+    "searching": false,
+    "lengthChange": false,
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+    }
+})
 $(document).on("click", "#tblBusquedaGenerica tbody tr td button#seleccionar", function () {
-    var prod_Text = $(this).closest('tr').find('td:eq(0)').text()
-    var prod_Id = this.value;
-    document.getElementById("prod_Id").value = prod_Id
-    document.getElementById("prod_Text").value = prod_Text.trimStart().trimEnd()
+    var emp_Text = $(this).closest('tr').find('td:eq(0)').text()
+    var emp_Id = this.value;
+    document.getElementById("emp_Id").value = emp_Id
+    document.getElementById("emp_Text").value = emp_Text.trimStart().trimEnd()
+});
+
+
+
+$('#empSearch').on('keyup', function () {
+    prodtable.search(this.value).draw();
 });
