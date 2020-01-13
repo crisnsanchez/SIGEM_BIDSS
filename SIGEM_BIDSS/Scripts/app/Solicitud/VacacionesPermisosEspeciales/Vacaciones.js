@@ -106,3 +106,11 @@ function soloNumeros(e) {
 
 
 
+document.getElementById("VPE_FechaInicio").addEventListener("change", function () {
+    document.getElementById("spanFechaInicio").value = ""
+    
+});
+document.getElementById("VPE_FechaInicio").addEventListener("change", function () {
+    document.getElementById("spanFechaFin").value = ""
+    spanFechaFin
+});

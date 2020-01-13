@@ -100,6 +100,10 @@ namespace SIGEM_BIDSS.Controllers
 
             try
             {
+                if (tbVacacionesPermisosEspeciales.VPE_FechaFin > tbVacacionesPermisosEspeciales.VPE_FechaFin)
+                {
+                    ModelState.AddModelError("ValidationSummary", "La Fecha de inicio no puede ser mayor que la final.");
+                }
                 int EmployeeID = Function.GetUser(out UserName);
                 cGetUserInfo GetEmployee = null;
                 cGetUserInfo EmpJefe = null;
@@ -145,6 +149,7 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
+
                         GetEmployee = Function.GetUserInfo(EmployeeID);
                         EmpJefe = Function.GetUserInfo(tbVacacionesPermisosEspeciales.VPE_JefeInmediato);
 

@@ -111,13 +111,11 @@ namespace SIGEM_BIDSS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "are_Id,Reqco_GralFechaSolicitud,Reqco_Comentario,Reqco_RazonRechazo")] tbRequisionCompra tbRequisionCompra)
         {
-            string UserName = "", ErrorEmail = "", ErrorMessage = "",Scope = "";
-            bool Result = false, ResultAdm = false;
+            string UserName = "", ErrorMessage = "",Scope = "";
             IEnumerable<object> Insert = null;
 
             try
             {
-                cGetUserInfo GetEmployee = null, EmpJefe = null;
                 int EmployeeID = Function.GetUser(out UserName);
 
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
@@ -159,29 +157,6 @@ namespace SIGEM_BIDSS.Controllers
                     }
                     else
                     {
-                        var UserInfo = (from _emp in db.tbEmpleado
-                                        join _pto in db.tbPuesto on _emp.pto_Id equals _pto.pto_Id
-                                        join _are in db.tbArea on _pto.are_Id equals _are.are_Id
-                                        where _emp.emp_Id == EmployeeID
-                                        select new { _emp, _are, _pto }).FirstOrDefault();
-
-                        var UserAreaInfo = (from _emp in db.tbEmpleado
-                                            join _pto in db.tbPuesto on _emp.pto_Id equals _pto.pto_Id
-                                            join _are in db.tbArea on _pto.are_Id equals _are.are_Id
-                                            where _emp.emp_EsJefe == true && _pto.are_Id == UserInfo._are.are_Id && _pto.pto_Id == UserInfo._pto.pto_Id
-                                            select new { _emp, _are }).FirstOrDefault();
-                        GetEmployee = Function.GetUserInfo(EmployeeID);
-                        EmpJefe = Function.GetUserInfo(UserAreaInfo._emp.emp_Id);
-
-
-                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
-                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
-
-
-
-                        if (!Result) Function.BitacoraErrores("RequisionCompra", "CreatePost", UserName, ErrorEmail);
-                        if (!ResultAdm) Function.BitacoraErrores("RequisionCompra", "CreatePost", UserName, ErrorEmail);
-
                         Session["Reqco_Id"] = Scope;
                         TempData["swalfunction"] = GeneralFunctions.sol_Enviada;
 
