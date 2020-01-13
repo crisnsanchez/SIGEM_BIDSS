@@ -43,24 +43,27 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Reqco_Id,prod_Id,Reqde_Cantidad,Reqde_Justificacion")] tbRequisionCompraDetalle tbRequisionCompraDetalle)
+        public ActionResult Create([Bind(Include = "Reqco_Id")] tbRequisionCompraDetalle tbRequisionCompraDetalle)
         {
             IEnumerable<object> List = null;
-            string UserName = "";
-            string MensajeError = "";
+            string UserName = "", ErrorEmail = "", ErrorMessage = "", MensajeError = "";
+            bool Result = false, ResultAdm = false;
             var listaDetalle = (List<tbRequisionCompraDetalle>)Session["RequisionCompraDetalle"];
             try
             {
                 ViewBag.prod_Id = new SelectList(db.tbProducto, "prod_Id", "prod_Descripcion");
                 ViewBag.Producto = db.tbProducto.Where(x => x.prod_EsActivo == true).ToList();
                 int EmployeeID = Function.GetUser(out UserName);
+                cGetUserInfo GetEmployee = null;
+                cGetUserInfo EmpJefe = null;
+
                 if (listaDetalle != null)
                 {
                     if (listaDetalle.Count > 0)
                     {
                         foreach (tbRequisionCompraDetalle RequisionCompraDetalle in listaDetalle)
                         {
-                            List = db.UDP_Adm_tbRequisionCompraDetalle_Insert(RequisionCompraDetalle.Reqco_Id,
+                            List = db.UDP_Adm_tbRequisionCompraDetalle_Insert(tbRequisionCompraDetalle.Reqco_Id,
                                 RequisionCompraDetalle.prod_Id, RequisionCompraDetalle.Cantidad, RequisionCompraDetalle.Reqde_Justificacion, EmployeeID, Function.DatetimeNow());
                             foreach (UDP_Adm_tbRequisionCompraDetalle_Insert_Result RequisionCompra in List)
                                 MensajeError = RequisionCompra.MensajeError;
@@ -71,7 +74,30 @@ namespace SIGEM_BIDSS.Controllers
                                 return View(tbRequisionCompraDetalle);
                             }
                         }
+                        var UserInfo = (from _emp in db.tbEmpleado
+                                        join _pto in db.tbPuesto on _emp.pto_Id equals _pto.pto_Id
+                                        join _are in db.tbArea on _pto.are_Id equals _are.are_Id
+                                        where _emp.emp_Id == EmployeeID
+                                        select new { _emp, _are, _pto }).FirstOrDefault();
+
+                        var UserAreaInfo = (from _emp in db.tbEmpleado
+                                            join _pto in db.tbPuesto on _emp.pto_Id equals _pto.pto_Id
+                                            join _are in db.tbArea on _pto.are_Id equals _are.are_Id
+                                            where _emp.emp_EsJefe == true && _pto.are_Id == UserInfo._are.are_Id && _pto.pto_Id == UserInfo._pto.pto_Id
+                                            select new { _emp, _are }).FirstOrDefault();
+
+                        GetEmployee = Function.GetUserInfo(EmployeeID);
+                        EmpJefe = Function.GetUserInfo(UserAreaInfo._emp.emp_Id);
+
+
+                        Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
+                        ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
+
+                        if (!Result) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
+                        if (!ResultAdm) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
+                        return View("Index");
                     }
+                    ModelState.AddModelError("ValidationSummary", "Agregar un registro a la tabla");
                 }
 
 
