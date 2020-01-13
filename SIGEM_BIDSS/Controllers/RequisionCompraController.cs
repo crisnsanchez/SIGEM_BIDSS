@@ -88,15 +88,6 @@ namespace SIGEM_BIDSS.Controllers
             tbRequisionCompra.are_Id = UserAreaInfo._are.are_Id;
             tbRequisionCompra.Area = UserAreaInfo._are.are_Descripcion;
 
-            Result = Function.LeerDatos(out ErrorEmail, ErrorMessage, GetEmployee.emp_Nombres, GeneralFunctions.stringEmpty, GeneralFunctions.msj_Enviada, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, GetEmployee.emp_CorreoElectronico);
-            ResultAdm = Function.LeerDatos(out ErrorEmail, ErrorMessage, EmpJefe.emp_Nombres, GetEmployee.emp_Nombres, GeneralFunctions.msj_ToAdmin, GeneralFunctions.stringEmpty, GeneralFunctions.stringEmpty, EmpJefe.emp_CorreoElectronico);
-
-
-
-            if (!Result) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
-            if (!ResultAdm) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
-
-
 
             ViewBag.are_Id = new SelectList(db.tbArea, "are_Id", "are_Descripcion", UserInfo._pto.are_Id);
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");

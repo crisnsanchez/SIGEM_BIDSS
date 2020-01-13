@@ -19,12 +19,12 @@
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
-                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Regresar", "Index", "RequisionCompra", new { @class = "btn btn-primary" })
             </li>
         </ul>
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(null, null, FormMethod.Post, FormMethod.Post, new { id = "RequisicionDetalle" }))
     {
         @Html.AntiForgeryToken()
 
@@ -40,7 +40,6 @@
                         <div class="col-md-10">
                             <div class="input-group date" id="prod_Search" data-target-input="nearest">
                                 <input type="text" id="prod_Text" class="form-control datetimepicker-input" data-target="#prod_Search" readonly="readonly">
-
                                 <input type="hidden" id="prod_Id">
                                 <div class="input-group-append" data-target="#prod_Search" data-toggle="datetimepicker">
                                     <button id="SelectProduct" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAgregarProducto"><span class="fa fa-search"></span></button>
@@ -72,18 +71,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-md-6">
-                        <div class="col-md-10">
+                        <div class="p-4 col-md-10">
                             <input type="button" id="addTable" value="Agregar" class="btn btn-default" />
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
-                        @Html.ActionLink("Cancelar", "Index", "RequisionCompra", new { @class = "btn btn-default" })
                     </div>
                 </div>
                 <div class="form-row col-lg-12">
@@ -110,6 +101,15 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="p-4 col-md-10">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                            @Html.ActionLink("Cancelar", "Index", "RequisionCompra", new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -130,11 +130,7 @@
             <div class="modal-body justify-content-center">
                 <div class="card card-primary card-outline">
                     <div class="card-header d-flex p-0 ui-sortable-handle">
-                        <h3 class="card-title p-3">
-                        </h3>
-                        <div class="form-group col-12">
-                            <input id="prodSearch" type="text" style="width: 100%;" class="form-control nospace col-lg-10" placeholder="Producto" />
-                        </div>
+                      
                     </div>
                     <div class="card-body">
                         <div class="form-group">
