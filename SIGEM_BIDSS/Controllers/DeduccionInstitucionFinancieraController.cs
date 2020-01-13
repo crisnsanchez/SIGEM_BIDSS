@@ -94,6 +94,7 @@ namespace SIGEM_BIDSS.Controllers
         {
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
             ViewBag.insf_Id = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre");
+            ViewBag.Empleado = db.tbEmpleado.Where(x => x.est_Id == 5).ToList();
             return View();
         }
 
@@ -108,19 +109,21 @@ namespace SIGEM_BIDSS.Controllers
             string UserName = "";
             try
             {
-                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
+        
+        
                 ViewBag.insf_Id= new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre");
+                ViewBag.Empleado = db.tbEmpleado.Where(x => x.est_Id == 5).ToList();
                 int EmployeeID = Function.GetUser(out UserName);
                 if (ModelState.IsValid)
                 {
                     IEnumerable<object> _List = null;
                     string ErrorMessage = "";
-                    _List = db.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert(tbDeduccionInstitucionFinanciera.insf_Id, tbDeduccionInstitucionFinanciera.emp_Id,tbDeduccionInstitucionFinanciera.deif_Monto,tbDeduccionInstitucionFinanciera.deif_Comentarios, EmployeeID, Function.DatetimeNow(), GeneralFunctions.Activo);
+                    _List = db.UDP_Plani_tbDeduccionInstitucionFinanciera_Insert(tbDeduccionInstitucionFinanciera.insf_Id,tbDeduccionInstitucionFinanciera.emp_Id ,tbDeduccionInstitucionFinanciera.deif_Monto,tbDeduccionInstitucionFinanciera.deif_Comentarios, EmployeeID, Function.DatetimeNow(), GeneralFunctions.Activo);
                     foreach (UDP_Plani_tbDeduccionInstitucionFinanciera_Insert_Result Area in _List)
                         ErrorMessage = Area.MensajeError;
                     if (ErrorMessage.StartsWith("-1"))
                     {
-                        Function.BitacoraErrores("Area", "CreatePost", UserName, ErrorMessage);
+                        Function.BitacoraErrores("DeduccionFinanciera", "CreatePost", UserName, ErrorMessage);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                         return View(tbDeduccionInstitucionFinanciera);
                     }
@@ -138,7 +141,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch (Exception Ex)
             {
-                Function.BitacoraErrores("Area", "CreatePost", UserName, Ex.Message.ToString());
+                Function.BitacoraErrores("DeduccionFinanciera", "CreatePost", UserName, Ex.Message.ToString());
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 return View(tbDeduccionInstitucionFinanciera);
             }

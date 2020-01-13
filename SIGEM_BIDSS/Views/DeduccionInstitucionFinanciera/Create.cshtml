@@ -4,7 +4,11 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<!-- Select2 -->
+<link rel="stylesheet" href="~/Content/template/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="~/Content/template/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<!-- Theme style -->
+@Styles.Render("~/Content/adminlte")
 
 <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 
@@ -60,9 +64,17 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-sm-4">
-                        @Html.DropDownListFor(model => model.emp_Id, (SelectList)ViewBag.emp_Id, "Seleccione Empleado", new { @class = "form-control" })
+                        <div class="input-group date" id="emp_Search" data-target-input="nearest">
+                            <input type="text" id="emp_Text" class="form-control datetimepicker-input" data-target="#emp_Search" readonly="readonly">
 
-                        @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                            <input type="hidden" id="emp_Id">
+                            <div class="input-group-append" data-target="#emp_Search" data-toggle="datetimepicker">
+                                <button id="Selectemp" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalAgregarProducto"><span class="fa fa-search"></span></button>
+                            </div>
+                        </div>
+                        <div id="Validationprod_TextCreate">
+                            @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -101,6 +113,40 @@
                         @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
                     </div>
                 </div>
+
+
+
+                <div class="modal fade" id="ModalAgregarProducto">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Buscar Empleado</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body justify-content-center">
+                                <div class="card card-primary card-outline">
+                                    <div class="card-header d-flex p-0 ui-sortable-handle">
+                                        <h3 class="card-title p-3">
+                                            <input id="empSearch" type="text" class="form-control nospace col-lg-12" placeholder="Empleado" />
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            @Html.Partial("_EmpleadoBus", (List<SIGEM_BIDSS.Models.tbEmpleado>)ViewBag.Empleado)
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
             </div>
         </div>
     }
@@ -122,20 +168,23 @@
 
 
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+@section Scripts {
+    <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/template/plugins/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+    <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="~/Content/template/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Select2 -->
+    <script src="~/Content/template/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/Scripts/app/DeduccionInstitucionFinaciera.js"></script>
+    <script src="~/Scripts/app/DataTables.js"></script>
+
+    <script>
+        $("#pto_Descripcion").keyup(function () {
+            $('#puesto').hide();
+        });
+
+    </script>
+}
 
 
-
-
-<script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="~/Scripts/app/ValidacionesGenerales.js"></script>
-<script src="~/Scripts/app/General_PCAE.js"></script>
-
-<script>
-    $("#pto_Descripcion").keyup(function () {
-        $('#puesto').hide();
-    });
-
-</script>
