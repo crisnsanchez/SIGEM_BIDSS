@@ -195,6 +195,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
 
+            ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
             ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
             ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
             return View(tbSueldo);
@@ -203,7 +204,7 @@ namespace SIGEM_BIDSS.Controllers
 
         }
 
-        // POST: Sueldo/Edit/5
+        // POST: Sueldo/Edit/
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -211,20 +212,22 @@ namespace SIGEM_BIDSS.Controllers
         public ActionResult Edit([Bind(Include = "sue_Id,emp_Id,sue_Cantidad,tmo_Id,Cantidad,Employee")] tbSueldo tbSueldo)
         {
             string UserName = "";
-            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
-
+            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id ==  5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+            ViewBag.tmo_Id = new SelectList(db.tbMoneda, "tmo_Id", "tmo_Nombre", tbSueldo.tmo_Id);
             try
             {
-                ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
+         
+                ViewBag.emp_Id = new SelectList(Employee, "emp_Id", "emp_Nombres", tbSueldo.emp_Id);
                 int EmployeeID = Function.GetUser(out UserName);
-                int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id && based.sue_Id != tbSueldo.sue_Id select based).Count();
-
-                if (Existe > 0)
-                {
-                    ModelState.AddModelError("", "Este empleado ya posee un sueldo.");
-                }
+ 
                 if (ModelState.IsValid)
                 {
+                    int Existe = (from based in db.tbSueldo where based.emp_Id == tbSueldo.emp_Id && based.sue_Id != tbSueldo.sue_Id select based).Count();
+
+                    if (Existe > 0)
+                    {
+                        ModelState.AddModelError("", "Este empleado ya posee un sueldo.");
+                    }
                     IEnumerable<object> _List = null;
                     string MsjError = "";
                     string _Cant = tbSueldo.Cantidad.Replace(",", "");
