@@ -185,8 +185,7 @@ namespace SIGEM_BIDSS.Controllers
 
             if (String.IsNullOrEmpty(dep_codigo))
                 ModelState.AddModelError("emp_UsuarioCrea", "El campo Departamento es obligatorio.");
-
-
+     
             try
             {
                 int EmployeeID = Function.GetUser(out UserName);
