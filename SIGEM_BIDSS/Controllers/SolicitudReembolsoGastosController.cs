@@ -98,7 +98,7 @@ namespace SIGEM_BIDSS.Controllers
 
 
 
-                tbSolicitudReembolsoGastos.Reemga_FechaViaje = Function.DatetimeNow();
+                //tbSolicitudReembolsoGastos.Reemga_FechaViaje = Function.DatetimeNow();
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
                 ViewBag.Reemga_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");
