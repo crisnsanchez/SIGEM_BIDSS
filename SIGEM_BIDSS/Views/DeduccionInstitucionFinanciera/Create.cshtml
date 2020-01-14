@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="~/Content/template/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="~/Content/template/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <!-- Theme style -->
+<link href="~/Content/template/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/template/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
 @Styles.Render("~/Content/adminlte")
 
 <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
@@ -128,9 +130,7 @@
                             <div class="modal-body justify-content-center">
                                 <div class="card card-primary card-outline">
                                     <div class="card-header d-flex p-0 ui-sortable-handle">
-                                        <h3 class="card-title p-3">
-                                            <input id="empSearch" type="text" class="form-control nospace col-lg-12" placeholder="Empleado" />
-                                        </h3>
+
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
@@ -176,8 +176,9 @@
     <script src="~/Content/template/plugins/datatables/dataTables.bootstrap4.js"></script>
     <!-- Select2 -->
     <script src="~/Content/template/plugins/select2/js/select2.full.min.js"></script>
-    <script src="~/Scripts/app/DeduccionInstitucionFinaciera.js"></script>
     <script src="~/Scripts/app/DataTables.js"></script>
+    <script src="~/Scripts/app/DeduccionInstitucionFinaciera.js"></script>
+
 
     <script>
         $("#pto_Descripcion").keyup(function () {

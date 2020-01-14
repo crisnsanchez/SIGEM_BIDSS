@@ -4,8 +4,8 @@
 
 
 var prodtable = $("#tblBusquedaGenerica").DataTable({
-    "searching": false,
-    "lengthChange": false,
+    "searching": true,
+    "lengthChange": true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
     }

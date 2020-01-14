@@ -9,7 +9,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-refresh  mr-1"></i>
-            Insertar Tipo Movimiento
+           Editar Tipo Movimiento
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -28,8 +28,8 @@
                 <div class="form-group">
                     <div class="form-group">
                         @Html.LabelFor(model => model.tipmo_Movimiento, htmlAttributes: new { @class = "control-label col-md-6" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.tipmo_Movimiento, new { htmlAttributes = new { @class = "form-control normalize textuppercase", @maxlength = "25", autocomplete = "off"} })
+                        <div class="col-sm-4">
+                            @Html.EditorFor(model => model.tipmo_Movimiento, new { htmlAttributes = new { @class = "form-control normalize textuppercase", @maxlength = "25", autocomplete = "off" } })
                             @Html.ValidationMessageFor(model => model.tipmo_Movimiento, "", new { @class = "text-danger", id = "descrip" })
                         </div>
                     </div>
