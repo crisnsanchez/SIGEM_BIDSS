@@ -256,8 +256,9 @@ function AgregarMunicipiosDT() {
         ]).draw(false);
         _ValuesTrue = { _Bool : true, _tbMunicipio : tbMunicipio }
         return _ValuesTrue
-    }
 }
+
+
 
 
 //--------Obtiene los valores de los textbox y los Elimina a la tabla(con Datatables)
