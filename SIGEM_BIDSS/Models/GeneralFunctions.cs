@@ -56,7 +56,7 @@ namespace SIGEM_BIDSS.Models
         //Solicitudes
         public const string sol_ErrorUpdateState = "Error001";
 
-        public const string msj_ToAdmin = "ha ingresado una solicitud";
+        public const string msj_ToAdmin = "a ingresado una solicitud";
 
 
         public const string sol_Enviada = "Enviada";
