@@ -27,9 +27,10 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 tbRequisionCompraDetalle tbRequisionCompraDetalle = new tbRequisionCompraDetalle();
                 tbRequisionCompraDetalle.Reqco_Id = Id;
+               
                 ViewBag.prod_Id = new SelectList(db.tbProducto, "prod_Id", "prod_Descripcion");
                 ViewBag.Producto = db.tbProducto.Where(x => x.prod_EsActivo == true).ToList();
-                return View();
+                return View(tbRequisionCompraDetalle);
             }
             catch (Exception)
             {
@@ -56,6 +57,7 @@ namespace SIGEM_BIDSS.Controllers
                 int EmployeeID = Function.GetUser(out UserName);
                 cGetUserInfo GetEmployee = null;
                 cGetUserInfo EmpJefe = null;
+                ErrorMessage = (from _d in db.tbRequisionCompra where _d.Reqco_Id == tbRequisionCompraDetalle.Reqco_Id select _d.Reqco_Correlativo).FirstOrDefault();
 
                 if (listaDetalle != null)
                 {
@@ -95,7 +97,7 @@ namespace SIGEM_BIDSS.Controllers
 
                         if (!Result) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
                         if (!ResultAdm) Function.BitacoraErrores("VacacionesPermisosEspeciales", "CreatePost", UserName, ErrorEmail);
-                        return View("Index");
+                        return RedirectToAction("Index", "RequisionCompra");
                     }
                     ModelState.AddModelError("ValidationSummary", "Agregar un registro a la tabla");
                 }

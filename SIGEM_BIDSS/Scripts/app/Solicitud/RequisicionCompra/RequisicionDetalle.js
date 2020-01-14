@@ -1,7 +1,7 @@
 ﻿var contador = 0;
 var prodtable = $("#tblBusquedaGenerica").DataTable({
-    "searching": false,
-    "lengthChange": false,
+    "searching": true,
+    "lengthChange": true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
     }
@@ -10,7 +10,6 @@ $(document).ready(function () {
     $("#Reqde_Justificacion")[0].maxLength = 50;
     $('.select2').select2();
 });
-
 function GetDetalle() {
     var CompraDetalle = {
         prod_Id: $('#prod_Id').val(),
@@ -20,10 +19,9 @@ function GetDetalle() {
     }
     return CompraDetalle;
 };
-
-var vform = document.getElementsByTagName("form")
-vform.object.addEventListener("submit", function (e) {
+document.getElementById("RequisicionDetalle").addEventListener("submit", function (e) {
     var _length = document.getElementById("dataTable").rows.length;
+    console.log(_length);
     if (_length <= 0) {
         e.preventDefault();
     }
@@ -40,6 +38,7 @@ $(document).on("click", "#tblBusquedaGenerica tbody tr td button#seleccionar", f
     var prod_Id = this.value;
     document.getElementById("prod_Id").value = prod_Id
     document.getElementById("prod_Text").value = prod_Text.trimStart().trimEnd()
+    console.log(prod_Id)
 });
 
 
@@ -88,11 +87,9 @@ $('#addTable').click(function () {
     _Reqde_Cantidad = true;
     _Reqde_Justificacion = true;
 
-    //------------------------------Validaciones Departamento------------------------------
-    //---------------------------------------------------------------------------------------
-    //------------------------------Validaciones Codigo Departamento------------------------------
+    //------------------------------Validaciones Producto------------------------------
 
-    if (prod_Text == '') {
+    if (CompraDetalle.prod_Text == '') {
         $('#prod_TextCodigoError').text('');
         $('#Validationprod_TextCreate').after('<span id="prod_TextCodigoError" class="validation-summary-errors field-validation-error text-danger"><span class="fa fa-ban text-danger"></span> Campo Producto Requerido</span>');
         _prod_Text = false;
@@ -100,14 +97,14 @@ $('#addTable').click(function () {
     else {
         $('#prod_TextCodigoError').text('');
     }
-    if (Reqde_Cantidad == '' || Reqde_Cantidad <= 0.00) {
+    if (CompraDetalle.Reqde_Cantidad == '' || Reqde_Cantidad <= 0.00) {
         $('#CantidadCodigoError').text('');
         $('#ValidationCantidadCreate').after('<span id="CantidadCodigoError" class="validation-summary-errors field-validation-error text-danger"><span class="fa fa-ban text-danger"></span> Campo Cantidad Requerido</span>');
         _Reqde_Cantidad = false;
     } else {
         $('#CantidadCodigoError').text('');
     }
-    if (Reqde_Justificacion == '') {
+    if (CompraDetalle.Reqde_Justificacion == '') {
         $('#JustificacionCodigoError').text('');
         $('#ValidationJustificacionCreate').after('<span id="JustificacionCodigoError" class="validation-summary-errors field-validation-error text-danger"><span class="fa fa-ban text-danger"></span>  Campo Justificacion Requerido.</span>');
         _Reqde_Justificacion = false;
@@ -115,11 +112,12 @@ $('#addTable').click(function () {
         $('#JustificacionCodigoError').text('');
     }
     //------------------------------Fin Validaciones Codigo Departamento------------------------------
-    if (!prod_Text || !Reqde_Cantidad || !Reqde_Justificacion) {
+    if (!_prod_Text || !_Reqde_Cantidad || !_Reqde_Justificacion) {
         return false
     }
     else {
-
+        console.log('Before Ajax/ ')
+        console.log(CompraDetalle)
         $.ajax({
             url: "/RequisionCompraDetalle/SaveCompraDetalle",
             method: "POST",
@@ -128,7 +126,7 @@ $('#addTable').click(function () {
             data: JSON.stringify({ tbRequisionCompraDetalle: CompraDetalle }),
         })
             .done(function (data) {
-
+                console.log(data)
                 if (CompraDetalle.tpv_Id == data) {
 
                     $('#dataTable td').each(function () {
@@ -164,6 +162,9 @@ $('#addTable').click(function () {
                 document.getElementById('Cantidad').value = '';
                 document.getElementById('Reqde_Justificacion').value = '';
             });
+        console.log('After Ajax/ ')
+        console.log(CompraDetalle)
+
     }
 });
 
