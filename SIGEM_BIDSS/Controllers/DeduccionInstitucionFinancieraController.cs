@@ -153,17 +153,22 @@ namespace SIGEM_BIDSS.Controllers
         // GET: DeduccionInstitucionFinanciera/Edit/5
         public ActionResult Edit(int? id)
         {
+            
+      
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             }
             tbDeduccionInstitucionFinanciera tbDeduccionInstitucionFinanciera = db.tbDeduccionInstitucionFinanciera.Find(id);
             if (tbDeduccionInstitucionFinanciera == null)
             {
                 return HttpNotFound();
             }
+
             ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
             ViewBag.insf_Id = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre", tbDeduccionInstitucionFinanciera.insf_Id);
+            ViewBag.Empleado = db.tbEmpleado.Where(x => x.est_Id == 5).ToList();
             return View(tbDeduccionInstitucionFinanciera);
         }
 
@@ -179,6 +184,7 @@ namespace SIGEM_BIDSS.Controllers
             {
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres", tbDeduccionInstitucionFinanciera.emp_Id);
                 ViewBag.insf_Id = new SelectList(db.tbInstitucionFinanciera, "insf_Id", "insf_Nombre", tbDeduccionInstitucionFinanciera.insf_Id);
+                ViewBag.Empleado = db.tbEmpleado.Where(x => x.est_Id == 5).ToList();
                 int EmployeeID = Function.GetUser(out UserName);
                 if (ModelState.IsValid)
                     if (db.tbDeduccionInstitucionFinanciera.Any(a => a.insf_Id == tbDeduccionInstitucionFinanciera.insf_Id && a.insf_Id != tbDeduccionInstitucionFinanciera.insf_Id))

@@ -7,6 +7,13 @@
 
 <input type="hidden" id="vSwal" value="@TempData["swalfunction"]" />
 
+
+
+
+<input type="hidden" id="municipios" value="@ViewBag.Empleado" />
+<input type="hidden" id="selectedMun" value="@ViewBag.emp_Id" />
+<input type="hidden" id="selectedPuesto" value="@ViewBag.insf_Id" />
+
 <style>
     .validation-error {
         color: red;
@@ -39,7 +46,7 @@
     <div class="card-header d-flex p-0 ui-sortable-handle">
         <h3 class="card-title p-3">
             <i class="fa fa-upload mr-1"></i>
-            Insertar Deducción Institución Financiera
+            Editar Deducción Institución Financiera
         </h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item">
@@ -54,22 +61,21 @@
         <div class="form-horizontal">
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.deif_IdDeduccionInstFinanciera)
-
+                @Html.HiddenFor(model => Model.deif_IdDeduccionInstFinanciera)
+               
                 <div class="form-group">
                     @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-sm-4">
-                        @Html.DropDownListFor(model => model.emp_Id, (SelectList)ViewBag.emp_Id, "Seleccione Empleado", new { @class = "form-control" })
-
-                        @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.emp_Id, (SelectList)ViewBag.emp_Id, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger", id = "empleado" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.insf_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-sm-4">
-                        @Html.DropDownListFor(model => model.insf_Id, (SelectList)ViewBag.insf_Id, "Seleccione Área", new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.insf_Id, (SelectList)ViewBag.insf_Id, new { @class = "form-control" })
 
-                        @Html.ValidationMessageFor(model => model.insf_Id, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.insf_Id, "", new { @class = "text-danger", id = "insfId" })
                     </div>
                 </div>
 
@@ -78,7 +84,7 @@
                     @Html.LabelFor(model => model.deif_Monto, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.deif_Monto, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.deif_Monto, "", new { @class = "text-danger", id = "puesto" })
+                        @Html.ValidationMessageFor(model => model.deif_Monto, "", new { @class = "text-danger", id = "Monto" })
                     </div>
                 </div>
 
@@ -87,7 +93,7 @@
                     @Html.LabelFor(model => model.deif_Comentarios, htmlAttributes: new { @class = "control-label col-sm-2" })
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.deif_Comentarios, new { htmlAttributes = new { @class = "form-control", maxlength = "150" } })
-                        @Html.ValidationMessageFor(model => model.deif_Comentarios, "", new { @class = "text-danger", id = "puesto" })
+                        @Html.ValidationMessageFor(model => model.deif_Comentarios, "", new { @class = "text-danger", id = "Comentarios" })
                     </div>
                 </div>
 
@@ -133,9 +139,17 @@
 <script src="~/Scripts/app/General_PCAE.js"></script>
 
 <script>
-    $("#pto_Descripcion").keyup(function () {
-        $('#puesto').hide();
+    $("#deif_Monto").keyup(function () {
+        $('#Monto').hide();
     });
-
-
+    $("#deif_Comentarios").keyup(function () {
+        $('#Comentarios').hide();
+    });
+    $('#insf_Id').change(function () {
+        $('#insfId').hide();
+    });
+    $('#emp_Id').change(function () {
+        $('#empleado').hide();
+    });
+    
 </script>
