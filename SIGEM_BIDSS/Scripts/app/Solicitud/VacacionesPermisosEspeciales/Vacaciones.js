@@ -2,7 +2,7 @@
 $("#frmsubmit").click(function () {
     document.getElementById('spinnerForm').classList.add("overlay");
     document.getElementById('spinnerDiv').removeAttribute("hidden");
-    $("form").submit()
+    document.getElementById('frmVacaciones').submit()
 })
 
 //--Date Picker--//

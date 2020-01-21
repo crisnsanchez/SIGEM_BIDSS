@@ -867,6 +867,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Gral_tbEmpleado_emp_Id_rrhh_tbSueldoHistorico_emp_Id">
+          <End Role="tbEmpleado" Type="Self.tbEmpleado" Multiplicity="1" />
+          <End Role="tbSueldoHistorico" Type="Self.tbSueldoHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleado">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbSueldoHistorico">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera">
           <End Role="tbInstitucionFinanciera" Type="Self.tbInstitucionFinanciera" Multiplicity="1" />
           <End Role="tbDeduccionInstitucionFinanciera" Type="Self.tbDeduccionInstitucionFinanciera" Multiplicity="*" />
@@ -899,6 +911,18 @@
               <PropertyRef Name="tmo_Id" />
             </Principal>
             <Dependent Role="tbSueldo">
+              <PropertyRef Name="tmo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbTMoneda_tmo_Id_rrhh_tbSueldoHistorico_tmo_Id">
+          <End Role="tbMoneda" Type="Self.tbMoneda" Multiplicity="1" />
+          <End Role="tbSueldoHistorico" Type="Self.tbSueldoHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMoneda">
+              <PropertyRef Name="tmo_Id" />
+            </Principal>
+            <Dependent Role="tbSueldoHistorico">
               <PropertyRef Name="tmo_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -1650,7 +1674,6 @@
           <Parameter Name="codsubcategoria" Type="int" Mode="In" />
         </Function>
         <Function Name="UDP_Inv_tbProducto_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Inv">
-          <Parameter Name="prod_Codigo" Type="varchar" Mode="In" />
           <Parameter Name="prod_CodigoBarras" Type="varchar" Mode="In" />
           <Parameter Name="prod_Descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="prod_Marca" Type="varchar" Mode="In" />
@@ -2004,6 +2027,10 @@
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbEmpleado_emp_Id_rrhh_tbSueldoHistorico_emp_Id" Association="Self.FK_Gral_tbEmpleado_emp_Id_rrhh_tbSueldoHistorico_emp_Id">
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+            <End Role="tbSueldoHistorico" EntitySet="tbSueldoHistorico" />
+          </AssociationSet>
           <AssociationSet Name="FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera" Association="Self.FK_Gral_tbInstitucionesFinancieras_insf_IdInstitucionFinanciera">
             <End Role="tbInstitucionFinanciera" EntitySet="tbInstitucionFinanciera" />
             <End Role="tbDeduccionInstitucionFinanciera" EntitySet="tbDeduccionInstitucionFinanciera" />
@@ -2015,6 +2042,10 @@
           <AssociationSet Name="FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" Association="Self.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id">
             <End Role="tbMoneda" EntitySet="tbMoneda" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbTMoneda_tmo_Id_rrhh_tbSueldoHistorico_tmo_Id" Association="Self.FK_Gral_tbTMoneda_tmo_Id_rrhh_tbSueldoHistorico_tmo_Id">
+            <End Role="tbMoneda" EntitySet="tbMoneda" />
+            <End Role="tbSueldoHistorico" EntitySet="tbSueldoHistorico" />
           </AssociationSet>
           <AssociationSet Name="FK_Inv_tbProducto_Gral_tbUnidadMedida_uni_Id" Association="Self.FK_Inv_tbProducto_Gral_tbUnidadMedida_uni_Id">
             <End Role="tbUnidadMedida" EntitySet="tbUnidadMedida" />
@@ -2803,22 +2834,6 @@
             <Parameter Name="pcat_UsuarioCrea" Mode="In" Type="Int32" />
             <Parameter Name="pcat_FechaCrea" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="UDP_Inv_tbProducto_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProducto_Insert_Result)">
-            <Parameter Name="prod_Codigo" Mode="In" Type="String" />
-            <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
-            <Parameter Name="prod_Descripcion" Mode="In" Type="String" />
-            <Parameter Name="prod_Marca" Mode="In" Type="String" />
-            <Parameter Name="prod_Modelo" Mode="In" Type="String" />
-            <Parameter Name="prod_Talla" Mode="In" Type="String" />
-            <Parameter Name="prod_Color" Mode="In" Type="String" />
-            <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
-            <Parameter Name="uni_Id" Mode="In" Type="Int32" />
-            <Parameter Name="prov_Id" Mode="In" Type="Int32" />
-            <Parameter Name="prod_EsActivo" Mode="In" Type="Boolean" />
-            <Parameter Name="prod_RazonInactivacion" Mode="In" Type="String" />
-            <Parameter Name="prod_UsuarioCrea" Mode="In" Type="Int32" />
-            <Parameter Name="prod_FechaCrea" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="UDP_Adm_tbVacacionesPermisosEspeciales_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result)">
             <Parameter Name="emp_Id" Mode="In" Type="Int32" />
             <Parameter Name="VPE_JefeInmediato" Mode="In" Type="Int32" />
@@ -3005,7 +3020,6 @@
           <EntitySet Name="tbInstitucionFinanciera" EntityType="SIGEM_BIDSSModel.tbInstitucionFinanciera" />
           <EntitySet Name="tbEmpleado" EntityType="SIGEM_BIDSSModel.tbEmpleado" />
           <EntitySet Name="tbSueldo" EntityType="SIGEM_BIDSSModel.tbSueldo" />
-          <EntitySet Name="tbSueldoHistorico" EntityType="SIGEM_BIDSSModel.tbSueldoHistorico" />
           <AssociationSet Name="FK_tbAccionPersonal_tbAccionPersonal_est_Id" Association="SIGEM_BIDSSModel.FK_tbAccionPersonal_tbAccionPersonal_est_Id">
             <End Role="tbEstado" EntitySet="tbEstado" />
             <End Role="tbAccionPersonal" EntitySet="tbAccionPersonal" />
@@ -3209,6 +3223,30 @@
           <AssociationSet Name="FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id">
             <End Role="tbEmpleado" EntitySet="tbEmpleado" />
             <End Role="tbSueldo" EntitySet="tbSueldo" />
+          </AssociationSet>
+          <FunctionImport Name="UDP_Inv_tbProducto_Insert" ReturnType="Collection(SIGEM_BIDSSModel.UDP_Inv_tbProducto_Insert_Result)">
+            <Parameter Name="prod_CodigoBarras" Mode="In" Type="String" />
+            <Parameter Name="prod_Descripcion" Mode="In" Type="String" />
+            <Parameter Name="prod_Marca" Mode="In" Type="String" />
+            <Parameter Name="prod_Modelo" Mode="In" Type="String" />
+            <Parameter Name="prod_Talla" Mode="In" Type="String" />
+            <Parameter Name="prod_Color" Mode="In" Type="String" />
+            <Parameter Name="pscat_Id" Mode="In" Type="Int32" />
+            <Parameter Name="uni_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prov_Id" Mode="In" Type="Int32" />
+            <Parameter Name="prod_EsActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="prod_RazonInactivacion" Mode="In" Type="String" />
+            <Parameter Name="prod_UsuarioCrea" Mode="In" Type="Int32" />
+            <Parameter Name="prod_FechaCrea" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbSueldoHistorico" EntityType="SIGEM_BIDSSModel.tbSueldoHistorico" />
+          <AssociationSet Name="FK_Gral_tbTMoneda_tmo_Id_rrhh_tbSueldoHistorico_tmo_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_rrhh_tbSueldoHistorico_tmo_Id">
+            <End Role="tbMoneda" EntitySet="tbMoneda" />
+            <End Role="tbSueldoHistorico" EntitySet="tbSueldoHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gral_tbEmpleado_emp_Id_rrhh_tbSueldoHistorico_emp_Id" Association="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_rrhh_tbSueldoHistorico_emp_Id">
+            <End Role="tbEmpleado" EntitySet="tbEmpleado" />
+            <End Role="tbSueldoHistorico" EntitySet="tbSueldoHistorico" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="SDP_tbMunicipio_Select_Result">
@@ -3423,9 +3461,6 @@
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Inv_tbProductoCategoria_Insert_Result">
-          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
-        </ComplexType>
-        <ComplexType Name="UDP_Inv_tbProducto_Insert_Result">
           <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="UDP_Adm_tbVacacionesPermisosEspeciales_Insert_Result">
@@ -3812,6 +3847,7 @@
           <Property Name="tmo_FechaModifica" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tbSueldo" Relationship="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldoHistorico_tmo_Id" FromRole="tbMoneda" ToRole="tbSueldo" />
           <NavigationProperty Name="tbSueldo1" Relationship="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" FromRole="tbMoneda" ToRole="tbSueldo" />
+          <NavigationProperty Name="tbSueldoHistorico" Relationship="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_rrhh_tbSueldoHistorico_tmo_Id" FromRole="tbMoneda" ToRole="tbSueldoHistorico" />
         </EntityType>
         <EntityType Name="tbMunicipio">
           <Key>
@@ -4081,6 +4117,7 @@
           <NavigationProperty Name="tbDeduccionInstitucionFinanciera" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Gral_tbDeduccionInstitucionFinanciera_emp_Id" FromRole="tbEmpleado" ToRole="tbDeduccionInstitucionFinanciera" />
           <NavigationProperty Name="tbSueldo" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldoHistorico_emp_Id" FromRole="tbEmpleado" ToRole="tbSueldo" />
           <NavigationProperty Name="tbSueldo1" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" FromRole="tbEmpleado" ToRole="tbSueldo" />
+          <NavigationProperty Name="tbSueldoHistorico" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_rrhh_tbSueldoHistorico_emp_Id" FromRole="tbEmpleado" ToRole="tbSueldoHistorico" />
         </EntityType>
         <EntityType Name="tbSueldo">
           <Key>
@@ -4098,19 +4135,6 @@
           <NavigationProperty Name="tbMoneda1" Relationship="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_Plani_tbSueldos_tmo_Id" FromRole="tbSueldo" ToRole="tbMoneda" />
           <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldoHistorico_emp_Id" FromRole="tbSueldo" ToRole="tbEmpleado" />
           <NavigationProperty Name="tbEmpleado1" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_Plani_tbSueldos_emp_Id" FromRole="tbSueldo" ToRole="tbEmpleado" />
-        </EntityType>
-        <EntityType Name="tbSueldoHistorico">
-          <Key>
-            <PropertyRef Name="sue_Id" />
-          </Key>
-          <Property Name="sue_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="emp_Id" Type="Int32" Nullable="false" />
-          <Property Name="sue_Cantidad" Type="Decimal" Precision="16" Scale="4" />
-          <Property Name="tmo_Id" Type="Int16" Nullable="false" />
-          <Property Name="sue_UsuarioCrea" Type="Int32" Nullable="false" />
-          <Property Name="sue_FechaCrea" Type="DateTime" Precision="3" />
-          <Property Name="sue_UsuarioModifica" Type="Int32" />
-          <Property Name="sue_FechaModifica" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_tbAccionPersonal_tbAccionPersonal_est_Id">
           <End Type="SIGEM_BIDSSModel.tbEstado" Role="tbEstado" Multiplicity="1" />
@@ -4724,6 +4748,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="UDP_Inv_tbProducto_Insert_Result">
+          <Property Type="String" Name="MensajeError" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ScopeIdentity" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <EntityType Name="tbSueldoHistorico">
+          <Key>
+            <PropertyRef Name="sue_Id" />
+          </Key>
+          <Property Name="sue_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_Id" Type="Int32" Nullable="false" />
+          <Property Name="sue_Cantidad" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="tmo_Id" Type="Int16" Nullable="false" />
+          <Property Name="sue_UsuarioCrea" Type="Int32" Nullable="false" />
+          <Property Name="sue_FechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="sue_UsuarioModifica" Type="Int32" />
+          <Property Name="sue_FechaModifica" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbMoneda" Relationship="SIGEM_BIDSSModel.FK_Gral_tbTMoneda_tmo_Id_rrhh_tbSueldoHistorico_tmo_Id" FromRole="tbSueldoHistorico" ToRole="tbMoneda" />
+          <NavigationProperty Name="tbEmpleado" Relationship="SIGEM_BIDSSModel.FK_Gral_tbEmpleado_emp_Id_rrhh_tbSueldoHistorico_emp_Id" FromRole="tbSueldoHistorico" ToRole="tbEmpleado" />
+        </EntityType>
+        <Association Name="FK_Gral_tbTMoneda_tmo_Id_rrhh_tbSueldoHistorico_tmo_Id">
+          <End Type="SIGEM_BIDSSModel.tbMoneda" Role="tbMoneda" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbSueldoHistorico" Role="tbSueldoHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMoneda">
+              <PropertyRef Name="tmo_Id" />
+            </Principal>
+            <Dependent Role="tbSueldoHistorico">
+              <PropertyRef Name="tmo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gral_tbEmpleado_emp_Id_rrhh_tbSueldoHistorico_emp_Id">
+          <End Type="SIGEM_BIDSSModel.tbEmpleado" Role="tbEmpleado" Multiplicity="1" />
+          <End Type="SIGEM_BIDSSModel.tbSueldoHistorico" Role="tbSueldoHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpleado">
+              <PropertyRef Name="emp_Id" />
+            </Principal>
+            <Dependent Role="tbSueldoHistorico">
+              <PropertyRef Name="emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5171,13 +5238,6 @@
           <FunctionImportMapping FunctionImportName="UDP_Inv_tbProductoCategoria_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProductoCategoria_Insert" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProductoCategoria_Insert_Result">
-                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_Insert" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_Insert_Result">
                 <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -5858,6 +5918,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UDP_Inv_tbProducto_Insert" FunctionName="SIGEM_BIDSSModel.Store.UDP_Inv_tbProducto_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGEM_BIDSSModel.UDP_Inv_tbProducto_Insert_Result">
+                <ScalarProperty Name="MensajeError" ColumnName="MensajeError" />
+                <ScalarProperty Name="ScopeIdentity" ColumnName="ScopeIdentity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="tbSueldoHistorico">
             <EntityTypeMapping TypeName="SIGEM_BIDSSModel.tbSueldoHistorico">
               <MappingFragment StoreEntitySet="tbSueldoHistorico">

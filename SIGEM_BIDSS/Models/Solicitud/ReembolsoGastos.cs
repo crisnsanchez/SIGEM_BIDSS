@@ -32,10 +32,12 @@ namespace SIGEM_BIDSS.Models
 
 
         [Display(Name = "Fecha Solicitud")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public System.DateTime Reemga_GralFechaSolicitud { get; set; }
 
         [Display(Name = "Fecha Viaje")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public System.DateTime Reemga_FechaViaje { get; set; }
 

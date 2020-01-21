@@ -69,7 +69,7 @@ namespace SIGEM_BIDSS.Controllers
             int id = Convert.ToInt32(Session["EmpID"]);
             ViewBag.empIsNull = id;
 
-            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+            IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 orderby _tbEmp.emp_Nombres select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
 
 
 
@@ -116,8 +116,12 @@ namespace SIGEM_BIDSS.Controllers
                     ViewBag.Existencia = Existe;
                     ModelState.AddModelError("", "Esta empleado ya tiene sueldo.");
                 }
-                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == 5 select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
-
+                IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado where _tbEmp.est_Id == GeneralFunctions.empleadoactivo 
+                                                select new  { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos } ).ToList();
+                //if (tbSueldo.sue_Cantidad == 0)
+                //{
+                //    ModelState.AddModelError("sue_Cantidad", "El campo Sueldo es obligatorio.");
+                //}
                 int EmployeeID = Function.GetUser(out UserName);
 
                 if (ModelState.IsValid)

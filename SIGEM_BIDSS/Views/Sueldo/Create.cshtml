@@ -52,30 +52,30 @@
                     @Html.LabelFor(model => model.emp_Id, htmlAttributes: new { @class = "control-label col-md-8" })
                     @if (ViewBag.empIsNull == 0 || ViewBag.empIsNull == null)
                     {
-
-                        @Html.DropDownList("emp_Id", null, "Seleccione Empleado", htmlAttributes: new { @class = "form-control" })
+                      
+                        @Html.DropDownList("emp_Id", null, "Seleccione Empleado", htmlAttributes: new { @class = "form-control"  })
                     }
                     else
                     {
                         @Html.HiddenFor(model => model.emp_Id)
                         @Html.DropDownList("emp_Id", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
                     }
-                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.emp_Id, "", new { @class = "text-danger" , @id = "Id" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.tmo_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
                         @Html.DropDownList("tmo_Id", null, "Seleccione Moneda", htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.tmo_Id, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.tmo_Id, "", new { @class = "text-danger" ,@id = "Mon" })
                     </div>
                 </div>
 
 
-                <div class="form-group">
+                <div class="form-group" >
                     @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
                         @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control", maxlength = "7", @OnKeyPress = "return soloNumeros(event)", @onChange = "MASK(this,this.value,'-###,###,###,##0.00',1)" } })
-                        @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger", @id = "Cant" })
 
                     </div>
                 </div>
@@ -131,19 +131,68 @@
     <script src="~/Content/template/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="~/Content/template/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="~/Content/template/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="~/Scripts/app/Empleados.js"></script>
+    @*<script src="~/Scripts/app/Empleados.js"></script>*@
     <script src="~/Scripts/app/General_PCAE.js"></script>
     <script type="text/javascript">
 
+        document.getElementById("Save").addEventListener("click", function () {
+            //
+            var v_emp_Id = document.getElementById('emp_Id').value;
+            var b_emp_Id = true;
+
+            //
+            var v_tmo_Id = document.getElementById('tmo_Id').value;
+            var b_tmo_Id = true;
+            //
+            var v_Cantidad = document.getElementById('Cantidad').value;
+            var b_Cantidad = true;
+      
+
+            if (v_emp_Id === "") {
+                document.getElementById('Id').innerHTML = "Campo Requerido"
+                b_emp_Id = false;
+            }
+            else
+            {
+                document.getElementById('Id').innerHTML = ""
+            }
+            if (v_tmo_Id === "") {
+                document.getElementById('Mon').innerText = "Campo Requerido"
+                b_tmo_Id = false;
+            }
+            else
+            {
+                document.getElementById('Mon').innerText = ""
+            }
+            if (v_Cantidad === "") {
+                document.getElementById('Cant').innerText = "Campo Requerido"
+                b_Cantidad = false;
+            }
+            
+            if (b_emp_Id && b_tmo_Id && b_Cantidad ) {
+                $('#ModalGuardar').modal();
+            }
+        })
 
 
 
         $(document).on("click", "#Save", function () {
 
+            var R = document.getElementById('emp_Id')
+            var emp_IdText= R.options[R.selectedIndex].text
+
             var emp = $('#emp_Id').val();
             var Moneda = $('#tmo_Id').val();
             var Existe = $('#Existe').val();
-            
+
+
+            if (emp_IdText.startsWith('Seleccione'))
+
+            {
+                console.log("El campo Municipio es obligatorio.");
+
+            }
+        
             $.ajax({
                 url: "/Sueldo/GetExistencia",
                 method: "POST",
@@ -164,6 +213,8 @@
                         $("form").submit();
                     }
                 });
+
+
         })
 
     </script>
@@ -172,6 +223,21 @@
 
     <script type="text/javascript">
 
+        function NUM(s, dec) {
+            for (var s = s + "", num = "", x = 0; x < s.length; x++) {
+                c = s.charAt(x);
+                if (".-+/*".indexOf(c) + 1 || c != " " && !isNaN(c)) { num += c; }
+            }
+            if (isNaN(num)) { num = eval(num); }
+            if (num == "") { num = 0; } else { num = parseFloat(num); }
+            if (dec != undefined) {
+                r = .5; if (num < 0) r = -r;
+                e = Math.pow(10, (dec > 0) ? dec : 0);
+                return parseInt(num * e + r) / e;
+            } else {
+                return num;
+            }
+        }
 
 
         // formatea un numero según una mascara dada ej: "-$###,###,##0.00"
@@ -182,8 +248,7 @@
         // force = formatea el numero aun si n es igual a 0
 
         // La función devuelve el numero formateado
-
-
+        
 
         function MASK(form, n, mask, format) {
             if (format == "undefined") format = false;
@@ -232,50 +297,7 @@
             return XMASK;
         }
 
-
-
-        // Convierte una cadena alfanumérica a numérica (incluyendo formulas aritméticas)
-        //
-        // s   = cadena a ser convertida a numérica
-        // dec = numero de decimales a redondear
-        //
-        // La función devuelve el numero redondeado
-
-
-
-        function NUM(s, dec) {
-            for (var s = s + "", num = "", x = 0; x < s.length; x++) {
-                c = s.charAt(x);
-                if (".-+/*".indexOf(c) + 1 || c != " " && !isNaN(c)) { num += c; }
-            }
-            if (isNaN(num)) { num = eval(num); }
-            if (num == "") { num = 0; } else { num = parseFloat(num); }
-            if (dec != undefined) {
-                r = .5; if (num < 0) r = -r;
-                e = Math.pow(10, (dec > 0) ? dec : 0);
-                return parseInt(num * e + r) / e;
-            } else {
-                return num;
-            }
-        }
-
-
-
     </script>
 
-    <script>
 
-        $("#emp_Id").keyup(function () {
-            $('#emp').hide();
-        });
-
-        $("#tmo_Id").keyup(function () {
-            $('#moneda').hide();
-        });
-
-        $("#Cantidad").keyup(function () {
-            $('#cant').hide();
-        });
-
-    </script>
 }

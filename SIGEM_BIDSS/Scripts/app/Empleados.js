@@ -1,11 +1,16 @@
 ﻿/////DATE PICKER
-$('#emp_FechaNacimiento,#emp_FechaIngreso').datepicker({
+$('#emp_FechaIngreso').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1900",
     language: "es",
     daysOfWeekDisabled: "0"
 });
 
+$('#emp_FechaNacimiento').datepicker({
+    format: "dd/mm/yyyy",
+    startDate: "01/01/1900",
+    language: "es"
+});
 
 
 function soloLetras(e) {

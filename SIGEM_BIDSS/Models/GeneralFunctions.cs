@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
@@ -148,11 +149,11 @@ namespace SIGEM_BIDSS.Models
             try
             {
                 tbEmpleado = db.tbEmpleado.Where(x => x.emp_Id == EmployeeID).FirstOrDefault();
-                cGetUserInfo.strFor =  " Por: "; cGetUserInfo.emp_Nombres = tbEmpleado.emp_Nombres + " " + tbEmpleado.emp_Apellidos; cGetUserInfo.emp_CorreoElectronico = tbEmpleado.emp_CorreoElectronico;
+                cGetUserInfo.strFor = " Por: "; cGetUserInfo.emp_Nombres = tbEmpleado.emp_Nombres + " " + tbEmpleado.emp_Apellidos; cGetUserInfo.emp_CorreoElectronico = tbEmpleado.emp_CorreoElectronico;
             }
             catch (Exception Ex)
             {
-                cGetUserInfo.strFor = Ex.Message.ToString() +" "+ Ex.InnerException.Message.ToString();
+                cGetUserInfo.strFor = Ex.Message.ToString() + " " + Ex.InnerException.Message.ToString();
             }
             return cGetUserInfo;
         }
@@ -206,7 +207,7 @@ namespace SIGEM_BIDSS.Models
             lsRutaPlantilla = System.AppContext.BaseDirectory + "Content\\Email\\Solicitud.xml";
 
             lsXMLDatos = @"<principal>
-                        <welcome>" + WelcomeName+ "</welcome>" +
+                        <welcome>" + WelcomeName + "</welcome>" +
                           @"<nref>REF:(" + Reference + ")</nref>" +
                           @"<EmployeeName>" + Empleado + "</EmployeeName>" +
                           @"<msj>" + _msj + "</msj>" +
@@ -269,39 +270,95 @@ namespace SIGEM_BIDSS.Models
             }
         }
 
+        static bool mailSent = false;
+        static string userState = "message1";
+
         public int enviarCorreo(out string ErrorMessage, string psEmisor, string psPassword, string psMensaje, string psAsunto, string psDestinatario, string psServidor, string psPuerto)
         {
             //      0 = Ok      //
             //      1 = Error   //
             ErrorMessage = "";
-            MailMessage correos = new MailMessage();
-            SmtpClient envios = new SmtpClient();
+            int tryAgain = 10;
+            bool failed = false;
+            do
+            {
+                try
+                {
+                    failed = false;
 
-            try
+                    // Command-line argument must be the SMTP host.
+                    SmtpClient envios = new SmtpClient();
+                    // Specify the email sender.
+                    // Create a mailing address that includes a UTF8 character
+                    // in the display name.
+                    MailAddress from = new MailAddress("","",System.Text.Encoding.UTF8);
+                    // Set destinations for the email message.
+                    MailAddress to = new MailAddress(psDestinatario.Trim());
+                    // Specify the message content.
+                    MailMessage message = new MailMessage(from, to);
+                    message.To.Clear();
+                    message.Body = "";
+                    // Include some non-ASCII characters in body and subject.
+                    message.Subject = "";
+                    message.Body = psMensaje;
+                    message.BodyEncoding = System.Text.Encoding.UTF8;
+                    message.Subject = psAsunto;
+                    message.IsBodyHtml = true;
+                    message.To.Add(psDestinatario.Trim());
+                    message.From = new MailAddress(psEmisor);
+                    // Datos del servidor //
+                    envios.Credentials = new NetworkCredential(psEmisor, psPassword);
+                    envios.Host = psServidor;
+                    envios.Port = Convert.ToInt32(psPuerto);
+                    envios.EnableSsl = true;
+                    //Función de envío de correo //
+                    // Set the method that is called back when the send operation ends.
+                    envios.SendCompleted += new
+                    SendCompletedEventHandler(SendCompletedCallback);
+                    // The userState can be any object that allows your callback 
+                    // method to identify this send operation.
+                    // For this example, the userToken is a string constant.
+                    envios.SendAsync(message, userState);
+                    envios.SendCompleted += new
+                    SendCompletedEventHandler(SendCompletedCallback);
+                    // If the user canceled the send, and mail hasn't been sent yet,
+                    // then cancel the pending operation.
+                    //if (answer.StartsWith("c") && mailSent == false)
+                    //{
+                    //    envios.SendAsyncCancel();
+                    //}
+                    // Clean up.
+                    message.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    failed = true;
+                    tryAgain--;
+                    var exception = ex.Message.ToString();
+                    //Other code for saving exception message to a log.
+                }
+            } while (failed && tryAgain != 0);
+            return 0;
+        }
+
+
+        private static void SendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            // Get the unique identifier for this asynchronous operation.
+            String token = (string)e.UserState;
+            if (e.Cancelled)
             {
-                correos.To.Clear();
-                correos.Body = "";
-                correos.Subject = "";
-                correos.Body = psMensaje;
-                correos.BodyEncoding = System.Text.Encoding.UTF8;
-                correos.Subject = psAsunto;
-                correos.IsBodyHtml = true;
-                correos.To.Add(psDestinatario.Trim());
-                correos.From = new MailAddress(psEmisor);
-                envios.Credentials = new NetworkCredential(psEmisor, psPassword);
-                // Datos del servidor //
-                envios.Host = psServidor;
-                envios.Port = Convert.ToInt32(psPuerto);
-                envios.EnableSsl = true;
-                //Función de envío de correo //
-                envios.Send(correos);
-                return 0;
+                userState = "Send canceled. " + token;
             }
-            catch (Exception ex)
+            if (e.Error != null)
             {
-                ErrorMessage = ex.Message.ToString() + " " + ex.InnerException.Message.ToString();
-                return 1;
+                userState = "Error: "+ token+ " " + e.Error.ToString();
             }
+            else
+            {
+                userState = "Message sent.";
+            }
+            mailSent = true;
         }
     }
 

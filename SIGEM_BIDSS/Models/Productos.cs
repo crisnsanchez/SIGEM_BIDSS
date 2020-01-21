@@ -10,20 +10,11 @@ namespace SIGEM_BIDSS.Models
     [MetadataType(typeof(ProductoMetadata))]
     public partial class tbProducto
     {
-        [NotMapped]
-        [Display(Name = "Categoría")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        public int pcat_Id { get; set; }
 
         [NotMapped]
         [Display(Name = "Unidad Medida")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int uni_Descripcion { get; set; }
-
-        [NotMapped]
-        [Display(Name = "SubCategoria")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
-        public int pscat_Descripcion { get; set; }
 
         [NotMapped]
         [Display(Name = "Proveedor")]
@@ -37,7 +28,7 @@ namespace SIGEM_BIDSS.Models
         public int prod_Id { get; set; }
 
         [Display(Name = "Correlativo")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public string prod_Codigo { get; set; }
 
         [Display(Name = "Código de Barras")]
@@ -65,7 +56,7 @@ namespace SIGEM_BIDSS.Models
         public string prod_Color { get; set; }
 
         [Display(Name = "Subcategoría")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+      
         public int pscat_Id { get; set; }
 
         [Display(Name = "Unidad de Medida")]

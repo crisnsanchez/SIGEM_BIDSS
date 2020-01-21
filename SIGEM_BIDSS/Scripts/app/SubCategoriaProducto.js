@@ -1,26 +1,26 @@
 ﻿
 //Cargar Codigo Producto
-$('#pscat_Id').change(function () {
-    //console.log('Entra pero no hace nada');
-    var cate = $('#pcat_Id').val();
-    var subcate = $('#pscat_Id').val();
-    var prodcod = $('#prod_Codigo').val();
-    console.log(cate);
-    console.log(subcate);
+//$('#pscat_Id').change(function () {
+//    //console.log('Entra pero no hace nada');
+//    var cate = $('#pcat_Id').val();
+//    var subcate = $('#pscat_Id').val();
+//    var prodcod = $('#prod_Codigo').val();
+//    console.log(cate);
+//    console.log(subcate);
 
-    $.ajax({
-        type: 'POST',
-        url: '/Producto/GetValue',
-        data: JSON.stringify({ pcat_Id: cate, pscat_Id: subcate }),
-        contentType: 'application/json',
-        success: function (data) {
-            $('#CodigoPro').val(data);
-            console.log(data);
+//    $.ajax({
+//        type: 'POST',
+//        url: '/Producto/GetValue',
+//        data: JSON.stringify({ pcat_Id: cate, pscat_Id: subcate }),
+//        contentType: 'application/json',
+//        success: function (data) {
+//            $('#CodigoPro').val(data);
+//            console.log(data);
 
-        }
+//        }
 
-    })
-});
+//    })
+//});
 
 
 //Validacion de solo letras

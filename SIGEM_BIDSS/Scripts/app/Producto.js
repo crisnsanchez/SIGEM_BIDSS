@@ -1,6 +1,23 @@
 ﻿var pscat_Id;
 var pcat_Id;
 
+function soloLetras(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    tecla = String.fromCharCode(tecla)
+    return /^[a-zA-ZáéíóúñÁÉÍÓÚÑ ]+$/.test(tecla);
+}
+
+function noespaciosincio(e) {
+    var valor = e.value.replace(/^ */, '');
+    e.value = valor;
+}
+
+function soloNumeros(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    tecla = String.fromCharCode(tecla)
+    return /^[0-9]+$/.test(tecla);
+}
+
 //////////////////////////////////////////////////////////////////////////////
 $('#btnGuardar').click(function () {
     $("#ErrorValidacionGeneral").remove();
@@ -64,7 +81,7 @@ $(document).ready(function () {
             .done(function (data) {
                 if (data.length > 0) {
                     $('#pscat_Id').empty();
-                    $('#pscat_Id').append("<option value=''>Seleccione</option>");
+                    $('#pscat_Id').append("<option value=''>Seleccione subcategoría</option>");
                     $.each(data, function (key, val) {
                         if (muncod !== "") {
                             if (val.idsubcate === idsubcate) {
@@ -104,7 +121,7 @@ function GetSubCategoriaProducto() {
             .done(function (data) {
                 if (data.length > 0) {
                     $('#pscat_Id').empty();
-                    $('#pscat_Id').append("<option value=''>Seleccione</option>");
+                    $('#pscat_Id').append("<option value=''>Seleccione subcategoría</option>");
                     $.each(data, function (key, val) {
                         $('#pscat_Id').append("<option value=" + val.pscat_Id + ">" + val.pscat_Descripcion + "</option>");
                     });
@@ -127,4 +144,57 @@ $("#pcat_Descripcion").keyup(function () {
     $('#categoria').hide();
 });
 ///////////////////////////////////////////////////////////////////
+
+$('#pcat_Id').change(function () {
+    $('#dep').hide();
+});
+
+$('#pscat_Id').change(function () {
+    $('#subcate').hide();
+});
+
+$('#prod_Codigo').change(function () {
+    $('#codigo').hide();
+});
+
+
+$('#prod_Codigo').keyup(function () {
+    $('#codigo').hide();
+});
+
+$('#prod_CodigoBarras').keyup(function () {
+    $('#barras').hide();
+});
+
+$('#prod_Descripcion').keyup(function () {
+    $('#descripcion').hide();
+});
+
+
+$('#prod_Descripcion').keyup(function () {
+    $('#descripcion').hide();
+});
+
+
+$('#prod_Marca').keyup(function () {
+    $('#marca').hide();
+});
+////////////
+
+
+$('#prod_Talla').keyup(function () {
+    $('#talla').hide();
+});
+
+$('#prod_Color').keyup(function () {
+    $('#color').hide();
+});
+
+$('#uni_Id').change(function () {
+    $('#medida').hide();
+});
+
+$('#prov_Id').change(function () {
+    $('#proveedor').hide();
+});
 

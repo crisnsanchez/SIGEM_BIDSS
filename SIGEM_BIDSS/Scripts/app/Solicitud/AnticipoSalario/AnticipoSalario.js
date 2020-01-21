@@ -11,8 +11,8 @@ $(document).ready(function () {
 
 $("#frmsubmit").click(function () {
     document.getElementById('spinnerForm').classList.add("overlay");
-    document.getElementById('spinnerDiv').removeAttribute("hidden");
-    document.getElementsByTagName("form").submit();
+    document.getElementById('spinnerDiv').removeAttribute("hidden"); 
+    document.getElementById('frmAnticipoSalario').submit();
 })
 
 
@@ -76,8 +76,8 @@ document.addEventListener("input", function () {
         document.getElementById(_id).value = _value.trimStart();
     });
     $(".normalize", 'form').each(function (e) {
-        if (!/^[ a-z0-9áéíóúüñ]*$/i.test(this.value)) {
-            this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
+        if (!/^[ a-záéíóúüñ]*$/i.test(this.value)) {
+            this.value = this.value.replace(/[^ .,a-záéíóúüñ]+/ig, "");
         }
     });
 });

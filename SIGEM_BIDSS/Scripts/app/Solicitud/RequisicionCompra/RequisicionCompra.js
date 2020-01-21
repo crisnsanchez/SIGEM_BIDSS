@@ -1,8 +1,8 @@
 ﻿//--------------------------------------------------------------------------------------//
 $("#frmsubmit").click(function () {
     document.getElementById('spinnerForm').classList.add("overlay");
-    document.getElementById('spinnerDiv').removeAttribute("hidden");
-    $("form").submit()
+    document.getElementById('spinnerDiv').removeAttribute("hidden"); 
+    document.getElementById('frmRequisicionCompra').submit()
 })
 
 $(document).ready(function () {

@@ -21,10 +21,10 @@
         </ul>
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(null, null, FormMethod.Post, FormMethod.Post, new { id = "frmAnticipoSalario" }))
     {
         @Html.AntiForgeryToken()
-      
+
         <div class="form-horizontal">
             <div class="card-body">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -63,7 +63,7 @@
                         @Html.LabelFor(model => model.tpsal_id, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
                             @Html.DropDownList("tpsal_id", null, "Seleccione un tipo de Salario", htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.tpsal_id, "", new { @class = "text-danger",id = "spantpsal_id" })
+                            @Html.ValidationMessageFor(model => model.tpsal_id, "", new { @class = "text-danger", id = "spantpsal_id" })
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         @Html.LabelFor(model => model.Ansal_Justificacion, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Ansal_Justificacion, new { htmlAttributes = new { @class = "form-control normalize nospace" } })
-                            @Html.ValidationMessageFor(model => model.Ansal_Justificacion, "", new { @class = "text-danger",id ="spanJustificacion" })
+                            @Html.ValidationMessageFor(model => model.Ansal_Justificacion, "", new { @class = "text-danger", id = "spanJustificacion" })
                         </div>
                     </div>
 
@@ -80,7 +80,7 @@
                         @Html.LabelFor(model => model.Ansal_Comentario, htmlAttributes: new { @class = "control-label col-md-6" })
                         <div class="col-md-10">
                             @Html.TextAreaFor(model => model.Ansal_Comentario, new { @class = "form-control normalize nospace" })
-                            @Html.ValidationMessageFor(model => model.Ansal_Comentario, "", new { @class = "text-danger" ,id ="spanComentario"})
+                            @Html.ValidationMessageFor(model => model.Ansal_Comentario, "", new { @class = "text-danger", id = "spanComentario" })
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
 </div>
 
 
-<div class="modal fade" id="ModalAuth" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="ModalAuth" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="d-flex justify-content-center align-items-center" id="spinnerForm">

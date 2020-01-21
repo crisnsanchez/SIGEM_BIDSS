@@ -62,7 +62,7 @@ namespace SIGEM_BIDSS.Controllers
                 {
                     try
                     {
-                        cate = db.UDP_Inv_tbProductoCategoria_Insert(tbProductoCategoria.pcat_Descripcion, Function.GetUser(), Function.DatetimeNow());
+                        cate = db.UDP_Inv_tbProductoCategoria_Insert(tbProductoCategoria.pcat_Descripcion.ToUpper(), Function.GetUser(), Function.DatetimeNow());
                         foreach (UDP_Inv_tbProductoCategoria_Insert_Result categoria in cate)
                             MsjError = categoria.MensajeError;
                         if (MsjError.StartsWith("-1"))
@@ -79,7 +79,7 @@ namespace SIGEM_BIDSS.Controllers
                                 {
                                     foreach (tbProductoSubcategoria subcategoria in listaSubCategoria)
                                     {
-                                        sub = db.UDP_Inv_tbProductoSubcategoria_Insert(subcategoria.pscat_Descripcion
+                                        sub = db.UDP_Inv_tbProductoSubcategoria_Insert(subcategoria.pscat_Descripcion.ToUpper()
                                                                                     , Convert.ToInt16(MsjError),
                                                                                     Function.GetUser(), Function.DatetimeNow()
                                                                                     );
@@ -88,7 +88,7 @@ namespace SIGEM_BIDSS.Controllers
                                         if (mensajeDetail.StartsWith("-1"))
                                         {
                                            
-                                            ModelState.AddModelError("", "No se pudo insertar el registro detalle, favor contacte al administrador.");
+                                            ModelState.AddModelError("", "No se pudo insertar el registro detalle, se encontraron Datos duplicados.");
                                             return View(tbProductoCategoria);
                                         }
                                     }
@@ -217,7 +217,7 @@ namespace SIGEM_BIDSS.Controllers
                         if (MsjError.StartsWith("-1"))
                         {
                           
-                            ModelState.AddModelError("", "1. No se pudo actualizar el registro, favor contacte al administrador.");
+                            ModelState.AddModelError("", "El Nombre de la Categoría ya existe.");
                             return View(tbProductoCategoria);
                         }
                         else

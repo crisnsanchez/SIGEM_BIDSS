@@ -31,6 +31,7 @@ namespace SIGEM_BIDSS.Models
             this.tbDeduccionInstitucionFinanciera = new HashSet<tbDeduccionInstitucionFinanciera>();
             this.tbSueldo = new HashSet<tbSueldo>();
             this.tbSueldo1 = new HashSet<tbSueldo>();
+            this.tbSueldoHistorico = new HashSet<tbSueldoHistorico>();
         }
     
         public int emp_Id { get; set; }
@@ -87,5 +88,7 @@ namespace SIGEM_BIDSS.Models
         public virtual ICollection<tbSueldo> tbSueldo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbSueldo> tbSueldo1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbSueldoHistorico> tbSueldoHistorico { get; set; }
     }
 }

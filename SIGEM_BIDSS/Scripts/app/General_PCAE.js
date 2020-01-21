@@ -1,23 +1,19 @@
 ﻿
 
-
-
-
-
 //Funcion no aceptar espacios en el textbox
 document.addEventListener("input", function () {
-    $("input[type='text']", 'form').each(function () {
+    $(".nospace", 'form').each(function (e) {
         var _id = $(this).attr("id");
+        var el = document.getElementById('' + _id + '')
         _value = document.getElementById(_id).value;
         document.getElementById(_id).value = _value.trimStart();
-       
     });
     $(".normalize", 'form').each(function (e) {
-        if (!/^[ A-Záéíóúüñ]*$/i.test(this.value)) {
-            this.value = this.value.replace(/[^ .,A-Záéíóúüñ]+/ig, "");
+        if (!/^[ a-záéíóúüñ]*$/i.test(this.value)) {
+            this.value = this.value.replace(/[^ .,a-z0-9áéíóúüñ]+/ig, "");
         }
     });
-})
+});
 
 //Funcion de Solo letras en el textbox
 function soloLetras(e) {
@@ -57,12 +53,6 @@ function soloLetrastIPOSANGRE(e) {
         return false;
     }
 }
-
-function noespaciosincio(e) {
-    var valor = e.value.replace(/^ */, '');
-    e.value = valor;
-}
-
 
 
 //Mostrar Mensaje:Campo requerido en tiempo real

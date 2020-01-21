@@ -3,8 +3,8 @@ $('#Reemga_FechaViaje').datepicker({
     format: "dd/mm/yyyy",
     startDate: "01/01/1900",
     language: "es",
-    daysOfWeekDisabled: "0"
-}.datepicker("setDate", new Date());
+ 
+}.datepicker("setDate", new Date()));
 
 
 ////MAX LENGTH DE LOS CAMPOS
@@ -104,6 +104,57 @@ $('#Reemga_GralFechaSolicitud').datepicker({
     language: "es",
     daysOfWeekDisabled: "0",
 }).datepicker("setDate", new Date());;
+
+//campos vacios con mensaje
+document.getElementById("Guardar").addEventListener("click", function () {
+    //
+    var v_Reemga_JefeInmediato = document.getElementById('Reemga_JefeInmediato').value;
+    var b_Reemga_JefeInmediato = true;
+    //
+    var v_Reemga_Cliente = document.getElementById('Reemga_Cliente').value;
+    var b_Reemga_Cliente = true;
+    //
+    var v_Reemga_PropositoVisita = document.getElementById('Reemga_PropositoVisita').value;
+    var b_Reemga_PropositoVisita = true;
+    //
+    var v_Reemga_UsuarioCrea = document.getElementById('Reemga_UsuarioCrea').value;
+    var b_Reemga_UsuarioCrea = true;
+    //
+    var v_mun_codigo = document.getElementById('mun_codigo').value;
+    var b_mun_codigo = true;
+
+
+
+    if (v_Ansal_JefeInmediato === "") {
+        document.getElementById('spanJefeInmediato').innerHTML = "Campo Requerido"
+        b_Ansal_JefeInmediato = false;
+    }
+    if (v_Cantidad === "") {
+
+
+
+        document.getElementById('spanCantidad').innerText = "Campo Requerido"
+        b_Cantidad = false;
+    }
+    if (v_tpsal_id === "") {
+        document.getElementById('spantpsal_id').innerText = "Campo Requerido"
+        b_tpsal_id = false;
+    }
+    if (v_Ansal_Justificacion === "") {
+        document.getElementById('spanJustificacion').innerText = "Campo Requerido"
+        b_Ansal_Justificacion = false;
+    }
+    if (b_Ansal_JefeInmediato && b_Cantidad && b_tpsal_id && b_Ansal_Justificacion) {
+        $('#ModalAuth').modal();
+    }
+})
+
+
+
+
+
+
+
 
 ///Solo números
 function soloNumeros(e) {

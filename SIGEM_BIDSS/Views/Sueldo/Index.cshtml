@@ -56,8 +56,22 @@
                             @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres) @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Apellidos)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.sue_Cantidad)
-                           
+                            @{
+                                string Money = "";
+                                string myDecimal = item.sue_Cantidad.ToString();
+                                NumberFormatInfo nfi = new CultureInfo("", true).NumberFormat;
+                                nfi.CurrencyDecimalDigits = 2;
+                                nfi.NumberDecimalDigits = 3;
+                                nfi.CurrencySymbol = "";
+                                if (!string.IsNullOrEmpty(myDecimal))
+                                {
+                                    decimal dDecimal = decimal.Parse(myDecimal);
+                                    Money = dDecimal.ToString("c", nfi);
+                                }
+                            }
+                            @Money
+
+
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.tbMoneda.tmo_Nombre)

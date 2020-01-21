@@ -11,8 +11,8 @@ using SIGEM_BIDSS.Models;
 
 namespace SIGEM_BIDSS.Controllers
 {
-    public class ProductoController  : BaseController
-        
+    public class ProductoController : BaseController
+
     {
         private SIGEM_BIDSSEntities db = new SIGEM_BIDSSEntities();
 
@@ -42,12 +42,13 @@ namespace SIGEM_BIDSS.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
-            ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion");
 
+
+            ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria.Where(x => x.pcat_EsActivo == true), "pcat_Id", "pcat_Descripcion");
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion");
             ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion");
             ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre");
-        
+
             return View();
         }
         [HttpPost]
@@ -56,6 +57,7 @@ namespace SIGEM_BIDSS.Controllers
             ObjectParameter Output = new ObjectParameter("prod_Codigo", typeof(string));
             var Categoria = Convert.ToInt32(pcat_Id);
             var SubCategoria = Convert.ToInt32(pscat_Id);
+           
             //var MsjError = "";
             var list = db.UDP_Inv_tbProducto_ValorCodigo(Categoria, SubCategoria, Output);
             foreach (UDP_Inv_tbProducto_ValorCodigo_Result Producto in list)
@@ -79,23 +81,30 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
-        public ActionResult Create([Bind(Include = "prod_Id,prod_Codigo,prod_CodigoBarras,prod_Descripcion,prod_Marca,prod_Modelo,prod_Talla,prod_Color,pscat_Id,uni_Id,prov_Id,prod_EsActivo,prod_RazonInactivacion,prod_UsuarioCrea,prod_FechaCrea,prod_UsuarioModifica,prod_FechaModifica, pcat_Id")] tbProducto tbProducto , int pcat_Id)
+
+        public ActionResult Create([Bind(Include = "prod_CodigoBarras,prod_Descripcion,prod_Marca,prod_Modelo,prod_Talla,prod_Color,pscat_Id,uni_Id,prov_Id,prod_EsActivo,prod_RazonInactivacion,prod_UsuarioCrea,prod_FechaCrea,prod_UsuarioModifica," +
+            "prod_FechaModifica,pcat_Id")] tbProducto tbProducto ,string pcat_Id)
         {
-            if (db.tbProducto.Any(a => a.prod_CodigoBarras == tbProducto.prod_CodigoBarras))
+            string UserName = "";
+
+           
+            if (String.IsNullOrEmpty(pcat_Id))
+                ModelState.AddModelError("prod_UsuarioCrea", "El campo Categoría es obligatorio.");
+            try
             {
-                ModelState.AddModelError("", "El Codigo de Barras ya Existe.");
-            }
-            ViewBag.idsubcategoria = tbProducto.pscat_Id;
-            if (ModelState.IsValid)
-            {
-                try
+                int EmployeeID = Function.GetUser(out UserName);
+                if (db.tbProducto.Any(a => a.prod_CodigoBarras == tbProducto.prod_CodigoBarras))
                 {
+                    ModelState.AddModelError("", "El Codigo de Barras ya Existe.");
+                }
+                if (ModelState.IsValid)
+                {
+                    
                     
                     string MsjError = "";
                     IEnumerable<object> List = null;
                     List = db.UDP_Inv_tbProducto_Insert(
-                                                        tbProducto.prod_Codigo,
+                                                       
                                                         tbProducto.prod_CodigoBarras,
                                                         tbProducto.prod_Descripcion.ToUpper(),
                                                         tbProducto.prod_Marca.ToUpper(),
@@ -112,11 +121,8 @@ namespace SIGEM_BIDSS.Controllers
                                                             );
                     foreach (UDP_Inv_tbProducto_Insert_Result Producto in List)
                         MsjError = Producto.MensajeError;
-
                     if (MsjError.StartsWith("-1"))
                     {
-
-                        
                         ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion");
                         ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion");
                         ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre");
@@ -124,44 +130,48 @@ namespace SIGEM_BIDSS.Controllers
                         ModelState.AddModelError("", "No se Pudo Insertar el Registro, Favor Contacte al Administrador.");
                         return View(tbProducto);
                     }
+                 
                     else
                     {
+                        TempData["swalfunction"] = "true";
                         return RedirectToAction("Index");
                     }
                 }
-                catch (Exception Ex)
-                {
-                   
-                    ModelState.AddModelError("", "No se Pudo Insertar el Registro, Favor Contacte al Administrador.");
-                   
-                    ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion");
-                    ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion");
-                    ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre");
-                    ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion");
-                    return View(tbProducto);
-                }
             }
-            
+            catch (Exception Ex)
+            {
+                ModelState.AddModelError("", "No se Pudo Insertar el Registro, Favor Contacte al Administrador.");
+
+                ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion");
+                ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion");
+                ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre");
+                ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion");
+                return View(tbProducto);
+            }
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
             ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
             ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
             ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion", pcat_Id);
             ViewBag.pscat_Id = new SelectList(db.tbMunicipio, "pscat_Id", "pcat_Id", tbProducto.pscat_Id);
             return View(tbProducto);
+            
         }
 
         // GET: Producto/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             tbProducto tbProducto = db.tbProducto.Find(id);
+
             if (tbProducto == null)
             {
                 return HttpNotFound();
             }
+
             ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
             ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
             ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
@@ -174,7 +184,7 @@ namespace SIGEM_BIDSS.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string id ,[Bind(Include = "prod_Id,prod_Codigo,prod_CodigoBarras,prod_Descripcion,prod_Marca,prod_Modelo,prod_Talla,prod_Color,pscat_Id,uni_Id,prov_Id,prod_EsActivo,prod_RazonInactivacion,prod_UsuarioCrea,prod_FechaCrea,prod_UsuarioModifica,prod_FechaModifica, pcat_Id")] tbProducto tbProducto, int pcat_Id)
+        public ActionResult Edit(int id, [Bind(Include = "prod_Id,prod_Codigo,prod_CodigoBarras,prod_Descripcion,prod_Marca,prod_Modelo,prod_Talla,prod_Color,pscat_Id,uni_Id,prov_Id,prod_EsActivo,prod_RazonInactivacion,prod_UsuarioCrea,prod_FechaCrea,prod_UsuarioModifica,prod_FechaModifica, pcat_Id")] tbProducto tbProducto, string pcat_Id)
         {
             string UserName = "";
             try
@@ -182,12 +192,7 @@ namespace SIGEM_BIDSS.Controllers
                 int EmployeeID = Function.GetUser(out UserName);
                 if (ModelState.IsValid)
                 {
-                    if (db.tbProducto.Any(a => a.prod_Descripcion == tbProducto.prod_Descripcion && a.prod_Id != tbProducto.prod_Id))
-                    {
-                        ModelState.AddModelError("", "Ya existe un producto con el mismo nombre.");
-                        return View(tbProducto);
-                    }
-
+              
                     IEnumerable<Object> List = null;
                     string Msj = "";
                     List = db.UDP_Inv_tbProducto_Update(tbProducto.prod_Id,
@@ -206,11 +211,15 @@ namespace SIGEM_BIDSS.Controllers
                                                         Function.DatetimeNow()
                                                         );
                     foreach (UDP_Inv_tbProducto_Update_Result producto in List)
-                    Msj = producto.MensajeError;
+                        Msj = producto.MensajeError;
                     if (Msj.StartsWith("-1"))
                     {
                         Function.BitacoraErrores("Producto", "EditPost", UserName, Msj);
                         ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
+                        ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
+                        ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
+                        ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
+                        ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion");
                         return View(tbProducto);
                     }
                     else
@@ -218,6 +227,10 @@ namespace SIGEM_BIDSS.Controllers
                         return RedirectToAction("Index");
                     }
                 }
+                ViewBag.uni_Id = new SelectList(db.tbUnidadMedida, "uni_Id", "uni_Descripcion", tbProducto.uni_Id);
+                ViewBag.pscat_Id = new SelectList(db.tbProductoSubcategoria, "pscat_Id", "pscat_Descripcion", tbProducto.pscat_Id);
+                ViewBag.prov_Id = new SelectList(db.tbProveedor, "prov_Id", "prov_Nombre", tbProducto.prov_Id);
+                ViewBag.pcat_Id = new SelectList(db.tbProductoCategoria, "pcat_Id", "pcat_Descripcion");
                 return View(tbProducto);
             }
             catch (Exception Ex)
@@ -226,7 +239,8 @@ namespace SIGEM_BIDSS.Controllers
                 ModelState.AddModelError("", "No se pudo insertar el registro, favor contacte al administrador.");
                 return View(tbProducto);
             }
-            
+          
+
         }
         [HttpPost]
         public JsonResult GetCategoriaProducto(int codsubcategoria)
@@ -280,7 +294,7 @@ namespace SIGEM_BIDSS.Controllers
             }
             catch (Exception Ex)
             {
-               
+
                 return Json("Error", JsonRequestBehavior.AllowGet);
             }
         }
@@ -318,7 +332,7 @@ namespace SIGEM_BIDSS.Controllers
             }
         }
 
-        public ActionResult EstadoActivar(int ? id)
+        public ActionResult EstadoActivar(int? id)
         {
             try
             {

@@ -1,18 +1,5 @@
 ﻿var contador = 0;
 
-document.addEventListener("input", function () {
-    $("input[type='text']", 'form').each(function () {
-        var _id = $(this).attr("id");
-        _value = document.getElementById(_id).value;
-        document.getElementById(_id).value = _value.trimStart();
-
-    });
-    $(".normalize", 'form').each(function (e) {
-        if (!/^[ A-Záéíóúüñ]*$/i.test(this.value)) {
-            this.value = this.value.replace(/[^ .,A-Záéíóúüñ]+/ig, "");
-        }
-    });
-})
 
 //Validacion de solo letras
 function soloLetras(e) {
@@ -33,6 +20,8 @@ function soloLetras(e) {
         return false;
     }
 }
+
+
 
 //Validar Los campos numericos
 function format(input) {
@@ -79,6 +68,10 @@ $(document).on("click", "#Datatable tbody tr td button#removerSubCategoria", fun
     });
 });
 
+$('#pscat_Descripcion').keyup(function () {
+    $('#ErrorDescripcion').hide();
+});
+
 $('#AgregarSubCategorias').click(function () {
 
     var Descripcion = $('#pscat_Descripcion').val();
@@ -92,15 +85,20 @@ $('#AgregarSubCategorias').click(function () {
         $('#categoria').after('<ul id="categoria" class="validation-summary-errors text-danger">Campo Categoría Requerido</ul>');
 
     }
+
     if (Descripcion == '') {
         $('#MessageError').text('');
         $('#ErrorDescripcion').text('');
         $('#ErrorISV').text('');
-        $('#DescripcionError').after('<ul id="ErrorDescripcion" class="validation-summary-errors text-danger">Campo SubCategoría Requerido</ul>');
+        $('#DescripcionError').after('<ul id="ErrorDescripcion" class="validation-summary-errors text-danger">Campo SubCategorías Requerido</ul>');
 
     }
+ 
 
     else {
+      
+
+      
         contador = contador + 1;
         copiar = "<tr data-id=" + contador + ">";
         copiar += "<td id = ''></td>";
@@ -169,6 +167,7 @@ $('#CrearSubCategoria').click(function () {
     }
 
     else {
+
         contador = contador + 1;
         copiar = "<tr data-id=" + contador + ">";
         copiar += "<td id = 'Descripcion'>" + $('#pscat_Descripcion').val() + "</td>";
@@ -196,7 +195,7 @@ $('#CrearSubCategoria').click(function () {
                 $('#ErrorISV').text('');
             });
     }
-
+  
 });
 
 function GetSubCategoria() {
@@ -352,9 +351,8 @@ $('#pscat_Descripcion_edit').keyup(function () {
 });
 
 
-
 $('#pscat_Descripcion_edit').keyup(function () {
-    $('#editerror').hide();
+    $('#DescripcionErrorEdit').hide();
 });
 
 

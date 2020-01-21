@@ -94,11 +94,12 @@ namespace SIGEM_BIDSS.Controllers
                 }
                 IEnumerable<object> Employee = (from _tbEmp in db.tbEmpleado
                                                 where _tbEmp.emp_EsJefe == true && _tbEmp.est_Id == GeneralFunctions.empleadoactivo && _tbEmp.emp_Id != EmployeeID
-                                                select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
+                                                orderby (_tbEmp.emp_Nombres) select new { emp_Id = _tbEmp.emp_Id, emp_Nombres = _tbEmp.emp_Nombres + " " + _tbEmp.emp_Apellidos }).ToList();
 
 
 
-                //tbSolicitudReembolsoGastos.Reemga_FechaViaje = Function.DatetimeNow();
+                tbSolicitudReembolsoGastos.Reemga_GralFechaSolicitud = Function.DatetimeNow();
+                tbSolicitudReembolsoGastos.Reemga_FechaViaje = Function.DatetimeNow();
                 ViewBag.emp_Id = new SelectList(db.tbEmpleado, "emp_Id", "emp_Nombres");
                 ViewBag.est_Id = new SelectList(db.tbEstado, "est_Id", "est_Descripcion");
                 ViewBag.Reemga_JefeInmediato = new SelectList(Employee, "emp_Id", "emp_Nombres");

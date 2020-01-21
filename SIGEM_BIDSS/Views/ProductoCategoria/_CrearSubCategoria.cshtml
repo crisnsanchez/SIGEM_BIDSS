@@ -5,16 +5,16 @@
         <from>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.pscat_Descripcion,new { @class = "control-label col-md-6" })
-                    <div class="col-md-11">
-                        <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control" maxlength="150" autocomplete="off" style="text-transform:uppercase;" />
+                    @Html.LabelFor(model => model.pscat_Descripcion,new { @class = "control-label col-md-4" })
+                    <div class="col-md-12">
+                        <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control inputFormu" maxlength="150" autocomplete="off" style="text-transform:uppercase;"  onkeyup="validar()" />
                         <div id="DescripcionError">
                             <p style="color:red">
                                 @Html.ValidationMessageFor(model => model.pscat_Descripcion)
                             </p>
                         </div>
                         <div class="col-md-1">
-                            <button class="btn btn-primary" type="button" id="CrearSubCategoria">Añadir</button>
+                            <button class="btn btn-primary" type="button" id="CrearSubCategoria" disabled>Añadir</button>
                         </div>
                     </div>
 
@@ -39,3 +39,25 @@
 </div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+
+
+    function validar() {
+        var validado = true;
+        elementos = document.getElementsByClassName("inputFormu");
+        for (i = 0; i < elementos.length; i++) {
+            if (elementos[i].value == "" || elementos[i].value == null) {
+                validado = false
+            }
+        }
+        if (validado) {
+            document.getElementById("CrearSubCategoria").disabled = false;
+
+        } else {
+            document.getElementById("CrearSubCategoria").disabled = true;
+            //Salta un alert cada vez que escribes y hay un campo vacio
+            //alert("Hay campos vacios")   
+        }
+    }
+
+</script>
