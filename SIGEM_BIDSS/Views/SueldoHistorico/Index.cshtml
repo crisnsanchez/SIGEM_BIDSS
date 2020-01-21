@@ -31,7 +31,10 @@
                         @Html.DisplayNameFor(model => model.sue_Id)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.emp_Id)
+                       Nombre
+                    </th>
+                    <th>
+                       Apellido
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.tmo_Id)
@@ -51,6 +54,10 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
+                        
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Apellidos)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.tbMoneda.tmo_Nombre)

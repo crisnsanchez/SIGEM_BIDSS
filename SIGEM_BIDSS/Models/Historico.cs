@@ -19,7 +19,7 @@ namespace SIGEM_BIDSS.Models
         public int emp_Id { get; set; }
 
 
-        [Display(Name = "Cantidad Anterior")]
+        [Display(Name = "Sueldo Anterior")]
         public Nullable<decimal> sue_Cantidad { get; set; }
 
 
