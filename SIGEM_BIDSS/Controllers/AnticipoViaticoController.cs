@@ -110,8 +110,6 @@ namespace SIGEM_BIDSS.Controllers
                 ViewBag.munCodigo = tbAnticipoViatico.mun_Codigo;
             if (String.IsNullOrEmpty(dep_codigo))
                 ModelState.AddModelError("Anvi_UsuarioCrea", "El campo Departamento es obligatorio.");
-            else
-                ModelState.AddModelError("Anvi_UsuarioCrea", "");
             try
             {
 
