@@ -75,7 +75,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.par_PorcentajeAdelantoSalario, htmlAttributes: new { @class = "control-label col-md-8" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.par_PorcentajeAdelantoSalario, new { htmlAttributes = new { @class = "form-control", @minlength = "2", @maxlength = "10", @type = "text", @autocomplete = "off", @onkeypress = "return soloNumerosP(event), camposDecimales(event)", id = "porcentaje" } })
+                            @Html.EditorFor(model => model.par_PorcentajeAdelantoSalario, new { htmlAttributes = new { @class = "form-control", @minlength = "2", @maxlength = "5", @type = "text", @autocomplete = "off", @onkeypress = "return soloNumerosP(event)", id = "porcentaje" } })
                             @Html.ValidationMessageFor(model => model.par_PorcentajeAdelantoSalario, null, new { @class = "text-danger", id = "errorPorcentaje" })
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.par_Puerto, htmlAttributes: new { @class = "control-label col-md-8" })
                         <div class="col-md-11">
-                            @Html.EditorFor(model => model.par_Puerto, new { htmlAttributes = new { @class = "form-control", @minlength = "2", @maxlength = "10", @type = "text", @autocomplete = "off", @onkeypress = "return soloNumeros(event)" } })
+                            @Html.EditorFor(model => model.par_Puerto, new { htmlAttributes = new { @class = "form-control", @minlength = "2", @maxlength = "4", @type = "text", @autocomplete = "off", @onkeypress = "return soloNumeros(event)" } })
                             @Html.ValidationMessageFor(model => model.par_Puerto, null, new { @class = "text-danger", id = "errorPuerto" })
                         </div>
                     </div>
@@ -145,6 +145,16 @@
         $(document).ready(function () {
             bsCustomFileInput.init();
         });
+
+        function onKeyDecimal(e, thix) {
+            var keynum = window.event ? window.event.keyCode : e.which;
+            if (document.getElementById(thix.id).value.indexOf('.') != -1 && keynum == 46)
+                return false;
+            if ((keynum == 8 || keynum == 48 || keynum == 46))
+                return true;
+            if (keynum <= 47 || keynum >= 58) return false;
+            return /\d/.test(String.fromCharCode(keynum));
+        }
     </script>
 
 </div>

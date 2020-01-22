@@ -86,6 +86,11 @@ $("#par_NombreEmpresa").keyup(function () {
     $('#errornombreempresa').hide();
 });
 
+$("#CargarFoto").change(function () {
+    $('#errorlogo').hide();
+});
+
+
 
 $('#par_TelefonoEmpresa').keyup(function () {
     $('#errortelefonoempresa').hide();
@@ -393,18 +398,3 @@ function MASK(form, n, mask, format) {
 
 
 
-function NUM(s, dec) {
-    for (var s = s + "", num = "", x = 0; x < s.length; x++) {
-        c = s.charAt(x);
-        if (".-+/*".indexOf(c) + 1 || c != " " && !isNaN(c)) { num += c; }
-    }
-    if (isNaN(num)) { num = eval(num); }
-    if (num == "") { num = 0; } else { num = parseFloat(num); }
-    if (dec != undefined) {
-        r = .5; if (num < 0) r = -r;
-        e = Math.pow(10, (dec > 0) ? dec : 0);
-        return parseInt(num * e + r) / e;
-    } else {
-        return num;
-    }
-}

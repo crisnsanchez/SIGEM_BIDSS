@@ -60,7 +60,7 @@ namespace SIGEM_BIDSS.Models
 
 
         [Display(Name = "Frecuencia de Adelanto de Salario")]
-        [Range(1, 14, ErrorMessage = "La frecuencia de Adelanto de Salario no debe ser mayor a 12")]
+        [Range(1, 12, ErrorMessage = "La frecuencia de Adelanto de Salario no debe ser mayor a 12")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
         public int par_FrecuenciaAdelantoSalario { get; set; }
     }

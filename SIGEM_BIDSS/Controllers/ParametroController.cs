@@ -229,7 +229,7 @@ namespace SIGEM_BIDSS.Controllers
                     {
                         Function.BitacoraErrores("Parametro", "EditPost", UserName, MsjError);
                         ModelState.AddModelError("", "No se pudo actualizar el registro, favor contacte al administrador.");
-                        return RedirectToAction("Edit/" + MsjError);
+                        return RedirectToAction("Edit");
                     }
                     else
                     {
