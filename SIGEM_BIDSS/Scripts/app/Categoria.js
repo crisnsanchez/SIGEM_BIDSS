@@ -162,7 +162,7 @@ $('#CrearSubCategoria').click(function () {
         $('#MessageError').text('');
         $('#ErrorDescripcion').text('');
         $('#ErrorISV').text('');
-        $('#DescripcionError').after('<ul id="ErrorDescripcions" class="validation-summary-errors text-danger">Campo SubCategoría Requerido</ul>');
+        $('#DescripcionError').after('<ul id="ErrorDescripcions" class="validation-summary-errors text-danger">Campo SubCategorías Requerido</ul>');
 
     }
 
@@ -189,6 +189,8 @@ $('#CrearSubCategoria').click(function () {
             .done(function (data) {
                 $('#pscat_Descripcion').val('');
                 $('#pscat_ISV').val('');
+
+                validar();
 
                 $('#MessageError').text('');
                 $('#ErrorDescripcion').text('');
@@ -329,7 +331,7 @@ $("#bton").keypress(function (e) {
 $('#pscat_Descripcion_edit').blur(function () {
     if ($.trim($('#pscat_Descripcion_edit').val()) == 0) {
         $('#editerror').text('');
-        $('#editerror').after('<ul id="editerror" class="validation-summary-errors text-danger">Campo Descripcion Requerido</ul>');
+        $('#editerror').after('<ul id="editerror" class="validation-summary-errors text-danger">Campo Subcategoría Requerido</ul>');
     }
 });
 
@@ -341,6 +343,8 @@ $('#pcat_Descripcion').keyup(function () {
 $('#pscat_Descripcion').keyup(function () {
     $('#ErrorDescripcions').hide();
 });
+
+
 
 $('#pscat_Descripcion').keyup(function () {
     $('#DescripcionErrorEdit').hide();

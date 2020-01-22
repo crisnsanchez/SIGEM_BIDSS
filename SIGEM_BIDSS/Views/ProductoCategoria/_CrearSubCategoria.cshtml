@@ -7,7 +7,7 @@
                 <div class="form-group col-md-4">
                     @Html.LabelFor(model => model.pscat_Descripcion,new { @class = "control-label col-md-4" })
                     <div class="col-md-12">
-                        <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control inputFormu" maxlength="150" autocomplete="off" style="text-transform:uppercase;"  onkeyup="validar()" />
+                        <input type="text" id="pscat_Descripcion" onkeypress="return soloLetras(event)" placeholder="" class="form-control inputFormu" maxlength="150"  minlength="5" autocomplete="off" style="text-transform:uppercase;"  onkeyup="validar()" />
                         <div id="DescripcionError">
                             <p style="color:red">
                                 @Html.ValidationMessageFor(model => model.pscat_Descripcion)
@@ -17,8 +17,6 @@
                             <button class="btn btn-primary" type="button" id="CrearSubCategoria" disabled>Añadir</button>
                         </div>
                     </div>
-
-
 
                     <br />
 
@@ -55,8 +53,7 @@
 
         } else {
             document.getElementById("CrearSubCategoria").disabled = true;
-            //Salta un alert cada vez que escribes y hay un campo vacio
-            //alert("Hay campos vacios")   
+            
         }
     }
 
