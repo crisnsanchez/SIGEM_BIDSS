@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<SIGEM_BIDSS.Models.tbSueldoHistorico>
 @using SIGEM_BIDSS.Models
+@using System.Globalization;
 
-@{ 
+
+@{
     tbEmpleado emp = new tbEmpleado();
 }
 
@@ -21,7 +23,7 @@
             <i class="fa fa-list mr-1"></i>
             Listado históricos de sueldo
         </h3>
-        
+
     </div>
     <div class="card-body">
         <table class="table table-bordered table-hover" id="dataTable">
@@ -31,10 +33,10 @@
                         @Html.DisplayNameFor(model => model.sue_Id)
                     </th>
                     <th>
-                       Nombre
+                        Nombre
                     </th>
                     <th>
-                       Apellido
+                        Apellido
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.tmo_Id)
@@ -48,24 +50,37 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.sue_Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
-                        
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Apellidos)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tbMoneda.tmo_Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.sue_Cantidad)
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sue_Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Nombres)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbEmpleado.emp_Apellidos)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbMoneda.tmo_Nombre)
+                        </td>
+                        <td>
+                            @{
+                                string Money = "";
+                                string myDecimal = item.sue_Cantidad.ToString();
+                                NumberFormatInfo nfi = new CultureInfo("", true).NumberFormat;
+                                nfi.CurrencyDecimalDigits = 2;
+                                nfi.NumberDecimalDigits = 3;
+                                nfi.CurrencySymbol = "";
+                                if (!string.IsNullOrEmpty(myDecimal))
+                                {
+                                    decimal dDecimal = decimal.Parse(myDecimal);
+                                    Money = dDecimal.ToString("c", nfi);
+                                }
+                            }
+                            @Money
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
