@@ -155,6 +155,16 @@
             if (keynum <= 47 || keynum >= 58) return false;
             return /\d/.test(String.fromCharCode(keynum));
         }
+
+        $(document).ready(function () {
+            $('#porcentaje')
+                .inputmask({
+                    alias: 'decimal',
+                    allowMinus: false,
+                    digits: 2,
+                    max: 999.99
+                });
+        })
     </script>
 
 </div>

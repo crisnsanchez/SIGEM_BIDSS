@@ -54,6 +54,7 @@ namespace SIGEM_BIDSS.Models
 
         [Display(Name = "Porcentaje Adelanto de Salario")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido")]
+       
         [Range(0, 100, ErrorMessage = "El porcentaje de Adelanto de Salario no debe ser mayor al 100%")]
         public decimal par_PorcentajeAdelantoSalario { get; set; }
 
